@@ -1,0 +1,75 @@
+@layer components {
+  .singlestage-accordion {
+    /* AccordionItem */
+    details {
+      @apply border-b
+      last:border-b-0;
+
+      /* AccordionTrigger */
+      &[open] > summary > h3 > svg {
+        @apply rotate-180;
+      }
+
+      summary {
+        @apply focus-visible:border-ring
+        focus-visible:ring-[3px]
+        focus-visible:ring-ring/50
+        list-none
+        outline-none
+        rounded-md
+        transition-all
+        w-full;
+
+        /* Safari */
+        &::-webkit-details-marker {
+          @apply hidden;
+        }
+
+        > h3 {
+          @apply flex
+          flex-1
+          font-medium
+          gap-4
+          hover:underline
+          items-start
+          justify-between
+          py-4
+          text-left
+          text-sm;
+
+          > svg {
+            @apply duration-200
+            pointer-events-none
+            shrink-0
+            size-4
+            text-muted-foreground
+            transition-transform
+            translate-y-0.5;
+          }
+        }
+      }
+
+      /* AccordionContent */
+      &::details-content {
+        block-size: 0;
+        @apply block
+        opacity-0
+        transition-all
+        transition-discrete;
+      }
+
+      &[open]::details-content {
+        block-size: auto;
+        block-size: calc-size(auto, size);
+        @apply opacity-100;
+      }
+
+      section {
+        @apply pb-4;
+        > p {
+          @apply text-sm;
+        }
+      }
+    }
+  }
+}

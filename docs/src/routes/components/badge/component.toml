@@ -1,0 +1,28 @@
+name = "Badge"
+description = "Displays a badge or a component that looks like a badge."
+
+[[examples]]
+name = "Badge"
+
+[[examples]]
+name = "Badge Invalid"
+title = "Invalid"
+
+[[examples]]
+name = "Badge Icon"
+title = "With Icon"
+
+[[examples]]
+name = "Badge Link"
+title = "Link"
+
+[[references]]
+name = "Badge"
+description = "Contains arbitrary badge content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specifies \
+    the style of badge to display.""" },
+]

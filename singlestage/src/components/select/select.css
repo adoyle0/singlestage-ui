@@ -1,0 +1,166 @@
+@layer components {
+  select.singlestage-select {
+    @apply appearance-none
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    border
+    border-input
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    flex
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    gap-2
+    h-9
+    items-center
+    justify-between
+    outline-none
+    pl-3
+    pr-9
+    rounded-md
+    shadow-xs
+    text-sm
+    transition-[color,box-shadow]
+    w-fit
+    whitespace-nowrap;
+
+    @apply bg-[image:var(--chevron-down-icon-50)]
+    bg-no-repeat
+    bg-position-[center_right_0.75rem]
+    bg-size-[1rem];
+
+    option,
+    optgroup {
+      @apply bg-popover
+      text-popover-foreground;
+    }
+  }
+  *:not(select).singlestage-select {
+    @apply inline-flex
+    relative;
+
+    [data-popover] {
+      @apply p-1;
+
+      [role="option"] {
+        @apply [&_svg]:shrink-0
+        [&_svg]:size-4
+        [&_svg]:text-muted-foreground
+        aria-disabled:opacity-50
+        aria-disabled:pointer-events-none
+        aria-hidden:hidden
+        cursor-default
+        disabled:opacity-50
+        disabled:pointer-events-none
+        flex
+        gap-2
+        items-center
+        outline-hidden
+        pl-2
+        pr-7.5
+        py-1.5
+        relative
+        rounded-sm
+        select-none
+        text-sm
+        truncate
+        w-full;
+
+        &[aria-selected="true"] {
+          @apply bg-[image:var(--check-icon)]
+          bg-no-repeat
+          bg-position-[center_right_0.5rem]
+          bg-size-[0.875rem];
+        }
+
+        &.active,
+        &:focus-visible {
+          @apply bg-accent
+          text-accent-foreground;
+        }
+      }
+
+      [role="listbox"] [role="heading"] {
+        @apply flex
+        px-2
+        py-1.5
+        text-muted-foreground
+        text-xs;
+      }
+
+      [role="listbox"]
+        [role="group"]:not(:has([role="option"]:not([aria-hidden="true"]))) {
+        @apply hidden;
+      }
+
+      [role="separator"] {
+        @apply -mx-1
+        border-border
+        my-1;
+      }
+
+      > header {
+        @apply -mt-1
+        -mx-1
+        border-b
+        flex
+        gap-2
+        h-9
+        items-center
+        mb-1
+        px-3;
+
+        svg {
+          @apply opacity-50
+          shrink-0
+          size-4;
+        }
+
+        input[role="combobox"] {
+          @apply bg-transparent
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+          flex
+          flex-1
+          h-10
+          min-w-0
+          outline-hidden
+          placeholder:text-muted-foreground
+          py-3
+          rounded-md
+          text-sm
+          w-full;
+        }
+      }
+
+      [role="listbox"]:not(
+          :has([data-value]:not([aria-hidden="true"]))
+        )::before {
+        @apply flex
+        items-center
+        justify-center
+        p-6
+        text-sm
+        truncate;
+      }
+
+      [role="listbox"][data-empty]:not(
+          :has([data-value]:not([aria-hidden="true"]))
+        )::before {
+        @apply content-[attr(data-empty)];
+      }
+
+      [role="listbox"]:not([data-empty]):not(
+          :has([data-value]:not([aria-hidden="true"]))
+        )::before {
+        @apply content-['No_results_found'];
+      }
+    }
+
+    &:not([data-select-initialized]) [data-popover] [role="option"] {
+      @apply hover:bg-accent
+      hover:text-accent-foreground;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+name = "Label"
+description = "Renders an accessible label associated with controls."
+
+[[examples]]
+name = "label"
+
+[[references]]
+name = "Label"
+description = "Renders an accessible label associated with controls."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \
+    <label> `for` attribute to avoid name collisions.""" },
+]

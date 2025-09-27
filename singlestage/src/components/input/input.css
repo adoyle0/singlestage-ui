@@ -1,0 +1,71 @@
+@layer components {
+  .singlestage-input[type="date"],
+  .singlestage-input[type="datetime-local"],
+  .singlestage-input[type="email"],
+  .singlestage-input[type="file"],
+  .singlestage-input[type="month"],
+  .singlestage-input[type="number"],
+  .singlestage-input[type="password"],
+  .singlestage-input[type="search"],
+  .singlestage-input[type="tel"],
+  .singlestage-input[type="text"],
+  .singlestage-input[type="time"],
+  .singlestage-input[type="url"],
+  .singlestage-input[type="week"] {
+    @apply appearance-none
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    bg-transparent
+    border
+    border-input
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    disabled:pointer-events-none
+    file:bg-transparent
+    file:border-0
+    file:font-medium
+    file:h-7
+    file:inline-flex
+    file:text-foreground
+    file:text-sm
+    flex
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    h-9
+    md:text-sm
+    min-w-0
+    outline-none
+    placeholder:text-muted-foreground
+    px-3
+    py-1
+    rounded-md
+    selection:bg-primary
+    selection:text-primary-foreground
+    shadow-xs
+    text-base
+    transition-[color,box-shadow]
+    w-full;
+  }
+  .singlestage-input[type="color"] {
+    @apply appearance-none
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    bg-transparent
+    border
+    border-input
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    disabled:pointer-events-none
+    flex
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    size-9
+    outline-none
+    p-2
+    rounded-md
+    shadow-xs
+    transition-[color,box-shadow];
+  }
+}

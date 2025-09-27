@@ -1,0 +1,15 @@
+name = "Select"
+description = "Displays a list of options for the user to pick from—triggered by a button."
+
+[[examples]]
+name = "select"
+
+[[references]]
+name = "Select"
+description = "Contains all the parts of a select."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select#attributes">select</a> \
+attributes."""
+attrs = []

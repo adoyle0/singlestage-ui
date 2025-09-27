@@ -1,0 +1,19 @@
+@layer components {
+  .singlestage-label {
+    @apply flex
+    font-medium
+    gap-2
+    items-center
+    leading-none
+    peer-disabled:opacity-50
+    peer-disabled:pointer-events-none
+    select-none
+    text-sm;
+
+    &:has(> *:disabled),
+    &:has(+ *:disabled) {
+      @apply opacity-50
+      pointer-events-none;
+    }
+  }
+}

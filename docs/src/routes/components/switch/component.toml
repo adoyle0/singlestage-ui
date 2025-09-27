@@ -1,0 +1,20 @@
+name = "switch"
+description = "A control that allows the user to toggle between checked and not checked."
+
+[[examples]]
+name = "switch"
+
+[[references]]
+name = "switch"
+description = "A control that allows the user to toggle between checked and not checked."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a>, \
+<a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#attributes">input</a>, \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#additional_attributes">checkbox</a> \
+attributes."""
+attrs = [
+  { attr = "checked", attr_type = "RwSignal<bool>", default = "false", description = """A \
+    reactive signal coupled to the switch's checked value.""" },
+]

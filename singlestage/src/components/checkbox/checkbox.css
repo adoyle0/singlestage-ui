@@ -1,0 +1,36 @@
+@layer components {
+  .singlestage-checkbox.singlestage-input[type="checkbox"]:not(
+      [role="switch"]
+    ) {
+    @apply appearance-none
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    border
+    border-input
+    checked:bg-primary
+    checked:border-primary
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    outline-none
+    rounded-[4px]
+    shadow-xs
+    shrink-0
+    size-4
+    transition-shadow;
+
+    &:checked:after {
+      @apply bg-primary-foreground
+      block
+      content-['']
+      size-3.5;
+
+      @apply mask-[image:var(--check-icon)]
+      mask-center
+      mask-no-repeat
+      mask-size-[0.875rem];
+    }
+  }
+}

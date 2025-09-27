@@ -1,0 +1,48 @@
+name = "tabs"
+description = "A set of layered sections of content—known as tab panels—that are displayed one at a time."
+
+[[examples]]
+name = "tabs"
+
+[[references]]
+name = "Tabs"
+description = "Contains all the tab component parts."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """Reactive \
+    signal coupled to the `value` of the current selected tab.""" },
+]
+
+[[references]]
+name = "TabsContent"
+description = "Contains the content associated with each trigger."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "value", attr_type = "String", default = """""""", description = """This tab's trigger \
+    value.""" },
+]
+
+[[references]]
+name = "TabsList"
+description = "Contains the triggers that are aligned along the edge of the active content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "TabsTrigger"
+description = "The button that activates its associated content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = [
+  { attr = "value", attr_type = "String", default = """""""", description = """The value of the \
+    tab that this button triggers.""" },
+]

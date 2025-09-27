@@ -1,0 +1,24 @@
+name = "textarea"
+description = "Displays a form textarea."
+
+[[examples]]
+name = "textarea"
+
+[[references]]
+name = "Textarea"
+description = "The textarea. Takes children as a default value."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea#attributes">textarea</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Sets the default \
+    value of the element. Setting `value` sets this once at page load.""" },
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Toggles whether or \
+    not the textarea is disabled.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Toggles invalid \
+    appearance.""" },
+  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """Reactive \
+    signal coupled to the value of the textarea.""" },
+]

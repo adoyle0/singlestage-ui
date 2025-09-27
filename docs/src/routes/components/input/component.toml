@@ -1,0 +1,25 @@
+name = "Input"
+description = "Displays a form input field."
+
+[[examples]]
+name = "input"
+
+[[references]]
+name = "Input"
+description = "A form input field."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#attributes">input</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Sets the default \
+    value of the element. Setting `value` sets this once at page load. Use this for subsequent \
+    updates.""" },
+  { attr = "input_type", attr_type = "String", default = """""""", description = """Renamed  \
+    <input> `type` attribute to avoid name collisions.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
+    the input is disabled.""" },
+  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """A \
+    reactive signal coupled to the input's value.""" },
+]

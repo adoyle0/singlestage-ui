@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+cargo leptos build --release
+
+mkdir dist
+cp ./target/release/singlestage_docs ./dist/
+cp  -r ./target/site ./dist/
+
+rsync -avzp dist deez:singlestage/
+ssh -l "$USER" deez -t "cd singlestage
+rm singlestage_docs
+rm -rf site
+mv dist/* .
+rmdir dist
+sudo -S systemctl restart singlestage"
+
+rm -rf dist
+

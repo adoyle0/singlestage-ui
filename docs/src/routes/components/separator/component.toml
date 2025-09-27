@@ -1,0 +1,13 @@
+name = "Separator"
+description = "Visually or semantically separates content."
+
+[[examples]]
+name = "separator"
+
+[[references]]
+name = "Separator"
+description = "The separator."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

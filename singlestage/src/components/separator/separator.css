@@ -1,0 +1,15 @@
+@layer components {
+  .singlestage-separator {
+    @apply bg-border
+    my-4
+    shrink-0;
+    &[data-orientation="horizontal"] {
+      @apply h-px
+      w-full;
+    }
+    &[data-orientation="vertical"] {
+      @apply h-full
+      w-px;
+    }
+  }
+}

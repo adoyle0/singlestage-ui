@@ -1,0 +1,10 @@
+name = "Popover"
+description = "Unfinished -- Displays rich content in a portal, triggered by a button."
+
+[[examples]]
+name = "popover"
+
+[[references]]
+name = "Popover"
+description = "Contains all the parts of a popover."
+attrs = [{ attr = "class", attr_type = "MaybeProp<String>", default = "None" }]

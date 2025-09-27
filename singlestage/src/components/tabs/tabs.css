@@ -1,0 +1,58 @@
+@layer components {
+  .singlestage-tabs {
+    @apply flex
+    flex-col
+    gap-2;
+
+    [role="tablist"] {
+      @apply bg-muted
+      h-9
+      inline-flex
+      items-center
+      justify-center
+      p-[3px]
+      rounded-lg
+      text-muted-foreground
+      w-fit;
+
+      [role="tab"] {
+        @apply [&_svg:not([class*='size-'])]:size-4
+        [&_svg]:pointer-events-none
+        [&_svg]:shrink-0
+        border
+        border-transparent
+        disabled:opacity-50
+        disabled:pointer-events-none
+        flex-1
+        focus-visible:border-ring
+        focus-visible:outline-1
+        focus-visible:outline-ring
+        focus-visible:ring-[3px]
+        focus-visible:ring-ring/50
+        font-medium
+        gap-1.5
+        h-[calc(100%_-_1px)]
+        inline-flex
+        items-center
+        justify-center
+        px-2
+        py-1
+        rounded-md
+        text-foreground
+        text-sm
+        transition-[color,box-shadow]
+        whitespace-nowrap;
+
+        &[aria-selected="true"] {
+          @apply bg-background
+          shadow-sm;
+        }
+      }
+    }
+
+    [role="tabpanel"] {
+      @apply flex-1
+      outline-none;
+    }
+  }
+}

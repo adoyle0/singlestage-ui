@@ -1,0 +1,30 @@
+name = "Radio Group"
+description = "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time."
+
+[[examples]]
+name = "radio"
+
+[[references]]
+name = "RadioGroup"
+description = "Contains all the parts of a radio group."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "Radio"
+description = "An item in the group that can be checked."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a>, \
+<a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#attributes">input</a>, \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio#additional_attributes">radio</a> \
+attributes."""
+attrs = [
+  { attr = "checked", attr_type = "RwSignal<bool>", default = "false", description = """A \
+    reactive signal coupled to the radio button's checked value.""" },
+]

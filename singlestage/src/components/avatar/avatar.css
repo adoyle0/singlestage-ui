@@ -1,0 +1,22 @@
+@layer components {
+  .singlestage-avatar {
+    @apply flex
+    overflow-hidden
+    relative
+    rounded-full
+    shrink-0
+    size-8;
+  }
+  .singlestage-avatar-image {
+    @apply aspect-square 
+    size-full;
+  }
+  .singlestage-avatar-fallback {
+    @apply bg-muted 
+    flex
+    items-center
+    justify-center
+    rounded-full
+    size-full;
+  }
+}

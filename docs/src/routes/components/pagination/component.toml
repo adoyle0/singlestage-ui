@@ -1,0 +1,72 @@
+name = "Pagination"
+description = "Pagination with page navigation, next, and previous links."
+
+[[examples]]
+name = "pagination"
+
+[[references]]
+name = "Pagination"
+description = "Contains all the parts of the pagination component."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PaginationContent"
+description = "Contains pagination content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PaginationEllipsis"
+description = "Contains a pagination ellipsis."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PaginationItem"
+description = "Contains a pagination item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PaginationLink"
+description = "A pagination link."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#attributes">a</a> \
+attributes."""
+attrs = [
+  { attr = "active", attr_type = "bool", default = "false", description = """Toggle whether or \
+    not this button should render with active styling.""" },
+]
+
+[[references]]
+name = "PaginationNext"
+description = "A pagination next button."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#attributes">a</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PaginationPrevious"
+description = "A pagination previous button."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#attributes">a</a> \
+attributes."""
+attrs = []

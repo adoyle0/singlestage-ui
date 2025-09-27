@@ -1,0 +1,149 @@
+@layer components {
+  .singlestage-dropdown-menu {
+    @apply transition-all;
+
+    /* Hacks to render properly until anchor support
+      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
+    */
+    /* Webkit -- HAS TO BE FIRST */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      [popover] {
+        @apply relative
+        bg-transparent;
+        position-area: bottom center;
+        inset: unset;
+        /* transform: translate(calc(50% - 2.125rem), 0); */
+        /* transform: translate(25%, 0); */
+      }
+    }
+
+    /* Firefox */
+    @-moz-document url-prefix() {
+      [popover] {
+        @apply relative
+        bg-transparent;
+        inset: unset;
+        /* transform: translate(0, 1.5rem); */
+      }
+    }
+    /* End hacks */
+
+    .singlestage-dropdown-menu-content {
+      @apply bg-popover
+      border
+      /* data-[side=bottom]:slide-in-from-top-2 */
+      /* data-[side=left]:slide-in-from-right-2 */
+      /* data-[side=right]:slide-in-from-left-2 */
+      /* data-[side=top]:slide-in-from-bottom-2 */
+      /* data-[state=closed]:animate-out */
+      /* data-[state=closed]:fade-out-0 */
+      /* data-[state=closed]:zoom-out-95 */
+      /* data-[state=open]:animate-in */
+      /* data-[state=open]:fade-in-0 */
+      /* data-[state=open]:zoom-in-95 */
+      /* max-h-(--radix-singlestage-dropdown-menu-content-available-height) */
+      min-w-[8rem]
+      /* origin-(--radix-singlestage-dropdown-menu-content-transform-origin) */
+      overflow-x-hidden
+      overflow-y-auto
+      p-1
+      rounded-md
+      shadow-md
+      text-popover-foreground
+      z-50;
+    }
+
+    .singlestage-dropdown-menu-item,
+    > a {
+      @apply [&_svg:not([class*='size-'])]:size-4
+      [&_svg:not([class*='text-'])]:text-muted-foreground
+      [&_svg]:pointer-events-none
+      [&_svg]:shrink-0
+      cursor-default
+      /* dark:data-[variant=destructive]:focus:bg-destructive/20 */
+      /* data-[disabled]:opacity-50 */
+      /* data-[disabled]:pointer-events-none */
+      /* data-[inset]:pl-8 */
+      /* data-[variant=destructive]:*:[svg]:!text-destructive */
+      /* data-[variant=destructive]:focus:bg-destructive/10 */
+      /* data-[variant=destructive]:focus:text-destructive */
+      /* data-[variant=destructive]:text-destructive */
+      flex
+      focus:bg-accent
+      focus:text-accent-foreground
+      gap-2
+      hover:bg-accent
+      hover:text-accent-foreground
+      items-center
+      outline-hidden
+      px-2
+      py-1.5
+      relative
+      rounded-sm
+      select-none
+      text-sm;
+    }
+
+    .singlestage-dropdown-menu-label {
+      @apply data-[inset]:pl-8
+      font-medium
+      px-2
+      py-1.5
+      text-sm;
+    }
+
+    .singlestage-dropdown-menu-separator {
+      @apply -mx-1
+      bg-border
+      h-px
+      my-1;
+    }
+
+    .singlestage-dropdown-menu-shortcut {
+      @apply ml-auto
+      text-muted-foreground
+      text-xs
+      tracking-widest;
+    }
+
+    .singlestage-dropdown-menu-sub-trigger {
+      @apply cursor-default
+      /* data-[inset]:pl-8 */
+      /* data-[state=open]:bg-accent */
+      /* data-[state=open]:text-accent-foreground */
+      flex
+      focus:bg-accent
+      focus:text-accent-foreground
+      items-center
+      outline-hidden
+      px-2
+      py-1.5
+      rounded-sm
+      select-none
+      text-sm;
+    }
+
+    .singlestage-dropdown-menu-sub-content {
+      @apply bg-popover
+      border
+      /* data-[side=bottom]:slide-in-from-top-2 */
+      /* data-[side=left]:slide-in-from-right-2 */
+      /* data-[side=right]:slide-in-from-left-2 */
+      /* data-[side=top]:slide-in-from-bottom-2 */
+      /* data-[state=closed]:animate-out */
+      /* data-[state=closed]:fade-out-0 */
+      /* data-[state=closed]:zoom-out-95 */
+      /* data-[state=open]:animate-in */
+      /* data-[state=open]:fade-in-0 */
+      /* data-[state=open]:zoom-in-95 */
+      min-w-[8rem]
+      /* origin-(--radix-singlestage-dropdown-menu-content-transform-origin) */
+      overflow-hidden
+      p-1
+      rounded-md
+      shadow-lg
+      text-popover-foreground
+      z-50;
+    }
+  }
+}

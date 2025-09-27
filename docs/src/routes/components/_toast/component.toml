@@ -1,0 +1,10 @@
+name = "toast"
+description = "unfinished toast"
+
+[[examples]]
+name = "toast"
+
+[[references]]
+name = "toast"
+description = "unfinished toast"
+attrs = []

@@ -1,0 +1,32 @@
+@layer components {
+  .singlestage-input[type="checkbox"][role="switch"] {
+    @apply appearance-none
+    before:bg-background
+    before:block
+    before:content-['']
+    before:pointer-events-none
+    before:ring-0
+    before:rounded-full
+    before:size-4
+    before:transition-all
+    bg-input
+    border
+    border-transparent
+    checked:before:ms-3.5
+    checked:bg-primary
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    h-[1.15rem]
+    inline-flex
+    items-center
+    outline-none
+    rounded-full
+    shadow-xs
+    shrink-0
+    transition-all
+    w-8;
+  }
+}

@@ -1,0 +1,56 @@
+name = "Dropdown Menu"
+description = "Displays a menu to the user — such as a set of actions or functions — triggered by a button."
+
+[info]
+title = "This component could use some work"
+description = """
+While this component does make use of the new popover browser API, \
+proper positioning is still not widely supported. \
+There are hacks in place to try to work around this issue \
+while still taking advantage of the rest of the API.
+Until this is implemented (hopefully soon - Aug 03, 2025) that puts this component in only a 'Good Enough' state.\
+"<singlestage::Button variant="link"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility">\
+"More Info"</a></singlestage::Button>""""
+
+[[examples]]
+name = "Dropdown Menu"
+
+[[references]]
+name = "DropdownMenu"
+description = "Contains all the parts of a dropdown menu."
+attrs = [{ attr = "class", attr_type = "MaybeProp<String>", default = "None" }]
+
+[[references]]
+name = "DropdownMenuTrigger"
+description = "The button that toggles the dropdown menu."
+attrs = []
+
+[[references]]
+name = "DropdownMenuGroup"
+description = "Contains multiple items."
+attrs = []
+
+[[references]]
+name = "DropdownMenuLabel"
+description = "Labels groups."
+attrs = []
+
+[[references]]
+name = "DropdownMenuContent"
+description = "The component that pops out when the dropdown menu is open."
+attrs = [{ attr = "class", attr_type = "MaybeProp<String>", default = "None" }]
+
+[[references]]
+name = "DropdownMenuItem"
+description = "Contains a menu item."
+attrs = [{ attr = "disabled", attr_type = "Signal<bool>", default = "false" }]
+
+[[references]]
+name = "DropdownMenuShortcut"
+description = "Displays next to the item content and indicates keyboard shortcuts."
+attrs = []
+
+[[references]]
+name = "DropdownMenuSeparator"
+description = "Visually separates groups of menu items."
+attrs = []

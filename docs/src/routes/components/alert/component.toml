@@ -1,0 +1,37 @@
+name = "Alert"
+description = "Displays a callout for user attention."
+
+[[examples]]
+name = "Alert"
+
+[[examples]]
+name = "Alert Destructive"
+title = "Destructive"
+description = "Alerts have a destructive themed variant."
+
+[[references]]
+name = "Alert"
+description = "Contains the contents of the alert."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """"alert"""", description = """Specifies \
+    the style of alert to display.""" },
+]
+
+[[references]]
+name = "AlertDescription"
+description = "Contains the description of the alert."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertTitle"
+description = "Contains the title of the alert."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

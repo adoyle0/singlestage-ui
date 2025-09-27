@@ -1,0 +1,18 @@
+name = "Link"
+description = "A styled hyperlink component."
+
+[[examples]]
+name = "link"
+
+[[references]]
+name = "Link"
+description = "Creates a hyperlink."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#attributes">a</a> \
+attributes."""
+attrs = [
+  { attr = "mimetype", attr_type = "String", default = """""""", description = """Renamed <a> \
+    `type` attribute to avoid name collisions.""" },
+]

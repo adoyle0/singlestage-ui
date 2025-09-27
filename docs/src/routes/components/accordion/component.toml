@@ -1,0 +1,55 @@
+name = "Accordion"
+description = "A vertically stacked set of interactive headings that each reveal an associated section of content."
+
+[[examples]]
+name = "Accordion"
+
+[[examples]]
+name = "custom icon"
+title = "Custom Icons"
+description = "Triggers may use custom icons."
+
+[[references]]
+name = "Accordion"
+description = "Contains all the parts of an accordion."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AccordionContent"
+description = """Contains all the collapsible content for an item. Implements HTML global \
+attributes."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AccordionIcon"
+description = "Optional. Used to wrap content such as an icon to replace the default trigger icon."
+extra = "Note: the slot attribute is required."
+attrs = []
+
+[[references]]
+name = "AccordionItem"
+description = """Contains all the parts of a collapsible section. If all items have the same name \
+then only one can be open at a time."""
+extra = """Implements
+<a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and \
+<a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details#attributes">details</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AccordionTrigger"
+description = """Toggles the collapsed state of its associated item. Also serves as the header. \
+Implements HTML global attributes."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

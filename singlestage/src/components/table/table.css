@@ -1,0 +1,54 @@
+@layer components {
+  .singlestage-table {
+    @apply text-sm
+    w-full;
+
+    thead {
+      @apply [&_tr]:border-b;
+    }
+
+    tbody {
+      @apply [&_tr:last-child]:border-0;
+    }
+
+    tfoot {
+      @apply [&>tr]:last:border-b-0
+      bg-muted/50
+      border-t
+      font-medium;
+    }
+
+    tr {
+      @apply border-b
+      hover:bg-muted/50
+      transition-colors;
+    }
+
+    th {
+      @apply [&:has([role=checkbox])]:pr-0
+      [&>[role=checkbox]]:translate-y-[2px]
+      align-middle
+      font-medium
+      h-10
+      px-2
+      text-foreground
+      text-left
+      whitespace-nowrap;
+    }
+
+    td {
+      @apply [&:has([role=checkbox])]:pr-0
+      [&>[role=checkbox]]:translate-y-[2px]
+      align-middle
+      p-2;
+      /* whitespace-nowrap; */
+    }
+
+    caption {
+      @apply caption-bottom
+      mt-4
+      text-muted-foreground
+      text-sm;
+    }
+  }
+}

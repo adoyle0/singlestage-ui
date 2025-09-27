@@ -1,0 +1,79 @@
+name = "Dialog"
+description = "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert."
+
+[[examples]]
+name = "Dialog"
+
+[[examples]]
+name = "Dialog Alert"
+title = "Alert Dialog"
+description = "A modal dialog that interrupts the user with important content and expects a response."
+
+[[references]]
+name = "Dialog"
+description = "Contains all the parts of an alert dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#attributes">dialog</a> \
+attributes."""
+attrs = [
+  { attr = "alert", attr_type = "bool", default = "false", description = """Specify whether or \
+    not alert styling should be used.""" },
+]
+
+[[references]]
+name = "DialogClose"
+description = "An optional button that renders in the top-right corner and closes the dialog when clicked."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogContent"
+description = "Contains content to be rendered in the main body of the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogDescription"
+description = "A short description/subheading describing dialog content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogFooter"
+description = "Displays at the bottom of the dialog, contains calls to action. Submit events such as button clicks in this area automatically trigger closing of the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogHeader"
+description = "Contains the dialog title and a description to be rendered in the open dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogTitle"
+description = "The title of the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogTrigger"
+description = "Used to wrap other elements and trigger the dialog on click."
+extra = "Note: the slot attribute is required."
+attrs = []

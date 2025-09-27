@@ -1,0 +1,39 @@
+name = "Avatar"
+description = "An image element with a fallback for representing the user."
+
+[[examples]]
+name = "Avatar"
+
+[[examples]]
+name = "Avatar Fallback"
+title = "Fallback"
+
+[[examples]]
+name = "Avatar Multi"
+title = "Overlapping"
+
+[[references]]
+name = "Avatar"
+description = "Contains the contents of an avatar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AvatarFallback"
+description = "Renders a text fallback inside the avatar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AvatarImage"
+description = "Renders an image inside the avatar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#attributes">img</a> \ 
+attributes."""
+attrs = []

@@ -1,0 +1,5 @@
+@layer components {
+  .singlestage-link {
+    @apply font-medium underline underline-offset-4;
+  }
+}

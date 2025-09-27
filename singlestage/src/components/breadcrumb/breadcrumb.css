@@ -1,0 +1,17 @@
+@layer components {
+  .singlestage-breadcrumb {
+    @apply break-words
+    flex
+    flex-wrap
+    gap-1.5
+    items-center
+    sm:gap-2.5
+    text-muted-foreground
+    text-sm;
+  }
+  .singlestage-breadcrumb-item {
+    @apply gap-1.5
+    inline-flex
+    items-center;
+  }
+}

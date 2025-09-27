@@ -1,0 +1,88 @@
+[package]
+name = "singlestage"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+description.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+leptos = { workspace = true }
+leptos_meta = { workspace = true }
+uuid = { workspace = true, features = ["v4", "js"] }
+
+[build-dependencies]
+reqwest = { workspace = true, features = ["blocking"] }
+sha256 = { workspace = true }
+
+[features]
+csr = ["leptos/csr"]
+ssr = ["leptos/ssr"]
+hydrate = ["leptos/hydrate"]
+nightly = ["leptos/nightly"]
+default = [
+  "accordion",
+  "alert",
+  "avatar",
+  "badge",
+  "breadcrumb",
+  "button",
+  "card",
+  "checkbox",
+  # "combobox",
+  "dialog",
+  # "dropdown",
+  "input",
+  "label",
+  "link",
+  "pagination",
+  # "popover",
+  "radio",
+  # "range",
+  "select",
+  "separator",
+  "sidebar",
+  "skeleton",
+  "switch",
+  "table",
+  "tabs",
+  "textarea",
+  "theme_provider",
+  # "toast",
+  "tooltip",
+]
+
+accordion = []
+alert = []
+avatar = []
+badge = []
+breadcrumb = ["dropdown"]
+button = []
+card = []
+checkbox = []
+combobox = ["button"]
+dialog = []
+dropdown = ["button"]
+input = []
+label = []
+link = []
+pagination = ["button"]
+popover = []
+radio = []
+range = []
+select = []
+separator = []
+sidebar = []
+skeleton = []
+switch = []
+table = []
+tabs = []
+textarea = []
+theme_provider = []
+toast = []
+tooltip = []

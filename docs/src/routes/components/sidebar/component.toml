@@ -1,0 +1,132 @@
+name = "Sidebar"
+description = "A composable, themeable, and customizable sidebar component."
+
+# [[examples]]
+# name = "sidebar"
+
+[[references]]
+name = "Collapsible"
+description = "Creates a collapsible menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details#attributes">details</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CollapsibleContent"
+description = "Creates a collapsible menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "Sidebar"
+description = "The sidebar container."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarContent"
+description = "A scrollable wrapper displayed in the middle of the sidebar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarFooter"
+description = "A sticky footer displayed at the bottom of the sidebar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarGroup"
+description = "Creates a section in the content area of the sidebar that groups similar items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarGroupContent"
+description = "Wraps the content of a sidebar group."
+attrs = []
+
+[[references]]
+name = "SidebarGroupLabel"
+description = "The label displayed above the group."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarHeader"
+description = "A sticky header displayed at the top of the sidebar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarMenu"
+description = "For building a menu within a SidebarGroup."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarMenuButton"
+description = "Wraps content displayed in the click area of a SidebarMenuItem."
+attrs = []
+
+[[references]]
+name = "SidebarMenuItem"
+description = "Contains an element within the SidebarMenu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarProvider"
+description = "Takes in initial state and provides SidebarContext to its children."
+attrs = [
+  { attr = "hidden", attr_type = "RwSignal<bool>", default = "false", description = """Reactive \
+    signal coupled to the sidebar's hidden state.""" },
+  { attr = "side", attr_type = "RwSignal<String>", default = """"left"""", description = """\
+    Reactive signal coupled to which side of its container the sidebar renders on.""" },
+]
+
+[[references]]
+name = "SidebarMenuSub"
+description = "Wraps a submenu within a SidebarMenu."
+attrs = []
+
+[[references]]
+name = "SidebarMenuSubItem"
+description = "A menu item within the SidebarMenuSub menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarTrigger"
+description = "Wrapper that toggles showing/hiding of the sidebar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
