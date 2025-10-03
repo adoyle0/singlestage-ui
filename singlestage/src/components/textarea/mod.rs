@@ -2,8 +2,6 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Textarea(
-    // #[prop(optional)] children: Option<Children>,
-
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -155,8 +153,6 @@ pub fn Textarea(
     #[prop(optional, into)]
     wrap: RwSignal<String>,
 
-    // REACTIVE ATTRIBUTES
-    //
     /// Sets the default value of the element. Setting `value` sets this once at page load.
     /// Use this for subsequent updates.
     #[prop(optional, into)]
@@ -273,6 +269,7 @@ pub fn Textarea(
                 }
             }
             class=move || format!("singlestage-textarea {}", class.get().unwrap_or_default())
+
             {..global_attrs_1}
             {..global_attrs_2}
             {..textarea_attrs}
