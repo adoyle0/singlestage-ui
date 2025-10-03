@@ -40,10 +40,9 @@ pub fn Breadcrumb(
     /// Modifies the appearance of the enter key on virtual keyboards.
     #[prop(optional, into)]
     enterkeyhint: MaybeProp<String>,
-    // // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-    // /// Expose elements in the shadow DOM to be manipulated by the DOM.
-    // #[prop(optional, into)]
-    // exportparts: MaybeProp<String>,
+    /// Expose elements in the shadow DOM to be manipulated by the DOM.
+    #[prop(optional, into)]
+    exportparts: MaybeProp<String>,
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
@@ -139,8 +138,7 @@ pub fn Breadcrumb(
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
-            // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-            // exportparts=move || exportparts.get()
+            exportparts=move || exportparts.get()
             hidden=move || hidden.get()
             id=move || id.get()
             inert=move || inert.get()
