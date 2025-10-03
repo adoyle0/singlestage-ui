@@ -125,6 +125,10 @@ pub fn Input(
     /// expected data type.
     #[prop(optional, into)]
     capture: MaybeProp<String>,
+    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
+    /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
+    #[prop(optional, into)]
+    dirname: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
     disabled: MaybeProp<bool>,
@@ -206,16 +210,10 @@ pub fn Input(
     #[prop(optional, into)]
     width: MaybeProp<usize>,
 
-    // REACTIVE ATTRIBUTES //
-    //
     /// Sets the default value of the element. Setting `value` sets this once at page load.
     /// Use this for subsequent updates.
     #[prop(optional, into)]
     default: MaybeProp<String>,
-    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
-    /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
-    #[prop(optional, into)]
-    dirname: MaybeProp<String>,
     /// Set the input type. Supported types: `color`, `date`, `datetime-local`, `email`, `file`,
     /// `hidden`, `image`, `month`, `number`, `password`, `search`, `tel`, `text`, `time`, `url`,
     /// `week`.
