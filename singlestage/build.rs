@@ -5,8 +5,8 @@
 ///
 use std::{
     env,
-    fs::{self, exists, File},
-    io::{prelude::*, BufRead, BufReader, Write},
+    fs::{self, File, exists},
+    io::{BufRead, BufReader, Write, prelude::*},
     path::{Path, PathBuf},
     process::Command,
 };
@@ -172,7 +172,7 @@ fn main() {
         return;
     }
 
-    let url_base = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.13/";
+    let url_base = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.14/";
 
     let tailwind =
         Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env")).join(&filename);

@@ -108,4 +108,4 @@ lib-default-features = false
 lib-profile-release = "wasm-release"
 
 tailwind-input-file = "style/tailwind.css"
-LEPTOS_TAILWIND_VERSION = "v4.1.13"
+LEPTOS_TAILWIND_VERSION = "v4.1.14"
