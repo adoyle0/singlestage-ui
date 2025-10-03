@@ -120,12 +120,10 @@ pub fn Textarea(
     /// Set the width of the `<textarea>`. Must be positive. The default value is `20`.
     #[prop(optional, into)]
     cols: MaybeProp<usize>,
-    // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-    //
-    // /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
-    // /// regular form data.
-    // #[prop(optional, into)]
-    // dirname: MaybeProp<String>,
+    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
+    /// regular form data.
+    #[prop(optional, into)]
+    dirname: MaybeProp<String>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -250,8 +248,7 @@ pub fn Textarea(
         <{..}
             autocomplete=move || autocomplete.get()
             cols=move || cols.get()
-            // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-            // dirname=move || dirname.get()
+            dirname=move || dirname.get()
             disabled=move || disabled.get()
             form=move || form.get()
             maxlength=move || maxlength.get()

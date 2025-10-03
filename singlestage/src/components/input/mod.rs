@@ -212,12 +212,10 @@ pub fn Input(
     /// Use this for subsequent updates.
     #[prop(optional, into)]
     default: MaybeProp<String>,
-    // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-    //
-    // /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
-    // /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
-    // #[prop(optional, into)]
-    // dirname: MaybeProp<String>,
+    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
+    /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
+    #[prop(optional, into)]
+    dirname: MaybeProp<String>,
     /// Set the input type. Supported types: `color`, `date`, `datetime-local`, `email`, `file`,
     /// `hidden`, `image`, `month`, `number`, `password`, `search`, `tel`, `text`, `time`, `url`,
     /// `week`.
@@ -322,14 +320,13 @@ pub fn Input(
         />
     };
 
-    let input_attrs = view! {
+    let input_attrs_1 = view! {
         <{..}
             accept=move || accept.get()
             alt=move || alt.get()
             autocomplete=move || autocomplete.get()
             capture=move || capture.get()
-            // TODO: Waiting on https://github.com/leptos-rs/leptos/pull/4308 and next release (>0.8.9)
-            // dirname=move || dirname.get()
+            dirname=move || dirname.get()
             form=move || form.get()
             formaction=move || formaction.get()
             formenctype=move || formenctype.get()
@@ -338,6 +335,11 @@ pub fn Input(
             formtarget=move || formtarget.get()
             height=move || height.get()
             list=move || list.get()
+        />
+    };
+
+    let input_attrs_2 = view! {
+        <{..}
             max=move || max.get()
             maxlength=move || maxlength.get()
             min=move || min.get()
@@ -383,7 +385,8 @@ pub fn Input(
 
             {..global_attrs_1}
             {..global_attrs_2}
-            {..input_attrs}
+            {..input_attrs_1}
+            {..input_attrs_2}
         />
     }
 }
