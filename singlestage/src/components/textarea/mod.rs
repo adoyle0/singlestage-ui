@@ -151,7 +151,7 @@ pub fn Textarea(
     ///
     /// Accepted values: "hard" | "soft" | "off".
     #[prop(optional, into)]
-    wrap: RwSignal<String>,
+    wrap: MaybeProp<String>,
 
     /// Sets the default value of the element. Setting `value` sets this once at page load.
     /// Use this for subsequent updates.
