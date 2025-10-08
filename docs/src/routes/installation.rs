@@ -16,7 +16,7 @@ pub fn Installation() -> impl IntoView {
 <span>[dependencies]</span>
 <span>leptos = "0.8"</span>
 <span>...</span>
-<span>singlestage = "0.1"</span>
+<span>singlestage = "0.2"</span>
 </pre>"#
             .to_string() />
 
@@ -30,7 +30,7 @@ pub fn Installation() -> impl IntoView {
 <span>[dependencies]</span>
 <span>leptos = { version = "0.8", features = ["nightly"] }</span>
 <span>...</span>
-<span>singlestage = {version = "0.1", features = ["nightly"] }</span>
+<span>singlestage = {version = "0.2", features = ["nightly"] }</span>
 </pre>"#
             .to_string() />
 
