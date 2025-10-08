@@ -47,8 +47,18 @@ fn download_file(download_url: &str, file_path: &PathBuf) {
         .open(file_path)
         .expect("Error opening file");
 
-    let response = reqwest::blocking::get(download_url).expect("Error getting response");
+    let client = reqwest::blocking::Client::builder()
+        .timeout(std::time::Duration::from_secs(3600))
+        .build()
+        .expect("Error building client");
+
+    let response = client
+        .get(download_url)
+        .send()
+        .expect("Error getting response");
+
     let content = response.bytes().expect("Error getting bytes from response");
+
     file.write_all(&content).expect("Error writing to file");
 }
 
@@ -56,6 +66,8 @@ fn main() {
     let out_dir = env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env");
     let bundle_path = Path::new(&out_dir).join("bundle.css");
     let singlestage_path = Path::new(&out_dir).join("singlestage.css");
+
+    if env::var("DOCS_RS").is_ok() {}
 
     // Build list of css files to include
     let features = features!(
