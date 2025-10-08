@@ -46,9 +46,6 @@ pub fn TabsTrigger(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
-    // /// Set the id of this element.
-    // #[prop(optional, into)]
-    // id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -86,9 +83,6 @@ pub fn TabsTrigger(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    // /// Define the semantic meaning of content.
-    // #[prop(optional, into)]
-    // role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -100,9 +94,6 @@ pub fn TabsTrigger(
     /// Define CSS to be applied to the element.
     #[prop(optional, into)]
     style: MaybeProp<String>,
-    // /// Controls how an element behaves when a user navigates using the tab key.
-    // #[prop(optional, into)]
-    // tabindex: MaybeProp<usize>,
     /// Describes the content of the element to screen readers.
     #[prop(optional, into)]
     title: MaybeProp<String>,
@@ -112,11 +103,6 @@ pub fn TabsTrigger(
 
     // BUTTON ATTRIBUTES
     //
-    // /// Set the default behavior of the button.
-    // ///
-    // /// Accepted values: "submit" | "reset" | "button"
-    // #[prop(optional, into)]
-    // button_type: MaybeProp<String>,
     /// The action that's performed by the element this button controls.
     ///
     /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
@@ -192,7 +178,6 @@ pub fn TabsTrigger(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            // id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -210,11 +195,9 @@ pub fn TabsTrigger(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            // role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
-            // tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
         />
@@ -234,7 +217,6 @@ pub fn TabsTrigger(
             name=move || name.get()
             popovertarget=move || popovertarget.get()
             popovertargetaction=move || popovertargetaction.get()
-            // type=move || button_type.get()
             value=move || value.get()
         />
     };
