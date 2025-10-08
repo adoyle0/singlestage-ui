@@ -70,6 +70,10 @@ setting the `SINGLESTAGE_TAILWIND_PATH` environment variable to the full path (f
 tailwind binary. Note that if you download the binary from github on Linux or MacOS then you'll
 probably have to make it executable (`chmod +x`).
 
+```bash
+SINGLESTAGE_TAILWIND_PATH=/path/to/tailwindcss cargo leptos watch
+```
+
 ## Contributing
 
 Contributions are welcome.
