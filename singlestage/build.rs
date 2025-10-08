@@ -5,7 +5,7 @@
 ///
 use std::{
     env,
-    fs::{self, File, exists},
+    fs::{self, File, exists, remove_file},
     io::{BufRead, BufReader, Write, prelude::*},
     path::{Path, PathBuf},
     process::Command,
@@ -63,13 +63,13 @@ fn download_file(download_url: &str, file_path: &PathBuf) {
 }
 
 fn main() {
-    let out_dir = env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env");
+    let out_dir = env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (1)\n");
     let bundle_path = Path::new(&out_dir).join("bundle.css");
     let singlestage_path = Path::new(&out_dir).join("singlestage.css");
 
     // Skip css bundling and tailwind for docs.rs
     if env::var("DOCS_RS").is_ok() {
-        File::create(&singlestage_path).expect("Error creating dummy file");
+        File::create(&singlestage_path).expect("\nError creating dummy file.\n");
         return;
     }
 
@@ -110,7 +110,7 @@ fn main() {
         .create(true)
         .truncate(true)
         .open(&bundle_path)
-        .expect("Error opening bundle file");
+        .expect("\nError opening bundle file.\n");
 
     // Theme provider goes first
     #[cfg(feature = "theme_provider")]
@@ -135,7 +135,27 @@ fn main() {
     }
 
     // Tailwind
-    //
+
+    // User brought their own tailwind
+    if let Ok(tailwind_path) = env::var("SINGLESTAGE_TAILWIND_PATH") {
+        if Command::new(Path::new(&tailwind_path))
+            .arg("-i")
+            .arg(&bundle_path)
+            .arg("-o")
+            .arg(&singlestage_path)
+            .arg("-m")
+            .output()
+            .is_ok()
+        {
+            // BYOT tailwind worked, bail
+            return;
+        }
+        panic!(
+            "\nRunning tailwind at `{}` didn't work.\nIs it executable? (sudo chmod +x)\nIs this a full path?\n",
+            tailwind_path
+        )
+    }
+
     // Try system tailwind
     if Command::new("tailwindcss")
         .arg("-i")
@@ -156,13 +176,13 @@ fn main() {
         "linux" => filename.push_str("-linux"),
         "windows" => filename.push_str("-windows"),
         "macos" => filename.push_str("-macos"),
-        _ => panic!("This platform is not supported at this time."),
+        _ => panic!("\nThis platform is not supported at this time.\n"),
     };
 
     match env::consts::ARCH {
         "x86_64" => filename.push_str("-x64"),
         "aarch64" => filename.push_str("-arm64"),
-        _ => panic!("This platform is not supported at this time."),
+        _ => panic!("\nThis platform is not supported at this time.\n"),
     }
 
     // TODO: handle no windows aarch64
@@ -174,7 +194,8 @@ fn main() {
 
     // Try downloaded tailwind
     if Command::new(
-        Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env")).join(&filename),
+        Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (2)\n"))
+            .join(&filename),
     )
     .arg("-i")
     .arg(&bundle_path)
@@ -191,22 +212,24 @@ fn main() {
     let url_base = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.14/";
 
     let tailwind =
-        Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env")).join(&filename);
+        Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (3)\n"))
+            .join(&filename);
 
-    if !exists(&tailwind).expect("Error checking for tailwind") {
+    if !exists(&tailwind).expect("\nError checking for tailwind.\n") {
         let file_url = format!("{}{}", &url_base, &filename);
         download_file(&file_url, &tailwind);
     }
 
-    let checksums = Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env"))
-        .join("sha256sums.txt");
+    let checksums =
+        Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (4)\n"))
+            .join("sha256sums.txt");
 
-    if !exists(&checksums).expect("Error checking for checksums") {
+    if !exists(&checksums).expect("\nError checking for checksums.\n") {
         let sums_url = format!("{}sha256sums.txt", &url_base);
         download_file(&sums_url, &checksums);
     }
 
-    let sums = File::open(&checksums).expect("Error opening checksums");
+    let sums = File::open(&checksums).expect("\nError opening checksums.\n");
     let buf_reader = BufReader::new(sums);
 
     let mut expected_checksum = "".to_string();
@@ -220,7 +243,8 @@ fn main() {
         }
     }
 
-    let calculated_checksum = sha256::try_digest(tailwind).expect("Error calculating checksum");
+    let calculated_checksum =
+        sha256::try_digest(&tailwind).expect("\nError calculating checksum.\n");
 
     println!("Expected Checksum: {}", expected_checksum);
     println!("Calculated Checksum: {}", calculated_checksum);
@@ -228,30 +252,34 @@ fn main() {
     if expected_checksum == calculated_checksum {
         println! {"Checksum match"};
     } else {
-        println! {"Checksum mismatch"};
-        panic!("Checksum mismatch");
+        println! {"Checksum mismatch!"};
+        let _idc_if_this_fails = remove_file(tailwind);
+        panic!("\nChecksum mismatch!\n");
     }
 
     if env::consts::FAMILY == "unix" {
         Command::new("chmod")
             .arg("+x")
             .arg(
-                Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env"))
-                    .join(&filename),
+                Path::new(
+                    &env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (5)\n"),
+                )
+                .join(&filename),
             )
             .output()
-            .expect("Error running chmod +x");
+            .expect("\nError running chmod +x\n");
     }
 
     // Run downloaded tailwind
-    Command::new(Path::new(&env::var_os("OUT_DIR").expect("Error reading OUT_DIR from env")).join(&filename))
-        .arg("-i")
-        .arg(&bundle_path)
-        .arg("-o")
-        .arg(&singlestage_path)
-        .arg("-m")
-        .output()
-        .expect(
-            "\n`tailwindcss` not found in PATH. Is it installed? See:\n https://tailwindcss.com/docs/installation/tailwind-cli or\n https://github.com/tailwindlabs/tailwindcss/releases/latest\nOr install using your package manager.\n\n",
-        );
+    Command::new(
+        Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (6)\n"))
+            .join(&filename),
+    )
+    .arg("-i")
+    .arg(&bundle_path)
+    .arg("-o")
+    .arg(&singlestage_path)
+    .arg("-m")
+    .output()
+    .expect("\nFailed to run tailwind\n");
 }
