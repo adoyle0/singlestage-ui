@@ -2610,7 +2610,6 @@ dependencies = [
  "reqwest",
  "sha256",
  "uuid",
- "web-sys",
 ]
 
 [[package]]
