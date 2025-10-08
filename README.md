@@ -60,6 +60,16 @@ Add the nightly feature to singlestage just as you do with Leptos, if using nigh
 
 Nothing special needs to happen whether you you use SSR or not.
 
+### Tailwind BYOB
+
+Singlestage uses tailwind during the build process. It first checks for `tailwindcss` in
+`PATH` (system install, typical for Linux). If that doesn't work then it tries to download the
+latest tailwind binary from their github release page. If for some reason this fails, or for
+whatever reason you want to use your own tailwind executable, you can bring your own binary by
+setting the `SINGLESTAGE_TAILWIND_PATH` environment variable to the full path (from root) to your
+tailwind binary. Note that if you download the binary from github on Linux or MacOS then you'll
+probably have to make it executable (`chmod +x`).
+
 ## Contributing
 
 Contributions are welcome.
