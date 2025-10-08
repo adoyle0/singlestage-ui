@@ -29,6 +29,72 @@ pub fn SidebarButton() -> impl IntoView {
 }
 
 #[component]
+pub fn DebugMenu() -> impl IntoView {
+    {
+        if cfg!(debug_assertions) {
+            view! {
+                <SidebarGroup>
+                    <SidebarGroupLabel>"Debug"</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <A href="/reactive-debug">
+                                        {icon!(icondata::BsJoystick)} <span>"Reactivity"</span>
+                                    </A>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <Collapsible>
+                                    <CollapsibleTrigger slot>
+                                        <SidebarMenuButton>
+                                            {icon!(icondata::LuSettings)} "Test Menu"
+                                        </SidebarMenuButton>
+                                    </CollapsibleTrigger>
+                                    <CollapsibleContent>
+                                        <SidebarMenuSub>
+                                            <SidebarMenuSubItem>
+                                                <a href="#">
+                                                    <span>"One"</span>
+                                                </a>
+                                            </SidebarMenuSubItem>
+                                        </SidebarMenuSub>
+                                        <SidebarMenuSub>
+                                            <SidebarMenuSubItem>
+                                                <a href="#">
+                                                    <span>"Two"</span>
+                                                </a>
+                                            </SidebarMenuSubItem>
+                                        </SidebarMenuSub>
+                                        <SidebarMenuSub>
+                                            <SidebarMenuSubItem>
+                                                <a href="#">
+                                                    <span>"Three"</span>
+                                                </a>
+                                            </SidebarMenuSubItem>
+                                        </SidebarMenuSub>
+                                        <SidebarMenuSub>
+                                            <SidebarMenuSubItem>
+                                                <a href="#">
+                                                    <span>"Four"</span>
+                                                </a>
+                                            </SidebarMenuSubItem>
+                                        </SidebarMenuSub>
+                                    </CollapsibleContent>
+                                </Collapsible>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            }
+            .into_any()
+        } else {
+            view! {}.into_any()
+        }
+    }
+}
+
+#[component]
 pub fn SidebarContainer() -> impl IntoView {
     view! {
         <SidebarProvider>
@@ -100,133 +166,15 @@ pub fn SidebarContainer() -> impl IntoView {
                             </SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>
-                    {if cfg!(debug_assertions) {
-                        view! {
-                            <SidebarGroup>
-                                <SidebarGroupLabel>"Debug"</SidebarGroupLabel>
-                                <SidebarGroupContent>
-                                    <SidebarMenu>
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton>
-                                                <A href="/reactive-debug">
-                                                    {icon!(icondata::BsJoystick)} <span>"Reactivity"</span>
-                                                </A>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
-                                    </SidebarMenu>
-                                </SidebarGroupContent>
-                            </SidebarGroup>
-                        }
-                            .into_any()
-                    } else {
-                        view! {}.into_any()
-                    }}
+
+                    <DebugMenu />
+
                     <SidebarGroup>
                         <SidebarGroupLabel>"Components"</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>{generate_component_links!()}</SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>
-
-                    {if cfg!(debug_assertions) {
-                        view! {
-                            <SidebarGroup>
-                                <SidebarGroupLabel>"Menu"</SidebarGroupLabel>
-                                <SidebarGroupContent>
-                                    <SidebarMenu>
-                                        <SidebarMenuItem>
-                                            <Collapsible>
-                                                <CollapsibleTrigger slot>
-                                                    <SidebarMenuButton>
-                                                        {icon!(icondata::LuSettings)} "Settings"
-                                                    </SidebarMenuButton>
-                                                </CollapsibleTrigger>
-                                                <CollapsibleContent>
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"General"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Team"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Billing"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Limits"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-                                                </CollapsibleContent>
-                                            </Collapsible>
-                                        </SidebarMenuItem>
-                                        <SidebarMenuItem>
-                                            <Collapsible>
-                                                <CollapsibleTrigger slot>
-                                                    <SidebarMenuButton>
-                                                        {icon!(icondata::LuSettings)} "Options"
-                                                    </SidebarMenuButton>
-                                                </CollapsibleTrigger>
-                                                <CollapsibleContent>
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"General"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Team"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Billing"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-
-                                                    <SidebarMenuSub>
-                                                        <SidebarMenuSubItem>
-                                                            <a href="#">
-                                                                <span>"Limits"</span>
-                                                            </a>
-                                                        </SidebarMenuSubItem>
-                                                    </SidebarMenuSub>
-                                                </CollapsibleContent>
-                                            </Collapsible>
-                                        </SidebarMenuItem>
-                                    </SidebarMenu>
-                                </SidebarGroupContent>
-                            </SidebarGroup>
-                        }
-                            .into_any()
-                    } else {
-                        view! {}.into_any()
-                    }}
-
                 </SidebarContent>
                 <SidebarSeparator />
                 <SidebarFooter>
