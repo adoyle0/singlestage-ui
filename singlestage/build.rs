@@ -67,7 +67,11 @@ fn main() {
     let bundle_path = Path::new(&out_dir).join("bundle.css");
     let singlestage_path = Path::new(&out_dir).join("singlestage.css");
 
-    if env::var("DOCS_RS").is_ok() {}
+    // Skip css bundling and tailwind for docs.rs
+    if env::var("DOCS_RS").is_ok() {
+        File::create(&singlestage_path).expect("Error creating dummy file");
+        return;
+    }
 
     // Build list of css files to include
     let features = features!(
@@ -106,7 +110,7 @@ fn main() {
         .create(true)
         .truncate(true)
         .open(&bundle_path)
-        .expect("Error opening test file");
+        .expect("Error opening bundle file");
 
     // Theme provider goes first
     #[cfg(feature = "theme_provider")]
