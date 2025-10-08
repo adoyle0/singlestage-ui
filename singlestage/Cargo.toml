@@ -16,6 +16,7 @@ categories.workspace = true
 leptos = { workspace = true }
 leptos_meta = { workspace = true }
 uuid = { workspace = true, features = ["v4", "js"] }
+web-sys = { version = "*", features = ["HtmlInputElement"] }
 
 [build-dependencies]
 reqwest = { workspace = true, features = ["blocking"] }
@@ -44,11 +45,11 @@ default = [
   "pagination",
   # "popover",
   "radio",
-  # "range",
   "select",
   "separator",
   "sidebar",
   "skeleton",
+  "slider",
   "switch",
   "table",
   "tabs",
@@ -75,11 +76,11 @@ link = []
 pagination = ["button"]
 popover = []
 radio = []
-range = []
 select = []
 separator = []
 sidebar = []
 skeleton = []
+slider = []
 switch = []
 table = []
 tabs = []

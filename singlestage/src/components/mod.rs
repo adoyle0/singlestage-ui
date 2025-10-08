@@ -83,11 +83,6 @@ pub mod radio;
 #[cfg(feature = "radio")]
 pub use radio::*;
 
-#[cfg(feature = "range")]
-pub mod range;
-#[cfg(feature = "range")]
-pub use range::*;
-
 #[cfg(feature = "select")]
 pub mod select;
 #[cfg(feature = "select")]
@@ -107,6 +102,11 @@ pub use sidebar::*;
 pub mod skeleton;
 #[cfg(feature = "skeleton")]
 pub use skeleton::*;
+
+#[cfg(feature = "slider")]
+pub mod slider;
+#[cfg(feature = "slider")]
+pub use slider::*;
 
 #[cfg(feature = "switch")]
 pub mod switch;

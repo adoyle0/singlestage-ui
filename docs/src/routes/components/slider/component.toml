@@ -1,0 +1,27 @@
+name = "Slider"
+description = "An input where the user selects a value from within a given range."
+
+[[examples]]
+name = "slider"
+
+[[references]]
+name = "Slider"
+description = "A simple component containing all parts of a slider."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range">range</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "f64", default = "0.0", description = """Sets the default \
+    value of the element. Setting `value` sets this once at page load. Use this for subsequent \
+    updates.""" },
+  { attr = "max", attr_type = "f64", default = "100.0", description = """The greatest value in the \
+    range of permitted values.""" },
+  { attr = "min", attr_type = "f64", default = "0.0", description = """The lowest value in the \
+    range of permitted values.""" },
+  { attr = "step", attr_type = "f64", default = "1.0", description = """Define the granularity of \
+    the expected input value.""" },
+  { attr = "value", attr_type = "RwSignal<f64>", default = "0.0", description = """A \
+    reactive signal coupled to the input's value.""" },
+]

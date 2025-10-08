@@ -1,7 +1,8 @@
 @layer components {
-  .singlestage-form input[type="range"],
   .singlestage-input[type="range"] {
     @apply appearance-none
+    disabled:cursor-not-allowed
+    disabled:opacity-50
     flex
     items-center
     outline-none
