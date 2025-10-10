@@ -82,6 +82,7 @@ fn main() {
         "breadcrumb",
         "button",
         "card",
+        "carousel",
         "checkbox",
         "dialog",
         "dropdown",

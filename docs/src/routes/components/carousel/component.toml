@@ -1,0 +1,47 @@
+name = "Carousel"
+description = "An image carousel."
+
+[[examples]]
+name = "carousel"
+
+[[references]]
+name = "Carousel"
+description = "Contains all the parts of a carousel."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CarouselContent"
+description = "Contains the content portion of the carousel."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CarouselItem"
+description = "Contains a single piece of content for the carousel."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CarouselNext"
+description = "A button that triggers the change to the next available carousel item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CarouselPrevious"
+description = "A button that triggers the change to the previous available carousel item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
