@@ -1,0 +1,30 @@
+@layer components {
+  .singlestage-carousel {
+    > ul {
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      @apply flex
+      gap-4
+      motion-safe:scroll-smooth
+      overflow-x-scroll
+      snap-mandatory
+      snap-x;
+
+      > li {
+        @apply content-center
+        flex-[0_0_100%]
+        snap-center;
+
+        > * {
+          @apply m-auto
+          w-fit;
+        }
+      }
+    }
+  }
+}
