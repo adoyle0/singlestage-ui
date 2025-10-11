@@ -160,7 +160,7 @@ pub fn BreadcrumbItem(
         <li
             value=move || value.get()
             class=move || {
-                format!("singlestage-breadcrumb_item {}", class.get().unwrap_or_default())
+                format!("singlestage-breadcrumb-item {}", class.get().unwrap_or_default())
             }
 
             {..global_attrs_1}
