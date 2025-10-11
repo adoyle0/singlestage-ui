@@ -1,3 +1,4 @@
+use crate::Label;
 use leptos::prelude::*;
 
 // TODO: Tri-state
@@ -6,6 +7,8 @@ use leptos::prelude::*;
 /// between checked and not checked.
 #[component]
 pub fn Checkbox(
+    #[prop(optional)] children: Option<Children>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -192,26 +195,59 @@ pub fn Checkbox(
     };
 
     view! {
-        <input
-            checked=checked.get_untracked()
-            form=move || form.get()
-            name=move || name.get()
-            readonly=move || readonly.get()
-            required=move || required.get()
-            disabled=disabled.get_untracked()
-            class=move || {
-                format!(
-                    "singlestage-checkbox singlestage-input {}",
-                    class.get().unwrap_or_default(),
-                )
-            }
-            node_ref=checkbox_ref
-            on:change=on_change
-            type="checkbox"
-            value=move || value.get()
+        {if let Some(children) = children {
+            view! {
+                <Label>
+                    <input
+                        checked=checked.get_untracked()
+                        form=move || form.get()
+                        name=move || name.get()
+                        readonly=move || readonly.get()
+                        required=move || required.get()
+                        disabled=disabled.get_untracked()
+                        class=move || {
+                            format!(
+                                "singlestage-checkbox singlestage-input {}",
+                                class.get().unwrap_or_default(),
+                            )
+                        }
+                        node_ref=checkbox_ref
+                        on:change=on_change
+                        type="checkbox"
+                        value=move || value.get()
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        />
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                    {children()}
+                </Label>
+            }
+                .into_any()
+        } else {
+            view! {
+                <input
+                    checked=checked.get_untracked()
+                    form=move || form.get()
+                    name=move || name.get()
+                    readonly=move || readonly.get()
+                    required=move || required.get()
+                    disabled=disabled.get_untracked()
+                    class=move || {
+                        format!(
+                            "singlestage-checkbox singlestage-input {}",
+                            class.get().unwrap_or_default(),
+                        )
+                    }
+                    node_ref=checkbox_ref
+                    on:change=on_change
+                    type="checkbox"
+                    value=move || value.get()
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                />
+            }
+                .into_any()
+        }}
     }
 }
