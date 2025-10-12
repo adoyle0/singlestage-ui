@@ -1,8 +1,4 @@
 // TODO:
-// keyboard focus
-// focus tracking
-// tabindex
-// close on selection
 // react to viewport bounds
 // radio
 // checkbox

@@ -37,7 +37,7 @@ default = [
   "checkbox",
   # "combobox",
   "dialog",
-  # "dropdown",
+  "dropdown",
   "input",
   "label",
   "link",
