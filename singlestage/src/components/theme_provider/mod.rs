@@ -22,11 +22,20 @@ pub struct ThemeProviderContext {
 }
 
 #[component]
+/// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
+/// initial values. Updates should be done via `ThemeProviderContext`.
 pub fn ThemeProvider(
     children: Children,
-    #[prop(optional, into, default = RwSignal::new(Theme::Default))] theme: RwSignal<Theme::Theme>,
-    #[prop(optional, into)] mode: RwSignal<Mode>,
+    /// Set the theme display mode.
+    #[prop(optional, into)]
+    mode: MaybeProp<Mode>,
+    /// Set/update the current Theme.
+    #[prop(optional, into)]
+    theme: MaybeProp<Theme::Theme>,
 ) -> impl IntoView {
+    let mode = RwSignal::new(mode.get_untracked().unwrap_or(Mode::Auto));
+    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
+
     let context = ThemeProviderContext { theme, mode };
     provide_context(context);
 
