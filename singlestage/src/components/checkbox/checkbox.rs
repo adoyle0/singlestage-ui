@@ -173,6 +173,18 @@ pub fn Checkbox(
     }
 
     Effect::new(move || {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            if let Some(value) = value.get_untracked() {
+                if checkbox_group.value.get().contains(&value) {
+                    checked.set(true);
+                } else {
+                    checked.set(false);
+                }
+            }
+        }
+    });
+
+    Effect::new(move || {
         if let Some(checkbox) = checkbox_ref.get_untracked() {
             checkbox.set_checked(checked.get());
         }
