@@ -70,7 +70,6 @@
   }
 
   .singlestage-input-label {
-    @apply gap-3
-    grid;
+    @apply my-3;
   }
 }

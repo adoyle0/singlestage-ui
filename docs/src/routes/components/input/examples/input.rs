@@ -4,7 +4,7 @@ use singlestage::input::*;
 #[component]
 pub fn InputExample() -> impl IntoView {
     view! {
-        <div class="space-y-4">
+        <div>
             <Input input_type="color" default="#F00">
                 "Color:"
             </Input>
