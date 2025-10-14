@@ -5,13 +5,14 @@ description = "A control that allows the user to toggle between checked and not 
 name = "checkbox"
 
 [[examples]]
-name = "checkbox_subtext"
+name = "subtext"
 
 [[examples]]
-name = "checkbox_form"
+name = "form"
 
 [[examples]]
-name = "checkbox_fieldset"
+name = "group"
+title = "Checkbox Group"
 
 [[references]]
 name = "Checkbox"
@@ -26,4 +27,19 @@ attributes."""
 attrs = [
   { attr = "checked", attr_type = "RwSignal<bool>", default = "false", description = """A \
     reactive signal coupled to the checkbox's checked value.""" },
+]
+
+[[references]]
+name = "CheckboxGroup"
+description = "Contains all the parts of a checkbox group."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "RwSignal<bool>", default = "false", description = """A \
+    reactive signal that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "RwSignal<Vec<String>>", default = "[]", description = """A \
+    dynamic list of all the values of checked children Checkboxes.""" },
 ]

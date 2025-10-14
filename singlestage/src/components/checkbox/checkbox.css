@@ -33,4 +33,18 @@
       mask-size-[0.875rem];
     }
   }
+
+  .singlestage-checkbox-group {
+    @apply flex
+    flex-col
+    font-normal
+    gap-2
+    leading-tight;
+
+    > legend {
+      @apply font-medium
+      mb-3
+      text-base;
+    }
+  }
 }
