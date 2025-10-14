@@ -1,9 +1,9 @@
 mod checkbox;
-mod checkbox_fieldset;
-mod checkbox_form;
-mod checkbox_subtext;
+mod form;
+mod group;
+mod subtext;
 
 pub use checkbox::*;
-pub use checkbox_fieldset::*;
-pub use checkbox_form::*;
-pub use checkbox_subtext::*;
+pub use form::*;
+pub use group::*;
+pub use subtext::*;
