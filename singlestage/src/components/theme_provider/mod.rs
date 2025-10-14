@@ -74,7 +74,7 @@ pub fn ThemeProvider(
 @layer components {
   .singlestage-btn-primary {
     .singlestage-input {
-      @apply border-primary-foreground/30;
+      @apply border-primary-foreground/30!;
     }
   }
 
