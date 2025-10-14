@@ -42,6 +42,12 @@
     py-2;
   }
 
+  .singlestage-btn-primary {
+    .singlestage-input {
+      @apply border-primary-foreground/30!;
+    }
+  }
+
   .singlestage-btn-icon {
     @apply size-9;
   }

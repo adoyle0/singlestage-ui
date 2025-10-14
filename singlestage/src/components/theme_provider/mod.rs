@@ -76,6 +76,12 @@ pub fn ThemeProvider(
     // TODO: This code is dead and here for future reference
     let _dark_overrides_tw = r#"
 @layer components {
+  .singlestage-btn-primary {
+    .singlestage-input {
+      @apply border-primary-foreground/30;
+    }
+  }
+
   .singlestage-textarea {
     @apply aria-invalid:ring-destructive/40
     bg-input/30;
@@ -186,6 +192,15 @@ pub fn ThemeProvider(
 }"#;
 
     let dark_overrides = r#"@layer components {
+  .singlestage-btn-primary {
+    .singlestage-input[type="checkbox"],
+    .singlestage-input[type="radio"] {
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent) !important;
+      }
+    }
+  }
+
   .singlestage-textarea {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
