@@ -2,6 +2,8 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Slider(
+    #[prop(optional)] children: Option<Children>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -240,7 +242,6 @@ pub fn Slider(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -278,9 +279,92 @@ pub fn Slider(
     };
 
     view! {
-        <input
+        {if let Some(children) = children {
+            let uuid = uuid::Uuid::new_v4();
+            view! {
+                <label class="singlestage-label singlestage-slider-label"
+                    for=move || id.get().unwrap_or(uuid.to_string())
+                >
+                    {children()}
+                </label>
+                <input
+                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+                    disabled=disabled.get_untracked()
+                    id=move || id.get().unwrap_or(uuid.to_string())
+                    max=move || {
+                        let mut current_value = init_value;
+                        let max = max.get().unwrap_or_else(|| max_default);
+                        let min = min.get_untracked().unwrap_or_else(|| min_default);
+                        if let Some(value) = value.get_untracked() {
+                            current_value = value.get_untracked();
+                            if current_value > max {
+                                value.set(max)
+                            }
+                        }
+                        update_slider(min, max, current_value);
+                        max
+                    }
+                    min=move || {
+                        let mut current_value = init_value;
+                        let max = max.get_untracked().unwrap_or_else(|| max_default);
+                        let min = min.get().unwrap_or_else(|| min_default);
+                        if let Some(value) = value.get_untracked() {
+                            current_value = value.get_untracked();
+                            if current_value < min {
+                                value.set(min)
+                            }
+                        }
+                        update_slider(min, max, current_value);
+                        min
+                    }
+                    node_ref=slider_ref
+                    on:input=on_input
+                    prop:value=move || {
+                        if let Some(value) = value.get() {
+                            let max = max.get_untracked().unwrap_or_else(|| max_default);
+                            let min = min.get_untracked().unwrap_or_else(|| min_default);
+                            let mut new_value = value.get();
+
+                            // Make sure value is in range
+                            if new_value > max {
+                                new_value = max;
+                                value.set(max);
+                            } else if new_value < min {
+                                new_value = min;
+                                value.set(min);
+                            }
+
+                            update_slider(min, max, new_value);
+                            new_value.to_string()
+                        } else {
+                            init_value.to_string()
+                        }
+                    }
+                    step=move || {
+                        let current_value = init_value;
+                        let max = max.get_untracked().unwrap_or_else(|| max_default);
+                        let min = min.get_untracked().unwrap_or_else(|| min_default);
+                        let step = step.get().unwrap_or_else(|| step_default);
+                        update_slider(min, max, current_value);
+                        step
+                    }
+                    style:--slider-value=move || slider_value.get()
+                    type="range"
+                    value=init_value.to_string()
+
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..range_attrs}
+                />
+            }
+                .into_any()
+        } else {
+            view! {
+                <input
             class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
             disabled=disabled.get_untracked()
+            id=move || id.get()
             max=move || {
                 let mut current_value = init_value;
                 let max = max.get().unwrap_or_else(|| max_default);
@@ -347,5 +431,8 @@ pub fn Slider(
             {..global_attrs_2}
             {..range_attrs}
         />
+            }
+                .into_any()
+        }}
     }
 }

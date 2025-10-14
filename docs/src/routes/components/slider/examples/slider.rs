@@ -37,9 +37,13 @@ pub fn SliderExample() -> impl IntoView {
                 </div>
             </div>
 
-            <div class="grid my-4 space-y-4">
-                <Label>"Min: " <Slider class="ml-auto" min=0. max=value value=min /></Label>
-                <Label>"Max: " <Slider class="ml-auto" min=value max=100. value=max /></Label>
+            <div>
+                <Slider class="ml-auto" min=0. max=value value=min>
+                    "Min:"
+                </Slider>
+                <Slider class="ml-auto" min=value max=100. value=max>
+                    "Max:"
+                </Slider>
             </div>
         </div>
     }
