@@ -8,6 +8,6 @@ use leptos::prelude::RwSignal;
 
 #[derive(Clone)]
 pub struct CheckboxGroupContext {
-    invalid: RwSignal<bool>,
-    value: RwSignal<Vec<String>>,
+    pub invalid: RwSignal<bool>,
+    pub value: RwSignal<Vec<String>>,
 }
