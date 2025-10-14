@@ -1,5 +1,4 @@
 use crate::CheckboxGroupContext;
-use crate::Label;
 use leptos::prelude::*;
 
 // TODO: Tri-state
@@ -174,18 +173,6 @@ pub fn Checkbox(
     }
 
     Effect::new(move || {
-        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            if let Some(value) = value.get_untracked() {
-                if checkbox_group.value.get().contains(&value) {
-                    checked.set(true);
-                } else {
-                    checked.set(false);
-                }
-            }
-        }
-    });
-
-    Effect::new(move || {
         if let Some(checkbox) = checkbox_ref.get_untracked() {
             checkbox.set_checked(checked.get());
         }
@@ -238,7 +225,7 @@ pub fn Checkbox(
     view! {
         {if let Some(children) = children {
             view! {
-                <Label>
+                <label class="singlestage-label">
                     <input
                         checked=checked.get_untracked()
                         form=move || form.get()
@@ -261,10 +248,11 @@ pub fn Checkbox(
                         {..global_attrs_2}
                     />
                     {children()}
-                </Label>
+                </label>
             }
                 .into_any()
         } else {
+
             view! {
                 <input
                     aria-invalid=move || {

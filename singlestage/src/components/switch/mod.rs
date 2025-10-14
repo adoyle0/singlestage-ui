@@ -1,5 +1,4 @@
 use crate::CheckboxGroupContext;
-use crate::Label;
 use leptos::prelude::*;
 
 #[component]
@@ -238,7 +237,7 @@ pub fn Switch(
     view! {
         {if let Some(children) = children {
             view! {
-                <Label>
+                <label class="singlestage-label">
                     <input
                         checked=checked.get_untracked()
                         form=move || form.get()
@@ -259,7 +258,7 @@ pub fn Switch(
                         {..global_attrs_2}
                     />
                     {children()}
-                </Label>
+                </label>
             }
                 .into_any()
         } else {
