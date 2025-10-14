@@ -40,9 +40,9 @@ pub fn ThemeSwitcher() -> impl IntoView {
                 .count();
 
             match theme_mode {
-                "dark" => theme_context.mode.set(Mode::Dark),
-                "light" => theme_context.mode.set(Mode::Light),
-                _ => theme_context.mode.set(Mode::Auto),
+                "dark" => theme_context.mode.set("dark".to_string()),
+                "light" => theme_context.mode.set("light".to_string()),
+                _ => theme_context.mode.set("auto".to_string()),
             }
 
             if !theme.is_empty() {
@@ -53,23 +53,23 @@ pub fn ThemeSwitcher() -> impl IntoView {
 
     let swap_theme = move |_| {
         let mode;
-        match theme_context.mode.get_untracked() {
-            Mode::Auto => {
-                if prefers_dark.get_untracked() {
-                    theme_context.mode.set(Mode::Light);
-                    mode = "light";
-                } else {
-                    theme_context.mode.set(Mode::Dark);
-                    mode = "dark";
-                }
-            }
-            Mode::Dark => {
-                theme_context.mode.set(Mode::Light);
+        match theme_context.mode.get_untracked().as_str() {
+            "dark" => {
+                theme_context.mode.set("light".to_string());
                 mode = "light"
             }
-            Mode::Light => {
-                theme_context.mode.set(Mode::Dark);
+            "light" => {
+                theme_context.mode.set("dark".to_string());
                 mode = "dark"
+            }
+            _ => {
+                if prefers_dark.get_untracked() {
+                    theme_context.mode.set("light".to_string());
+                    mode = "light";
+                } else {
+                    theme_context.mode.set("dark".to_string());
+                    mode = "dark";
+                }
             }
         };
 
@@ -129,16 +129,17 @@ pub fn ThemeSwitcher() -> impl IntoView {
 
             <Tooltip side="bottom" value="Toggle dark mode">
                 <Button variant="outline" size="sm-icon" on:click=swap_theme>
-                    <Show when=move || { theme_context.mode.get() == Mode::Light }>
-                        <span>{icon!(icondata::LuSun)}</span>
-                    </Show>
-                    <Show when=move || { theme_context.mode.get() == Mode::Dark }>
-                        <span>{icon!(icondata::LuMoon)}</span>
-                    </Show>
-                    <Show when=move || { theme_context.mode.get() == Mode::Auto }>
-                        <span class="block dark:hidden">{icon!(icondata::LuSun)}</span>
-                        <span class="hidden dark:block">{icon!(icondata::LuMoon)}</span>
-                    </Show>
+                    {move || match theme_context.mode.get().as_str() {
+                        "light" => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
+                        "dark" => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
+                        _ => {
+                            view! {
+                                <span class="block dark:hidden">{icon!(icondata::LuSun)}</span>
+                                <span class="hidden dark:block">{icon!(icondata::LuMoon)}</span>
+                            }
+                                .into_any()
+                        }
+                    }}
                 </Button>
             </Tooltip>
 

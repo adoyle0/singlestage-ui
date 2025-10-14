@@ -1,9 +1,9 @@
-use crate::DropdownMenuGroupContext;
+use crate::CheckboxGroupContext;
 use leptos::prelude::*;
 
-/// Contains multiple items.
+/// Contains all the parts of a radio group
 #[component]
-pub fn DropdownMenuGroup(
+pub fn CheckboxGroup(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -87,6 +87,9 @@ pub fn DropdownMenuGroup(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -107,12 +110,26 @@ pub fn DropdownMenuGroup(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
+
+    // FIELDSET ATTRIBUTES
+    //
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+
+    /// Set or update the invalid state of the radio group.
+    #[prop(optional, into)]
+    invalid: RwSignal<bool>,
+    /// Reactive signal coupled to the current selected value of the radio group.
+    #[prop(optional, into)]
+    value: RwSignal<Vec<String>>,
 ) -> impl IntoView {
-    let heading_id = RwSignal::new(String::new());
-
-    let context = DropdownMenuGroupContext { heading_id };
-    provide_context(context);
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -142,6 +159,7 @@ pub fn DropdownMenuGroup(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -151,18 +169,20 @@ pub fn DropdownMenuGroup(
         />
     };
 
+    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
+
+    let context = CheckboxGroupContext { invalid, value };
+    provide_context(context);
+
     view! {
-        <div
-            aria-labelledby=move || heading_id.get()
-            class=move || {
-                format!("singlestage-dropdown-menu-group {}", class.get().unwrap_or_default())
-            }
-            role="group"
+        <fieldset
+            class=move || format!("singlestage-checkbox-group {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
+            {..fieldset_attrs}
         >
             {children()}
-        </div>
+        </fieldset>
     }
 }

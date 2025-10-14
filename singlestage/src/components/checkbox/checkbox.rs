@@ -1,10 +1,13 @@
-use crate::RadioGroupContext;
+use crate::CheckboxGroupContext;
 use leptos::prelude::*;
 
-/// Contains all the parts of a radio group
+// TODO: Tri-state
+
+/// A control that allows the user to toggle
+/// between checked and not checked.
 #[component]
-pub fn RadioGroup(
-    children: Children,
+pub fn Checkbox(
+    #[prop(optional)] children: Option<Children>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -87,9 +90,9 @@ pub fn RadioGroup(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
+    // /// Define the semantic meaning of content.
+    // #[prop(optional, into)]
+    // role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -111,34 +114,93 @@ pub fn RadioGroup(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 
-    // FIELDSET ATTRIBUTES
+    // CHECKBOX ATTRIBUTES
     //
-    /// Toggle whether or not the input is disabled.
+    /// Reactive signal coupled to the checkbox's checked value.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    checked: RwSignal<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
     /// Name of this element. Submitted with the form as part of a name/value pair.
     #[prop(optional, into)]
     name: MaybeProp<String>,
-
-    /// Set or update the default value.
+    /// Toggle whether or not the user can modify the value of this element.
     #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Set or update the invalid state of the radio group.
+    readonly: MaybeProp<bool>,
+    /// Toggle whether or not this element requires a value for form submission.
     #[prop(optional, into)]
-    invalid: RwSignal<bool>,
-    /// Reactive signal coupled to the current selected value of the radio group.
+    required: MaybeProp<bool>,
+    /// Whether the form control is disabled
     #[prop(optional, into)]
-    value: RwSignal<String>,
+    disabled: MaybeProp<bool>,
+    /// The value of the control. When specified in the HTML, corresponds to the initial value
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 ) -> impl IntoView {
+    let checkbox_ref = NodeRef::<leptos::html::Input>::new();
+
+    let on_change = move |ev| {
+        let checkbox_checked = event_target_checked(&ev);
+
+        checked.set(checkbox_checked);
+
+        if let Some(checkbox_value) = value.get_untracked() {
+            if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                match checkbox_checked {
+                    true => checkbox_group.value.update(|group_value| {
+                        group_value.push(checkbox_value);
+                    }),
+                    false => checkbox_group.value.update(|group_value| {
+                        if let Some(index) = group_value.iter().position(|el| *el == checkbox_value)
+                        {
+                            group_value.swap_remove(index);
+                        }
+                    }),
+                }
+            }
+        }
+    };
+
+    if let Some(value) = value.get_untracked() {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            if checkbox_group.value.get_untracked().contains(&value) {
+                if let Some(checkbox) = checkbox_ref.get_untracked() {
+                    checkbox.set_checked(true)
+                }
+            }
+        }
+    }
+
+    Effect::new(move || {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            if let Some(value) = value.get_untracked() {
+                if checkbox_group.value.get().contains(&value) {
+                    checked.set(true);
+                } else {
+                    checked.set(false);
+                }
+            }
+        }
+    });
+
+    Effect::new(move || {
+        if let Some(checkbox) = checkbox_ref.get_untracked() {
+            checkbox.set_checked(checked.get());
+        }
+    });
+
+    Effect::new(move || {
+        if let Some(checkbox) = checkbox_ref.get_untracked() {
+            checkbox.set_disabled(disabled.get().unwrap_or_default());
+        }
+    });
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,7 +214,6 @@ pub fn RadioGroup(
             itemid=move || itemid.get()
         />
     };
-
     let global_attrs_2 = view! {
         <{..}
             itemprop=move || itemprop.get()
@@ -163,7 +224,7 @@ pub fn RadioGroup(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
+            // role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -173,30 +234,68 @@ pub fn RadioGroup(
         />
     };
 
-    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default)
-    };
-
-    let context = RadioGroupContext {
-        name: name
-            .get_untracked()
-            .unwrap_or(uuid::Uuid::new_v4().to_string()),
-        invalid,
-        value,
-    };
-    provide_context(context);
-
     view! {
-        <fieldset
-            class=move || format!("singlestage-radio-group {}", class.get().unwrap_or_default())
+        {if let Some(children) = children {
+            view! {
+                <label class="singlestage-label">
+                    <input
+                        checked=checked.get_untracked()
+                        form=move || form.get()
+                        name=move || name.get()
+                        readonly=move || readonly.get()
+                        required=move || required.get()
+                        disabled=disabled.get_untracked()
+                        class=move || {
+                            format!(
+                                "singlestage-checkbox singlestage-input {}",
+                                class.get().unwrap_or_default(),
+                            )
+                        }
+                        node_ref=checkbox_ref
+                        on:change=on_change
+                        type="checkbox"
+                        value=move || value.get()
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..fieldset_attrs}
-        >
-            {children()}
-        </fieldset>
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                    {children()}
+                </label>
+            }
+                .into_any()
+        } else {
+
+            view! {
+                <input
+                    aria-invalid=move || {
+                        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                            checkbox_group.invalid.get().to_string()
+                        } else {
+                            false.to_string()
+                        }
+                    }
+                    checked=checked.get_untracked()
+                    form=move || form.get()
+                    name=move || name.get()
+                    readonly=move || readonly.get()
+                    required=move || required.get()
+                    disabled=disabled.get_untracked()
+                    class=move || {
+                        format!(
+                            "singlestage-checkbox singlestage-input {}",
+                            class.get().unwrap_or_default(),
+                        )
+                    }
+                    node_ref=checkbox_ref
+                    on:change=on_change
+                    type="checkbox"
+                    value=move || value.get()
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                />
+            }
+                .into_any()
+        }}
     }
 }

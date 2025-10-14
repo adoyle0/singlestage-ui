@@ -1,12 +1,7 @@
 use leptos::prelude::*;
-use singlestage::{checkbox::*, Label};
+use singlestage::checkbox::*;
 
 #[component]
 pub fn CheckboxExample() -> impl IntoView {
-    view! {
-        <Label>
-            <Checkbox />
-            "Accept terms and conditions"
-        </Label>
-    }
+    view! { <Checkbox>"Accept terms and conditions"</Checkbox> }
 }

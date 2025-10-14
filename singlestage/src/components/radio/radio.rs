@@ -1,4 +1,3 @@
-use crate::Label;
 use crate::RadioGroupContext;
 use leptos::prelude::*;
 
@@ -228,7 +227,7 @@ pub fn Radio(
     view! {
         {if let Some(children) = children {
             view! {
-                <Label>
+                <label class="singlestage-label">
                     <input
                         aria-invalid=move || radio_group.invalid.get().to_string()
                         class=move || {
@@ -243,7 +242,7 @@ pub fn Radio(
                         {..radio_attrs}
                     />
                     {children()}
-                </Label>
+                </label>
             }
                 .into_any()
         } else {

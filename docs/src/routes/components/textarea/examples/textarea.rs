@@ -1,7 +1,11 @@
 use leptos::prelude::*;
-use singlestage::*;
+use singlestage::Textarea;
 
 #[component]
 pub fn TextareaExample() -> impl IntoView {
-    view! { <Textarea placeholder="Type your message here" /> }
+    view! {
+        <form class="w-full">
+            <Textarea placeholder="Type your message here">"Comments:"</Textarea>
+        </form>
+    }
 }

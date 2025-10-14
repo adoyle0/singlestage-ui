@@ -13,7 +13,9 @@
     }
 
     & + * {
-      @apply transition-[margin] ease-in-out duration-300;
+      @apply transition-[margin]
+      ease-in-out
+      duration-300;
     }
 
     &:not([data-side]),
@@ -95,7 +97,8 @@
         flex-col
         gap-2
         min-h-0
-        overflow-y-auto;
+        overflow-y-auto
+        overscroll-none;
 
         > [role="group"] {
           @apply flex

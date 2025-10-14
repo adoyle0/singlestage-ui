@@ -1,0 +1,94 @@
+name = "Dropdown Menu"
+description = """Displays a menu to the user — such as a set of actions or functions — triggered \
+by a button."""
+
+[info]
+title = "This component could use some work"
+description = """While this component does make use of the new popover browser API, proper \
+positioning is still not widely supported. There are hacks in place to try to work around this \
+issue while still taking advantage of the rest of the API. Until this is implemented (hopefully \
+soon - Aug 03, 2025) that puts this component in only a 'Good Enough' state. "<singlestage::Link \
+style="color: var(--foreground)" \
+href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility"> "More \
+Info"</singlestage::Link>""""
+
+[[examples]]
+name = "Dropdown Menu"
+
+[[references]]
+name = "DropdownMenu"
+description = "Contains all the parts of a dropdown menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuContent"
+description = "The component that pops out when the dropdown menu is open."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuGroup"
+description = "Contains multiple items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuItem"
+description = "Contains a menu item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+]
+
+[[references]]
+name = "DropdownMenuLabel"
+description = "Labels groups."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuSeparator"
+description = "Visually separates groups of menu items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuShortcut"
+description = "Displays next to the item content and indicates keyboard shortcuts."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuTrigger"
+description = "The button that toggles the dropdown menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = [
+  { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed <button> \
+    `type` attribute to avoid name collisions.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
+    render the button.""" },
+  { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specify \
+    the style of button to render.""" },
+]

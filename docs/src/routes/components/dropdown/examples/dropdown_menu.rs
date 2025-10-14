@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::dropdown::*;
+use singlestage::{dropdown::*, icon};
 
 #[component]
 pub fn DropdownMenuExample() -> impl IntoView {
@@ -23,13 +23,21 @@ pub fn DropdownMenuExample() -> impl IntoView {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>"GitHub"</DropdownMenuItem>
-                <DropdownMenuItem>"Support"</DropdownMenuItem>
-                <DropdownMenuItem disabled=true>"API"</DropdownMenuItem>
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>"GitHub"</DropdownMenuItem>
+                    <DropdownMenuItem>"Support"</DropdownMenuItem>
+                    <DropdownMenuItem disabled=true>"API"</DropdownMenuItem>
+                </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    "Logout" <DropdownMenuShortcut>"⇧⌘P"</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                <DropdownMenuGroup>
+                    <DropdownMenuItem variant="destructive">
+                        {icon!(icondata::LuTrash2)} "Delete Account"
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        {icon!(icondata::LuLogOut)} "Logout"
+                        <DropdownMenuShortcut>"⇧⌘Q"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
     }
