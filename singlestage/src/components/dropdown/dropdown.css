@@ -38,7 +38,7 @@
       text-popover-foreground
       z-50;
 
-      .singlestage-radiogroup {
+      .singlestage-radio-group {
         @appply block
         gap-0;
       }

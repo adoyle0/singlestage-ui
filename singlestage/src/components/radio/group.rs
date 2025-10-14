@@ -190,7 +190,7 @@ pub fn RadioGroup(
 
     view! {
         <fieldset
-            class=move || format!("singlestage-radiogroup {}", class.get().unwrap_or_default())
+            class=move || format!("singlestage-radio-group {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
