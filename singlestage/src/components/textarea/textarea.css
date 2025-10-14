@@ -24,4 +24,8 @@
     transition-[color,box-shadow]
     w-full;
   }
+
+  .singlestage-textarea-label {
+    @apply my-3;
+  }
 }

@@ -2,6 +2,8 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Textarea(
+    #[prop(optional)] children: Option<Children>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -205,14 +207,12 @@ pub fn Textarea(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -259,28 +259,74 @@ pub fn Textarea(
     };
 
     view! {
-        <textarea
-            node_ref=textarea_ref
-            on:input=on_input
-            aria-invalid=move || {
-                match invalid.get() {
-                    Some(true) => "true",
-                    _ => "",
-                }
-            }
-            class=move || format!("singlestage-textarea {}", class.get().unwrap_or_default())
+        {if let Some(children) = children {
+            let uuid = uuid::Uuid::new_v4();
+            view! {
+                <label
+                    class="singlestage-label singlestage-textarea-label"
+                    for=move || id.get().unwrap_or(uuid.to_string())
+                >
+                    {children()}
+                </label>
+                <textarea
+                    id=move || id.get().unwrap_or(uuid.to_string())
+                    node_ref=textarea_ref
+                    on:input=on_input
+                    aria-invalid=move || {
+                        match invalid.get() {
+                            Some(true) => "true",
+                            _ => "",
+                        }
+                    }
+                    class=move || {
+                        format!("singlestage-textarea {}", class.get().unwrap_or_default())
+                    }
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..textarea_attrs}
-        >
-            {if let Some(default) = default.get_untracked() {
-                default
-            } else if let Some(value) = value.get_untracked() {
-                value.get_untracked()
-            } else {
-                "".to_string()
-            }}
-        </textarea>
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..textarea_attrs}
+                >
+                    {if let Some(default) = default.get_untracked() {
+                        default
+                    } else if let Some(value) = value.get_untracked() {
+                        value.get_untracked()
+                    } else {
+                        "".to_string()
+                    }}
+                </textarea>
+            }
+                .into_any()
+        } else {
+
+            view! {
+                <textarea
+                    id=move || id.get()
+                    node_ref=textarea_ref
+                    on:input=on_input
+                    aria-invalid=move || {
+                        match invalid.get() {
+                            Some(true) => "true",
+                            _ => "",
+                        }
+                    }
+                    class=move || {
+                        format!("singlestage-textarea {}", class.get().unwrap_or_default())
+                    }
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..textarea_attrs}
+                >
+                    {if let Some(default) = default.get_untracked() {
+                        default
+                    } else if let Some(value) = value.get_untracked() {
+                        value.get_untracked()
+                    } else {
+                        "".to_string()
+                    }}
+                </textarea>
+            }
+                .into_any()
+        }}
     }
 }
