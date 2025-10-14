@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{input::*, label::*};
+use singlestage::input::*;
 
 #[component]
 pub fn InputExample() -> impl IntoView {
