@@ -68,4 +68,9 @@
     shadow-xs
     transition-[color,box-shadow];
   }
+
+  .singlestage-input-label {
+    @apply gap-3
+    grid;
+  }
 }
