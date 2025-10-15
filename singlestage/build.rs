@@ -136,6 +136,8 @@ fn main() {
 
     // Tailwind
 
+    let _cleanup = remove_file(&singlestage_path);
+
     // User brought their own tailwind
     if let Ok(tailwind_path) = env::var("SINGLESTAGE_TAILWIND_PATH") {
         if Command::new(Path::new(&tailwind_path))
