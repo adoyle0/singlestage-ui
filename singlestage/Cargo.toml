@@ -38,7 +38,6 @@ default = [
   # "combobox",
   "dialog",
   "dropdown",
-  "field",
   "input",
   "label",
   "link",
@@ -70,7 +69,6 @@ checkbox = ["label"]
 combobox = ["button"]
 dialog = []
 dropdown = ["button"]
-field = []
 input = ["label"]
 label = []
 link = []
