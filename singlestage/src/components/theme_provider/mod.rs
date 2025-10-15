@@ -1,19 +1,20 @@
+#[allow(non_snake_case)]
+pub mod Theme;
+mod mode;
+
 use crate::CSS;
+pub use mode::*;
+
 use leptos::prelude::*;
 use leptos_meta::Style;
 
 // TODO: CSS should be in an actual css file and run through tailwind somehow. This works for now
 
-#[allow(non_snake_case)]
-pub mod Theme;
-
 #[derive(Clone)]
 pub struct ThemeProviderContext {
-    /// Set the theme's light/dark mode behavior. Defaults to `auto`.
-    ///
-    /// Accepted values: `auto` | `dark` | `light`
-    pub mode: RwSignal<String>,
-    /// The current theme in use.
+    /// Set the theme's light/dark mode behavior. Defaults to `Mode::Auto`.
+    pub mode: RwSignal<Mode>,
+    /// The get/set/update the current theme in use.
     pub theme: RwSignal<Theme::Theme>,
 }
 
@@ -22,14 +23,16 @@ pub struct ThemeProviderContext {
 /// initial values. Updates should be done via `ThemeProviderContext`.
 pub fn ThemeProvider(
     children: Children,
-    /// Set the theme display mode.
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
     #[prop(optional, into)]
-    mode: MaybeProp<String>,
-    /// Set/update the current Theme.
+    mode: String,
+    /// Set the initial Theme.
     #[prop(optional, into)]
     theme: MaybeProp<Theme::Theme>,
 ) -> impl IntoView {
-    let mode = RwSignal::new(mode.get_untracked().unwrap_or("auto".to_string()));
+    let mode = RwSignal::<Mode>::new(mode.into());
     let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
 
     let context = ThemeProviderContext { theme, mode };
@@ -454,8 +457,8 @@ pub fn ThemeProvider(
             id="theme"
             inner_html=move || {
                 let theme = theme.get();
-                match mode.get().as_str() {
-                    "dark" => {
+                match mode.get() {
+                    Mode::Dark => {
                         format!(
                             ":root{{ {} {} {}}}\n{}\n",
                             dark_common,
@@ -464,8 +467,8 @@ pub fn ThemeProvider(
                             dark_overrides,
                         )
                     }
-                    "light" => format!(":root{{ {} {}}}\n", theme.common, theme.light),
-                    _ => {
+                    Mode::Light => format!(":root{{ {} {}}}\n", theme.common, theme.light),
+                    Mode::Auto => {
                         format!(
                             ":root{{ {} {}}}\n\n@media (prefers-color-scheme: dark) {{\n  :root {{ {} {}  }}\n{}}}",
                             theme.common,

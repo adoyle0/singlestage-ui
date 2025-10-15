@@ -39,11 +39,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
                 })
                 .count();
 
-            match theme_mode {
-                "dark" => theme_context.mode.set("dark".to_string()),
-                "light" => theme_context.mode.set("light".to_string()),
-                _ => theme_context.mode.set("auto".to_string()),
-            }
+            theme_context.mode.set(Mode::from(theme_mode));
 
             if !theme.is_empty() {
                 selected_theme.set(theme.to_string());
@@ -52,30 +48,31 @@ pub fn ThemeSwitcher() -> impl IntoView {
     });
 
     let swap_theme = move |_| {
-        let mode;
-        match theme_context.mode.get_untracked().as_str() {
-            "dark" => {
-                theme_context.mode.set("light".to_string());
-                mode = "light"
+        match theme_context.mode.get_untracked() {
+            Mode::Dark => {
+                theme_context.mode.set(Mode::Light);
             }
-            "light" => {
-                theme_context.mode.set("dark".to_string());
-                mode = "dark"
+            Mode::Light => {
+                theme_context.mode.set(Mode::Dark);
             }
             _ => {
                 if prefers_dark.get_untracked() {
-                    theme_context.mode.set("light".to_string());
-                    mode = "light";
+                    theme_context.mode.set(Mode::Light);
                 } else {
-                    theme_context.mode.set("dark".to_string());
-                    mode = "dark";
+                    theme_context.mode.set(Mode::Dark);
                 }
             }
         };
 
         let _ = document()
             .unchecked_ref::<web_sys::HtmlDocument>()
-            .set_cookie(&format!("theme_mode={}; Path=/", mode).as_str());
+            .set_cookie(
+                &format!(
+                    "theme_mode={}; Path=/",
+                    theme_context.mode.get_untracked().to_string()
+                )
+                .as_str(),
+            );
     };
 
     Effect::new(move || {
@@ -126,12 +123,11 @@ pub fn ThemeSwitcher() -> impl IntoView {
                     </optgroup>
                 </Select>
             </Tooltip>
-
             <Tooltip side="bottom" value="Toggle dark mode">
                 <Button variant="outline" size="sm-icon" on:click=swap_theme>
-                    {move || match theme_context.mode.get().as_str() {
-                        "light" => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
-                        "dark" => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
+                    {move || match theme_context.mode.get() {
+                        Mode::Light => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
+                        Mode::Dark => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
                         _ => {
                             view! {
                                 <span class="block dark:hidden">{icon!(icondata::LuSun)}</span>
@@ -142,7 +138,6 @@ pub fn ThemeSwitcher() -> impl IntoView {
                     }}
                 </Button>
             </Tooltip>
-
             <Tooltip side="bottom" align="end" value="GitHub repository">
                 <a href="https://github.com/adoyle0/singlestage-ui">
                     <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
