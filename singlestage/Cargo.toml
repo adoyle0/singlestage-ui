@@ -46,6 +46,7 @@ default = [
   "dialog",
   "dropdown",
   "icon",
+  "field",
   "input",
   "item",
   "kbd",
@@ -84,6 +85,7 @@ context_menu = []
 dialog = []
 dropdown = ["button"]
 icon = ["macro"]
+field = []
 input = ["label"]
 item = []
 kbd = []
