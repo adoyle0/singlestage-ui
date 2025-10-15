@@ -6,10 +6,37 @@ name = "select"
 
 [[references]]
 name = "Select"
-description = "Contains all the parts of a select."
+description = "Contains all the parts of the Select."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select#attributes">select</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Set the default \
+    selected value. Setting value overrides this setting.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle invalid \
+    appearance and behavior.""" },
+  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """A \
+    reactive value coupled to the currently selected item's value.""" },
+]
+
+[[references]]
+name = "SelectContent"
+description = "Contains a group of items for the Select."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup#attributes">optgroup</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SelectItem"
+description = "Contains an item with a value to be selected."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/option#attributes">option</a> \
 attributes."""
 attrs = []
