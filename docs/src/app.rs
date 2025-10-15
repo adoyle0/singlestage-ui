@@ -1,10 +1,10 @@
 use crate::components::*;
 use crate::routes::*;
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
+use leptos_meta::{MetaTags, Stylesheet, Title, provide_meta_context};
 use leptos_router::{
-    components::{Outlet, ParentRoute, Route, Router, Routes},
     StaticSegment,
+    components::{Outlet, ParentRoute, Route, Router, Routes},
 };
 use singlestage::*;
 use singlestage_macro::*;
