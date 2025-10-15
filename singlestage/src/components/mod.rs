@@ -53,6 +53,11 @@ pub mod dropdown;
 #[cfg(feature = "dropdown")]
 pub use dropdown::*;
 
+#[cfg(feature = "field")]
+pub mod field;
+#[cfg(feature = "field")]
+pub use field::*;
+
 #[cfg(feature = "input")]
 pub mod input;
 #[cfg(feature = "input")]
