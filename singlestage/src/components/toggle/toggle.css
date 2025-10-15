@@ -1,0 +1,66 @@
+@layer components {
+  .singlestage-toggle-default,
+  .singlestage-toggle-outline {
+    @apply [&_svg:not([class*='size-'])]:size-4
+    [&_svg]:pointer-events-none
+    [&_svg]:shrink-0
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    cursor-pointer
+    disabled:opacity-50
+    disabled:pointer-events-none
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    font-medium
+    inline-flex
+    items-center
+    justify-center
+    outline-none
+    rounded-md
+    shrink-0
+    text-sm
+    transition-all
+    whitespace-nowrap;
+  
+    &:hover,
+    &[aria-pressed="true"] {
+      @apply bg-accent
+      text-accent-foreground;
+    }   
+  }
+
+  .singlestage-toggle-default,
+  .singlestage-toggle-outline {
+    @apply gap-2
+    h-9
+    has-[>svg]:px-3
+    px-4
+    py-2;
+  }
+
+
+  .singlestage-toggle-sm {
+    @apply gap-1.5
+    h-8
+    has-[>svg]:px-2.5
+    px-3;
+  }
+
+  .singlestage-toggle-lg {
+    @apply gap-2
+    h-10
+    has-[>svg]:px-4
+    px-6;
+  }
+
+  .singlestage-toggle-default {
+    @apply bg-transparent 
+  }
+  .singlestage-toggle-outline {
+    @apply border 
+    border-input 
+    bg-transparent 
+    shadow-xs 
+  }
+}

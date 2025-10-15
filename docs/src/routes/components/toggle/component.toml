@@ -1,0 +1,22 @@
+name = "Toggle"
+description = "A two-state button that toggles between on and off."
+
+[[examples]]
+name = "Toggle"
+
+[[references]]
+name = "Toggle"
+description = "A control that toggles between an on and off state."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = [
+  { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
+    render the toggle.""" },
+  { attr = "variant", attr_type = "String", default = """"outline"""", description = """Specify \
+    the style of toggle to render.""" },
+  { attr = "pressed", attr_type = "RwSignal<bool>", default = "false", description = """A \
+    reactive signal coupled to the toggle's pressed state.""" },
+]

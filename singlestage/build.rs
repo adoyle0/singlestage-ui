@@ -97,6 +97,7 @@ fn main() {
         "skeleton",
         "slider",
         "switch",
+        "toggle",
         "table",
         "tabs",
         "textarea",
