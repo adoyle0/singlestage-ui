@@ -37,7 +37,7 @@ default = [
   "checkbox",
   # "combobox",
   "dialog",
-  # "dropdown",
+  "dropdown",
   "input",
   "label",
   "link",
@@ -66,23 +66,23 @@ badge = []
 breadcrumb = ["dropdown"]
 button = []
 card = []
-checkbox = []
+checkbox = ["label"]
 combobox = ["button"]
 dialog = []
 dropdown = ["button"]
-input = []
+input = ["label"]
 label = []
 link = []
 pagination = ["button"]
 popover = []
-radio = []
+radio = ["label"]
 select = []
 separator = []
 sidebar = []
 skeleton = []
 slider = []
-switch = []
 toggle = []
+switch = ["checkbox", "label"]
 table = []
 tabs = []
 textarea = []

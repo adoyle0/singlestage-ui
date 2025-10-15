@@ -1,32 +1,40 @@
+#[allow(non_snake_case)]
+pub mod Theme;
+mod mode;
+
 use crate::CSS;
+pub use mode::*;
+
 use leptos::prelude::*;
 use leptos_meta::Style;
 
 // TODO: CSS should be in an actual css file and run through tailwind somehow. This works for now
 
-#[allow(non_snake_case)]
-pub mod Theme;
-
-#[derive(Clone, Default, PartialEq)]
-pub enum Mode {
-    #[default]
-    Auto,
-    Dark,
-    Light,
-}
-
 #[derive(Clone)]
 pub struct ThemeProviderContext {
+    /// Set the theme's light/dark mode behavior. Defaults to `Mode::Auto`.
     pub mode: RwSignal<Mode>,
+    /// The get/set/update the current theme in use.
     pub theme: RwSignal<Theme::Theme>,
 }
 
 #[component]
+/// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
+/// initial values. Updates should be done via `ThemeProviderContext`.
 pub fn ThemeProvider(
     children: Children,
-    #[prop(optional, into, default = RwSignal::new(Theme::Default))] theme: RwSignal<Theme::Theme>,
-    #[prop(optional, into)] mode: RwSignal<Mode>,
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
+    #[prop(optional, into)]
+    mode: String,
+    /// Set the initial Theme.
+    #[prop(optional, into)]
+    theme: MaybeProp<Theme::Theme>,
 ) -> impl IntoView {
+    let mode = RwSignal::<Mode>::new(mode.into());
+    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
+
     let context = ThemeProviderContext { theme, mode };
     provide_context(context);
 
@@ -67,6 +75,12 @@ pub fn ThemeProvider(
     // TODO: This code is dead and here for future reference
     let _dark_overrides_tw = r#"
 @layer components {
+  .singlestage-btn-primary {
+    .singlestage-input {
+      @apply border-primary-foreground/30!;
+    }
+  }
+
   .singlestage-textarea {
     @apply aria-invalid:ring-destructive/40
     bg-input/30;
@@ -177,6 +191,15 @@ pub fn ThemeProvider(
 }"#;
 
     let dark_overrides = r#"@layer components {
+  .singlestage-btn-primary {
+    .singlestage-input[type="checkbox"],
+    .singlestage-input[type="radio"] {
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent) !important;
+      }
+    }
+  }
+
   .singlestage-textarea {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
@@ -435,16 +458,6 @@ pub fn ThemeProvider(
             inner_html=move || {
                 let theme = theme.get();
                 match mode.get() {
-                    Mode::Auto => {
-                        format!(
-                            ":root{{ {} {}}}\n\n@media (prefers-color-scheme: dark) {{\n  :root {{ {} {}  }}\n{}}}",
-                            theme.common,
-                            theme.light,
-                            dark_common,
-                            theme.dark,
-                            dark_overrides,
-                        )
-                    }
                     Mode::Dark => {
                         format!(
                             ":root{{ {} {} {}}}\n{}\n",
@@ -455,6 +468,16 @@ pub fn ThemeProvider(
                         )
                     }
                     Mode::Light => format!(":root{{ {} {}}}\n", theme.common, theme.light),
+                    Mode::Auto => {
+                        format!(
+                            ":root{{ {} {}}}\n\n@media (prefers-color-scheme: dark) {{\n  :root {{ {} {}  }}\n{}}}",
+                            theme.common,
+                            theme.light,
+                            dark_common,
+                            theme.dark,
+                            dark_overrides,
+                        )
+                    }
                 }
             }
         ></style>

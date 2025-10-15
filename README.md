@@ -41,7 +41,7 @@ Or add singlestage to your Cargo.toml:
 [dependencies]
 leptos = "0.8"
 ...
-singlestage = "0.2"
+singlestage = "0.3"
 ```
 
 ### Nightly
@@ -51,7 +51,7 @@ singlestage = "0.2"
 [dependencies]
 leptos = { version = "0.8", features = ["nightly"] }
 ...
-singlestage = {version = "0.2", features = ["nightly"] }
+singlestage = {version = "0.3", features = ["nightly"] }
 ```
 
 Add the nightly feature to singlestage just as you do with Leptos, if using nightly.

@@ -1,40 +1,46 @@
 @layer components {
-  .singlestage-radiogroup {
+  .singlestage-input[type="radio"] {
+    @apply appearance-none
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    aspect-square
+    border
+    border-input
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    outline-none
+    relative
+    rounded-full
+    shadow-xs
+    shrink-0
+    size-4
+    text-primary
+    transition-[color,box-shadow];
+
+    &:checked:before {
+      @apply -translate-x-1/2
+      -translate-y-1/2
+      absolute
+      bg-primary
+      content-['']
+      left-1/2
+      rounded-full
+      size-2
+      top-1/2;
+    }
+  }
+
+  .singlestage-radio-group {
     @apply gap-3
     grid;
 
-    .singlestage-input[type="radio"] {
-      @apply appearance-none
-      aria-invalid:border-destructive
-      aria-invalid:ring-destructive/20
-      aspect-square
-      border
-      border-input
-      disabled:cursor-not-allowed
-      disabled:opacity-50
-      focus-visible:border-ring
-      focus-visible:ring-[3px]
-      focus-visible:ring-ring/50
-      outline-none
-      relative
-      rounded-full
-      shadow-xs
-      shrink-0
-      size-4
-      text-primary
-      transition-[color,box-shadow];
-
-      &:checked:before {
-        @apply -translate-x-1/2
-        -translate-y-1/2
-        absolute
-        bg-primary
-        content-['']
-        left-1/2
-        rounded-full
-        size-2
-        top-1/2;
-      }
+    > legend {
+      @apply font-medium
+      mb-3
+      text-base;
     }
   }
 }

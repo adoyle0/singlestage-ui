@@ -1,7 +1,10 @@
+use crate::CheckboxGroupContext;
 use leptos::prelude::*;
 
 #[component]
 pub fn Switch(
+    #[prop(optional)] children: Option<Children>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -132,11 +135,50 @@ pub fn Switch(
     value: MaybeProp<String>,
 ) -> impl IntoView {
     let switch_ref = NodeRef::<leptos::html::Input>::new();
-    let on_change = move |_| {
-        if let Some(switch) = switch_ref.get() {
-            checked.set(switch.checked());
+
+    let on_change = move |ev| {
+        let switch_checked = event_target_checked(&ev);
+
+        checked.set(switch_checked);
+
+        if let Some(checkbox_value) = value.get_untracked() {
+            if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                match switch_checked {
+                    true => checkbox_group.value.update(|group_value| {
+                        group_value.push(checkbox_value);
+                    }),
+                    false => checkbox_group.value.update(|group_value| {
+                        if let Some(index) = group_value.iter().position(|el| *el == checkbox_value)
+                        {
+                            group_value.swap_remove(index);
+                        }
+                    }),
+                }
+            }
         }
     };
+
+    if let Some(value) = value.get_untracked() {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            if checkbox_group.value.get_untracked().contains(&value) {
+                if let Some(switch) = switch_ref.get_untracked() {
+                    switch.set_checked(true)
+                }
+            }
+        }
+    }
+
+    Effect::new(move || {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            if let Some(value) = value.get_untracked() {
+                if checkbox_group.value.get().contains(&value) {
+                    checked.set(true);
+                } else {
+                    checked.set(false);
+                }
+            }
+        }
+    });
 
     Effect::new(move || {
         if let Some(switch) = switch_ref.get_untracked() {
@@ -193,22 +235,53 @@ pub fn Switch(
     };
 
     view! {
-        <input
-            checked=checked.get_untracked()
-            form=move || form.get()
-            name=move || name.get()
-            readonly=move || readonly.get()
-            required=move || required.get()
-            disabled=disabled.get_untracked()
-            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-            node_ref=switch_ref
-            on:change=on_change
-            role="switch"
-            type="checkbox"
-            value=move || value.get()
+        {if let Some(children) = children {
+            view! {
+                <label class="singlestage-label">
+                    <input
+                        checked=checked.get_untracked()
+                        form=move || form.get()
+                        name=move || name.get()
+                        readonly=move || readonly.get()
+                        required=move || required.get()
+                        disabled=disabled.get_untracked()
+                        class=move || {
+                            format!("singlestage-input {}", class.get().unwrap_or_default())
+                        }
+                        node_ref=switch_ref
+                        on:change=on_change
+                        role="switch"
+                        type="checkbox"
+                        value=move || value.get()
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        />
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                    {children()}
+                </label>
+            }
+                .into_any()
+        } else {
+            view! {
+                <input
+                    checked=checked.get_untracked()
+                    form=move || form.get()
+                    name=move || name.get()
+                    readonly=move || readonly.get()
+                    required=move || required.get()
+                    disabled=disabled.get_untracked()
+                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+                    node_ref=switch_ref
+                    on:change=on_change
+                    role="switch"
+                    type="checkbox"
+                    value=move || value.get()
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                />
+            }
+                .into_any()
+        }}
     }
 }

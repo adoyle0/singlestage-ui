@@ -2,6 +2,8 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Input(
+    #[prop(optional)] children: Option<Children>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -283,14 +285,12 @@ pub fn Input(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -356,35 +356,87 @@ pub fn Input(
     };
 
     view! {
-        <input
-            aria-invalid=move || {
-                match invalid.get() {
-                    Some(true) => "true",
-                    _ => "",
-                }
-            }
-            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-            disabled=move || disabled.get()
-            node_ref=input_ref
-            on:input=on_input
-            type=move || {
-                let input_type = input_type.get().unwrap_or_default();
-                if supported_types.contains(&input_type.as_str()) {
-                    input_type
-                } else {
-                    "text".to_string()
-                }
-            }
-            value=if let Some(value) = value.get_untracked() {
-                value.get_untracked()
-            } else {
-                String::default()
-            }
+        {if let Some(children) = children {
+            let uuid = uuid::Uuid::new_v4();
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..input_attrs_1}
-            {..input_attrs_2}
-        />
+            view! {
+                <label
+                    class="singlestage-label singlestage-input-label"
+                    for=move || id.get().unwrap_or(uuid.to_string())
+                >
+                    {children()}
+                </label>
+                <input
+                    aria-invalid=move || {
+                        match invalid.get() {
+                            Some(true) => "true",
+                            _ => "",
+                        }
+                    }
+                    class=move || {
+                        format!("singlestage-input {}", class.get().unwrap_or_default())
+                    }
+                    disabled=move || disabled.get()
+                    id=move || id.get().unwrap_or(uuid.to_string())
+                    node_ref=input_ref
+                    on:input=on_input
+                    type=move || {
+                        let input_type = input_type.get().unwrap_or_default();
+                        if supported_types.contains(&input_type.as_str()) {
+                            input_type
+                        } else {
+                            "text".to_string()
+                        }
+                    }
+                    value=if let Some(value) = value.get_untracked() {
+                        value.get_untracked()
+                    } else {
+                        String::default()
+                    }
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..input_attrs_1}
+                    {..input_attrs_2}
+                />
+            }
+                .into_any()
+        } else {
+
+            view! {
+                <input
+                    aria-invalid=move || {
+                        match invalid.get() {
+                            Some(true) => "true",
+                            _ => "",
+                        }
+                    }
+                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+                    disabled=move || disabled.get()
+                    id=move || id.get()
+                    node_ref=input_ref
+                    on:input=on_input
+                    type=move || {
+                        let input_type = input_type.get().unwrap_or_default();
+                        if supported_types.contains(&input_type.as_str()) {
+                            input_type
+                        } else {
+                            "text".to_string()
+                        }
+                    }
+                    value=if let Some(value) = value.get_untracked() {
+                        value.get_untracked()
+                    } else {
+                        String::default()
+                    }
+
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..input_attrs_1}
+                    {..input_attrs_2}
+                />
+            }
+                .into_any()
+        }}
     }
 }

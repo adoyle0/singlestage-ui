@@ -4,6 +4,11 @@ description = "A control that allows the user to toggle between checked and not 
 [[examples]]
 name = "switch"
 
+[[examples]]
+name = "switch_group"
+title = "Checkbox Group"
+description = "Since a Switch is a Checkbox underneath, it can also be used in a CheckboxGroup."
+
 [[references]]
 name = "switch"
 description = "A control that allows the user to toggle between checked and not checked."
