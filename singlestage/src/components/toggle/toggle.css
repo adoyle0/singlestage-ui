@@ -20,16 +20,8 @@
     rounded-md
     shrink-0
     text-sm
-    hover:bg-muted
-    hover:text-muted-foreground
     transition-all
     whitespace-nowrap;
-  
-    &:hover,
-    &[aria-pressed="true"] {
-      @apply bg-accent
-      text-accent-foreground;
-    }   
   }
 
   .singlestage-toggle-default,
@@ -57,17 +49,22 @@
   }
 
   .singlestage-toggle-default {
-    @apply bg-transparent 
+    @apply bg-transparent;
   }
+
   .singlestage-toggle-outline {
-    @apply border 
-    border-input 
-    bg-transparent 
-    shadow-xs 
+    @apply border
+    border-input
+    bg-transparent
+    shadow-xs;
   }
-  .singlestage-toggle-default
+
+  .singlestage-toggle-default,
   .singlestage-toggle-outline {
-    aria-pressed: @apply bg-accent
-    text-accent-foreground
+    &:hover,
+    &[aria-pressed="true"] {
+      @apply bg-accent
+      text-accent-foreground;
+    }
   }
 }
