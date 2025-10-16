@@ -14,7 +14,7 @@ pub fn ToggleExample() -> impl IntoView {
                     variant="default"
                     pressed=bold
                     title="Toggle bold text"
-                    aria-label="Toggle bold text"
+                    attr:aria-label="Toggle italic text"
                 >
                     <span class="font-semibold leading-none">"B"</span>
                 </Toggle>
@@ -23,7 +23,7 @@ pub fn ToggleExample() -> impl IntoView {
                     variant="outline"
                     pressed=italic
                     title="Toggle italic text"
-                    aria-label="Toggle italic text"
+                    attr:aria-label="Toggle italic text"
                 >
                     <span class="italic leading-none">"I"</span>
                 </Toggle>
@@ -32,8 +32,8 @@ pub fn ToggleExample() -> impl IntoView {
                     variant="default"
                     pressed=underline
                     title="disabled"
-                    aria-label="disabled"
-                    disabled=true
+                    attr:aria-label="Toggle italic text"
+                    attr:disabled=true
                 >
                     <span class="underline leading-none">"U"</span>
                 </Toggle>

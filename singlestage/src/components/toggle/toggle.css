@@ -20,6 +20,8 @@
     rounded-md
     shrink-0
     text-sm
+    hover:bg-muted
+    hover:text-muted-foreground
     transition-all
     whitespace-nowrap;
   
@@ -63,4 +65,8 @@
     bg-transparent 
     shadow-xs 
   }
+  .singlestage-toggle-default
+  .singlestage-toggle-outline {
+    aria-pressed: @apply bg-accent
+    text-accent-foreground
 }
