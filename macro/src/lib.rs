@@ -48,47 +48,46 @@ struct ComponentPage {
 }
 
 /// Converts string to kebab-case
-fn string_to_kebab(input: &String) -> String {
+fn string_to_kebab(input: &str) -> String {
     input.to_lowercase().replace(" ", "-").replace("_", "-")
 }
 
 /// Converts word to Title case
-fn word_to_title(input: &String) -> String {
+fn word_to_title(input: &str) -> String {
     if input.is_empty() {
-        return "".to_string();
+        String::new()
+    } else {
+        let (head, tail) = input.split_at(1);
+        let mut buf = head.to_uppercase();
+        buf.push_str(tail.to_lowercase().as_str());
+        buf
     }
-    let (head, tail) = input.split_at(1);
-    let mut buf = head.to_uppercase();
-    buf.push_str(tail.to_lowercase().as_str());
-    buf
 }
 
 /// Converts string To Title Case
-fn string_to_title(input: &String) -> String {
+fn string_to_title(input: &str) -> String {
     let buf = input
         .split(" ")
-        .into_iter()
         .flat_map(|word| word.split("_"))
         .flat_map(|word| word.split("-"))
-        .map(|word| format!("{} ", word_to_title(&word.to_string())))
+        .map(|word| format!("{} ", word_to_title(word)))
         .collect::<String>();
 
-    return buf.trim().to_string();
+    buf.trim().to_string()
 }
 
 /// Converts string to PascalCase.
-fn string_to_pascal(input: &String) -> String {
+fn string_to_pascal(input: &str) -> String {
     input
         .split(" ")
-        .into_iter()
         .flat_map(|word| word.split("_"))
         .flat_map(|word| word.split("-"))
-        .map(|word| word_to_title(&word.to_string()))
+        .map(word_to_title)
         .collect::<String>()
 }
 
 /// Converts string to snake_case
-fn string_to_snake(input: &String) -> String {
+fn string_to_snake(input: &str) -> String {
     input.to_lowercase().replace(" ", "_")
 }
 
@@ -114,11 +113,11 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
             .pop()
             .unwrap()
             .to_owned();
-        if &component_module_name.chars().nth(0).unwrap() == &"_".chars().nth(0).unwrap() {
+        if component_module_name.chars().next().unwrap() == "_".chars().next().unwrap() {
             continue;
         }
 
-        if let Ok(file) = File::open(&path.join("component.toml")) {
+        if let Ok(file) = File::open(path.join("component.toml")) {
             let mut buf_reader = BufReader::new(file);
             let mut contents = String::new();
 
@@ -157,7 +156,7 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
         )
     }
 
-    output.push_str("}");
+    output.push('}');
 
     output.parse().expect("Error parsing output")
 }
@@ -194,11 +193,11 @@ pub fn ComponentRoutes() -> impl MatchNestedRoutes + Clone {
             .pop()
             .unwrap()
             .to_owned();
-        if &component_module_name.chars().nth(0).unwrap() == &"_".chars().nth(0).unwrap() {
+        if component_module_name.chars().next().unwrap() == "_".chars().next().unwrap() {
             continue;
         }
 
-        if let Ok(file) = File::open(&path.join("component.toml")) {
+        if let Ok(file) = File::open(path.join("component.toml")) {
             let mut buf_reader = BufReader::new(file);
             let mut contents = String::new();
 
@@ -240,7 +239,7 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
     let comp_path = Path::new("./docs/src/routes/components");
 
     for cur_dir in read_dir(comp_path)
-        .expect(format!("Error reading dir {}", &comp_path.to_str().unwrap()).as_str())
+        .unwrap_or_else(|_| panic!("Error reading dir {}", &comp_path.to_str().unwrap()))
     {
         let path = cur_dir.unwrap().path();
         if !path.is_dir() {
@@ -257,12 +256,12 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
             .to_owned();
 
         // Skip directories marked with a leading "_"
-        if &component_module_name.chars().nth(0).unwrap() == &"_".chars().nth(0).unwrap() {
+        if component_module_name.chars().next().unwrap() == "_".chars().next().unwrap() {
             continue;
         }
 
         // Read component.toml
-        let component_toml = File::open(&path.join("component.toml"));
+        let component_toml = File::open(path.join("component.toml"));
         if component_toml.is_err() {
             println!(
                 "WARN: component.toml not found at {}",

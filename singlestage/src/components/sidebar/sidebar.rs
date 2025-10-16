@@ -226,7 +226,7 @@ pub fn Sidebar(
         <aside
             node_ref=sidebar_ref
             class="singlestage-sidebar"
-            on:click=move |ev| on_click(ev)
+            on:click=on_click
             data-side=move || sidebar.side.get()
             aria-hidden=move || sidebar.hidden.get().to_string()
         >

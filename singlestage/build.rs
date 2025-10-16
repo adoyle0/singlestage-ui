@@ -1,3 +1,4 @@
+#![allow(clippy::vec_init_then_push)]
 /// Pre-build stuff
 ///
 /// This script snatches CSS per enabled component, merges it all to one file,
@@ -25,24 +26,23 @@ macro_rules! features {
 }
 
 fn bundle_css(input: PathBuf, mut output: &File) {
-    let file = File::open(&input).expect(format!("Error opening {}", &input.display()).as_str());
+    let file = File::open(&input).unwrap_or_else(|_| panic!("Error opening {}", &input.display()));
     let mut buf_reader = BufReader::new(file);
     let mut contents = String::new();
 
     buf_reader
         .read_to_string(&mut contents)
-        .expect(format!("Error reading {}", input.display()).as_str());
+        .unwrap_or_else(|_| panic!("Error reading {}", input.display()));
 
     output
-        .write_all(&contents.as_bytes())
+        .write_all(contents.as_bytes())
         .expect("Error writing bundle");
 }
 
 fn download_file(download_url: &str, file_path: &PathBuf) {
-    File::create(&file_path).expect("Error creating file");
+    File::create(file_path).expect("Error creating file");
 
     let mut file = File::options()
-        .write(true)
         .append(true)
         .open(file_path)
         .expect("Error opening file");
@@ -129,7 +129,7 @@ fn main() {
         if env::var(&feature_flag).is_ok() {
             let feature_css = Path::new("src")
                 .join("components")
-                .join(&feature)
+                .join(feature)
                 .join(format!("{}.css", &feature));
             bundle_css(feature_css, &bundle);
         }
@@ -237,12 +237,10 @@ fn main() {
 
     let mut expected_checksum = "".to_string();
 
-    for line in buf_reader.lines() {
-        if let Ok(line) = line {
-            let split_line = line.split_whitespace().collect::<Vec<&str>>();
-            if format!("./{}", filename) == split_line[1] {
-                expected_checksum = split_line[0].into()
-            }
+    for line in buf_reader.lines().map_while(Result::ok) {
+        let split_line = line.split_whitespace().collect::<Vec<&str>>();
+        if format!("./{}", filename) == split_line[1] {
+            expected_checksum = split_line[0].into()
         }
     }
 

@@ -145,8 +145,8 @@ pub fn Checkbox(
 
         checked.set(checkbox_checked);
 
-        if let Some(checkbox_value) = value.get_untracked() {
-            if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+        if let Some(checkbox_value) = value.get_untracked()
+            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
                 match checkbox_checked {
                     true => checkbox_group.value.update(|group_value| {
                         group_value.push(checkbox_value);
@@ -159,29 +159,24 @@ pub fn Checkbox(
                     }),
                 }
             }
-        }
     };
 
-    if let Some(value) = value.get_untracked() {
-        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            if checkbox_group.value.get_untracked().contains(&value) {
-                if let Some(checkbox) = checkbox_ref.get_untracked() {
+    if let Some(value) = value.get_untracked()
+        && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+            && checkbox_group.value.get_untracked().contains(&value)
+                && let Some(checkbox) = checkbox_ref.get_untracked() {
                     checkbox.set_checked(true)
                 }
-            }
-        }
-    }
 
     Effect::new(move || {
-        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            if let Some(value) = value.get_untracked() {
+        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+            && let Some(value) = value.get_untracked() {
                 if checkbox_group.value.get().contains(&value) {
                     checked.set(true);
                 } else {
                     checked.set(false);
                 }
             }
-        }
     });
 
     Effect::new(move || {

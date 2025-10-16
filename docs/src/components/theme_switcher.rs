@@ -67,18 +67,14 @@ pub fn ThemeSwitcher() -> impl IntoView {
         let _ = document()
             .unchecked_ref::<web_sys::HtmlDocument>()
             .set_cookie(
-                &format!(
-                    "theme_mode={}; Path=/",
-                    theme_context.mode.get_untracked().to_string()
-                )
-                .as_str(),
+                format!("theme_mode={}; Path=/", theme_context.mode.get_untracked()).as_str(),
             );
     };
 
     Effect::new(move || {
         let _ = document()
             .unchecked_ref::<web_sys::HtmlDocument>()
-            .set_cookie(&format!("theme={}; Path=/", selected_theme.get()).as_str());
+            .set_cookie(format!("theme={}; Path=/", selected_theme.get()).as_str());
 
         theme_context
             .theme

@@ -1,8 +1,9 @@
+#![allow(clippy::module_inception)]
 use std::include_str;
 mod components;
 pub use components::*;
 
-static CSS: &'static str = include_str!(concat!(env!("OUT_DIR"), "/singlestage.css"));
+static CSS: &str = include_str!(concat!(env!("OUT_DIR"), "/singlestage.css"));
 
 /// Helper macro for using icondata icons
 #[macro_export]

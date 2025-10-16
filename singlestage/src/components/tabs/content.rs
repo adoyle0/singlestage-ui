@@ -161,9 +161,9 @@ pub fn TabsContent(
             aria-labelledby=move || format!("{}-tab", value.get().unwrap_or_default())
             aria-selected=move || {
                 if value.get().unwrap_or_default() == tabs.value.get() {
-                    return "true"
+                    "true"
                 } else {
-                    return "false"
+                    "false"
                 }
             }
             hidden=move || value.get().unwrap_or_default() != tabs.value.get()

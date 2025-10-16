@@ -251,27 +251,24 @@ pub fn Input(
     let input_ref = NodeRef::<leptos::html::Input>::new();
 
     Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            if let Some(default) = default.get() {
+        if let Some(input) = input_ref.get_untracked()
+            && let Some(default) = default.get() {
                 input.set_default_value(&default);
             }
-        }
     });
 
     Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            if let Some(disabled) = disabled.get() {
+        if let Some(input) = input_ref.get_untracked()
+            && let Some(disabled) = disabled.get() {
                 input.set_disabled(disabled);
             }
-        }
     });
 
     Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            if let Some(value) = value.get() {
+        if let Some(input) = input_ref.get_untracked()
+            && let Some(value) = value.get() {
                 input.set_value(&value.get());
             }
-        }
     });
 
     let on_input = move |ev| {

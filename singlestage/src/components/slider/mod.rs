@@ -169,25 +169,24 @@ pub fn Slider(
     };
 
     let slider_value = RwSignal::new({
-        let max = max.get_untracked().unwrap_or_else(|| max_default);
-        let min = min.get_untracked().unwrap_or_else(|| min_default);
+        let max = max.get_untracked().unwrap_or(max_default);
+        let min = min.get_untracked().unwrap_or(min_default);
 
-        let percent;
-        if max == min {
-            percent = 0.;
+        let percent = if max == min {
+            0.
         } else {
-            percent = ((&init_value - min) / (max - min)) * 100.;
-        }
+            ((init_value - min) / (max - min)) * 100.
+        };
 
         format!("{}%", &percent.to_string())
     });
 
     // On default
     Effect::new(move || {
-        if let Some(default) = default.get() {
-            if let Some(slider) = slider_ref.get_untracked() {
-                slider.set_default_value(&default.to_string());
-            }
+        if let Some(default) = default.get()
+            && let Some(slider) = slider_ref.get_untracked()
+        {
+            slider.set_default_value(&default.to_string());
         }
     });
 
@@ -200,20 +199,19 @@ pub fn Slider(
 
     let update_slider = move |min: f64, max: f64, current_value: f64| {
         // Update slider
-        let percent: f64;
-        if max == min {
-            percent = 0.;
+        let percent: f64 = if max == min {
+            0.
         } else {
-            percent = ((current_value - min) / (max - min)) * 100.;
-        }
+            ((current_value - min) / (max - min)) * 100.
+        };
         slider_value.set(format!("{}%", &percent.to_string()));
     };
 
     let on_input = move |ev| {
         let target_value = event_target_value(&ev);
         if let Ok(mut current_value) = target_value.parse::<f64>() {
-            let min = min.get_untracked().unwrap_or_else(|| min_default);
-            let max = max.get_untracked().unwrap_or_else(|| max_default);
+            let min = min.get_untracked().unwrap_or(min_default);
+            let max = max.get_untracked().unwrap_or(max_default);
 
             if current_value < min {
                 current_value = min
@@ -293,8 +291,8 @@ pub fn Slider(
                     id=move || id.get().unwrap_or(uuid.to_string())
                     max=move || {
                         let mut current_value = init_value;
-                        let max = max.get().unwrap_or_else(|| max_default);
-                        let min = min.get_untracked().unwrap_or_else(|| min_default);
+                        let max = max.get().unwrap_or(max_default);
+                        let min = min.get_untracked().unwrap_or(min_default);
                         if let Some(value) = value.get_untracked() {
                             current_value = value.get_untracked();
                             if current_value > max {
@@ -306,8 +304,8 @@ pub fn Slider(
                     }
                     min=move || {
                         let mut current_value = init_value;
-                        let max = max.get_untracked().unwrap_or_else(|| max_default);
-                        let min = min.get().unwrap_or_else(|| min_default);
+                        let max = max.get_untracked().unwrap_or(max_default);
+                        let min = min.get().unwrap_or(min_default);
                         if let Some(value) = value.get_untracked() {
                             current_value = value.get_untracked();
                             if current_value < min {
@@ -321,8 +319,8 @@ pub fn Slider(
                     on:input=on_input
                     prop:value=move || {
                         if let Some(value) = value.get() {
-                            let max = max.get_untracked().unwrap_or_else(|| max_default);
-                            let min = min.get_untracked().unwrap_or_else(|| min_default);
+                            let max = max.get_untracked().unwrap_or(max_default);
+                            let min = min.get_untracked().unwrap_or(min_default);
                             let mut new_value = value.get();
 
                             // Make sure value is in range
@@ -342,9 +340,9 @@ pub fn Slider(
                     }
                     step=move || {
                         let current_value = init_value;
-                        let max = max.get_untracked().unwrap_or_else(|| max_default);
-                        let min = min.get_untracked().unwrap_or_else(|| min_default);
-                        let step = step.get().unwrap_or_else(|| step_default);
+                        let max = max.get_untracked().unwrap_or(max_default);
+                        let min = min.get_untracked().unwrap_or(min_default);
+                        let step = step.get().unwrap_or(step_default);
                         update_slider(min, max, current_value);
                         step
                     }
@@ -367,8 +365,8 @@ pub fn Slider(
             id=move || id.get()
             max=move || {
                 let mut current_value = init_value;
-                let max = max.get().unwrap_or_else(|| max_default);
-                let min = min.get_untracked().unwrap_or_else(|| min_default);
+                let max = max.get().unwrap_or(max_default);
+                let min = min.get_untracked().unwrap_or(min_default);
                 if let Some(value) = value.get_untracked() {
                     current_value = value.get_untracked();
                     if current_value > max {
@@ -380,8 +378,8 @@ pub fn Slider(
             }
             min=move || {
                 let mut current_value = init_value;
-                let max = max.get_untracked().unwrap_or_else(|| max_default);
-                let min = min.get().unwrap_or_else(|| min_default);
+                let max = max.get_untracked().unwrap_or(max_default);
+                let min = min.get().unwrap_or(min_default);
                 if let Some(value) = value.get_untracked() {
                     current_value = value.get_untracked();
                     if current_value < min {
@@ -395,8 +393,8 @@ pub fn Slider(
             on:input=on_input
             prop:value=move || {
                 if let Some(value) = value.get() {
-                    let max = max.get_untracked().unwrap_or_else(|| max_default);
-                    let min = min.get_untracked().unwrap_or_else(|| min_default);
+                    let max = max.get_untracked().unwrap_or(max_default);
+                    let min = min.get_untracked().unwrap_or(min_default);
                     let mut new_value = value.get();
 
                     // Make sure value is in range
@@ -416,9 +414,9 @@ pub fn Slider(
             }
             step=move || {
                 let current_value = init_value;
-                let max = max.get_untracked().unwrap_or_else(|| max_default);
-                let min = min.get_untracked().unwrap_or_else(|| min_default);
-                let step = step.get().unwrap_or_else(|| step_default);
+                let max = max.get_untracked().unwrap_or(max_default);
+                let min = min.get_untracked().unwrap_or(min_default);
+                let step = step.get().unwrap_or(step_default);
                 update_slider(min, max, current_value);
                 step
             }

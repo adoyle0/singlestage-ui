@@ -143,14 +143,13 @@ pub fn Radio(
         radio_group.value.set(event_target_value(&ev));
     };
 
-    if let Some(value) = value.get_untracked() {
-        if radio_group.value.get_untracked() == value {
+    if let Some(value) = value.get_untracked()
+        && radio_group.value.get_untracked() == value {
             if let Some(radio) = radio_ref.get_untracked() {
                 radio.set_checked(true);
             }
             checked.set(true);
         }
-    }
 
     Effect::new(move || {
         if radio_group.value.get() == value.get().unwrap_or_default() {
