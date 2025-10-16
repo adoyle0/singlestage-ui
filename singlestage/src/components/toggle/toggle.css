@@ -69,4 +69,5 @@
   .singlestage-toggle-outline {
     aria-pressed: @apply bg-accent
     text-accent-foreground
+  }
 }

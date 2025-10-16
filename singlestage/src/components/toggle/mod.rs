@@ -193,12 +193,12 @@ pub fn Toggle(
                     class.get().unwrap_or_default(),
                 )
             }
-            attr:data-state=move || if pressed.get() {"on"} else {"off"}
-            attr:aria-pressed=move || if pressed.get() {"true"} else {"false"}
+            attr:data-state=move || if pressed.get() { "on" } else { "off" }
+            attr:aria-pressed=move || if pressed.get() { "true" } else { "false" }
             on:click=move |_| pressed.set(!pressed.get_untracked())
 
-        {..global_attrs_1}
-        {..global_attrs_2}
+            {..global_attrs_1}
+            {..global_attrs_2}
         >
             {children()}
         </button>

@@ -42,19 +42,15 @@ pub fn ToggleExample() -> impl IntoView {
             <p class="text-sm text-muted-foreground">
                 {move || {
                     let mut active = Vec::new();
-
                     if bold.get() {
                         active.push("bold");
                     }
-
                     if italic.get() {
                         active.push("italic");
                     }
-
                     if underline.get() {
                         active.push("underline");
                     }
-
                     if active.is_empty() {
                         "Formatting disabled".to_string()
                     } else {
