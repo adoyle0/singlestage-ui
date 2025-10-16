@@ -5,13 +5,13 @@ use singlestage::*;
 pub fn SelectExample() -> impl IntoView {
     view! {
         <Select>
-            <optgroup label="Fruits">
-                <option>"Apple"</option>
-                <option>"Banana"</option>
-                <option>"Blueberry"</option>
-                <option>"Grapes"</option>
-                <option>"Pineapple"</option>
-            </optgroup>
+            <SelectContent label="Fruits">
+                <SelectItem value="apple">"Apple"</SelectItem>
+                <SelectItem value="banana">"Banana"</SelectItem>
+                <SelectItem value="blueberry">"Blueberry"</SelectItem>
+                <SelectItem value="grapes">"Grapes"</SelectItem>
+                <SelectItem value="pineapple">"Pineapple"</SelectItem>
+            </SelectContent>
         </Select>
     }
 }
