@@ -44,20 +44,19 @@ impl SidebarContext {
 
 /// Get current viewport width
 fn get_screen_width() -> Option<f64> {
-    if let Ok(js_width) = window().inner_width() {
-        if let Some(f64_width) = js_width.as_f64() {
+    if let Ok(js_width) = window().inner_width()
+        && let Some(f64_width) = js_width.as_f64() {
             return Some(f64_width);
         }
-    }
 
-    return None;
+    None
 }
 
 /// Get the font size setting of the browser viewing the page
 fn get_font_size() -> Option<usize> {
-    if let Some(dom) = document().document_element() {
-        if let Ok(Some(css)) = window().get_computed_style(&dom) {
-            if let Ok(mut font_size) = css.get_property_value("font-size") {
+    if let Some(dom) = document().document_element()
+        && let Ok(Some(css)) = window().get_computed_style(&dom)
+            && let Ok(mut font_size) = css.get_property_value("font-size") {
                 // Cut off "px"
                 let _ = font_size.split_off(font_size.len() - 2);
 
@@ -65,10 +64,8 @@ fn get_font_size() -> Option<usize> {
                     return Some(parsed_font_size);
                 }
             }
-        }
-    }
 
-    return None;
+    None
 }
 
 /// Determine if the viewport is smaller than 48rem wide
@@ -80,11 +77,10 @@ fn screen_is_small() -> bool {
         breakpoint = BREAKPOINT_PX;
     }
 
-    if let Some(screen_width) = get_screen_width() {
-        if screen_width < breakpoint as f64 {
+    if let Some(screen_width) = get_screen_width()
+        && screen_width < breakpoint as f64 {
             return true;
         }
-    }
 
-    return false;
+    false
 }

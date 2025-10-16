@@ -141,19 +141,16 @@ pub fn Dialog(
     provide_context(context);
 
     let open_dialog = move || {
-        if let Some(dialog) = dialog_ref.write().as_ref() {
-            if dialog.show_modal().is_err() {
-                return;
+        if let Some(dialog) = dialog_ref.write().as_ref()
+            && dialog.show_modal().is_err() {
             }
-        }
     };
 
     let close_dialog = move || {
-        if let Some(alert) = alert.get_untracked() {
-            if alert {
+        if let Some(alert) = alert.get_untracked()
+            && alert {
                 return;
             }
-        }
 
         if let Some(dialog) = dialog_ref.write().as_ref() {
             dialog.close();

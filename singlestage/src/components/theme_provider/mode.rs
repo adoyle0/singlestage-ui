@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Clone, Default, PartialEq)]
 #[non_exhaustive]
 pub enum Mode {
@@ -27,9 +29,9 @@ impl From<&str> for Mode {
     }
 }
 
-impl Into<String> for Mode {
-    fn into(self) -> String {
-        match self {
+impl From<Mode> for String {
+    fn from(val: Mode) -> Self {
+        match val {
             Mode::Auto => String::from("auto"),
             Mode::Dark => String::from("dark"),
             Mode::Light => String::from("light"),
@@ -37,12 +39,12 @@ impl Into<String> for Mode {
     }
 }
 
-impl Mode {
-    pub fn to_string(self) -> String {
+impl fmt::Display for Mode {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Mode::Auto => String::from("auto"),
-            Mode::Dark => String::from("dark"),
-            Mode::Light => String::from("light"),
+            Mode::Auto => write!(f, "auto"),
+            Mode::Dark => write!(f, "dark"),
+            Mode::Light => write!(f, "light"),
         }
     }
 }

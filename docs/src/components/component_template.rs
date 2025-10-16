@@ -124,7 +124,7 @@ pub fn Reference(
                 }
                     .into_any()
             } else {
-                view! {}.into_any()
+                ().into_any()
             }}
             <div class="text-sm" inner_html=extra></div>
         </div>

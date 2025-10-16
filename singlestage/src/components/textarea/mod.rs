@@ -179,27 +179,24 @@ pub fn Textarea(
     };
 
     Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked() {
-            if let Some(default_value) = default.get() {
+        if let Some(textarea) = textarea_ref.get_untracked()
+            && let Some(default_value) = default.get() {
                 let _ = textarea.set_default_value(&default_value);
             }
-        }
     });
 
     Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked() {
-            if let Some(disabled) = disabled.get() {
+        if let Some(textarea) = textarea_ref.get_untracked()
+            && let Some(disabled) = disabled.get() {
                 textarea.set_disabled(disabled)
             }
-        }
     });
 
     Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked() {
-            if let Some(value) = value.get() {
+        if let Some(textarea) = textarea_ref.get_untracked()
+            && let Some(value) = value.get() {
                 textarea.set_value(&value.get());
             }
-        }
     });
 
     let global_attrs_1 = view! {

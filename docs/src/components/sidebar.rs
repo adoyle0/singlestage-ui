@@ -89,7 +89,7 @@ pub fn DebugMenu() -> impl IntoView {
             }
             .into_any()
         } else {
-            view! {}.into_any()
+            ().into_any()
         }
     }
 }

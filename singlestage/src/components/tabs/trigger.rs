@@ -227,12 +227,12 @@ pub fn TabsTrigger(
             aria-selected=move || {
                 if let Some(value) = value.get() {
                     if value == tabs.value.get() {
-                        return "true";
+                        "true"
                     } else {
-                        return "false"
+                        "false"
                     }
                 } else {
-                    return "false"
+                    "false"
                 }
             }
             id=move || format!("{}-tab", value.get().unwrap_or_default())
