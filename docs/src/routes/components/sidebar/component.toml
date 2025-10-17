@@ -102,9 +102,9 @@ attrs = []
 name = "SidebarProvider"
 description = "Takes in initial state and provides SidebarContext to its children."
 attrs = [
-  { attr = "hidden", attr_type = "RwSignal<bool>", default = "false", description = """Reactive \
+  { attr = "hidden", attr_type = "Reactive<bool>", default = "false", description = """Reactive \
     signal coupled to the sidebar's hidden state.""" },
-  { attr = "side", attr_type = "RwSignal<String>", default = """"left"""", description = """\
+  { attr = "side", attr_type = "Reactive<String>", default = """"left"""", description = """\
     Reactive signal coupled to which side of its container the sidebar renders on.""" },
 ]
 

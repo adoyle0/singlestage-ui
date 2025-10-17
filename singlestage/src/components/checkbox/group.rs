@@ -1,4 +1,4 @@
-use crate::CheckboxGroupContext;
+use crate::{CheckboxGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains all the parts of a radio group
@@ -125,10 +125,10 @@ pub fn CheckboxGroup(
 
     /// Set or update the invalid state of the radio group.
     #[prop(optional, into)]
-    invalid: RwSignal<bool>,
+    invalid: Reactive<bool>,
     /// Reactive signal coupled to the current selected value of the radio group.
     #[prop(optional, into)]
-    value: RwSignal<Vec<String>>,
+    value: Reactive<Vec<String>>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

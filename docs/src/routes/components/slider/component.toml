@@ -22,6 +22,6 @@ attrs = [
     range of permitted values.""" },
   { attr = "step", attr_type = "f64", default = "1.0", description = """Define the granularity of \
     the expected input value.""" },
-  { attr = "value", attr_type = "RwSignal<f64>", default = "0.0", description = """A \
+  { attr = "value", attr_type = "Reactive<f64>", default = "0.0", description = """A \
     reactive signal coupled to the input's value.""" },
 ]

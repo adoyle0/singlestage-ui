@@ -1,4 +1,5 @@
 use super::*;
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Sidebar context provider
@@ -8,10 +9,10 @@ pub fn SidebarProvider(
 
     /// Reactive signal coupled to the sidebar's hidden state.
     #[prop(optional, into)]
-    hidden: RwSignal<bool>,
+    hidden: Reactive<bool>,
     /// Reactive signal coupled to which side of its container the sidebar renders on.
-    #[prop(optional, into, default = RwSignal::new("left".to_string()))]
-    side: RwSignal<String>,
+    #[prop(optional, into, default = Reactive::new("left".to_string()))]
+    side: Reactive<String>,
 ) -> impl IntoView {
     // Sent from SidebarGroupContent and SidebarMenuContent
     let close_if_small_screen = move || {

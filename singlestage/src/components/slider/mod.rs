@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -146,7 +147,7 @@ pub fn Slider(
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
-    value: MaybeProp<RwSignal<f64>>,
+    value: Reactive<f64>,
 ) -> impl IntoView {
     let slider_ref = NodeRef::<leptos::html::Input>::new();
 
@@ -157,10 +158,8 @@ pub fn Slider(
     let init_value = {
         if let Some(default_value) = default.get_untracked() {
             default_value
-        } else if let Some(value) = value.get_untracked() {
-            value.get_untracked()
         } else {
-            0.
+            value.get_untracked()
         }
     };
 
@@ -221,9 +220,7 @@ pub fn Slider(
                 current_value = max
             };
 
-            if let Some(value) = value.get_untracked() {
-                value.set(current_value);
-            };
+            value.set(current_value);
 
             update_slider(min, max, current_value);
         }
@@ -276,159 +273,103 @@ pub fn Slider(
         />
     };
 
+    let update_max = move || {
+        let current_value = value.get_untracked();
+        let max = max.get().unwrap_or(max_default);
+        let min = min.get_untracked().unwrap_or(min_default);
+
+        if current_value > max {
+            value.set(max)
+        }
+
+        update_slider(min, max, current_value);
+        max
+    };
+
+    let update_min = move || {
+        let current_value = value.get_untracked();
+        let max = max.get_untracked().unwrap_or(max_default);
+        let min = min.get().unwrap_or(min_default);
+
+        if current_value < min {
+            value.set(min)
+        }
+
+        update_slider(min, max, current_value);
+        min
+    };
+
+    let update_prop_value = move || {
+        let mut new_value = value.get();
+        let max = max.get_untracked().unwrap_or(max_default);
+        let min = min.get_untracked().unwrap_or(min_default);
+
+        // Make sure value is in range
+        if new_value > max {
+            new_value = max;
+            value.set(max);
+        } else if new_value < min {
+            new_value = min;
+            value.set(min);
+        }
+
+        update_slider(min, max, new_value);
+        new_value.to_string()
+    };
+
+    let update_step = move || {
+        let current_value = value.get();
+        let max = max.get_untracked().unwrap_or(max_default);
+        let min = min.get_untracked().unwrap_or(min_default);
+        let step = step.get().unwrap_or(step_default);
+        update_slider(min, max, current_value);
+        step
+    };
+
+    let slider_attrs = view! {
+        <{..}
+            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+            disabled=disabled.get_untracked()
+            max=update_max
+            min=update_min
+            node_ref=slider_ref
+            on:input=on_input
+            prop:value=update_prop_value
+            step=update_step
+            style:--slider-value=move || slider_value.get()
+            type="range"
+            value=init_value.to_string()
+        />
+    };
+
     view! {
         {if let Some(children) = children {
             let uuid = uuid::Uuid::new_v4();
             view! {
-                <label class="singlestage-label singlestage-slider-label"
+                <label
+                    class="singlestage-label singlestage-slider-label"
                     for=move || id.get().unwrap_or(uuid.to_string())
                 >
                     {children()}
                 </label>
                 <input
-                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-                    disabled=disabled.get_untracked()
                     id=move || id.get().unwrap_or(uuid.to_string())
-                    max=move || {
-                        let mut current_value = init_value;
-                        let max = max.get().unwrap_or(max_default);
-                        let min = min.get_untracked().unwrap_or(min_default);
-                        if let Some(value) = value.get_untracked() {
-                            current_value = value.get_untracked();
-                            if current_value > max {
-                                value.set(max)
-                            }
-                        }
-                        update_slider(min, max, current_value);
-                        max
-                    }
-                    min=move || {
-                        let mut current_value = init_value;
-                        let max = max.get_untracked().unwrap_or(max_default);
-                        let min = min.get().unwrap_or(min_default);
-                        if let Some(value) = value.get_untracked() {
-                            current_value = value.get_untracked();
-                            if current_value < min {
-                                value.set(min)
-                            }
-                        }
-                        update_slider(min, max, current_value);
-                        min
-                    }
-                    node_ref=slider_ref
-                    on:input=on_input
-                    prop:value=move || {
-                        if let Some(value) = value.get() {
-                            let max = max.get_untracked().unwrap_or(max_default);
-                            let min = min.get_untracked().unwrap_or(min_default);
-                            let mut new_value = value.get();
-
-                            // Make sure value is in range
-                            if new_value > max {
-                                new_value = max;
-                                value.set(max);
-                            } else if new_value < min {
-                                new_value = min;
-                                value.set(min);
-                            }
-
-                            update_slider(min, max, new_value);
-                            new_value.to_string()
-                        } else {
-                            init_value.to_string()
-                        }
-                    }
-                    step=move || {
-                        let current_value = init_value;
-                        let max = max.get_untracked().unwrap_or(max_default);
-                        let min = min.get_untracked().unwrap_or(min_default);
-                        let step = step.get().unwrap_or(step_default);
-                        update_slider(min, max, current_value);
-                        step
-                    }
-                    style:--slider-value=move || slider_value.get()
-                    type="range"
-                    value=init_value.to_string()
-
-
                     {..global_attrs_1}
                     {..global_attrs_2}
                     {..range_attrs}
+                    {..slider_attrs}
                 />
             }
                 .into_any()
         } else {
             view! {
                 <input
-            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-            disabled=disabled.get_untracked()
-            id=move || id.get()
-            max=move || {
-                let mut current_value = init_value;
-                let max = max.get().unwrap_or(max_default);
-                let min = min.get_untracked().unwrap_or(min_default);
-                if let Some(value) = value.get_untracked() {
-                    current_value = value.get_untracked();
-                    if current_value > max {
-                        value.set(max)
-                    }
-                }
-                update_slider(min, max, current_value);
-                max
-            }
-            min=move || {
-                let mut current_value = init_value;
-                let max = max.get_untracked().unwrap_or(max_default);
-                let min = min.get().unwrap_or(min_default);
-                if let Some(value) = value.get_untracked() {
-                    current_value = value.get_untracked();
-                    if current_value < min {
-                        value.set(min)
-                    }
-                }
-                update_slider(min, max, current_value);
-                min
-            }
-            node_ref=slider_ref
-            on:input=on_input
-            prop:value=move || {
-                if let Some(value) = value.get() {
-                    let max = max.get_untracked().unwrap_or(max_default);
-                    let min = min.get_untracked().unwrap_or(min_default);
-                    let mut new_value = value.get();
-
-                    // Make sure value is in range
-                    if new_value > max {
-                        new_value = max;
-                        value.set(max);
-                    } else if new_value < min {
-                        new_value = min;
-                        value.set(min);
-                    }
-
-                    update_slider(min, max, new_value);
-                    new_value.to_string()
-                } else {
-                    init_value.to_string()
-                }
-            }
-            step=move || {
-                let current_value = init_value;
-                let max = max.get_untracked().unwrap_or(max_default);
-                let min = min.get_untracked().unwrap_or(min_default);
-                let step = step.get().unwrap_or(step_default);
-                update_slider(min, max, current_value);
-                step
-            }
-            style:--slider-value=move || slider_value.get()
-            type="range"
-            value=init_value.to_string()
-
-
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..range_attrs}
-        />
+                    id=move || id.get()
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..range_attrs}
+                    {..slider_attrs}
+                />
             }
                 .into_any()
         }}

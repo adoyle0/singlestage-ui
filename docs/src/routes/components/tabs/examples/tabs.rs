@@ -25,7 +25,7 @@ pub fn TabsExample() -> impl IntoView {
                                 <Input
                                     input_type="text"
                                     id="demo-tabs-account-name"
-                                    value=RwSignal::new("Pedro Duarte".to_string())
+                                    value="Pedro Duarte"
                                 />
                             </div>
                             <div class="grid gap-3">
@@ -33,7 +33,7 @@ pub fn TabsExample() -> impl IntoView {
                                 <Input
                                     input_type="text"
                                     id="demo-tabs-account-username"
-                                    value=RwSignal::new("@peduarte".to_string())
+                                    value="@peduarte"
                                 />
                             </div>
                         </form>

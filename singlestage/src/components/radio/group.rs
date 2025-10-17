@@ -1,4 +1,4 @@
-use crate::RadioGroupContext;
+use crate::{RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains all the parts of a radio group
@@ -128,10 +128,10 @@ pub fn RadioGroup(
     default: MaybeProp<String>,
     /// Set or update the invalid state of the radio group.
     #[prop(optional, into)]
-    invalid: RwSignal<bool>,
+    invalid: Reactive<bool>,
     /// Reactive signal coupled to the current selected value of the radio group.
     #[prop(optional, into)]
-    value: RwSignal<String>,
+    value: Reactive<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

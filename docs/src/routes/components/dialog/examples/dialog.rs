@@ -23,17 +23,14 @@ pub fn DialogExample() -> impl IntoView {
                     <div class="grid gap-3">
                         <Label label_for="demo-dialog-edit-profile-name">"Name"</Label>
                         <Input
-                            value=RwSignal::new("Pedro Duarte".to_string())
+                            value="Pedro Duarte"
                             id="demo-dialog-edit-profile-name"
                             autofocus=true
                         />
                     </div>
                     <div class="grid gap-3">
                         <Label label_for="demo-dialog-edit-profile-username">"Username"</Label>
-                        <Input
-                            value=RwSignal::new("@peduarte".to_string())
-                            id="demo-dialog-edit-profile-username"
-                        />
+                        <Input value="@peduarte" id="demo-dialog-edit-profile-username" />
                     </div>
                 </form>
             </DialogContent>
