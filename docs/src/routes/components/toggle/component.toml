@@ -36,7 +36,7 @@ attributes."""
 attrs = [
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
     render the toggle.""" },
-  { attr = "variant", attr_type = "String", default = """"default"""", description = """Specify \
+  { attr = "variant", attr_type = "String", default = """""""", description = """Specify \
     the style of toggle to render.""" },
   { attr = "pressed", attr_type = "Reactive<bool>", default = "false", description = """A \
     reactive signal coupled to the toggle's pressed state.""" },
