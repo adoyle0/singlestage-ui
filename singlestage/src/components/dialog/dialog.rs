@@ -142,15 +142,16 @@ pub fn Dialog(
 
     let open_dialog = move || {
         if let Some(dialog) = dialog_ref.write().as_ref()
-            && dialog.show_modal().is_err() {
-            }
+            && dialog.show_modal().is_err()
+        {}
     };
 
     let close_dialog = move || {
         if let Some(alert) = alert.get_untracked()
-            && alert {
-                return;
-            }
+            && alert
+        {
+            return;
+        }
 
         if let Some(dialog) = dialog_ref.write().as_ref() {
             dialog.close();
