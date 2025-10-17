@@ -25,7 +25,7 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#additional_attributes">checkbox</a> \
 attributes."""
 attrs = [
-  { attr = "checked", attr_type = "RwSignal<bool>", default = "false", description = """A \
+  { attr = "checked", attr_type = "Reactive<bool>", default = "false", description = """A \
     reactive signal coupled to the checkbox's checked value.""" },
 ]
 
@@ -38,8 +38,8 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
 attributes."""
 attrs = [
-  { attr = "invalid", attr_type = "RwSignal<bool>", default = "false", description = """A \
+  { attr = "invalid", attr_type = "Reactive<bool>", default = "false", description = """A \
     reactive signal that toggles whether all the children Checkboxes appear invalid or not.""" },
-  { attr = "value", attr_type = "RwSignal<Vec<String>>", default = "[]", description = """A \
+  { attr = "value", attr_type = "Reactive<Vec<String>>", default = "[]", description = """A \
     dynamic list of all the values of checked children Checkboxes.""" },
 ]

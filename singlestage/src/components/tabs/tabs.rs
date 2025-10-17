@@ -1,4 +1,5 @@
 use super::TabsContext;
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -111,8 +112,8 @@ pub fn Tabs(
     translate: MaybeProp<String>,
 
     /// Reactive signal coupled to the value of the current selected tab
-    #[prop(optional, into, default = RwSignal::new(String::default()))]
-    value: RwSignal<String>,
+    #[prop(optional, into)]
+    value: Reactive<String>,
 ) -> impl IntoView {
     let context = TabsContext { value };
     provide_context(context);

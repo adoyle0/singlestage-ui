@@ -17,7 +17,7 @@ attrs = [
     selected value. Setting value overrides this setting.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle invalid \
     appearance and behavior.""" },
-  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """A \
+  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
     reactive value coupled to the currently selected item's value.""" },
 ]
 

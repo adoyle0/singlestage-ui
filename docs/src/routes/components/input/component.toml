@@ -20,6 +20,6 @@ attrs = [
     <input> `type` attribute to avoid name collisions.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
     the input is disabled.""" },
-  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """A \
+  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
     reactive signal coupled to the input's value.""" },
 ]

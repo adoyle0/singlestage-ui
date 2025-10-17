@@ -1,4 +1,4 @@
-use crate::CheckboxGroupContext;
+use crate::{CheckboxGroupContext, Reactive};
 use leptos::prelude::*;
 
 #[component]
@@ -114,7 +114,7 @@ pub fn Switch(
     //
     /// Whether the command or control is checked
     #[prop(optional, into)]
-    checked: RwSignal<bool>,
+    checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -142,37 +142,39 @@ pub fn Switch(
         checked.set(switch_checked);
 
         if let Some(checkbox_value) = value.get_untracked()
-            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-                match switch_checked {
-                    true => checkbox_group.value.update(|group_value| {
-                        group_value.push(checkbox_value);
-                    }),
-                    false => checkbox_group.value.update(|group_value| {
-                        if let Some(index) = group_value.iter().position(|el| *el == checkbox_value)
-                        {
-                            group_value.swap_remove(index);
-                        }
-                    }),
-                }
+            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+        {
+            match switch_checked {
+                true => checkbox_group.value.update(|group_value| {
+                    group_value.push(checkbox_value);
+                }),
+                false => checkbox_group.value.update(|group_value| {
+                    if let Some(index) = group_value.iter().position(|el| *el == checkbox_value) {
+                        group_value.swap_remove(index);
+                    }
+                }),
             }
+        }
     };
 
     if let Some(value) = value.get_untracked()
         && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-            && checkbox_group.value.get_untracked().contains(&value)
-                && let Some(switch) = switch_ref.get_untracked() {
-                    switch.set_checked(true)
-                }
+        && checkbox_group.value.get_untracked().contains(&value)
+        && let Some(switch) = switch_ref.get_untracked()
+    {
+        switch.set_checked(true)
+    }
 
     Effect::new(move || {
         if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-            && let Some(value) = value.get_untracked() {
-                if checkbox_group.value.get().contains(&value) {
-                    checked.set(true);
-                } else {
-                    checked.set(false);
-                }
+            && let Some(value) = value.get_untracked()
+        {
+            if checkbox_group.value.get().contains(&value) {
+                checked.set(true);
+            } else {
+                checked.set(false);
             }
+        }
     });
 
     Effect::new(move || {
@@ -183,9 +185,10 @@ pub fn Switch(
 
     Effect::new(move || {
         if let Some(switch) = switch_ref.get_untracked()
-            && let Some(disabled) = disabled.get() {
-                switch.set_disabled(disabled);
-            }
+            && let Some(disabled) = disabled.get()
+        {
+            switch.set_disabled(disabled);
+        }
     });
 
     let global_attrs_1 = view! {

@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -141,20 +142,16 @@ pub fn Select(
     invalid: MaybeProp<bool>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
-    value: MaybeProp<RwSignal<String>>,
+    value: Reactive<String>,
 ) -> impl IntoView {
     let select_ref = NodeRef::<leptos::html::Select>::new();
 
-    let on_change = move |ev| {
-        if let Some(value) = value.get_untracked() {
-            value.set(event_target_value(&ev))
-        }
-    };
+    let on_change = move |ev| value.set(event_target_value(&ev));
 
     if let Some(select) = select_ref.get_untracked() {
         if let Some(default) = default.get_untracked() {
             select.set_value(&default);
-        } else if let Some(value) = value.get_untracked() {
+        } else {
             select.set_value(&value.get_untracked());
         }
     }
@@ -167,10 +164,9 @@ pub fn Select(
 
     // Update value reactively
     Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked()
-            && let Some(value) = value.get() {
-                select.set_value(&value.get());
-            }
+        if let Some(select) = select_ref.get_untracked() {
+            select.set_value(&value.get());
+        }
     });
 
     let global_attrs_1 = view! {

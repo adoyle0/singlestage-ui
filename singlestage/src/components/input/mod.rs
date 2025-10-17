@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -227,7 +228,7 @@ pub fn Input(
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
-    value: MaybeProp<RwSignal<String>>,
+    value: Reactive<String>,
 ) -> impl IntoView {
     let supported_types = [
         "color",
@@ -252,29 +253,28 @@ pub fn Input(
 
     Effect::new(move || {
         if let Some(input) = input_ref.get_untracked()
-            && let Some(default) = default.get() {
-                input.set_default_value(&default);
-            }
+            && let Some(default) = default.get()
+        {
+            input.set_default_value(&default);
+        }
     });
 
     Effect::new(move || {
         if let Some(input) = input_ref.get_untracked()
-            && let Some(disabled) = disabled.get() {
-                input.set_disabled(disabled);
-            }
+            && let Some(disabled) = disabled.get()
+        {
+            input.set_disabled(disabled);
+        }
     });
 
     Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(value) = value.get() {
-                input.set_value(&value.get());
-            }
+        if let Some(input) = input_ref.get_untracked() {
+            input.set_value(&value.get());
+        }
     });
 
     let on_input = move |ev| {
-        if let Some(value) = value.get_untracked() {
-            value.set(event_target_value(&ev));
-        }
+        value.set(event_target_value(&ev));
     };
 
     let global_attrs_1 = view! {
@@ -352,6 +352,30 @@ pub fn Input(
         />
     };
 
+    let custom_attrs = view! {
+        <{..}
+            aria-invalid=move || {
+                match invalid.get() {
+                    Some(true) => "true",
+                    _ => "",
+                }
+            }
+            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            disabled=move || disabled.get()
+            node_ref=input_ref
+            on:input=on_input
+            type=move || {
+                let input_type = input_type.get().unwrap_or_default();
+                if supported_types.contains(&input_type.as_str()) {
+                    input_type
+                } else {
+                    "text".to_string()
+                }
+            }
+            value=value.get_untracked()
+        />
+    };
+
     view! {
         {if let Some(children) = children {
             let uuid = uuid::Uuid::new_v4();
@@ -364,37 +388,12 @@ pub fn Input(
                     {children()}
                 </label>
                 <input
-                    aria-invalid=move || {
-                        match invalid.get() {
-                            Some(true) => "true",
-                            _ => "",
-                        }
-                    }
-                    class=move || {
-                        format!("singlestage-input {}", class.get().unwrap_or_default())
-                    }
-                    disabled=move || disabled.get()
                     id=move || id.get().unwrap_or(uuid.to_string())
-                    node_ref=input_ref
-                    on:input=on_input
-                    type=move || {
-                        let input_type = input_type.get().unwrap_or_default();
-                        if supported_types.contains(&input_type.as_str()) {
-                            input_type
-                        } else {
-                            "text".to_string()
-                        }
-                    }
-                    value=if let Some(value) = value.get_untracked() {
-                        value.get_untracked()
-                    } else {
-                        String::default()
-                    }
-
                     {..global_attrs_1}
                     {..global_attrs_2}
                     {..input_attrs_1}
                     {..input_attrs_2}
+                    {..custom_attrs}
                 />
             }
                 .into_any()
@@ -402,35 +401,12 @@ pub fn Input(
 
             view! {
                 <input
-                    aria-invalid=move || {
-                        match invalid.get() {
-                            Some(true) => "true",
-                            _ => "",
-                        }
-                    }
-                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-                    disabled=move || disabled.get()
                     id=move || id.get()
-                    node_ref=input_ref
-                    on:input=on_input
-                    type=move || {
-                        let input_type = input_type.get().unwrap_or_default();
-                        if supported_types.contains(&input_type.as_str()) {
-                            input_type
-                        } else {
-                            "text".to_string()
-                        }
-                    }
-                    value=if let Some(value) = value.get_untracked() {
-                        value.get_untracked()
-                    } else {
-                        String::default()
-                    }
-
                     {..global_attrs_1}
                     {..global_attrs_2}
                     {..input_attrs_1}
                     {..input_attrs_2}
+                    {..custom_attrs}
                 />
             }
                 .into_any()

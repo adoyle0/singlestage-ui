@@ -3,12 +3,10 @@ use syntect::{
     easy::HighlightFile,
     highlighting::ThemeSet,
     html::{
-        append_highlighted_html_for_styled_line, start_highlighted_html_snippet, IncludeBackground,
+        IncludeBackground, append_highlighted_html_for_styled_line, start_highlighted_html_snippet,
     },
     parsing::SyntaxSet,
 };
-
-// let muh_theme = syntect::highlighting::Theme
 
 pub fn highlight_html_from_file<P: AsRef<Path>>(path: P) -> String {
     let ss = SyntaxSet::load_defaults_newlines();
