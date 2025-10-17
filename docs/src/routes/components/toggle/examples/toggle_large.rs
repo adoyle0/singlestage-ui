@@ -3,9 +3,9 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn ToggleOutlineExample() -> impl IntoView {
+pub fn ToggleLargeExample() -> impl IntoView {
     view! {
-        <Toggle variant="outline" attr:aria-label="Toggle italic">
+        <Toggle size="large" attr:aria-label="Toggle italic">
             {icon!(LuItalic)}
         </Toggle>
     }

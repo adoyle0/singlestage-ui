@@ -1,5 +1,7 @@
 use leptos::prelude::*;
 
+use crate::Reactive;
+
 /// A two-state button that toggles between on and off.
 #[component]
 pub fn Toggle(
@@ -121,7 +123,7 @@ pub fn Toggle(
 
     /// Reactive signal coupled to the toggle's pressed state.
     #[prop(optional, into)]
-    pressed: MaybeProp<bool>,
+    pressed: Reactive<bool>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -160,7 +162,6 @@ pub fn Toggle(
             translate=move || translate.get()
         />
     };
-    let state = { pressed };
 
     view! {
         <button
@@ -181,9 +182,9 @@ pub fn Toggle(
                     class.get().unwrap_or_default(),
                 )
             }
-            data-state=move || if state.get().unwrap_or_default() { "on" } else { "off" }
-            aria-pressed=move || if state.get().unwrap_or_default() { "true" } else { "false" }
-            on:click=move |_| !state.get_untracked().unwrap_or_default()
+            data-state=move || if pressed.get() { "on" } else { "off" }
+            aria-pressed=move || if pressed.get() { "true" } else { "false" }
+            on:click=move |_| pressed.set(!pressed.get_untracked())
 
             {..global_attrs_1}
             {..global_attrs_2}

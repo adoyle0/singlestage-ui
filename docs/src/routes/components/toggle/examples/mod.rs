@@ -1,4 +1,12 @@
 mod toggle;
+mod toggle_disabled;
+mod toggle_large;
 mod toggle_outline;
+mod toggle_small;
+mod toggle_with_text;
 pub use toggle::*;
+pub use toggle_disabled::*;
+pub use toggle_large::*;
 pub use toggle_outline::*;
+pub use toggle_small::*;
+pub use toggle_with_text::*;
