@@ -120,22 +120,9 @@ pub fn Toggle(
     variant: MaybeProp<String>,
 
     /// Reactive signal coupled to the toggle's pressed state.
-    #[prop(into)]
-    pressed: RwSignal<bool>,
+    #[prop(optional, into)]
+    pressed: MaybeProp<bool>,
 ) -> impl IntoView {
-    //TODO: Test if this is necessary
-    //
-    // let disabled_for_click = disabled.clone();
-    //
-    // let on_click = move |_| {
-    //     if disabled_for_click.get().unwrap_or(false) {
-    //         return;
-    //     }
-    //
-    //     pressed.set(!pressed.get_untracked());
-    // };
-    //
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -173,6 +160,7 @@ pub fn Toggle(
             translate=move || translate.get()
         />
     };
+    let state = { pressed };
 
     view! {
         <button
@@ -193,9 +181,9 @@ pub fn Toggle(
                     class.get().unwrap_or_default(),
                 )
             }
-            attr:data-state=move || if pressed.get() { "on" } else { "off" }
-            attr:aria-pressed=move || if pressed.get() { "true" } else { "false" }
-            on:click=move |_| pressed.set(!pressed.get_untracked())
+            data-state=move || if state.get().unwrap_or_default() { "on" } else { "off" }
+            aria-pressed=move || if state.get().unwrap_or_default() { "true" } else { "false" }
+            on:click=move |_| !state.get_untracked().unwrap_or_default()
 
             {..global_attrs_1}
             {..global_attrs_2}
