@@ -1,4 +1,4 @@
-use leptos::prelude::RwSignal;
+use crate::Reactive;
 
 mod group;
 mod radio;
@@ -9,6 +9,6 @@ pub use radio::*;
 #[derive(Clone)]
 pub struct RadioGroupContext {
     name: String,
-    invalid: RwSignal<bool>,
-    value: RwSignal<String>,
+    invalid: Reactive<bool>,
+    value: Reactive<String>,
 }

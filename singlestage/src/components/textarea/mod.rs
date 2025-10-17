@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -168,35 +169,34 @@ pub fn Textarea(
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
-    value: MaybeProp<RwSignal<String>>,
+    value: Reactive<String>,
 ) -> impl IntoView {
     let textarea_ref = NodeRef::<leptos::html::Textarea>::new();
 
     let on_input = move |ev| {
-        if let Some(value) = value.get_untracked() {
-            value.set(event_target_value(&ev));
-        }
+        value.set(event_target_value(&ev));
     };
 
     Effect::new(move || {
         if let Some(textarea) = textarea_ref.get_untracked()
-            && let Some(default_value) = default.get() {
-                let _ = textarea.set_default_value(&default_value);
-            }
+            && let Some(default_value) = default.get()
+        {
+            let _ = textarea.set_default_value(&default_value);
+        }
     });
 
     Effect::new(move || {
         if let Some(textarea) = textarea_ref.get_untracked()
-            && let Some(disabled) = disabled.get() {
-                textarea.set_disabled(disabled)
-            }
+            && let Some(disabled) = disabled.get()
+        {
+            textarea.set_disabled(disabled)
+        }
     });
 
     Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked()
-            && let Some(value) = value.get() {
-                textarea.set_value(&value.get());
-            }
+        if let Some(textarea) = textarea_ref.get_untracked() {
+            textarea.set_value(&value.get());
+        }
     });
 
     let global_attrs_1 = view! {
@@ -285,10 +285,8 @@ pub fn Textarea(
                 >
                     {if let Some(default) = default.get_untracked() {
                         default
-                    } else if let Some(value) = value.get_untracked() {
-                        value.get_untracked()
                     } else {
-                        "".to_string()
+                        value.get_untracked()
                     }}
                 </textarea>
             }
@@ -316,10 +314,8 @@ pub fn Textarea(
                 >
                     {if let Some(default) = default.get_untracked() {
                         default
-                    } else if let Some(value) = value.get_untracked() {
-                        value.get_untracked()
                     } else {
-                        "".to_string()
+                        value.get_untracked()
                     }}
                 </textarea>
             }

@@ -4,10 +4,10 @@ mod group;
 pub use checkbox::*;
 pub use group::*;
 
-use leptos::prelude::RwSignal;
+use crate::Reactive;
 
 #[derive(Clone)]
 pub struct CheckboxGroupContext {
-    pub invalid: RwSignal<bool>,
-    pub value: RwSignal<Vec<String>>,
+    pub invalid: Reactive<bool>,
+    pub value: Reactive<Vec<String>>,
 }

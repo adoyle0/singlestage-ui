@@ -11,7 +11,7 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "value", attr_type = "RwSignal<String>", default = """""""", description = """Reactive \
+  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """Reactive \
     signal coupled to the `value` of the current selected tab.""" },
 ]
 

@@ -1,4 +1,4 @@
-use crate::CheckboxGroupContext;
+use crate::{CheckboxGroupContext, Reactive};
 use leptos::prelude::*;
 
 // TODO: Tri-state
@@ -118,7 +118,7 @@ pub fn Checkbox(
     //
     /// Reactive signal coupled to the checkbox's checked value.
     #[prop(optional, into)]
-    checked: RwSignal<bool>,
+    checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -146,37 +146,39 @@ pub fn Checkbox(
         checked.set(checkbox_checked);
 
         if let Some(checkbox_value) = value.get_untracked()
-            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-                match checkbox_checked {
-                    true => checkbox_group.value.update(|group_value| {
-                        group_value.push(checkbox_value);
-                    }),
-                    false => checkbox_group.value.update(|group_value| {
-                        if let Some(index) = group_value.iter().position(|el| *el == checkbox_value)
-                        {
-                            group_value.swap_remove(index);
-                        }
-                    }),
-                }
+            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+        {
+            match checkbox_checked {
+                true => checkbox_group.value.update(|group_value| {
+                    group_value.push(checkbox_value);
+                }),
+                false => checkbox_group.value.update(|group_value| {
+                    if let Some(index) = group_value.iter().position(|el| *el == checkbox_value) {
+                        group_value.swap_remove(index);
+                    }
+                }),
             }
+        }
     };
 
     if let Some(value) = value.get_untracked()
         && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-            && checkbox_group.value.get_untracked().contains(&value)
-                && let Some(checkbox) = checkbox_ref.get_untracked() {
-                    checkbox.set_checked(true)
-                }
+        && checkbox_group.value.get_untracked().contains(&value)
+        && let Some(checkbox) = checkbox_ref.get_untracked()
+    {
+        checkbox.set_checked(true)
+    }
 
     Effect::new(move || {
         if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-            && let Some(value) = value.get_untracked() {
-                if checkbox_group.value.get().contains(&value) {
-                    checked.set(true);
-                } else {
-                    checked.set(false);
-                }
+            && let Some(value) = value.get_untracked()
+        {
+            if checkbox_group.value.get().contains(&value) {
+                checked.set(true);
+            } else {
+                checked.set(false);
             }
+        }
     });
 
     Effect::new(move || {

@@ -1,4 +1,4 @@
-use leptos::prelude::*;
+use crate::Reactive;
 
 mod content;
 mod list;
@@ -12,5 +12,5 @@ pub use trigger::*;
 
 #[derive(Clone)]
 pub struct TabsContext {
-    value: RwSignal<String>,
+    value: Reactive<String>,
 }

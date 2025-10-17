@@ -17,7 +17,7 @@ pub fn CookieSettings() -> impl IntoView {
                             "These cookies are essential in order to use the website and use its features."
                         </p>
                     </div>
-                    <Switch checked=RwSignal::new(true) />
+                    <Switch checked=true />
                 </Label>
 
                 <Label class="justify-between">

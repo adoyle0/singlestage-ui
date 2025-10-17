@@ -1,4 +1,4 @@
-use crate::RadioGroupContext;
+use crate::{RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// An item in the group that can be checked
@@ -115,7 +115,7 @@ pub fn Radio(
     //
     /// Whether the command or control is checked
     #[prop(optional, into)]
-    checked: RwSignal<bool>,
+    checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -144,12 +144,13 @@ pub fn Radio(
     };
 
     if let Some(value) = value.get_untracked()
-        && radio_group.value.get_untracked() == value {
-            if let Some(radio) = radio_ref.get_untracked() {
-                radio.set_checked(true);
-            }
-            checked.set(true);
+        && radio_group.value.get_untracked() == value
+    {
+        if let Some(radio) = radio_ref.get_untracked() {
+            radio.set_checked(true);
         }
+        checked.set(true);
+    }
 
     Effect::new(move || {
         if radio_group.value.get() == value.get().unwrap_or_default() {
