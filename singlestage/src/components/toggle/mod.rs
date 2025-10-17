@@ -113,11 +113,11 @@ pub fn Toggle(
     translate: MaybeProp<String>,
 
     /// The size of the toggle. Leave this empty for the default size.
-    /// Sizes: small | large | icon | sm-icon | lg-icon
+    /// Sizes: small | large
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// The display variant of the toggle. Defaults to `outline`
-    /// Variants: primary | secondary | outline | ghost | link | destructive
+    /// The display variant of the toggle. Leave this empty for the default variant.
+    /// Variants: outline
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
