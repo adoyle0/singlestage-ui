@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn FieldExample() -> impl IntoView {
     view! {
-        <div class="w-full max-w-md">
+        <div class="max-w-md">
             <form>
                 <FieldGroup>
                     <FieldSet>
