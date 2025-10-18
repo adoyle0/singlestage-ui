@@ -1,3 +1,4 @@
+use super::SelectContext;
 use crate::Reactive;
 use leptos::prelude::*;
 
@@ -159,6 +160,9 @@ pub fn Select(
             select.set_value(&value.get_untracked());
         }
     }
+
+    let context = SelectContext { value };
+    provide_context(context);
 
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {

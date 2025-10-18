@@ -1,3 +1,5 @@
+use super::SelectContext;
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -117,11 +119,23 @@ pub fn SelectItem(
     label: MaybeProp<String>,
     /// Set if this item is initially selected.
     #[prop(optional, into)]
-    selected: MaybeProp<bool>,
+    selected: Reactive<bool>,
     /// Set the value of this item to be submitted with form data.
     #[prop(optional, into)]
     value: MaybeProp<String>,
 ) -> impl IntoView {
+    let select_context = expect_context::<SelectContext>();
+
+    if let Some(value) = value.get_untracked() {
+        selected.set(value == select_context.value.get_untracked())
+    };
+
+    Effect::new(move || {
+        if let Some(value) = value.get() {
+            selected.set(value == select_context.value.get())
+        }
+    });
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
