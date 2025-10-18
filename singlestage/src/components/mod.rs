@@ -133,6 +133,11 @@ pub mod theme_provider;
 #[cfg(feature = "theme_provider")]
 pub use theme_provider::*;
 
+#[cfg(feature = "toggle")]
+pub mod toggle;
+#[cfg(feature = "toggle")]
+pub use toggle::*;
+
 #[cfg(feature = "toast")]
 pub mod toast;
 #[cfg(feature = "toast")]

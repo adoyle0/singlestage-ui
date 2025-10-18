@@ -54,6 +54,7 @@ default = [
   "tabs",
   "textarea",
   "theme_provider",
+  "toggle",
   # "toast",
   "tooltip",
 ]
@@ -80,6 +81,7 @@ separator = []
 sidebar = []
 skeleton = []
 slider = []
+toggle = []
 switch = ["checkbox", "label"]
 table = []
 tabs = []
