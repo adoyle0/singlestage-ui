@@ -11,8 +11,13 @@ pub fn Field(
             class=move || {
                 format!(
                     "singlestage-field {} {}",
+                    match orientation.get().unwrap_or_default().as_str() {
+                        "horizontal" => "singlestage-field-horizontal",
+                        "responsive" => "singlestage-field-responsive",
+                        _ => "singlestage-field-vertical",
+                    }
+                        .to_string(),
                     class.get().unwrap_or_default(),
-                    orientation.get().unwrap_or_default(),
                 )
             }
             data-orientation=move || orientation.get()
