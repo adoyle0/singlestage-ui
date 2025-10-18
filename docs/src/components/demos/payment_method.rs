@@ -46,34 +46,34 @@ pub fn PaymentMethod() -> impl IntoView {
                         <div class="grid gap-2 flex-1">
                             <Label label_for="payment-method-expiration-month">"Expires"</Label>
                             <Select id="payment-method-expiration-month" class="w-full">
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
+                                <SelectItem value="01">"January"</SelectItem>
+                                <SelectItem value="02">"February"</SelectItem>
+                                <SelectItem value="03">"March"</SelectItem>
+                                <SelectItem value="04">"April"</SelectItem>
+                                <SelectItem value="05">"May"</SelectItem>
+                                <SelectItem value="06">"June"</SelectItem>
+                                <SelectItem value="07">"July"</SelectItem>
+                                <SelectItem value="08">"August"</SelectItem>
+                                <SelectItem value="09">"September"</SelectItem>
+                                <SelectItem value="10">"October"</SelectItem>
+                                <SelectItem value="11">"November"</SelectItem>
+                                <SelectItem value="12">"December"</SelectItem>
                             </Select>
                         </div>
                         <div class="grid gap-2 flex-1">
                             <Label label_for="payment-method-expiration-year">"Year"</Label>
                             <Select id="payment-method-expiration-year" class="w-full">
-                                <option value="2024">"2024"</option>
-                                <option value="2025">"2025"</option>
-                                <option value="2026">"2026"</option>
-                                <option value="2027">"2027"</option>
-                                <option value="2028">"2028"</option>
-                                <option value="2029">"2029"</option>
-                                <option value="2030">"2030"</option>
-                                <option value="2031">"2031"</option>
-                                <option value="2032">"2032"</option>
-                                <option value="2033">"2033"</option>
-                                <option value="2034">"2034"</option>
+                                <SelectItem value="2024">"2024"</SelectItem>
+                                <SelectItem value="2025">"2025"</SelectItem>
+                                <SelectItem value="2026">"2026"</SelectItem>
+                                <SelectItem value="2027">"2027"</SelectItem>
+                                <SelectItem value="2028">"2028"</SelectItem>
+                                <SelectItem value="2029">"2029"</SelectItem>
+                                <SelectItem value="2030">"2030"</SelectItem>
+                                <SelectItem value="2031">"2031"</SelectItem>
+                                <SelectItem value="2032">"2032"</SelectItem>
+                                <SelectItem value="2033">"2033"</SelectItem>
+                                <SelectItem value="2034">"2034"</SelectItem>
                             </Select>
                         </div>
                         <div class="grid gap-2 flex-1">

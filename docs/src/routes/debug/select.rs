@@ -27,9 +27,9 @@ pub fn DebugSelect() -> impl IntoView {
 
         <Label>
             "Select me" <Select disabled value invalid default="two">
-                <option value="one">"One"</option>
-                <option value="two">"Two"</option>
-                <option value="three">"Three"</option>
+                <SelectItem value="one">"One"</SelectItem>
+                <SelectItem value="two">"Two"</SelectItem>
+                <SelectItem value="three">"Three"</SelectItem>
             </Select>
         </Label>
 

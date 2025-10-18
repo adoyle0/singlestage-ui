@@ -21,11 +21,11 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"m@example.com"</p>
                         </div>
 
-                        <Select>
-                            <option>"Viewer"</option>
-                            <option>"Developer"</option>
-                            <option>"Billing"</option>
-                            <option>"Owner"</option>
+                        <Select default="owner">
+                            <SelectItem value="viewer">"Viewer"</SelectItem>
+                            <SelectItem value="developer">"Developer"</SelectItem>
+                            <SelectItem value="billing">"Billing"</SelectItem>
+                            <SelectItem value="owner">"Owner"</SelectItem>
                         </Select>
                     </li>
 
@@ -40,10 +40,11 @@ pub fn TeamMembers() -> impl IntoView {
                         </div>
 
                         <Select>
-                            <option>"Viewer"</option>
-                            <option>"Developer"</option>
-                            <option>"Billing"</option>
-                            <option>"Owner"</option>
+                            <SelectItem value="empty">"Empty"</SelectItem>
+                            <SelectItem value="viewer">"Viewer"</SelectItem>
+                            <SelectItem value="developer">"Developer"</SelectItem>
+                            <SelectItem value="billing">"Billing"</SelectItem>
+                            <SelectItem value="owner">"Owner"</SelectItem>
                         </Select>
                     </li>
 
@@ -57,11 +58,11 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"i@example.com"</p>
                         </div>
 
-                        <Select>
-                            <option>"Viewer"</option>
-                            <option>"Developer"</option>
-                            <option>"Billing"</option>
-                            <option>"Owner"</option>
+                        <Select default="viewer">
+                            <SelectItem value="viewer">"Viewer"</SelectItem>
+                            <SelectItem value="developer">"Developer"</SelectItem>
+                            <SelectItem value="billing">"Billing"</SelectItem>
+                            <SelectItem value="owner">"Owner"</SelectItem>
                         </Select>
                     </li>
 

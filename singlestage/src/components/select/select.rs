@@ -148,6 +148,10 @@ pub fn Select(
 
     let on_change = move |ev| value.set(event_target_value(&ev));
 
+    if let Some(default) = default.get_untracked() {
+        value.set(default);
+    }
+
     if let Some(select) = select_ref.get_untracked() {
         if let Some(default) = default.get_untracked() {
             select.set_value(&default);
@@ -165,7 +169,10 @@ pub fn Select(
     // Update value reactively
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {
-            select.set_value(&value.get());
+            let value = value.get();
+            if !value.is_empty() {
+                select.set_value(&value);
+            }
         }
     });
 

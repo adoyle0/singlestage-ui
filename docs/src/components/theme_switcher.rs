@@ -100,23 +100,23 @@ pub fn ThemeSwitcher() -> impl IntoView {
         <span class="flex space-x-2">
             <Tooltip side="bottom" value="Select theme">
                 <Select value=selected_theme class="h-8">
-                    <optgroup label="Colors">
-                        <option value="default">"Default"</option>
-                        <option value="amber">"Amber"</option>
-                        <option value="blue">"Blue"</option>
-                        <option value="lime">"Lime"</option>
-                        <option value="orange">"Orange"</option>
-                        <option value="purple">"Purple"</option>
-                        <option value="red">"Red"</option>
-                        <option value="rose">"Rose"</option>
-                        <option value="teal">"Teal"</option>
-                        <option value="violet">"Violet"</option>
-                        <option value="yellow">"Yellow"</option>
-                    </optgroup>
-                    <optgroup label="Layout">
-                        <option value="mono">"Mono"</option>
-                        <option value="scaled">"Scaled"</option>
-                    </optgroup>
+                    <SelectContent label="Colors">
+                        <SelectItem value="default">"Default"</SelectItem>
+                        <SelectItem value="amber">"Amber"</SelectItem>
+                        <SelectItem value="blue">"Blue"</SelectItem>
+                        <SelectItem value="lime">"Lime"</SelectItem>
+                        <SelectItem value="orange">"Orange"</SelectItem>
+                        <SelectItem value="purple">"Purple"</SelectItem>
+                        <SelectItem value="red">"Red"</SelectItem>
+                        <SelectItem value="rose">"Rose"</SelectItem>
+                        <SelectItem value="teal">"Teal"</SelectItem>
+                        <SelectItem value="violet">"Violet"</SelectItem>
+                        <SelectItem value="yellow">"Yellow"</SelectItem>
+                    </SelectContent>
+                    <SelectContent label="Layout">
+                        <SelectItem value="mono">"Mono"</SelectItem>
+                        <SelectItem value="scaled">"Scaled"</SelectItem>
+                    </SelectContent>
                 </Select>
             </Tooltip>
             <Tooltip side="bottom" value="Toggle dark mode">

@@ -15,20 +15,20 @@ pub fn ReportIssue() -> impl IntoView {
                         <div class="grid gap-2 flex-1">
                             <Label label_for="report-issue-area">"Area"</Label>
                             <Select id="report-issue-area" class="w-full">
-                                <option value="team">"Team"</option>
-                                <option value="billing">"Billing"</option>
-                                <option value="account">"Account"</option>
-                                <option value="deployments">"Deployments"</option>
-                                <option value="support">"Support"</option>
+                                <SelectItem value="team">"Team"</SelectItem>
+                                <SelectItem value="billing">"Billing"</SelectItem>
+                                <SelectItem value="account">"Account"</SelectItem>
+                                <SelectItem value="deployments">"Deployments"</SelectItem>
+                                <SelectItem value="support">"Support"</SelectItem>
                             </Select>
                         </div>
                         <div class="grid gap-2 flex-1">
                             <Label label_for="report-issue-security-level">"Security Level"</Label>
                             <Select id="report-issue-security-level" class="w-full">
-                                <option value="1">"Severity 1 (Highest)"</option>
-                                <option value="2">"Severity 2"</option>
-                                <option value="3">"Severity 3"</option>
-                                <option value="4">"Severity 4 (Lowest)"</option>
+                                <SelectItem value="1">"Severity 1 (Highest)"</SelectItem>
+                                <SelectItem value="2">"Severity 2"</SelectItem>
+                                <SelectItem value="3">"Severity 3"</SelectItem>
+                                <SelectItem value="4">"Severity 4 (Lowest)"</SelectItem>
                             </Select>
                         </div>
                     </div>
