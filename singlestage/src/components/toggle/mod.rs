@@ -111,6 +111,9 @@ pub fn Toggle(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
+    /// Defines an accessible string value that can be used to name an element.
+    #[prop(optional, into)]
+    aria_label: MaybeProp<String>,
 
     // BUTTON ATTRIBUTES
     //
@@ -169,15 +172,17 @@ pub fn Toggle(
     /// The value associated with this button's `name` when submitted with form data.
     #[prop(optional, into)]
     value: MaybeProp<String>,
+
+    // TOGGLE ATTRIBUTES
+    //
     /// The size of the toggle. Leave this empty for the default size.
-    /// Sizes: small | large
+    /// Sizes: sm / small | lg / large
     #[prop(optional, into)]
     size: MaybeProp<String>,
     /// The display variant of the toggle. Leave this empty for the default variant.
     /// Variants: outline
     #[prop(optional, into)]
     variant: MaybeProp<String>,
-
     /// Reactive signal coupled to the toggle's pressed state.
     #[prop(optional, into)]
     pressed: Reactive<bool>,
@@ -217,6 +222,7 @@ pub fn Toggle(
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
+            aria-label=move || aria_label.get()
         />
     };
     let button_attrs = view! {
@@ -238,7 +244,6 @@ pub fn Toggle(
     view! {
         <button
             type="button"
-
             class=move || {
                 format!(
                     "{} {} {}",
@@ -248,7 +253,9 @@ pub fn Toggle(
                     },
                     match size.get().unwrap_or_default().as_str() {
                         "small" => "singlestage-toggle-sm",
+                        "sm" => "singlestage-toggle-sm",
                         "large" => "singlestage-toggle-lg",
+                        "lg" => "singlestage-toggle-lg",
                         _ => "",
                     },
                     class.get().unwrap_or_default(),

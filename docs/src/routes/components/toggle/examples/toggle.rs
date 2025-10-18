@@ -5,7 +5,7 @@ use singlestage::*;
 #[component]
 pub fn ToggleExample() -> impl IntoView {
     view! {
-        <Toggle attr:aria-label="Toggle italic">
+        <Toggle aria_label="Toggle italic">
             {icon!(LuBold)}
         </Toggle>
     }
