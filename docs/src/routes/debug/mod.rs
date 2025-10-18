@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+mod button;
 mod checkbox;
 mod form_reset;
 mod input;
@@ -8,6 +9,7 @@ mod select;
 mod slider;
 mod textarea;
 
+use button::*;
 use checkbox::*;
 use form_reset::*;
 use input::*;
@@ -27,6 +29,7 @@ pub fn ReactiveDebug() -> impl IntoView {
             <DebugSelect />
             <DebugRadio />
             <DebugSlider />
+            <DebugButton />
         </div>
     }
 }

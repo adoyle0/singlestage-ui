@@ -223,7 +223,6 @@ pub fn Button(
         <{..}
             command=move || command.get()
             commandfor=move || commandfor.get()
-            disabled=move || disabled.get()
             form=move || form.get()
             formaction=move || formaction.get()
             formenctype=move || formenctype.get()
@@ -262,6 +261,8 @@ pub fn Button(
                     class.get().unwrap_or_default(),
                 )
             }
+            disabled=disabled.get_untracked()
+            prop:disabled=move || disabled.get()
             type=button_type.get()
 
             {..global_attrs_1}
