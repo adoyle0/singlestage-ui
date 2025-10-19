@@ -2547,7 +2547,7 @@ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
 
 [[package]]
 name = "singlestage"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "leptos",
  "leptos_meta",
@@ -2558,7 +2558,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_docs"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "axum",
  "console_error_panic_hook",
@@ -2576,7 +2576,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "serde",
  "syntect",
@@ -2634,9 +2634,9 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "syn"
-version = "2.0.106"
+version = "2.0.107"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ede7c438028d4436d71104916910f5bb611972c5cfd7f89b8300a8186e6fada6"
+checksum = "2a26dbd934e5451d21ef060c018dae56fc073894c5a7896f882928a76e6d081b"
 dependencies = [
  "proc-macro2",
  "quote",
