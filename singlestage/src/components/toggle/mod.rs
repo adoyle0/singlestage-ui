@@ -229,7 +229,6 @@ pub fn Toggle(
     <{..}
         command=move || command.get()
         commandfor=move || commandfor.get()
-        disabled=move || disabled.get()
         form=move || form.get()
         formaction=move || formaction.get()
         formenctype=move || formenctype.get()
@@ -262,7 +261,9 @@ pub fn Toggle(
                 )
             }
             data-state=move || if pressed.get() { "on" } else { "off" }
-            aria-pressed=move || if pressed.get() { "true" } else { "false" }
+            aria-pressed=move ||  pressed.get().to_string()
+            disabled=move || disabled.get_untracked()
+            prop:disabled=move || disabled.get()
             on:click=move |_| pressed.set(!pressed.get_untracked())
 
             {..global_attrs_1}
