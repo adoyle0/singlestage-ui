@@ -163,6 +163,13 @@ pub fn SidebarContainer() -> impl IntoView {
                                         </A>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton>
+                                        <A href="https://github.com/adoyle0/singlestage-ui">
+                                            {icon!(icondata::LuGithub)} <span>"GitHub"</span>
+                                        </A>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
                             </SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>
