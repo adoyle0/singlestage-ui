@@ -3,7 +3,7 @@ resolver = "2"
 members = ["singlestage", "docs", "macro"]
 
 [workspace.package]
-version = "0.3.3"
+version = "0.3.4"
 authors = ["Adam Doyle <adam@doordesk.net>"]
 edition = "2024"
 rust-version = "1.88"
@@ -22,7 +22,6 @@ leptos_axum = "0.8"
 
 # Singlestage
 icondata_core = "0.1"
-once_cell = "1.2"
 
 # Singlestage build
 reqwest = "0.12"

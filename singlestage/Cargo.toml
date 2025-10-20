@@ -15,7 +15,6 @@ categories.workspace = true
 [dependencies]
 leptos = { workspace = true }
 leptos_meta = { workspace = true }
-once_cell = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 uuid = { workspace = true, features = ["v4", "js"] }
 
@@ -27,7 +26,7 @@ sha256 = { workspace = true }
 csr = ["leptos/csr"]
 ssr = ["leptos/ssr"]
 hydrate = ["leptos/hydrate"]
-islands = ["serde/derive", "leptos/islands", "dep:once_cell"]
+islands = ["serde/derive", "leptos/islands"]
 nightly = ["leptos/nightly"]
 default = [
   "accordion",

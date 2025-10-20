@@ -178,9 +178,9 @@ dependencies = [
 
 [[package]]
 name = "bitflags"
-version = "2.9.4"
+version = "2.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2261d10cca569e4643e526d8dc2e62e433cc8aba21ab764233731f8d369bf394"
+checksum = "812e12b5285cc515a9c72a5c1d3b6d46a19dac5acfef5265968c166106e31dd3"
 
 [[package]]
 name = "block-buffer"
@@ -2547,18 +2547,19 @@ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
 
 [[package]]
 name = "singlestage"
-version = "0.3.3"
+version = "0.3.4"
 dependencies = [
  "leptos",
  "leptos_meta",
  "reqwest",
+ "serde",
  "sha256",
  "uuid",
 ]
 
 [[package]]
 name = "singlestage_docs"
-version = "0.3.3"
+version = "0.3.4"
 dependencies = [
  "axum",
  "console_error_panic_hook",
@@ -2576,7 +2577,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.3.3"
+version = "0.3.4"
 dependencies = [
  "serde",
  "syntect",
