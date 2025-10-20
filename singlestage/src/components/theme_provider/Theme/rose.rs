@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind rose palette
 pub const Rose: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-rose-50: oklch(96.9% 0.015 12.422);
   --color-rose-100: oklch(94.1% 0.03 12.58);
   --color-rose-200: oklch(89.2% 0.058 10.001);
@@ -22,7 +24,9 @@ pub const Rose: Theme = Theme {
   --chart-4: var(--color-rose-700);
   --chart-5: var(--color-rose-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-rose-500);
     --primary-foreground: var(--color-rose-50);
     --ring: var(--color-rose-900);
@@ -30,7 +34,9 @@ pub const Rose: Theme = Theme {
     --sidebar-primary-foreground: var(--color-rose-50);
     --sidebar-ring: var(--color-rose-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-rose-600);
   --primary-foreground: var(--color-rose-50);
   --ring: var(--color-rose-400);
@@ -38,4 +44,5 @@ pub const Rose: Theme = Theme {
   --sidebar-primary-foreground: var(--color-rose-50);
   --sidebar-ring: var(--color-rose-400);
 "#,
+    ),
 };

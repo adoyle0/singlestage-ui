@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind violet palette
 pub const Violet: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-violet-50: oklch(96.9% 0.016 293.756);
   --color-violet-100: oklch(94.3% 0.029 294.588);
   --color-violet-200: oklch(89.4% 0.057 293.283);
@@ -22,7 +24,9 @@ pub const Violet: Theme = Theme {
   --chart-4: var(--color-violet-700);
   --chart-5: var(--color-violet-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-violet-500);
     --primary-foreground: var(--color-violet-50);
     --ring: var(--color-violet-900);
@@ -30,7 +34,9 @@ pub const Violet: Theme = Theme {
     --sidebar-primary-foreground: var(--color-violet-50);
     --sidebar-ring: var(--color-violet-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-violet-600);
   --primary-foreground: var(--color-violet-50);
   --ring: var(--color-violet-400);
@@ -38,4 +44,5 @@ pub const Violet: Theme = Theme {
   --sidebar-primary-foreground: var(--color-violet-50);
   --sidebar-ring: var(--color-violet-400);
 "#,
+    ),
 };

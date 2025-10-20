@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind amber palette
 pub const Amber: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-amber-50: oklch(98.7% 0.022 95.277);
   --color-amber-100: oklch(96.2% 0.059 95.617);
   --color-amber-200: oklch(92.4% 0.12 95.746);
@@ -22,7 +24,9 @@ pub const Amber: Theme = Theme {
   --chart-4: var(--color-amber-700);
   --chart-5: var(--color-amber-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-amber-500);
     --primary-foreground: var(--color-amber-950);
     --ring: var(--color-amber-900);
@@ -30,7 +34,9 @@ pub const Amber: Theme = Theme {
     --sidebar-primary-foreground: var(--color-amber-950);
     --sidebar-ring: var(--color-amber-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-amber-600);
   --primary-foreground: var(--color-amber-950);
   --ring: var(--color-amber-400);
@@ -38,4 +44,5 @@ pub const Amber: Theme = Theme {
   --sidebar-primary-foreground: var(--color-amber-950);
   --sidebar-ring: var(--color-amber-400);
 "#,
+    ),
 };

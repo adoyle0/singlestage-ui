@@ -34,6 +34,20 @@ pub fn Installation() -> impl IntoView {
 </pre>"#
             .to_string() />
 
+        <h2 class="my-6 text-2xl font-semibold">"Islands"</h2>
+        <p class="my-4">
+            "Add the islands feature to singlestage just as you do with Leptos, if using islands."
+        </p>
+        <CodeBlock code=r#"<pre>
+<span># Cargo.toml</span>
+<span></span>
+<span>[dependencies]</span>
+<span>leptos = { version = "0.8", features = ["islands"] }</span>
+<span>...</span>
+<span>singlestage = {version = "0.3", features = ["islands"] }</span>
+</pre>"#
+            .to_string() />
+
         <h2 class="my-6 text-2xl font-semibold">"SSR"</h2>
         <p class="my-4">"Nothing special needs to happen whether you you use SSR or not."</p>
 

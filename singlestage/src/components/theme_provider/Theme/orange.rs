@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind orange palette
 pub const Orange: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-orange-50: oklch(98% 0.016 73.684);
   --color-orange-100: oklch(95.4% 0.038 75.164);
   --color-orange-200: oklch(90.1% 0.076 70.697);
@@ -22,7 +24,9 @@ pub const Orange: Theme = Theme {
   --chart-4: var(--color-orange-700);
   --chart-5: var(--color-orange-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-orange-500);
     --primary-foreground: var(--color-orange-50);
     --ring: var(--color-orange-900);
@@ -30,7 +34,9 @@ pub const Orange: Theme = Theme {
     --sidebar-primary-foreground: var(--color-orange-50);
     --sidebar-ring: var(--color-orange-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-orange-600);
   --primary-foreground: var(--color-orange-50);
   --ring: var(--color-orange-400);
@@ -38,4 +44,5 @@ pub const Orange: Theme = Theme {
   --sidebar-primary-foreground: var(--color-orange-50);
   --sidebar-ring: var(--color-orange-400);
 "#,
+    ),
 };

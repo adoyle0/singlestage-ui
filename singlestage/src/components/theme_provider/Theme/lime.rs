@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind lime palette
 pub const Lime: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-lime-50: oklch(98.6% 0.031 120.757);
   --color-lime-100: oklch(96.7% 0.067 122.328);
   --color-lime-200: oklch(93.8% 0.127 124.321);
@@ -22,7 +24,9 @@ pub const Lime: Theme = Theme {
   --chart-4: var(--color-lime-700);
   --chart-5: var(--color-lime-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-lime-600);
     --primary-foreground: var(--color-lime-50);
     --ring: var(--color-lime-900);
@@ -30,7 +34,9 @@ pub const Lime: Theme = Theme {
     --sidebar-primary-foreground: var(--color-lime-50);
     --sidebar-ring: var(--color-lime-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-lime-600);
   --primary-foreground: var(--color-lime-50);
   --ring: var(--color-lime-400);
@@ -38,4 +44,5 @@ pub const Lime: Theme = Theme {
   --sidebar-primary-foreground: var(--color-lime-50);
   --sidebar-ring: var(--color-lime-400);
 "#,
+    ),
 };

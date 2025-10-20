@@ -18,28 +18,8 @@ pub struct ThemeProviderContext {
     pub theme: RwSignal<Theme::Theme>,
 }
 
-#[component]
-/// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
-/// initial values. Updates should be done via `ThemeProviderContext`.
-pub fn ThemeProvider(
-    children: Children,
-    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
-    ///
-    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
-    #[prop(optional, into)]
-    mode: String,
-    /// Set the initial Theme.
-    #[prop(optional, into)]
-    theme: MaybeProp<Theme::Theme>,
-) -> impl IntoView {
-    let mode = RwSignal::<Mode>::new(mode.into());
-    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
-
-    let context = ThemeProviderContext { theme, mode };
-    provide_context(context);
-
-    // TODO: Don't have css here
-    let dark_common = r#"
+// TODO: Don't have css here
+static DARK_COMMON: &str = r#"
     --scrollbar-thumb: rgba(255, 255, 255, 0.3);
     color-scheme: dark;
   
@@ -71,9 +51,9 @@ pub fn ThemeProvider(
     --sidebar-border: oklch(1 0 0 / 10%);
 "#;
 
-    // TODO: Don't have css here
-    // TODO: This code is dead and here for future reference
-    let _dark_overrides_tw = r#"
+// TODO: Don't have css here
+// TODO: This code is dead and here for future reference
+static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
   .singlestage-btn-primary {
     .singlestage-input {
@@ -190,7 +170,7 @@ pub fn ThemeProvider(
   }
 }"#;
 
-    let dark_overrides = r#"@layer components {
+static DARK_OVERRIDES: &str = r#"@layer components {
   .singlestage-btn-primary {
     .singlestage-input[type="checkbox"],
     .singlestage-input[type="radio"] {
@@ -451,6 +431,26 @@ pub fn ThemeProvider(
   }
 }"#;
 
+#[component]
+/// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
+/// initial values. Updates should be done via `ThemeProviderContext`.
+pub fn ThemeProviderInner(
+    children: Children,
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
+    #[prop(optional, into)]
+    mode: MaybeProp<String>,
+    /// Set the initial Theme.
+    #[prop(optional, into)]
+    theme: MaybeProp<Theme::Theme>,
+) -> impl IntoView {
+    let mode = RwSignal::<Mode>::new(mode.get_untracked().unwrap_or_default().into());
+    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
+
+    let context = ThemeProviderContext { theme, mode };
+    provide_context(context);
+
     view! {
         <Style id="singlestage">{CSS}</Style>
         <style
@@ -461,10 +461,10 @@ pub fn ThemeProvider(
                     Mode::Dark => {
                         format!(
                             ":root{{ {} {} {}}}\n{}\n",
-                            dark_common,
+                            DARK_COMMON,
                             theme.common,
                             theme.dark,
-                            dark_overrides,
+                            DARK_OVERRIDES,
                         )
                     }
                     Mode::Light => format!(":root{{ {} {}}}\n", theme.common, theme.light),
@@ -473,14 +473,60 @@ pub fn ThemeProvider(
                             ":root{{ {} {}}}\n\n@media (prefers-color-scheme: dark) {{\n  :root {{ {} {}  }}\n{}}}",
                             theme.common,
                             theme.light,
-                            dark_common,
+                            DARK_COMMON,
                             theme.dark,
-                            dark_overrides,
+                            DARK_OVERRIDES,
                         )
                     }
                 }
             }
         ></style>
         {children()}
+    }
+}
+
+#[cfg(not(feature = "islands"))]
+#[component]
+pub fn ThemeProvider(
+    children: Children,
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
+    #[prop(optional, into)]
+    mode: MaybeProp<String>,
+    /// Set the initial Theme.
+    #[prop(optional, into)]
+    theme: MaybeProp<Theme::Theme>,
+) -> impl IntoView {
+    view! {
+        <ThemeProviderInner mode theme>
+            {children()}
+        </ThemeProviderInner>
+    }
+}
+
+#[cfg(feature = "islands")]
+#[island]
+pub fn ThemeProvider(
+    children: Children,
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
+    #[prop(optional, into)]
+    mode: Option<String>,
+    /// Set the initial Theme.
+    #[prop(optional, into)]
+    theme: Option<Theme::Theme>,
+) -> impl IntoView {
+    use leptos_meta::provide_meta_context;
+
+    provide_meta_context();
+    view! {
+        <ThemeProviderInner
+            theme=theme.unwrap_or(Theme::Default)
+            mode=mode.unwrap_or("auto".into())
+        >
+            {children()}
+        </ThemeProviderInner>
     }
 }
