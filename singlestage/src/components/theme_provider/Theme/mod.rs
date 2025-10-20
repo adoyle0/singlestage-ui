@@ -26,9 +26,23 @@ pub use teal::*;
 pub use violet::*;
 pub use yellow::*;
 
+use std::borrow::Cow;
+
+#[cfg(not(feature = "islands"))]
 #[derive(Clone)]
 pub struct Theme {
-    pub common: &'static str,
-    pub dark: &'static str,
-    pub light: &'static str,
+    pub common: Cow<'static, str>,
+    pub dark: Cow<'static, str>,
+    pub light: Cow<'static, str>,
+}
+
+#[cfg(feature = "islands")]
+use serde::{Deserialize, Serialize};
+
+#[cfg(feature = "islands")]
+#[derive(Clone, Deserialize, Serialize)]
+pub struct Theme {
+    pub common: Cow<'static, str>,
+    pub dark: Cow<'static, str>,
+    pub light: Cow<'static, str>,
 }

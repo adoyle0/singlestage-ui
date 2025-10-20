@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind teal palette
 pub const Teal: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-teal-50: oklch(98.4% 0.014 180.72);
   --color-teal-100: oklch(95.3% 0.051 180.801);
   --color-teal-200: oklch(91% 0.096 180.426);
@@ -22,7 +24,9 @@ pub const Teal: Theme = Theme {
   --chart-4: var(--color-teal-700);
   --chart-5: var(--color-teal-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-teal-500);
     --primary-foreground: var(--color-teal-50);
     --ring: var(--color-teal-900);
@@ -30,7 +34,9 @@ pub const Teal: Theme = Theme {
     --sidebar-primary-foreground: var(--color-teal-50);
     --sidebar-ring: var(--color-teal-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-teal-600);
   --primary-foreground: var(--color-teal-50);
   --ring: var(--color-teal-400);
@@ -38,4 +44,5 @@ pub const Teal: Theme = Theme {
   --sidebar-primary-foreground: var(--color-teal-50);
   --sidebar-ring: var(--color-teal-400);
 "#,
+    ),
 };

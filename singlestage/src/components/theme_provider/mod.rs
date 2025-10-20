@@ -509,20 +509,24 @@ pub fn ThemeProvider(
 #[island]
 pub fn ThemeProvider(
     children: Children,
-    // /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
-    // ///
-    // /// Accepted values: `auto` | `dark` | `light` or a `Mode`
-    #[prop(optional, into)] mode: Option<String>,
-    // /// Set the initial Theme.
-    // #[prop(optional, into)] theme: Option<Theme::Theme>,
+    /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
+    ///
+    /// Accepted values: `auto` | `dark` | `light` or a `Mode`
+    #[prop(optional, into)]
+    mode: Option<String>,
+    /// Set the initial Theme.
+    #[prop(optional, into)]
+    theme: Option<Theme::Theme>,
 ) -> impl IntoView {
     use leptos_meta::provide_meta_context;
 
     provide_meta_context();
     view! {
-        <ThemeProviderInner>
-            // theme=theme.unwrap_or(Theme::Default)
-            mode=mode.unwrap_or("auto".into()) {children()}
+        <ThemeProviderInner
+            theme=theme.unwrap_or(Theme::Default)
+            mode=mode.unwrap_or("auto".into())
+        >
+            {children()}
         </ThemeProviderInner>
     }
 }

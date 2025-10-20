@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind purple palette
 pub const Purple: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-purple-50: oklch(97.7% 0.014 308.299);
   --color-purple-100: oklch(94.6% 0.033 307.174);
   --color-purple-200: oklch(90.2% 0.063 306.703);
@@ -22,7 +24,9 @@ pub const Purple: Theme = Theme {
   --chart-4: var(--color-purple-700);
   --chart-5: var(--color-purple-800);
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-purple-500);
     --primary-foreground: var(--color-purple-50);
     --ring: var(--color-purple-900);
@@ -30,7 +34,9 @@ pub const Purple: Theme = Theme {
     --sidebar-primary-foreground: var(--color-purple-50);
     --sidebar-ring: var(--color-purple-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-purple-600);
   --primary-foreground: var(--color-purple-50);
   --ring: var(--color-purple-400);
@@ -38,4 +44,5 @@ pub const Purple: Theme = Theme {
   --sidebar-primary-foreground: var(--color-purple-50);
   --sidebar-ring: var(--color-purple-400);
 "#,
+    ),
 };

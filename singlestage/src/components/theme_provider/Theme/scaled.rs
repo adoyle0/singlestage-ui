@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Similar to the Default theme but more condensed
 pub const Scaled: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-blue-50: oklch(97% 0.014 254.604);
   --color-blue-100: oklch(93.2% 0.032 255.585);
   --color-blue-200: oklch(88.2% 0.059 254.128);
@@ -65,7 +67,9 @@ pub const Scaled: Theme = Theme {
     padding-bottom: 0;
   }
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-neutral-200);
     --primary-foreground: var(--color-neutral-900);
     --ring: var(--color-neutral-500);
@@ -73,7 +77,9 @@ pub const Scaled: Theme = Theme {
     --sidebar-primary-foreground: var(--color-neutral-900);
     --sidebar-ring: var(--color-neutral-500);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-neutral-900);
   --primary-foreground: var(--color-neutral-50);
   --ring: var(--color-neutral-400);
@@ -81,4 +87,5 @@ pub const Scaled: Theme = Theme {
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-ring: var(--color-neutral-400);
 "#,
+    ),
 };

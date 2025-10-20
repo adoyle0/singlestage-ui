@@ -1,9 +1,11 @@
 use super::Theme;
+use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Monospace fonts and a blocky appearance
 pub const Mono: Theme = Theme {
-    common: r#"
+    common: Cow::Borrowed(
+        r#"
   --color-stone-50: oklch(98.5% 0.001 106.423);
   --color-stone-100: oklch(97% 0.001 106.424);
   --color-stone-200: oklch(92.3% 0.003 48.717);
@@ -62,7 +64,9 @@ pub const Mono: Theme = Theme {
     box-shadow: 0 0 #0000 !important;
   }
 "#,
-    dark: r#"
+    ),
+    dark: Cow::Borrowed(
+        r#"
     --primary: var(--color-stone-500);
     --primary-foreground: var(--color-stone-50);
     --ring: var(--color-stone-900);
@@ -70,7 +74,9 @@ pub const Mono: Theme = Theme {
     --sidebar-primary-foreground: var(--color-stone-50);
     --sidebar-ring: var(--color-stone-900);
 "#,
-    light: r#"
+    ),
+    light: Cow::Borrowed(
+        r#"
   --primary: var(--color-stone-600);
   --primary-foreground: var(--color-stone-50);
   --ring: var(--color-stone-400);
@@ -78,4 +84,5 @@ pub const Mono: Theme = Theme {
   --sidebar-primary-foreground: var(--color-stone-50);
   --sidebar-ring: var(--color-stone-400);
 "#,
+    ),
 };
