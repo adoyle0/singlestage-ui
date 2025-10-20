@@ -8,6 +8,7 @@ mod radio;
 mod select;
 mod slider;
 mod textarea;
+mod toggle;
 
 use button::*;
 use checkbox::*;
@@ -17,6 +18,7 @@ use radio::*;
 use select::*;
 use slider::*;
 use textarea::*;
+use toggle::*;
 
 #[component]
 pub fn ReactiveDebug() -> impl IntoView {
@@ -30,6 +32,7 @@ pub fn ReactiveDebug() -> impl IntoView {
             <DebugRadio />
             <DebugSlider />
             <DebugButton />
+            <DebugToggle />
         </div>
     }
 }
