@@ -28,15 +28,12 @@
     .singlestage-popover-content {
       @apply bg-popover
       border
-      opacity-100
       overflow-x-hidden
       overflow-y-auto
       p-4
       rounded-md
-      scale-100
       shadow-md
       text-popover-foreground
-      transition-all
       z-50;
     }
   }
