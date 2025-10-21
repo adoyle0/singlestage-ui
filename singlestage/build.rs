@@ -140,7 +140,6 @@ fn main() {
         "table",
         "tabs",
         "textarea",
-        "toast",
         "tooltip"
     );
 
