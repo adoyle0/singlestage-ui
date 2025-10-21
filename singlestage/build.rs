@@ -12,6 +12,8 @@ use std::{
     process::Command,
 };
 
+const TAILWIND_URL: &str = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.15/";
+
 macro_rules! features {
     ( $( $x:expr ),* ) => {
         {
@@ -60,6 +62,43 @@ fn download_file(download_url: &str, file_path: &PathBuf) {
     let content = response.bytes().expect("Error getting bytes from response");
 
     file.write_all(&content).expect("Error writing to file");
+}
+
+fn run_tailwind(
+    tailwind_path: Option<&Path>,
+    bundle_path: &PathBuf,
+    singlestage_path: &PathBuf,
+) -> Result<(), ()> {
+    let output;
+
+    if let Some(tailwind_path) = tailwind_path {
+        output = Command::new(tailwind_path)
+            .arg("-i")
+            .arg(bundle_path)
+            .arg("-o")
+            .arg(singlestage_path)
+            .arg("-m")
+            .output()
+    } else {
+        output = Command::new("tailwindcss")
+            .arg("-i")
+            .arg(bundle_path)
+            .arg("-o")
+            .arg(singlestage_path)
+            .arg("-m")
+            .output()
+    }
+
+    if let Ok(output) = output {
+        if output.status.success() {
+            Ok(())
+        } else {
+            let error = String::from_utf8(output.stderr).unwrap();
+            panic!("{}", error);
+        }
+    } else {
+        Err(())
+    }
 }
 
 fn main() {
@@ -141,14 +180,12 @@ fn main() {
 
     // User brought their own tailwind
     if let Ok(tailwind_path) = env::var("SINGLESTAGE_TAILWIND_PATH") {
-        if Command::new(Path::new(&tailwind_path))
-            .arg("-i")
-            .arg(&bundle_path)
-            .arg("-o")
-            .arg(&singlestage_path)
-            .arg("-m")
-            .output()
-            .is_ok()
+        if run_tailwind(
+            Some(Path::new(&tailwind_path)),
+            &bundle_path,
+            &singlestage_path,
+        )
+        .is_ok()
         {
             // BYOT tailwind worked, bail
             return;
@@ -160,15 +197,7 @@ fn main() {
     }
 
     // Try system tailwind
-    if Command::new("tailwindcss")
-        .arg("-i")
-        .arg(&bundle_path)
-        .arg("-o")
-        .arg(&singlestage_path)
-        .arg("-m")
-        .output()
-        .is_ok()
-    {
+    if run_tailwind(None, &bundle_path, &singlestage_path).is_ok() {
         // System tailwind worked, bail
         return;
     }
@@ -196,30 +225,26 @@ fn main() {
     println!("Filename: {}", filename);
 
     // Try downloaded tailwind
-    if Command::new(
+    let downloaded_tailwind_path =
         Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (2)\n"))
-            .join(&filename),
+            .join(&filename);
+    if run_tailwind(
+        Some(&downloaded_tailwind_path),
+        &bundle_path,
+        &singlestage_path,
     )
-    .arg("-i")
-    .arg(&bundle_path)
-    .arg("-o")
-    .arg(&singlestage_path)
-    .arg("-m")
-    .output()
     .is_ok()
     {
         // Downloaded tailwind worked, bail
         return;
     }
 
-    let url_base = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.14/";
-
     let tailwind =
         Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (3)\n"))
             .join(&filename);
 
     if !exists(&tailwind).expect("\nError checking for tailwind.\n") {
-        let file_url = format!("{}{}", &url_base, &filename);
+        let file_url = format!("{}{}", &TAILWIND_URL, &filename);
         download_file(&file_url, &tailwind);
     }
 
@@ -228,7 +253,7 @@ fn main() {
             .join("sha256sums.txt");
 
     if !exists(&checksums).expect("\nError checking for checksums.\n") {
-        let sums_url = format!("{}sha256sums.txt", &url_base);
+        let sums_url = format!("{}sha256sums.txt", &TAILWIND_URL);
         download_file(&sums_url, &checksums);
     }
 
@@ -272,15 +297,9 @@ fn main() {
     }
 
     // Run downloaded tailwind
-    Command::new(
-        Path::new(&env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (6)\n"))
-            .join(&filename),
-    )
-    .arg("-i")
-    .arg(&bundle_path)
-    .arg("-o")
-    .arg(&singlestage_path)
-    .arg("-m")
-    .output()
-    .expect("\nFailed to run tailwind\n");
+    let _ = run_tailwind(
+        Some(&downloaded_tailwind_path),
+        &bundle_path,
+        &singlestage_path,
+    );
 }
