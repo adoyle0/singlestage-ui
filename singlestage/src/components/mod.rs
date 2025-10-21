@@ -68,6 +68,11 @@ pub mod pagination;
 #[cfg(feature = "pagination")]
 pub use pagination::*;
 
+#[cfg(feature = "popover")]
+pub mod popover;
+#[cfg(feature = "popover")]
+pub use popover::*;
+
 #[cfg(feature = "radio")]
 pub mod radio;
 #[cfg(feature = "radio")]
