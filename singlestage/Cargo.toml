@@ -55,6 +55,7 @@ default = [
   "textarea",
   "theme_provider",
   "toggle",
+  "toast",
   "tooltip",
 ]
 
@@ -83,5 +84,6 @@ table = []
 tabs = []
 textarea = []
 theme_provider = []
+toast = []
 toggle = []
 tooltip = []
