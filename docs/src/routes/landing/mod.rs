@@ -1,6 +1,8 @@
-use crate::components::*;
 use leptos::prelude::*;
 use singlestage::*;
+
+mod demos;
+use demos::*;
 
 #[component]
 pub fn LandingPage() -> impl IntoView {
