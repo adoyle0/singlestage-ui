@@ -2547,7 +2547,7 @@ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
 
 [[package]]
 name = "singlestage"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "leptos",
  "leptos_meta",
@@ -2559,7 +2559,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_docs"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "axum",
  "console_error_panic_hook",
@@ -2577,7 +2577,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "serde",
  "syntect",
@@ -3098,9 +3098,9 @@ checksum = "75b844d17643ee918803943289730bec8aac480150456169e647ed0b576ba539"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.19"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f63a545481291138910575129486daeaf8ac54aee4387fe7906919f7830c7d9d"
+checksum = "462eeb75aeb73aea900253ce739c8e18a67423fadf006037cd3ff27e82748a06"
 
 [[package]]
 name = "unicode-segmentation"
