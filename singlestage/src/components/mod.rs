@@ -38,11 +38,6 @@ pub mod checkbox;
 #[cfg(feature = "checkbox")]
 pub use checkbox::*;
 
-#[cfg(feature = "combobox")]
-pub mod combobox;
-#[cfg(feature = "combobox")]
-pub use combobox::*;
-
 #[cfg(feature = "dialog")]
 pub mod dialog;
 #[cfg(feature = "dialog")]
@@ -72,11 +67,6 @@ pub use link::*;
 pub mod pagination;
 #[cfg(feature = "pagination")]
 pub use pagination::*;
-
-#[cfg(feature = "popover")]
-pub mod popover;
-#[cfg(feature = "popover")]
-pub use popover::*;
 
 #[cfg(feature = "radio")]
 pub mod radio;
@@ -133,15 +123,15 @@ pub mod theme_provider;
 #[cfg(feature = "theme_provider")]
 pub use theme_provider::*;
 
-#[cfg(feature = "toggle")]
-pub mod toggle;
-#[cfg(feature = "toggle")]
-pub use toggle::*;
-
 #[cfg(feature = "toast")]
 pub mod toast;
 #[cfg(feature = "toast")]
 pub use toast::*;
+
+#[cfg(feature = "toggle")]
+pub mod toggle;
+#[cfg(feature = "toggle")]
+pub use toggle::*;
 
 #[cfg(feature = "tooltip")]
 pub mod tooltip;

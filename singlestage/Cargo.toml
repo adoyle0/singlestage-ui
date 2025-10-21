@@ -37,14 +37,12 @@ default = [
   "button",
   "card",
   "checkbox",
-  # "combobox",
   "dialog",
   "dropdown",
   "input",
   "label",
   "link",
   "pagination",
-  # "popover",
   "radio",
   "select",
   "separator",
@@ -57,7 +55,7 @@ default = [
   "textarea",
   "theme_provider",
   "toggle",
-  # "toast",
+  "toast",
   "tooltip",
 ]
 
@@ -69,25 +67,23 @@ breadcrumb = ["dropdown"]
 button = []
 card = []
 checkbox = ["label"]
-combobox = ["button"]
 dialog = []
 dropdown = ["button"]
 input = ["label"]
 label = []
 link = []
 pagination = ["button"]
-popover = []
 radio = ["label"]
 select = []
 separator = []
 sidebar = []
 skeleton = []
 slider = []
-toggle = []
 switch = ["checkbox", "label"]
 table = []
 tabs = []
 textarea = []
 theme_provider = []
 toast = []
+toggle = []
 tooltip = []

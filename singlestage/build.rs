@@ -128,7 +128,6 @@ fn main() {
         "label",
         "link",
         "pagination",
-        "popover",
         "radio",
         "select",
         "separator",
