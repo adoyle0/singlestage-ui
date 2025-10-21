@@ -279,14 +279,9 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
         let decoded: ComponentPage = toml::from_str(&contents).expect("Error reading toml");
 
         // Generate info block
-        let mut use_alert_icon = String::new();
         let mut info = String::new();
 
         if let Some(special_info) = decoded.info {
-            use_alert_icon.push_str(
-                r#"use singlestage::{alert::*, icon};
-"#,
-            );
             info.push_str(
                 format!(
                     r#"<Alert>
@@ -411,7 +406,7 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
                 r##"
 mod {};
 use {}::*;
-{}
+
 #[component]
 pub fn {}Route() -> impl IntoView {{
     view! {{
@@ -427,7 +422,6 @@ pub fn {}Route() -> impl IntoView {{
 "##,
                 component_module_name,
                 component_module_name,
-                use_alert_icon,
                 string_to_pascal(&decoded.name),
                 string_to_title(&decoded.name),
                 decoded.description,
