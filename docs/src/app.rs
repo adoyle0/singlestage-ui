@@ -63,7 +63,7 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Title text="SingleStageUI" />
+        <Title text="Singlestage UI" />
         <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
         <ThemeProvider>
             <Router>
