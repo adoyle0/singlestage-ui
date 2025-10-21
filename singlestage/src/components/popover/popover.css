@@ -1,0 +1,40 @@
+@layer components {
+  .singlestage-popover {
+    @apply transition-all;
+
+    /* Hacks to render properly until anchor support
+      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
+    */
+    /* Webkit -- HAS TO BE FIRST */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      [popover] {
+        @apply relative
+        bg-transparent;
+        position-area: bottom span-right;
+        inset: unset;
+      }
+    }
+
+    /* Firefox */
+    @-moz-document url-prefix() {
+      [popover] {
+        @apply relative
+        bg-transparent;
+        inset: unset;
+      }
+    }
+    /* End hacks */
+
+    .singlestage-popover-content {
+      @apply bg-popover
+      border
+      overflow-x-hidden
+      overflow-y-auto
+      p-4
+      rounded-md
+      shadow-md
+      text-popover-foreground
+      z-50;
+    }
+  }
+}

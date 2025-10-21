@@ -43,6 +43,7 @@ default = [
   "label",
   "link",
   "pagination",
+  "popover",
   "radio",
   "select",
   "separator",
@@ -72,6 +73,7 @@ input = ["label"]
 label = []
 link = []
 pagination = ["button"]
+popover = []
 radio = ["label"]
 select = []
 separator = []

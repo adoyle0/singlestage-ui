@@ -1,0 +1,48 @@
+name = "Popover"
+description = "Displays rich content in a portal, triggered by a button."
+
+[info]
+title = "This component could use some work"
+description = """While this component does make use of the new popover browser API, proper \
+positioning is still not widely supported. There are hacks in place to try to work around this \
+issue while still taking advantage of the rest of the API. Until this is implemented (hopefully \
+soon - Aug 03, 2025) that puts this component in only a 'Good Enough' state. "<singlestage::Link \
+style="color: var(--foreground)" \
+href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility"> "More \
+Info"</singlestage::Link>""""
+
+[[examples]]
+name = "popover"
+
+[[references]]
+name = "Popover"
+description = "Contains all the parts of a popover."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PopoverContent"
+description = "The component that pops out when the popover is open."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PopoverTrigger"
+description = "The button that toggles the popover."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = [
+  { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed <button> \
+    `type` attribute to avoid name collisions.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
+    render the button.""" },
+  { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specify \
+    the style of button to render.""" },
+]
