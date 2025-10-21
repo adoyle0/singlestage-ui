@@ -128,7 +128,6 @@ fn main() {
         "label",
         "link",
         "pagination",
-        "popover",
         "radio",
         "select",
         "separator",
@@ -140,7 +139,6 @@ fn main() {
         "table",
         "tabs",
         "textarea",
-        "toast",
         "tooltip"
     );
 
