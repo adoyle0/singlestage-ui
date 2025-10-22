@@ -1,0 +1,32 @@
+name = "Kbd"
+description = "Used to display textual user input from keyboard."
+
+[[examples]]
+name = "Kbd"
+
+[[examples]]
+name = "Kbd Group"
+title = "Group"
+description = "Use the KbdGroup component to group keyboard keys together."
+
+[[examples]]
+name = "Kbd Button"
+title = "Button"
+description = """Use the Kbd component inside a Button component to display a keyboard key inside \
+a button."""
+
+[[references]]
+name = "Kbd"
+description = "Contains a single styled input indication."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "KbdGroup"
+description = "Contains a group of styled input indicators."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
