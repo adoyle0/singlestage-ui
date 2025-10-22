@@ -1,0 +1,16 @@
+name = "Aspect Ratio"
+description = "Displays content within a desired ratio."
+
+[[examples]]
+name = "Aspect Ratio"
+
+[[references]]
+name = "AspectRatio"
+description = "Contains the contents of an aspect ratio component."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "ratio", attr_type = "f64", default = "1.0", description = """The aspect ratio to use \
+    to display the child element.""" },
+]

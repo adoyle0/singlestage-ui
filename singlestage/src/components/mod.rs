@@ -8,6 +8,11 @@ pub mod alert;
 #[cfg(feature = "alert")]
 pub use alert::*;
 
+#[cfg(feature = "aspect_ratio")]
+pub mod aspect_ratio;
+#[cfg(feature = "aspect_ratio")]
+pub use aspect_ratio::*;
+
 #[cfg(feature = "avatar")]
 pub mod avatar;
 #[cfg(feature = "avatar")]

@@ -116,6 +116,7 @@ fn main() {
     let features = features!(
         "accordion",
         "alert",
+        "aspect_ratio",
         "avatar",
         "badge",
         "breadcrumb",
