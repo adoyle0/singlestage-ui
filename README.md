@@ -56,6 +56,19 @@ singlestage = {version = "0.3", features = ["nightly"] }
 
 Add the nightly feature to singlestage just as you do with Leptos, if using nightly.
 
+### Islands
+
+Add the islands feature to singlestage just as you do with Leptos, if using islands.
+
+```toml
+# Cargo.toml
+
+[dependencies]
+leptos = { version = "0.8", features = ["islands"] }
+...
+singlestage = {version = "0.3", features = ["islands"] }
+```
+
 ### SSR
 
 Nothing special needs to happen whether you you use SSR or not.
