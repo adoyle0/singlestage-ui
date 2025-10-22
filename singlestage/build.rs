@@ -126,6 +126,7 @@ fn main() {
         "dialog",
         "dropdown",
         "input",
+        "kbd",
         "label",
         "link",
         "pagination",

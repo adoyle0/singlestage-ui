@@ -58,6 +58,11 @@ pub mod input;
 #[cfg(feature = "input")]
 pub use input::*;
 
+#[cfg(feature = "kbd")]
+pub mod kbd;
+#[cfg(feature = "kbd")]
+pub use kbd::*;
+
 #[cfg(feature = "label")]
 pub mod label;
 #[cfg(feature = "label")]

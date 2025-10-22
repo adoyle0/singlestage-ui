@@ -1,0 +1,27 @@
+@layer components {
+  .singlestage-kbd {
+    @apply [&_svg:not([class*='size-'])]:size-3
+    bg-muted
+    font-medium
+    font-sans
+    gap-1
+    h-5
+    inline-flex
+    items-center
+    justify-center
+    min-w-5
+    pointer-events-none
+    px-1
+    rounded-sm
+    select-none
+    text-muted-foreground
+    text-xs
+    w-fit;
+  }
+
+  .singlestage-kbd-group {
+    @apply gap-1
+    inline-flex
+    items-center;
+  }
+}
