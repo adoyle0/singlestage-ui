@@ -6,6 +6,8 @@ async fn main() {
     use leptos::prelude::*;
     use leptos_axum::{LeptosRoutes, generate_route_list};
     use singlestage_docs::app::*;
+    use tower::ServiceBuilder;
+    use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -25,9 +27,17 @@ async fn main() {
     // `axum::Server` is a re-export of `hyper::Server`
     log!("listening on http://{}", &addr);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    axum::serve(listener, app.into_make_service())
-        .await
-        .unwrap();
+    axum::serve(
+        listener,
+        app.layer(
+            ServiceBuilder::new()
+                .layer(CompressionLayer::new())
+                .layer(RequestDecompressionLayer::new()),
+        )
+        .into_make_service(),
+    )
+    .await
+    .unwrap();
 }
 
 #[cfg(not(feature = "ssr"))]

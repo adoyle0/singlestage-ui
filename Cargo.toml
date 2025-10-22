@@ -32,6 +32,8 @@ axum = "0.8"
 console_error_panic_hook = "0.1"
 icondata = "0.6"
 tokio = "1"
+tower = "0.5"
+tower-http = "0.6"
 uuid = "1.17"
 wasm-bindgen = "=0.2.104"
 

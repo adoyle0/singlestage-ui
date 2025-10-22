@@ -26,6 +26,8 @@ leptos_router = { workspace = true, features = ["nightly"] }
 singlestage = { path = "../singlestage", features = ["nightly"] }
 singlestage_macro = { path = "../macro" }
 tokio = { workspace = true, features = ["rt-multi-thread"], optional = true }
+tower = { workspace = true, optional = true }
+tower-http = { workspace = true, optional = true }
 wasm-bindgen = { workspace = true, optional = true }
 web-sys = { version = "*", features = ["MediaQueryList", "HtmlDocument"] }
 
@@ -36,6 +38,9 @@ ssr = [
   "dep:axum",
   "dep:leptos_axum",
   "dep:tokio",
+  "dep:tower",
+  "tower-http/compression-full",
+  "tower-http/decompression-full",
   "leptos/ssr",
   "leptos_meta/ssr",
   "leptos_router/ssr",
