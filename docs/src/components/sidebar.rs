@@ -173,7 +173,7 @@ pub fn SidebarContainer() -> impl IntoView {
                                 <SidebarMenuItem>
                                     <SidebarMenuButton>
                                         <A href="https://docs.rs/singlestage/latest/singlestage/index.html">
-                                            {icon!(icondata::FiHelpCircle)} <span>"docs.rs"</span>
+                                            {icon!(icondata::SiDocsdotrs)} <span>"Docs.rs"</span>
                                         </A>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
