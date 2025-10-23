@@ -1,0 +1,13 @@
+name = "Scroll Area"
+description = "Augments native scroll functionality for custom, cross-browser styling."
+
+[[examples]]
+name = "scroll area"
+
+[[references]]
+name = "ScrollArea"
+description = "Contains the contents of a scroll area."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

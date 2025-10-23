@@ -88,6 +88,11 @@ pub mod radio;
 #[cfg(feature = "radio")]
 pub use radio::*;
 
+#[cfg(feature = "scroll_area")]
+pub mod scroll_area;
+#[cfg(feature = "scroll_area")]
+pub use scroll_area::*;
+
 #[cfg(feature = "select")]
 pub mod select;
 #[cfg(feature = "select")]

@@ -47,6 +47,7 @@ default = [
   "pagination",
   "popover",
   "radio",
+  "scroll_area",
   "select",
   "separator",
   "sidebar",
@@ -79,6 +80,7 @@ link = []
 pagination = ["button"]
 popover = []
 radio = ["label"]
+scroll_area = []
 select = []
 separator = []
 sidebar = []
