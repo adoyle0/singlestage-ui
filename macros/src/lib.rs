@@ -1,4 +1,5 @@
 extern crate proc_macro;
+
 mod highlight;
 use highlight::*;
 use proc_macro::TokenStream;
@@ -8,6 +9,16 @@ use std::{
     io::{BufReader, Read},
     path::Path,
 };
+
+mod svg;
+
+/// The main svg procedural macro function.
+/// It accepts optional named arguments
+/// and generates an SVG string.
+#[proc_macro]
+pub fn svg(input: TokenStream) -> TokenStream {
+    svg::svg(input)
+}
 
 #[derive(Deserialize)]
 struct ComponentSpecialInfo {
