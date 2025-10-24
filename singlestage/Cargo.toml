@@ -13,6 +13,8 @@ keywords.workspace = true
 categories.workspace = true
 
 [dependencies]
+singlestage_macros = { path = "../macros/" }
+
 leptos = { workspace = true }
 leptos_meta = { workspace = true }
 serde = { workspace = true, optional = true }

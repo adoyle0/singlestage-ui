@@ -2,7 +2,7 @@ use super::theme_switcher::*;
 use leptos::prelude::*;
 use leptos_router::{components::A, nested_router::Outlet};
 use singlestage::*;
-use singlestage_macro::*;
+use singlestage_macros::*;
 
 #[component]
 pub fn SidebarButton() -> impl IntoView {

@@ -7,7 +7,7 @@ use leptos_router::{
     components::{Outlet, ParentRoute, Route, Router, Routes},
 };
 use singlestage::*;
-use singlestage_macro::*;
+use singlestage_macros::*;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {

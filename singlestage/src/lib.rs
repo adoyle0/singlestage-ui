@@ -5,6 +5,9 @@ pub mod reactive;
 pub use components::*;
 pub use reactive::*;
 
+extern crate singlestage_macros;
+pub use singlestage_macros::svg;
+
 static CSS: &str = include_str!(concat!(env!("OUT_DIR"), "/singlestage.css"));
 
 /// Helper macro for using icondata icons

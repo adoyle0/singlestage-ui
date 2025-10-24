@@ -1,5 +1,5 @@
 [package]
-name = "singlestage_macro"
+name = "singlestage_macros"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
@@ -19,3 +19,5 @@ proc-macro = true
 serde = { workspace = true }
 syntect = { workspace = true }
 toml = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }
