@@ -6,8 +6,8 @@ use leptos_router::{
     StaticSegment,
     components::{Outlet, ParentRoute, Route, Router, Routes},
 };
+use macros_internal::*;
 use singlestage::*;
-use singlestage_macros::*;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {

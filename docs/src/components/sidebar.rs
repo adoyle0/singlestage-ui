@@ -1,8 +1,8 @@
 use super::theme_switcher::*;
 use leptos::prelude::*;
 use leptos_router::{components::A, nested_router::Outlet};
+use macros_internal::*;
 use singlestage::*;
-use singlestage_macros::*;
 
 #[component]
 pub fn SidebarButton() -> impl IntoView {
@@ -102,9 +102,7 @@ pub fn SidebarContainer() -> impl IntoView {
                 <SidebarHeader>
                     <a href="/">
                         <div class="flex m-2">
-                            <div class="flex items-center justify-center bg-(--primary)
-                            text-(--primary-foreground) min-w-12 max-w-12 min-h-12 max-h-12
-                            rounded-md shadow-sm">
+                            <div class="flex justify-center items-center max-h-12 rounded-md shadow-sm bg-(--primary) text-(--primary-foreground) min-w-12 max-w-12 min-h-12">
                                 <svg
                                     class="h-9 fill-current"
                                     viewBox="0 0 44.238907 53.197109"
@@ -123,8 +121,8 @@ pub fn SidebarContainer() -> impl IntoView {
                                 </svg>
                             </div>
                             <div class="content-center ml-2">
-                                <p class="text-center font-semibold">"Singlestage UI"</p>
-                                <p class="text-center text-sm">"v"{env!("CARGO_PKG_VERSION")}</p>
+                                <p class="font-semibold text-center">"Singlestage UI"</p>
+                                <p class="text-sm text-center">"v"{env!("CARGO_PKG_VERSION")}</p>
                             </div>
                         </div>
                     </a>
@@ -202,16 +200,15 @@ pub fn SidebarContainer() -> impl IntoView {
             </Sidebar>
 
             <main>
-                <header class="bg-(--background) sticky inset-x-0 top-0 isolate flex shrink-0
-                items-center gap-2 border-b z-10">
-                    <div class="flex h-14 w-full items-center justify-between gap-2 px-4">
+                <header class="flex sticky inset-x-0 top-0 z-10 gap-2 items-center border-b bg-(--background) isolate shrink-0">
+                    <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
                         <SidebarTrigger>
                             <SidebarButton />
                         </SidebarTrigger>
                         <ThemeSwitcher />
                     </div>
                 </header>
-                <div class="mx-2 sm:mx-12 my-8">
+                <div class="my-8 mx-2 sm:mx-12">
                     <Outlet />
                 </div>
             </main>

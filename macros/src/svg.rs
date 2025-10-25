@@ -91,12 +91,12 @@ pub fn svg(input: TokenStream) -> TokenStream {
 
     let width = match args.width {
         Some(w) => w.to_token_stream(),
-        None => quote! {#icon_expr.width.unwrap_or(24)},
+        None => quote! {#icon_expr.width.unwrap_or("auto")},
     };
 
     let height = match args.height {
         Some(h) => h.to_token_stream(),
-        None => quote! {#icon_expr.height.unwrap_or(24)},
+        None => quote! {#icon_expr.height.unwrap_or("auto")},
     };
 
     let view_box = match args.view_box {
@@ -106,27 +106,27 @@ pub fn svg(input: TokenStream) -> TokenStream {
 
     let stroke_linecap = match args.stroke_linecap {
         Some(s) => s.to_token_stream(),
-        None => quote! {#icon_expr.stroke_linecap.unwrap_or_default()},
+        None => quote! {#icon_expr.stroke_linecap.unwrap_or("butt")},
     };
 
     let stroke_linejoin = match args.stroke_linejoin {
         Some(s) => s.to_token_stream(),
-        None => quote! {#icon_expr.stroke_linejoin.unwrap_or_default()},
+        None => quote! {#icon_expr.stroke_linejoin.unwrap_or("miter")},
     };
 
     let stroke_width = match args.stroke_width {
         Some(sw) => sw.to_token_stream(),
-        None => quote! {#icon_expr.stroke_width.unwrap_or_default()},
+        None => quote! {#icon_expr.stroke_width.unwrap_or("1px")},
     };
 
     let stroke = match args.stroke {
         Some(s) => s.to_token_stream(),
-        None => quote! {#icon_expr.stroke.unwrap_or_default()},
+        None => quote! {#icon_expr.stroke.unwrap_or("currentColor")},
     };
 
     let fill = match args.fill {
-        Some(f) => f.to_token_stream(),
-        None => quote! {#icon_expr.fill.unwrap_or_default()},
+        Some(h) => h.to_token_stream(),
+        None => quote! {#icon_expr.fill.unwrap_or("currentColor")},
     };
 
     let expanded = quote! {

@@ -1654,6 +1654,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "34080505efa8e45a4b816c349525ebe327ceaa8559756f0356cba97ef3bf7432"
 
 [[package]]
+name = "macros_internal"
+version = "0.3.6"
+dependencies = [
+ "serde",
+ "syntect",
+ "toml",
+]
+
+[[package]]
 name = "manyhow"
 version = "0.11.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2632,6 +2641,7 @@ version = "0.3.6"
 dependencies = [
  "leptos",
  "leptos_meta",
+ "macros_internal",
  "reqwest",
  "serde",
  "sha256",
@@ -2650,8 +2660,8 @@ dependencies = [
  "leptos_axum",
  "leptos_meta",
  "leptos_router",
+ "macros_internal",
  "singlestage",
- "singlestage_macros",
  "tokio",
  "tower",
  "tower-http",
