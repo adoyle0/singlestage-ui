@@ -1654,6 +1654,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "34080505efa8e45a4b816c349525ebe327ceaa8559756f0356cba97ef3bf7432"
 
 [[package]]
+name = "macros_internal"
+version = "0.3.6"
+dependencies = [
+ "serde",
+ "syntect",
+ "toml",
+]
+
+[[package]]
 name = "manyhow"
 version = "0.11.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2632,9 +2641,11 @@ version = "0.3.6"
 dependencies = [
  "leptos",
  "leptos_meta",
+ "macros_internal",
  "reqwest",
  "serde",
  "sha256",
+ "singlestage_macros",
  "uuid",
 ]
 
@@ -2649,8 +2660,8 @@ dependencies = [
  "leptos_axum",
  "leptos_meta",
  "leptos_router",
+ "macros_internal",
  "singlestage",
- "singlestage_macro",
  "tokio",
  "tower",
  "tower-http",
@@ -2659,10 +2670,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "singlestage_macro"
+name = "singlestage_macros"
 version = "0.3.6"
 dependencies = [
+ "quote",
  "serde",
+ "syn",
  "syntect",
  "toml",
 ]
@@ -2718,9 +2731,9 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "syn"
-version = "2.0.107"
+version = "2.0.108"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a26dbd934e5451d21ef060c018dae56fc073894c5a7896f882928a76e6d081b"
+checksum = "da58917d35242480a05c2897064da0a80589a2a0476c9a3f2fdc83b53502e917"
 dependencies = [
  "proc-macro2",
  "quote",
