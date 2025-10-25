@@ -1,12 +1,12 @@
 use crate::components::*;
 use crate::routes::*;
+use docs_macro::*;
 use leptos::prelude::*;
 use leptos_meta::{MetaTags, Stylesheet, Title, provide_meta_context};
 use leptos_router::{
     StaticSegment,
     components::{Outlet, ParentRoute, Route, Router, Routes},
 };
-use macros_internal::*;
 use singlestage::*;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {

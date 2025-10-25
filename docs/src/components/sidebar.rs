@@ -1,7 +1,7 @@
 use super::theme_switcher::*;
+use docs_macro::*;
 use leptos::prelude::*;
 use leptos_router::{components::A, nested_router::Outlet};
-use macros_internal::*;
 use singlestage::*;
 
 #[component]

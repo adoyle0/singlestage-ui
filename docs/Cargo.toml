@@ -24,7 +24,7 @@ leptos_axum = { workspace = true, optional = true }
 leptos_meta = { workspace = true }
 leptos_router = { workspace = true, features = ["nightly"] }
 singlestage = { path = "../singlestage", features = ["nightly"] }
-macros_internal = { path = "../macros_internal" }
+docs_macro = { path = "../docs_macro" }
 tokio = { workspace = true, features = ["rt-multi-thread"], optional = true }
 tower = { workspace = true, optional = true }
 tower-http = { workspace = true, optional = true }
