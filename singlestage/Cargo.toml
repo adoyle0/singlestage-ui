@@ -37,6 +37,7 @@ default = [
   "breadcrumb",
   "button",
   "card",
+  "carousel",
   "checkbox",
   "dialog",
   "dropdown",
@@ -69,6 +70,7 @@ badge = []
 breadcrumb = ["dropdown"]
 button = []
 card = []
+carousel = []
 checkbox = ["label"]
 dialog = []
 dropdown = ["button"]
