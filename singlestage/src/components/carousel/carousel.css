@@ -1,5 +1,8 @@
 @layer components {
   .singlestage-carousel {
+    @apply relative;
+
+    /* Content */
     > ul {
       ::-webkit-scrollbar {
         display: none;
@@ -15,9 +18,15 @@
       snap-mandatory
       snap-x;
 
+      /* Item */
       > li {
-        @apply content-center
+        @apply basis-full
+        content-center
         flex-[0_0_100%]
+        grow-0
+        min-w-0
+        pl-4
+        shrink-0
         snap-center;
 
         > * {

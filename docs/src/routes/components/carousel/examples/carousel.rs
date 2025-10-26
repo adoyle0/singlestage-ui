@@ -3,30 +3,30 @@ use singlestage::{card::*, carousel::*};
 
 #[component]
 pub fn CarouselExample() -> impl IntoView {
+    let carousel_items = RwSignal::new((1..6).collect::<Vec<usize>>());
+
     view! {
-        <Carousel>
-            <CarouselContent class="text-4xl font-bold">
-                <CarouselItem>
-                    <Card class="flex size-32">
-                        <CardContent class="h-full flex items-center justify-center">
-                            <p>"1"</p>
-                        </CardContent>
-                    </Card>
-                </CarouselItem>
-                <CarouselItem>
-                    <Card class="flex size-32">
-                        <CardContent class="h-full flex items-center justify-center">
-                            <p>"2"</p>
-                        </CardContent>
-                    </Card>
-                </CarouselItem>
-                <CarouselItem>
-                    <Card class="flex size-32">
-                        <CardContent class="h-full flex items-center justify-center">
-                            <p>"3"</p>
-                        </CardContent>
-                    </Card>
-                </CarouselItem>
+        <Carousel class="w-full max-w-xs">
+            <CarouselContent>
+                <For
+                    each=move || carousel_items.get()
+                    key=|item| item.clone()
+                    children=move |item| {
+                        view! {
+                            <CarouselItem>
+                                <div class="p-1">
+                                    <Card>
+                                        <CardContent class="flex aspect-square items-center justify-center p-6">
+                                            <span class="text-4xl font-semibold">
+                                                {item.to_string()}
+                                            </span>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        }
+                    }
+                />
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
