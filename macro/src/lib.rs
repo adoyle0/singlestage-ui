@@ -11,3 +11,8 @@ mod svg;
 pub fn svg(input: TokenStream) -> TokenStream {
     svg::svg(input)
 }
+
+#[proc_macro]
+pub fn icon(input: TokenStream) -> TokenStream {
+    svg::svg(input)
+}

@@ -3,7 +3,6 @@ use docs_macro::*;
 use leptos::prelude::*;
 use leptos_router::{components::A, nested_router::Outlet};
 use singlestage::*;
-
 #[component]
 pub fn SidebarButton() -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();
@@ -171,7 +170,8 @@ pub fn SidebarContainer() -> impl IntoView {
                                 <SidebarMenuItem>
                                     <SidebarMenuButton>
                                         <A href="https://docs.rs/singlestage/latest/singlestage/index.html">
-                                            {icon!(icondata::SiDocsdotrs)} <span>"Docs.rs"</span>
+                                            {icon!(icondata::SiDocsdotrs, stroke_width=0)}
+                                            <span>"Docs.rs"</span>
                                         </A>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>

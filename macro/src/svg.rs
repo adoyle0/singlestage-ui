@@ -1,10 +1,10 @@
 use proc_macro::TokenStream;
 use quote::{ToTokens, quote};
 use syn::parse::{Parse, ParseStream};
-use syn::{Expr, Ident, Result, Token, parse_macro_input};
+use syn::{Expr, Ident, Path, Result, Token, parse_macro_input};
 
 pub struct MacroArgs {
-    icon: Option<Expr>,
+    icon: Option<Path>,
     style: Option<Expr>,
     width: Option<Expr>,
     height: Option<Expr>,
@@ -14,8 +14,8 @@ pub struct MacroArgs {
     stroke_width: Option<Expr>,
     stroke: Option<Expr>,
     fill: Option<Expr>,
+    class: Option<Expr>,
 }
-
 impl Parse for MacroArgs {
     fn parse(input: ParseStream) -> Result<Self> {
         let mut args = MacroArgs {
@@ -29,7 +29,20 @@ impl Parse for MacroArgs {
             stroke_width: None,
             stroke: None,
             fill: None,
+            class: None,
         };
+
+        if !input.is_empty() {
+            let value: Path = input.parse::<Path>()?;
+            args.icon = Some(value);
+
+            // Consume trailing comma if present
+            if !input.is_empty() {
+                let _comma: Token![,] = input.parse()?;
+            }
+        } else {
+            return Err(input.error("The argument of type icondata::IconData) is required"));
+        }
 
         while !input.is_empty() {
             let key: Ident = input.parse()?;
@@ -39,7 +52,6 @@ impl Parse for MacroArgs {
             let key_str = key.to_string();
 
             match key_str.as_str() {
-                "icon" => args.icon = Some(value),
                 "style" => args.style = Some(value),
                 "width" => args.width = Some(value),
                 "height" => args.height = Some(value),
@@ -49,9 +61,8 @@ impl Parse for MacroArgs {
                 "stroke_width" => args.stroke_width = Some(value),
                 "stroke" => args.stroke = Some(value),
                 "fill" => args.fill = Some(value),
-                _ => {
-                    return Err(input.error(format!("unrecognized argument name: {}", key_str)));
-                }
+                "class" => args.class = Some(value),
+                _ => return Err(input.error(format!("unrecognized argument name: {}", key_str))),
             }
 
             // Consume trailing comma if present
@@ -70,18 +81,8 @@ impl Parse for MacroArgs {
 pub fn svg(input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(input as MacroArgs);
 
-    // Ensure the required 'icon' argument is present
-    let icon_expr = match args.icon {
-        Some(i) => i,
-        None => {
-            return syn::Error::new_spanned(
-                quote! {},
-                "The 'icon' argument (of type icondata::IconData) is required",
-            )
-            .to_compile_error()
-            .into();
-        }
-    };
+    // If we arrive here, then args.icon is guaranteed to be valid
+    let icon_expr = args.icon.expect("Failure reading icon");
 
     // Assign provided expressions or default literal values for optional arguments
     let style = match args.style {
@@ -129,6 +130,11 @@ pub fn svg(input: TokenStream) -> TokenStream {
         None => quote! {#icon_expr.fill.unwrap_or("currentColor")},
     };
 
+    let class = match args.class {
+        Some(c) => c.to_token_stream(),
+        None => quote! {"".to_string()},
+    };
+
     let expanded = quote! {
         view! {
             <svg
@@ -142,6 +148,7 @@ pub fn svg(input: TokenStream) -> TokenStream {
                 stroke-width=#stroke_width
                 stroke=#stroke
                 fill=#fill
+                class=#class
                 inner_html=#icon_expr.data
             ></svg>
         }
