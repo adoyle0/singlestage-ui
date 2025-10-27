@@ -55,6 +55,14 @@ static DARK_COMMON: &str = r#"
 // TODO: This code is dead and here for future reference
 static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
+  .singlestage-carousel-previous,
+  .singlestage-carousel-next {
+    @apply aria-invalid:ring-destructive/40
+    bg-input/30
+    border-input
+    hover:bg-input/50;
+  }
+
   .singlestage-btn-primary {
     .singlestage-input {
       @apply border-primary-foreground/30!;
@@ -171,6 +179,28 @@ static _DARK_OVERRIDES_TW: &str = r#"
 }"#;
 
 static DARK_OVERRIDES: &str = r#"@layer components {
+  .singlestage-carousel-previous, .singlestage-carousel-next {
+    border-color: var(--input);
+    background-color: var(--input);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--input) 30%, transparent);
+    }
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--input);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--input) 50%, transparent);
+        }
+      }
+    }
+    &[aria-invalid="true"] {
+      --tw-ring-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      }
+    }
+  }
+
   .singlestage-btn-primary {
     .singlestage-input[type="checkbox"],
     .singlestage-input[type="radio"] {
