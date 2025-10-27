@@ -16,7 +16,8 @@ pub fn CarouselExample() -> impl IntoView {
                             <CarouselItem>
                                 <div class="p-1">
                                     <Card>
-                                        <CardContent class="flex aspect-square items-center justify-center p-6">
+                                        <CardContent class="flex aspect-square items-center
+                                        justify-center p-6">
                                             <span class="text-4xl font-semibold">
                                                 {item.to_string()}
                                             </span>

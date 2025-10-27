@@ -33,7 +33,7 @@ pub fn CarouselPrevious() -> impl IntoView {
     };
 
     view! {
-        <Button class="singlestage-carousel-button" on:click=on_click size="icon" variant="outline">
+        <button class="singlestage-carousel-previous" on:click=on_click>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -48,7 +48,7 @@ pub fn CarouselPrevious() -> impl IntoView {
                 <path d="m12 19-7-7 7-7" />
                 <path d="M19 12H5" />
             </svg>
-        </Button>
+        </button>
     }
 }
 
@@ -69,7 +69,7 @@ pub fn CarouselNext() -> impl IntoView {
     };
 
     view! {
-        <Button class="singlestage-carousel-button" on:click=on_click size="icon" variant="outline">
+        <button class="singlestage-carousel-next" on:click=on_click>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -84,6 +84,6 @@ pub fn CarouselNext() -> impl IntoView {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
             </svg>
-        </Button>
+        </button>
     }
 }

@@ -22,18 +22,103 @@
       > li {
         @apply basis-full
         content-center
-        flex-[0_0_100%]
+        /* flex-[0_0_100%] */
         grow-0
         min-w-0
-        pl-4
+        /* pl-4 */
         shrink-0
         snap-center;
 
-        > * {
-          @apply m-auto
-          w-fit;
-        }
+        /* > * { */
+        /*   @apply m-auto */
+        /*   w-fit; */
+        /* } */
       }
+    }
+  }
+
+  .singlestage-carousel-previous {
+    @apply -left-12
+    -translate-y-1/2
+    /* [&amp;_svg:not([class*='size-'])]:size-4 */
+    /* [&amp;_svg]:pointer-events-none */
+    /* [&amp;_svg]:shrink-0 */
+    absolute
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    bg-background
+    border
+    dark:aria-invalid:ring-destructive/40
+    dark:bg-input/30
+    dark:border-input
+    dark:hover:bg-input/50
+    disabled:opacity-50
+    disabled:pointer-events-none
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    font-medium
+    gap-2
+    hover:bg-accent
+    hover:text-accent-foreground
+    inline-flex
+    items-center
+    justify-center
+    outline-none
+    rounded-full
+    shadow-xs
+    shrink-0
+    size-8
+    text-sm
+    top-1/2
+    transition-all
+    whitespace-nowrap;
+
+    > svg {
+      @apply pointer-events-none
+      shrink-0
+      size-4;
+    }
+  }
+
+  .singlestage-carousel-next {
+    @apply -right-12
+    -translate-y-1/2
+    absolute
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    bg-background
+    border
+    dark:aria-invalid:ring-destructive/40
+    dark:bg-input/30
+    dark:border-input
+    dark:hover:bg-input/50
+    disabled:opacity-50
+    disabled:pointer-events-none
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    font-medium
+    gap-2
+    hover:bg-accent
+    hover:text-accent-foreground
+    inline-flex
+    items-center
+    justify-center
+    outline-none
+    rounded-full
+    shadow-xs
+    shrink-0
+    size-8
+    text-sm
+    top-1/2
+    transition-all
+    whitespace-nowrap;
+
+    > svg {
+      @apply pointer-events-none
+      shrink-0
+      size-4;
     }
   }
 }
