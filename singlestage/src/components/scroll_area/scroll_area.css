@@ -4,40 +4,26 @@
     focus-visible:ring-[3px]
     focus-visible:ring-ring/50
     outline-none
-    overflow-scroll
+    overflow-hidden
     relative
     rounded-[inherit]
     size-full
     transition-[color,box-shadow];
   }
 
-  .singlestage-scroll-area-scrollbar {
-    @apply flex
-    select-none
-    touch-none
-    transition-colors;
-  }
-
-  .singlestage-scroll-area-scrollbar-horizontal {
+  .singlestage-scroll-area-horizontal {
     @apply border-l
-    border-l-transparent
     h-full
+    overflow-x-scroll
     p-[1px]
     w-2.5;
   }
 
-  .singlestage-scroll-area-scrollbar-vertical {
+  .singlestage-scroll-area-vertical {
     @apply border-t
-    border-t-transparent
     flex-col
     h-2.5
+    overflow-y-scroll
     p-[1px];
-  }
-
-  .singlestage-scroll-area-thumb {
-    @apply bg-border
-    flex-1
-    relative
-    rounded-full;
   }
 }

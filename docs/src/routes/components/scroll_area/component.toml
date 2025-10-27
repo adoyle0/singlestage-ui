@@ -4,10 +4,17 @@ description = "Augments native scroll functionality for custom, cross-browser st
 [[examples]]
 name = "scroll area"
 
+[[examples]]
+name = "scroll horizontal"
+title = "Horizontal Scrolling"
+
 [[references]]
 name = "ScrollArea"
 description = "Contains the contents of a scroll area."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """"vertical"""", description = """Sets \
+    the scrolling direction. Can be "horizontal" or "vertical".""" },
+]
