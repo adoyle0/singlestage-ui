@@ -3,7 +3,7 @@ use quote::{ToTokens, quote};
 use syn::parse::{Parse, ParseStream};
 use syn::{Expr, Ident, Path, Result, Token, parse_macro_input};
 
-pub struct MacroArgs {
+struct MacroArgs {
     icon: Option<Path>,
     style: Option<Expr>,
     width: Option<Expr>,
@@ -16,6 +16,7 @@ pub struct MacroArgs {
     fill: Option<Expr>,
     class: Option<Expr>,
 }
+
 impl Parse for MacroArgs {
     fn parse(input: ParseStream) -> Result<Self> {
         let mut args = MacroArgs {
