@@ -1,0 +1,29 @@
+@layer components {
+  .singlestage-scroll-area {
+    @apply focus-visible:outline-1
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    outline-none
+    overflow-hidden
+    relative
+    rounded-[inherit]
+    size-full
+    transition-[color,box-shadow];
+  }
+
+  .singlestage-scroll-area-horizontal {
+    @apply border-l
+    h-full
+    overflow-x-scroll
+    p-[1px]
+    w-2.5;
+  }
+
+  .singlestage-scroll-area-vertical {
+    @apply border-t
+    flex-col
+    h-2.5
+    overflow-y-scroll
+    p-[1px];
+  }
+}

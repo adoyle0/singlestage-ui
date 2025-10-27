@@ -133,6 +133,7 @@ fn main() {
         "pagination",
         "popover",
         "radio",
+        "scroll_area",
         "select",
         "separator",
         "sidebar",
