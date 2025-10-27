@@ -38,6 +38,11 @@ pub mod card;
 #[cfg(feature = "card")]
 pub use card::*;
 
+#[cfg(feature = "carousel")]
+pub mod carousel;
+#[cfg(feature = "carousel")]
+pub use carousel::*;
+
 #[cfg(feature = "checkbox")]
 pub mod checkbox;
 #[cfg(feature = "checkbox")]

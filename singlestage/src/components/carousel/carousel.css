@@ -1,0 +1,77 @@
+@layer components {
+  .singlestage-carousel {
+    @apply relative;
+
+    /* Content */
+    > ul {
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      @apply flex
+      gap-4
+      motion-safe:scroll-smooth
+      overflow-x-scroll
+      snap-mandatory
+      snap-x;
+
+      /* Item */
+      > li {
+        @apply basis-full
+        content-center
+        grow-0
+        min-w-0
+        shrink-0
+        snap-center;
+      }
+    }
+  }
+
+  .singlestage-carousel-previous,
+  .singlestage-carousel-next {
+    @apply -translate-y-1/2
+    absolute
+    aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    bg-background
+    border
+    disabled:opacity-50
+    disabled:pointer-events-none
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    font-medium
+    gap-2
+    hover:bg-accent
+    hover:text-accent-foreground
+    inline-flex
+    items-center
+    justify-center
+    outline-none
+    rounded-full
+    shadow-xs
+    shrink-0
+    size-8
+    text-sm
+    top-1/2
+    transition-all
+    whitespace-nowrap;
+
+    > svg {
+      @apply pointer-events-none
+      shrink-0
+      size-4;
+    }
+  }
+
+  .singlestage-carousel-previous {
+    @apply -left-12;
+  }
+
+  .singlestage-carousel-next {
+    @apply -right-12;
+  }
+}
