@@ -467,9 +467,9 @@ checksum = "2a2330da5de22e8a3cb63252ce2abb30116bf5265e89c0e01bc17015ce30a476"
 
 [[package]]
 name = "deranged"
-version = "0.5.4"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a41953f86f8a05768a6cda24def994fd2f424b04ec5c719cf89989779f199071"
+checksum = "ececcb659e7ba858fb4f10388c250a7252eb0a27373f1a72b8748afdd248e587"
 dependencies = [
  "powerfmt",
 ]
@@ -2628,7 +2628,7 @@ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
 
 [[package]]
 name = "singlestage"
-version = "0.3.6"
+version = "0.3.7"
 dependencies = [
  "leptos",
  "leptos_meta",
@@ -2640,7 +2640,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_docs"
-version = "0.3.6"
+version = "0.3.7"
 dependencies = [
  "axum",
  "console_error_panic_hook",
@@ -2660,7 +2660,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.3.6"
+version = "0.3.7"
 dependencies = [
  "serde",
  "syntect",
