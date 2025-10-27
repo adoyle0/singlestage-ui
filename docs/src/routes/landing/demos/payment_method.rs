@@ -10,23 +10,23 @@ pub fn PaymentMethod() -> impl IntoView {
                 <p>Add a new payment method to your account.</p>
             </CardHeader>
             <CardContent>
-                <form class="form grid gap-6">
+                <form class="grid gap-6 form">
                     <RadioGroup name="payment-method-type" class="grid-cols-3 gap-4">
-                        <Label class="text-sm font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-(--muted) p-4 hover:bg-(--muted) has-checked:border-(--primary) [&amp;&gt;svg]:mb-3 [&amp;&gt;svg]:size-6">
+                        <Label class="flex flex-col justify-between items-center p-4 text-sm font-medium leading-none rounded-md border-2 border-(--muted) has-checked:border-(--primary) hover:bg-(--muted)">
                             <Radio value="card" class="hidden" />
-                            {icon!(icondata::FiCreditCard)}
+                            {icon!(icondata::FiCreditCard, class="mb-3 size-6")}
                             "Card"
                         </Label>
 
-                        <Label class="text-sm font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-(--muted) p-4 hover:bg-(--muted) has-checked:border-(--primary) [&amp;&gt;svg]:mb-3 [&amp;&gt;svg]:size-6">
+                        <Label class="flex flex-col justify-between items-center p-4 text-sm font-medium leading-none rounded-md border-2 border-(--muted) has-checked:border-(--primary) hover:bg-(--muted)">
                             <Radio value="paypal" class="hidden" />
-                            {icon!(icondata::FaPaypalBrands)}
+                            {icon!(icondata::FaPaypalBrands, class="mb-3 size-6")}
                             "Paypal"
                         </Label>
 
-                        <Label class="text-nowrap text-sm font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-(--muted) p-4 hover:bg-(--muted) has-checked:border-(--primary) [&amp;&gt;svg]:mb-3 [&amp;&gt;svg]:size-6">
+                        <Label class="flex flex-col justify-between items-center p-4 text-sm font-medium leading-none rounded-md border-2 text-nowrap border-(--muted) has-checked:border-(--primary) hover:bg-(--muted)">
                             <Radio value="apple" class="hidden" />
-                            {icon!(icondata::FaAppleBrands)}
+                            {icon!(icondata::FaAppleBrands, class="mb-3 size-6")}
                             "Apple Pay"
                         </Label>
                     </RadioGroup>
@@ -43,7 +43,7 @@ pub fn PaymentMethod() -> impl IntoView {
                         <Input id="payment-method-card-number" placeholder="1234 5678 9012 3456" />
                     </div>
                     <div class="flex gap-4">
-                        <div class="grid gap-2 flex-1">
+                        <div class="grid flex-1 gap-2">
                             <Label label_for="payment-method-expiration-month">"Expires"</Label>
                             <Select id="payment-method-expiration-month" class="w-full">
                                 <SelectItem value="01">"January"</SelectItem>
@@ -60,7 +60,7 @@ pub fn PaymentMethod() -> impl IntoView {
                                 <SelectItem value="12">"December"</SelectItem>
                             </Select>
                         </div>
-                        <div class="grid gap-2 flex-1">
+                        <div class="grid flex-1 gap-2">
                             <Label label_for="payment-method-expiration-year">"Year"</Label>
                             <Select id="payment-method-expiration-year" class="w-full">
                                 <SelectItem value="2024">"2024"</SelectItem>
@@ -76,7 +76,7 @@ pub fn PaymentMethod() -> impl IntoView {
                                 <SelectItem value="2034">"2034"</SelectItem>
                             </Select>
                         </div>
-                        <div class="grid gap-2 flex-1">
+                        <div class="grid flex-1 gap-2">
                             <Label label_for="payment-method-cvv">"CVV"</Label>
                             <Input
                                 id="payment-method-cvv"

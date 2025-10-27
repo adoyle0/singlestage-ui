@@ -61,7 +61,6 @@ pub fn IconMacroRoute() -> impl IntoView {
             "The icon macro will accept, in no particular order, any or none of the following arguments:"
         </p>
         <Table class="mt-4">
-            <TableCaption>"Custom Attributes"</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>"Name"</TableHead>
