@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["singlestage", "docs", "macro", "docs_macro"]
+members = ["singlestage", "docs", "singlestage_macro", "docs_macro"]
 
 [workspace.package]
 version = "0.3.6"
