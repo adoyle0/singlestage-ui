@@ -14,16 +14,14 @@ pub fn CarouselExample() -> impl IntoView {
                     children=move |item| {
                         view! {
                             <CarouselItem>
-                                <div class="p-1">
-                                    <Card>
-                                        <CardContent class="flex aspect-square items-center
-                                        justify-center p-6">
-                                            <span class="text-4xl font-semibold">
-                                                {item.to_string()}
-                                            </span>
-                                        </CardContent>
-                                    </Card>
-                                </div>
+                                <Card>
+                                    <CardContent class="flex aspect-square items-center
+                                    justify-center p-6">
+                                        <span class="text-4xl font-semibold">
+                                            {item.to_string()}
+                                        </span>
+                                    </CardContent>
+                                </Card>
                             </CarouselItem>
                         }
                     }

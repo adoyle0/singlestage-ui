@@ -35,13 +35,23 @@ name = "CarouselNext"
 description = "A button that triggers the change to the next available carousel item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "button_type", attr_type = "String", default = """"button"""", description = """Renamed <button> \
+    `type` attribute to avoid name collisions.""" },
+]
 
 [[references]]
 name = "CarouselPrevious"
 description = "A button that triggers the change to the previous available carousel item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "button_type", attr_type = "String", default = """"button"""", description = """Renamed <button> \
+    `type` attribute to avoid name collisions.""" },
+]

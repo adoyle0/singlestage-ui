@@ -22,17 +22,10 @@
       > li {
         @apply basis-full
         content-center
-        /* flex-[0_0_100%] */
         grow-0
         min-w-0
-        /* pl-4 */
         shrink-0
         snap-center;
-
-        /* > * { */
-        /*   @apply m-auto */
-        /*   w-fit; */
-        /* } */
       }
     }
   }
@@ -40,9 +33,6 @@
   .singlestage-carousel-previous {
     @apply -left-12
     -translate-y-1/2
-    /* [&amp;_svg:not([class*='size-'])]:size-4 */
-    /* [&amp;_svg]:pointer-events-none */
-    /* [&amp;_svg]:shrink-0 */
     absolute
     aria-invalid:border-destructive
     aria-invalid:ring-destructive/20
