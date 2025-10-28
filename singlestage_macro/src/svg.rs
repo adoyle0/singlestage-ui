@@ -93,12 +93,12 @@ pub fn svg(input: TokenStream) -> TokenStream {
 
     let width = match args.width {
         Some(w) => w.to_token_stream(),
-        None => quote! {#icon_expr.width.unwrap_or("auto")},
+        None => quote! {#icon_expr.width.unwrap_or("100%")},
     };
 
     let height = match args.height {
         Some(h) => h.to_token_stream(),
-        None => quote! {#icon_expr.height.unwrap_or("auto")},
+        None => quote! {#icon_expr.height.unwrap_or("100%")},
     };
 
     let view_box = match args.view_box {
