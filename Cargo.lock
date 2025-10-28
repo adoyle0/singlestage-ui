@@ -1397,9 +1397,9 @@ dependencies = [
 
 [[package]]
 name = "leptos"
-version = "0.8.11"
+version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d916b7c270615f493e43a43c389725094b8e08eb635fe2469c5c767750c62a0"
+checksum = "b78b04cc52d6f6372e546afcd8ed98ee29ea1a9221b19befb8f9961e47b8307c"
 dependencies = [
  "any_spawner",
  "base64",
@@ -1524,9 +1524,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_macro"
-version = "0.8.10"
+version = "0.8.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18e29d53c342a1ebb63c4578b4d398057a25967166e7eaa3759f25bb74263472"
+checksum = "2009e2cc8ac3aa3e417c51d2a2b951c34dfea51f25935717b564c347fb20cb3f"
 dependencies = [
  "attribute-derive",
  "cfg-if",
@@ -1587,9 +1587,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_router_macro"
-version = "0.8.5"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "571042420d79f4f5b6b0d149dc1561b03f47e08c37c8fa0dfc80c73ad67be8af"
+checksum = "409c0bd99f986c3cfa1a4db2443c835bc602ded1a12784e22ecb28c3ed5a2ae2"
 dependencies = [
  "proc-macro-error2",
  "proc-macro2",
@@ -2345,9 +2345,9 @@ dependencies = [
 
 [[package]]
 name = "rustls-pki-types"
-version = "1.12.0"
+version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "229a4a4c221013e7e1f1a043678c5cc39fe5171437c88fb47151a21e6f5b5c79"
+checksum = "94182ad936a0c91c324cd46c6511b9510ed16af436d7b5bab34beab0afd55f7a"
 dependencies = [
  "zeroize",
 ]
@@ -2644,7 +2644,7 @@ dependencies = [
  "reqwest",
  "serde",
  "sha256",
- "singlestage_macro",
+ "singlestage_macro 0.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "uuid",
 ]
 
@@ -2670,7 +2670,20 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.3.7"
+version = "0.0.0"
+dependencies = [
+ "quote",
+ "serde",
+ "syn",
+ "syntect",
+ "toml",
+]
+
+[[package]]
+name = "singlestage_macro"
+version = "0.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e8a71d6d650b48227580ab84c887ad2c52b990e2422eddea28dfed2b31829a23"
 dependencies = [
  "quote",
  "serde",
@@ -3390,27 +3403,24 @@ dependencies = [
 
 [[package]]
 name = "wasm_split_helpers"
-version = "0.1.2"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c50e0e45d0d871605a21fc4ee93a5380b7bdc41b5eda22e42f0777a4ce79b65c"
+checksum = "a114b3073258dd5de3d812cdd048cca6842342755e828a14dbf15f843f2d1b84"
 dependencies = [
  "async-once-cell",
- "or_poisoned",
  "wasm_split_macros",
 ]
 
 [[package]]
 name = "wasm_split_macros"
-version = "0.1.3"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aecbaea69b61abedb9b8199720e65a529a2dd2294d27113bfa1b7c1db598f672"
+checksum = "56481f8ed1a9f9ae97ea7b08a5e2b12e8adf9a7818a6ba952b918e09c7be8bf0"
 dependencies = [
  "base16",
- "digest",
  "quote",
  "sha2",
  "syn",
- "wasm-bindgen",
 ]
 
 [[package]]
