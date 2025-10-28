@@ -1,5 +1,5 @@
 [package]
-name = "singlestage_macro"
+name = "docs_macro"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
