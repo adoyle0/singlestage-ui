@@ -1,0 +1,51 @@
+name = "Button Group"
+description = "A container that groups related buttons together with consistent styling."
+
+[[examples]]
+name = "button group"
+
+[[examples]]
+name = "button group orientation"
+title = "Orientation"
+description = "Set the orientation prop to change the button group layout."
+
+[[examples]]
+name = "button group size"
+title = "Size"
+description = "Control the size of buttons using the size prop on individual buttons."
+
+[[examples]]
+name = "button group nested"
+title = "Nested"
+description = "Nest <ButtonGroup> components to create button groups with spacing."
+
+[[examples]]
+name = "button group separator"
+title = "Separator"
+description = """The ButtonGroupSeparator component visually divides buttons within a group. \
+\
+Buttons with variant outline do not need a separator since they have a border. For other variants, \
+a separator is recommended to improve the visual hierarchy."""
+
+[[examples]]
+name = "button group split"
+title = "Split"
+description = "Create a split button group by adding two buttons separated by a ButtonGroupSeparator."
+
+[[examples]]
+name = "button group input"
+title = "Input"
+description = "Wrap an Input component with buttons."
+
+[[examples]]
+name = "button group dropdown"
+title = "Dropdown Menu"
+description = "Create a split button group with a DropdownMenu component."
+
+[[references]]
+name = "ButtonGroup"
+description = "Contains the Buttons that make up the ButtonGroup."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

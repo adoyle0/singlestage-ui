@@ -13,7 +13,8 @@ keywords.workspace = true
 categories.workspace = true
 
 [dependencies]
-singlestage_macro = "0.0"
+# singlestage_macro = "0.0"
+singlestage_macro = { path = "../singlestage_macro" }
 
 leptos = { workspace = true }
 leptos_meta = { workspace = true }
@@ -38,6 +39,7 @@ default = [
   "badge",
   "breadcrumb",
   "button",
+  "button_group",
   "card",
   "carousel",
   "checkbox",
@@ -72,6 +74,7 @@ avatar = []
 badge = []
 breadcrumb = ["dropdown"]
 button = []
+button_group = ["separator"]
 card = []
 carousel = []
 checkbox = ["label"]

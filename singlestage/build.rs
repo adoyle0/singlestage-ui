@@ -121,6 +121,7 @@ fn main() {
         "badge",
         "breadcrumb",
         "button",
+        "button_group",
         "card",
         "carousel",
         "checkbox",

@@ -2644,7 +2644,7 @@ dependencies = [
  "reqwest",
  "serde",
  "sha256",
- "singlestage_macro 0.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "singlestage_macro",
  "uuid",
 ]
 
@@ -2671,19 +2671,6 @@ dependencies = [
 [[package]]
 name = "singlestage_macro"
 version = "0.0.0"
-dependencies = [
- "quote",
- "serde",
- "syn",
- "syntect",
- "toml",
-]
-
-[[package]]
-name = "singlestage_macro"
-version = "0.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e8a71d6d650b48227580ab84c887ad2c52b990e2422eddea28dfed2b31829a23"
 dependencies = [
  "quote",
  "serde",
