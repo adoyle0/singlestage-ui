@@ -1,16 +1,10 @@
 use proc_macro::TokenStream;
 
-mod svg;
+mod icon;
 
-/// The main svg procedural macro function.
-/// It accepts optional named arguments
-/// and generates an SVG string.
-#[proc_macro]
-pub fn svg(input: TokenStream) -> TokenStream {
-    svg::svg(input)
-}
-
+/// The icon macro for working with icondata icons.
+/// It accepts optional named arguments and generates a view containing a SVG element.
 #[proc_macro]
 pub fn icon(input: TokenStream) -> TokenStream {
-    svg::svg(input)
+    icon::icon(input)
 }

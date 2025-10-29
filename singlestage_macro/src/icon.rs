@@ -76,10 +76,9 @@ impl Parse for MacroArgs {
     }
 }
 
-/// The main svg procedural macro function.
-/// It accepts optional named arguments
-/// and generates an SVG string.
-pub fn svg(input: TokenStream) -> TokenStream {
+/// The icon macro for working with icondata icons.
+/// It accepts optional named arguments and generates a view containing a SVG element.
+pub fn icon(input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(input as MacroArgs);
 
     // If we arrive here, then args.icon is guaranteed to be valid

@@ -1,10 +1,10 @@
 [package]
 name = "singlestage_macro"
-version = "0.0.0"
+version = "0.1.0"
 authors.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-description.workspace = true
+description = "Contains macros for the singlestage crate"
 homepage.workspace = true
 repository.workspace = true
 license.workspace = true
