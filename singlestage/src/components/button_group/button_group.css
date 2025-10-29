@@ -1,0 +1,123 @@
+@layer components {
+  .singlestage-button-group {
+    @apply [&>input]:flex-1
+    flex
+    has-[>.singlestage-button-group]:gap-2
+    items-stretch
+    w-fit;
+
+    & > * {
+      @apply focus-visible:relative
+    focus-visible:z-10;
+    }
+  }
+
+  .singlestage-button-group-horizontal {
+    > *:not(:first-child) {
+      @apply !border-l-0
+        !rounded-l-none;
+    }
+
+    > .singlestage-dropdown-menu:not(:first-child) {
+      > button {
+        @apply !border-l-0
+        !rounded-l-none;
+      }
+    }
+
+    > .singlestage-popover:not(:first-child) {
+      > button {
+        @apply !border-l-0
+        !rounded-l-none;
+      }
+    }
+
+    > *:not(:last-child) {
+      @apply !rounded-r-none;
+    }
+
+    > .singlestage-dropdown-menu:not(:last-child) {
+      > button {
+        @apply rounded-r-none;
+      }
+    }
+
+    > .singlestage-popover:not(:last-child) {
+      > button {
+        @apply rounded-r-none;
+      }
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-full
+      w-px;
+    }
+  }
+
+  .singlestage-button-group-vertical {
+    @apply flex-col;
+
+    > *:not(:first-child) {
+      @apply !border-t-0
+        !rounded-t-none;
+    }
+
+    > .singlestage-dropdown-menu:not(:first-child) {
+      > button {
+        @apply !border-t-0
+        !rounded-t-none;
+      }
+    }
+
+    > .singlestage-popover:not(:first-child) {
+      > button {
+        @apply !border-t-0
+        !rounded-t-none;
+      }
+    }
+
+    > *:not(:last-child) {
+      @apply !rounded-b-none;
+    }
+
+    > .singlestage-dropdown-menu:not(:last-child) {
+      > button {
+        @apply !rounded-b-none;
+      }
+    }
+
+    > .singlestage-popover:not(:last-child) {
+      > button {
+        @apply !rounded-b-none;
+      }
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-px
+      w-full;
+    }
+  }
+
+  .singlestage-button-group-text {
+    @apply [&_svg:not([class*='size-'])]:size-4
+    [&_svg]:pointer-events-none
+    bg-muted
+    border
+    flex
+    font-medium
+    gap-2
+    items-center
+    px-4
+    rounded-md
+    shadow-xs
+    text-sm;
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input
+    m-0
+    relative
+    self-stretch
+    shrink-0;
+  }
+}

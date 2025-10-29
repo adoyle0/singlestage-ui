@@ -33,6 +33,11 @@ pub mod button;
 #[cfg(feature = "button")]
 pub use button::*;
 
+#[cfg(feature = "button_group")]
+pub mod button_group;
+#[cfg(feature = "button_group")]
+pub use button_group::*;
+
 #[cfg(feature = "card")]
 pub mod card;
 #[cfg(feature = "card")]
