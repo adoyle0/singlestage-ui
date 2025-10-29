@@ -42,9 +42,38 @@ name = "button group dropdown"
 title = "Dropdown Menu"
 description = "Create a split button group with a DropdownMenu component."
 
+[[examples]]
+name = "button group select"
+title = "Select"
+description = "Pair with a Select component."
+
+[[examples]]
+name = "button group popover"
+title = "Popover"
+description = "Use with a Popover component."
+
 [[references]]
 name = "ButtonGroup"
 description = "Contains the Buttons that make up the ButtonGroup."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Sets \
+    the display direction of the ButtonGroup.""" },
+]
+
+[[references]]
+name = "ButtonGroupSeparator"
+description = "Visually separates elements in the ButtonGroup."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ButtonGroupText"
+description = "Creates a styled text element for use in the ButtonGroup."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

@@ -6,6 +6,8 @@ pub fn ButtonGroupAnatomy() -> impl IntoView {
     view! {
         <ButtonGroup>
             <Button />
+            <ButtonGroupSeparator />
+            <ButtonGroupText />
         </ButtonGroup>
     }
 }

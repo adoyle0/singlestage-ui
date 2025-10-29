@@ -1,14 +1,15 @@
 @layer components {
   .singlestage-button-group {
-    @apply [&>*]:focus-visible:relative
-    [&>*]:focus-visible:z-10
-    [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit
-    [&>input]:flex-1
+    @apply [&>input]:flex-1
     flex
-    has-[>[data-slot=button-group]]:gap-2
-    has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md
+    has-[>.singlestage-button-group]:gap-2
     items-stretch
     w-fit;
+
+    & > * {
+      @apply focus-visible:relative
+    focus-visible:z-10;
+    }
   }
 
   .singlestage-button-group-horizontal {
@@ -24,6 +25,13 @@
       }
     }
 
+    > .singlestage-popover:not(:first-child) {
+      > button {
+        @apply !border-l-0
+        !rounded-l-none;
+      }
+    }
+
     > *:not(:last-child) {
       @apply !rounded-r-none;
     }
@@ -33,15 +41,35 @@
         @apply rounded-r-none;
       }
     }
+
+    > .singlestage-popover:not(:last-child) {
+      > button {
+        @apply rounded-r-none;
+      }
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-full
+      w-px;
+    }
   }
 
   .singlestage-button-group-vertical {
+    @apply flex-col;
+
     > *:not(:first-child) {
       @apply !border-t-0
         !rounded-t-none;
     }
 
     > .singlestage-dropdown-menu:not(:first-child) {
+      > button {
+        @apply !border-t-0
+        !rounded-t-none;
+      }
+    }
+
+    > .singlestage-popover:not(:first-child) {
       > button {
         @apply !border-t-0
         !rounded-t-none;
@@ -58,7 +86,16 @@
       }
     }
 
-    @apply flex-col;
+    > .singlestage-popover:not(:last-child) {
+      > button {
+        @apply !rounded-b-none;
+      }
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-px
+      w-full;
+    }
   }
 
   .singlestage-button-group-text {
@@ -77,10 +114,10 @@
   }
 
   .singlestage-button-group-separator {
-    @apply !m-0
-    bg-input
-    data-[orientation=vertical]:h-auto
+    @apply bg-input
+    m-0
     relative
-    self-stretch;
+    self-stretch
+    shrink-0;
   }
 }
