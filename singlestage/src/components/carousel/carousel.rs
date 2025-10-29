@@ -110,10 +110,8 @@ pub fn Carousel(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
     // /// Specify the orientation of the carousel.
-    // ///
-    // /// Accepted values: `vertical` | `horizontal`
     // #[prop(optional, into)]
-    // orientation: MaybeProp<String>,
+    // vertical: MaybeProp<String>,
 ) -> impl IntoView {
     let current_item = RwSignal::new(0);
     let num_items = RwSignal::new(0);

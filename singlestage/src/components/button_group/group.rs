@@ -107,10 +107,8 @@ pub fn ButtonGroup(
     translate: MaybeProp<String>,
 
     /// Sets the display direction of the ButtonGroup.
-    ///
-    /// Accepted values: horizontal | vertical. Default is horizontal.
     #[prop(optional, into)]
-    orientation: MaybeProp<String>,
+    vertical: MaybeProp<bool>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -155,9 +153,9 @@ pub fn ButtonGroup(
             class=move || {
                 format!(
                     "singlestage-button-group {} {}",
-                    match orientation.get().unwrap_or_default().as_str() {
-                        "vertical" => "singlestage-button-group-vertical",
-                        _ => "singlestage-button-group-horizontal",
+                    match vertical.get().unwrap_or_default() {
+                        true => "singlestage-button-group-vertical",
+                        false => "singlestage-button-group-horizontal",
                     },
                     class.get().unwrap_or_default(),
                 )
