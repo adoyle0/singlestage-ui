@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::button::*;
+use singlestage::*;
 
 #[component]
 pub fn ButtonGroupAnatomy() -> impl IntoView {
