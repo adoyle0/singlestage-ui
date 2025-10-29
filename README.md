@@ -1,7 +1,7 @@
 # Singlestage UI
 
 A familiar UI library for [Leptos](https://leptos.dev) made with [Tailwind
-CSS](https://tailwindcss.com), Based on [Basecoat](https://basecoatui.com),
+CSS](https://tailwindcss.com), and based on [Basecoat](https://basecoatui.com),
 [shadcn/ui](https://ui.shadcn.com), and [Radix](https://radix-ui.com).
 
 [https://singlestage.doordesk.net](https://singlestage.doordesk.net)
