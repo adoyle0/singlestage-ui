@@ -9,7 +9,7 @@ pub fn ScrollAreaExample() -> impl IntoView {
         <ScrollArea class="h-72 w-48 rounded-md border">
             <div class="p-4">
                 <h4 class="mb-4 text-sm leading-none font-medium">"Tags"</h4>
-                <For each=move || versions.get() key=|version| version.clone() let(version)>
+                <For each=move || versions.get() key=|version| *version let(version)>
                     <div class="text-sm">"v1.2.0-beta."{version.to_string()}</div>
                     <Separator class="my-2" />
                 </For>

@@ -8,7 +8,7 @@ pub fn CarouselExample() -> impl IntoView {
     view! {
         <Carousel class="w-full max-w-xs">
             <CarouselContent>
-                <For each=move || carousel_items.get() key=|item| item.clone() let(item)>
+                <For each=move || carousel_items.get() key=|item| *item let(item)>
                     <CarouselItem>
                         <Card>
                             <CardContent class="flex aspect-square items-center justify-center">
