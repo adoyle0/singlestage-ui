@@ -9,14 +9,18 @@ pub fn CustomIconExample() -> impl IntoView {
                 <AccordionTrigger>
                     "Custom icons" <AccordionIcon slot>{icon!(icondata::LuSmile)}</AccordionIcon>
                 </AccordionTrigger>
-                <AccordionContent>"You can use your own custom icons."</AccordionContent>
+                <AccordionContent>
+                    <p>"You can use your own custom icons."</p>
+                </AccordionContent>
             </AccordionItem>
             <AccordionItem name="icon_demo">
                 <AccordionTrigger>
                     "Turn that frown upside down"
                     <AccordionIcon slot>{icon!(icondata::LuFrown)}</AccordionIcon>
                 </AccordionTrigger>
-                <AccordionContent>"Custom icons make me happy."</AccordionContent>
+                <AccordionContent>
+                    <p>"Custom icons make me happy."</p>
+                </AccordionContent>
             </AccordionItem>
         </Accordion>
     }
