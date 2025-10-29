@@ -1,8 +1,9 @@
 use proc_macro::TokenStream;
 
-mod svg;
+mod icon;
 
-/// Generates an `<svg>` tag wrapped in a leptos `view!`
+/// The icon macro for working with icondata icons.
+/// It accepts optional named arguments and generates a Leptos `view!` containing a SVG element.
 ///
 /// # Arguments
 ///
@@ -35,5 +36,5 @@ mod svg;
 /// ```
 #[proc_macro]
 pub fn icon(input: TokenStream) -> TokenStream {
-    svg::svg(input)
+    icon::icon(input)
 }
