@@ -1,0 +1,128 @@
+name = "Item"
+description = "A versatile component used to display any content."
+
+[[examples]]
+name = "Item"
+
+[[examples]]
+name = "item variants"
+title = "Variants"
+
+[[examples]]
+name = "item icon"
+title = "Icon"
+
+[[examples]]
+name = "item avatar"
+title = "Avatar"
+
+[[examples]]
+name = "item image"
+title = "Image"
+
+[[examples]]
+name = "item group"
+title = "Group"
+
+[[examples]]
+name = "item header"
+title = "Header"
+
+[[examples]]
+name = "item link"
+title = "Link"
+
+[[examples]]
+name = "item dropdown"
+title = "Dropdown"
+
+[[references]]
+name = "Item"
+description = "Contains the contents of an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "size", attr_type = "String", default = """"default"""", description = """Set the \
+    display size of the Item.""" },
+  { attr = "variant", attr_type = "String", default = """"default"""", description = """Set the \
+    display variant of the Item.""" },
+]
+
+[[references]]
+name = "ItemActions"
+description = "Contains the actionable section of an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemContent"
+description = "Contains the content section of an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemDescription"
+description = "Contains description text for an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemFooter"
+description = "Contains footer content for an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemGroup"
+description = "Groups content together for display within an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemHeader"
+description = "Contains header content for an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ItemMedia"
+description = "Contains media content such as an icon or image for an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """"default"""", description = """Set the \
+    display variant of the ItemMedia.""" },
+]
+
+[[references]]
+name = "ItemSeparator"
+description = "Separates Item content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "vertical", attr_type = "bool", default = "false", description = """Toggle whether or \
+    not the separator should display vertically.""" },
+]
+
+[[references]]
+name = "ItemTitle"
+description = "Contains title text for an Item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

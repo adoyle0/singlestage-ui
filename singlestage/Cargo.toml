@@ -45,6 +45,7 @@ default = [
   "dialog",
   "dropdown",
   "input",
+  "item",
   "kbd",
   "label",
   "link",
@@ -80,6 +81,7 @@ checkbox = ["label"]
 dialog = []
 dropdown = ["button"]
 input = ["label"]
+item = []
 kbd = []
 label = []
 link = []
