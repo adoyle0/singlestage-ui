@@ -8,19 +8,23 @@ pub fn AccordionExample() -> impl IntoView {
             <AccordionItem name="demo" open=false>
                 <AccordionTrigger>"Is it accessible?"</AccordionTrigger>
                 <AccordionContent>
-                    "Yes. It adheres to the WAI-ARIA design pattern."
+                    <p>"Yes. It adheres to the WAI-ARIA design pattern."</p>
                 </AccordionContent>
             </AccordionItem>
             <AccordionItem name="demo" open=true>
                 <AccordionTrigger>"Is it styled?"</AccordionTrigger>
                 <AccordionContent>
-                    "Yes. It comes with default styles
-                    that match the other components' aesthetic."
+                    <p>
+                        "Yes. It comes with default styles
+                        that match the other components' aesthetic."
+                    </p>
                 </AccordionContent>
             </AccordionItem>
             <AccordionItem name="demo">
                 <AccordionTrigger>"Is it animated?"</AccordionTrigger>
-                <AccordionContent>"Yes. It's animated by default."</AccordionContent>
+                <AccordionContent>
+                    <p>"Yes. It's animated by default."</p>
+                </AccordionContent>
             </AccordionItem>
         </Accordion>
     }
