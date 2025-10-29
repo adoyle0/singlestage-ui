@@ -1,0 +1,162 @@
+@layer components {
+  a:has(> .singlestage-item) {
+    > .singlestage-item {
+      @apply hover:bg-accent/50
+      transition-colors;
+    }
+  }
+
+  .singlestage-item {
+    @apply border
+    border-transparent
+    duration-100
+    flex
+    flex-wrap
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    items-center
+    outline-none
+    rounded-md
+    text-sm
+    transition-colors;
+  }
+
+  .singlestage-item:has(.singlestage-item-description) {
+    .singlestage-item-media {
+      @apply self-start
+    translate-y-0.5;
+    }
+  }
+
+  .singlestage-item-default {
+    @apply bg-transparent;
+  }
+
+  .singlestage-item-outline {
+    @apply border-border;
+  }
+
+  .singlestage-item-muted {
+    @apply bg-muted/50;
+  }
+
+  .singlestage-item-size-default {
+    @apply gap-4
+    p-4;
+  }
+
+  .singlestage-item-size-small {
+    @apply gap-2.5
+    px-4
+    py-3;
+  }
+
+  .singlestage-item-group {
+    @apply flex
+    flex-col;
+  }
+
+  .singlestage-item-media {
+    @apply [&_svg]:pointer-events-none
+    flex
+    gap-2
+    items-center
+    justify-center
+    shrink-0;
+  }
+
+  .singlestage-item-media-default {
+    @apply bg-transparent;
+  }
+
+  .singlestage-item-media-icon {
+    @apply [&_svg:not([class*='size-'])]:size-4
+    bg-muted
+    border
+    rounded-sm
+    size-8;
+  }
+
+  .singlestage-item-media-image {
+    @apply [&_img]:object-cover
+    [&_img]:size-full
+    overflow-hidden
+    rounded-sm
+    size-10;
+  }
+
+  .singlestage-item-content {
+    @apply flex
+    flex-1
+    flex-col
+    gap-1;
+
+    & + .singlestage-item-content {
+      @apply flex-none;
+    }
+  }
+
+  .singlestage-item-title {
+    @apply flex
+    font-medium
+    gap-2
+    items-center
+    leading-snug
+    text-sm
+    w-fit;
+  }
+
+  .singlestage-item-description {
+    @apply font-normal
+    leading-normal
+    line-clamp-2
+    text-balance
+    text-muted-foreground
+    text-sm
+    w-fit;
+
+    & > a {
+      @apply hover:text-primary
+      underline
+      underline-offset-4;
+    }
+  }
+
+  .singlestage-item-actions {
+    @apply flex
+    gap-2
+    items-center
+    ml-auto;
+  }
+
+  .singlestage-item-header {
+    @apply basis-full
+    flex
+    gap-2
+    items-center
+    justify-between;
+  }
+
+  .singlestage-item-footer {
+    @apply basis-full
+    flex
+    gap-2
+    items-center
+    justify-between;
+  }
+
+  .singlestage-item-separator {
+    @apply bg-border
+    my-0
+    shrink-0;
+    &[data-orientation="horizontal"] {
+      @apply h-px
+      w-full;
+    }
+    &[data-orientation="vertical"] {
+      @apply h-full
+      w-px;
+    }
+  }
+}

@@ -128,6 +128,7 @@ fn main() {
         "dialog",
         "dropdown",
         "input",
+        "item",
         "kbd",
         "label",
         "link",
