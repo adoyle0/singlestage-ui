@@ -13,7 +13,7 @@ keywords.workspace = true
 categories.workspace = true
 
 [dependencies]
-singlestage_macro = "0.0"
+singlestage_macro = "0"
 
 leptos = { workspace = true }
 leptos_meta = { workspace = true }

@@ -2639,7 +2639,7 @@ dependencies = [
  "reqwest",
  "serde",
  "sha256",
- "singlestage_macro 0.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "singlestage_macro 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "uuid",
 ]
 
@@ -2665,7 +2665,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "quote",
  "serde",
@@ -2676,9 +2676,9 @@ dependencies = [
 
 [[package]]
 name = "singlestage_macro"
-version = "0.0.0"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e8a71d6d650b48227580ab84c887ad2c52b990e2422eddea28dfed2b31829a23"
+checksum = "40223326c4d7aed6c7d7543c9fcd84f35ade4c369c4e07f5e254bfcea85dc16e"
 dependencies = [
  "quote",
  "serde",
