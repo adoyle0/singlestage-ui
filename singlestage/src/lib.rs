@@ -1,5 +1,6 @@
 #![allow(clippy::module_inception)]
 use std::include_str;
+mod patch_class;
 mod components;
 pub mod reactive;
 pub use components::*;
