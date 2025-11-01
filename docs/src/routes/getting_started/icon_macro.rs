@@ -68,7 +68,7 @@ pub fn IconMacroRoute() -> impl IntoView {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {attr_row!("width", "Default : auto")} {attr_row!("height", "Default: auto")}
+                {attr_row!("width", "Default : 100%")} {attr_row!("height", "Default: 100%")}
                 {attr_row!("stroke_linecap", "Notice the underscore")}
                 {attr_row!("stroke_linejoin", "Notice the underscore")}
                 {attr_row!("stroke_width", "Notice the underscore")} {attr_row!("stroke", "")}
