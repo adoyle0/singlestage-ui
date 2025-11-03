@@ -1,5 +1,5 @@
  use leptos::{
-    prelude::{Get, RenderEffect, Signal},
+    prelude::{Get, Oco, RenderEffect, Signal, TextProp},
     tachys::{
         html::class::IntoClass,
         renderer::{
@@ -10,24 +10,20 @@
 };
 
 /// A CSS class whose value lives in a **signal** that produces a `String`.
-#[derive(Debug)]
-pub struct PatchClass<S>(pub S);
+#[derive(Debug, Default, Clone)]
+pub struct PatchClass(pub TextProp);
 
-impl<S> Clone for PatchClass<S>
-where
-    S: Clone,
+impl<S> From<S> for PatchClass
+where S: Into<TextProp>
 {
-    fn clone(&self) -> Self {
-        Self(self.0.clone())
+    fn from(value: S) -> Self {
+        Self(value.into())
     }
 }
-
-impl<S> IntoClass for PatchClass<S>
-where
-    S: Into<Signal<String>> + Send + Clone + 'static,
-{
+impl IntoClass for PatchClass 
+ {
     type AsyncOutput = Self;
-    type State = RenderEffect<(Element, String)>;
+    type State = RenderEffect<(Element, Oco<'static, str>)>;
     type Cloneable = Self;
     type CloneableOwned = Self;
 
@@ -38,14 +34,14 @@ where
     }
 
     fn to_html(self, class: &mut String) {
-        class.push_str(&self.0.into().get());
+        class.push_str(&self.0.get());
     }
 
     fn hydrate<const FROM_SERVER: bool>(self, el: &Element) -> Self::State {
         let class_list = Rndr::class_list(el);
-        let signal = self.0.into();
+        let signal = self.0;
         let el = el.clone();
-        RenderEffect::new(move |prev: Option<(Element, String)>| {
+        RenderEffect::new(move |prev: Option<(Element, Oco<'static, str>)>| {
             let value = signal.get();
             let tokens = split_tokens(&value);
 
@@ -66,9 +62,9 @@ where
 
     fn build(self, el: &Element) -> Self::State {
         let class_list = Rndr::class_list(el);
-        let signal = self.0.into();
+        let signal = self.0;
         let el = el.clone();
-        RenderEffect::new(move |prev: Option<(Element, String)>| {
+        RenderEffect::new(move |prev: Option<(Element, Oco<'static, str>)>| {
             let value = signal.get();
             let tokens = split_tokens(&value);
 
@@ -87,9 +83,9 @@ where
 
     fn rebuild(self, state: &mut Self::State) {
         let prev = state.take_value();
-        let signal = self.0.into();
+        let signal = self.0;
         *state = RenderEffect::new_with_value(
-            move |prev: Option<(Element, String)>| {
+            move |prev: Option<(Element, Oco<'static, str>)>| {
                 let value = signal.get();
                 let tokens = split_tokens(&value);
 
