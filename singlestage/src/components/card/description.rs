@@ -151,8 +151,14 @@ pub fn CardDescription(
     };
 
     view! {
-        <p {..global_attrs_1} {..global_attrs_2}>
+        <div
+            class=move || {
+                format!("singlestage-card-description {}", class.get().unwrap_or_default())
+            }
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
-        </p>
+        </div>
     }
 }
