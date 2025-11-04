@@ -65,10 +65,8 @@
       }
 
       section {
-        @apply pb-4;
-        > div {
-          @apply text-sm;
-        }
+        @apply pb-4
+        text-sm;
       }
     }
   }

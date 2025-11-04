@@ -151,10 +151,8 @@ pub fn AccordionContent(
     };
 
     view! {
-        <section>
-            <div {..global_attrs_1} {..global_attrs_2}>
-                {children()}
-            </div>
+        <section {..global_attrs_1} {..global_attrs_2}>
+            {children()}
         </section>
     }
 }
