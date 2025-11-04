@@ -24,14 +24,14 @@ pub fn LandingPage() -> impl IntoView {
             </a>
         </div>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <div class="flex flex-col gap-4">
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8 max-w-fit mr-auto">
+            <div class="flex flex-col gap-4 max-w-lg">
                 <TeamMembers />
                 <CookieSettings />
                 <PaymentMethod />
             </div>
 
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 max-w-lg">
                 <ChatDemo />
                 <CreateAccount />
                 <ReportIssue />
