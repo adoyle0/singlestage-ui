@@ -208,7 +208,7 @@ pub fn SidebarContainer() -> impl IntoView {
                         <ThemeSwitcher />
                     </div>
                 </header>
-                <div class="my-8 mx-2 sm:mx-12">
+                <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
                     <Outlet />
                 </div>
             </main>

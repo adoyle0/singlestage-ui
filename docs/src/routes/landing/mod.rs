@@ -7,7 +7,7 @@ use demos::*;
 #[component]
 pub fn LandingPage() -> impl IntoView {
     view! {
-        <header class="w-fit mx-auto lg:ml-4 lg:mr-auto">
+        <header class="w-fit mx-auto lg:ml-0 lg:mr-auto">
             <h1 class="text-4xl font-semibold">"A familiar UI library for Leptos"</h1>
             <p class="text-(--muted-foreground) pt-3">
                 "Made with " <Link href="https://tailwindcss.com">"Tailwind CSS"</Link>
@@ -26,7 +26,7 @@ pub fn LandingPage() -> impl IntoView {
             </div>
         </header>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 max-w-fit mx-auto lg:ml-4 lg:mr-auto">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 max-w-fit mx-auto lg:ml-0 lg:mr-auto">
             <div class="flex flex-col gap-4 max-w-md">
                 <TeamMembers />
                 <CookieSettings />
