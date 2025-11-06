@@ -107,15 +107,15 @@ fn main() {
         return;
     }
 
+    let out_dir = env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (1)\n");
+    let bundle_path = Path::new(&out_dir).join("bundle.css");
+    let singlestage_path = Path::new(&out_dir).join("singlestage.css");
+
     // Skip css bundling and tailwind for docs.rs
     if env::var("DOCS_RS").is_ok() {
         File::create(&singlestage_path).expect("\nError creating dummy file.\n");
         return;
     }
-
-    let out_dir = env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (1)\n");
-    let bundle_path = Path::new(&out_dir).join("bundle.css");
-    let singlestage_path = Path::new(&out_dir).join("singlestage.css");
 
     // Build list of css files to include
     let features = features!(
