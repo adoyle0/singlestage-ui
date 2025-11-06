@@ -109,6 +109,7 @@ fn main() {
 
     // Skip css bundling and tailwind for docs.rs
     if env::var("DOCS_RS").is_ok() {
+        File::create(&singlestage_path).expect("\nError creating dummy file.\n");
         return;
     }
 
