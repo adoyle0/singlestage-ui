@@ -16,8 +16,5 @@ publish = true
 proc-macro = true
 
 [dependencies]
-serde = { workspace = true }
-syntect = { workspace = true }
-toml = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true }
