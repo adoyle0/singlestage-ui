@@ -1,5 +1,5 @@
-use crate::DropdownMenuContext;
-use leptos::prelude::*;
+use crate::{AsChild, DropdownMenuContext};
+use leptos::{either::Either, prelude::*};
 
 /// The button that toggles the dropdown menu.
 #[component]
@@ -164,6 +164,9 @@ pub fn DropdownMenuTrigger(
     /// Variants: primary | secondary | outline | ghost | link | destructive
     #[prop(optional, into)]
     variant: MaybeProp<String>,
+
+    /// asChild
+    #[prop(optional)] as_child: bool,
 ) -> impl IntoView {
     let menu = expect_context::<DropdownMenuContext>();
 
@@ -221,44 +224,86 @@ pub fn DropdownMenuTrigger(
             value=move || value.get()
         />
     };
+    if as_child {
+        Either::Right(view! {
+            <AsChild
+                class=move || {
+                    format!(
+                        "{} {} {}",
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => "singlestage-btn-primary",
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "small" => "singlestage-btn-sm",
+                            "large" => "singlestage-btn-lg",
+                            "icon" => "singlestage-btn-icon",
+                            "sm-icon" => "singlestage-btn-sm-icon",
+                            "lg-icon" => "singlestage-btn-lg-icon",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                {..}
+                aria-controls=move || menu.menu_id.get()
+                aria-haspopup="menu"
+                popovertarget=move || menu.menu_id.get()
+                popovertargetaction="toggle"
+                id=uuid
+                type=button_type.get()
 
-    view! {
-        <button
-            aria-controls=move || menu.menu_id.get()
-            aria-haspopup="menu"
-            popovertarget=move || menu.menu_id.get()
-            popovertargetaction="toggle"
-            class=move || {
-                format!(
-                    "{} {} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => "singlestage-btn-primary",
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "small" => "singlestage-btn-sm",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            id=uuid
-            type=button_type.get()
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </AsChild>
+        })
+    } else {
+        Either::Left(view! {
+            <button
+                aria-controls=move || menu.menu_id.get()
+                aria-haspopup="menu"
+                popovertarget=move || menu.menu_id.get()
+                popovertargetaction="toggle"
+                class=move || {
+                    format!(
+                        "{} {} {}",
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => "singlestage-btn-primary",
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "small" => "singlestage-btn-sm",
+                            "large" => "singlestage-btn-lg",
+                            "icon" => "singlestage-btn-icon",
+                            "sm-icon" => "singlestage-btn-sm-icon",
+                            "lg-icon" => "singlestage-btn-lg-icon",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                id=uuid
+                type=button_type.get()
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..button_attrs}
-        >
-            {children()}
-        </button>
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </button>
+        })
     }
 }
