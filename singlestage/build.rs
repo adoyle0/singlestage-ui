@@ -12,7 +12,7 @@ use std::{
     process::Command,
 };
 
-const TAILWIND_URL: &str = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.16/";
+const TAILWIND_URL: &str = "https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.17/";
 
 macro_rules! features {
     ( $( $x:expr ),* ) => {
