@@ -47,6 +47,9 @@ pub fn ContextMenuTrigger(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -104,9 +107,6 @@ pub fn ContextMenuTrigger(
 ) -> impl IntoView {
     let menu = expect_context::<ContextMenuContext>();
 
-    let uuid = uuid::Uuid::new_v4().to_string();
-    menu.trigger_id.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -119,6 +119,7 @@ pub fn ContextMenuTrigger(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()

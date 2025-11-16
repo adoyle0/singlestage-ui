@@ -112,17 +112,12 @@ pub fn ContextMenu(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu_id = RwSignal::new(String::new());
-    let trigger_id = RwSignal::new(String::new());
-
-    let x = RwSignal::new(i32::default());
-    let y = RwSignal::new(i32::default());
 
     let context = ContextMenuContext {
         menu_id,
         menu_ref: RwSignal::new(None),
-        trigger_id,
-        x,
-        y,
+        x: RwSignal::new(i32::default()),
+        y: RwSignal::new(i32::default()),
     };
     provide_context(context);
 

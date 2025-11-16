@@ -22,7 +22,6 @@ use leptos::{html::Menu, prelude::*};
 pub struct ContextMenuContext {
     menu_id: RwSignal<String>,
     menu_ref: RwSignal<Option<NodeRef<Menu>>>,
-    trigger_id: RwSignal<String>,
     x: RwSignal<i32>,
     y: RwSignal<i32>,
 }
