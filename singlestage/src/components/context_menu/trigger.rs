@@ -164,7 +164,6 @@ pub fn ContextMenuTrigger(
                 }
             }
             on:mouseup=move |ev| {
-                leptos::logging::log!("{:#?}", ev.button());
                 if ev.button() == 2 {
                     if let Some(menu) = menu.menu_ref.get_untracked() {
                         if let Some(menu) = menu.get_untracked() {
