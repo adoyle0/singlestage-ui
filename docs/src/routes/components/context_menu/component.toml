@@ -1,0 +1,75 @@
+name = "Context Menu"
+description = """Displays a menu to the user — such as a set of actions or functions — triggered \
+by a button."""
+
+[[examples]]
+name = "Context Menu"
+
+[[references]]
+name = "ContextMenu"
+description = "Contains all the parts of a context menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuContent"
+description = "The component that pops out when the context menu is open."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuGroup"
+description = "Contains multiple items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuItem"
+description = "Contains a menu item."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+]
+
+[[references]]
+name = "ContextMenuLabel"
+description = "Labels groups."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuSeparator"
+description = "Visually separates groups of menu items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuShortcut"
+description = "Displays next to the item content and indicates keyboard shortcuts."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuTrigger"
+description = "Defines the area where the context menu can be triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

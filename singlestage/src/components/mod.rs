@@ -53,6 +53,11 @@ pub mod checkbox;
 #[cfg(feature = "checkbox")]
 pub use checkbox::*;
 
+#[cfg(feature = "context_menu")]
+pub mod context_menu;
+#[cfg(feature = "context_menu")]
+pub use context_menu::*;
+
 #[cfg(feature = "dialog")]
 pub mod dialog;
 #[cfg(feature = "dialog")]

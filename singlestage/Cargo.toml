@@ -42,6 +42,7 @@ default = [
   "card",
   "carousel",
   "checkbox",
+  "context_menu",
   "dialog",
   "dropdown",
   "icon",
@@ -79,6 +80,7 @@ button_group = []
 card = []
 carousel = []
 checkbox = ["label"]
+context_menu = []
 dialog = []
 dropdown = ["button"]
 icon = ["macro"]

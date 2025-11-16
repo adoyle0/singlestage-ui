@@ -1,0 +1,116 @@
+@layer components {
+  .singlestage-context-menu {
+    @apply transition-all;
+
+    [popover] {
+      @apply fixed
+      bg-transparent;
+    }
+
+    .singlestage-context-menu-content {
+      @apply bg-popover
+      border
+      min-w-[8rem]
+      overflow-x-hidden
+      overflow-y-auto
+      p-1
+      rounded-md
+      shadow-md
+      text-nowrap
+      text-popover-foreground
+      z-50;
+
+      .singlestage-radio-group {
+        @appply block
+        gap-0;
+      }
+    }
+
+    .singlestage-context-menu-item {
+      > button {
+        @apply [&_svg:not([class*='size-'])]:size-4
+        [&_svg:not([class*='text-'])]:text-muted-foreground
+        [&_svg]:pointer-events-none
+        [&_svg]:shrink-0
+        content-center
+        cursor-default
+        data-[disabled]:opacity-50
+        data-[disabled]:pointer-events-none
+        data-[inset]:pl-8
+        data-[variant=destructive]:*:[svg]:!text-destructive
+        data-[variant=destructive]:focus:bg-destructive/10
+        data-[variant=destructive]:focus:text-destructive
+        data-[variant=destructive]:text-destructive
+        focus:bg-accent
+        focus:text-accent-foreground
+        flex
+        gap-2
+        h-full
+        hover:bg-accent
+        hover:text-accent-foreground
+        items-center
+        outline-hidden
+        px-2
+        py-1.5
+        relative
+        rounded-sm
+        select-none
+        text-sm
+        w-full;
+      }
+
+      > .singlestage-label {
+        @apply h-full
+        w-full;
+      }
+    }
+
+    .singlestage-context-menu-label {
+      @apply data-[inset]:pl-8
+      font-medium
+      px-2
+      py-1.5
+      text-sm;
+    }
+
+    .singlestage-context-menu-separator {
+      @apply -mx-1
+      bg-border
+      h-px
+      my-1;
+    }
+
+    .singlestage-context-menu-shortcut {
+      @apply ml-auto
+      text-muted-foreground
+      text-xs
+      tracking-widest;
+    }
+
+    .singlestage-context-menu-sub-trigger {
+      @apply cursor-default
+      flex
+      focus:bg-accent
+      focus:text-accent-foreground
+      items-center
+      outline-hidden
+      px-2
+      py-1.5
+      rounded-sm
+      select-none
+      text-sm;
+    }
+
+    .singlestage-context-menu-sub-content {
+      @apply bg-popover
+      border
+      min-w-[8rem]
+      overflow-hidden
+      p-1
+      rounded-md
+      shadow-lg
+      text-popover-foreground
+      z-50;
+    }
+  }
+}
