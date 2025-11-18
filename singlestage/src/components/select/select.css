@@ -163,4 +163,8 @@
       hover:text-accent-foreground;
     }
   }
+
+  .singlestage-select-placeholder {
+    @apply text-muted-foreground;
+  }
 }

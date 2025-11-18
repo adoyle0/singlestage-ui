@@ -1,3 +1,4 @@
+use crate::SelectContext;
 use leptos::prelude::*;
 
 #[component]
@@ -116,6 +117,8 @@ pub fn SelectContent(
     #[prop(optional, into)]
     label: MaybeProp<String>,
 ) -> impl IntoView {
+    let select = expect_context::<SelectContext>();
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -164,6 +167,16 @@ pub fn SelectContent(
             {..global_attrs_1}
             {..global_attrs_2}
         >
+            {if let Some(placeholder) = select.placeholder.get_untracked() {
+                view! {
+                    <option value="singlestage-select-placeholder" disabled hidden selected>
+                        {placeholder}
+                    </option>
+                }
+                    .into_any()
+            } else {
+                "".into_any()
+            }}
             {children()}
         </optgroup>
     }

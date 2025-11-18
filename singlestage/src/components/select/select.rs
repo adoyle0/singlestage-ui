@@ -141,6 +141,9 @@ pub fn Select(
     /// Toggle invalid appearance.
     #[prop(optional, into)]
     invalid: MaybeProp<bool>,
+    /// The placeholder value for the select.
+    #[prop(optional, into)]
+    placeholder: MaybeProp<String>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
     value: Reactive<String>,
@@ -151,17 +154,21 @@ pub fn Select(
 
     if let Some(default) = default.get_untracked() {
         value.set(default);
+    } else if placeholder.get_untracked().is_some() {
+        value.set("singlestage-select-placeholder".to_string());
     }
 
     if let Some(select) = select_ref.get_untracked() {
         if let Some(default) = default.get_untracked() {
             select.set_value(&default);
+        } else if placeholder.get_untracked().is_some() {
+            select.set_value("singlestage-select-placeholder");
         } else {
             select.set_value(&value.get_untracked());
         }
     }
 
-    let context = SelectContext { value };
+    let context = SelectContext { placeholder, value };
     provide_context(context);
 
     Effect::new(move || {
@@ -242,7 +249,16 @@ pub fn Select(
             }
             node_ref=select_ref
             on:change=on_change
-            class=move || format!("singlestage-select {}", class.get().unwrap_or_default())
+            class=move || {
+                format!(
+                    "singlestage-select{} {}",
+                    match value.get().as_str() {
+                        "singlestage-select-placeholder" => " singlestage-select-placeholder",
+                        _ => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
