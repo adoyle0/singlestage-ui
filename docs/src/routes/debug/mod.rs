@@ -2,6 +2,8 @@ use leptos::prelude::*;
 
 mod button;
 mod checkbox;
+mod context_menu;
+mod dropdown;
 mod form_reset;
 mod input;
 mod radio;
@@ -12,6 +14,8 @@ mod toggle;
 
 use button::*;
 use checkbox::*;
+use context_menu::*;
+use dropdown::*;
 use form_reset::*;
 use input::*;
 use radio::*;
@@ -33,6 +37,8 @@ pub fn ReactiveDebug() -> impl IntoView {
             <DebugSlider />
             <DebugButton />
             <DebugToggle />
+            <DebugDropdown />
+            <DebugContextMenu />
         </div>
     }
 }
