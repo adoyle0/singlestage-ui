@@ -4,6 +4,16 @@ description = "Displays a list of options for the user to pick from—triggered 
 [[examples]]
 name = "select"
 
+[[examples]]
+name = "select placeholder"
+title = "Placeholder"
+description = "A placeholder can be set to hint to the user what type of value this field expects."
+
+[[examples]]
+name = "select default"
+title = "Default"
+description = "Set a default value to be pre-selected."
+
 [[references]]
 name = "Select"
 description = "Contains all the parts of the Select."
@@ -17,6 +27,8 @@ attrs = [
     selected value. Setting value overrides this setting.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle invalid \
     appearance and behavior.""" },
+  { attr = "placeholder", attr_type = "String", default = """""""", description = """Sets a \
+    placeholder value displayed on initial load. Setting default will override this value.""" },
   { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
     reactive value coupled to the currently selected item's value.""" },
 ]
