@@ -5,6 +5,53 @@ grouped inputs."""
 [[examples]]
 name = "field"
 
+[[examples]]
+name = "field input"
+title = "Input"
+
+[[examples]]
+name = "field textarea"
+title = "Textarea"
+
+[[examples]]
+name = "field select"
+title = "Select"
+
+[[examples]]
+name = "field slider"
+title = "Slider"
+
+[[examples]]
+name = "field set"
+title = "Fieldset"
+
+[[examples]]
+name = "field checkbox"
+title = "Checkbox"
+
+[[examples]]
+name = "field radio"
+title = "Radio"
+
+[[examples]]
+name = "field switch"
+title = "Switch"
+
+[[examples]]
+name = "field choice card"
+title = "Choice Card"
+description = """Wrap Field components inside FieldLabel to create selectable field groups. This \
+works with Radio, Checkbox and Switch components."""
+
+[[examples]]
+name = "field group"
+title = "Field Group"
+description = "Stack Field components with FieldGroup. Add FieldSeparator to divide them."
+
+[[examples]]
+name = "field responsive layout"
+title = "Responsive Layout"
+
 [[references]]
 name = "Field"
 description = "A form input field."

@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn FieldExample() -> impl IntoView {
     view! {
-        <div class="max-w-md">
+        <div class="w-full max-w-md">
             <form>
                 <FieldGroup>
                     <FieldSet>
@@ -41,10 +41,7 @@ pub fn FieldExample() -> impl IntoView {
                                     <FieldLabel label_for="checkout-exp-month-ts6">
                                         "Month"
                                     </FieldLabel>
-                                    <Select default="">
-                                        // <SelectTrigger id="checkout-exp-month-ts6">
-                                        // <SelectValue placeholder="MM" />
-                                        // </SelectTrigger>
+                                    <Select placeholder="MM" id="checkout-exp-month-ts6">
                                         <SelectContent>
                                             <SelectItem value="01">"01"</SelectItem>
                                             <SelectItem value="02">"02"</SelectItem>
@@ -65,10 +62,7 @@ pub fn FieldExample() -> impl IntoView {
                                     <FieldLabel label_for="checkout-7j9-exp-year-f59">
                                         "Year"
                                     </FieldLabel>
-                                    <Select default="">
-                                        // <SelectTrigger id="checkout-7j9-exp-year-f59">
-                                        // <SelectValue placeholder="YYYY" />
-                                        // </SelectTrigger>
+                                    <Select placeholder="YYYY" id="checkout-7j9-exp-year-f59">
                                         <SelectContent>
                                             <SelectItem value="2024">"2024"</SelectItem>
                                             <SelectItem value="2025">"2025"</SelectItem>
@@ -94,10 +88,7 @@ pub fn FieldExample() -> impl IntoView {
                         </FieldDescription>
                         <FieldGroup>
                             <Field orientation="horizontal">
-                                <Checkbox
-                                    id="checkout-7j9-same-as-shipping-wgm"
-                                    checked=RwSignal::new(true)
-                                />
+                                <Checkbox id="checkout-7j9-same-as-shipping-wgm" checked=true />
                                 <FieldLabel
                                     label_for="checkout-7j9-same-as-shipping-wgm"
                                     class="font-normal"

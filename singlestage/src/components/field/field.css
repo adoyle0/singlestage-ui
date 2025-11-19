@@ -13,11 +13,14 @@
     }
 
     .singlestage-field-horizontal {
-      @apply [&>[data-slot=field-label]]:flex-auto
-      has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px
-      flex-row
-      has-[>[data-slot=field-content]]:items-start
+      @apply flex-row
+      has-[>.singlestage-field-content]:[&>[role=checkbox],[role=radio]]:mt-px
+      has-[>.singlestage-field-content]:items-start
       items-center;
+
+      .singlestage-field-label {
+        @apply flex-auto;
+      }
     }
 
     .singlestage-field-responsive {
@@ -26,12 +29,12 @@
       [&>.sr-only]:w-auto;
 
       .singlestage-field-group {
-        @apply md:flex-row
-        md:items-center
-        md:[&>*]:w-auto
-        md:[&>[data-slot=field-label]]:flex-auto
-        md:has-[>[data-slot=field-content]]:items-start
-        md:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px;
+        @apply md:[&>*]:w-auto
+        md:[&>.singlestage-field-label]:flex-auto
+        md:flex-row
+        md:has-[>.singlestage-field-content]:[&>[role=checkbox],[role=radio]]:mt-px
+        md:has-[>.singlestage-field-content]:items-start
+        md:items-center;
       }
     }
   }
@@ -40,8 +43,8 @@
     @apply flex
     flex-col
     gap-6
-    has-[>[data-slot=checkbox-group]]:gap-3
-    has-[>[data-slot=radio-group]]:gap-3;
+    has-[>.singlestage-checkbox-group]:gap-3
+    has-[>.singlestage-radio-group]:gap-3;
   }
 
   .singlestage-field-legend {
