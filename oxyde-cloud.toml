@@ -1,3 +1,0 @@
-[hooks]
-pre_build = "cd ./docs"
-post_build = "cd ../"
