@@ -197,11 +197,6 @@
     gap-6;
   }
 
-  .singlestage-field-set:has(.singlestage-checkbox-group),
-  .singlestage-field-set:has(.singlestage-radio-group) {
-    @apply gap-3;
-  }
-
   /* Separator */
 
   .singlestage-field-separator {
