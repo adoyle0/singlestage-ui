@@ -7,6 +7,12 @@
     w-full;
   }
 
+  .singlestage-field:has(> *:disabled) {
+    .singlestage-field-label {
+      @apply opacity-50;
+    }
+  }
+
   .singlestage-field-vertical {
     @apply flex-col;
 
