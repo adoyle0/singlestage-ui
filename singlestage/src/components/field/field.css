@@ -35,8 +35,12 @@
   }
 
   .singlestage-field-horizontal:has(> .singlestage-field-content) {
-    @apply [&>[role=checkbox],[role=radio]]:mt-px
-    items-start;
+    @apply items-start;
+
+    > input[type="checkbox"],
+    > input[type="radio"] {
+      @apply md:mt-px;
+    }
   }
 
   .singlestage-field-responsive {
@@ -52,8 +56,12 @@
   }
 
   .singlestage-field-responsive:has(> .singlestage-field-content) {
-    @apply md:[&>[role=checkbox],[role=radio]]:mt-px
-    md:items-start;
+    @apply md:items-start;
+
+    > input[type="checkbox"],
+    > input[type="radio"] {
+      @apply md:mt-px;
+    }
   }
 
   /* Content */
@@ -118,8 +126,12 @@
     }
 
     .singlestage-field-responsive:has(> .singlestage-field-content) {
-      @apply md:items-start
-      md:[&>[role=checkbox],[role=radio]]:mt-px;
+      @apply md:items-start;
+
+      > input[type="checkbox"],
+      > input[type="radio"] {
+        @apply md:mt-px;
+      }
     }
   }
 
