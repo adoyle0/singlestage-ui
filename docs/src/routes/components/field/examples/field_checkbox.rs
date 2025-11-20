@@ -11,43 +11,45 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                     <FieldDescription>
                         "Select the items you want to show on the desktop."
                     </FieldDescription>
-                    <FieldGroup class="gap-3">
-                        <Field orientation="horizontal">
-                            <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
-                            <FieldLabel
-                                label_for="finder-pref-9k2-hard-disks-ljj"
-                                class="font-normal"
-                            >
-                                "Hard disks"
-                            </FieldLabel>
-                        </Field>
-                        <Field orientation="horizontal">
-                            <Checkbox id="finder-pref-9k2-external-disks-1yg" />
-                            <FieldLabel
-                                label_for="finder-pref-9k2-external-disks-1yg"
-                                class="font-normal"
-                            >
-                                "External disks"
-                            </FieldLabel>
-                        </Field>
-                        <Field orientation="horizontal">
-                            <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
-                            <FieldLabel
-                                label_for="finder-pref-9k2-cds-dvds-fzt"
-                                class="font-normal"
-                            >
-                                "CDs, DVDs, and iPods"
-                            </FieldLabel>
-                        </Field>
-                        <Field orientation="horizontal">
-                            <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
-                            <FieldLabel
-                                label_for="finder-pref-9k2-connected-servers-6l2"
-                                class="font-normal"
-                            >
-                                "Connected servers"
-                            </FieldLabel>
-                        </Field>
+                    <FieldGroup>
+                        <CheckboxGroup>
+                            <Field orientation="horizontal">
+                                <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
+                                <FieldLabel
+                                    label_for="finder-pref-9k2-hard-disks-ljj"
+                                    class="font-normal"
+                                >
+                                    "Hard disks"
+                                </FieldLabel>
+                            </Field>
+                            <Field orientation="horizontal">
+                                <Checkbox id="finder-pref-9k2-external-disks-1yg" />
+                                <FieldLabel
+                                    label_for="finder-pref-9k2-external-disks-1yg"
+                                    class="font-normal"
+                                >
+                                    "External disks"
+                                </FieldLabel>
+                            </Field>
+                            <Field orientation="horizontal">
+                                <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
+                                <FieldLabel
+                                    label_for="finder-pref-9k2-cds-dvds-fzt"
+                                    class="font-normal"
+                                >
+                                    "CDs, DVDs, and iPods"
+                                </FieldLabel>
+                            </Field>
+                            <Field orientation="horizontal">
+                                <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
+                                <FieldLabel
+                                    label_for="finder-pref-9k2-connected-servers-6l2"
+                                    class="font-normal"
+                                >
+                                    "Connected servers"
+                                </FieldLabel>
+                            </Field>
+                        </CheckboxGroup>
                     </FieldGroup>
                 </FieldSet>
                 <FieldSeparator />

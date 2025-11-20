@@ -11,7 +11,7 @@ pub fn FieldSliderExample() -> impl IntoView {
                 <FieldTitle>"Price Range"</FieldTitle>
                 <FieldDescription>
                     "Set your budget range ($" <span class="font-medium tabular-nums">"0"</span>
-                    " - " <span class="font-medium tabular-nums">{move || value.get()}</span>")."
+                    " - $" <span class="font-medium tabular-nums">{move || value.get()}</span>")."
                 </FieldDescription>
                 <Slider
                     value

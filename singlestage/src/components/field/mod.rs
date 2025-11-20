@@ -20,29 +20,10 @@ pub fn Field(
                     class.get().unwrap_or_default(),
                 )
             }
-            data-orientation=move || orientation.get()
-            data-slot="field"
             role="group"
         >
             {children()}
         </div>
-    }
-}
-
-#[component]
-pub fn FieldLabel(
-    children: Children,
-    #[prop(optional, into)] class: MaybeProp<String>,
-    #[prop(optional, into)] label_for: MaybeProp<String>,
-) -> impl IntoView {
-    view! {
-        <label
-            data-slot="field-label"
-            class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
-            for=move || label_for.get().unwrap_or_default()
-        >
-            {children()}
-        </label>
     }
 }
 
@@ -52,14 +33,9 @@ pub fn FieldDescription(
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <p
-            class=move || {
-                format!("singlestage-field-description {}", class.get().unwrap_or_default())
-            }
-            data-slot="field-description"
-        >
-            {children()}
-        </p>
+        <p class=move || {
+            format!("singlestage-field-description {}", class.get().unwrap_or_default())
+        }>{children()}</p>
     }
 }
 
@@ -74,12 +50,9 @@ pub fn FieldGroup(
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <div
-            class=move || format!("singlestage-field-group {}", class.get().unwrap_or_default())
-            data-slot="field-group"
-        >
-            {children()}
-        </div>
+        <div class=move || {
+            format!("singlestage-field-group {}", class.get().unwrap_or_default())
+        }>{children()}</div>
     }
 }
 
@@ -89,12 +62,9 @@ pub fn FieldContent(
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <div
-            class=move || format!("singlestage-field-content {}", class.get().unwrap_or_default())
-            data-slot="field-content"
-        >
-            {children()}
-        </div>
+        <div class=move || {
+            format!("singlestage-field-content {}", class.get().unwrap_or_default())
+        }>{children()}</div>
     }
 }
 
@@ -105,23 +75,36 @@ pub fn FieldLegend(
     #[prop(optional, into)] variant: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <legend
-            class=move || format!("singlestage-field-legend {}", class.get().unwrap_or_default())
-            data-slot="field-legend"
-            data-variant=move || variant.get()
-        >
-            {children()}
-        </legend>
+        <legend class=move || {
+            format!(
+                "singlestage-field-legend {} {}",
+                match variant.get().unwrap_or_default().as_str() {
+                    "label" => "singlestage-field-legend-label",
+                    _ => "singlestage-field-legend-legend",
+                },
+                class.get().unwrap_or_default(),
+            )
+        }>{children()}</legend>
     }
 }
 
 #[component]
-pub fn FieldSeparator(#[prop(optional, into)] class: MaybeProp<String>) -> impl IntoView {
+pub fn FieldSeparator(
+    #[prop(optional)] children: Option<Children>,
+    #[prop(optional, into)] class: MaybeProp<String>,
+) -> impl IntoView {
     view! {
-        <div
-            data-slot="field-separator"
-            class=move || format!("singlestage-field-separator {}", class.get().unwrap_or_default())
-        ></div>
+        <div class=move || {
+            format!("singlestage-field-separator-outer {}", class.get().unwrap_or_default())
+        }>
+            <div class="singlestage-field-separator"></div>
+            {if let Some(children) = children {
+                view! { <span class="singlestage-field-separator-content">{children()}</span> }
+                    .into_any()
+            } else {
+                "".into_any()
+            }}
+        </div>
     }
 }
 
@@ -131,12 +114,9 @@ pub fn FieldSet(
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <fieldset
-            class=move || format!("singlestage-field-set {}", class.get().unwrap_or_default())
-            data-slot="field-set"
-        >
-            {children()}
-        </fieldset>
+        <fieldset class=move || {
+            format!("singlestage-field-set {}", class.get().unwrap_or_default())
+        }>{children()}</fieldset>
     }
 }
 
@@ -146,11 +126,24 @@ pub fn FieldTitle(
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <div
-            data-slot="field-label"
-            class=move || format!("singlestage-field-title {}", class.get().unwrap_or_default())
+        <div class=move || {
+            format!("singlestage-field-title {}", class.get().unwrap_or_default())
+        }>{children()}</div>
+    }
+}
+
+#[component]
+pub fn FieldLabel(
+    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] label_for: MaybeProp<String>,
+) -> impl IntoView {
+    view! {
+        <label
+            class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
+            for=move || label_for.get().unwrap_or_default()
         >
             {children()}
-        </div>
+        </label>
     }
 }
