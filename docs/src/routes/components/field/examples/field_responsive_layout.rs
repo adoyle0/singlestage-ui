@@ -23,7 +23,7 @@ pub fn FieldResponsiveLayoutExample() -> impl IntoView {
                         <FieldSeparator />
                         <Field orientation="responsive">
                             <FieldContent>
-                                <FieldLabel label_for="lastName">"Message"</FieldLabel>
+                                <FieldLabel label_for="message">"Message"</FieldLabel>
                                 <FieldDescription>
                                     "You can write your message here. Keep it short, preferably
                                     under 100 characters."

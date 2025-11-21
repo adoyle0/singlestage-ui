@@ -57,7 +57,80 @@ name = "Field"
 description = "A form input field."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "orientation", attr_type = "String", default = "\"vertical\"", description = """Sets \
+    the display orientation. Accepted values: \"vertical\" | \"horizontal\" | \"responsive\".""" },
+]
+
+[[references]]
+name = "FieldContent"
+description = "Contains field content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "FieldDescription"
+description = "Contains a description of content for the input in a field."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "FieldError"
+description = "An error message related to field input."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "FieldGroup"
+description = "Groups together related input fields."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "FieldLabel"
+description = "The label associated with an input."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \
+    <label> `for` attribute to avoid name collisions.""" },
+]
+
+[[references]]
+name = "FieldLegend"
+description = "A title for a FieldSet."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = "\"legend\"", description = """Set the \
+    display style of the FieldLegend. Accepted values: \"label\" | \"legend\".""" },
+]
+
+[[references]]
+name = "FieldSet"
+description = "Contains a set of related input fields or groups of fields."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#attributes">input</a> \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "FieldTitle"
+description = "A title associated with a field."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []

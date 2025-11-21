@@ -7,9 +7,7 @@ pub fn FieldChoiceCardExample() -> impl IntoView {
         <div class="w-full max-w-md">
             <FieldGroup>
                 <FieldSet>
-                    <FieldLabel label_for="compute-environment-p8w">
-                        "Compute Environment"
-                    </FieldLabel>
+                    <FieldLegend variant="label">"Compute Environment"</FieldLegend>
                     <FieldDescription>
                         "Select the compute environment for your cluster."
                     </FieldDescription>

@@ -30,6 +30,7 @@ pub fn FieldExample() -> impl IntoView {
                                 <Input
                                     id="checkout-7j9-card-number-uw1"
                                     placeholder="1234 5678 9012 3456"
+                                    inputmode="numeric"
                                     required=true
                                 />
                                 <FieldDescription>
@@ -75,7 +76,12 @@ pub fn FieldExample() -> impl IntoView {
                                 </Field>
                                 <Field>
                                     <FieldLabel label_for="checkout-7j9-cvv">"CVV"</FieldLabel>
-                                    <Input id="checkout-7j9-cvv" placeholder="123" required=true />
+                                    <Input
+                                        id="checkout-7j9-cvv"
+                                        inputmode="numeric"
+                                        placeholder="123"
+                                        required=true
+                                    />
                                 </Field>
                             </div>
                         </FieldGroup>

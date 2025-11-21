@@ -6,8 +6,8 @@ pub fn FieldGroupExample() -> impl IntoView {
     view! {
         <div class="w-full max-w-md">
             <FieldGroup>
-                <FieldSet>
-                    <FieldLabel>"Responses"</FieldLabel>
+                <FieldSet class="gap-3">
+                    <FieldTitle>"Responses"</FieldTitle>
                     <FieldDescription>
                         "Get notified when ChatGPT responds to requests that take time, like
                         research or image generation."
@@ -23,7 +23,7 @@ pub fn FieldGroupExample() -> impl IntoView {
                 </FieldSet>
                 <FieldSeparator />
                 <FieldSet>
-                    <FieldLabel>"Tasks"</FieldLabel>
+                    <FieldTitle>"Tasks"</FieldTitle>
                     <FieldDescription>
                         "Get notified when tasks you've created have updates. "
                         <a href="#">"Manage tasks"</a>

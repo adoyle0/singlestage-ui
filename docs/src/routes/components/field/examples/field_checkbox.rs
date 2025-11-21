@@ -55,15 +55,15 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                 <FieldSeparator />
                 <Field orientation="horizontal">
                     <Checkbox id="finder-pref-9k2-sync-folders-nep" checked=true />
-                    <FieldContent>
-                        <FieldLabel label_for="finder-pref-9k2-sync-folders-nep">
-                            "Sync Desktop & Documents folders"
-                        </FieldLabel>
-                        <FieldDescription>
-                            "Your Desktop & Documents folders are being synced with iCloud
-                            Drive. You can access them from other devices."
-                        </FieldDescription>
-                    </FieldContent>
+                    <FieldLabel label_for="finder-pref-9k2-sync-folders-nep">
+                        <FieldContent>
+                            <FieldTitle>"Sync Desktop & Documents folders"</FieldTitle>
+                            <FieldDescription>
+                                "Your Desktop & Documents folders are being synced with iCloud
+                                Drive. You can access them from other devices."
+                            </FieldDescription>
+                        </FieldContent>
+                    </FieldLabel>
                 </Field>
             </FieldGroup>
         </div>

@@ -16,7 +16,7 @@ pub fn FieldSetExample() -> impl IntoView {
                     <div class="grid grid-cols-2 gap-4">
                         <Field>
                             <FieldLabel label_for="city">"City"</FieldLabel>
-                            <Input id="city" input_type="text" placeholder="New York" />
+                            <Input id="city" input_type="text" placeholder="Torrance" />
                         </Field>
                         <Field>
                             <FieldLabel label_for="zip">"Postal Code"</FieldLabel>

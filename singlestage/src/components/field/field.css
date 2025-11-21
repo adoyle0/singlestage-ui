@@ -40,7 +40,7 @@
     }
   }
 
-  .singlestage-field-horizontal:has(> .singlestage-field-content) {
+  .singlestage-field-horizontal:has(.singlestage-field-content) {
     @apply items-start;
 
     > input[type="checkbox"],
