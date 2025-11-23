@@ -70,6 +70,19 @@
     }
   }
 
+  .singlestage-field-button {
+    @apply border
+    flex-auto
+    p-4
+    rounded-md
+    w-full;
+  }
+
+  .singlestage-field-button:has(input:checked) {
+    @apply bg-primary/5
+    border-primary;
+  }
+
   /* Content */
 
   .singlestage-field-content {
@@ -131,7 +144,7 @@
       }
     }
 
-    .singlestage-field-responsive:has(> .singlestage-field-content) {
+    .singlestage-field-responsive:has(.singlestage-field-content) {
       @apply md:items-start;
 
       > input[type="checkbox"],
@@ -154,26 +167,6 @@
     select-none
     aria-disabled:pointer-events-none
     aria-disabled:opacity-50;
-
-    > .singlestage-field {
-      @apply p-4;
-    }
-
-    .singlestage-field-horizontal {
-      @apply flex-auto;
-    }
-  }
-
-  .singlestage-field-label:has(input:checked) {
-    @apply bg-primary/5
-    border-primary;
-  }
-
-  .singlestage-field-label:has(> .singlestage-field) {
-    @apply border
-    flex-col
-    rounded-md
-    w-full;
   }
 
   /* Legend */

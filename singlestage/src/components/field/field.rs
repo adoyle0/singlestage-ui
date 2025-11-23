@@ -1,4 +1,5 @@
-use leptos::prelude::*;
+use crate::FieldContext;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
 pub fn Field(
@@ -111,7 +112,18 @@ pub fn Field(
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
+    /// Sets the display variant of the `Field`.
+    ///
+    /// Accepted values: "button".
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 ) -> impl IntoView {
+    let context = FieldContext {
+        description_id: RwSignal::new(String::default()),
+        input_id: RwSignal::new(String::default()),
+        label_id: RwSignal::new(String::default()),
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -154,11 +166,16 @@ pub fn Field(
         <div
             class=move || {
                 format!(
-                    "singlestage-field {} {}",
+                    "singlestage-field{}{}{}",
                     match orientation.get().unwrap_or_default().as_str() {
-                        "horizontal" => "singlestage-field-horizontal",
-                        "responsive" => "singlestage-field-responsive",
-                        _ => "singlestage-field-vertical",
+                        "horizontal" => " singlestage-field-horizontal",
+                        "responsive" => " singlestage-field-responsive",
+                        _ => " singlestage-field-vertical",
+                    }
+                        .to_string(),
+                    match variant.get().unwrap_or_default().as_str() {
+                        "button" => " singlestage-field-button",
+                        _ => "",
                     }
                         .to_string(),
                     class.get().unwrap_or_default(),
@@ -169,7 +186,7 @@ pub fn Field(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

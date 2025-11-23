@@ -1,3 +1,4 @@
+use crate::FieldContext;
 use leptos::prelude::*;
 
 #[component]
@@ -124,7 +125,6 @@ pub fn FieldLabel(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -152,10 +152,32 @@ pub fn FieldLabel(
         />
     };
 
+    let uuid = uuid::Uuid::new_v4();
+
     view! {
         <label
             class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
-            for=move || label_for.get().unwrap_or_default()
+            for=move || {
+                if let Some(label_for) = label_for.get() {
+                    Some(label_for)
+                } else if let Some(field) = use_context::<FieldContext>() {
+                    Some(field.input_id.get())
+                } else {
+                    None
+                }
+            }
+            id={if let Some(field) = use_context::<FieldContext>() {
+                let label_id;
+                if let Some(id) = id.get_untracked() {
+                    label_id = id;
+                } else {
+                    label_id = uuid.to_string()
+                };
+                field.label_id.set(label_id.clone());
+                Some(label_id)
+            } else {
+                id.get_untracked()
+            }}
 
             {..global_attrs_1}
             {..global_attrs_2}

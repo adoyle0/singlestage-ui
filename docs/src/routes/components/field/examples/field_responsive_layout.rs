@@ -13,24 +13,23 @@ pub fn FieldResponsiveLayoutExample() -> impl IntoView {
                     <FieldGroup>
                         <Field orientation="responsive">
                             <FieldContent>
-                                <FieldLabel label_for="name">"Name"</FieldLabel>
+                                <FieldLabel>"Name"</FieldLabel>
                                 <FieldDescription>
                                     "Provide your full name for identification"
                                 </FieldDescription>
                             </FieldContent>
-                            <Input id="name" placeholder="Evil Rabbit" />
+                            <Input placeholder="Evil Rabbit" />
                         </Field>
                         <FieldSeparator />
                         <Field orientation="responsive">
                             <FieldContent>
-                                <FieldLabel label_for="message">"Message"</FieldLabel>
+                                <FieldLabel>"Message"</FieldLabel>
                                 <FieldDescription>
                                     "You can write your message here. Keep it short, preferably
                                     under 100 characters."
                                 </FieldDescription>
                             </FieldContent>
                             <Textarea
-                                id="message"
                                 placeholder="Hello, world!"
                                 class="min-h-[100px] resize-none sm:min-w-[300px]"
                             />

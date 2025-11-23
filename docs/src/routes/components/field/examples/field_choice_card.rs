@@ -5,38 +5,38 @@ use singlestage::*;
 pub fn FieldChoiceCardExample() -> impl IntoView {
     view! {
         <div class="w-full max-w-md">
-            <FieldGroup>
-                <FieldSet>
-                    <FieldLegend variant="label">"Compute Environment"</FieldLegend>
-                    <FieldDescription>
-                        "Select the compute environment for your cluster."
-                    </FieldDescription>
+            <FieldSet>
+                <FieldLegend variant="label">"Compute Environment"</FieldLegend>
+                <FieldDescription>
+                    "Select the compute environment for your cluster."
+                </FieldDescription>
+                <FieldGroup>
                     <RadioGroup default="kubernetes">
-                        <FieldLabel label_for="kubernetes-r2h">
-                            <Field orientation="horizontal">
+                        <Field orientation="horizontal" variant="button">
+                            <FieldLabel>
                                 <FieldContent>
                                     <FieldTitle>"Kubernetes"</FieldTitle>
                                     <FieldDescription>
                                         "Run GPU workloads on a K8s configured cluster."
                                     </FieldDescription>
                                 </FieldContent>
-                                <Radio value="kubernetes" id="kubernetes-r2h" />
-                            </Field>
-                        </FieldLabel>
-                        <FieldLabel label_for="vm-z4k">
-                            <Field orientation="horizontal">
+                            </FieldLabel>
+                            <Radio value="kubernetes" />
+                        </Field>
+                        <Field orientation="horizontal" variant="button">
+                            <FieldLabel>
                                 <FieldContent>
                                     <FieldTitle>"Virtual Machine"</FieldTitle>
                                     <FieldDescription>
                                         "Access a VM configured cluster to run GPU workloads."
                                     </FieldDescription>
                                 </FieldContent>
-                                <Radio value="vm" id="vm-z4k" />
-                            </Field>
-                        </FieldLabel>
+                            </FieldLabel>
+                            <Radio value="vm" />
+                        </Field>
                     </RadioGroup>
-                </FieldSet>
-            </FieldGroup>
+                </FieldGroup>
+            </FieldSet>
         </div>
     }
 }

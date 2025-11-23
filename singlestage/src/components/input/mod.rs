@@ -1,4 +1,4 @@
-use crate::Reactive;
+use crate::{FieldContext, FieldLabel, Reactive};
 use leptos::prelude::*;
 
 #[component]
@@ -352,12 +352,31 @@ pub fn Input(
         />
     };
 
+    let input_id = uuid::Uuid::new_v4();
+    let label_id = uuid::Uuid::new_v4();
+    let has_children = children.is_some();
+
     let custom_attrs = view! {
         <{..}
+            aria_describedby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    let description_id = field.description_id.get();
+                    if description_id.is_empty() { None } else { Some(description_id) }
+                } else {
+                    None
+                }
+            }
             aria-invalid=move || {
                 match invalid.get() {
-                    Some(true) => "true",
-                    _ => "",
+                    Some(true) => Some("true"),
+                    _ => None,
+                }
+            }
+            aria_labelledby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    Some(field.label_id.get())
+                } else {
+                    if has_children { Some(label_id.to_string()) } else { None }
                 }
             }
             class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
@@ -372,44 +391,75 @@ pub fn Input(
                     "text".to_string()
                 }
             }
-            value=value.get_untracked()
+            value={
+                let value = value.get_untracked();
+                if value.is_empty() { None } else { Some(value) }
+            }
         />
     };
 
-    view! {
-        {if let Some(children) = children {
-            let uuid = uuid::Uuid::new_v4();
+    if let Some(children) = children {
+        view! {
+            {if use_context::<FieldContext>().is_some() {
+                view! {
+                    <FieldLabel
+                        class=class.get_untracked()
+                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                    >
+                        {children()}
+                    </FieldLabel>
+                }
+                    .into_any()
+            } else {
+                view! {
+                    <label
+                        class=move || {
+                            format!(
+                                "singlestage-label singlestage-input-label {}",
+                                class.get().unwrap_or_default(),
+                            )
+                        }
+                        for=move || id.get().unwrap_or(input_id.to_string())
+                        id=label_id.to_string()
+                    >
+                        {children()}
+                    </label>
+                }
+                    .into_any()
+            }}
+            <input
+                id=move || id.get().unwrap_or(input_id.to_string())
 
-            view! {
-                <label
-                    class="singlestage-label singlestage-input-label"
-                    for=move || id.get().unwrap_or(uuid.to_string())
-                >
-                    {children()}
-                </label>
-                <input
-                    id=move || id.get().unwrap_or(uuid.to_string())
-                    {..global_attrs_1}
-                    {..global_attrs_2}
-                    {..input_attrs_1}
-                    {..input_attrs_2}
-                    {..custom_attrs}
-                />
-            }
-                .into_any()
-        } else {
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..input_attrs_1}
+                {..input_attrs_2}
+                {..custom_attrs}
+            />
+        }
+        .into_any()
+    } else {
+        view! {
+            <input
+                id={if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        Some(id)
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        Some(input_id.to_string())
+                    }
+                } else {
+                    id.get_untracked()
+                }}
 
-            view! {
-                <input
-                    id=move || id.get()
-                    {..global_attrs_1}
-                    {..global_attrs_2}
-                    {..input_attrs_1}
-                    {..input_attrs_2}
-                    {..custom_attrs}
-                />
-            }
-                .into_any()
-        }}
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..input_attrs_1}
+                {..input_attrs_2}
+                {..custom_attrs}
+            />
+        }
+        .into_any()
     }
 }

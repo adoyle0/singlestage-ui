@@ -19,3 +19,12 @@ pub use legend::*;
 pub use separator::*;
 pub use set::*;
 pub use title::*;
+
+use leptos::prelude::RwSignal;
+
+#[derive(Clone)]
+pub struct FieldContext {
+    pub description_id: RwSignal<String>,
+    pub input_id: RwSignal<String>,
+    pub label_id: RwSignal<String>,
+}

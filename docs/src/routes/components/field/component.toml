@@ -40,8 +40,8 @@ title = "Switch"
 [[examples]]
 name = "field choice card"
 title = "Choice Card"
-description = """Wrap Field components inside FieldLabel to create selectable field groups. This \
-works with Radio, Checkbox and Switch components."""
+description = """Use the button variant to create selectable field buttons. This works with \
+Radio, Checkbox and Switch components."""
 
 [[examples]]
 name = "field group"
@@ -61,6 +61,8 @@ attributes."""
 attrs = [
   { attr = "orientation", attr_type = "String", default = "\"vertical\"", description = """Sets \
     the display orientation. Accepted values: \"vertical\" | \"horizontal\" | \"responsive\".""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Sets the display \
+    variant of the Field. Accepted values: \"button\".""" },
 ]
 
 [[references]]
@@ -116,6 +118,15 @@ attrs = [
   { attr = "variant", attr_type = "String", default = "\"legend\"", description = """Set the \
     display style of the FieldLegend. Accepted values: \"label\" | \"legend\".""" },
 ]
+
+[[references]]
+name = "FieldSeparator"
+description = """Separates different groups of fields. Optionally takes children such as a string \
+that will be displayed in the center of the separator."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
 
 [[references]]
 name = "FieldSet"

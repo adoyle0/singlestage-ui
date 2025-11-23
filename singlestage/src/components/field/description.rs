@@ -1,3 +1,4 @@
+use crate::FieldContext;
 use leptos::prelude::*;
 
 #[component]
@@ -121,7 +122,6 @@ pub fn FieldDescription(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -149,11 +149,25 @@ pub fn FieldDescription(
         />
     };
 
+    let uuid = uuid::Uuid::new_v4();
+
     view! {
         <p
             class=move || {
                 format!("singlestage-field-description {}", class.get().unwrap_or_default())
             }
+            id={if let Some(field) = use_context::<FieldContext>() {
+                let description_id;
+                if let Some(id) = id.get_untracked() {
+                    description_id = id;
+                } else {
+                    description_id = uuid.to_string()
+                };
+                field.description_id.set(description_id.clone());
+                Some(description_id)
+            } else {
+                id.get_untracked()
+            }}
 
             {..global_attrs_1}
             {..global_attrs_2}

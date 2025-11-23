@@ -7,14 +7,19 @@ pub fn FieldSliderExample() -> impl IntoView {
 
     view! {
         <div class="w-full max-w-md">
-            <Field>
-                <FieldLabel label_for="price-range">"Price Range"</FieldLabel>
-                <FieldDescription>
-                    "Set your budget range ($" <span class="font-medium tabular-nums">"0"</span>
-                    " - $" <span class="font-medium tabular-nums">{move || value.get()}</span>")."
-                </FieldDescription>
-                <Slider id="price-range" value max=1000. min=0. step=10. class="mt-2 w-full" />
-            </Field>
+            <FieldSet>
+                <FieldGroup>
+                    <Field>
+                        <FieldLabel>"Price Range"</FieldLabel>
+                        <FieldDescription>
+                            "Set your budget range ($"
+                            <span class="font-medium tabular-nums">"0"</span> " - $"
+                            <span class="font-medium tabular-nums">{move || value.get()}</span>")."
+                        </FieldDescription>
+                        <Slider class="mt-2 w-full" max=1000. min=0. step=10. value />
+                    </Field>
+                </FieldGroup>
+            </FieldSet>
         </div>
     }
 }

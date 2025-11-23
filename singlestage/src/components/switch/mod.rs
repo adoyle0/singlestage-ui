@@ -1,4 +1,4 @@
-use crate::{CheckboxGroupContext, Reactive};
+use crate::{CheckboxGroupContext, FieldContext, FieldLabel, Reactive};
 use leptos::prelude::*;
 
 #[component]
@@ -196,7 +196,6 @@ pub fn Switch(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -221,7 +220,6 @@ pub fn Switch(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            // role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -231,54 +229,111 @@ pub fn Switch(
         />
     };
 
-    view! {
-        {if let Some(children) = children {
-            view! {
-                <label class="singlestage-label">
+    let input_id = uuid::Uuid::new_v4();
+    let label_id = uuid::Uuid::new_v4();
+    let has_children = children.is_some();
+
+    let custom_attrs = view! {
+        <{..}
+            aria_describedby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    let description_id = field.description_id.get();
+                    if description_id.is_empty() { None } else { Some(description_id) }
+                } else {
+                    None
+                }
+            }
+            aria-invalid=move || {
+                if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                    checkbox_group.invalid.get().to_string()
+                } else {
+                    false.to_string()
+                }
+            }
+            aria_labelledby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    Some(field.label_id.get())
+                } else {
+                    if has_children { Some(label_id.to_string()) } else { None }
+                }
+            }
+            checked=checked.get_untracked()
+            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            disabled=disabled.get_untracked()
+            form=move || form.get()
+            name=move || name.get()
+            node_ref=switch_ref
+            on:change=on_change
+            readonly=move || readonly.get()
+            required=move || required.get()
+            role="switch"
+            type="checkbox"
+            value=move || value.get()
+        />
+    };
+
+    if let Some(children) = children {
+        view! {
+            {if use_context::<FieldContext>().is_some() {
+                view! {
                     <input
-                        checked=checked.get_untracked()
-                        form=move || form.get()
-                        name=move || name.get()
-                        readonly=move || readonly.get()
-                        required=move || required.get()
-                        disabled=disabled.get_untracked()
-                        class=move || {
-                            format!("singlestage-input {}", class.get().unwrap_or_default())
-                        }
-                        node_ref=switch_ref
-                        on:change=on_change
-                        role="switch"
-                        type="checkbox"
-                        value=move || value.get()
+                        id=move || id.get().unwrap_or(input_id.to_string())
 
                         {..global_attrs_1}
                         {..global_attrs_2}
+                        {..custom_attrs}
                     />
-                    {children()}
-                </label>
-            }
-                .into_any()
-        } else {
-            view! {
-                <input
-                    checked=checked.get_untracked()
-                    form=move || form.get()
-                    name=move || name.get()
-                    readonly=move || readonly.get()
-                    required=move || required.get()
-                    disabled=disabled.get_untracked()
-                    class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
-                    node_ref=switch_ref
-                    on:change=on_change
-                    role="switch"
-                    type="checkbox"
-                    value=move || value.get()
+                    <FieldLabel
+                        class=class.get_untracked()
+                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                    >
+                        {children()}
+                    </FieldLabel>
+                }
+                    .into_any()
+            } else {
+                view! {
+                    <label
+                        class=move || {
+                            format!("singlestage-label {}", class.get().unwrap_or_default())
+                        }
+                        for=move || id.get().unwrap_or(input_id.to_string())
+                        id=label_id.to_string()
+                    >
+                        <input
+                            id=move || id.get().unwrap_or(input_id.to_string())
 
-                    {..global_attrs_1}
-                    {..global_attrs_2}
-                />
-            }
-                .into_any()
-        }}
+                            {..global_attrs_1}
+                            {..global_attrs_2}
+                            {..custom_attrs}
+                        />
+                        {children()}
+                    </label>
+                }
+                    .into_any()
+            }}
+        }
+        .into_any()
+    } else {
+        view! {
+            <input
+                id={if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        Some(id)
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        Some(input_id.to_string())
+                    }
+                } else {
+                    id.get_untracked()
+                }}
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..custom_attrs}
+            />
+        }
+        .into_any()
     }
 }

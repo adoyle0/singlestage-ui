@@ -14,35 +14,26 @@ pub fn FieldExample() -> impl IntoView {
                         </FieldDescription>
                         <FieldGroup>
                             <Field>
-                                <FieldLabel label_for="checkout-7j9-card-name-43j">
+                                <Input placeholder="Evil Rabbit" required=true>
                                     "Name on Card"
-                                </FieldLabel>
-                                <Input
-                                    id="checkout-7j9-card-name-43j"
-                                    placeholder="Evil Rabbit"
-                                    required=true
-                                />
+                                </Input>
                             </Field>
                             <Field>
-                                <FieldLabel label_for="checkout-7j9-card-number-uw1">
-                                    "Card Number"
-                                </FieldLabel>
                                 <Input
-                                    id="checkout-7j9-card-number-uw1"
                                     placeholder="1234 5678 9012 3456"
                                     inputmode="numeric"
                                     required=true
-                                />
+                                >
+                                    "Card Number"
+                                </Input>
                                 <FieldDescription>
                                     "Enter your 16-digit card number"
                                 </FieldDescription>
                             </Field>
-                            <div class="grid grid-cols-3 gap-4">
+                            <FieldGroup class="grid grid-cols-3">
                                 <Field>
-                                    <FieldLabel label_for="checkout-exp-month-ts6">
-                                        "Month"
-                                    </FieldLabel>
-                                    <Select placeholder="MM" id="checkout-exp-month-ts6">
+                                    <FieldLabel>"Month"</FieldLabel>
+                                    <Select placeholder="MM">
                                         <SelectContent>
                                             <SelectItem value="01">"01"</SelectItem>
                                             <SelectItem value="02">"02"</SelectItem>
@@ -60,10 +51,8 @@ pub fn FieldExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <FieldLabel label_for="checkout-7j9-exp-year-f59">
-                                        "Year"
-                                    </FieldLabel>
-                                    <Select placeholder="YYYY" id="checkout-7j9-exp-year-f59">
+                                    <FieldLabel>"Year"</FieldLabel>
+                                    <Select placeholder="YYYY">
                                         <SelectContent>
                                             <SelectItem value="2024">"2024"</SelectItem>
                                             <SelectItem value="2025">"2025"</SelectItem>
@@ -75,15 +64,11 @@ pub fn FieldExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <FieldLabel label_for="checkout-7j9-cvv">"CVV"</FieldLabel>
-                                    <Input
-                                        id="checkout-7j9-cvv"
-                                        inputmode="numeric"
-                                        placeholder="123"
-                                        required=true
-                                    />
+                                    <Input inputmode="numeric" placeholder="123" required=true>
+                                        "CVV"
+                                    </Input>
                                 </Field>
-                            </div>
+                            </FieldGroup>
                         </FieldGroup>
                     </FieldSet>
                     <FieldSeparator />
@@ -92,31 +77,18 @@ pub fn FieldExample() -> impl IntoView {
                         <FieldDescription>
                             "The billing address associated with your payment method"
                         </FieldDescription>
-                        <FieldGroup>
-                            <Field orientation="horizontal">
-                                <Checkbox id="checkout-7j9-same-as-shipping-wgm" checked=true />
-                                <FieldLabel
-                                    label_for="checkout-7j9-same-as-shipping-wgm"
-                                    class="font-normal"
-                                >
-                                    "Same as shipping address"
-                                </FieldLabel>
-                            </Field>
-                        </FieldGroup>
+                        <Field orientation="horizontal">
+                            <Checkbox class="font-normal" checked=true>
+                                "Same as shipping address"
+                            </Checkbox>
+                        </Field>
                     </FieldSet>
                     <FieldSet>
-                        <FieldGroup>
-                            <Field>
-                                <FieldLabel label_for="checkout-7j9-optional-comments">
-                                    "Comments"
-                                </FieldLabel>
-                                <Textarea
-                                    id="checkout-7j9-optional-comments"
-                                    placeholder="Add any additional comments"
-                                    class="resize-none"
-                                />
-                            </Field>
-                        </FieldGroup>
+                        <Field>
+                            <Textarea placeholder="Add any additional comments" class="resize-none">
+                                "Comments"
+                            </Textarea>
+                        </Field>
                     </FieldSet>
                     <Field orientation="horizontal">
                         <Button button_type="submit">"Submit"</Button>

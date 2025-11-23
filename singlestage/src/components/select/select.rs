@@ -1,5 +1,5 @@
 use super::SelectContext;
-use crate::Reactive;
+use crate::{FieldContext, Reactive};
 use leptos::prelude::*;
 
 #[component]
@@ -192,14 +192,12 @@ pub fn Select(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -239,12 +237,29 @@ pub fn Select(
         />
     };
 
+    let input_id = uuid::Uuid::new_v4();
+
     view! {
         <select
+            aria_describedby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    let description_id = field.description_id.get();
+                    if description_id.is_empty() { None } else { Some(description_id) }
+                } else {
+                    None
+                }
+            }
             aria-invalid=move || {
                 match invalid.get() {
-                    Some(true) => "true",
-                    _ => "",
+                    Some(true) => Some("true"),
+                    _ => None,
+                }
+            }
+            aria_labelledby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    Some(field.label_id.get())
+                } else {
+                    None
                 }
             }
             node_ref=select_ref
@@ -259,6 +274,17 @@ pub fn Select(
                     class.get().unwrap_or_default(),
                 )
             }
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
+                } else {
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
+                }
+            } else {
+                id.get_untracked()
+            }}
 
             {..global_attrs_1}
             {..global_attrs_2}

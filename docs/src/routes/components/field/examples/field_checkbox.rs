@@ -14,48 +14,24 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                     <FieldGroup>
                         <CheckboxGroup>
                             <Field orientation="horizontal">
-                                <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
-                                <FieldLabel
-                                    label_for="finder-pref-9k2-hard-disks-ljj"
-                                    class="font-normal"
-                                >
-                                    "Hard disks"
-                                </FieldLabel>
+                                <Checkbox class="font-normal">"Hard disks"</Checkbox>
                             </Field>
                             <Field orientation="horizontal">
-                                <Checkbox id="finder-pref-9k2-external-disks-1yg" />
-                                <FieldLabel
-                                    label_for="finder-pref-9k2-external-disks-1yg"
-                                    class="font-normal"
-                                >
-                                    "External disks"
-                                </FieldLabel>
+                                <Checkbox class="font-normal">"External disks"</Checkbox>
                             </Field>
                             <Field orientation="horizontal">
-                                <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
-                                <FieldLabel
-                                    label_for="finder-pref-9k2-cds-dvds-fzt"
-                                    class="font-normal"
-                                >
-                                    "CDs, DVDs, and iPods"
-                                </FieldLabel>
+                                <Checkbox class="font-normal">"CDs, DVDs, and iPods"</Checkbox>
                             </Field>
                             <Field orientation="horizontal">
-                                <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
-                                <FieldLabel
-                                    label_for="finder-pref-9k2-connected-servers-6l2"
-                                    class="font-normal"
-                                >
-                                    "Connected servers"
-                                </FieldLabel>
+                                <Checkbox class="font-normal">"Connected servers"</Checkbox>
                             </Field>
                         </CheckboxGroup>
                     </FieldGroup>
                 </FieldSet>
                 <FieldSeparator />
                 <Field orientation="horizontal">
-                    <Checkbox id="finder-pref-9k2-sync-folders-nep" checked=true />
-                    <FieldLabel label_for="finder-pref-9k2-sync-folders-nep">
+                    <Checkbox checked=true />
+                    <FieldLabel>
                         <FieldContent>
                             <FieldTitle>"Sync Desktop & Documents folders"</FieldTitle>
                             <FieldDescription>
