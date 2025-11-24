@@ -113,6 +113,22 @@
     }
   }
 
+  /* Error */
+
+  .singlestage-field-error {
+    @apply font-normal
+    text-destructive
+    text-sm;
+  }
+
+  .singlestage-field-error-list {
+    @apply flex
+    flex-col
+    gap-1
+    list-disc
+    ml-4;
+  }
+
   /* Group */
 
   .singlestage-field-group {

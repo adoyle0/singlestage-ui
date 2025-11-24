@@ -52,9 +52,14 @@ description = "Stack Field components with FieldGroup. Add FieldSeparator to div
 name = "field responsive layout"
 title = "Responsive Layout"
 
+[[examples]]
+name = "field errors"
+title = "Errors"
+
 [[references]]
 name = "Field"
-description = "A form input field."
+description = """The core wrapper for a single field. Provides orientation control, invalid state \
+styling, and spacing."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -67,7 +72,8 @@ attrs = [
 
 [[references]]
 name = "FieldContent"
-description = "Contains field content."
+description = """Flex column that groups control and descriptions when the label sits beside the \
+control. Not required if you have no description."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -75,7 +81,7 @@ attrs = []
 
 [[references]]
 name = "FieldDescription"
-description = "Contains a description of content for the input in a field."
+description = "Helper text slot that automatically balances long lines in horizontal layouts."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -83,7 +89,7 @@ attrs = []
 
 [[references]]
 name = "FieldError"
-description = "An error message related to field input."
+description = "Accessible error container that accepts children."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -91,7 +97,8 @@ attrs = []
 
 [[references]]
 name = "FieldGroup"
-description = "Groups together related input fields."
+description = """Layout wrapper that stacks Field components and enables queries for responsive \
+orientations."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -99,7 +106,7 @@ attrs = []
 
 [[references]]
 name = "FieldLabel"
-description = "The label associated with an input."
+description = "A styled label associated with the input for a Field."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -110,7 +117,7 @@ attrs = [
 
 [[references]]
 name = "FieldLegend"
-description = "A title for a FieldSet."
+description = "Legend element for a FieldSet. Use the label variant to align with label sizing."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -121,8 +128,8 @@ attrs = [
 
 [[references]]
 name = "FieldSeparator"
-description = """Separates different groups of fields. Optionally takes children such as a string \
-that will be displayed in the center of the separator."""
+description = """Visual divider to separate sections inside a FieldGroup. Accepts optional inline \
+content"""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -130,7 +137,7 @@ attrs = []
 
 [[references]]
 name = "FieldSet"
-description = "Contains a set of related input fields or groups of fields."
+description = "Container that renders a semantic fieldset with spacing presets."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
@@ -140,7 +147,7 @@ attrs = []
 
 [[references]]
 name = "FieldTitle"
-description = "A title associated with a field."
+description = "Renders a title with label styling."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

@@ -2,7 +2,7 @@ use leptos::prelude::*;
 
 #[component]
 pub fn FieldError(
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -85,9 +85,6 @@ pub fn FieldError(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -108,13 +105,16 @@ pub fn FieldError(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
+
+    /// A list of errors
+    #[prop(optional, into)]
+    errors: MaybeProp<Vec<String>>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -139,7 +139,6 @@ pub fn FieldError(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -151,11 +150,29 @@ pub fn FieldError(
 
     view! {
         <div
+            class=move || format!("singlestage-field-error {}", class.get().unwrap_or_default())
+            role="alert"
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            {if !errors.get().unwrap_or_default().is_empty() {
+                view! {
+                    <ul class="singlestage-field-error-list">
+                        <For
+                            each=move || errors.get().unwrap_or_default()
+                            key=|error| error.clone()
+                            let(error)
+                        >
+                            <li>{error}</li>
+                        </For>
+                    </ul>
+                }
+                    .into_any()
+            } else {
+                { if let Some(children) = children { { children() } } else { "".into_any() } }
+            }
+                .into_any()}
         </div>
     }
 }

@@ -1,11 +1,21 @@
 use leptos::*;
-use singlestage::field::*;
+use singlestage::*;
 
 #[component]
 pub fn FieldAnatomy() -> impl IntoView {
     view! {
         <FieldSet>
             <FieldLegend />
+            <FieldDescription />
+            <FieldGroup>
+                <Field>
+                    <FieldLabel />
+                    <FieldError />
+                    <Input />
+                    <FieldDescription />
+                </Field>
+            </FieldGroup>
+            <FieldSeparator />
             <FieldGroup>
                 <Field>
                     <FieldLabel>
@@ -14,9 +24,9 @@ pub fn FieldAnatomy() -> impl IntoView {
                             <FieldDescription />
                         </FieldContent>
                     </FieldLabel>
+                    <Checkbox />
                 </Field>
             </FieldGroup>
-            <FieldSeparator />
         </FieldSet>
     }
 }

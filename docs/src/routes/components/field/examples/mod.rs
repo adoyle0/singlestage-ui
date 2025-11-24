@@ -1,6 +1,7 @@
 mod field;
 mod field_checkbox;
 mod field_choice_card;
+mod field_errors;
 mod field_group;
 mod field_input;
 mod field_radio;
@@ -14,6 +15,7 @@ mod field_textarea;
 pub use field::*;
 pub use field_checkbox::*;
 pub use field_choice_card::*;
+pub use field_errors::*;
 pub use field_group::*;
 pub use field_input::*;
 pub use field_radio::*;
