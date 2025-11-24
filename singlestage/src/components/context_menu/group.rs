@@ -1,5 +1,5 @@
 use crate::ContextMenuGroupContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains multiple items.
 #[component]
@@ -111,7 +111,6 @@ pub fn ContextMenuGroup(
     let heading_id = RwSignal::new(String::new());
 
     let context = ContextMenuGroupContext { heading_id };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -162,7 +161,7 @@ pub fn ContextMenuGroup(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

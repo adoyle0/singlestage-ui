@@ -1,5 +1,5 @@
 use crate::ContextMenuContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a context menu.
 #[component]
@@ -119,7 +119,6 @@ pub fn ContextMenu(
         x: RwSignal::new(i32::default()),
         y: RwSignal::new(i32::default()),
     };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -169,7 +168,7 @@ pub fn ContextMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

@@ -1,6 +1,6 @@
 use super::SelectContext;
 use crate::{FieldContext, Reactive};
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
 pub fn Select(
@@ -169,7 +169,6 @@ pub fn Select(
     }
 
     let context = SelectContext { placeholder, value };
-    provide_context(context);
 
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {
@@ -286,7 +285,7 @@ pub fn Select(
             {..global_attrs_2}
             {..select_attrs}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </select>
     }
 }
