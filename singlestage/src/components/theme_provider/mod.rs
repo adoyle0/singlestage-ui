@@ -55,7 +55,7 @@ static DARK_COMMON: &str = r#"
 // TODO: This code is dead and here for future reference
 static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
-  .singlestage-field-label:has(input:checked) {
+  .singlestage-field-button:has(input:checked) {
     @apply bg-primary/10;
   }
 
@@ -183,7 +183,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
 }"#;
 
 static DARK_OVERRIDES: &str = r#"@layer components {
-  .singlestage-field-label:has(input:checked) {
+  .singlestage-field-button:has(input:checked) {
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--primary) 10%, transparent);
     }
