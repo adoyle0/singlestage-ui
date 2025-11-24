@@ -34,15 +34,15 @@ pub fn FieldErrorsExample() -> impl IntoView {
             errors.push("Password must be at least 8 characters long".to_string());
         };
 
-        if !password.chars().find(|char| char.is_numeric()).is_some() {
+        if !password.chars().any(|char| char.is_numeric()) {
             errors.push("Password must contain a number".to_string());
         };
 
-        if !password.chars().find(|char| char.is_uppercase()).is_some() {
+        if !password.chars().any(|char| char.is_uppercase()) {
             errors.push("Password must contain uppercase letters".to_string());
         };
 
-        if !password.chars().find(|char| char.is_lowercase()).is_some() {
+        if !password.chars().any(|char| char.is_lowercase()) {
             errors.push("Password must contain lowercase letters".to_string());
         };
 
