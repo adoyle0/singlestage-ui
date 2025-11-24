@@ -7,7 +7,8 @@ pub fn FieldErrorsExample() -> impl IntoView {
     let password_invalid = RwSignal::new(true);
 
     let password_errors = RwSignal::new(vec![
-        "Password must be 8 characters long".to_string(),
+        "Password is required".to_string(),
+        "Password must be at least 8 characters long".to_string(),
         "Password must contain a number".to_string(),
         "Password must contain uppercase letters".to_string(),
         "Password must contain lowercase letters".to_string(),
@@ -23,11 +24,14 @@ pub fn FieldErrorsExample() -> impl IntoView {
 
     let password_validate = move |ev| {
         let password = event_target_value(&ev);
-
         let mut errors = vec![];
 
+        if password.is_empty() {
+            errors.push("Password is required".to_string());
+        };
+
         if password.len() < 8 {
-            errors.push("Password must be 8 characters long".to_string());
+            errors.push("Password must be at least 8 characters long".to_string());
         };
 
         if !password.chars().find(|char| char.is_numeric()).is_some() {
@@ -51,14 +55,14 @@ pub fn FieldErrorsExample() -> impl IntoView {
             <FieldSet>
                 <FieldGroup>
                     <Field>
-                        <FieldLabel>"Username"</FieldLabel>
+                        <FieldLabel>"Username *"</FieldLabel>
                         <Show when=move || username_invalid.get()>
                             <FieldError>"Username is required"</FieldError>
                         </Show>
                         <Input invalid=username_invalid on:input=username_validate />
                     </Field>
                     <Field>
-                        <FieldLabel>"Password"</FieldLabel>
+                        <FieldLabel>"Password *"</FieldLabel>
                         <FieldError errors=password_errors />
                         <Input
                             input_type="password"
