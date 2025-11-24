@@ -1,9 +1,8 @@
-use super::SelectContext;
-use crate::{FieldContext, Reactive};
-use leptos::prelude::*;
+use crate::FieldContext;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
-pub fn Select(
+pub fn Field(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -87,9 +86,6 @@ pub fn Select(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -111,81 +107,22 @@ pub fn Select(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 
-    // SELECT ATTRIBUTES
-    //
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    /// Sets the display orientation.
+    ///
+    /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
     #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
+    orientation: MaybeProp<String>,
+    /// Sets the display variant of the `Field`.
+    ///
+    /// Accepted values: "button".
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Set how many characters wide the field should be. Defaults to `20`.
-    #[prop(optional, into)]
-    size: MaybeProp<usize>,
-
-    /// Set default value. Setting value overrides this setting.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Toggle invalid appearance.
-    #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
-    /// The placeholder value for the select.
-    #[prop(optional, into)]
-    placeholder: MaybeProp<String>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
-    #[prop(optional, into)]
-    value: Reactive<String>,
+    variant: MaybeProp<String>,
 ) -> impl IntoView {
-    let select_ref = NodeRef::<leptos::html::Select>::new();
-
-    let on_change = move |ev| value.set(event_target_value(&ev));
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default);
-    } else if placeholder.get_untracked().is_some() {
-        value.set("singlestage-select-placeholder".to_string());
-    }
-
-    if let Some(select) = select_ref.get_untracked() {
-        if let Some(default) = default.get_untracked() {
-            select.set_value(&default);
-        } else if placeholder.get_untracked().is_some() {
-            select.set_value("singlestage-select-placeholder");
-        } else {
-            select.set_value(&value.get_untracked());
-        }
-    }
-
-    let context = SelectContext { placeholder, value };
-    provide_context(context);
-
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            select.set_disabled(disabled.get().unwrap_or_default());
-        }
-    });
-
-    // Update value reactively
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            let value = value.get();
-            if !value.is_empty() {
-                select.set_value(&value);
-            }
-        }
-    });
+    let context = FieldContext {
+        description_id: RwSignal::new(String::default()),
+        input_id: RwSignal::new(String::default()),
+        label_id: RwSignal::new(String::default()),
+    };
 
     let global_attrs_1 = view! {
         <{..}
@@ -198,6 +135,7 @@ pub fn Select(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -215,7 +153,6 @@ pub fn Select(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -225,68 +162,29 @@ pub fn Select(
         />
     };
 
-    let select_attrs = view! {
-        <{..}
-            autocomplete=move || autocomplete.get()
-            disabled=move || disabled.get()
-            form=move || form.get()
-            multiple=move || multiple.get()
-            name=move || name.get()
-            required=move || required.get()
-            size=move || size.get()
-        />
-    };
-
-    let input_id = uuid::Uuid::new_v4();
-
     view! {
-        <select
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                match invalid.get() {
-                    Some(true) => Some("true"),
-                    _ => None,
-                }
-            }
-            aria_labelledby=move || {
-                use_context::<FieldContext>().map(|field| field.label_id.get())
-            }
-            node_ref=select_ref
-            on:change=on_change
+        <div
             class=move || {
                 format!(
-                    "singlestage-select{} {}",
-                    match value.get().as_str() {
-                        "singlestage-select-placeholder" => " singlestage-select-placeholder",
+                    "singlestage-field{}{}{}",
+                    match orientation.get().unwrap_or_default().as_str() {
+                        "horizontal" => " singlestage-field-horizontal",
+                        "responsive" => " singlestage-field-responsive",
+                        _ => " singlestage-field-vertical",
+                    },
+                    match variant.get().unwrap_or_default().as_str() {
+                        "button" => " singlestage-field-button",
                         _ => "",
                     },
                     class.get().unwrap_or_default(),
                 )
             }
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
-                }
-            } else {
-                id.get_untracked()
-            }}
+            role="group"
 
             {..global_attrs_1}
             {..global_attrs_2}
-            {..select_attrs}
         >
-            {children()}
-        </select>
+            <Provider value=context>{children()}</Provider>
+        </div>
     }
 }

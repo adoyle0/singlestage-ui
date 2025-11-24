@@ -1,0 +1,261 @@
+@layer components {
+  /* Field */
+  .singlestage-field {
+    @apply aria-invalid:text-destructive
+    flex
+    gap-3
+    w-full;
+  }
+
+  .singlestage-field:has(> *:disabled) {
+    .singlestage-field-label {
+      @apply opacity-50;
+    }
+  }
+
+  .singlestage-field-vertical {
+    @apply flex-col;
+
+    > * {
+      @apply w-full;
+    }
+
+    > .sr-only {
+      @apply w-auto;
+    }
+  }
+
+  .singlestage-field-horizontal {
+    @apply flex-row
+      items-center;
+
+    .singlestage-field-description {
+      @apply text-balance;
+    }
+
+    > .singlestage-field-label,
+    > .singlestage-field-title,
+    > .singlestage-field-legend-label {
+      @apply flex-auto;
+    }
+  }
+
+  .singlestage-field-horizontal:has(.singlestage-field-content) {
+    @apply items-start;
+
+    > input[type="checkbox"],
+    > input[type="radio"] {
+      @apply md:mt-px;
+    }
+  }
+
+  .singlestage-field-responsive {
+    @apply flex-col;
+
+    > * {
+      @apply w-full;
+    }
+
+    > .sr-only {
+      @apply w-auto;
+    }
+  }
+
+  .singlestage-field-responsive:has(> .singlestage-field-content) {
+    @apply md:items-start;
+
+    > input[type="checkbox"],
+    > input[type="radio"] {
+      @apply md:mt-px;
+    }
+  }
+
+  .singlestage-field-button {
+    @apply border
+    flex-auto
+    p-4
+    rounded-md
+    w-full;
+  }
+
+  .singlestage-field-button:has(input:checked) {
+    @apply bg-primary/5
+    border-primary;
+  }
+
+  /* Content */
+
+  .singlestage-field-content {
+    @apply flex
+    flex-1
+    flex-col
+    gap-1.5
+    leading-snug;
+  }
+
+  /* Description */
+
+  .singlestage-field-description {
+    @apply font-normal
+    last:mt-0
+    leading-normal
+    nth-last-2:-mt-1
+    text-muted-foreground
+    text-sm;
+
+    > a {
+      @apply underline
+      underline-offset-4;
+    }
+
+    > a:hover {
+      @apply text-primary;
+    }
+  }
+
+  /* Error */
+
+  .singlestage-field-error {
+    @apply font-normal
+    text-destructive
+    text-sm;
+  }
+
+  .singlestage-field-error-list {
+    @apply flex
+    flex-col
+    gap-1
+    list-disc
+    ml-4;
+  }
+
+  /* Group */
+
+  .singlestage-field-group {
+    @apply flex
+    flex-col
+    gap-7
+    w-full;
+
+    > .singlestage-field-group {
+      @apply gap-4;
+    }
+
+    > .singlestage-checkbox-group {
+      @apply gap-3;
+    }
+
+    .singlestage-field-responsive {
+      @apply md:flex-row
+      md:items-center;
+
+      > * {
+        @apply md:!w-auto;
+      }
+
+      > .singlestage-field-label,
+      > .singlestage-field-title,
+      > .singlestage-field-legend-label {
+        @apply md:flex-auto;
+      }
+    }
+
+    .singlestage-field-responsive:has(.singlestage-field-content) {
+      @apply md:items-start;
+
+      > input[type="checkbox"],
+      > input[type="radio"] {
+        @apply md:mt-px;
+      }
+    }
+  }
+
+  /* Label */
+
+  .singlestage-field-label {
+    @apply flex
+    w-fit
+    gap-2
+    leading-snug
+    items-center
+    text-sm
+    font-medium
+    select-none
+    aria-disabled:pointer-events-none
+    aria-disabled:opacity-50;
+  }
+
+  /* Legend */
+
+  .singlestage-field-legend {
+    @apply font-medium
+    mb-3;
+  }
+
+  .singlestage-field-legend-legend {
+    @apply text-base;
+  }
+
+  .singlestage-field-legend-legend + .singlestage-field-description {
+    @apply -mt-1.5;
+  }
+
+  .singlestage-field-legend-label {
+    @apply text-sm;
+  }
+
+  /* Set */
+
+  .singlestage-field-set {
+    @apply flex
+    flex-col
+    gap-6;
+  }
+
+  .singlestage-field-set:has(.singlestage-checkbox-group),
+  .singlestage-field-set:has(.singlestage-radio-group) {
+    @apply gap-3;
+  }
+
+  /* Separator */
+
+  .singlestage-field-separator {
+    @apply absolute
+    bg-border
+    h-px
+    inset-0
+    shrink-0
+    top-1/2
+    w-full;
+  }
+
+  .singlestage-field-separator-outer {
+    @apply -my-2
+    h-5
+    relative
+    text-sm;
+  }
+
+  .singlestage-field-separator-content {
+    @apply bg-background
+    block
+    mx-auto
+    px-2
+    relative
+    text-muted-foreground
+    w-fit;
+  }
+
+  /* Title */
+
+  .singlestage-field-title {
+    @apply aria-disabled:opacity-50
+    flex
+    font-medium
+    gap-2
+    items-center
+    leading-snug
+    text-sm
+    w-fit;
+  }
+}

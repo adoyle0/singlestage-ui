@@ -1,9 +1,8 @@
-use super::SelectContext;
-use crate::{FieldContext, Reactive};
+use crate::FieldContext;
 use leptos::prelude::*;
 
 #[component]
-pub fn Select(
+pub fn FieldLabel(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -111,82 +110,10 @@ pub fn Select(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 
-    // SELECT ATTRIBUTES
-    //
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    /// The id of the labeled element if it's not a child
     #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Set how many characters wide the field should be. Defaults to `20`.
-    #[prop(optional, into)]
-    size: MaybeProp<usize>,
-
-    /// Set default value. Setting value overrides this setting.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Toggle invalid appearance.
-    #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
-    /// The placeholder value for the select.
-    #[prop(optional, into)]
-    placeholder: MaybeProp<String>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
-    #[prop(optional, into)]
-    value: Reactive<String>,
+    label_for: MaybeProp<String>,
 ) -> impl IntoView {
-    let select_ref = NodeRef::<leptos::html::Select>::new();
-
-    let on_change = move |ev| value.set(event_target_value(&ev));
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default);
-    } else if placeholder.get_untracked().is_some() {
-        value.set("singlestage-select-placeholder".to_string());
-    }
-
-    if let Some(select) = select_ref.get_untracked() {
-        if let Some(default) = default.get_untracked() {
-            select.set_value(&default);
-        } else if placeholder.get_untracked().is_some() {
-            select.set_value("singlestage-select-placeholder");
-        } else {
-            select.set_value(&value.get_untracked());
-        }
-    }
-
-    let context = SelectContext { placeholder, value };
-    provide_context(context);
-
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            select.set_disabled(disabled.get().unwrap_or_default());
-        }
-    });
-
-    // Update value reactively
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            let value = value.get();
-            if !value.is_empty() {
-                select.set_value(&value);
-            }
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -225,68 +152,33 @@ pub fn Select(
         />
     };
 
-    let select_attrs = view! {
-        <{..}
-            autocomplete=move || autocomplete.get()
-            disabled=move || disabled.get()
-            form=move || form.get()
-            multiple=move || multiple.get()
-            name=move || name.get()
-            required=move || required.get()
-            size=move || size.get()
-        />
-    };
-
-    let input_id = uuid::Uuid::new_v4();
+    let uuid = uuid::Uuid::new_v4();
 
     view! {
-        <select
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                match invalid.get() {
-                    Some(true) => Some("true"),
-                    _ => None,
-                }
-            }
-            aria_labelledby=move || {
-                use_context::<FieldContext>().map(|field| field.label_id.get())
-            }
-            node_ref=select_ref
-            on:change=on_change
-            class=move || {
-                format!(
-                    "singlestage-select{} {}",
-                    match value.get().as_str() {
-                        "singlestage-select-placeholder" => " singlestage-select-placeholder",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
+        <label
+            class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
+            for=move || {
+                if let Some(label_for) = label_for.get() {
+                    Some(label_for)
+                } else { use_context::<FieldContext>().map(|field| field.input_id.get()) }
             }
             id={if let Some(field) = use_context::<FieldContext>() {
+                let label_id;
                 if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
+                    label_id = id;
                 } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
-                }
+                    label_id = uuid.to_string()
+                };
+                field.label_id.set(label_id.clone());
+                Some(label_id)
             } else {
                 id.get_untracked()
             }}
 
             {..global_attrs_1}
             {..global_attrs_2}
-            {..select_attrs}
         >
             {children()}
-        </select>
+        </label>
     }
 }

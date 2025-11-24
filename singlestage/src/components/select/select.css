@@ -22,7 +22,7 @@
     shadow-xs
     text-sm
     transition-[color,box-shadow]
-    w-fit
+    min-w-fit
     whitespace-nowrap;
 
     @apply bg-[image:var(--chevron-down-icon-50)]

@@ -1,0 +1,32 @@
+use leptos::prelude::*;
+use singlestage::*;
+
+#[component]
+pub fn FieldSelectExample() -> impl IntoView {
+    view! {
+        <div class="w-full max-w-md">
+            <FieldSet>
+                <FieldGroup>
+                    <Field>
+                        <FieldLabel>"Department"</FieldLabel>
+                        <Select placeholder="Choose department">
+                            <SelectContent>
+                                <SelectItem value="engineering">"Engineering"</SelectItem>
+                                <SelectItem value="design">"Design"</SelectItem>
+                                <SelectItem value="marketing">"Marketing"</SelectItem>
+                                <SelectItem value="sales">"Sales"</SelectItem>
+                                <SelectItem value="support">"Customer Support"</SelectItem>
+                                <SelectItem value="hr">"Human Resources"</SelectItem>
+                                <SelectItem value="finance">"Finance"</SelectItem>
+                                <SelectItem value="operations">"Operations"</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <FieldDescription>
+                            "Select your department or area of work."
+                        </FieldDescription>
+                    </Field>
+                </FieldGroup>
+            </FieldSet>
+        </div>
+    }
+}

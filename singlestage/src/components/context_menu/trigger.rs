@@ -151,27 +151,23 @@ pub fn ContextMenuTrigger(
                 ev.prevent_default();
                 menu.x.set(ev.x());
                 menu.y.set(ev.y());
-                if let Some(menu) = menu.menu_ref.get_untracked() {
-                    if let Some(menu) = menu.get_untracked() {
+                if let Some(menu) = menu.menu_ref.get_untracked()
+                    && let Some(menu) = menu.get_untracked() {
                         let _ = menu.show_popover();
                     }
-                }
             }
             on:mousedown=move |_ev| {
-                if let Some(menu) = menu.menu_ref.get_untracked() {
-                    if let Some(menu) = menu.get_untracked() {
+                if let Some(menu) = menu.menu_ref.get_untracked()
+                    && let Some(menu) = menu.get_untracked() {
                         let _ = menu.hide_popover();
                     }
-                }
             }
             on:mouseup=move |ev| {
-                if ev.button() == 2 {
-                    if let Some(menu) = menu.menu_ref.get_untracked() {
-                        if let Some(menu) = menu.get_untracked() {
+                if ev.button() == 2
+                    && let Some(menu) = menu.menu_ref.get_untracked()
+                        && let Some(menu) = menu.get_untracked() {
                             let _ = menu.show_popover();
                         }
-                    }
-                }
             }
             {..global_attrs_1}
             {..global_attrs_2}

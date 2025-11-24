@@ -1,10 +1,8 @@
-use crate::{FieldContext, FieldLabel, RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
-/// An item in the group that can be checked
 #[component]
-pub fn Radio(
-    #[prop(optional)] children: Option<Children>,
+pub fn FieldSet(
+    children: Children,
 
     // GLOBAL ATTRIBUTES
     //
@@ -111,73 +109,23 @@ pub fn Radio(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 
-    // RADIO ATTRIBUTES
+    // FIELDSET ATTRIBUTES
     //
-    /// Whether the command or control is checked
+    /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    checked: Reactive<bool>,
+    disabled: MaybeProp<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
-    // /// Name of this element. Submitted with the form as part of a name/value pair.
-    // #[prop(optional, into)]
-    // name: MaybeProp<String>,
-    /// Toggle whether or not the user can modify the value of this element.
+    /// Name of this element. Submitted with the form as part of a name/value pair.
     #[prop(optional, into)]
-    readonly: MaybeProp<bool>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Whether the form control is disabled
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
+    name: MaybeProp<String>,
 ) -> impl IntoView {
-    let radio_group = expect_context::<RadioGroupContext>();
-    let radio_ref = NodeRef::<leptos::html::Input>::new();
-
-    let on_change = move |ev| {
-        checked.set(event_target_checked(&ev));
-        radio_group.value.set(event_target_value(&ev));
-    };
-
-    if let Some(value) = value.get_untracked()
-        && radio_group.value.get_untracked() == value
-    {
-        if let Some(radio) = radio_ref.get_untracked() {
-            radio.set_checked(true);
-        }
-        checked.set(true);
-    }
-
-    Effect::new(move || {
-        if radio_group.value.get() == value.get().unwrap_or_default() {
-            checked.set(true);
-        } else {
-            checked.set(false);
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(radio) = radio_ref.get_untracked() {
-            radio.set_checked(checked.get());
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(radio) = radio_ref.get_untracked() {
-            radio.set_disabled(disabled.get().unwrap_or_default());
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -212,108 +160,17 @@ pub fn Radio(
         />
     };
 
-    let input_id = uuid::Uuid::new_v4();
-    let label_id = uuid::Uuid::new_v4();
-    let has_children = children.is_some();
+    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
 
-    let radio_attrs = view! {
-        <{..}
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                if let Some(radio_group) = use_context::<RadioGroupContext>() {
-                    radio_group.invalid.get().to_string()
-                } else {
-                    false.to_string()
-                }
-            }
-            aria_labelledby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children { Some(label_id.to_string()) } else { None }
-            }
-            checked=move || checked.get_untracked()
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
-            disabled=disabled.get_untracked()
-            form=move || form.get()
-            name=radio_group.name.clone()
-            node_ref=radio_ref
-            on:change=on_change
-            readonly=move || readonly.get()
-            required=move || required.get()
-            type="radio"
-            value=move || value.get()
-        />
-    };
+    view! {
+        <fieldset
+            class=move || { format!("singlestage-field-set {}", class.get().unwrap_or_default()) }
 
-    if let Some(children) = children {
-        view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <input
-                        id=move || id.get().unwrap_or(input_id.to_string())
-
-                        {..global_attrs_1}
-                        {..global_attrs_2}
-                        {..radio_attrs}
-                    />
-                    <FieldLabel
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </FieldLabel>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!("singlestage-label {}", class.get().unwrap_or_default())
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        <input
-                            id=move || id.get().unwrap_or(input_id.to_string())
-
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                            {..radio_attrs}
-                        />
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
-        }
-        .into_any()
-    } else {
-        view! {
-            <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..radio_attrs}
-            />
-        }
-        .into_any()
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..fieldset_attrs}
+        >
+            {children()}
+        </fieldset>
     }
 }
