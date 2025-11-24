@@ -1,6 +1,6 @@
 use super::TabsContext;
 use crate::Reactive;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
 pub fn Tabs(
@@ -116,7 +116,6 @@ pub fn Tabs(
     value: Reactive<String>,
 ) -> impl IntoView {
     let context = TabsContext { value };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -165,7 +164,7 @@ pub fn Tabs(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

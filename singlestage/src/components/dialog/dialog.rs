@@ -1,5 +1,5 @@
 use crate::{DialogContext, DialogTrigger};
-use leptos::{html, prelude::*};
+use leptos::{context::Provider, html, prelude::*};
 
 /// Contains all the parts of an alert dialog.
 #[component]
@@ -138,8 +138,6 @@ pub fn Dialog(
         described_by,
     };
 
-    provide_context(context);
-
     let open_dialog = move || {
         if let Some(dialog) = dialog_ref.write().as_ref()
             && dialog.show_modal().is_err()
@@ -220,7 +218,7 @@ pub fn Dialog(
             open=move || open.get_untracked()
         >
             <article {..global_attrs_1} {..global_attrs_2} on:click=move |ev| ev.stop_propagation()>
-                {children()}
+                <Provider value=context>{children()}</Provider>
             </article>
         </dialog>
     }

@@ -1,6 +1,6 @@
 use super::*;
 use crate::Reactive;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Sidebar context provider
 #[component]
@@ -26,7 +26,6 @@ pub fn SidebarProvider(
         hidden,
         side,
     };
-    provide_context(context);
 
-    view! { {children()} }
+    view! { <Provider value=context>{children()}</Provider> }
 }

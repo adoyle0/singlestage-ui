@@ -1,5 +1,5 @@
 use crate::PopoverContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a popover.
 #[component]
@@ -118,7 +118,6 @@ pub fn Popover(
         menu_id,
         trigger_id,
     };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -166,7 +165,7 @@ pub fn Popover(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

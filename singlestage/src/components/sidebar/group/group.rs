@@ -1,5 +1,5 @@
 use crate::SidebarGroupContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
 pub fn SidebarGroup(
@@ -113,7 +113,6 @@ pub fn SidebarGroup(
     let label_id = RwSignal::new("".to_string());
 
     let context = SidebarGroupContext { label_id };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -164,7 +163,7 @@ pub fn SidebarGroup(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

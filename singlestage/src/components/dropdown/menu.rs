@@ -1,5 +1,5 @@
 use crate::DropdownMenuContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a dropdown menu.
 #[component]
@@ -118,7 +118,6 @@ pub fn DropdownMenu(
         menu_id,
         trigger_id,
     };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -168,7 +167,7 @@ pub fn DropdownMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

@@ -1,5 +1,5 @@
 use crate::CollapsibleContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// A button that opens the collapsible menu.
 #[slot]
@@ -130,7 +130,6 @@ pub fn Collapsible(
 ) -> impl IntoView {
     let uuid = uuid::Uuid::new_v4().to_string();
     let context = CollapsibleContext { id: uuid.clone() };
-    provide_context(context);
 
     let global_attrs_1 = view! {
         <{..}
@@ -183,7 +182,7 @@ pub fn Collapsible(
             >
                 {(collapsible_trigger.children)().into_any()}
             </summary>
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </details>
     }
 }

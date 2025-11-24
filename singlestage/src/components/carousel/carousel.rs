@@ -1,5 +1,5 @@
 use super::CarouselContext;
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 #[component]
 pub fn Carousel(
@@ -145,8 +145,6 @@ pub fn Carousel(
         }
     });
 
-    provide_context(context);
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -193,7 +191,7 @@ pub fn Carousel(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

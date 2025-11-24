@@ -1,5 +1,5 @@
 use crate::{CheckboxGroupContext, Reactive};
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a radio group
 #[component]
@@ -172,7 +172,6 @@ pub fn CheckboxGroup(
     let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
 
     let context = CheckboxGroupContext { invalid, value };
-    provide_context(context);
 
     view! {
         <fieldset
@@ -182,7 +181,7 @@ pub fn CheckboxGroup(
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </fieldset>
     }
 }

@@ -1,5 +1,5 @@
 use crate::{RadioGroupContext, Reactive};
-use leptos::prelude::*;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a radio group
 #[component]
@@ -186,7 +186,6 @@ pub fn RadioGroup(
         invalid,
         value,
     };
-    provide_context(context);
 
     view! {
         <fieldset
@@ -196,7 +195,7 @@ pub fn RadioGroup(
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            {children()}
+            <Provider value=context>{children()}</Provider>
         </fieldset>
     }
 }
