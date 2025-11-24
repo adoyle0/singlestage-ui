@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[component]
@@ -108,7 +109,7 @@ pub fn FieldError(
 
     /// A list of errors
     #[prop(optional, into)]
-    errors: MaybeProp<Vec<String>>,
+    errors: Reactive<Vec<String>>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -156,23 +157,15 @@ pub fn FieldError(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if !errors.get().unwrap_or_default().is_empty() {
-                view! {
-                    <ul class="singlestage-field-error-list">
-                        <For
-                            each=move || errors.get().unwrap_or_default()
-                            key=|error| error.clone()
-                            let(error)
-                        >
-                            <li>{error}</li>
-                        </For>
-                    </ul>
-                }
-                    .into_any()
-            } else {
-                { if let Some(children) = children { { children() } } else { "".into_any() } }
-            }
-                .into_any()}
+            {if let Some(children) = children { children() } else { "".into_any() }}
+
+            <Show when=move || !errors.get().is_empty()>
+                <ul class="singlestage-field-error-list">
+                    <For each=move || errors.get() key=|error| error.clone() let(error)>
+                        <li>{error}</li>
+                    </For>
+                </ul>
+            </Show>
         </div>
     }
 }
