@@ -171,13 +171,11 @@ pub fn Field(
                         "horizontal" => " singlestage-field-horizontal",
                         "responsive" => " singlestage-field-responsive",
                         _ => " singlestage-field-vertical",
-                    }
-                        .to_string(),
+                    },
                     match variant.get().unwrap_or_default().as_str() {
                         "button" => " singlestage-field-button",
                         _ => "",
-                    }
-                        .to_string(),
+                    },
                     class.get().unwrap_or_default(),
                 )
             }

@@ -256,11 +256,7 @@ pub fn Select(
                 }
             }
             aria_labelledby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else {
-                    None
-                }
+                use_context::<FieldContext>().map(|field| field.label_id.get())
             }
             node_ref=select_ref
             on:change=on_change

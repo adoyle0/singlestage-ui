@@ -260,9 +260,7 @@ pub fn Textarea(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else {
-                    if has_children { Some(label_id.to_string()) } else { None }
-                }
+                } else if has_children { Some(label_id.to_string()) } else { None }
             }
             autocomplete=move || autocomplete.get()
             cols=move || cols.get()

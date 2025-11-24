@@ -160,11 +160,7 @@ pub fn FieldLabel(
             for=move || {
                 if let Some(label_for) = label_for.get() {
                     Some(label_for)
-                } else if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.input_id.get())
-                } else {
-                    None
-                }
+                } else { use_context::<FieldContext>().map(|field| field.input_id.get()) }
             }
             id={if let Some(field) = use_context::<FieldContext>() {
                 let label_id;

@@ -253,9 +253,7 @@ pub fn Checkbox(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else {
-                    if has_children { Some(label_id.to_string()) } else { None }
-                }
+                } else if has_children { Some(label_id.to_string()) } else { None }
             }
             checked=checked.get_untracked()
             class=move || {

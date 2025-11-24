@@ -236,9 +236,7 @@ pub fn Radio(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else {
-                    if has_children { Some(label_id.to_string()) } else { None }
-                }
+                } else if has_children { Some(label_id.to_string()) } else { None }
             }
             checked=move || checked.get_untracked()
             class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }

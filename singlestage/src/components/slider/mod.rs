@@ -343,9 +343,7 @@ pub fn Slider(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else {
-                    if has_children { Some(label_id.to_string()) } else { None }
-                }
+                } else if has_children { Some(label_id.to_string()) } else { None }
             }
             class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
             disabled=disabled.get_untracked()
