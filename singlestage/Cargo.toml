@@ -45,6 +45,7 @@ default = [
   "context_menu",
   "dialog",
   "dropdown",
+  "empty",
   "icon",
   "field",
   "input",
@@ -86,6 +87,7 @@ checkbox = ["field", "label"]
 context_menu = []
 dialog = []
 dropdown = ["button"]
+empty = []
 icon = ["macro"]
 field = []
 input = ["field", "label"]
