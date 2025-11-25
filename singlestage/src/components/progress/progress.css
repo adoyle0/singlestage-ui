@@ -1,0 +1,18 @@
+@layer components {
+  .singlestage-progress {
+    @apply bg-primary/20
+    h-2
+    overflow-hidden
+    relative
+    rounded-full
+    w-full;
+  }
+
+  .singlestage-progress-indicator {
+    @apply bg-primary
+    flex-1
+    h-full
+    transition-all
+    w-full;
+  }
+}
