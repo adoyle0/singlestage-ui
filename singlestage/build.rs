@@ -141,6 +141,7 @@ fn main() {
         "link",
         "pagination",
         "popover",
+        "progress",
         "radio",
         "scroll_area",
         "select",

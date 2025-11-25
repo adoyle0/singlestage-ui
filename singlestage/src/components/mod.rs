@@ -108,6 +108,11 @@ pub mod popover;
 #[cfg(feature = "popover")]
 pub use popover::*;
 
+#[cfg(feature = "progress")]
+pub mod progress;
+#[cfg(feature = "progress")]
+pub use progress::*;
+
 #[cfg(feature = "radio")]
 pub mod radio;
 #[cfg(feature = "radio")]

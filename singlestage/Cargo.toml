@@ -54,6 +54,7 @@ default = [
   "link",
   "pagination",
   "popover",
+  "progress",
   "radio",
   "scroll_area",
   "select",
@@ -95,6 +96,7 @@ label = []
 link = []
 pagination = ["button"]
 popover = []
+progress = []
 radio = ["field", "label"]
 scroll_area = []
 select = ["field"]
