@@ -1,0 +1,39 @@
+name = "Spinner"
+description = "An indicator that can be used to show a loading state."
+
+[[examples]]
+name = "spinner"
+
+[[examples]]
+name = "spinner custom"
+title = "Customization"
+description = "Spinner will override the default icon with any provided children."
+
+[[examples]]
+name = "spinner size"
+title = "Size"
+description = "Use the size-* utility class to change the size of the spinner."
+
+[[examples]]
+name = "spinner color"
+title = "Color"
+description = "Use the text-* utility class to change the color of the spinner."
+
+[[examples]]
+name = "spinner button"
+title = "Button"
+description = """Add a spinner to a button to indicate a loading state. The Button will handle \
+the spacing between the spinner and the text."""
+
+[[examples]]
+name = "spinner badge"
+title = "Badge"
+description = "You can also use a spinner inside a badge."
+
+[[references]]
+name = "Spinner"
+description = "Displays a loading spinner."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

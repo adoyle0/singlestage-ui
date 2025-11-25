@@ -143,6 +143,11 @@ pub mod slider;
 #[cfg(feature = "slider")]
 pub use slider::*;
 
+#[cfg(feature = "spinner")]
+pub mod spinner;
+#[cfg(feature = "spinner")]
+pub use spinner::*;
+
 #[cfg(feature = "switch")]
 pub mod switch;
 #[cfg(feature = "switch")]

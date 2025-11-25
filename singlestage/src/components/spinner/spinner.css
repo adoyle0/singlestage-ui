@@ -1,0 +1,13 @@
+@layer components {
+  .singlestage-spinner {
+    @apply animate-spin
+    size-4;
+  }
+
+  .singlestage-spinner-custom {
+    > svg {
+      @apply animate-spin
+      size-4;
+    }
+  }
+}

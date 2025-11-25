@@ -61,6 +61,7 @@ default = [
   "sidebar",
   "skeleton",
   "slider",
+  "spinner",
   "switch",
   "table",
   "tabs",
@@ -101,6 +102,7 @@ separator = []
 sidebar = []
 skeleton = []
 slider = ["field", "label"]
+spinner = []
 switch = ["field", "checkbox", "label"]
 table = []
 tabs = []
