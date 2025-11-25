@@ -148,6 +148,7 @@ fn main() {
         "sidebar",
         "skeleton",
         "slider",
+        "spinner",
         "switch",
         "toggle",
         "table",
