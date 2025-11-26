@@ -1,4 +1,5 @@
-use leptos::prelude::*;
+use leptos::{either::Either, prelude::*};
+use crate::AsChild;
 
 /// Displays a button.
 #[component]
@@ -180,6 +181,9 @@ pub fn Button(
     /// Variants: primary | secondary | outline | ghost | link | destructive
     #[prop(optional, into)]
     variant: MaybeProp<String>,
+
+    /// asChild
+    #[prop(optional)] as_child: bool,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -236,44 +240,88 @@ pub fn Button(
         />
     };
 
-    view! {
-        <button
-            class=move || {
-                format!(
-                    "{} {} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => "singlestage-btn-primary",
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-btn-sm",
-                        "small" => "singlestage-btn-sm",
-                        "lg" => "singlestage-btn-lg",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "icon-sm" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        "icon-lg" => "singlestage-btn-lg-icon",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            disabled=disabled.get_untracked()
-            prop:disabled=move || disabled.get()
-            type=button_type.get()
+    if as_child {
+        Either::Right(view! {
+            <AsChild
+                class=move || {
+                    format!(
+                        "{} {} {}",
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => "singlestage-btn-primary",
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" => "singlestage-btn-sm",
+                            "small" => "singlestage-btn-sm",
+                            "lg" => "singlestage-btn-lg",
+                            "large" => "singlestage-btn-lg",
+                            "icon" => "singlestage-btn-icon",
+                            "sm-icon" => "singlestage-btn-sm-icon",
+                            "icon-sm" => "singlestage-btn-sm-icon",
+                            "lg-icon" => "singlestage-btn-lg-icon",
+                            "icon-lg" => "singlestage-btn-lg-icon",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                {..}
+                disabled=disabled.get_untracked()
+                prop:disabled=move || disabled.get()
+                type=button_type.get()
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..button_attrs}
-        >
-            {children()}
-        </button>
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </AsChild>
+        })
+    } else {
+        Either::Left(view! {
+            <button
+                class=move || {
+                    format!(
+                        "{} {} {}",
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => "singlestage-btn-primary",
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" => "singlestage-btn-sm",
+                            "small" => "singlestage-btn-sm",
+                            "lg" => "singlestage-btn-lg",
+                            "large" => "singlestage-btn-lg",
+                            "icon" => "singlestage-btn-icon",
+                            "sm-icon" => "singlestage-btn-sm-icon",
+                            "icon-sm" => "singlestage-btn-sm-icon",
+                            "lg-icon" => "singlestage-btn-lg-icon",
+                            "icon-lg" => "singlestage-btn-lg-icon",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                disabled=disabled.get_untracked()
+                prop:disabled=move || disabled.get()
+                type=button_type.get()
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </button>
+        })
     }
 }

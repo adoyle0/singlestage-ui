@@ -1,5 +1,7 @@
+use crate::AsChild;
+
 use super::TabsContext;
-use leptos::prelude::*;
+use leptos::{either::Either, prelude::*};
 
 #[component]
 pub fn TabsTrigger(
@@ -159,6 +161,9 @@ pub fn TabsTrigger(
     /// The value of the tab that this button triggers.
     #[prop(optional, into)]
     value: MaybeProp<String>,
+
+    /// asChild
+    #[prop(optional)] as_child: bool,
 ) -> impl IntoView {
     let tabs = expect_context::<TabsContext>();
 
@@ -171,7 +176,6 @@ pub fn TabsTrigger(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -220,36 +224,65 @@ pub fn TabsTrigger(
             value=move || value.get()
         />
     };
-
-    view! {
-        <button
-            aria-controls=move || format!("{}-panel", value.get().unwrap_or_default())
-            aria-selected=move || {
-                if let Some(value) = value.get() {
-                    if value == tabs.value.get() {
-                        "true"
+    if as_child {
+        Either::Right(view! {
+            <AsChild
+                class={move || class.get().unwrap_or_default()}
+                {..}
+                aria-controls=move || format!("{}-panel", value.get().unwrap_or_default())
+                aria-selected=move || {
+                    if let Some(value) = value.get() {
+                        if value == tabs.value.get() { "true" } else { "false" }
                     } else {
                         "false"
                     }
-                } else {
-                    "false"
                 }
-            }
-            id=move || format!("{}-tab", value.get().unwrap_or_default())
-            on:click=move |_| {
-                if let Some(value) = value.get_untracked() {
-                    tabs.value.set(value)
+                id=move || format!("{}-tab", value.get().unwrap_or_default())
+                on:click=move |_| {
+                    if let Some(value) = value.get_untracked() {
+                        tabs.value.set(value)
+                    }
                 }
-            }
-            role="tab"
-            tabindex="0"
-            type="button"
+                role="tab"
+                tabindex="0"
+                type="button"
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..button_attrs}
-        >
-            {children()}
-        </button>
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </AsChild>
+        })
+    } else {
+        Either::Left(view! {
+            <button
+                class=move || class.get()
+                aria-controls=move || format!("{}-panel", value.get().unwrap_or_default())
+                aria-selected=move || {
+                    if let Some(value) = value.get() {
+                        if value == tabs.value.get() { "true" } else { "false" }
+                    } else {
+                        "false"
+                    }
+                }
+                id=move || format!("{}-tab", value.get().unwrap_or_default())
+                on:click=move |_| {
+                    if let Some(value) = value.get_untracked() {
+                        tabs.value.set(value)
+                    }
+                }
+                role="tab"
+                tabindex="0"
+                type="button"
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+                {..button_attrs}
+            >
+                {children()}
+            </button>
+        })
     }
 }
+ 
