@@ -1,0 +1,43 @@
+name = "Input Group"
+description = """Display additional information or actions to an input or textarea."""
+
+[[examples]]
+name = "input group"
+
+[[examples]]
+name = "input group icon"
+title = "Icon"
+
+[[examples]]
+name = "input group text"
+title = "Text"
+description = "Display additional text information alongside inputs."
+
+# [[examples]]
+# name = "input group button"
+# title = "Button"
+# description = "Add buttons to perform actions within the input group."
+
+[[examples]]
+name = "input group tooltip"
+title = "Tooltip"
+description = "Add Add tooltips to provide additional context or help."
+
+[[examples]]
+name = "input group textarea"
+title = "Textarea"
+description = """Input groups also work with textarea components. Use block-start or block-end \
+for alignment."""
+
+[[references]]
+name = "Progress"
+description = "Displays progress."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "max", attr_type = "usize", default = "100", description = """The value that \
+    represents 100%, or full.""" },
+  { attr = "value", attr_type = "usize", default = "0", description = """The current progress \
+    value to be rendered.""" },
+]
