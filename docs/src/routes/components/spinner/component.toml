@@ -31,6 +31,10 @@ title = "Badge"
 description = "You can also use a spinner inside a badge."
 
 [[examples]]
+name = "spinner empty"
+title = "Empty"
+
+[[examples]]
 name = "spinner item"
 title = "Item"
 description = "Use the spinner inside ItemMedia to indicate a loading state."
