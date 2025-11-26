@@ -1391,9 +1391,9 @@ dependencies = [
 
 [[package]]
 name = "leptos"
-version = "0.8.13"
+version = "0.8.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d0cb08bc6a391886f683e931a7c1424d4e3fbef13683eb932289c03da8c672a7"
+checksum = "87c98f6d751e524ff425ad9d63d53e120ed68311ffbc22bbd9c0b3c4005a421e"
 dependencies = [
  "any_spawner",
  "base64",
@@ -1423,8 +1423,8 @@ dependencies = [
  "tachys",
  "thiserror 2.0.17",
  "throw_error",
- "typed-builder",
- "typed-builder-macro",
+ "typed-builder 0.22.0",
+ "typed-builder-macro 0.22.0",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm_split_helpers",
@@ -1465,7 +1465,7 @@ dependencies = [
  "regex",
  "serde",
  "thiserror 2.0.17",
- "typed-builder",
+ "typed-builder 0.21.2",
 ]
 
 [[package]]
@@ -1518,9 +1518,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_macro"
-version = "0.8.11"
+version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2009e2cc8ac3aa3e417c51d2a2b951c34dfea51f25935717b564c347fb20cb3f"
+checksum = "9d199fafe14b7925fd392764fdd851215909604955acfda7c0263b8722d57c23"
 dependencies = [
  "attribute-derive",
  "cfg-if",
@@ -2136,9 +2136,9 @@ dependencies = [
 
 [[package]]
 name = "reactive_graph"
-version = "0.2.10"
+version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "243417a1395a60c8bfa1134822ff5ba0e99be4ad65c0b3389bdd3e5b35907487"
+checksum = "4043190442021086719fb9183daacb050f44d4ed8d3a1c8534e366d45dd95c29"
 dependencies = [
  "any_spawner",
  "async-lock",
@@ -2147,6 +2147,7 @@ dependencies = [
  "hydration_context",
  "indexmap",
  "or_poisoned",
+ "paste",
  "pin-project-lite",
  "rustc-hash",
  "rustc_version",
@@ -3167,7 +3168,16 @@ version = "0.21.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fef81aec2ca29576f9f6ae8755108640d0a86dd3161b2e8bca6cfa554e98f77d"
 dependencies = [
- "typed-builder-macro",
+ "typed-builder-macro 0.21.2",
+]
+
+[[package]]
+name = "typed-builder"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "398a3a3c918c96de527dc11e6e846cd549d4508030b8a33e1da12789c856b81a"
+dependencies = [
+ "typed-builder-macro 0.22.0",
 ]
 
 [[package]]
@@ -3175,6 +3185,17 @@ name = "typed-builder-macro"
 version = "0.21.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ecb9ecf7799210407c14a8cfdfe0173365780968dc57973ed082211958e0b18"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "typed-builder-macro"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e48cea23f68d1f78eb7bc092881b6bb88d3d6b5b7e6234f6f9c911da1ffb221"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3674,18 +3695,18 @@ dependencies = [
 
 [[package]]
 name = "zerocopy"
-version = "0.8.29"
+version = "0.8.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b7a46b351402ada3508ec7d8b210e5643085b30692a09e921b07c902f8aded21"
+checksum = "4ea879c944afe8a2b25fef16bb4ba234f47c694565e97383b36f3a878219065c"
 dependencies = [
  "zerocopy-derive",
 ]
 
 [[package]]
 name = "zerocopy-derive"
-version = "0.8.29"
+version = "0.8.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e999748819ddfe1ad621c3c277f9e4814321defdc0e6a7dd31772eb31ad3d2b"
+checksum = "cf955aa904d6040f70dc8e9384444cb1030aed272ba3cb09bbc4ab9e7c1f34f5"
 dependencies = [
  "proc-macro2",
  "quote",
