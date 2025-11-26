@@ -14,7 +14,7 @@ attrs = []
 
 [[references]]
 name = "CardContent"
-description = "Contains content displayed in the body of the card."
+description = "Contains the content displayed in the card body."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -22,7 +22,7 @@ attrs = []
 
 [[references]]
 name = "CardDescription"
-description = "Description of the card content."
+description = "A summary that describes the card content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -30,7 +30,7 @@ attrs = []
 
 [[references]]
 name = "CardFooter"
-description = "Contains card footer content displayed at the bottom of the card."
+description = "Contains card footer content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

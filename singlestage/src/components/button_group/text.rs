@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Creates a styled text element for use in the ButtonGroup.
 #[component]
 pub fn ButtonGroupText(
     children: Children,

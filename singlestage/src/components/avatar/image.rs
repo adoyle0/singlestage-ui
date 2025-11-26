@@ -3,6 +3,59 @@ use leptos::prelude::*;
 /// Renders an image inside the avatar.
 #[component]
 pub fn AvatarImage(
+    // IMG ATTRIBUTES
+    //
+    /// The text that shows when an image is not loaded.
+    #[prop(optional, into)]
+    alt: MaybeProp<String>,
+    /// Indicates if the fetching of the image must be done using a `CORS` request.
+    #[prop(optional, into)]
+    crossorigin: MaybeProp<String>,
+    /// Specifies how the browser should handle displaying the image or lack of image during
+    /// rendering.
+    ///
+    /// Accepted values: "sync" | "async" | "auto"
+    #[prop(optional, into)]
+    decoding: MaybeProp<String>,
+    /// Marks the image for observation by the `PerformanceElementTiming` API.
+    #[prop(optional, into)]
+    elementtiming: MaybeProp<String>,
+    /// Set the priority of this image compared to other images on the same page.
+    ///
+    /// Accepted values: "high" | "low" | "auto"
+    #[prop(optional, into)]
+    fetchpriority: MaybeProp<String>,
+    /// The height to render the image.
+    #[prop(optional, into)]
+    height: MaybeProp<usize>,
+    /// Specify whether the image is part of a map and the coordinates should be sent back to the
+    /// server..
+    #[prop(optional, into)]
+    ismap: MaybeProp<bool>,
+    /// How the browser should load the image.
+    ///
+    /// Accepted values: "eager" | "lazy"
+    #[prop(optional, into)]
+    loading: MaybeProp<String>,
+    /// Specify which referrer to use when fetching the image.
+    #[prop(optional, into)]
+    referrerpolicy: MaybeProp<String>,
+    /// A comma separated list of sizes that the image can be displayed, or "auto".
+    #[prop(optional, into)]
+    sizes: MaybeProp<String>,
+    /// The source of the image file.
+    #[prop(optional, into)]
+    src: MaybeProp<String>,
+    /// A comma separated list of possible sources for the image.
+    #[prop(optional, into)]
+    srcset: MaybeProp<String>,
+    /// A partial URL of an associated image map.
+    #[prop(optional, into)]
+    usemap: MaybeProp<String>,
+    /// The width to render the image.
+    #[prop(optional, into)]
+    width: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -107,59 +160,6 @@ pub fn AvatarImage(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // IMG ATTRIBUTES
-    //
-    /// The text that shows when an image is not loaded.
-    #[prop(optional, into)]
-    alt: MaybeProp<String>,
-    /// Indicates if the fetching of the image must be done using a `CORS` request.
-    #[prop(optional, into)]
-    crossorigin: MaybeProp<String>,
-    /// Specifies how the browser should handle displaying the image or lack of image during
-    /// rendering.
-    ///
-    /// Accepted values: "sync" | "async" | "auto"
-    #[prop(optional, into)]
-    decoding: MaybeProp<String>,
-    /// Marks the image for observation by the `PerformanceElementTiming` API.
-    #[prop(optional, into)]
-    elementtiming: MaybeProp<String>,
-    /// Set the priority of this image compared to other images on the same page.
-    ///
-    /// Accepted values: "high" | "low" | "auto"
-    #[prop(optional, into)]
-    fetchpriority: MaybeProp<String>,
-    /// The height to render the image.
-    #[prop(optional, into)]
-    height: MaybeProp<usize>,
-    /// Specify whether the image is part of a map and the coordinates should be sent back to the
-    /// server..
-    #[prop(optional, into)]
-    ismap: MaybeProp<bool>,
-    /// How the browser should load the image.
-    ///
-    /// Accepted values: "eager" | "lazy"
-    #[prop(optional, into)]
-    loading: MaybeProp<String>,
-    /// Specify which referrer to use when fetching the image.
-    #[prop(optional, into)]
-    referrerpolicy: MaybeProp<String>,
-    /// A comma separated list of sizes that the image can be displayed, or "auto".
-    #[prop(optional, into)]
-    sizes: MaybeProp<String>,
-    /// The source of the image file.
-    #[prop(optional, into)]
-    src: MaybeProp<String>,
-    /// A comma separated list of possible sources for the image.
-    #[prop(optional, into)]
-    srcset: MaybeProp<String>,
-    /// A partial URL of an associated image map.
-    #[prop(optional, into)]
-    usemap: MaybeProp<String>,
-    /// The width to render the image.
-    #[prop(optional, into)]
-    width: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

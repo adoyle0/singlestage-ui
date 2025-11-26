@@ -6,7 +6,7 @@ name = "tabs"
 
 [[references]]
 name = "Tabs"
-description = "Contains all the tab component parts."
+description = "Contains all the tabs component parts."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

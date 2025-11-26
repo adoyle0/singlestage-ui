@@ -7,11 +7,22 @@ pub struct CollapsibleTrigger {
     children: ChildrenFn,
 }
 
+/// Creates a collapsible menu.
 #[component]
 pub fn Collapsible(
     children: Children,
     /// A button that opens the collapsible menu.
     collapsible_trigger: CollapsibleTrigger,
+
+    // DETAILS ATTRIBUTES
+    //
+    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
+    #[prop(optional, into)]
+    open: MaybeProp<bool>,
+    /// Sets the name of the `details` element.
+    /// Set the same name for each `AccordionItem` to only allow one open at a time.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -117,16 +128,6 @@ pub fn Collapsible(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // DETAILS ATTRIBUTES
-    //
-    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
-    #[prop(optional, into)]
-    open: MaybeProp<bool>,
-    /// Sets the name of the `details` element.
-    /// Set the same name for each `AccordionItem` to only allow one open at a time.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
 ) -> impl IntoView {
     let uuid = uuid::Uuid::new_v4().to_string();
     let context = CollapsibleContext { id: uuid.clone() };

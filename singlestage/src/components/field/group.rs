@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Layout wrapper that stacks Field components and enables queries for responsive orientations.
 #[component]
 pub fn FieldGroup(
     children: Children,

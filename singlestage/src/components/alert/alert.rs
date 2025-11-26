@@ -1,9 +1,14 @@
 use leptos::prelude::*;
 
-/// Displays a callout for user attention.
+/// Contains the contents of the alert.
 #[component]
 pub fn Alert(
     children: Children,
+
+    /// Set the variant of the alert. Leave empty for default.
+    /// Other variants: "destructive"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,11 +114,6 @@ pub fn Alert(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set the variant of the alert. Leave empty for default.
-    /// Other variants: "destructive"
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

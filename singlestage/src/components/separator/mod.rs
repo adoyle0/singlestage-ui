@@ -1,7 +1,12 @@
 use leptos::prelude::*;
 
+/// The separator.
 #[component]
 pub fn Separator(
+    /// Toggle whether or not the separator should display vertically.
+    #[prop(optional, into)]
+    vertical: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -106,10 +111,6 @@ pub fn Separator(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Toggle whether or not the separator should display vertically.
-    #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

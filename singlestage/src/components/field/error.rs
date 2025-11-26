@@ -1,9 +1,14 @@
 use crate::Reactive;
 use leptos::prelude::*;
 
+/// Accessible error container that accepts children or a reactive list of errors.
 #[component]
 pub fn FieldError(
     #[prop(optional)] children: Option<Children>,
+
+    /// A reactive list of errors to display.
+    #[prop(optional, into)]
+    errors: Reactive<Vec<String>>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -106,10 +111,6 @@ pub fn FieldError(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// A list of errors
-    #[prop(optional, into)]
-    errors: Reactive<Vec<String>>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

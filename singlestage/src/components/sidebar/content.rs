@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A scrollable wrapper displayed in the middle of the sidebar.
 #[component]
 pub fn SidebarContent(
     children: Children,

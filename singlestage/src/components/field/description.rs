@@ -1,6 +1,7 @@
 use crate::FieldContext;
 use leptos::prelude::*;
 
+/// Helper text slot that automatically balances long lines in horizontal layouts.
 #[component]
 pub fn FieldDescription(
     children: Children,

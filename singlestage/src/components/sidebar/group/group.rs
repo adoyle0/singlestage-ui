@@ -1,6 +1,7 @@
 use crate::SidebarGroupContext;
 use leptos::{context::Provider, prelude::*};
 
+/// Creates a section in the content area of the sidebar that groups similar items.
 #[component]
 pub fn SidebarGroup(
     children: Children,

@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// The table's body element.
 #[component]
 pub fn TableBody(
     children: Children,

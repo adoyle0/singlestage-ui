@@ -1,8 +1,21 @@
 use leptos::prelude::*;
 
+/// A table cell element.
 #[component]
 pub fn TableCell(
     children: Children,
+
+    // TD ATTRIBUTES
+    //
+    /// The number of columns this cell spans.
+    #[prop(optional, into)]
+    colspan: MaybeProp<usize>,
+    /// Space-separated list of ids of `<th>` elements that provide headings for this cell.
+    #[prop(optional, into)]
+    headers: MaybeProp<String>,
+    /// The number of rows this cell spans.
+    #[prop(optional, into)]
+    rowspan: MaybeProp<usize>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,18 +121,6 @@ pub fn TableCell(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // TD ATTRIBUTES
-    //
-    /// The number of columns this cell spans.
-    #[prop(optional, into)]
-    colspan: MaybeProp<usize>,
-    /// Space-separated list of ids of `<th>` elements that provide headings for this cell.
-    #[prop(optional, into)]
-    headers: MaybeProp<String>,
-    /// The number of rows this cell spans.
-    #[prop(optional, into)]
-    rowspan: MaybeProp<usize>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

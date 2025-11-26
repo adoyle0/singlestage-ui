@@ -2,9 +2,23 @@ use super::SelectContext;
 use crate::Reactive;
 use leptos::prelude::*;
 
+/// Contains an item with a value to be selected.
 #[component]
 pub fn SelectItem(
     children: Children,
+
+    /// Set whether or not this item appears disabled and is checkable.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Set a label describing the meaning of this item.
+    #[prop(optional, into)]
+    label: MaybeProp<String>,
+    /// Set if this item is initially selected.
+    #[prop(optional, into)]
+    selected: Reactive<bool>,
+    /// Set the value of this item to be submitted with form data.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -110,19 +124,6 @@ pub fn SelectItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set whether or not this item appears disabled and is checkable.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Set a label describing the meaning of this item.
-    #[prop(optional, into)]
-    label: MaybeProp<String>,
-    /// Set if this item is initially selected.
-    #[prop(optional, into)]
-    selected: Reactive<bool>,
-    /// Set the value of this item to be submitted with form data.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let select_context = expect_context::<SelectContext>();
 

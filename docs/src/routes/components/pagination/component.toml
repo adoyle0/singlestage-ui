@@ -30,7 +30,7 @@ attrs = []
 
 [[references]]
 name = "PaginationItem"
-description = "Contains a pagination item."
+description = "Contains a single pagination item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \

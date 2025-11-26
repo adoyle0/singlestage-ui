@@ -1,9 +1,14 @@
 use crate::FieldContext;
 use leptos::prelude::*;
 
+/// A styled label associated with the input for a Field.
 #[component]
 pub fn FieldLabel(
     children: Children,
+
+    /// The id of the labeled element if it's not a child
+    #[prop(optional, into)]
+    label_for: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,10 +114,6 @@ pub fn FieldLabel(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// The id of the labeled element if it's not a child
-    #[prop(optional, into)]
-    label_for: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -160,7 +161,9 @@ pub fn FieldLabel(
             for=move || {
                 if let Some(label_for) = label_for.get() {
                     Some(label_for)
-                } else { use_context::<FieldContext>().map(|field| field.input_id.get()) }
+                } else {
+                    use_context::<FieldContext>().map(|field| field.input_id.get())
+                }
             }
             id={if let Some(field) = use_context::<FieldContext>() {
                 let label_id;

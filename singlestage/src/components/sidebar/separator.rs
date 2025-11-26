@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Visually eparates sidebar content.
 #[component]
 pub fn SidebarSeparator(
     // GLOBAL ATTRIBUTES

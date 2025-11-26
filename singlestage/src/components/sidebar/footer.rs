@@ -1,6 +1,7 @@
 use super::SidebarContext;
 use leptos::prelude::*;
 
+/// A sticky footer displayed at the bottom of the sidebar.
 #[component]
 pub fn SidebarFooter(
     children: Children,

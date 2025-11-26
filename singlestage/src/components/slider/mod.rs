@@ -1,9 +1,49 @@
 use crate::{FieldContext, FieldLabel, Reactive};
 use leptos::prelude::*;
 
+/// A simple component containing all parts of a slider.
 #[component]
 pub fn Slider(
     #[prop(optional)] children: Option<Children>,
+
+    /// Sets the default value of the element. Setting `value` sets this once at page load.
+    /// Use this for subsequent updates.
+    #[prop(optional, into)]
+    default: MaybeProp<f64>,
+    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
+    /// update it.
+    #[prop(optional, into)]
+    value: Reactive<f64>,
+
+    // RANGE ATTRIBUTES
+    //
+    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    ///
+    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
+    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
+    #[prop(optional, into)]
+    autocomplete: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Link this input with a `<datalist>` element for value suggestions with its `id`.
+    #[prop(optional, into)]
+    list: MaybeProp<String>,
+    /// The greatest value in the range of permitted values.
+    #[prop(optional, into)]
+    max: MaybeProp<f64>,
+    /// The lowest value in the range of permitted values.
+    #[prop(optional, into)]
+    min: MaybeProp<f64>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// Define the granularity of expected input value.
+    #[prop(optional, into)]
+    step: MaybeProp<f64>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,45 +149,6 @@ pub fn Slider(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // RANGE ATTRIBUTES
-    //
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
-    ///
-    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
-    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
-    #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Link this input with a `<datalist>` element for value suggestions with its `id`.
-    #[prop(optional, into)]
-    list: MaybeProp<String>,
-    /// The greatest value in the range of permitted values.
-    #[prop(optional, into)]
-    max: MaybeProp<f64>,
-    /// The lowest value in the range of permitted values.
-    #[prop(optional, into)]
-    min: MaybeProp<f64>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Define the granularity of expected input value.
-    #[prop(optional, into)]
-    step: MaybeProp<f64>,
-
-    /// Sets the default value of the element. Setting `value` sets this once at page load.
-    /// Use this for subsequent updates.
-    #[prop(optional, into)]
-    default: MaybeProp<f64>,
-    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
-    /// update it.
-    #[prop(optional, into)]
-    value: Reactive<f64>,
 ) -> impl IntoView {
     let slider_ref = NodeRef::<leptos::html::Input>::new();
 

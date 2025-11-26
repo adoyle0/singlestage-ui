@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Groups content together for display within an Item.
 #[component]
 pub fn ItemGroup(
     children: Children,

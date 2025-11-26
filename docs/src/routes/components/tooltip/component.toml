@@ -1,5 +1,6 @@
 name = "tooltip"
-description = "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it."
+description = """A popup that displays information related to an element when the element \
+receives keyboard focus or the mouse hovers over it."""
 
 [[examples]]
 name = "tooltip"
@@ -16,8 +17,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "align", attr_type = "String", default = """"center"""", description = """Sets where the \
+  { attr = "align", attr_type = "String", default = """"center"""", description = """Set where the \
     tooltip is rendered along the chosen side.""" },
-  { attr = "side", attr_type = "String", default = """"top"""", description = """Sets which side of the \
+  { attr = "side", attr_type = "String", default = """"top"""", description = """Set which side of the \
     triggering element that the tooltip will spawn from.""" },
 ]

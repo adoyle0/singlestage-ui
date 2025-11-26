@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains a group of styled input indicators.
 #[component]
 pub fn KbdGroup(
     children: Children,

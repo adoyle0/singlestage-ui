@@ -6,6 +6,69 @@ use leptos::prelude::*;
 pub fn PopoverTrigger(
     children: Children,
 
+    /// The type of the button. Defaults to `submit`:
+    /// Button types: submit | button | reset
+    #[prop(optional, into)]
+    button_type: MaybeProp<String>,
+    /// The size of the button. Leave this empty for the default size.
+    /// Sizes: small | large | icon | sm-icon | lg-icon
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+    /// The display variant of the button. Defaults to `primary`
+    /// Variants: primary | secondary | outline | ghost | link | destructive
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
+    // BUTTON ATTRIBUTES
+    //
+    /// The action that's performed by the element this button controls.
+    ///
+    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
+    /// | "toggle-popover" | "--[custom value]"
+    #[prop(optional, into)]
+    command: MaybeProp<String>,
+    /// Turn this button into a command button for an element via id.
+    #[prop(optional, into)]
+    commandfor: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
+    #[prop(optional, into)]
+    formaction: MaybeProp<String>,
+    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
+    /// `formenctype` values.
+    ///
+    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
+    #[prop(optional, into)]
+    formenctype: MaybeProp<String>,
+    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
+    /// values.
+    ///
+    /// Accepted values: "get" | "post" | "dialog".
+    #[prop(optional, into)]
+    formmethod: MaybeProp<String>,
+    /// Toggle whether the form data is validated or not before submission. Overrides any parent
+    /// `<form>` `novalidate` values.
+    #[prop(optional, into)]
+    formnovalidate: MaybeProp<bool>,
+    /// Defines where to display the response received after submission. Overrides any parent
+    /// `<form>` `target` values.
+    ///
+    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
+    /// or iframe
+    #[prop(optional, into)]
+    formtarget: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// The value associated with this button's `name` when submitted with form data.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -101,69 +164,6 @@ pub fn PopoverTrigger(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // BUTTON ATTRIBUTES
-    //
-    /// The action that's performed by the element this button controls.
-    ///
-    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
-    /// | "toggle-popover" | "--[custom value]"
-    #[prop(optional, into)]
-    command: MaybeProp<String>,
-    /// Turn this button into a command button for an element via id.
-    #[prop(optional, into)]
-    commandfor: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
-    #[prop(optional, into)]
-    formaction: MaybeProp<String>,
-    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
-    /// `formenctype` values.
-    ///
-    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
-    #[prop(optional, into)]
-    formenctype: MaybeProp<String>,
-    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
-    /// values.
-    ///
-    /// Accepted values: "get" | "post" | "dialog".
-    #[prop(optional, into)]
-    formmethod: MaybeProp<String>,
-    /// Toggle whether the form data is validated or not before submission. Overrides any parent
-    /// `<form>` `novalidate` values.
-    #[prop(optional, into)]
-    formnovalidate: MaybeProp<bool>,
-    /// Defines where to display the response received after submission. Overrides any parent
-    /// `<form>` `target` values.
-    ///
-    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
-    /// or iframe
-    #[prop(optional, into)]
-    formtarget: MaybeProp<String>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// The value associated with this button's `name` when submitted with form data.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
-
-    /// The type of the button. Defaults to `submit`:
-    /// Button types: submit | button | reset
-    #[prop(optional, into)]
-    button_type: MaybeProp<String>,
-    /// The size of the button. Leave this empty for the default size.
-    /// Sizes: small | large | icon | sm-icon | lg-icon
-    #[prop(optional, into)]
-    size: MaybeProp<String>,
-    /// The display variant of the button. Defaults to `primary`
-    /// Variants: primary | secondary | outline | ghost | link | destructive
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let menu = expect_context::<PopoverContext>();
 

@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains header content for an Item.
 #[component]
 pub fn ItemHeader(
     children: Children,

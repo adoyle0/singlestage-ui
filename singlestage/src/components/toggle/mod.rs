@@ -1,11 +1,82 @@
-use leptos::prelude::*;
-
 use crate::Reactive;
+use leptos::prelude::*;
 
 /// A two-state button that toggles between on and off.
 #[component]
 pub fn Toggle(
     children: Children,
+
+    // TOGGLE ATTRIBUTES
+    //
+    /// The size of the toggle. Leave this empty for the default size.
+    /// Sizes: sm / small | lg / large
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+    /// Reactive signal coupled to the toggle's pressed state.
+    #[prop(optional, into)]
+    pressed: Reactive<bool>,
+    /// The display variant of the toggle. Leave this empty for the default variant.
+    /// Variants: outline
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
+    // BUTTON ATTRIBUTES
+    //
+    /// The action that's performed by the element this button controls.
+    ///
+    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
+    /// | "toggle-popover" | "--[custom value]"
+    #[prop(optional, into)]
+    command: MaybeProp<String>,
+    /// Turn this button into a command button for an element via id.
+    #[prop(optional, into)]
+    commandfor: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
+    #[prop(optional, into)]
+    formaction: MaybeProp<String>,
+    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
+    /// `formenctype` values.
+    ///
+    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
+    #[prop(optional, into)]
+    formenctype: MaybeProp<String>,
+    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
+    /// values.
+    ///
+    /// Accepted values: "get" | "post" | "dialog".
+    #[prop(optional, into)]
+    formmethod: MaybeProp<String>,
+    /// Toggle whether the form data is validated or not before submission. Overrides any parent
+    /// `<form>` `novalidate` values.
+    #[prop(optional, into)]
+    formnovalidate: MaybeProp<bool>,
+    /// Defines where to display the response received after submission. Overrides any parent
+    /// `<form>` `target` values.
+    ///
+    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
+    /// or iframe
+    #[prop(optional, into)]
+    formtarget: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// Id of a popover to control.
+    #[prop(optional, into)]
+    popovertarget: MaybeProp<String>,
+    /// The action to perform on the target popover.
+    ///
+    /// Accepted values: "hide" | "show" | "toggle"
+    #[prop(optional, into)]
+    popovertargetaction: MaybeProp<String>,
+    /// The value associated with this button's `name` when submitted with form data.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -114,78 +185,6 @@ pub fn Toggle(
     /// Defines an accessible string value that can be used to name an element.
     #[prop(optional, into)]
     aria_label: MaybeProp<String>,
-
-    // BUTTON ATTRIBUTES
-    //
-    /// The action that's performed by the element this button controls.
-    ///
-    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
-    /// | "toggle-popover" | "--[custom value]"
-    #[prop(optional, into)]
-    command: MaybeProp<String>,
-    /// Turn this button into a command button for an element via id.
-    #[prop(optional, into)]
-    commandfor: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
-    #[prop(optional, into)]
-    formaction: MaybeProp<String>,
-    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
-    /// `formenctype` values.
-    ///
-    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
-    #[prop(optional, into)]
-    formenctype: MaybeProp<String>,
-    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
-    /// values.
-    ///
-    /// Accepted values: "get" | "post" | "dialog".
-    #[prop(optional, into)]
-    formmethod: MaybeProp<String>,
-    /// Toggle whether the form data is validated or not before submission. Overrides any parent
-    /// `<form>` `novalidate` values.
-    #[prop(optional, into)]
-    formnovalidate: MaybeProp<bool>,
-    /// Defines where to display the response received after submission. Overrides any parent
-    /// `<form>` `target` values.
-    ///
-    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
-    /// or iframe
-    #[prop(optional, into)]
-    formtarget: MaybeProp<String>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Id of a popover to control.
-    #[prop(optional, into)]
-    popovertarget: MaybeProp<String>,
-    /// The action to perform on the target popover.
-    ///
-    /// Accepted values: "hide" | "show" | "toggle"
-    #[prop(optional, into)]
-    popovertargetaction: MaybeProp<String>,
-    /// The value associated with this button's `name` when submitted with form data.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
-
-    // TOGGLE ATTRIBUTES
-    //
-    /// The size of the toggle. Leave this empty for the default size.
-    /// Sizes: sm / small | lg / large
-    #[prop(optional, into)]
-    size: MaybeProp<String>,
-    /// The display variant of the toggle. Leave this empty for the default variant.
-    /// Variants: outline
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
-    /// Reactive signal coupled to the toggle's pressed state.
-    #[prop(optional, into)]
-    pressed: Reactive<bool>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}
@@ -226,20 +225,21 @@ pub fn Toggle(
         />
     };
     let button_attrs = view! {
-    <{..}
-        command=move || command.get()
-        commandfor=move || commandfor.get()
-        form=move || form.get()
-        formaction=move || formaction.get()
-        formenctype=move || formenctype.get()
-        formmethod=move || formmethod.get()
-        formnovalidate=move || formnovalidate.get()
-        formtarget=move || formtarget.get()
-        name=move || name.get()
-        popovertarget=move || popovertarget.get()
-        popovertargetaction=move || popovertargetaction.get()
-        value=move || value.get()
-    />};
+        <{..}
+            command=move || command.get()
+            commandfor=move || commandfor.get()
+            form=move || form.get()
+            formaction=move || formaction.get()
+            formenctype=move || formenctype.get()
+            formmethod=move || formmethod.get()
+            formnovalidate=move || formnovalidate.get()
+            formtarget=move || formtarget.get()
+            name=move || name.get()
+            popovertarget=move || popovertarget.get()
+            popovertargetaction=move || popovertargetaction.get()
+            value=move || value.get()
+        />
+    };
     view! {
         <button
             type="button"
@@ -261,7 +261,7 @@ pub fn Toggle(
                 )
             }
             data-state=move || if pressed.get() { "on" } else { "off" }
-            aria-pressed=move ||  pressed.get().to_string()
+            aria-pressed=move || pressed.get().to_string()
             disabled=move || disabled.get_untracked()
             prop:disabled=move || disabled.get()
             on:click=move |_| pressed.set(!pressed.get_untracked())

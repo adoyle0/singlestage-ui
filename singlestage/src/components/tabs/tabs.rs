@@ -2,9 +2,14 @@ use super::TabsContext;
 use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
+/// Contains all the tabs component parts.
 #[component]
 pub fn Tabs(
     children: Children,
+
+    /// Reactive signal coupled to the value of the current selected tab
+    #[prop(optional, into)]
+    value: Reactive<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -110,10 +115,6 @@ pub fn Tabs(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Reactive signal coupled to the value of the current selected tab
-    #[prop(optional, into)]
-    value: Reactive<String>,
 ) -> impl IntoView {
     let context = TabsContext { value };
 

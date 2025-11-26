@@ -1,8 +1,7 @@
 use leptos::prelude::*;
 
-/// Displays at the bottom of the dialog, contains calls to action.
-/// Submit events such as button clicks in this area
-/// automatically trigger closing of the dialog.
+/// Displays at the bottom of the dialog, contains calls to action. Submit events such as button
+/// clicks in this area automatically trigger closing of the dialog.
 #[component]
 pub fn DialogFooter(
     children: Children,

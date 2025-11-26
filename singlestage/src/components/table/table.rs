@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains all the part of a table component.
 #[component]
 pub fn Table(
     children: Children,

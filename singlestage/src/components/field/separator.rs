@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Visual divider to separate sections inside a FieldGroup. Accepts optional inline content.
 #[component]
 pub fn FieldSeparator(
     #[prop(optional)] children: Option<Children>,

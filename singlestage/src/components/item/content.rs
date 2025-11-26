@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains the content section of an Item.
 #[component]
 pub fn ItemContent(
     children: Children,

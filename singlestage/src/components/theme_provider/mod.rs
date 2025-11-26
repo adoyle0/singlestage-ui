@@ -471,9 +471,9 @@ static DARK_OVERRIDES: &str = r#"@layer components {
   }
 }"#;
 
-#[component]
 /// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
 /// initial values. Updates should be done via `ThemeProviderContext`.
+#[component]
 pub fn ThemeProviderInner(
     children: Children,
     /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.

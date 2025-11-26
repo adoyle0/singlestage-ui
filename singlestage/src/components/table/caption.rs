@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// The table's caption element.
 #[component]
 pub fn TableCaption(
     children: Children,

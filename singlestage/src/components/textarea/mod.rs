@@ -1,9 +1,71 @@
 use crate::{FieldContext, FieldLabel, Reactive};
 use leptos::prelude::*;
 
+/// Creates a textarea that takes children as a default value.
 #[component]
 pub fn Textarea(
     #[prop(optional)] children: Option<Children>,
+
+    /// Sets the default value of the element. Setting `value` sets this once at page load.
+    /// Use this for subsequent updates.
+    #[prop(optional, into)]
+    default: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Toggle invalid appearance.
+    #[prop(optional, into)]
+    invalid: MaybeProp<bool>,
+    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
+    /// update it.
+    #[prop(optional, into)]
+    value: Reactive<String>,
+
+    // TEXTAREA ATTRIBUTES
+    //
+    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    ///
+    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
+    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
+    #[prop(optional, into)]
+    autocomplete: MaybeProp<String>,
+    /// Set the width of the `<textarea>`. Must be positive. The default value is `20`.
+    #[prop(optional, into)]
+    cols: MaybeProp<usize>,
+    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
+    /// regular form data.
+    #[prop(optional, into)]
+    dirname: MaybeProp<String>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Set the maximum length of accepted input.
+    #[prop(optional, into)]
+    maxlength: MaybeProp<usize>,
+    /// Set the minimum length of accepted input.
+    #[prop(optional, into)]
+    minlength: MaybeProp<usize>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// Text that shows while there is no value set. Carriage returns and line-feeds are treated as
+    /// line breaks.
+    #[prop(optional, into)]
+    placeholder: MaybeProp<String>,
+    /// Toggle whether or not the user can modify the value of this element.
+    #[prop(optional, into)]
+    readonly: MaybeProp<bool>,
+    /// Set whether this element requires a value for form submission
+    #[prop(optional, into)]
+    required: MaybeProp<bool>,
+    /// The number of visible text lines. Must be positive. Default is 2.
+    #[prop(optional, into)]
+    rows: MaybeProp<usize>,
+    /// How the control should wrap the value. NOTE: Not all values are standard across browsers.
+    ///
+    /// Accepted values: "hard" | "soft" | "off".
+    #[prop(optional, into)]
+    wrap: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,67 +171,6 @@ pub fn Textarea(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // TEXTAREA ATTRIBUTES
-    //
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
-    ///
-    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
-    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
-    #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Set the width of the `<textarea>`. Must be positive. The default value is `20`.
-    #[prop(optional, into)]
-    cols: MaybeProp<usize>,
-    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
-    /// regular form data.
-    #[prop(optional, into)]
-    dirname: MaybeProp<String>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Set the maximum length of accepted input.
-    #[prop(optional, into)]
-    maxlength: MaybeProp<usize>,
-    /// Set the minimum length of accepted input.
-    #[prop(optional, into)]
-    minlength: MaybeProp<usize>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Text that shows while there is no value set. Carriage returns and line-feeds are treated as
-    /// line breaks.
-    #[prop(optional, into)]
-    placeholder: MaybeProp<String>,
-    /// Toggle whether or not the user can modify the value of this element.
-    #[prop(optional, into)]
-    readonly: MaybeProp<bool>,
-    /// Set whether this element requires a value for form submission
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// The number of visible text lines. Must be positive. Default is 2.
-    #[prop(optional, into)]
-    rows: MaybeProp<usize>,
-    /// How the control should wrap the value. NOTE: Not all values are standard across browsers.
-    ///
-    /// Accepted values: "hard" | "soft" | "off".
-    #[prop(optional, into)]
-    wrap: MaybeProp<String>,
-
-    /// Sets the default value of the element. Setting `value` sets this once at page load.
-    /// Use this for subsequent updates.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Toggle invalid appearance.
-    #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
-    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
-    /// update it.
-    #[prop(optional, into)]
-    value: Reactive<String>,
 ) -> impl IntoView {
     let textarea_ref = NodeRef::<leptos::html::Textarea>::new();
 
@@ -260,7 +261,11 @@ pub fn Textarea(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else if has_children { Some(label_id.to_string()) } else { None }
+                } else if has_children {
+                    Some(label_id.to_string())
+                } else {
+                    None
+                }
             }
             autocomplete=move || autocomplete.get()
             cols=move || cols.get()

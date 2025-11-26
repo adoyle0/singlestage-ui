@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Description of the card content.
+/// The title of the card.
 #[component]
 pub fn CardTitle(
     children: Children,

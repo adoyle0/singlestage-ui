@@ -1,9 +1,22 @@
 use crate::FieldContext;
 use leptos::{context::Provider, prelude::*};
 
+/// The core wrapper for a single field. Provides orientation control, invalid state styling, and
+/// spacing.
 #[component]
 pub fn Field(
     children: Children,
+
+    /// Sets the display orientation.
+    ///
+    /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
+    /// Sets the display variant of the `Field`.
+    ///
+    /// Accepted values: "button".
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -106,17 +119,6 @@ pub fn Field(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Sets the display orientation.
-    ///
-    /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
-    #[prop(optional, into)]
-    orientation: MaybeProp<String>,
-    /// Sets the display variant of the `Field`.
-    ///
-    /// Accepted values: "button".
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let context = FieldContext {
         description_id: RwSignal::new(String::default()),

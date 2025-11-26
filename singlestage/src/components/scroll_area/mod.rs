@@ -1,8 +1,15 @@
 use leptos::prelude::*;
 
+/// Contains the contents of a scroll area.
 #[component]
 pub fn ScrollArea(
     children: Children,
+
+    /// Sets the scrolling direction.
+    ///
+    /// Accepted values: "vertical" | "horizontal". Defaults to "vertical".
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,12 +115,6 @@ pub fn ScrollArea(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Sets the scrolling direction.
-    ///
-    /// Accepted values: "vertical" | "horizontal". Defaults to "vertical".
-    #[prop(optional, into)]
-    orientation: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

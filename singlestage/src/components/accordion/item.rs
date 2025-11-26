@@ -5,6 +5,16 @@ use leptos::prelude::*;
 pub fn AccordionItem(
     children: Children,
 
+    // DETAILS ATTRIBUTES
+    //
+    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
+    #[prop(optional, into)]
+    open: MaybeProp<bool>,
+    /// Sets the name of the `details` element.
+    /// Set the same name for each `AccordionItem` to only allow one open at a time.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -109,16 +119,6 @@ pub fn AccordionItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // DETAILS ATTRIBUTES
-    //
-    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
-    #[prop(optional, into)]
-    open: MaybeProp<bool>,
-    /// Sets the name of the `details` element.
-    /// Set the same name for each `AccordionItem` to only allow one open at a time.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

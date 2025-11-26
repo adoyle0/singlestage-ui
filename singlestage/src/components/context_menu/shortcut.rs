@@ -4,6 +4,7 @@ use leptos::prelude::*;
 #[component]
 pub fn ContextMenuShortcut(
     children: Children,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's

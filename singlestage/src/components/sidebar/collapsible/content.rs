@@ -1,6 +1,7 @@
 use crate::CollapsibleContext;
 use leptos::prelude::*;
 
+/// Contains the content of a collapsible menu.
 #[component]
 pub fn CollapsibleContent(
     children: Children,

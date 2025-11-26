@@ -1,8 +1,20 @@
 use leptos::prelude::*;
 
+/// Contains the contents of an Item.
 #[component]
 pub fn Item(
     children: Children,
+
+    /// Set the display size of the `Item`.
+    ///
+    /// Accepted values: small | default
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+    /// Set the display style of the `Item`.
+    ///
+    /// Accepted values: outline | muted | default
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,17 +120,6 @@ pub fn Item(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set the display size of the `Item`.
-    ///
-    /// Accepted values: small | default
-    #[prop(optional, into)]
-    size: MaybeProp<String>,
-    /// Set the display style of the `Item`.
-    ///
-    /// Accepted values: outline | muted | default
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

@@ -6,6 +6,30 @@ use leptos::prelude::*;
 pub fn Radio(
     #[prop(optional)] children: Option<Children>,
 
+    // RADIO ATTRIBUTES
+    //
+    /// Whether the command or control is checked
+    #[prop(optional, into)]
+    checked: Reactive<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    // /// Name of this element. Submitted with the form as part of a name/value pair.
+    // #[prop(optional, into)]
+    // name: MaybeProp<String>,
+    /// Toggle whether or not the user can modify the value of this element.
+    #[prop(optional, into)]
+    readonly: MaybeProp<bool>,
+    /// Toggle whether or not this element requires a value for form submission.
+    #[prop(optional, into)]
+    required: MaybeProp<bool>,
+    /// Whether the form control is disabled
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// The value of the control. When specified in the HTML, corresponds to the initial value
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -110,30 +134,6 @@ pub fn Radio(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // RADIO ATTRIBUTES
-    //
-    /// Whether the command or control is checked
-    #[prop(optional, into)]
-    checked: Reactive<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    // /// Name of this element. Submitted with the form as part of a name/value pair.
-    // #[prop(optional, into)]
-    // name: MaybeProp<String>,
-    /// Toggle whether or not the user can modify the value of this element.
-    #[prop(optional, into)]
-    readonly: MaybeProp<bool>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Whether the form control is disabled
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let radio_group = expect_context::<RadioGroupContext>();
     let radio_ref = NodeRef::<leptos::html::Input>::new();
@@ -236,7 +236,11 @@ pub fn Radio(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else if has_children { Some(label_id.to_string()) } else { None }
+                } else if has_children {
+                    Some(label_id.to_string())
+                } else {
+                    None
+                }
             }
             checked=move || checked.get_untracked()
             class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }

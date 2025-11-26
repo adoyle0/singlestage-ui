@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains title text for an Item.
 #[component]
 pub fn ItemTitle(
     children: Children,

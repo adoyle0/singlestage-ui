@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Renders a title with label styling.
 #[component]
 pub fn FieldTitle(
     children: Children,

@@ -1,6 +1,7 @@
 use crate::sidebar::*;
 use leptos::prelude::*;
 
+/// Wrapper that toggles showing/hiding of the sidebar.
 #[component]
 pub fn SidebarTrigger(
     children: Children,

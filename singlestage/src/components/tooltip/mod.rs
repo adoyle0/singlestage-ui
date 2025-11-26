@@ -1,8 +1,22 @@
 use leptos::prelude::*;
 
+/// A popup that displays information related to an element when the element receives keyboard
+/// focus or the mouse hovers over it.
 #[component]
 pub fn Tooltip(
     children: Children,
+
+    /// Set where the tooltip is rendered along the chosen side.
+    ///
+    /// Accepted values: "start" | "center" | "end". Default is "center".
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side of the triggering element that the tooltip will spawn from.
+    ///
+    /// Accepted values: "top" | "bottom" | "left" | "right". Default is "top".
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
+    #[prop(optional, into)] value: Signal<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,14 +122,6 @@ pub fn Tooltip(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// start | center | end
-    #[prop(optional, into)]
-    align: MaybeProp<String>,
-    /// top | bottom | left | right
-    #[prop(optional, into)]
-    side: MaybeProp<String>,
-    #[prop(optional, into)] value: Signal<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

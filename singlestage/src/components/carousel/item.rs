@@ -1,9 +1,16 @@
 use super::CarouselContext;
 use leptos::prelude::*;
 
+/// Contains a single piece of content for the carousel.
 #[component]
 pub fn CarouselItem(
     children: Children,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,12 +116,6 @@ pub fn CarouselItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let carousel = expect_context::<CarouselContext>();
 

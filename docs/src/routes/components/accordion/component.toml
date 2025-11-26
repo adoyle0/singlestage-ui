@@ -19,8 +19,7 @@ attrs = []
 
 [[references]]
 name = "AccordionContent"
-description = """Contains all the collapsible content for an item. Implements HTML global \
-attributes."""
+description = "Contains all the collapsible content for an item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -47,8 +46,7 @@ attrs = []
 
 [[references]]
 name = "AccordionTrigger"
-description = """Toggles the collapsed state of its associated item. Also serves as the header. \
-Implements HTML global attributes."""
+description = "Toggles the collapsed state of its associated item. Also serves as the header."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

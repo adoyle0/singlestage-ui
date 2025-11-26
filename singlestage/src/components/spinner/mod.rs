@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Displays a loading spinner.
 #[component]
 pub fn Spinner(
     #[prop(optional)] children: Option<Children>,

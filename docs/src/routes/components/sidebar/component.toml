@@ -16,10 +16,16 @@ attrs = []
 
 [[references]]
 name = "CollapsibleContent"
-description = "Creates a collapsible menu."
+description = "Contains the content of a collapsible menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
+attrs = []
+
+[[references]]
+name = "CollapsibleTrigger"
+description = "A button that opens the collapsible menu."
+extra = """Note: Slot is required."""
 attrs = []
 
 [[references]]
@@ -99,16 +105,6 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "SidebarProvider"
-description = "Takes in initial state and provides SidebarContext to its children."
-attrs = [
-  { attr = "hidden", attr_type = "Reactive<bool>", default = "false", description = """Reactive \
-    signal coupled to the sidebar's hidden state.""" },
-  { attr = "side", attr_type = "Reactive<String>", default = """"left"""", description = """\
-    Reactive signal coupled to which side of its container the sidebar renders on.""" },
-]
-
-[[references]]
 name = "SidebarMenuSub"
 description = "Wraps a submenu within a SidebarMenu."
 attrs = []
@@ -120,6 +116,24 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SidebarProvider"
+description = "Takes in initial state and provides SidebarContext to its children."
+attrs = [
+  { attr = "hidden", attr_type = "Reactive<bool>", default = "false", description = """Reactive \
+    signal coupled to the sidebar's hidden state.""" },
+  { attr = "side", attr_type = "Reactive<String>", default = """"left"""", description = """\
+    Reactive signal coupled to which side of its container the sidebar renders on.""" },
+]
+
+[[references]]
+name = "SidebarSeparator"
+description = "Visually separates sidebar content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 

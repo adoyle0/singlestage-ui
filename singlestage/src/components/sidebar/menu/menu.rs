@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// For building a menu within a SidebarGroup.
 #[component]
 pub fn SidebarMenu(
     children: Children,

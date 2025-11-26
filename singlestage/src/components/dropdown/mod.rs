@@ -1,9 +1,3 @@
-// TODO:
-// react to viewport bounds
-// radio
-// checkbox
-// submenus
-
 mod content;
 mod group;
 mod item;

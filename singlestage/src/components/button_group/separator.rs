@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Visually separates elements in the ButtonGroup.
 #[component]
 pub fn ButtonGroupSeparator(
     // GLOBAL ATTRIBUTES
