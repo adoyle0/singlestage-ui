@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-///Contains the contents of an aspect ratio component.
+/// Contains the contents of an aspect ratio component.
 #[component]
 pub fn AspectRatio(
     children: Children,
