@@ -1,0 +1,80 @@
+name = "Empty"
+description = "Use the Empty component to display an empty state."
+
+[[examples]]
+name = "empty"
+
+[[examples]]
+name = "empty outline"
+title = "Outline"
+description = "Use the border utility class to create an outline empty state."
+
+[[examples]]
+name = "empty background"
+title = "Background"
+description = "Use the bg-* and bg-gradient-* utilities to add a background to the empty state."
+
+[[examples]]
+name = "empty avatar"
+title = "Avatar"
+description = "Use the EmptyMedia component to display an avatar in the empty state."
+
+[[examples]]
+name = "empty avatar group"
+title = "Avatar Group"
+description = "Use the EmptyMedia component to display an avatar group in the empty state."
+
+[[references]]
+name = "Empty"
+description = """The main component of the empty state. Wraps the EmptyHeader and EmptyContent \
+components."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "EmptyContent"
+description = """Use the EmptyContent component to display the content of the empty state such as \
+a button, input or a link."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "EmptyDescription"
+description = """Use the EmptyDescription component to display the description of the empty \
+state."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "EmptyHeader"
+description = """The EmptyHeader component wraps the empty media, title, and description."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "EmptyMedia"
+description = """Use the EmptyMedia component to display the media of the empty state such as an \
+icon or an image. You can also use it to display other components such as an avatar."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """""""", description = """Select which \
+    variant to render. Accepted values: \"icon\".""" },
+]
+
+[[references]]
+name = "EmptyTitle"
+description = """Use the EmptyTitle component to display the title of the empty state."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

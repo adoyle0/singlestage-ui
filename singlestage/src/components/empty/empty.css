@@ -1,0 +1,74 @@
+@layer components {
+  .singlestage-empty {
+    @apply border-dashed
+    flex
+    flex-1
+    flex-col
+    gap-6
+    items-center
+    justify-center
+    md:p-12
+    min-w-0
+    p-6
+    rounded-lg
+    text-balance
+    text-center;
+  }
+
+  .singlestage-empty-header {
+    @apply flex
+    flex-col
+    gap-2
+    items-center
+    max-w-sm
+    text-center;
+  }
+
+  .singlestage-empty-media {
+    @apply bg-transparent;
+  }
+
+  .singlestage-empty-media-icon {
+    @apply bg-muted
+    flex
+    items-center
+    justify-center
+    rounded-lg
+    shrink-0
+    size-10
+    text-foreground
+    [&_svg:not([class*='size-'])]:size-6;
+  }
+
+  .singlestage-empty-title {
+    @apply font-medium
+    text-lg
+    tracking-tight;
+  }
+
+  .singlestage-empty-description {
+    @apply text-muted-foreground
+    text-sm/relaxed;
+
+    > a {
+      @apply underline
+      underline-offset-4;
+    }
+
+    > a:hover {
+      @apply text-primary;
+    }
+  }
+
+  .singlestage-empty-content {
+    @apply flex
+    flex-col
+    gap-4
+    items-center
+    max-w-sm
+    min-w-0
+    text-balance
+    text-sm
+    w-full;
+  }
+}
