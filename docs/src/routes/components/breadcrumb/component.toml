@@ -19,7 +19,7 @@ attrs = [
 
 [[references]]
 name = "BreadcrumbItem"
-description = "Contains the contents of the breadcrumb."
+description = "An individual breadcrumb link."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
@@ -29,7 +29,7 @@ attrs = []
 
 [[references]]
 name = "BreadcrumbSeparator"
-description = "Contains the contents of the breadcrumb."
+description = "Separates breadcrumb items. Can render any children as a custom marker."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \

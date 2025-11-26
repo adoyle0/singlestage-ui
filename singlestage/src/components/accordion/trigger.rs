@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Optional. Used to wrap content such as an icon to replace the default trigger icon.
 #[slot]
 pub struct AccordionIcon {
     children: ChildrenFn,
@@ -9,6 +10,10 @@ pub struct AccordionIcon {
 #[component]
 pub fn AccordionTrigger(
     children: Children,
+
+    /// Optional. Used to wrap content such as an icon to replace the default trigger icon.
+    #[prop(optional)]
+    accordion_icon: Option<AccordionIcon>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -114,10 +119,6 @@ pub fn AccordionTrigger(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Optional. Used to wrap content such as an icon to replace the default trigger icon.
-    #[prop(optional)]
-    accordion_icon: Option<AccordionIcon>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// A button that opens the dialog.
+/// Used to wrap other elements and trigger the dialog on click.
 #[slot]
 pub struct DialogTrigger {
     children: ChildrenFn,

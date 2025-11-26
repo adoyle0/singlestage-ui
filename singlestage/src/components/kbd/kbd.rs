@@ -1,14 +1,9 @@
 use leptos::prelude::*;
 
-/// Contains arbitrary badge content.
+/// Contains a single styled input indication.
 #[component]
-pub fn Badge(
+pub fn Kbd(
     children: Children,
-
-    /// Define the badge variant. Defaults to `"primary"`.
-    /// Variants: "primary" | "secondary" | "destructive" | "outline"
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -120,7 +115,6 @@ pub fn Badge(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -156,25 +150,13 @@ pub fn Badge(
     };
 
     view! {
-        <span
-            class=move || {
-                format!(
-                    "{} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-badge-primary",
-                        "secondary" => "singlestage-badge-secondary",
-                        "destructive" => "singlestage-badge-destructive",
-                        "outline" => "singlestage-badge-outline",
-                        _ => "singlestage-badge-primary",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <kbd
+            class=move || { format!("singlestage-kbd {}", class.get().unwrap_or_default()) }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </span>
+        </kbd>
     }
 }

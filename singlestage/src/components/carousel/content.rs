@@ -1,6 +1,7 @@
 use super::CarouselContext;
 use leptos::prelude::*;
 
+/// Contains the content portion of the carousel.
 #[component]
 pub fn CarouselContent(
     children: Children,

@@ -8,6 +8,21 @@ pub fn Dialog(
     /// A button that opens the dialog.
     dialog_trigger: DialogTrigger,
 
+    // DIALOG ATTRIBUTES
+    //
+    /// Specify whether or not this dialog contains an alert
+    #[prop(optional, into)]
+    alert: MaybeProp<bool>,
+    // TODO:Check for safari support
+    // /// Specify what actions will close the dialog.
+    // ///
+    // /// Accepted values: "any" | "closerequest" | "none"
+    // #[prop(optional, into)]
+    // closedby: MaybeProp<String>,
+    /// Toggle whether or not the dialog is open.
+    #[prop(optional, into)]
+    open: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -112,22 +127,6 @@ pub fn Dialog(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // DIALOG ATTRIBUTES
-    //
-    // TODO:Check for safari support
-    // /// Specify what actions will close the dialog.
-    // ///
-    // /// Accepted values: "any" | "closerequest" | "none"
-    // #[prop(optional, into)]
-    // closedby: MaybeProp<String>,
-    /// Toggle whether or not the dialog is open.
-    #[prop(optional, into)]
-    open: MaybeProp<bool>,
-
-    /// Set whether or not this dialog contains an alert
-    #[prop(optional, into)]
-    alert: MaybeProp<bool>,
 ) -> impl IntoView {
     let dialog_ref = NodeRef::<html::Dialog>::new();
     let labeled_by = RwSignal::new(String::new());

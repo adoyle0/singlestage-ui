@@ -1,7 +1,7 @@
 use super::*;
 use leptos::prelude::*;
 
-/// Sidebar component
+/// The sidebar container.
 #[component]
 pub fn Sidebar(
     children: Children,

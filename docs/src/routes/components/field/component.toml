@@ -89,11 +89,15 @@ attrs = []
 
 [[references]]
 name = "FieldError"
-description = "Accessible error container that accepts children."
+description = "Accessible error container that accepts children or a reactive list of errors."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "errors", attr_type = "Reactive<Vec<String>>", default = "[]", description = """A \
+    reactive list of errors to display.""" },
+
+]
 
 [[references]]
 name = "FieldGroup"
@@ -129,7 +133,7 @@ attrs = [
 [[references]]
 name = "FieldSeparator"
 description = """Visual divider to separate sections inside a FieldGroup. Accepts optional inline \
-content"""
+content."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

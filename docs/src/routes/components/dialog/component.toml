@@ -20,6 +20,8 @@ attributes."""
 attrs = [
   { attr = "alert", attr_type = "bool", default = "false", description = """Specify whether or \
     not alert styling should be used.""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Toggle whether or not \
+    the dialog is open.""" },
 ]
 
 [[references]]
@@ -50,7 +52,8 @@ attrs = []
 
 [[references]]
 name = "DialogFooter"
-description = "Displays at the bottom of the dialog, contains calls to action. Submit events such as button clicks in this area automatically trigger closing of the dialog."
+description = """Displays at the bottom of the dialog, contains calls to action. Submit events \
+such as button clicks in this area automatically trigger closing of the dialog."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

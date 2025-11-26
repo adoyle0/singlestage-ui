@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains the actionable section of an Item.
 #[component]
 pub fn ItemActions(
     children: Children,

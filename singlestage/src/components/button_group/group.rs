@@ -1,8 +1,13 @@
 use leptos::prelude::*;
 
+/// Contains the Buttons that make up the ButtonGroup.
 #[component]
 pub fn ButtonGroup(
     children: Children,
+
+    /// Sets the display direction of the ButtonGroup.
+    #[prop(optional, into)]
+    vertical: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -105,10 +110,6 @@ pub fn ButtonGroup(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Sets the display direction of the ButtonGroup.
-    #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

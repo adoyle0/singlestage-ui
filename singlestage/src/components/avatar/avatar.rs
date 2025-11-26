@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Contains all the parts of an avatar.
+/// Contains the contents of an avatar.
 #[component]
 pub fn Avatar(
     children: Children,

@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A table row element.
 #[component]
 pub fn TableRow(
     children: Children,

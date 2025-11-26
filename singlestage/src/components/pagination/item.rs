@@ -1,9 +1,15 @@
 use leptos::prelude::*;
 
-/// Contains a pagination item
+/// Contains a single pagination item
 #[component]
 pub fn PaginationItem(
     children: Children,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,12 +115,6 @@ pub fn PaginationItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

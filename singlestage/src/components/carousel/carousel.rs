@@ -1,6 +1,7 @@
 use super::CarouselContext;
 use leptos::{context::Provider, prelude::*};
 
+/// Contains all the parts of a carousel.
 #[component]
 pub fn Carousel(
     children: Children,
@@ -109,9 +110,6 @@ pub fn Carousel(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-    // /// Specify the orientation of the carousel.
-    // #[prop(optional, into)]
-    // vertical: MaybeProp<String>,
 ) -> impl IntoView {
     let current_item = RwSignal::new(0);
     let num_items = RwSignal::new(0);

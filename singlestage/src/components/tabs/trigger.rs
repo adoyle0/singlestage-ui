@@ -1,9 +1,69 @@
 use super::TabsContext;
 use leptos::prelude::*;
 
+/// The button that activates its associated content.
 #[component]
 pub fn TabsTrigger(
     children: Children,
+
+    /// The value of the tab that this button triggers.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
+
+    // BUTTON ATTRIBUTES
+    //
+    /// The action that's performed by the element this button controls.
+    ///
+    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
+    /// | "toggle-popover" | "--[custom value]"
+    #[prop(optional, into)]
+    command: MaybeProp<String>,
+    /// Turn this button into a command button for an element via id.
+    #[prop(optional, into)]
+    commandfor: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
+    #[prop(optional, into)]
+    formaction: MaybeProp<String>,
+    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
+    /// `formenctype` values.
+    ///
+    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
+    #[prop(optional, into)]
+    formenctype: MaybeProp<String>,
+    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
+    /// values.
+    ///
+    /// Accepted values: "get" | "post" | "dialog".
+    #[prop(optional, into)]
+    formmethod: MaybeProp<String>,
+    /// Toggle whether the form data is validated or not before submission. Overrides any parent
+    /// `<form>` `novalidate` values.
+    #[prop(optional, into)]
+    formnovalidate: MaybeProp<bool>,
+    /// Defines where to display the response received after submission. Overrides any parent
+    /// `<form>` `target` values.
+    ///
+    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
+    /// or iframe
+    #[prop(optional, into)]
+    formtarget: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// Id of a popover to control.
+    #[prop(optional, into)]
+    popovertarget: MaybeProp<String>,
+    /// The action to perform on the target popover.
+    ///
+    /// Accepted values: "hide" | "show" | "toggle"
+    #[prop(optional, into)]
+    popovertargetaction: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -100,65 +160,6 @@ pub fn TabsTrigger(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // BUTTON ATTRIBUTES
-    //
-    /// The action that's performed by the element this button controls.
-    ///
-    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
-    /// | "toggle-popover" | "--[custom value]"
-    #[prop(optional, into)]
-    command: MaybeProp<String>,
-    /// Turn this button into a command button for an element via id.
-    #[prop(optional, into)]
-    commandfor: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
-    #[prop(optional, into)]
-    formaction: MaybeProp<String>,
-    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
-    /// `formenctype` values.
-    ///
-    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
-    #[prop(optional, into)]
-    formenctype: MaybeProp<String>,
-    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
-    /// values.
-    ///
-    /// Accepted values: "get" | "post" | "dialog".
-    #[prop(optional, into)]
-    formmethod: MaybeProp<String>,
-    /// Toggle whether the form data is validated or not before submission. Overrides any parent
-    /// `<form>` `novalidate` values.
-    #[prop(optional, into)]
-    formnovalidate: MaybeProp<bool>,
-    /// Defines where to display the response received after submission. Overrides any parent
-    /// `<form>` `target` values.
-    ///
-    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
-    /// or iframe
-    #[prop(optional, into)]
-    formtarget: MaybeProp<String>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Id of a popover to control.
-    #[prop(optional, into)]
-    popovertarget: MaybeProp<String>,
-    /// The action to perform on the target popover.
-    ///
-    /// Accepted values: "hide" | "show" | "toggle"
-    #[prop(optional, into)]
-    popovertargetaction: MaybeProp<String>,
-
-    /// The value of the tab that this button triggers.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let tabs = expect_context::<TabsContext>();
 
@@ -226,11 +227,7 @@ pub fn TabsTrigger(
             aria-controls=move || format!("{}-panel", value.get().unwrap_or_default())
             aria-selected=move || {
                 if let Some(value) = value.get() {
-                    if value == tabs.value.get() {
-                        "true"
-                    } else {
-                        "false"
-                    }
+                    if value == tabs.value.get() { "true" } else { "false" }
                 } else {
                     "false"
                 }

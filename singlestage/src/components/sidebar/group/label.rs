@@ -1,6 +1,7 @@
 use crate::sidebar::*;
 use leptos::prelude::*;
 
+/// The label displayed above the group.
 #[component]
 pub fn SidebarGroupLabel(
     children: Children,

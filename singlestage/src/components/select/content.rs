@@ -1,9 +1,17 @@
 use crate::SelectContext;
 use leptos::prelude::*;
 
+/// Contains a group of items for the Select.
 #[component]
 pub fn SelectContent(
     children: Children,
+
+    /// Set whether or not the items in the group are appear as disabled and can be selected.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Label this group of content.
+    #[prop(optional, into)]
+    label: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,13 +117,6 @@ pub fn SelectContent(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set whether or not the items in the group are appear as disabled and can be selected.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Label this group of content.
-    #[prop(optional, into)]
-    label: MaybeProp<String>,
 ) -> impl IntoView {
     let select = expect_context::<SelectContext>();
 

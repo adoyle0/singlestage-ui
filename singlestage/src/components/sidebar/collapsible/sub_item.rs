@@ -1,9 +1,16 @@
 use crate::SidebarContext;
 use leptos::prelude::*;
 
+/// A menu item within the SidebarMenuSub menu.
 #[component]
 pub fn SidebarMenuSubItem(
     children: Children,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,12 +116,6 @@ pub fn SidebarMenuSubItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();
 

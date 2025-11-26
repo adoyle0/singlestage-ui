@@ -5,6 +5,34 @@ use leptos::prelude::*;
 pub fn PaginationPrevious(
     children: Children,
 
+    // A ATTRIBUTES
+    //
+    /// Causes the browser to treat the linked URL as a download. Can be used with or without a
+    /// `filename` value.
+    #[prop(optional, into)]
+    download: MaybeProp<String>,
+    /// The URL the link points to.
+    #[prop(optional, into)]
+    href: MaybeProp<String>,
+    /// Hints at the language of the content at the linked URL.
+    #[prop(optional, into)]
+    hreflang: MaybeProp<String>,
+    /// Hint the MIME type of the linked data.
+    #[prop(optional, into)]
+    mimetype: MaybeProp<String>,
+    /// Space separated list of URLs to ping with a `POST` request when the link is clicked.
+    #[prop(optional, into)]
+    ping: MaybeProp<String>,
+    /// How much of the referrer header to send when following the link.
+    #[prop(optional, into)]
+    referrerpolicy: MaybeProp<String>,
+    /// Relationship between the linked resource and the current document.
+    #[prop(optional, into)]
+    rel: MaybeProp<String>,
+    /// Specify where to display the linked content
+    #[prop(optional, into)]
+    target: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -109,34 +137,6 @@ pub fn PaginationPrevious(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // A ATTRIBUTES
-    //
-    /// Causes the browser to treat the linked URL as a download. Can be used with or without a
-    /// `filename` value.
-    #[prop(optional, into)]
-    download: MaybeProp<String>,
-    /// The URL the link points to.
-    #[prop(optional, into)]
-    href: MaybeProp<String>,
-    /// Hints at the language of the content at the linked URL.
-    #[prop(optional, into)]
-    hreflang: MaybeProp<String>,
-    /// Hint the MIME type of the linked data.
-    #[prop(optional, into)]
-    mimetype: MaybeProp<String>,
-    /// Space separated list of URLs to ping with a `POST` request when the link is clicked.
-    #[prop(optional, into)]
-    ping: MaybeProp<String>,
-    /// How much of the referrer header to send when following the link.
-    #[prop(optional, into)]
-    referrerpolicy: MaybeProp<String>,
-    /// Relationship between the linked resource and the current document.
-    #[prop(optional, into)]
-    rel: MaybeProp<String>,
-    /// Specify where to display the linked content
-    #[prop(optional, into)]
-    target: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

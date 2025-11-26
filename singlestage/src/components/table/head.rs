@@ -1,8 +1,29 @@
 use leptos::prelude::*;
 
+/// A table head element.
 #[component]
 pub fn TableHead(
     children: Children,
+
+    // TH ATTRIBUTES
+    //
+    /// Short alternate label for screen readers, etc.
+    #[prop(optional, into)]
+    abbr: MaybeProp<String>,
+    /// The number of columns this cell spans.
+    #[prop(optional, into)]
+    colspan: MaybeProp<usize>,
+    /// Space-separated list of ids of `<th>` elements that provide headings for this cell.
+    #[prop(optional, into)]
+    headers: MaybeProp<String>,
+    /// The number of rows this cell spans.
+    #[prop(optional, into)]
+    rowspan: MaybeProp<usize>,
+    /// Defines the cells this header relates to.
+    ///
+    /// Accepted values: "row" | "col" | "rowgroup" | "colgroup"
+    #[prop(optional, into)]
+    scope: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,26 +129,6 @@ pub fn TableHead(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // TH ATTRIBUTES
-    //
-    /// Short alternate label for screen readers, etc.
-    #[prop(optional, into)]
-    abbr: MaybeProp<String>,
-    /// The number of columns this cell spans.
-    #[prop(optional, into)]
-    colspan: MaybeProp<usize>,
-    /// Space-separated list of ids of `<th>` elements that provide headings for this cell.
-    #[prop(optional, into)]
-    headers: MaybeProp<String>,
-    /// The number of rows this cell spans.
-    #[prop(optional, into)]
-    rowspan: MaybeProp<usize>,
-    /// Defines the cells this header relates to.
-    ///
-    /// Accepted values: "row" | "col" | "rowgroup" | "colgroup"
-    #[prop(optional, into)]
-    scope: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

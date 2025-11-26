@@ -1,8 +1,13 @@
 use leptos::prelude::*;
 
+///Contains the contents of an aspect ratio component.
 #[component]
 pub fn AspectRatio(
     children: Children,
+
+    /// The aspect ratio to use to display the child element.
+    #[prop(optional, into)]
+    ratio: MaybeProp<f64>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,8 +113,6 @@ pub fn AspectRatio(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    #[prop(optional, into)] ratio: MaybeProp<f64>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

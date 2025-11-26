@@ -2,7 +2,7 @@ use super::*;
 use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
-/// Sidebar context provider
+/// Takes in initial state and provides SidebarContext to its children.
 #[component]
 pub fn SidebarProvider(
     children: Children,

@@ -6,6 +6,21 @@ use leptos::prelude::*;
 pub fn DropdownMenuItem(
     children: Children,
 
+    /// Controls whether the item appears disabled and is clickable.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Set the display variant of the item.
+    ///
+    /// Accepted values: "destructive"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -107,21 +122,6 @@ pub fn DropdownMenuItem(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
-
-    /// Controls whether the item appears disabled and is clickable.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Set the display variant of the item.
-    ///
-    /// Accepted values: "destructive"
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let menu = expect_context::<DropdownMenuContext>();
 

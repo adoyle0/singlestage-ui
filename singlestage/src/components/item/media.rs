@@ -1,8 +1,15 @@
 use leptos::prelude::*;
 
+/// Contains media content such as an icon or image for an Item.
 #[component]
 pub fn ItemMedia(
     children: Children,
+
+    /// Set the display style of the `ItemMedia`.
+    ///
+    /// Accepted values: icon | image
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,12 +115,6 @@ pub fn ItemMedia(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set the display style of the `ItemMedia`.
-    ///
-    /// Accepted values: icon | image
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

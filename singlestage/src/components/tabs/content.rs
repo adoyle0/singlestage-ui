@@ -1,9 +1,14 @@
 use super::TabsContext;
 use leptos::prelude::*;
 
+/// Contains the content associated with each trigger.
 #[component]
 pub fn TabsContent(
     children: Children,
+
+    /// This tab's trigger value.
+    #[prop(into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,10 +114,6 @@ pub fn TabsContent(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// This tab's trigger value.
-    #[prop(into)]
-    value: MaybeProp<String>,
 ) -> impl IntoView {
     let tabs = expect_context::<TabsContext>();
 
@@ -160,11 +161,7 @@ pub fn TabsContent(
         <div
             aria-labelledby=move || format!("{}-tab", value.get().unwrap_or_default())
             aria-selected=move || {
-                if value.get().unwrap_or_default() == tabs.value.get() {
-                    "true"
-                } else {
-                    "false"
-                }
+                if value.get().unwrap_or_default() == tabs.value.get() { "true" } else { "false" }
             }
             hidden=move || value.get().unwrap_or_default() != tabs.value.get()
             id=move || format!("{}-panel", value.get().unwrap_or_default())

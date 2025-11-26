@@ -1,7 +1,8 @@
 use leptos::prelude::*;
 
+/// Creates a skeleton used to show a placeholder while content is loading.
 #[component]
-pub fn skeleton(
+pub fn Skeleton(
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's

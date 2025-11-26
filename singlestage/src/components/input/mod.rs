@@ -1,9 +1,130 @@
 use crate::{FieldContext, FieldLabel, Reactive};
 use leptos::prelude::*;
 
+/// A form input field.
 #[component]
 pub fn Input(
     #[prop(optional)] children: Option<Children>,
+
+    /// Sets the default value of the element. Setting `value` sets this once at page load.
+    /// Use this for subsequent updates.
+    #[prop(optional, into)]
+    default: MaybeProp<String>,
+    /// Set the input type. Supported types: `color`, `date`, `datetime-local`, `email`, `file`,
+    /// `hidden`, `image`, `month`, `number`, `password`, `search`, `tel`, `text`, `time`, `url`,
+    /// `week`.
+    #[prop(optional, into)]
+    input_type: MaybeProp<String>,
+    /// Toggle invalid appearance.
+    #[prop(optional, into)]
+    invalid: MaybeProp<bool>,
+    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
+    /// update it.
+    #[prop(optional, into)]
+    value: Reactive<String>,
+
+    // INPUT ATTRIBUTES
+    //
+    /// Defines which file types are selectable. Only works with the 'file' input type.
+    #[prop(optional, into)]
+    accept: MaybeProp<String>,
+    /// Fallback string used with `image` input type. Renders while the image isn't loaded.
+    #[prop(optional, into)]
+    alt: MaybeProp<String>,
+    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    ///
+    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
+    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
+    #[prop(optional, into)]
+    autocomplete: MaybeProp<String>,
+    /// Specify which camera to use for capture of an image or video. Use `accept` to define the
+    /// expected data type.
+    #[prop(optional, into)]
+    capture: MaybeProp<String>,
+    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
+    /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
+    #[prop(optional, into)]
+    dirname: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
+    #[prop(optional, into)]
+    formaction: MaybeProp<String>,
+    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
+    /// `formenctype` values.
+    ///
+    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
+    #[prop(optional, into)]
+    formenctype: MaybeProp<String>,
+    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
+    /// values.
+    ///
+    /// Accepted values: "get" | "post" | "dialog".
+    #[prop(optional, into)]
+    formmethod: MaybeProp<String>,
+    /// Toggle whether the form data is validated or not before submission. Overrides any parent
+    /// `<form>` `novalidate` values.
+    #[prop(optional, into)]
+    formnovalidate: MaybeProp<bool>,
+    /// Defines where to display the response received after submission. Overrides any parent
+    /// `<form>` `target` values.
+    ///
+    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
+    /// or iframe
+    #[prop(optional, into)]
+    formtarget: MaybeProp<String>,
+    /// Set the height of the image defined by `src` when `input_type` is set to "image".
+    #[prop(optional, into)]
+    height: MaybeProp<usize>,
+    /// Link this input with a `<datalist>` element for value suggestions with its `id`.
+    #[prop(optional, into)]
+    list: MaybeProp<String>,
+    /// The latest date the form will accept in `yyyy-mm-dd` format.
+    #[prop(optional, into)]
+    max: MaybeProp<String>,
+    /// Set the maximum length of accepted input.
+    #[prop(optional, into)]
+    maxlength: MaybeProp<usize>,
+    /// The earliest date the form will accept in `yyyy-mm-dd` format.
+    #[prop(optional, into)]
+    min: MaybeProp<String>,
+    /// Set the minimum length of accepted input.
+    #[prop(optional, into)]
+    minlength: MaybeProp<usize>,
+    /// Toggle accepting multiple input values for certain input types.
+    #[prop(optional, into)]
+    multiple: MaybeProp<bool>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// A regular expression that the input's value must match to pass validation.
+    #[prop(optional, into)]
+    pattern: MaybeProp<String>,
+    /// Text that shows while there is no value set.
+    #[prop(optional, into)]
+    placeholder: MaybeProp<String>,
+    /// Toggle whether or not the user can modify the value of this element.
+    #[prop(optional, into)]
+    readonly: MaybeProp<bool>,
+    /// Toggle whether or not this element requires a value for form submission.
+    #[prop(optional, into)]
+    required: MaybeProp<bool>,
+    /// Set how many characters wide the field should be. Defaults to `20`.
+    #[prop(optional, into)]
+    size: MaybeProp<usize>,
+    /// Define the URL of the image to display when `input_type` is set to "image".
+    #[prop(optional, into)]
+    src: MaybeProp<String>,
+    /// Define the granularity of expected input value.
+    #[prop(optional, into)]
+    step: MaybeProp<String>,
+    /// Define the width of the image defined by `src` when `input_type` is set to "image".
+    #[prop(optional, into)]
+    width: MaybeProp<usize>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -109,126 +230,6 @@ pub fn Input(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // INPUT ATTRIBUTES
-    //
-    /// Defines which file types are selectable. Only works with the 'file' input type.
-    #[prop(optional, into)]
-    accept: MaybeProp<String>,
-    /// Fallback string used with `image` input type. Renders while the image isn't loaded.
-    #[prop(optional, into)]
-    alt: MaybeProp<String>,
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
-    ///
-    /// Works with `color`, `date`, `datetime-local`, `email`, `hidden`, `month`, `number`,
-    /// `password`, `range`, `search`, `tel`, `text`, `time`, `url`, and `week`.
-    #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Specify which camera to use for capture of an image or video. Use `accept` to define the
-    /// expected data type.
-    #[prop(optional, into)]
-    capture: MaybeProp<String>,
-    /// Submits the user's text directionality (`ltr`, `rtl`) set by the browser along with the
-    /// regular form data. Works with `email`, `hidden`, `search`, `tel`, `text`, `url`.
-    #[prop(optional, into)]
-    dirname: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
-    #[prop(optional, into)]
-    formaction: MaybeProp<String>,
-    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
-    /// `formenctype` values.
-    ///
-    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
-    #[prop(optional, into)]
-    formenctype: MaybeProp<String>,
-    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
-    /// values.
-    ///
-    /// Accepted values: "get" | "post" | "dialog".
-    #[prop(optional, into)]
-    formmethod: MaybeProp<String>,
-    /// Toggle whether the form data is validated or not before submission. Overrides any parent
-    /// `<form>` `novalidate` values.
-    #[prop(optional, into)]
-    formnovalidate: MaybeProp<bool>,
-    /// Defines where to display the response received after submission. Overrides any parent
-    /// `<form>` `target` values.
-    ///
-    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
-    /// or iframe
-    #[prop(optional, into)]
-    formtarget: MaybeProp<String>,
-    /// Set the height of the image defined by `src` when `input_type` is set to "image".
-    #[prop(optional, into)]
-    height: MaybeProp<usize>,
-    /// Link this input with a `<datalist>` element for value suggestions with its `id`.
-    #[prop(optional, into)]
-    list: MaybeProp<String>,
-    /// The latest date the form will accept in `yyyy-mm-dd` format.
-    #[prop(optional, into)]
-    max: MaybeProp<String>,
-    /// Set the maximum length of accepted input.
-    #[prop(optional, into)]
-    maxlength: MaybeProp<usize>,
-    /// The earliest date the form will accept in `yyyy-mm-dd` format.
-    #[prop(optional, into)]
-    min: MaybeProp<String>,
-    /// Set the minimum length of accepted input.
-    #[prop(optional, into)]
-    minlength: MaybeProp<usize>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// A regular expression that the input's value must match to pass validation.
-    #[prop(optional, into)]
-    pattern: MaybeProp<String>,
-    /// Text that shows while there is no value set.
-    #[prop(optional, into)]
-    placeholder: MaybeProp<String>,
-    /// Toggle whether or not the user can modify the value of this element.
-    #[prop(optional, into)]
-    readonly: MaybeProp<bool>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Set how many characters wide the field should be. Defaults to `20`.
-    #[prop(optional, into)]
-    size: MaybeProp<usize>,
-    /// Define the URL of the image to display when `input_type` is set to "image".
-    #[prop(optional, into)]
-    src: MaybeProp<String>,
-    /// Define the granularity of expected input value.
-    #[prop(optional, into)]
-    step: MaybeProp<String>,
-    /// Define the width of the image defined by `src` when `input_type` is set to "image".
-    #[prop(optional, into)]
-    width: MaybeProp<usize>,
-
-    /// Sets the default value of the element. Setting `value` sets this once at page load.
-    /// Use this for subsequent updates.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Set the input type. Supported types: `color`, `date`, `datetime-local`, `email`, `file`,
-    /// `hidden`, `image`, `month`, `number`, `password`, `search`, `tel`, `text`, `time`, `url`,
-    /// `week`.
-    #[prop(optional, into)]
-    input_type: MaybeProp<String>,
-    /// Toggle invalid appearance.
-    #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
-    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
-    /// update it.
-    #[prop(optional, into)]
-    value: Reactive<String>,
 ) -> impl IntoView {
     let supported_types = [
         "color",
@@ -375,7 +376,11 @@ pub fn Input(
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else if has_children { Some(label_id.to_string()) } else { None }
+                } else if has_children {
+                    Some(label_id.to_string())
+                } else {
+                    None
+                }
             }
             class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
             disabled=move || disabled.get()

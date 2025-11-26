@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains description text for an Item.
 #[component]
 pub fn ItemDescription(
     children: Children,

@@ -1,8 +1,15 @@
 use leptos::prelude::*;
 
+/// Legend element for a FieldSet. Use the label variant to align with label sizing.
 #[component]
 pub fn FieldLegend(
     children: Children,
+
+    /// Set the display style of the `FieldLegend`.
+    ///
+    /// Accepted values: "label" | "legend" (default)
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -108,12 +115,6 @@ pub fn FieldLegend(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// Set the display style of the `FieldLegend`.
-    ///
-    /// Accepted values: "label" | "legend" (default)
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

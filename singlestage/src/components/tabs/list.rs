@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains the triggers that are aligned along the edge of the active content.
 #[component]
 pub fn TabsList(
     children: Children,

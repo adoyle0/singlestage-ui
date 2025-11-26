@@ -6,6 +6,28 @@ use leptos::{context::Provider, prelude::*};
 pub fn RadioGroup(
     children: Children,
 
+    /// Set or update the default value.
+    #[prop(optional, into)]
+    default: MaybeProp<String>,
+    /// Set or update the invalid state of the radio group.
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+    /// Reactive signal coupled to the current selected value of the radio group.
+    #[prop(optional, into)]
+    value: Reactive<String>,
+
+    // FIELDSET ATTRIBUTES
+    //
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -110,28 +132,6 @@ pub fn RadioGroup(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // FIELDSET ATTRIBUTES
-    //
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-
-    /// Set or update the default value.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Set or update the invalid state of the radio group.
-    #[prop(optional, into)]
-    invalid: Reactive<bool>,
-    /// Reactive signal coupled to the current selected value of the radio group.
-    #[prop(optional, into)]
-    value: Reactive<String>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

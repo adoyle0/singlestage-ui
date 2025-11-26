@@ -1,5 +1,7 @@
 use leptos::prelude::*;
 
+/// Flex column that groups control and descriptions when the label sits beside the control. Not
+/// required if you have no description.
 #[component]
 pub fn FieldContent(
     children: Children,

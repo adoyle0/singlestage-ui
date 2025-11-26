@@ -2,9 +2,47 @@ use super::SelectContext;
 use crate::{FieldContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
+/// Contains all the parts of the Select.
 #[component]
 pub fn Select(
     children: Children,
+
+    /// Set default value. Setting value overrides this setting.
+    #[prop(optional, into)]
+    default: MaybeProp<String>,
+    /// Toggle invalid appearance.
+    #[prop(optional, into)]
+    invalid: MaybeProp<bool>,
+    /// The placeholder value for the select.
+    #[prop(optional, into)]
+    placeholder: MaybeProp<String>,
+    /// The value of the control. When specified in the HTML, corresponds to the initial value
+    #[prop(optional, into)]
+    value: Reactive<String>,
+
+    // SELECT ATTRIBUTES
+    //
+    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
+    #[prop(optional, into)]
+    autocomplete: MaybeProp<String>,
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Toggle accepting multiple input values for certain input types.
+    #[prop(optional, into)]
+    multiple: MaybeProp<bool>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
+    /// Toggle whether or not this element requires a value for form submission.
+    #[prop(optional, into)]
+    required: MaybeProp<bool>,
+    /// Set how many characters wide the field should be. Defaults to `20`.
+    #[prop(optional, into)]
+    size: MaybeProp<usize>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -110,43 +148,6 @@ pub fn Select(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    // SELECT ATTRIBUTES
-    //
-    /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
-    #[prop(optional, into)]
-    autocomplete: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// Toggle whether or not this element requires a value for form submission.
-    #[prop(optional, into)]
-    required: MaybeProp<bool>,
-    /// Set how many characters wide the field should be. Defaults to `20`.
-    #[prop(optional, into)]
-    size: MaybeProp<usize>,
-
-    /// Set default value. Setting value overrides this setting.
-    #[prop(optional, into)]
-    default: MaybeProp<String>,
-    /// Toggle invalid appearance.
-    #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
-    /// The placeholder value for the select.
-    #[prop(optional, into)]
-    placeholder: MaybeProp<String>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
-    #[prop(optional, into)]
-    value: Reactive<String>,
 ) -> impl IntoView {
     let select_ref = NodeRef::<leptos::html::Select>::new();
 

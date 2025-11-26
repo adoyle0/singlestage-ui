@@ -1,7 +1,15 @@
 use leptos::prelude::*;
 
+/// Displays progress.
 #[component]
 pub fn Progress(
+    /// The value that represents 100%, or full.
+    #[prop(optional, into)]
+    max: MaybeProp<usize>,
+    /// The current progress value to be rendered.
+    #[prop(optional, into)]
+    value: MaybeProp<usize>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -103,13 +111,6 @@ pub fn Progress(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-
-    /// The value that represents 100%, or full.
-    #[prop(optional, into)]
-    max: MaybeProp<usize>,
-    /// The current progress value to be rendered.
-    #[prop(optional, into)]
-    value: MaybeProp<usize>,
 ) -> impl IntoView {
     let global_attrs_1 = view! {
         <{..}

@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// The table's footer element.
 #[component]
 pub fn TableFooter(
     children: Children,

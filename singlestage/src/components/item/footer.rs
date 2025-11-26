@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// Contains footer content for an Item.
 #[component]
 pub fn ItemFooter(
     children: Children,

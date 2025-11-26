@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// The table's header element.
 #[component]
 pub fn TableHeader(
     children: Children,
