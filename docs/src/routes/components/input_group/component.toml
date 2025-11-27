@@ -1,5 +1,5 @@
 name = "Input Group"
-description = """Display additional information or actions to an input or textarea."""
+description = """Add additional information or actions to an input or textarea."""
 
 [[examples]]
 name = "input group"
@@ -13,10 +13,10 @@ name = "input group text"
 title = "Text"
 description = "Display additional text information alongside inputs."
 
-# [[examples]]
-# name = "input group button"
-# title = "Button"
-# description = "Add buttons to perform actions within the input group."
+[[examples]]
+name = "input group button"
+title = "Button"
+description = "Add buttons to perform actions within the input group."
 
 [[examples]]
 name = "input group tooltip"
@@ -28,6 +28,21 @@ name = "input group textarea"
 title = "Textarea"
 description = """Input groups also work with textarea components. Use block-start or block-end \
 for alignment."""
+
+[[examples]]
+name = "input group spinner"
+title = "Spinner"
+description = "Show loading indicators while processing input."
+
+[[examples]]
+name = "input group label"
+title = "Label"
+description = "Add labels within input groups to improve accessibility."
+
+[[examples]]
+name = "input group dropdown"
+title = "Dropdown"
+description = "Pair input groups with dropdown menus for complex interactions."
 
 [[references]]
 name = "Progress"

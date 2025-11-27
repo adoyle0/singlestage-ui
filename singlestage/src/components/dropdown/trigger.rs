@@ -6,6 +6,8 @@ use leptos::prelude::*;
 pub fn DropdownMenuTrigger(
     children: Children,
 
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+
     /// The type of the button. Defaults to `submit`:
     /// Button types: submit | button | reset
     #[prop(optional, into)]
@@ -226,6 +228,7 @@ pub fn DropdownMenuTrigger(
         <button
             aria-controls=move || menu.menu_id.get()
             aria-haspopup="menu"
+            aria-label=move || aria_label.get()
             popovertarget=move || menu.menu_id.get()
             popovertargetaction="toggle"
             class=move || {

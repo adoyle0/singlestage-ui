@@ -1,116 +1,212 @@
 @layer components {
+  /* Group */
+
   .singlestage-input-group {
-    @apply /* group/input-group */
+    @apply border
     border-input
-    dark:bg-input/30
-    relative
+    dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40
     flex
-    w-full
+    h-9
+    has-[[data-slot=input-group-control]:focus-visible]:border-ring
+    has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]
+    has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50
+    has-[[data-slot][aria-invalid=true]]:border-destructive
+    has-[[data-slot][aria-invalid=true]]:ring-destructive/20
     items-center
+    min-w-0
+    outline-none
+    relative
     rounded-md
-    border
     shadow-xs
     transition-[color,box-shadow]
-    outline-none
-    h-9
-    min-w-0
-    has-[>textarea]:h-auto
-    has-[>[data-align=inline-start]]:[&>input]:pl-2
-    has-[>[data-align=inline-end]]:[&>input]:pr-2
-    has-[>[data-align=block-start]]:h-auto
-    has-[>[data-align=block-start]]:flex-col
-    has-[>[data-align=block-start]]:[&>input]:pb-3
-    has-[>[data-align=block-end]]:h-auto
-    has-[>[data-align=block-end]]:flex-col
-    has-[>[data-align=block-end]]:[&>input]:pt-3
-    has-[[data-slot=input-group-control]:focus-visible]:border-ring
-    has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50
-    has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]
-    has-[[data-slot][aria-invalid=true]]:ring-destructive/20
-    has-[[data-slot][aria-invalid=true]]:border-destructive
-    dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40;
+    w-full;
+  }
+  .singlestage-input-group:has(> input, > textarea) {
+    .singlestage-input-group-addon-block-end {
+      @apply pb-2.5;
+    }
   }
 
+  .singlestage-input-group:has(> input, > textarea) {
+    .singlestage-input-group-addon-block-start {
+      @apply pt-2.5;
+    }
+  }
+
+  .singlestage-input-group:has(> textarea) {
+    @apply h-auto;
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-inline-start) {
+    > input {
+      @apply pl-2;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-inline-end) {
+    > input {
+      @apply pr-2;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-block-start) {
+    @apply flex-col
+    h-auto;
+
+    > input {
+      @apply pb-3;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-block-end) {
+    @apply flex-col
+    h-auto;
+
+    > input {
+      @apply pt-3;
+    }
+  }
+
+  /* Addon */
+
   .singlestage-input-group-addon {
-    @apply text-muted-foreground
-    flex
-    h-auto
+    @apply [&>kbd]:rounded-[calc(var(--radius)-5px)]
+    [&>svg:not([class*='size-'])]:size-4
     cursor-text
+    flex
+    font-medium
+    gap-2
+    group-data-[disabled=true]/input-group:opacity-50
+    h-auto
     items-center
     justify-center
-    gap-2
     py-1.5
-    text-sm
-    font-medium
     select-none
-    [&>svg:not([class*='size-'])]:size-4
-    [&>kbd]:rounded-[calc(var(--radius)-5px)]
-    group-data-[disabled=true]/input-group:opacity-50;
+    text-muted-foreground
+    text-sm;
   }
 
   .singlestage-input-group-addon-inline-start {
     @apply order-first
-    pl-3
-    has-[>button]:ml-[-0.45rem]
-    has-[>kbd]:ml-[-0.35rem];
+    pl-3;
+  }
+
+  .singlestage-input-group-addon-inline-start:has(> button) {
+    @apply ml-[-0.45rem];
+  }
+  .singlestage-input-group-addon-inline-start:has(> kbd) {
+    @apply ml-[-0.35rem];
   }
 
   .singlestage-input-group-addon-inline-end {
     @apply order-last
-    pr-3
-    has-[>button]:mr-[-0.45rem]
-    has-[>kbd]:mr-[-0.35rem];
+    pr-3;
+  }
+
+  .singlestage-input-group-addon-inline-end:has(> button) {
+    @apply mr-[-0.45rem];
+  }
+
+  .singlestage-input-group-addon-inline-end:has(> kbd) {
+    @apply mr-[-0.35rem];
   }
 
   .singlestage-input-group-addon-block-start {
-    @apply order-first
-    w-full
-    justify-start
-    px-3
+    @apply justify-start
+    order-first
     pt-3
-    [.border-b]:pb-3
-    group-has-[>input]/input-group:pt-2.5;
+    px-3
+    w-full;
+  }
+
+  .singlestage-input-group-addon-block-start.border-b {
+    @apply pb-3;
   }
 
   .singlestage-input-group-addon-block-end {
-    @apply order-last
-    w-full
-    justify-start
-    px-3
+    @apply justify-start
+    order-last
     pb-3
-    [.border-t]:pt-3
-    group-has-[>input]/input-group:pb-2.5;
+    px-3
+    w-full;
   }
 
-  .singlestage-input-group-text {
-    @apply text-muted-foreground
-    flex
-    items-center
-    gap-2
-    text-sm
-    [&_svg]:pointer-events-none
-    [&_svg:not([class*='size-'])]:size-4;
+  .singlestage-input-group-addon-block-end.border-t {
+    @apply pt-3;
   }
+
+  /* Button */
+
+  .singlestage-input-group-button,
+  .singlestage-input-group .singlestage-popover button,
+  .singlestage-input-group-addon > .singlestage-dropdown-menu > button {
+    @apply !flex
+    !shadow-none;
+  }
+
+  .singlestage-input-group-button-xs,
+  .singlestage-input-group .singlestage-popover button,
+  .singlestage-input-group-addon > .singlestage-dropdown-menu > button {
+    @apply !gap-1
+    !h-6
+    !px-2
+    [&>svg:not([class*='size-'])]:!size-3.5
+    has-[>svg]:!px-2
+    rounded-[calc(var(--radius)-5px)];
+  }
+
+  .singlestage-input-group-button-sm {
+    @apply !gap-1.5
+    !h-8
+    !px-2.5
+    has-[>svg]:!px-2.5
+    rounded-md;
+  }
+
+  .singlestage-input-group-button-icon-xs {
+    @apply !p-0
+    !size-6
+    has-[>svg]:!p-0
+    rounded-[calc(var(--radius)-5px)];
+  }
+
+  .singlestage-input-group-button-icon-sm {
+    @apply !p-0
+    !size-8
+    has-[>svg]:!p-0;
+  }
+
+  /* Input */
 
   .singlestage-input-group-input {
-    @apply flex-1
-    rounded-none
-    border-0
-    bg-transparent
-    shadow-none
-    focus-visible:ring-0
-    dark:bg-transparent;
+    @apply !border-0
+    !rounded-none
+    !shadow-none
+    flex-1
+    focus-visible:!ring-0;
   }
 
+  /* Text */
+
+  .singlestage-input-group-text {
+    @apply [&_svg:not([class*='size-'])]:size-4
+    [&_svg]:pointer-events-none
+    flex
+    gap-2
+    items-center
+    text-muted-foreground
+    text-sm;
+  }
+
+  /* Textarea */
+
   .singlestage-input-group-textarea {
-    @apply flex-1
-    resize-none
-    rounded-none
-    border-0
-    bg-transparent
-    py-3
-    shadow-none
-    focus-visible:ring-0
-    dark:bg-transparent;
+    @apply !border-0
+    !py-3
+    !rounded-none
+    !shadow-none
+    flex-1
+    focus-visible:!ring-0
+    resize-none;
   }
 }

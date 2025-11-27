@@ -25,7 +25,7 @@ pub fn InputGroupExample() -> impl IntoView {
             </InputGroup>
             <InputGroup>
                 <InputGroupTextarea placeholder="Ask, Search or Chat..." />
-                <InputGroupAddon align="block-end">
+                <InputGroupAddon align="block-end" class="max-h-[42px]">
                     <InputGroupButton variant="outline" class="rounded-full" size="icon-xs">
                         {icon!(icondata::LuPlus)}
                     </InputGroupButton>
@@ -56,7 +56,7 @@ pub fn InputGroupExample() -> impl IntoView {
             <InputGroup>
                 <InputGroupInput placeholder="@shadcn" />
                 <InputGroupAddon align="inline-end">
-                    <div class="bg-primary text-primary-foreground flex size-4 items-center justify-center rounded-full">
+                    <div class="bg-(--primary) text-(--primary-foreground) flex size-4 items-center justify-center rounded-full">
                         {icon!(icondata::LuCheck, class="size-3")}
                     </div>
                 </InputGroupAddon>

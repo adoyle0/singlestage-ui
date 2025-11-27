@@ -26,14 +26,14 @@ pub fn InputGroupTooltipExample() -> impl IntoView {
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup>
-                <InputGroupInput placeholder="Enter API key" />
-                <Tooltip value="Click for help with API keys">
+                <Tooltip side="left" value="Click for help with API keys">
                     <InputGroupAddon>
                         <InputGroupButton variant="ghost" attr:aria-label="Help" size="icon-xs">
                             {icon!(icondata::FiHelpCircle)}
                         </InputGroupButton>
                     </InputGroupAddon>
                 </Tooltip>
+                <InputGroupInput placeholder="Enter API key" />
             </InputGroup>
         </div>
     }

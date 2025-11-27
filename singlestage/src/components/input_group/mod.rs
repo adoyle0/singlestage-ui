@@ -1,10 +1,11 @@
-use crate::{Input, Textarea};
+use crate::{Button, Input, Textarea};
 use leptos::prelude::*;
 
 #[component]
 pub fn InputGroup(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
 ) -> impl IntoView {
     view! {
         <div
@@ -46,6 +47,7 @@ pub fn InputGroupAddon(
 #[component]
 pub fn InputGroupButton(
     children: Children,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] button_type: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] disabled: MaybeProp<bool>,
@@ -53,40 +55,24 @@ pub fn InputGroupButton(
     #[prop(optional, into)] variant: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
-        <button
-            class=move || {
-                format!(
-                    "{} {} {} singlestage-input-group-button",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => "singlestage-btn-primary",
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-btn-sm",
-                        "small" => "singlestage-btn-sm",
-                        "lg" => "singlestage-btn-lg",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "icon-sm" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        "icon-lg" => "singlestage-btn-lg-icon",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <Button
+            button_type=button_type.get_untracked().unwrap_or("button".to_string())
+            class=format!(
+                "singlestage-input-group-button {} {}",
+                match size.get_untracked().unwrap_or_default().as_str() {
+                    "sm" => "singlestage-input-group-button-sm",
+                    "icon-xs" => "singlestage-input-group-button-icon-xs",
+                    "icon-sm" => "singlestage-input-group-button-icon-sm",
+                    _ => "singlestage-input-group-button-xs",
+                },
+                class.get().unwrap_or_default(),
+            )
             disabled=disabled.get_untracked()
-            prop:disabled=move || disabled.get()
-            type=button_type.get()
+            size=size.get_untracked().unwrap_or("xs".to_string())
+            variant=variant.get_untracked().unwrap_or("ghost".to_string())
         >
             {children()}
-        </button>
+        </Button>
     }
 }
 
@@ -104,20 +90,28 @@ pub fn InputGroupText(
 
 #[component]
 pub fn InputGroupInput(
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] id: MaybeProp<String>,
     #[prop(optional, into)] input_type: MaybeProp<String>,
     #[prop(optional, into)] placeholder: MaybeProp<String>,
+    #[prop(optional, into)] readonly: MaybeProp<bool>,
+    #[prop(optional, into)] title: MaybeProp<String>,
 ) -> impl IntoView {
     view! {
         <Input
+            attr:aria_label=aria_label.get_untracked()
             class=format!(
                 "singlestage-input-group-input {}",
                 class.get_untracked().unwrap_or_default(),
             )
-            id=id.get_untracked().unwrap_or_default()
-            input_type=input_type.get_untracked().unwrap_or_default()
-            placeholder=placeholder.get_untracked().unwrap_or_default()
+            attr:data-slot="input-group-control"
+            id=id.get_untracked()
+            input_type=input_type.get_untracked()
+            placeholder=placeholder.get_untracked()
+            readonly=readonly.get_untracked()
+            title=title.get_untracked()
         />
     }
 }
@@ -125,6 +119,7 @@ pub fn InputGroupInput(
 #[component]
 pub fn InputGroupTextarea(
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] id: MaybeProp<String>,
     #[prop(optional, into)] placeholder: MaybeProp<String>,
 ) -> impl IntoView {
@@ -134,6 +129,7 @@ pub fn InputGroupTextarea(
                 "singlestage-input-group-textarea {}",
                 class.get_untracked().unwrap_or_default(),
             )
+            attr:data-slot="input-group-control"
             id=id.get_untracked().unwrap_or_default()
             placeholder=placeholder.get_untracked().unwrap_or_default()
         />
