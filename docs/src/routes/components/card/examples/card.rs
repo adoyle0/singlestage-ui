@@ -6,9 +6,11 @@ pub fn CardExample() -> impl IntoView {
     view! {
         <Card class="w-full sm:w-sm">
             <CardHeader>
-                <CardTitle>"Log in to your account"</CardTitle>
+                <CardTitle>
+                    <p>"Log in to your account"</p>
+                </CardTitle>
                 <CardDescription>
-                    "Enter your details below to log in to your account"
+                    <p>"Enter your details below to log in to your account"</p>
                 </CardDescription>
             </CardHeader>
             <CardContent>

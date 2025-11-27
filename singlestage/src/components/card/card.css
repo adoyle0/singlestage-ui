@@ -21,12 +21,12 @@
       items-start
       px-6;
 
-      h2 {
+      .singlestage-card-title {
         @apply font-semibold
         leading-none;
       }
 
-      p {
+      .singlestage-card-description {
         @apply text-muted-foreground
         text-sm;
       }
