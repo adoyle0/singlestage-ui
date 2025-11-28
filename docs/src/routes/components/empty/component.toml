@@ -24,6 +24,11 @@ name = "empty avatar group"
 title = "Avatar Group"
 description = "Use the EmptyMedia component to display an avatar group in the empty state."
 
+[[examples]]
+name = "empty input group"
+title = "Input Group"
+description = "You can add an InputGroup component to the EmptyContent component."
+
 [[references]]
 name = "Empty"
 description = """The main component of the empty state. Wraps the EmptyHeader and EmptyContent \

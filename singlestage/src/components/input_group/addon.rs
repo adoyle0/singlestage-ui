@@ -1,75 +1,16 @@
-use crate::DropdownMenuContext;
 use leptos::prelude::*;
 
-/// The button that toggles the dropdown menu.
+/// Displays icons, text, buttons, or other content alongside inputs.
 #[component]
-pub fn DropdownMenuTrigger(
+pub fn InputGroupAddon(
     children: Children,
 
-    #[prop(optional, into)] aria_label: MaybeProp<String>,
-
-    /// The type of the button. Defaults to `submit`:
-    /// Button types: submit | button | reset
-    #[prop(optional, into)]
-    button_type: MaybeProp<String>,
-    /// The size of the button. Leave this empty for the default size.
-    /// Sizes: small | large | icon | sm-icon | lg-icon
-    #[prop(optional, into)]
-    size: MaybeProp<String>,
-    /// The display variant of the button. Defaults to `primary`
-    /// Variants: primary | secondary | outline | ghost | link | destructive
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
-
-    // BUTTON ATTRIBUTES
-    //
-    /// The action that's performed by the element this button controls.
+    /// Set how child content should be aligned.
     ///
-    /// Accepted values: "show-modal" | "close" | "request-close" | "show-popover" | "hide-popover"
-    /// | "toggle-popover" | "--[custom value]"
+    /// Accepted values: "inline-start" | "inline-end" | "block-start" | "block-end".
+    /// Default: "inline-start"
     #[prop(optional, into)]
-    command: MaybeProp<String>,
-    /// Turn this button into a command button for an element via id.
-    #[prop(optional, into)]
-    commandfor: MaybeProp<String>,
-    /// Toggle whether or not the input is disabled.
-    #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
-    /// Associate this element with a form element that may not be its parent by its `id`.
-    #[prop(optional, into)]
-    form: MaybeProp<String>,
-    /// Defines the target for submitted form data. Overrides any parent `<form>` `action` values.
-    #[prop(optional, into)]
-    formaction: MaybeProp<String>,
-    /// Defines the encoding type for submitted form data. Overrides any parent `<form>`
-    /// `formenctype` values.
-    ///
-    /// Accepted values: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain".
-    #[prop(optional, into)]
-    formenctype: MaybeProp<String>,
-    /// Defines the HTTP method used to submit form data. Overrides any parent `<form>` `method`
-    /// values.
-    ///
-    /// Accepted values: "get" | "post" | "dialog".
-    #[prop(optional, into)]
-    formmethod: MaybeProp<String>,
-    /// Toggle whether the form data is validated or not before submission. Overrides any parent
-    /// `<form>` `novalidate` values.
-    #[prop(optional, into)]
-    formnovalidate: MaybeProp<bool>,
-    /// Defines where to display the response received after submission. Overrides any parent
-    /// `<form>` `target` values.
-    ///
-    /// Accepted values: "_self" | "_blank" | "_parent" | "_top", or the `name` of any tab, window,
-    /// or iframe
-    #[prop(optional, into)]
-    formtarget: MaybeProp<String>,
-    /// Name of this element. Submitted with the form as part of a name/value pair.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
-    /// The value associated with this button's `name` when submitted with form data.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
+    align: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -112,6 +53,9 @@ pub fn DropdownMenuTrigger(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -160,6 +104,9 @@ pub fn DropdownMenuTrigger(
     /// Define CSS to be applied to the element.
     #[prop(optional, into)]
     style: MaybeProp<String>,
+    /// Controls how an element behaves when a user navigates using the tab key.
+    #[prop(optional, into)]
+    tabindex: MaybeProp<usize>,
     /// Describes the content of the element to screen readers.
     #[prop(optional, into)]
     title: MaybeProp<String>,
@@ -167,11 +114,6 @@ pub fn DropdownMenuTrigger(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<DropdownMenuContext>();
-
-    let uuid = uuid::Uuid::new_v4().to_string();
-    menu.trigger_id.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -183,6 +125,7 @@ pub fn DropdownMenuTrigger(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -203,65 +146,32 @@ pub fn DropdownMenuTrigger(
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
+            tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
         />
     };
 
-    let button_attrs = view! {
-        <{..}
-            command=move || command.get()
-            commandfor=move || commandfor.get()
-            disabled=move || disabled.get()
-            form=move || form.get()
-            formaction=move || formaction.get()
-            formenctype=move || formenctype.get()
-            formmethod=move || formmethod.get()
-            formnovalidate=move || formnovalidate.get()
-            formtarget=move || formtarget.get()
-            name=move || name.get()
-            value=move || value.get()
-        />
-    };
-
     view! {
-        <button
-            aria-controls=move || menu.menu_id.get()
-            aria-haspopup="menu"
-            aria-label=move || aria_label.get()
-            popovertarget=move || menu.menu_id.get()
-            popovertargetaction="toggle"
+        <div
             class=move || {
                 format!(
-                    "{} {} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => "singlestage-btn-primary",
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "small" => "singlestage-btn-sm",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        _ => "",
+                    "singlestage-input-group-addon {} {}",
+                    match align.get().unwrap_or_default().as_str() {
+                        "inline-end" => "singlestage-input-group-addon-inline-end",
+                        "block-start" => "singlestage-input-group-addon-block-start",
+                        "block-end" => "singlestage-input-group-addon-block-end",
+                        _ => "singlestage-input-group-addon-inline-start",
                     },
                     class.get().unwrap_or_default(),
                 )
             }
-            id=uuid
-            type=button_type.get()
+            role="group"
 
             {..global_attrs_1}
             {..global_attrs_2}
-            {..button_attrs}
         >
             {children()}
-        </button>
+        </div>
     }
 }

@@ -23,6 +23,12 @@ pub fn Input(
     #[prop(optional, into)]
     value: Reactive<String>,
 
+    // ARIA ATTRIBUTES
+    //
+    /// Provide a custom accessible name for this element.
+    #[prop(optional, into)]
+    aria_label: MaybeProp<String>,
+
     // INPUT ATTRIBUTES
     //
     /// Defines which file types are selectable. Only works with the 'file' input type.
@@ -367,12 +373,13 @@ pub fn Input(
                     None
                 }
             }
-            aria-invalid=move || {
+            aria_invalid=move || {
                 match invalid.get() {
                     Some(true) => Some("true"),
                     _ => None,
                 }
             }
+            aria_label=move || aria_label.get()
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())

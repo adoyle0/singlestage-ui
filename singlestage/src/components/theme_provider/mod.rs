@@ -55,6 +55,19 @@ static DARK_COMMON: &str = r#"
 // TODO: This code is dead and here for future reference
 static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
+  .singlestage-input-group {
+    @apply dark:bg-input/30;
+
+    .singlestage-input,
+    .singlestage-textarea {
+      @apply !bg-transparent;
+    }
+  }
+
+  .singlestage-input-group:has([aria-invalid="true"]) {
+    @apply dark:ring-destructive/40;
+  }
+
   .singlestage-field-button:has(input:checked) {
     @apply bg-primary/10;
   }
@@ -183,6 +196,28 @@ static _DARK_OVERRIDES_TW: &str = r#"
 }"#;
 
 static DARK_OVERRIDES: &str = r#"@layer components {
+  .singlestage-input-group {
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--input) 30%, transparent);
+    }
+
+    .singlestage-input,
+    .singlestage-textarea {
+      background-color: transparent !important;
+    }
+  }
+
+  .singlestage-input-group:has([aria-invalid="true"]) {
+    --tw-ring-color: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(
+        in oklab,
+        var(--destructive) 40%,
+        transparent
+      );
+    }
+  }
+
   .singlestage-field-button:has(input:checked) {
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--primary) 10%, transparent);

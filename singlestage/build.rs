@@ -136,6 +136,7 @@ fn main() {
         "empty",
         "field",
         "input",
+        "input_group",
         "item",
         "kbd",
         "label",

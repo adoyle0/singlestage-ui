@@ -1,0 +1,233 @@
+@layer components {
+  /* Group */
+
+  .singlestage-input-group {
+    @apply border
+    border-input
+    flex
+    h-9
+    items-center
+    min-w-0
+    outline-none
+    relative
+    rounded-md
+    shadow-xs
+    transition-[color,box-shadow]
+    w-full;
+  }
+
+  .singlestage-input-group:has([aria-invalid="true"]),
+  .singlestage-input-group:has(*:invalid) {
+    @apply border-destructive
+    ring-destructive/20;
+  }
+
+  .singlestage-input-group:has([aria-disabled="true"]),
+  .singlestage-input-group:has(*:disabled) {
+    .singlestage-input-group-addon {
+      @apply opacity-50;
+    }
+  }
+
+  .singlestage-input-group:has(
+    .singlestage-input:focus-visible,
+    .singlestage-textarea:focus-visible
+  ) {
+    @apply border-ring
+    ring-[3px]
+    ring-ring/50;
+  }
+
+  .singlestage-input-group:has(> input, > textarea) {
+    .singlestage-input-group-addon-block-start {
+      @apply pt-2.5;
+    }
+
+    .singlestage-input-group-addon-block-end {
+      @apply pb-2.5;
+    }
+  }
+
+  .singlestage-input-group:has(> textarea) {
+    @apply h-auto;
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-inline-start) {
+    > input {
+      @apply pl-2;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-inline-end) {
+    > input {
+      @apply pr-2;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-block-start) {
+    @apply flex-col
+    h-auto;
+
+    > input {
+      @apply pb-3;
+    }
+  }
+
+  .singlestage-input-group:has(> .singlestage-input-group-addon-block-end) {
+    @apply flex-col
+    h-auto;
+
+    > input {
+      @apply pt-3;
+    }
+  }
+
+  /* Addon */
+
+  .singlestage-input-group-addon {
+    @apply [&>kbd]:rounded-[calc(var(--radius)-5px)]
+    [&>svg:not([class*='size-'])]:size-4
+    cursor-text
+    flex
+    font-medium
+    gap-2
+    h-auto
+    items-center
+    justify-center
+    py-1.5
+    select-none
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-input-group-addon-inline-start {
+    @apply order-first
+    pl-3;
+  }
+
+  .singlestage-input-group-addon-inline-start:has(button) {
+    @apply ml-[-0.45rem];
+  }
+
+  .singlestage-input-group-addon-inline-start:has(kbd) {
+    @apply ml-[-0.35rem];
+  }
+
+  .singlestage-input-group-addon-inline-end {
+    @apply order-last
+    pr-3;
+  }
+
+  .singlestage-input-group-addon-inline-end:has(button) {
+    @apply mr-[-0.45rem];
+  }
+
+  .singlestage-input-group-addon-inline-end:has(kbd) {
+    @apply mr-[-0.35rem];
+  }
+
+  .singlestage-input-group-addon-block-start {
+    @apply justify-start
+    order-first
+    pt-3
+    px-3
+    w-full;
+  }
+
+  .singlestage-input-group-addon-block-start.border-b {
+    @apply pb-3;
+  }
+
+  .singlestage-input-group-addon-block-end {
+    @apply justify-start
+    order-last
+    pb-3
+    px-3
+    w-full;
+  }
+
+  .singlestage-input-group-addon-block-end.border-t {
+    @apply pt-3;
+  }
+
+  /* Button */
+
+  .singlestage-input-group-button,
+  .singlestage-input-group .singlestage-popover button,
+  .singlestage-input-group-addon > .singlestage-dropdown-menu > button {
+    @apply !flex
+    !shadow-none;
+  }
+
+  .singlestage-input-group-button-xs,
+  .singlestage-input-group .singlestage-popover button,
+  .singlestage-input-group-addon > .singlestage-dropdown-menu > button {
+    @apply !gap-1
+    !h-6
+    !px-2
+    [&>svg:not([class*='size-'])]:!size-3.5
+    has-[>svg]:!px-2
+    rounded-[calc(var(--radius)-5px)];
+  }
+
+  .singlestage-input-group-button-sm {
+    @apply !gap-1.5
+    !h-8
+    !px-2.5
+    has-[>svg]:!px-2.5
+    rounded-md;
+  }
+
+  .singlestage-input-group-button-icon-xs,
+  .singlestage-input-group-button-icon-sm {
+    @apply !p-0
+    has-[>svg]:!p-0;
+  }
+
+  .singlestage-input-group-button-icon-xs {
+    @apply !size-6
+    rounded-[calc(var(--radius)-5px)];
+  }
+
+  .singlestage-input-group-button-icon-sm {
+    @apply !size-8;
+  }
+
+  /* Input */
+
+  .singlestage-input-group {
+    .singlestage-input {
+      @apply !border-0
+      !rounded-none
+      !shadow-none
+      flex-1
+      focus-visible:!ring-0;
+    }
+  }
+
+  /* Text */
+
+  .singlestage-input-group-text {
+    @apply [&_svg:not([class*='size-'])]:size-4
+    [&_svg]:pointer-events-none
+    flex
+    gap-2
+    items-center
+    text-muted-foreground
+    text-sm;
+  }
+
+  /* Textarea */
+
+  .singlestage-input-group {
+    .singlestage-textarea {
+      @apply !border-0
+      !py-3
+      !rounded-none
+      !shadow-none
+      flex-1
+      focus-visible:!ring-0
+      resize-none;
+    }
+  }
+}

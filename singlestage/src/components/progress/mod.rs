@@ -91,6 +91,9 @@ pub fn Progress(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -141,6 +144,7 @@ pub fn Progress(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()

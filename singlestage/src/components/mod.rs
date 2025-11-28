@@ -83,6 +83,11 @@ pub mod input;
 #[cfg(feature = "input")]
 pub use input::*;
 
+#[cfg(feature = "input_group")]
+pub mod input_group;
+#[cfg(feature = "input_group")]
+pub use input_group::*;
+
 #[cfg(feature = "item")]
 pub mod item;
 #[cfg(feature = "item")]

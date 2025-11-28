@@ -49,6 +49,7 @@ default = [
   "icon",
   "field",
   "input",
+  "input_group",
   "item",
   "kbd",
   "label",
@@ -79,7 +80,7 @@ aspect_ratio = []
 avatar = []
 badge = []
 breadcrumb = ["dropdown"]
-button = []
+button = ["input_group"]
 button_group = []
 card = []
 carousel = []
@@ -91,6 +92,7 @@ empty = []
 icon = ["macro"]
 field = []
 input = ["field", "label"]
+input_group = []
 item = []
 kbd = []
 macro = ["dep:singlestage_macro"]
