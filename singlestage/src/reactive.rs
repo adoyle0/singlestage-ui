@@ -1,15 +1,9 @@
 use leptos::prelude::*;
+use std::fmt::Debug;
+use reactive_stores::{Store, ArcStore, Field, ArcField, Subfield, StoreField};
 
-use reactive_stores::{
-    Store, ArcStore, ArcField, AtIndex, AtKeyed, DerefedField, Field, KeyedSubfield, StoreField, Subfield,
-};
-use std::{
-    fmt::Debug,
-    hash::Hash,
-    ops::{Deref, DerefMut, Index, IndexMut},
-};
-
-/// A reactive binding wrapper that can take any value and upgrade it to a RwSignal.
+/// A reactive binding wrapper that can take any value and upgrade it to a RwSignal (default) 
+/// or a reactive_stores::Field (Store, ArcStore, Field, ArcField and Subfield can be converted).
 ///
 /// For example:
 /// ```rs
@@ -28,7 +22,6 @@ use std::{
 /// }
 /// ```
 /// In this case the `RwSignal` and the `Checkbox` are coupled. Changing one will update the other and notify all listeners.
-
 #[derive(Clone, Debug)]
 pub enum Reactive<T>
 where
@@ -173,111 +166,3 @@ where
         Reactive::Field(value.into())
     }
 }
-
-// impl<Inner, T> From<DerefedField<Inner>> for Reactive<T>
-// where
-//     Inner: Clone + StoreField + Send + Sync + 'static,
-//     Inner::Value: Deref<Target = T> + DerefMut,
-//     <Inner as StoreField>::Value: Deref + DerefMut,
-//     <Inner::Value as Deref>::Target: Sized,
-//     T: Sized + Send + Sync + Clone + 'static,
-//     DerefedField<Inner>: Get<Value = <Inner::Value as Deref>::Target> + Set<Value = <Inner::Value as Deref>::Target> + Clone,
-// {
-//     fn from(value: DerefedField<T>) -> Self {
-//         Reactive::Field(value.into())
-//     }
-// }
-
-// impl<Inner, Prev, K, T> From<AtKeyed<Inner, Prev, K, T>> for Reactive<T::Output>
-// where
-//     Inner: Send + Sync + StoreField<Value = Prev> + 'static,
-//     Prev: 'static,
-//     K: Debug + Send + Sync + PartialEq + Eq + Hash + 'static,
-//     KeyedSubfield<Inner, Prev, K, T>: Clone,
-//     T: IndexMut<usize> + Send + Sync + Clone + 'static,
-//     for<'a> &'a T: IntoIterator,
-//     T::Output: Sized,
-//     AtKeyed<Inner, Prev, K, T>: Get<Value = T> + Set<Value = T> + Clone + Track,
-// {
-//     fn from(value: AtKeyed<Inner, Prev, K, T>) -> Self {
-//         Reactive::Field(value.into())
-//     }
-// }
-
-// impl<Inner, Prev> From<AtIndex<Inner, Prev>> for Reactive<Prev::Output>
-// where
-//     Inner: StoreField<Value = Prev> + Send + Sync + 'static,
-//     Prev: IndexMut<usize> + Send + Sync + 'static,
-//     Prev::Output: Sized + Send + Sync + Clone + 'static,
-//     AtIndex<Inner, Prev>: Clone,
-// {
-//     fn from(value: AtIndex<Inner, Prev>) -> Self {
-//         let field: Field<Prev::Output> = value.into();
-//         Reactive::Field(field)
-//     }
-// }
-
-
-// impl<Inner, Prev, K, T> From<KeyedSubfield<Inner, Prev, K, T>> for Reactive<T>
-// where
-//     Inner: Send + Sync + StoreField<Value = Prev> + 'static,
-//     Prev: 'static,
-//     K: Send + Sync + Debug + 'static + Eq + Hash,
-//     T: Send + Sync + Clone + 'static,
-//     for<'a> &'a T: IntoIterator,
-//     KeyedSubfield<Inner, Prev, K, T>: Get<Value = T> + Set<Value = T> + Clone + Track,
-// {
-//     fn from(value: KeyedSubfield<Inner, Prev, K, T>) -> Self {
-        
-//         Reactive::Field(value.into())
-//     }
-// }
-
-
-
-
-
-
-// /ArcField, AtIndex, AtKeyed, DerefedField, KeyedSubfield,
-
-
-// use reactive_stores::Store;
-
-// #[derive(Clone, Debug, Default, PartialEq, Eq, Store)]
-// pub struct MyStore {
-//     pub text: String,    
-// }
-
-// fn test() {
-//     let my_store = Store::new(MyStore {text: "bebebe".to_string() });
-    
-//     let field = my_store.text();
-//     // let value = Reactive(field);
-    
-//     let view = view! { <crate::Input value=field/> };
-    
-// }
-
-
-// impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
-// where
-//     T: Send + Sync + Clone + PartialEq + 'static,
-//     Inner: StoreField<Value = Prev> + Send + Sync + Clone + 'static,
-//     Prev: 'static,
-//     Subfield<Inner, Prev, T>: Copy + Track + IsDisposed + GetUntracked<Value=T>,
-// {
-//     fn from(value: Subfield<Inner, Prev, T>) -> Self {
-//         let rw_signal = RwSignal::new(value.get_untracked());
-//         Effect::new(move |_| {
-//             if value.with(|t| rw_signal.read_untracked() != *t) {
-//                 rw_signal.set(value.get_untracked());
-//             }
-//         });
-//         Effect::new(move |_| {
-//             if value.with_untracked(|t: &T| rw_signal.read() != *t) {
-//                 value.set(rw_signal.get_untracked());
-//             }
-//         });
-//         Reactive(rw_signal)
-//     }
-// }
