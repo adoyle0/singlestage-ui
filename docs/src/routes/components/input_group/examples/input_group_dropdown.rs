@@ -9,7 +9,7 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter file name" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <DropdownMenuTrigger aria_label="More" variant="ghost">
+                        <DropdownMenuTrigger aria_label="More" title="More" variant="ghost">
                             {icon!(icondata::FiMoreHorizontal)}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
