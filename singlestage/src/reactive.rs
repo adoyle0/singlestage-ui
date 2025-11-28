@@ -135,11 +135,13 @@ where
         let rw = RwSignal::new(value.get_untracked());
         Effect::new(move |_| {
             if value.with(|t| rw.read_untracked() != *t) {
+                dbg!("updating temp rw");
                 rw.set(value.get_untracked());
             }
         });
         Effect::new(move |_| {
             if value.with_untracked(|t: &T| rw.read() != *t) {
+                dbg!("updating store");
                 value.set(rw.get_untracked());
             }
         });
