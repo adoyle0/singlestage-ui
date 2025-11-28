@@ -21,6 +21,13 @@
     ring-destructive/20;
   }
 
+  .singlestage-input-group:has([aria-disabled="true"]),
+  .singlestage-input-group:has(*:disabled) {
+    .singlestage-input-group-addon {
+      @apply opacity-50;
+    }
+  }
+
   .singlestage-input-group:has(
     .singlestage-input:focus-visible,
     .singlestage-textarea:focus-visible
