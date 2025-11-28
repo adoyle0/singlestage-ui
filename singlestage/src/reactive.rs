@@ -124,27 +124,31 @@ where
     }
 }
 
-impl<T, Inner, Prev> IntoReactive for Subfield<Inner, Prev, T>
+impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
 where
-    T: Send + Sync + 'static + Clone,
-    Inner: StoreField<Value = Prev> + Send + Sync + Clone,
+    T: Send + Sync + Clone + PartialEq + 'static,
+    Inner: StoreField<Value = Prev> + Send + Sync + Clone + 'static,
     Prev: 'static,
-    Subfield<Inner, Prev, T>: Track + IsDisposed + GetUntracked<Value = T>,
-    Self: DefinedAt,
+    Subfield<Inner, Prev, T>: Copy + Track + IsDisposed + GetUntracked<Value=T>,
 {
-    type Value = T;
-    type Get = Subfield<Inner, Prev, T>;
-    type Set = Subfield<Inner, Prev, T>;
-
-    fn into_reactive(self) -> (Subfield<Inner, Prev, T>, Subfield<Inner, Prev, T>) {
-        (self.clone(), self)
-    }
-
-    fn with<U>(&self, fun: impl FnOnce(&Self::Value) -> U) -> U {
-        With::with(self, fun)
-    }
-
-    fn update(&self, fun: impl FnOnce(&mut Self::Value)) {
-        Update::update(self, fun);
+    fn from(value: Subfield<Inner, Prev, T>) -> Self {
+        let rw = RwSignal::new(value.get_untracked());
+        Effect::new(move |_| {
+            if value.with(|t| rw.read_untracked() != *t) {
+                rw.set(value.get_untracked());
+            }
+        });
+        Effect::new(move |_| {
+            if value.with_untracked(|t: &T| rw.read() != *t) {
+                value.set(rw.get_untracked());
+            }
+        });
+        Effect::new(move |_| {
+            if value.is_disposed() {
+                dbg!("disposing temp rw");
+                rw.dispose();
+            }
+        });
+        Reactive(rw)
     }
 }
