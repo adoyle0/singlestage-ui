@@ -31,14 +31,12 @@
   }
 
   .singlestage-input-group:has(> input, > textarea) {
-    .singlestage-input-group-addon-block-end {
-      @apply pb-2.5;
-    }
-  }
-
-  .singlestage-input-group:has(> input, > textarea) {
     .singlestage-input-group-addon-block-start {
       @apply pt-2.5;
+    }
+
+    .singlestage-input-group-addon-block-end {
+      @apply pb-2.5;
     }
   }
 
@@ -102,6 +100,7 @@
   .singlestage-input-group-addon-inline-start:has(> button) {
     @apply ml-[-0.45rem];
   }
+
   .singlestage-input-group-addon-inline-start:has(> kbd) {
     @apply ml-[-0.35rem];
   }
@@ -171,17 +170,19 @@
     rounded-md;
   }
 
-  .singlestage-input-group-button-icon-xs {
+  .singlestage-input-group-button-icon-xs,
+  .singlestage-input-group-button-icon-sm {
     @apply !p-0
-    !size-6
-    has-[>svg]:!p-0
+    has-[>svg]:!p-0;
+  }
+
+  .singlestage-input-group-button-icon-xs {
+    @apply !size-6
     rounded-[calc(var(--radius)-5px)];
   }
 
   .singlestage-input-group-button-icon-sm {
-    @apply !p-0
-    !size-8
-    has-[>svg]:!p-0;
+    @apply !size-8;
   }
 
   /* Input */
