@@ -132,25 +132,25 @@ where
     Subfield<Inner, Prev, T>: Copy + Track + IsDisposed + GetUntracked<Value=T>,
 {
     fn from(value: Subfield<Inner, Prev, T>) -> Self {
-        let rw = RwSignal::new(value.get_untracked());
+        let rw_signal = RwSignal::new(value.get_untracked());
         Effect::new(move |_| {
-            if value.with(|t| rw.read_untracked() != *t) {
-                dbg!("updating temp rw");
-                rw.set(value.get_untracked());
+            if value.with(|t| rw_signal.read_untracked() != *t) {
+                leptos::logging::log!("updating temp rw");
+                rw_signal.set(value.get_untracked());
             }
         });
         Effect::new(move |_| {
-            if value.with_untracked(|t: &T| rw.read() != *t) {
-                dbg!("updating store");
-                value.set(rw.get_untracked());
+            if value.with_untracked(|t: &T| rw_signal.read() != *t) {
+                leptos::logging::log!("updating store");
+                value.set(rw_signal.get_untracked());
             }
         });
         Effect::new(move |_| {
             if value.is_disposed() {
-                dbg!("disposing temp rw");
-                rw.dispose();
+                leptos::logging::log!("disposing temp rw");
+                rw_signal.dispose();
             }
         });
-        Reactive(rw)
+        Reactive(rw_signal)
     }
 }
