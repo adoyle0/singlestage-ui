@@ -1,8 +1,12 @@
 use leptos::prelude::*;
-use std::fmt::Debug;
 
 use reactive_stores::{
-  ArcField, AtIndex, AtKeyed, DerefedField, Field, KeyedSubfield, StoreField, Subfield,
+    Store, ArcStore, ArcField, AtIndex, AtKeyed, DerefedField, Field, KeyedSubfield, StoreField, Subfield,
+};
+use std::{
+    fmt::Debug,
+    hash::Hash,
+    ops::{Deref, DerefMut, Index, IndexMut},
 };
 
 /// A reactive binding wrapper that can take any value and upgrade it to a RwSignal.
@@ -39,7 +43,7 @@ impl<T> Reactive<T>
 where
     T: Send + Sync + Clone + 'static
 {
-        #[inline]
+    #[inline]
     pub fn get(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get(),
@@ -130,6 +134,112 @@ where
     }
 }
 
+impl<T> From<Field<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+    Field<T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+{
+    fn from(value: Field<T>) -> Self {
+        Reactive::Field(value)
+    }
+}
+
+impl<T> From<Store<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+    Store<T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+{
+    fn from(value: Store<T>) -> Self {
+        Reactive::Field(value.into())
+    }
+}
+
+impl<T> From<ArcField<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+    ArcField<T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+{
+    fn from(value: ArcField<T>) -> Self {
+        Reactive::Field(value.into())
+    }
+}
+
+impl<T> From<ArcStore<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+    ArcStore<T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+{
+    fn from(value: ArcStore<T>) -> Self {
+        Reactive::Field(value.into())
+    }
+}
+
+// impl<Inner, T> From<DerefedField<Inner>> for Reactive<T>
+// where
+//     Inner: Clone + StoreField + Send + Sync + 'static,
+//     Inner::Value: Deref<Target = T> + DerefMut,
+//     <Inner as StoreField>::Value: Deref + DerefMut,
+//     <Inner::Value as Deref>::Target: Sized,
+//     T: Sized + Send + Sync + Clone + 'static,
+//     DerefedField<Inner>: Get<Value = <Inner::Value as Deref>::Target> + Set<Value = <Inner::Value as Deref>::Target> + Clone,
+// {
+//     fn from(value: DerefedField<T>) -> Self {
+//         Reactive::Field(value.into())
+//     }
+// }
+
+// impl<Inner, Prev, K, T> From<AtKeyed<Inner, Prev, K, T>> for Reactive<T::Output>
+// where
+//     Inner: Send + Sync + StoreField<Value = Prev> + 'static,
+//     Prev: 'static,
+//     K: Debug + Send + Sync + PartialEq + Eq + Hash + 'static,
+//     KeyedSubfield<Inner, Prev, K, T>: Clone,
+//     T: IndexMut<usize> + Send + Sync + Clone + 'static,
+//     for<'a> &'a T: IntoIterator,
+//     T::Output: Sized,
+//     AtKeyed<Inner, Prev, K, T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+// {
+//     fn from(value: AtKeyed<Inner, Prev, K, T>) -> Self {
+//         Reactive::Field(value.into())
+//     }
+// }
+
+// impl<Inner, Prev> From<AtIndex<Inner, Prev>> for Reactive<Prev::Output>
+// where
+//     Inner: StoreField<Value = Prev> + Send + Sync + 'static,
+//     Prev: IndexMut<usize> + Send + Sync + 'static,
+//     Prev::Output: Sized + Send + Sync + Clone + 'static,
+//     AtIndex<Inner, Prev>: Clone,
+// {
+//     fn from(value: AtIndex<Inner, Prev>) -> Self {
+//         let field: Field<Prev::Output> = value.into();
+//         Reactive::Field(field)
+//     }
+// }
+
+
+// impl<Inner, Prev, K, T> From<KeyedSubfield<Inner, Prev, K, T>> for Reactive<T>
+// where
+//     Inner: Send + Sync + StoreField<Value = Prev> + 'static,
+//     Prev: 'static,
+//     K: Send + Sync + Debug + 'static + Eq + Hash,
+//     T: Send + Sync + Clone + 'static,
+//     for<'a> &'a T: IntoIterator,
+//     KeyedSubfield<Inner, Prev, K, T>: Get<Value = T> + Set<Value = T> + Clone + Track,
+// {
+//     fn from(value: KeyedSubfield<Inner, Prev, K, T>) -> Self {
+        
+//         Reactive::Field(value.into())
+//     }
+// }
+
+
+
+
+
+
+// /ArcField, AtIndex, AtKeyed, DerefedField, KeyedSubfield,
+
 
 // use reactive_stores::Store;
 
@@ -147,10 +257,6 @@ where
 //     let view = view! { <crate::Input value=field/> };
     
 // }
-
-
-
-
 
 
 // impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
