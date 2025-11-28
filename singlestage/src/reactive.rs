@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use std::fmt::Debug;
-use reactive_stores::{ArcField, Field, StoreField, Subfield};
+use reactive_stores::{Store, ArcField, Field, StoreField, Subfield};
 
 /// A reactive binding wrapper that can take any value and upgrade it to a RwSignal.
 ///
@@ -127,10 +127,9 @@ where
 impl<T, Inner, Prev> IntoReactive for Subfield<Inner, Prev, T>
 where
     T: Send + Sync + 'static + Clone,
-    Inner: StoreField<Value = Prev> + Send + Sync + Clone + 'static,
+    Inner: StoreField<Value = Prev> + Send + Sync + Clone,
     Prev: 'static,
-    Subfield<Inner, Prev, T>: Track + IsDisposed,
-    ReadSignal<T>: GetUntracked<Value = T>,
+    Subfield<Inner, Prev, T>: Track + IsDisposed + GetUntracked<Value = T>,
     Self: DefinedAt,
 {
     type Value = T;
