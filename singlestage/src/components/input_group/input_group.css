@@ -85,7 +85,6 @@
     flex
     font-medium
     gap-2
-    group-data-[disabled=true]/input-group:opacity-50
     h-auto
     items-center
     justify-center
