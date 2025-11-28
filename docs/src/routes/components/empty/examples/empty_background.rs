@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn EmptyBackgroundExample() -> impl IntoView {
     view! {
-        <Empty class="from-(--muted)/50 to-(--background) h-full bg-gradient-to-b from-30%">
+        <Empty class="from-(--muted)/50 to-(--background) h-full bg-gradient-to-b from-30% rounded-md">
             <EmptyHeader>
                 <EmptyMedia variant="icon">{icon!(icondata::LuBell)}</EmptyMedia>
                 <EmptyTitle>"No Notifications"</EmptyTitle>

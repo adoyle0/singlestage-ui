@@ -50,6 +50,9 @@ pub fn Example(
     #[prop(into)] code: String,
     #[prop(into)] view: AnyView,
 ) -> impl IntoView {
+    // Special case for Empty Background example to make it display full-size
+    let empty_backround = &name == &"Background".to_string();
+
     view! {
         <div class="my-12">
             {if !name.is_empty() {
@@ -69,9 +72,19 @@ pub fn Example(
                 </TabsList>
 
                 <TabsContent value="preview">
-                    <div class="py-12 px-4 sm:px-12 border border-(--muted) rounded-md flex justify-center">
-                        {view}
-                    </div>
+                    {if empty_backround {
+                        view! {
+                            <div class="h-[450px] border border-(--muted) rounded-md">{view}</div>
+                        }
+                            .into_any()
+                    } else {
+                        view! {
+                            <div class="py-12 px-4 sm:px-12 border border-(--muted) rounded-md flex justify-center">
+                                {view}
+                            </div>
+                        }
+                            .into_any()
+                    }}
                 </TabsContent>
 
                 <TabsContent value="code">
