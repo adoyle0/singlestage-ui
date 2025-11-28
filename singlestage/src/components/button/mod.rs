@@ -1,3 +1,4 @@
+use crate::InputGroupContext;
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -75,6 +76,12 @@ pub fn Button(
     /// The value associated with this button's `name` when submitted with form data.
     #[prop(optional, into)]
     value: MaybeProp<String>,
+
+    // ARIA ATTRIBUTES
+    //
+    /// Provide a custom accessible name for this element.
+    #[prop(optional, into)]
+    aria_label: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -238,9 +245,10 @@ pub fn Button(
 
     view! {
         <button
+            aria_label=move || aria_label.get()
             class=move || {
                 format!(
-                    "{} {} {}",
+                    "{} {} {} {}",
                     match variant.get().unwrap_or_default().as_str() {
                         "primary" => "singlestage-btn-primary",
                         "secondary" => "singlestage-btn-secondary",
@@ -248,7 +256,15 @@ pub fn Button(
                         "ghost" => "singlestage-btn-ghost",
                         "link" => "singlestage-btn-link",
                         "destructive" => "singlestage-btn-destructive",
-                        _ => "singlestage-btn-primary",
+                        _ => {
+                            if use_context::<InputGroupContext>().is_some()
+                                && variant.get().is_none()
+                            {
+                                "singlestage-btn-ghost"
+                            } else {
+                                "singlestage-btn-primary"
+                            }
+                        }
                     },
                     match size.get().unwrap_or_default().as_str() {
                         "sm" => "singlestage-btn-sm",
@@ -262,12 +278,37 @@ pub fn Button(
                         "icon-lg" => "singlestage-btn-lg-icon",
                         _ => "",
                     },
+                    {
+                        if use_context::<InputGroupContext>().is_some() {
+                            format!(
+                                "singlestage-input-group-button {}",
+                                match size.get().unwrap_or_default().as_str() {
+                                    "sm" => "singlestage-input-group-button-sm",
+                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                    _ => "singlestage-input-group-button-xs",
+                                },
+                            )
+                        } else {
+                            "".to_string()
+                        }
+                    },
                     class.get().unwrap_or_default(),
                 )
             }
             disabled=disabled.get_untracked()
             prop:disabled=move || disabled.get()
-            type=button_type.get()
+            type=move || {
+                if let Some(button_type) = button_type.get() {
+                    Some(button_type)
+                } else {
+                    if use_context::<InputGroupContext>().is_some() {
+                        Some("button".to_string())
+                    } else {
+                        None
+                    }
+                }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

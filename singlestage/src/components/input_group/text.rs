@@ -1,14 +1,8 @@
 use leptos::prelude::*;
 
-/// Displays progress.
 #[component]
-pub fn Progress(
-    /// The value that represents 100%, or full.
-    #[prop(optional, into)]
-    max: MaybeProp<usize>,
-    /// The current progress value to be rendered.
-    #[prop(optional, into)]
-    value: MaybeProp<usize>,
+pub fn InputGroupText(
+    children: Children,
 
     // GLOBAL ATTRIBUTES
     //
@@ -155,23 +149,15 @@ pub fn Progress(
     };
 
     view! {
-        <div
-            class=move || format!("singlestage-progress {}", class.get().unwrap_or_default())
+        <span
+            class=move || {
+                format!("singlestage-input-group-text {}", class.get().unwrap_or_default())
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <div
-                class="singlestage-progress-indicator"
-                style=move || {
-                    format!(
-                        "transform: translateX(-{}%)",
-                        100.
-                            - ((value.get().unwrap_or_default() as f64
-                                / max.get().unwrap_or(100) as f64) * 100.),
-                    )
-                }
-            ></div>
-        </div>
+            {children()}
+        </span>
     }
 }

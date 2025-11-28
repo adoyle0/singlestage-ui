@@ -1,14 +1,10 @@
-use leptos::prelude::*;
+use crate::InputGroupContext;
+use leptos::{context::Provider, prelude::*};
 
-/// Displays progress.
+/// The main component that wraps inputs and addons.
 #[component]
-pub fn Progress(
-    /// The value that represents 100%, or full.
-    #[prop(optional, into)]
-    max: MaybeProp<usize>,
-    /// The current progress value to be rendered.
-    #[prop(optional, into)]
-    value: MaybeProp<usize>,
+pub fn InputGroup(
+    children: Children,
 
     // GLOBAL ATTRIBUTES
     //
@@ -91,9 +87,6 @@ pub fn Progress(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -115,6 +108,8 @@ pub fn Progress(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let context = InputGroupContext {};
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -144,7 +139,6 @@ pub fn Progress(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -156,22 +150,13 @@ pub fn Progress(
 
     view! {
         <div
-            class=move || format!("singlestage-progress {}", class.get().unwrap_or_default())
+            class=move || { format!("singlestage-input-group {}", class.get().unwrap_or_default()) }
+            role="group"
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <div
-                class="singlestage-progress-indicator"
-                style=move || {
-                    format!(
-                        "transform: translateX(-{}%)",
-                        100.
-                            - ((value.get().unwrap_or_default() as f64
-                                / max.get().unwrap_or(100) as f64) * 100.),
-                    )
-                }
-            ></div>
+            <Provider value=context>{children()}</Provider>
         </div>
     }
 }

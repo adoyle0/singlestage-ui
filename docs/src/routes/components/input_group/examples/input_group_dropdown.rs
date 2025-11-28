@@ -6,7 +6,7 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
     view! {
         <div class="grid w-full max-w-sm gap-4">
             <InputGroup>
-                <InputGroupInput placeholder="Enter file name" />
+                <Input placeholder="Enter file name" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
                         <DropdownMenuTrigger aria_label="More" variant="ghost">
@@ -21,7 +21,7 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup class="[--radius:1rem]">
-                <InputGroupInput placeholder="Enter search query" />
+                <Input placeholder="Enter search query" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
                         <DropdownMenuTrigger variant="ghost" class="!pr-1.5 text-xs">

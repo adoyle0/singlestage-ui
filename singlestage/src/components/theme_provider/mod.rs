@@ -59,12 +59,20 @@ static _DARK_OVERRIDES_TW: &str = r#"
     @apply dark:bg-input/30;
   }
 
-  .singlestage-input-group-input {
-    @apply !bg-transparent;
+  .singlestage-input-group:has([aria-invalid="true"]) {
+    @apply dark:ring-destructive/40;
   }
 
-  .singlestage-input-group-textarea {
-    @apply !bg-transparent;
+  .singlestage-input-group {
+    .singlestage-input {
+      @apply !bg-transparent;
+    }
+  }
+
+  .singlestage-input-group {
+    .singlestage-textarea {
+      @apply !bg-transparent;
+    }
   }
 
   .singlestage-field-button:has(input:checked) {
@@ -201,12 +209,27 @@ static DARK_OVERRIDES: &str = r#"@layer components {
     }
   }
 
-  .singlestage-input-group-input {
-    background-color: transparent !important;
+  .singlestage-input-group:has([aria-invalid="true"]) {
+    --tw-ring-color: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(
+        in oklab,
+        var(--destructive) 40%,
+        transparent
+      );
+    }
   }
 
-  .singlestage-input-group-textarea {
-    background-color: transparent !important;
+  .singlestage-input-group {
+    .singlestage-input {
+      background-color: transparent !important;
+    }
+  }
+
+  .singlestage-input-group {
+    .singlestage-textarea {
+      background-color: transparent !important;
+    }
   }
 
   .singlestage-field-button:has(input:checked) {

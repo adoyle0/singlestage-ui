@@ -4,14 +4,8 @@
   .singlestage-input-group {
     @apply border
     border-input
-    dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40
     flex
     h-9
-    has-[[data-slot=input-group-control]:focus-visible]:border-ring
-    has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]
-    has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50
-    has-[[data-slot][aria-invalid=true]]:border-destructive
-    has-[[data-slot][aria-invalid=true]]:ring-destructive/20
     items-center
     min-w-0
     outline-none
@@ -21,6 +15,21 @@
     transition-[color,box-shadow]
     w-full;
   }
+
+  .singlestage-input-group:has([aria-invalid="true"]) {
+    @apply border-destructive
+    ring-destructive/20;
+  }
+
+  .singlestage-input-group:has(
+    .singlestage-input:focus-visible,
+    .singlestage-textarea:focus-visible
+  ) {
+    @apply border-ring
+    ring-[3px]
+    ring-ring/50;
+  }
+
   .singlestage-input-group:has(> input, > textarea) {
     .singlestage-input-group-addon-block-end {
       @apply pb-2.5;
@@ -178,12 +187,14 @@
 
   /* Input */
 
-  .singlestage-input-group-input {
-    @apply !border-0
-    !rounded-none
-    !shadow-none
-    flex-1
-    focus-visible:!ring-0;
+  .singlestage-input-group {
+    .singlestage-input {
+      @apply !border-0
+      !rounded-none
+      !shadow-none
+      flex-1
+      focus-visible:!ring-0;
+    }
   }
 
   /* Text */
@@ -200,13 +211,15 @@
 
   /* Textarea */
 
-  .singlestage-input-group-textarea {
-    @apply !border-0
-    !py-3
-    !rounded-none
-    !shadow-none
-    flex-1
-    focus-visible:!ring-0
-    resize-none;
+  .singlestage-input-group {
+    .singlestage-textarea {
+      @apply !border-0
+      !py-3
+      !rounded-none
+      !shadow-none
+      flex-1
+      focus-visible:!ring-0
+      resize-none;
+    }
   }
 }

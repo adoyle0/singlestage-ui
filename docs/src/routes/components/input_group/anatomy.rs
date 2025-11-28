@@ -1,7 +1,14 @@
 use leptos::prelude::*;
-use singlestage::progress::*;
+use singlestage::*;
 
 #[component]
 pub fn InputGroupAnatomy() -> impl IntoView {
-    view! { <InputGroup /> }
+    view! {
+        <InputGroup>
+            <Input />
+            <InputGroupAddon>
+                <InputGroupText />
+            </InputGroupAddon>
+        </InputGroup>
+    }
 }

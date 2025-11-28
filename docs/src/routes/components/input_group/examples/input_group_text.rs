@@ -9,7 +9,7 @@ pub fn InputGroupTextExample() -> impl IntoView {
                 <InputGroupAddon>
                     <InputGroupText>"$"</InputGroupText>
                 </InputGroupAddon>
-                <InputGroupInput placeholder="0.00" />
+                <Input placeholder="0.00" />
                 <InputGroupAddon align="inline-end">
                     <InputGroupText>"USD"</InputGroupText>
                 </InputGroupAddon>
@@ -18,19 +18,19 @@ pub fn InputGroupTextExample() -> impl IntoView {
                 <InputGroupAddon>
                     <InputGroupText>"https://"</InputGroupText>
                 </InputGroupAddon>
-                <InputGroupInput placeholder="example.com" class="!pl-0.5" />
+                <Input placeholder="example.com" class="!pl-0.5" />
                 <InputGroupAddon align="inline-end">
                     <InputGroupText>".com"</InputGroupText>
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup>
-                <InputGroupInput placeholder="Enter your username" />
+                <Input placeholder="Enter your username" />
                 <InputGroupAddon align="inline-end">
                     <InputGroupText>"@company.com"</InputGroupText>
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup>
-                <InputGroupTextarea placeholder="Enter your message" />
+                <Textarea placeholder="Enter your message" />
                 <InputGroupAddon align="block-end">
                     <InputGroupText class="text-muted-foreground text-xs">
                         "120 characters left"

@@ -16,9 +16,9 @@ pub fn InputGroupButtonExample() -> impl IntoView {
     view! {
         <div class="grid w-full max-w-sm gap-6">
             <InputGroup>
-                <InputGroupInput placeholder="https://x.com/shadcn" readonly=true />
+                <Input placeholder="https://x.com/shadcn" readonly=true />
                 <InputGroupAddon align="inline-end">
-                    <InputGroupButton
+                    <Button
                         // aria_label="Copy"
                         // title="Copy"
                         size="icon-xs"
@@ -30,35 +30,32 @@ pub fn InputGroupButtonExample() -> impl IntoView {
                         >
                             {icon!(icondata::LuCheck)}
                         </Show>
-                    </InputGroupButton>
+                    </Button>
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup class="[--radius:9999px]">
                 <InputGroupAddon>
-                    <InputGroupButton variant="secondary" size="icon-xs">
+                    <Button variant="secondary" size="icon-xs">
                         {icon!(icondata::LuInfo)}
-                    </InputGroupButton>
+                    </Button>
                 </InputGroupAddon>
                 <InputGroupAddon class="text-muted-foreground pl-1.5">"https://"</InputGroupAddon>
-                <InputGroupInput id="input-secure-19" />
+                <Input id="input-secure-19" />
                 <InputGroupAddon align="inline-end">
-                    <InputGroupButton
-                        on:click=move |_| is_favorite.set(!is_favorite.get())
-                        size="icon-xs"
-                    >
+                    <Button on:click=move |_| is_favorite.set(!is_favorite.get()) size="icon-xs">
                         <Show
                             when=move || is_favorite.get()
                             fallback=move || { { icon!(icondata::LuStar) } }
                         >
                             {icon!(icondata::LuStar, class="fill-blue-600 stroke-blue-600")}
                         </Show>
-                    </InputGroupButton>
+                    </Button>
                 </InputGroupAddon>
             </InputGroup>
             <InputGroup>
-                <InputGroupInput placeholder="Type to search..." />
+                <Input placeholder="Type to search..." />
                 <InputGroupAddon align="inline-end">
-                    <InputGroupButton variant="secondary">"Search"</InputGroupButton>
+                    <Button variant="secondary">"Search"</Button>
                 </InputGroupAddon>
             </InputGroup>
         </div>

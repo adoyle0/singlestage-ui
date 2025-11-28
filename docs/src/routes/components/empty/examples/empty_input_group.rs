@@ -14,7 +14,7 @@ pub fn EmptyInputGroupExample() -> impl IntoView {
             </EmptyHeader>
             <EmptyContent>
                 <InputGroup class="sm:w-3/4">
-                    <InputGroupInput placeholder="Try searching for pages..." />
+                    <Input placeholder="Try searching for pages..." />
                     <InputGroupAddon>{icon!(icondata::LuSearch)}</InputGroupAddon>
                     <InputGroupAddon align="inline-end">
                         <Kbd>"/"</Kbd>

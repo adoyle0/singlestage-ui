@@ -44,15 +44,53 @@ name = "input group dropdown"
 title = "Dropdown"
 description = "Pair input groups with dropdown menus for complex interactions."
 
+[[examples]]
+name = "input group button group"
+title = "Button Group"
+description = "Wrap input groups with button groups to create prefixes and suffixes."
+
 [[references]]
-name = "Progress"
-description = "Displays progress."
+name = "InputGroup"
+description = "The main component that wraps inputs and addons."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "InputGroupAddon"
+description = "Displays icons, text, buttons, or other content alongside inputs."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "max", attr_type = "usize", default = "100", description = """The value that \
-    represents 100%, or full.""" },
-  { attr = "value", attr_type = "usize", default = "0", description = """The current progress \
-    value to be rendered.""" },
+  { attr = "align", attr_type = "String", default = "\"inline-start\"", description = """Set how \
+    child content should be aligned. Accepted values are inline-start | inline-end | block-start \
+    | block-end.""" },
 ]
+
+[[references]]
+name = "Button"
+description = "InputGroup uses a regular Button with slightly different behavior."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = [
+  { attr = "button_type", attr_type = "String", default = """"button"""", description = """Renamed <button> \
+    `type` attribute to avoid name collisions.""" },
+  { attr = "size", attr_type = "String", default = """"xs"""", description = """Specify the size to \
+    render the button. Sizes: xs | icon-xs | sm | icon-sm.""" },
+  { attr = "variant", attr_type = "String", default = """"ghost"""", description = """Specify \
+    the style of button to render. Variants: primary | secondary | outline | ghost | link | \ 
+    destructive""" },
+]
+
+[[references]]
+name = "InputGroupText"
+description = "A styled wrapper for displaying text and icons in an InputGroup."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
