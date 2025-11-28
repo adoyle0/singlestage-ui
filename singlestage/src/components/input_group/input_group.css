@@ -16,7 +16,8 @@
     w-full;
   }
 
-  .singlestage-input-group:has([aria-invalid="true"]) {
+  .singlestage-input-group:has([aria-invalid="true"]),
+  .singlestage-input-group:has(*:invalid) {
     @apply border-destructive
     ring-destructive/20;
   }
