@@ -57,22 +57,15 @@ static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
   .singlestage-input-group {
     @apply dark:bg-input/30;
+
+    .singlestage-input,
+    .singlestage-textarea {
+      @apply !bg-transparent;
+    }
   }
 
   .singlestage-input-group:has([aria-invalid="true"]) {
     @apply dark:ring-destructive/40;
-  }
-
-  .singlestage-input-group {
-    .singlestage-input {
-      @apply !bg-transparent;
-    }
-  }
-
-  .singlestage-input-group {
-    .singlestage-textarea {
-      @apply !bg-transparent;
-    }
   }
 
   .singlestage-field-button:has(input:checked) {
@@ -207,6 +200,11 @@ static DARK_OVERRIDES: &str = r#"@layer components {
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
     }
+
+    .singlestage-input,
+    .singlestage-textarea {
+      background-color: transparent !important;
+    }
   }
 
   .singlestage-input-group:has([aria-invalid="true"]) {
@@ -217,18 +215,6 @@ static DARK_OVERRIDES: &str = r#"@layer components {
         var(--destructive) 40%,
         transparent
       );
-    }
-  }
-
-  .singlestage-input-group {
-    .singlestage-input {
-      background-color: transparent !important;
-    }
-  }
-
-  .singlestage-input-group {
-    .singlestage-textarea {
-      background-color: transparent !important;
     }
   }
 
