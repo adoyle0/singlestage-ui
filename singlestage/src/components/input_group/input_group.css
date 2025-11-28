@@ -105,11 +105,11 @@
     pl-3;
   }
 
-  .singlestage-input-group-addon-inline-start:has(> button) {
+  .singlestage-input-group-addon-inline-start:has(button) {
     @apply ml-[-0.45rem];
   }
 
-  .singlestage-input-group-addon-inline-start:has(> kbd) {
+  .singlestage-input-group-addon-inline-start:has(kbd) {
     @apply ml-[-0.35rem];
   }
 
@@ -118,11 +118,11 @@
     pr-3;
   }
 
-  .singlestage-input-group-addon-inline-end:has(> button) {
+  .singlestage-input-group-addon-inline-end:has(button) {
     @apply mr-[-0.45rem];
   }
 
-  .singlestage-input-group-addon-inline-end:has(> kbd) {
+  .singlestage-input-group-addon-inline-end:has(kbd) {
     @apply mr-[-0.35rem];
   }
 
