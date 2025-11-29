@@ -8,44 +8,20 @@
 
     & > * {
       @apply focus-visible:relative
-    focus-visible:z-10;
+      focus-visible:z-10;
     }
   }
 
   .singlestage-button-group-horizontal {
-    > *:not(:first-child) {
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger {
       @apply !border-l-0
-        !rounded-l-none;
+      !rounded-l-none;
     }
 
-    > .singlestage-dropdown-menu:not(:first-child) {
-      > button {
-        @apply !border-l-0
-        !rounded-l-none;
-      }
-    }
-
-    > .singlestage-popover:not(:first-child) {
-      > button {
-        @apply !border-l-0
-        !rounded-l-none;
-      }
-    }
-
-    > *:not(:last-child) {
+    > *:not(:last-child),
+    > *:not(:last-child) > .singlestage-trigger {
       @apply !rounded-r-none;
-    }
-
-    > .singlestage-dropdown-menu:not(:last-child) {
-      > button {
-        @apply rounded-r-none;
-      }
-    }
-
-    > .singlestage-popover:not(:last-child) {
-      > button {
-        @apply rounded-r-none;
-      }
     }
 
     .singlestage-button-group-separator {
@@ -57,39 +33,15 @@
   .singlestage-button-group-vertical {
     @apply flex-col;
 
-    > *:not(:first-child) {
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger {
       @apply !border-t-0
-        !rounded-t-none;
+      !rounded-t-none;
     }
 
-    > .singlestage-dropdown-menu:not(:first-child) {
-      > button {
-        @apply !border-t-0
-        !rounded-t-none;
-      }
-    }
-
-    > .singlestage-popover:not(:first-child) {
-      > button {
-        @apply !border-t-0
-        !rounded-t-none;
-      }
-    }
-
-    > *:not(:last-child) {
+    > *:not(:last-child),
+    > *:not(:last-child) > .singlestage-trigger {
       @apply !rounded-b-none;
-    }
-
-    > .singlestage-dropdown-menu:not(:last-child) {
-      > button {
-        @apply !rounded-b-none;
-      }
-    }
-
-    > .singlestage-popover:not(:last-child) {
-      > button {
-        @apply !rounded-b-none;
-      }
     }
 
     .singlestage-button-group-separator {

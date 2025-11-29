@@ -20,7 +20,7 @@ pub fn ItemAvatarExample() -> impl IntoView {
                         size="icon-sm"
                         variant="outline"
                         class="rounded-full"
-                        attr:aria-label="Invite"
+                        aria_label="Invite"
                     >
                         {icon!(icondata::LuPlus)}
                     </Button>

@@ -15,7 +15,9 @@ pub fn DebugDropdown() -> impl IntoView {
         </ul>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>"Open"</DropdownMenuTrigger>
+            <DropdownMenuTrigger>
+                <Button>"Open"</Button>
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem on:click=move |_| {
                     leptos::logging::log!("hey")

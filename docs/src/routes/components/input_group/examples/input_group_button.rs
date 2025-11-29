@@ -33,11 +33,19 @@ pub fn InputGroupButtonExample() -> impl IntoView {
                     </Button>
                 </InputGroupAddon>
             </InputGroup>
-            <InputGroup class="[--radius:9999px]">
+            <InputGroup class="rounded-full">
                 <InputGroupAddon>
-                    <Button variant="secondary" size="icon-xs">
-                        {icon!(icondata::LuInfo)}
-                    </Button>
+                    <Popover>
+                        <PopoverTrigger>
+                            <Button class="rounded-full" variant="secondary" size="icon-xs">
+                                {icon!(icondata::LuInfo)}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent class="gap-1 text-sm max-w-2xs">
+                            <p class="font-medium">"Your connection is not secure."</p>
+                            <p>"You should not enter any sensitive information on this site."</p>
+                        </PopoverContent>
+                    </Popover>
                 </InputGroupAddon>
                 <InputGroupAddon class="text-muted-foreground pl-1.5">"https://"</InputGroupAddon>
                 <Input id="input-secure-19" />
@@ -45,6 +53,7 @@ pub fn InputGroupButtonExample() -> impl IntoView {
                     <Button
                         aria_label="Bookmark this page"
                         title="Bookmark this page"
+                        class="rounded-full"
                         on:click=move |_| is_favorite.set(!is_favorite.get())
                         size="icon-xs"
                     >

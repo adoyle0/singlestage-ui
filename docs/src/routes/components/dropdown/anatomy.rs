@@ -1,11 +1,13 @@
 use leptos::prelude::*;
-use singlestage::dropdown::*;
+use singlestage::*;
 
 #[component]
 pub fn DropdownMenuAnatomy() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger />
+            <DropdownMenuTrigger>
+                <Button />
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
                     <DropdownMenuLabel />

@@ -47,6 +47,9 @@ pub fn PopoverContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -104,9 +107,6 @@ pub fn PopoverContent(
 ) -> impl IntoView {
     let menu = expect_context::<PopoverContext>();
 
-    let uuid = uuid::Uuid::new_v4().to_string();
-    menu.menu_id.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -145,10 +145,12 @@ pub fn PopoverContent(
 
     view! {
         <menu
-            class=move || {
-                format!("singlestage-popover-content {}", class.get().unwrap_or_default())
+            class=move || { format!("singlestage-popover {}", class.get().unwrap_or_default()) }
+            id={
+                let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                menu.menu_id.set(menu_id.clone());
+                menu_id
             }
-            id=uuid
             popover="auto"
             role="menu"
 

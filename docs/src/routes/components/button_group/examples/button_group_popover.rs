@@ -7,8 +7,10 @@ pub fn ButtonGroupPopoverExample() -> impl IntoView {
         <ButtonGroup>
             <Button variant="outline">{icon!(icondata::LuBot)} "Copilot"</Button>
             <Popover>
-                <PopoverTrigger variant="outline" size="icon" attr:aria-label="Open Popover">
-                    {icon!(icondata::LuChevronDown)}
+                <PopoverTrigger>
+                    <Button variant="outline" size="icon" aria_label="Open Popover">
+                        {icon!(icondata::LuChevronDown)}
+                    </Button>
                 </PopoverTrigger>
                 <PopoverContent class="rounded-xl p-0 text-sm max-w-72">
                     <p class="px-4 pt-3 text-sm font-medium">"Agent Tasks"</p>

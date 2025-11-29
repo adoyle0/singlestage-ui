@@ -31,9 +31,11 @@ pub fn ItemDropdownExample() -> impl IntoView {
     view! {
         <div class="flex min-h-64 w-full max-w-md flex-col items-center gap-6">
             <DropdownMenu>
-                <DropdownMenuTrigger variant="outline" size="sm" class="w-fit">
-                    "Select"
-                    {icon!(icondata::LuChevronDown)}
+                <DropdownMenuTrigger>
+                    <Button variant="outline" size="sm" class="w-fit">
+                        "Select"
+                        {icon!(icondata::LuChevronDown)}
+                    </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="w-72 [--radius:0.65rem]">
                     <For each=move || people.get() key=|person| person.username.clone() let(person)>

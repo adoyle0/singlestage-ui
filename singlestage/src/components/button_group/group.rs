@@ -9,6 +9,12 @@ pub fn ButtonGroup(
     #[prop(optional, into)]
     vertical: MaybeProp<bool>,
 
+    // ARIA ATTRIBUTES
+    //
+    /// Provide a custom accessible name for this element.
+    #[prop(optional, into)]
+    aria_label: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -150,6 +156,7 @@ pub fn ButtonGroup(
 
     view! {
         <div
+            aria_label=move || aria_label.get()
             role="group"
             class=move || {
                 format!(

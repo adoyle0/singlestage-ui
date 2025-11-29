@@ -23,10 +23,10 @@ pub fn ButtonGroupNestedExample() -> impl IntoView {
                 </Button>
             </ButtonGroup>
             <ButtonGroup>
-                <Button variant="outline" size="icon-sm" attr:aria-label="Previous">
+                <Button variant="outline" size="icon-sm" aria_label="Previous">
                     {icon!(icondata::LuArrowLeft)}
                 </Button>
-                <Button variant="outline" size="icon-sm" attr:aria-label="Next">
+                <Button variant="outline" size="icon-sm" aria_label="Next">
                     {icon!(icondata::LuArrowRight)}
                 </Button>
             </ButtonGroup>

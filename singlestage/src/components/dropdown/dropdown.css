@@ -1,134 +1,130 @@
 @layer components {
-  .singlestage-dropdown-menu {
-    @apply transition-all;
-
-    /* Hacks to render properly until anchor support
+  /* Hacks to render properly until anchor support
       https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
     */
-    /* Webkit -- HAS TO BE FIRST */
-    @media screen and (-webkit-min-device-pixel-ratio: 0) {
-      [popover] {
-        @apply relative
-        bg-transparent;
-        position-area: bottom span-right;
-        inset: unset;
-      }
+  /* Webkit -- HAS TO BE FIRST */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .singlestage-dropdown-menu {
+      @apply relative
+      bg-transparent;
+      position-area: bottom span-right;
+      inset: unset;
     }
+  }
 
-    /* Firefox */
-    @-moz-document url-prefix() {
-      [popover] {
-        @apply relative
-        bg-transparent;
-        inset: unset;
-      }
+  /* Firefox */
+  @-moz-document url-prefix() {
+    .singlestage-dropdown-menu {
+      @apply relative
+      bg-transparent;
+      inset: unset;
     }
-    /* End hacks */
+  }
+  /* End hacks */
 
-    .singlestage-dropdown-menu-content {
-      @apply bg-popover
-      border
-      min-w-[8rem]
-      overflow-x-hidden
-      overflow-y-auto
-      p-1
-      rounded-md
-      shadow-md
-      text-nowrap
-      text-popover-foreground
-      z-50;
+  .singlestage-dropdown-menu {
+    @apply bg-popover
+    border
+    min-w-[8rem]
+    overflow-x-hidden
+    overflow-y-auto
+    p-1
+    rounded-md
+    shadow-md
+    text-nowrap
+    text-popover-foreground
+    z-50;
 
-      .singlestage-radio-group {
-        @appply block
-        gap-0;
-      }
+    .singlestage-radio-group {
+      @appply block
+      gap-0;
     }
+  }
 
-    .singlestage-dropdown-menu-item {
-      > button {
-        @apply [&_svg:not([class*='size-'])]:size-4
-        [&_svg:not([class*='text-'])]:text-muted-foreground
-        [&_svg]:pointer-events-none
-        [&_svg]:shrink-0
-        content-center
-        cursor-default
-        data-[disabled]:opacity-50
-        data-[disabled]:pointer-events-none
-        data-[inset]:pl-8
-        data-[variant=destructive]:*:[svg]:!text-destructive
-        data-[variant=destructive]:focus:bg-destructive/10
-        data-[variant=destructive]:focus:text-destructive
-        data-[variant=destructive]:text-destructive
-        focus:bg-accent
-        focus:text-accent-foreground
-        flex
-        gap-2
-        h-full
-        hover:bg-accent
-        hover:text-accent-foreground
-        items-center
-        outline-hidden
-        px-2
-        py-1.5
-        relative
-        rounded-sm
-        select-none
-        text-sm
-        w-full;
-      }
-
-      > .singlestage-label {
-        @apply h-full
-        w-full;
-      }
-    }
-
-    .singlestage-dropdown-menu-label {
-      @apply data-[inset]:pl-8
-      font-medium
-      px-2
-      py-1.5
-      text-sm;
-    }
-
-    .singlestage-dropdown-menu-separator {
-      @apply -mx-1
-      bg-border
-      h-px
-      my-1;
-    }
-
-    .singlestage-dropdown-menu-shortcut {
-      @apply ml-auto
-      text-muted-foreground
-      text-xs
-      tracking-widest;
-    }
-
-    .singlestage-dropdown-menu-sub-trigger {
-      @apply cursor-default
-      flex
+  .singlestage-dropdown-menu-item {
+    > button {
+      @apply [&_svg:not([class*='size-'])]:size-4
+      [&_svg:not([class*='text-'])]:text-muted-foreground
+      [&_svg]:pointer-events-none
+      [&_svg]:shrink-0
+      content-center
+      cursor-default
+      data-[disabled]:opacity-50
+      data-[disabled]:pointer-events-none
+      data-[inset]:pl-8
+      data-[variant=destructive]:*:[svg]:!text-destructive
+      data-[variant=destructive]:focus:bg-destructive/10
+      data-[variant=destructive]:focus:text-destructive
+      data-[variant=destructive]:text-destructive
       focus:bg-accent
       focus:text-accent-foreground
+      flex
+      gap-2
+      h-full
+      hover:bg-accent
+      hover:text-accent-foreground
       items-center
       outline-hidden
       px-2
       py-1.5
+      relative
       rounded-sm
       select-none
-      text-sm;
+      text-sm
+      w-full;
     }
 
-    .singlestage-dropdown-menu-sub-content {
-      @apply bg-popover
-      border
-      min-w-[8rem]
-      overflow-hidden
-      p-1
-      rounded-md
-      shadow-lg
-      text-popover-foreground
-      z-50;
+    > .singlestage-label {
+      @apply h-full
+      w-full;
     }
+  }
+
+  .singlestage-dropdown-menu-label {
+    @apply data-[inset]:pl-8
+    font-medium
+    px-2
+    py-1.5
+    text-sm;
+  }
+
+  .singlestage-dropdown-menu-separator {
+    @apply -mx-1
+    bg-border
+    h-px
+    my-1;
+  }
+
+  .singlestage-dropdown-menu-shortcut {
+    @apply ml-auto
+    text-muted-foreground
+    text-xs
+    tracking-widest;
+  }
+
+  .singlestage-dropdown-menu-sub-trigger {
+    @apply cursor-default
+    flex
+    focus:bg-accent
+    focus:text-accent-foreground
+    items-center
+    outline-hidden
+    px-2
+    py-1.5
+    rounded-sm
+    select-none
+    text-sm;
+  }
+
+  .singlestage-dropdown-menu-sub-content {
+    @apply bg-popover
+    border
+    min-w-[8rem]
+    overflow-hidden
+    p-1
+    rounded-md
+    shadow-lg
+    text-popover-foreground
+    z-50;
   }
 }

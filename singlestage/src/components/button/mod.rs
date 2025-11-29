@@ -1,4 +1,7 @@
-use crate::InputGroupContext;
+use crate::{
+    DropdownMenuContext, DropdownTriggerContext, InputGroupContext, PopoverContext,
+    PopoverTriggerContext,
+};
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -199,7 +202,6 @@ pub fn Button(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -237,18 +239,34 @@ pub fn Button(
             formnovalidate=move || formnovalidate.get()
             formtarget=move || formtarget.get()
             name=move || name.get()
-            popovertarget=move || popovertarget.get()
-            popovertargetaction=move || popovertargetaction.get()
             value=move || value.get()
         />
     };
 
+    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some()
+        || use_context::<PopoverTriggerContext>().is_some();
+
     view! {
         <button
+            aria_controls=move || {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        Some(dropdown.menu_id.get())
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        Some(popover.menu_id.get())
+                    } else {
+                        None
+                    }
+                } else {
+                    None
+                }
+            }
+            aria_haspopup=move || { if button_is_trigger { Some("menu") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
                 format!(
-                    "{} {} {} {}",
+                    "{}{} {} {} {}",
+                    if button_is_trigger { "singlestage-trigger " } else { "" },
                     match variant.get().unwrap_or_default().as_str() {
                         "primary" => "singlestage-btn-primary",
                         "secondary" => "singlestage-btn-secondary",
@@ -278,25 +296,58 @@ pub fn Button(
                         "icon-lg" => "singlestage-btn-lg-icon",
                         _ => "",
                     },
-                    {
-                        if use_context::<InputGroupContext>().is_some() {
-                            format!(
-                                "singlestage-input-group-button {}",
-                                match size.get().unwrap_or_default().as_str() {
-                                    "sm" => "singlestage-input-group-button-sm",
-                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                    _ => "singlestage-input-group-button-xs",
-                                },
-                            )
-                        } else {
-                            "".to_string()
-                        }
+                    if use_context::<InputGroupContext>().is_some() {
+                        format!(
+                            "singlestage-input-group-button {}",
+                            match size.get().unwrap_or_default().as_str() {
+                                "sm" => "singlestage-input-group-button-sm",
+                                "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                _ => "singlestage-input-group-button-xs",
+                            },
+                        )
+                    } else {
+                        "".to_string()
                     },
                     class.get().unwrap_or_default(),
                 )
             }
             disabled=disabled.get_untracked()
+            id=move || {
+                if button_is_trigger {
+                    let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        dropdown.trigger_id.set(trigger_id.clone());
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        popover.trigger_id.set(trigger_id.clone());
+                    }
+                    Some(trigger_id)
+                } else {
+                    id.get()
+                }
+            }
+            popovertarget=move || {
+                if button_is_trigger {
+                    let mut target_id = None;
+                    if let Some(popovertarget) = popovertarget.get() {
+                        target_id = Some(popovertarget);
+                    } else if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        target_id = Some(dropdown.menu_id.get())
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        target_id = Some(popover.menu_id.get())
+                    }
+                    target_id
+                } else {
+                    popovertarget.get()
+                }
+            }
+            popovertargetaction=move || {
+                if button_is_trigger {
+                    Some("toggle".to_string())
+                } else {
+                    popovertargetaction.get()
+                }
+            }
             prop:disabled=move || disabled.get()
             type=move || {
                 if let Some(button_type) = button_type.get() {

@@ -18,7 +18,7 @@ pub fn ButtonGroupSelectExample() -> impl IntoView {
                 <Input placeholder="10.00" pattern="[0-9]*" />
             </ButtonGroup>
             <ButtonGroup>
-                <Button attr:aria-label="Send" size="icon" variant="outline">
+                <Button aria_label="Send" size="icon" variant="outline">
                     {icon!(icondata::LuArrowRight)}
                 </Button>
             </ButtonGroup>

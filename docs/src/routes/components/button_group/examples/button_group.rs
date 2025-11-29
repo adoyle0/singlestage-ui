@@ -6,7 +6,7 @@ pub fn ButtonGroupExample() -> impl IntoView {
     view! {
         <ButtonGroup>
             <ButtonGroup class="flex">
-                <Button variant="outline" size="icon" attr:aria-label="Go Back">
+                <Button variant="outline" size="icon" aria_label="Go Back">
                     {icon!(icondata::LuArrowLeft, width=24, height=24)}
                 </Button>
             </ButtonGroup>
@@ -17,12 +17,10 @@ pub fn ButtonGroupExample() -> impl IntoView {
             <ButtonGroup>
                 <Button variant="outline">"Snooze"</Button>
                 <DropdownMenu>
-                    <DropdownMenuTrigger
-                        variant="outline"
-                        size="icon"
-                        attr:aria-label="More Options"
-                    >
-                        {icon!(icondata::FiMoreHorizontal)}
+                    <DropdownMenuTrigger>
+                        <Button variant="outline" size="icon" aria_label="More Options">
+                            {icon!(icondata::FiMoreHorizontal)}
+                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="w-52">
                         <DropdownMenuGroup>
