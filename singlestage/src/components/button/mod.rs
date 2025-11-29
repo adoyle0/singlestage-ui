@@ -308,22 +308,24 @@ pub fn Button(
             disabled=disabled.get_untracked()
             id=move || {
                 if button_is_trigger {
+                    let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
-                        Some(dropdown.trigger_id.get())
-                    } else {
-                        id.get()
+                        dropdown.trigger_id.set(trigger_id.clone());
                     }
+                    Some(trigger_id)
                 } else {
                     id.get()
                 }
             }
             popovertarget=move || {
                 if button_is_trigger {
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
-                        Some(dropdown.menu_id.get())
-                    } else {
-                        popovertarget.get()
+                    let mut target_id = None;
+                    if let Some(popovertarget) = popovertarget.get() {
+                        target_id = Some(popovertarget);
+                    } else if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        target_id = Some(dropdown.menu_id.get())
                     }
+                    target_id
                 } else {
                     popovertarget.get()
                 }

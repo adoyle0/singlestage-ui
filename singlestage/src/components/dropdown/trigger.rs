@@ -12,4 +12,4 @@ pub fn DropdownMenuTrigger(children: Children) -> impl IntoView {
     let context = DropdownTriggerContext {};
 
     view! { <Provider value=context>{children()}</Provider> }
-}
+)
