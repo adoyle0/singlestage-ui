@@ -7,24 +7,23 @@ pub fn EmptyAvatarGroupExample() -> impl IntoView {
         <Empty>
             <EmptyHeader>
                 <EmptyMedia>
-                    <div class="flex -space-x-2
-                    [&_.singlestage-avatar]:ring-(--background)
-                    [&_.singlestage-avatar]:size-12
-                    [&_.singlestage-avatar]:ring-2
-                    [&_.singlestage-avatar]:grayscale">
-                        <Avatar>
+                    <AvatarGroup>
+                        <Avatar class="size-12 grayscale">
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                            <AvatarFallback>"CN"</AvatarFallback>
                         </Avatar>
-                        <Avatar>
+                        <Avatar class="size-12 grayscale">
                             <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+                            <AvatarFallback>"LR"</AvatarFallback>
                         </Avatar>
-                        <Avatar>
+                        <Avatar class="size-12 grayscale">
                             <AvatarImage
                                 src="https://github.com/evilrabbit.png"
                                 alt="@evilrabbit"
                             />
+                            <AvatarFallback>"ER"</AvatarFallback>
                         </Avatar>
-                    </div>
+                    </AvatarGroup>
                 </EmptyMedia>
                 <EmptyTitle>"No Team Members"</EmptyTitle>
                 <EmptyDescription>

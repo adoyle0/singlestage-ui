@@ -7,16 +7,35 @@
     shrink-0
     size-8;
   }
+
   .singlestage-avatar-image {
-    @apply aspect-square 
-    size-full;
+    @apply absolute
+    aspect-square 
+    indent-[100%]
+    overflow-hidden
+    size-full
+    whitespace-nowrap
+    z-2;
   }
+
   .singlestage-avatar-fallback {
-    @apply bg-muted 
+    @apply absolute
+    bg-muted 
     flex
     items-center
     justify-center
     rounded-full
-    size-full;
+    size-full
+    z-1;
+  }
+
+  .singlestage-avatar-group {
+    @apply -space-x-2
+    flex;
+
+    .singlestage-avatar {
+      @apply ring-2
+      ring-background;
+    }
   }
 }

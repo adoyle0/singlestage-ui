@@ -1,8 +1,8 @@
 use leptos::prelude::*;
 
-/// Contains the contents of an avatar.
+/// Renders a group of `Avatar` components.
 #[component]
-pub fn Avatar(
+pub fn AvatarGroup(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -151,7 +151,9 @@ pub fn Avatar(
 
     view! {
         <div
-            class=move || { format!("singlestage-avatar {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!("singlestage-avatar-group {}", class.get().unwrap_or_default())
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

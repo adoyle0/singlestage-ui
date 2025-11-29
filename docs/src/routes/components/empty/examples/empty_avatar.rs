@@ -7,8 +7,9 @@ pub fn EmptyAvatarExample() -> impl IntoView {
         <Empty>
             <EmptyHeader>
                 <EmptyMedia variant="default">
-                    <Avatar class="size-12">
-                        <AvatarImage src="https://github.com/shadcn.png" class="grayscale" />
+                    <Avatar class="size-12 grayscale">
+                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                        <AvatarFallback>"CN"</AvatarFallback>
                     </Avatar>
                 </EmptyMedia>
                 <EmptyTitle>"User Offline"</EmptyTitle>
