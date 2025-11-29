@@ -6,7 +6,7 @@ pub fn BreadcrumbExample() -> impl IntoView {
     view! {
         <Breadcrumb>
             <BreadcrumbItem>
-                <a href="#" class="hover:text-foreground transition-colors">
+                <a href="#" class="hover:text-(--foreground) transition-colors">
                     "Home"
                 </a>
             </BreadcrumbItem>
@@ -15,7 +15,7 @@ pub fn BreadcrumbExample() -> impl IntoView {
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         <Button
-                            class="flex size-9 items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer"
+                            class="flex size-9 items-center justify-center h-4 w-4 hover:text-(--foreground) cursor-pointer"
                             variant="ghost"
                         >
                             {icon!(icondata::VsEllipsis)}
@@ -32,13 +32,13 @@ pub fn BreadcrumbExample() -> impl IntoView {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-                <a href="#" class="hover:text-foreground transition-colors">
+                <a href="#" class="hover:text-(--foreground) transition-colors">
                     "Components"
                 </a>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-                <span class="text-foreground font-normal">"Breadcrumb"</span>
+                <span class="text-(--foreground) font-normal">"Breadcrumb"</span>
             </BreadcrumbItem>
         </Breadcrumb>
     }
