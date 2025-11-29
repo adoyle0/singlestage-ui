@@ -10,6 +10,9 @@ use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct PopoverContext {
-    menu_id: RwSignal<String>,
-    trigger_id: RwSignal<String>,
+    pub menu_id: RwSignal<String>,
+    pub trigger_id: RwSignal<String>,
 }
+
+#[derive(Clone)]
+pub struct PopoverTriggerContext {}

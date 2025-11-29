@@ -1,11 +1,13 @@
 use leptos::prelude::*;
-use singlestage::popover::*;
+use singlestage::*;
 
 #[component]
 pub fn PopoverAnatomy() -> impl IntoView {
     view! {
         <Popover>
-            <PopoverTrigger />
+            <PopoverTrigger>
+                <Button />
+            </PopoverTrigger>
             <PopoverContent />
         </Popover>
     }

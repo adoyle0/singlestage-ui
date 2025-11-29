@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::dropdown::*;
+use singlestage::*;
 
 #[component]
 pub fn DropdownMenuAnatomy() -> impl IntoView {

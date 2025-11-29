@@ -4,8 +4,10 @@ use singlestage::*;
 #[component]
 pub fn PopoverExample() -> impl IntoView {
     view! {
-        <Popover id="demo-popover">
-            <PopoverTrigger variant="outline">"Open popover"</PopoverTrigger>
+        <Popover>
+            <PopoverTrigger>
+                <Button variant="outline">"Open popover"</Button>
+            </PopoverTrigger>
             <PopoverContent class="w-80">
                 <form>
                     <FieldSet>

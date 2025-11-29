@@ -124,6 +124,7 @@ pub fn Popover(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -160,7 +161,6 @@ pub fn Popover(
 
     view! {
         <div
-            class=move || { format!("singlestage-popover {}", class.get().unwrap_or_default()) }
 
             {..global_attrs_1}
             {..global_attrs_2}

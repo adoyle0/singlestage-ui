@@ -1,4 +1,7 @@
-use crate::{DropdownMenuContext, DropdownTriggerContext, InputGroupContext};
+use crate::{
+    DropdownMenuContext, DropdownTriggerContext, InputGroupContext, PopoverContext,
+    PopoverTriggerContext,
+};
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -240,7 +243,8 @@ pub fn Button(
         />
     };
 
-    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some();
+    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some()
+        || use_context::<PopoverTriggerContext>().is_some();
 
     view! {
         <button
@@ -248,6 +252,8 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(dropdown.menu_id.get())
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        Some(popover.menu_id.get())
                     } else {
                         None
                     }
@@ -311,6 +317,8 @@ pub fn Button(
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         dropdown.trigger_id.set(trigger_id.clone());
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        popover.trigger_id.set(trigger_id.clone());
                     }
                     Some(trigger_id)
                 } else {
@@ -324,6 +332,8 @@ pub fn Button(
                         target_id = Some(popovertarget);
                     } else if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         target_id = Some(dropdown.menu_id.get())
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        target_id = Some(popover.menu_id.get())
                     }
                     target_id
                 } else {

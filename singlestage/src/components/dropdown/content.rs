@@ -146,7 +146,7 @@ pub fn DropdownMenuContent(
     view! {
         <menu
             class=move || {
-                format!("singlestage-dropdown-menu-content {}", class.get().unwrap_or_default())
+                format!("singlestage-dropdown-menu {}", class.get().unwrap_or_default())
             }
             id={
                 let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
