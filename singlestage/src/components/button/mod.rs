@@ -265,7 +265,8 @@ pub fn Button(
             aria_label=move || aria_label.get()
             class=move || {
                 format!(
-                    "{} {} {} {}",
+                    "{}{} {} {} {}",
+                    if button_is_trigger { "singlestage-trigger " } else { "" },
                     match variant.get().unwrap_or_default().as_str() {
                         "primary" => "singlestage-btn-primary",
                         "secondary" => "singlestage-btn-secondary",
