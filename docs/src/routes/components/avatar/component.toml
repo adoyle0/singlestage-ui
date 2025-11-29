@@ -9,8 +9,8 @@ name = "Avatar Fallback"
 title = "Fallback"
 
 [[examples]]
-name = "Avatar Multi"
-title = "Overlapping"
+name = "Avatar group"
+title = "Avatar Group"
 
 [[references]]
 name = "Avatar"
@@ -27,6 +27,15 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
+
+[[references]]
+name = "AvatarGroup"
+description = "Renders a group of Avatar components."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
 
 [[references]]
 name = "AvatarImage"
