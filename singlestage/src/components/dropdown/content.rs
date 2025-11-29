@@ -47,6 +47,9 @@ pub fn DropdownMenuContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -104,9 +107,6 @@ pub fn DropdownMenuContent(
 ) -> impl IntoView {
     let menu = expect_context::<DropdownMenuContext>();
 
-    let uuid = uuid::Uuid::new_v4().to_string();
-    menu.menu_id.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -148,7 +148,11 @@ pub fn DropdownMenuContent(
             class=move || {
                 format!("singlestage-dropdown-menu-content {}", class.get().unwrap_or_default())
             }
-            id=uuid
+            id={
+                let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                menu.menu_id.set(menu_id.clone());
+                menu_id
+            }
             popover="auto"
             role="menu"
 
