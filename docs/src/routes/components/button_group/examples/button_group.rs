@@ -17,12 +17,10 @@ pub fn ButtonGroupExample() -> impl IntoView {
             <ButtonGroup>
                 <Button variant="outline">"Snooze"</Button>
                 <DropdownMenu>
-                    <DropdownMenuTrigger
-                        variant="outline"
-                        size="icon"
-                        attr:aria-label="More Options"
-                    >
-                        {icon!(icondata::FiMoreHorizontal)}
+                    <DropdownMenuTrigger>
+                        <Button variant="outline" size="icon" attr:aria-label="More Options">
+                            {icon!(icondata::FiMoreHorizontal)}
+                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="w-52">
                         <DropdownMenuGroup>

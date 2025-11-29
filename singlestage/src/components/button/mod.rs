@@ -1,4 +1,4 @@
-use crate::InputGroupContext;
+use crate::{DropdownMenuContext, DropdownTriggerContext, InputGroupContext};
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -199,7 +199,6 @@ pub fn Button(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -237,14 +236,26 @@ pub fn Button(
             formnovalidate=move || formnovalidate.get()
             formtarget=move || formtarget.get()
             name=move || name.get()
-            popovertarget=move || popovertarget.get()
-            popovertargetaction=move || popovertargetaction.get()
             value=move || value.get()
         />
     };
 
+    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some();
+
     view! {
         <button
+            aria_controls=move || {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        Some(dropdown.menu_id.get())
+                    } else {
+                        None
+                    }
+                } else {
+                    None
+                }
+            }
+            aria_haspopup=move || { if button_is_trigger { Some("menu") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
                 format!(
@@ -278,25 +289,52 @@ pub fn Button(
                         "icon-lg" => "singlestage-btn-lg-icon",
                         _ => "",
                     },
-                    {
-                        if use_context::<InputGroupContext>().is_some() {
-                            format!(
-                                "singlestage-input-group-button {}",
-                                match size.get().unwrap_or_default().as_str() {
-                                    "sm" => "singlestage-input-group-button-sm",
-                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                    _ => "singlestage-input-group-button-xs",
-                                },
-                            )
-                        } else {
-                            "".to_string()
-                        }
+                    if use_context::<InputGroupContext>().is_some() {
+                        format!(
+                            "singlestage-input-group-button {}",
+                            match size.get().unwrap_or_default().as_str() {
+                                "sm" => "singlestage-input-group-button-sm",
+                                "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                _ => "singlestage-input-group-button-xs",
+                            },
+                        )
+                    } else {
+                        "".to_string()
                     },
                     class.get().unwrap_or_default(),
                 )
             }
             disabled=disabled.get_untracked()
+            id=move || {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        Some(dropdown.trigger_id.get())
+                    } else {
+                        id.get()
+                    }
+                } else {
+                    id.get()
+                }
+            }
+            popovertarget=move || {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        Some(dropdown.menu_id.get())
+                    } else {
+                        popovertarget.get()
+                    }
+                } else {
+                    popovertarget.get()
+                }
+            }
+            popovertargetaction=move || {
+                if button_is_trigger {
+                    Some("toggle".to_string())
+                } else {
+                    popovertargetaction.get()
+                }
+            }
             prop:disabled=move || disabled.get()
             type=move || {
                 if let Some(button_type) = button_type.get() {

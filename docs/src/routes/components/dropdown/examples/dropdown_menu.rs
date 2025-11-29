@@ -1,11 +1,13 @@
 use leptos::prelude::*;
-use singlestage::{dropdown::*, icon};
+use singlestage::{Button, dropdown::*, icon};
 
 #[component]
 pub fn DropdownMenuExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger variant="outline">"Open"</DropdownMenuTrigger>
+            <DropdownMenuTrigger>
+                <Button variant="outline">"Open"</Button>
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"My Account"</DropdownMenuLabel>

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{breadcrumb::*, dropdown::*, icon};
+use singlestage::{Button, breadcrumb::*, dropdown::*, icon};
 
 #[component]
 pub fn BreadcrumbExample() -> impl IntoView {
@@ -13,11 +13,13 @@ pub fn BreadcrumbExample() -> impl IntoView {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
                 <DropdownMenu>
-                    <DropdownMenuTrigger
-                        class="flex size-9 items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer"
-                        variant="ghost"
-                    >
-                        {icon!(icondata::VsEllipsis)}
+                    <DropdownMenuTrigger>
+                        <Button
+                            class="flex size-9 items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer"
+                            variant="ghost"
+                        >
+                            {icon!(icondata::VsEllipsis)}
+                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuGroup>

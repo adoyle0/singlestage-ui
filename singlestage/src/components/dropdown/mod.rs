@@ -20,9 +20,12 @@ use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct DropdownMenuContext {
-    menu_id: RwSignal<String>,
-    trigger_id: RwSignal<String>,
+    pub menu_id: RwSignal<String>,
+    pub trigger_id: RwSignal<String>,
 }
+
+#[derive(Clone)]
+pub struct DropdownTriggerContext {}
 
 #[derive(Clone)]
 pub struct DropdownMenuGroupContext {

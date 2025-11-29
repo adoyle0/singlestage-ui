@@ -5,7 +5,9 @@ use singlestage::dropdown::*;
 pub fn DropdownMenuAnatomy() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger />
+            <DropdownMenuTrigger>
+                <Button />
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
                     <DropdownMenuLabel />

@@ -7,8 +7,10 @@ pub fn ButtonGroupDropdownExample() -> impl IntoView {
         <ButtonGroup>
             <Button variant="outline">"Follow"</Button>
             <DropdownMenu>
-                <DropdownMenuTrigger variant="outline" class="!pl-2">
-                    {icon!(icondata::LuChevronDown)}
+                <DropdownMenuTrigger>
+                    <Button variant="outline" class="!pl-2">
+                        {icon!(icondata::LuChevronDown)}
+                    </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="[--radius:1rem]">
                     <DropdownMenuGroup>

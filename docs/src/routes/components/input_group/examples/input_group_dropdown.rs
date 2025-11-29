@@ -9,8 +9,10 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter file name" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <DropdownMenuTrigger aria_label="More" title="More" variant="ghost">
-                            {icon!(icondata::FiMoreHorizontal)}
+                        <DropdownMenuTrigger>
+                            <Button aria_label="More" title="More">
+                                {icon!(icondata::FiMoreHorizontal)}
+                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuItem>"Settings"</DropdownMenuItem>
@@ -24,9 +26,10 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter search query" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <DropdownMenuTrigger variant="ghost" class="!pr-1.5 text-xs">
-                            "Search In..."
-                            {icon!(icondata::LuChevronDown, class="size-3")}
+                        <DropdownMenuTrigger>
+                            <Button class="!pr-1.5 text-xs">
+                                "Search In..." {icon!(icondata::LuChevronDown, class="size-3")}
+                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent class="[--radius:0.95rem]">
                             <DropdownMenuItem>"Documentation"</DropdownMenuItem>
