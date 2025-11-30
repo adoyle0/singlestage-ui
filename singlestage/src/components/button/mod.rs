@@ -252,11 +252,7 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(dropdown.menu_id.get())
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        Some(popover.menu_id.get())
-                    } else {
-                        None
-                    }
+                    } else { use_context::<PopoverContext>().map(|popover| popover.menu_id.get()) }
                 } else {
                     None
                 }
@@ -352,12 +348,10 @@ pub fn Button(
             type=move || {
                 if let Some(button_type) = button_type.get() {
                     Some(button_type)
+                } else if use_context::<InputGroupContext>().is_some() {
+                    Some("button".to_string())
                 } else {
-                    if use_context::<InputGroupContext>().is_some() {
-                        Some("button".to_string())
-                    } else {
-                        None
-                    }
+                    None
                 }
             }
 

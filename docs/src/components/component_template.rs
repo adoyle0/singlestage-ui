@@ -51,7 +51,7 @@ pub fn Example(
     #[prop(into)] view: AnyView,
 ) -> impl IntoView {
     // Special case for Empty Background example to make it display full-size
-    let empty_backround = &name == &"Background".to_string();
+    let empty_backround = name == "Background";
 
     view! {
         <div class="my-12">
