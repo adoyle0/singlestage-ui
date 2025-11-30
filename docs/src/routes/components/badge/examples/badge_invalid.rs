@@ -5,14 +5,14 @@ use singlestage::badge::*;
 pub fn BadgeInvalidExample() -> impl IntoView {
     view! {
         <div class="space-x-2">
-            <Badge attr:aria-invalid="true">"Primary"</Badge>
-            <Badge attr:aria-invalid="true" variant="secondary">
+            <Badge invalid=true>"Primary"</Badge>
+            <Badge invalid=true variant="secondary">
                 "Secondary"
             </Badge>
-            <Badge attr:aria-invalid="true" variant="destructive">
+            <Badge invalid=true variant="destructive">
                 "Destructive"
             </Badge>
-            <Badge attr:aria-invalid="true" variant="outline">
+            <Badge invalid=true variant="outline">
                 "Outline"
             </Badge>
         </div>

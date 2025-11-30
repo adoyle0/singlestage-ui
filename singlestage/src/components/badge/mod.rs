@@ -5,6 +5,9 @@ use leptos::prelude::*;
 pub fn Badge(
     children: Children,
 
+    /// Toggle whether or not this badge appears invalid.
+    #[prop(optional, into)]
+    invalid: MaybeProp<bool>,
     /// Define the badge variant. Defaults to `"primary"`.
     /// Variants: "primary" | "secondary" | "destructive" | "outline"
     #[prop(optional, into)]
@@ -157,6 +160,7 @@ pub fn Badge(
 
     view! {
         <span
+            aria_invalid=move || if invalid.get().unwrap_or_default() { Some("true") } else { None }
             class=move || {
                 format!(
                     "{} {}",
