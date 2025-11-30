@@ -55,7 +55,10 @@ description = "The main component that wraps inputs and addons."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Toggle whether or \
+    not this input group should appear disabled.""" },
+]
 
 [[references]]
 name = "InputGroupAddon"
