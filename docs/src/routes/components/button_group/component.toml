@@ -38,6 +38,11 @@ title = "Input"
 description = "Wrap an Input component with buttons."
 
 [[examples]]
+name = "button group input group"
+title = "Input Group"
+description = "Wrap an InputGroup component to create complex input layouts."
+
+[[examples]]
 name = "button group dropdown"
 title = "Dropdown Menu"
 description = "Create a split button group with a DropdownMenu component."

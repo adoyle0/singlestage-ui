@@ -1,6 +1,7 @@
 mod button_group;
 mod button_group_dropdown;
 mod button_group_input;
+mod button_group_input_group;
 mod button_group_nested;
 mod button_group_orientation;
 mod button_group_popover;
@@ -12,6 +13,7 @@ mod button_group_split;
 pub use button_group::*;
 pub use button_group_dropdown::*;
 pub use button_group_input::*;
+pub use button_group_input_group::*;
 pub use button_group_nested::*;
 pub use button_group_orientation::*;
 pub use button_group_popover::*;

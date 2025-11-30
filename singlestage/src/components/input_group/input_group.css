@@ -14,19 +14,18 @@
     shadow-xs
     transition-[color,box-shadow]
     w-full;
+
+    &[data-disabled="true"] {
+      .singlestage-input-group-addon {
+        @apply opacity-50;
+      }
+    }
   }
 
   .singlestage-input-group:has([aria-invalid="true"]),
   .singlestage-input-group:has(*:invalid) {
     @apply border-destructive
     ring-destructive/20;
-  }
-
-  .singlestage-input-group:has([aria-disabled="true"]),
-  .singlestage-input-group:has(*:disabled) {
-    .singlestage-input-group-addon {
-      @apply opacity-50;
-    }
   }
 
   .singlestage-input-group:has(

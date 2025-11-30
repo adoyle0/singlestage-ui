@@ -6,6 +6,10 @@ use leptos::{context::Provider, prelude::*};
 pub fn InputGroup(
     children: Children,
 
+    /// Toggle whether or not this input group should appear disabled.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -151,6 +155,9 @@ pub fn InputGroup(
     view! {
         <div
             class=move || { format!("singlestage-input-group {}", class.get().unwrap_or_default()) }
+            data-disabled=move || {
+                if disabled.get().unwrap_or_default() { Some("true".to_string()) } else { None }
+            }
             role="group"
 
             {..global_attrs_1}

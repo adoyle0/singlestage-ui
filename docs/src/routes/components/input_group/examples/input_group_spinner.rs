@@ -5,26 +5,26 @@ use singlestage::*;
 pub fn InputGroupSpinnerExample() -> impl IntoView {
     view! {
         <div class="grid w-full max-w-sm gap-4">
-            <InputGroup>
+            <InputGroup disabled=true>
                 <Input placeholder="Searching..." disabled=true />
                 <InputGroupAddon align="inline-end">
                     <Spinner />
                 </InputGroupAddon>
             </InputGroup>
-            <InputGroup>
+            <InputGroup disabled=true>
                 <Input placeholder="Processing..." disabled=true />
                 <InputGroupAddon>
                     <Spinner />
                 </InputGroupAddon>
             </InputGroup>
-            <InputGroup>
+            <InputGroup disabled=true>
                 <Input placeholder="Saving changes..." disabled=true />
                 <InputGroupAddon align="inline-end">
                     <InputGroupText>"Saving..."</InputGroupText>
                     <Spinner />
                 </InputGroupAddon>
             </InputGroup>
-            <InputGroup>
+            <InputGroup disabled=true>
                 <Input placeholder="Refreshing data..." disabled=true />
                 <InputGroupAddon>
                     <Spinner>{icon!(icondata::LuLoader)}</Spinner>
