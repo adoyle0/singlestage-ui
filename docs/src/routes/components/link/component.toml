@@ -4,6 +4,11 @@ description = "A styled hyperlink component."
 [[examples]]
 name = "link"
 
+[[examples]]
+name = "link button"
+title = "As Button"
+description = "Use as_button to render a Link component with Button styling."
+
 [[references]]
 name = "Link"
 description = "Creates a styled hyperlink."
@@ -13,6 +18,12 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a#attributes">a</a> \
 attributes."""
 attrs = [
+  { attr = "as_button", attr_type = "bool", default = "false", description = """Set whether or \
+    not this Link should appear as a Button.""" },
   { attr = "mimetype", attr_type = "String", default = """""""", description = """Renamed <a> \
     `type` attribute to avoid name collisions.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """For use with \
+    as_button, specify the size to render the button.""" },
+  { attr = "variant", attr_type = "String", default = """"link"""", description = """For use with \
+    as_button, specify the style of button to render.""" },
 ]

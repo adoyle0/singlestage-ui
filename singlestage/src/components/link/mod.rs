@@ -1,9 +1,20 @@
+use crate::InputGroupContext;
 use leptos::prelude::*;
 
 /// Creates a styled hyperlink.
 #[component]
 pub fn Link(
     children: Children,
+
+    /// Set whether or not this `Link` should appear as a `Button`.
+    #[prop(optional, into)]
+    as_button: MaybeProp<bool>,
+    /// For use with `as_button`, specify the size to render the button.
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+    /// For use with `as_button`, specify the style of button to render.
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // A ATTRIBUTES
     //
@@ -192,7 +203,50 @@ pub fn Link(
 
     view! {
         <a
-            class=move || format!("singlestage-link {}", class.get().unwrap_or_default())
+            class=move || {
+                if as_button.get().unwrap_or_default() {
+                    format!(
+                        "{} {} {} {}",
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => "singlestage-btn-link",
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" => "singlestage-btn-sm",
+                            "small" => "singlestage-btn-sm",
+                            "lg" => "singlestage-btn-lg",
+                            "large" => "singlestage-btn-lg",
+                            "icon" => "singlestage-btn-icon",
+                            "sm-icon" => "singlestage-btn-sm-icon",
+                            "icon-sm" => "singlestage-btn-sm-icon",
+                            "lg-icon" => "singlestage-btn-lg-icon",
+                            "icon-lg" => "singlestage-btn-lg-icon",
+                            _ => "",
+                        },
+                        if use_context::<InputGroupContext>().is_some() {
+                            format!(
+                                "singlestage-input-group-button {}",
+                                match size.get().unwrap_or_default().as_str() {
+                                    "sm" => "singlestage-input-group-button-sm",
+                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                    _ => "singlestage-input-group-button-xs",
+                                },
+                            )
+                        } else {
+                            "".to_string()
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                } else {
+                    format!("singlestage-link {}", class.get().unwrap_or_default())
+                }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
