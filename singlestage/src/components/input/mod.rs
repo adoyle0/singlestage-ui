@@ -274,11 +274,24 @@ pub fn Input(
         }
     });
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            input.set_value(&value.get());
-        }
-    });
+    Effect::new(
+        move || match input_type.get_untracked().unwrap_or_default().as_str() {
+            "file" => {
+                if value.get().is_empty() {
+                    if let Some(input) = input_ref.get_untracked() {
+                        input.set_value("");
+                    }
+                } else {
+                    return;
+                }
+            }
+            _ => {
+                if let Some(input) = input_ref.get_untracked() {
+                    input.set_value(&value.get());
+                }
+            }
+        },
+    );
 
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
