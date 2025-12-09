@@ -41,7 +41,7 @@ Or add singlestage to your Cargo.toml:
 [dependencies]
 leptos = "0.8"
 ...
-singlestage = "0.3"
+singlestage = "0.4"
 ```
 
 ### Nightly
@@ -51,7 +51,7 @@ singlestage = "0.3"
 [dependencies]
 leptos = { version = "0.8", features = ["nightly"] }
 ...
-singlestage = {version = "0.3", features = ["nightly"] }
+singlestage = { version = "0.4", features = ["nightly"] }
 ```
 
 Add the nightly feature to singlestage just as you do with Leptos, if using nightly.
@@ -66,12 +66,27 @@ Add the islands feature to singlestage just as you do with Leptos, if using isla
 [dependencies]
 leptos = { version = "0.8", features = ["islands"] }
 ...
-singlestage = {version = "0.3", features = ["islands"] }
+singlestage = { version = "0.4", features = ["islands"] }
 ```
 
 ### SSR
 
 Nothing special needs to happen whether you you use SSR or not.
+
+### Reactive Stores
+
+Add the stores feature to singlestage if you're using reactive stores. This will enable using store
+`Field`s as `Reactive` values.
+
+```toml
+# Cargo.toml
+
+[dependencies]
+leptos = "0.8"
+...
+reactive_stores = "0.3"
+singlestage = { version = "0.4", features = ["stores"] }
+```
 
 ### Tailwind BYOB
 

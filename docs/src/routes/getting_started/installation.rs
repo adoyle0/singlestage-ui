@@ -16,7 +16,7 @@ pub fn Installation() -> impl IntoView {
 <span>[dependencies]</span>
 <span>leptos = "0.8"</span>
 <span>...</span>
-<span>singlestage = "0.3"</span>
+<span>singlestage = "0.4"</span>
 </pre>"#
             .to_string() />
 
@@ -30,7 +30,7 @@ pub fn Installation() -> impl IntoView {
 <span>[dependencies]</span>
 <span>leptos = { version = "0.8", features = ["nightly"] }</span>
 <span>...</span>
-<span>singlestage = {version = "0.3", features = ["nightly"] }</span>
+<span>singlestage = {version = "0.4", features = ["nightly"] }</span>
 </pre>"#
             .to_string() />
 
@@ -44,7 +44,7 @@ pub fn Installation() -> impl IntoView {
 <span>[dependencies]</span>
 <span>leptos = { version = "0.8", features = ["islands"] }</span>
 <span>...</span>
-<span>singlestage = {version = "0.3", features = ["islands"] }</span>
+<span>singlestage = {version = "0.4", features = ["islands"] }</span>
 </pre>"#
             .to_string() />
 
@@ -67,6 +67,22 @@ pub fn Installation() -> impl IntoView {
         <p>"Example:"</p>
         <CodeBlock code=r#"<pre>
 <span>SINGLESTAGE_TAILWIND_PATH=/path/to/tailwindcss cargo leptos watch</span>
+</pre>"#
+            .to_string() />
+
+        <h2 class="my-6 text-2xl font-semibold">"Reactive Stores"</h2>
+        <p class="my-4">
+            "Add the stores feature to singlestage if you're using reactive stores. This will
+            enable using store Fields as Reactive values."
+        </p>
+        <CodeBlock code=r#"<pre>
+<span># Cargo.toml</span>
+<span></span>
+<span>[dependencies]</span>
+<span>leptos = "0.8"</span>
+<span>...</span>
+<span>reactive_stores = "0.3"</span>
+<span>singlestage = {version = "0.4", features = ["stores"] }</span>
 </pre>"#
             .to_string() />
     }

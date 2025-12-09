@@ -277,12 +277,10 @@ pub fn Input(
     Effect::new(
         move || match input_type.get_untracked().unwrap_or_default().as_str() {
             "file" => {
-                if value.get().is_empty() {
-                    if let Some(input) = input_ref.get_untracked() {
-                        input.set_value("");
-                    }
-                } else {
-                    return;
+                if value.get().is_empty()
+                    && let Some(input) = input_ref.get_untracked()
+                {
+                    input.set_value("");
                 }
             }
             _ => {

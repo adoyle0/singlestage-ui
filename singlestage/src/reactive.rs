@@ -1,8 +1,14 @@
 use leptos::prelude::*;
 use std::fmt::Debug;
-use reactive_stores::{Store, ArcStore, Field, ArcField, Subfield, StoreField};
 
-/// A reactive binding wrapper that can take any value and upgrade it to a RwSignal (default) 
+#[cfg(feature = "stores")]
+use reactive_stores::{ArcField, ArcStore, Field, Store, StoreField, Subfield};
+
+// Rust gets upset about trying to use `#[cfg(feature = "stores")]` in a where clause:
+// https://github.com/rust-lang/rust/issues/115590
+// HACK: So we'll just define `Reactive` conditionally for now because it's easy and it works.
+
+/// A reactive binding wrapper that can take any value and upgrade it to a RwSignal (default)
 /// or a reactive_stores::Field (Store, ArcStore, Field, ArcField and Subfield can be converted).
 ///
 /// For example:
@@ -22,6 +28,7 @@ use reactive_stores::{Store, ArcStore, Field, ArcField, Subfield, StoreField};
 /// }
 /// ```
 /// In this case the `RwSignal` and the `Checkbox` are coupled. Changing one will update the other and notify all listeners.
+#[cfg(feature = "stores")]
 #[derive(Clone, Debug)]
 pub enum Reactive<T>
 where
@@ -32,14 +39,46 @@ where
     RwSignal(RwSignal<T>),
     Field(Field<T>),
 }
-impl<T> Reactive<T> 
+
+/// A reactive binding wrapper that can take any value and upgrade it to a RwSignal (default)
+/// or a reactive_stores::Field (Store, ArcStore, Field, ArcField and Subfield can be converted).
+///
+/// For example:
+/// ```rs
+/// <Checkbox checked=true />
+/// ```
+/// is effectively the same as:
+/// ```rs
+/// <Checkbox checked=RwSignal::new(true) />
+/// ```
+/// A RwSignal defined elsewhere can also be used:
+/// ```rs
+/// let checked = RwSignal::new(true);
+///
+/// view!{
+///     <Checkbox checked />
+/// }
+/// ```
+/// In this case the `RwSignal` and the `Checkbox` are coupled. Changing one will update the other and notify all listeners.
+#[cfg(not(feature = "stores"))]
+#[derive(Clone, Debug)]
+pub enum Reactive<T>
 where
-    T: Send + Sync + Clone + 'static
+    T: Send + Sync + Clone + 'static,
+    RwSignal<T>: Send + Sync + Clone + Copy + 'static,
+{
+    RwSignal(RwSignal<T>),
+}
+
+impl<T> Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
 {
     #[inline]
     pub fn get(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get(),
+            #[cfg(feature = "stores")]
             Self::Field(field) => field.get(),
         }
     }
@@ -48,6 +87,7 @@ where
     pub fn get_untracked(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get_untracked(),
+            #[cfg(feature = "stores")]
             Self::Field(field) => field.get_untracked(),
         }
     }
@@ -56,14 +96,16 @@ where
     pub fn set(&self, value: T) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.set(value),
+            #[cfg(feature = "stores")]
             Self::Field(field) => field.set(value),
         }
     }
-    
+
     #[inline]
     pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.with(fun),
+            #[cfg(feature = "stores")]
             Self::Field(field) => field.with(fun),
         }
     }
@@ -72,6 +114,7 @@ where
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.update(fun),
+            #[cfg(feature = "stores")]
             Self::Field(field) => field.update(fun),
         }
     }
@@ -115,6 +158,7 @@ where
     }
 }
 
+#[cfg(feature = "stores")]
 impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
 where
     Inner: Send + Sync + StoreField<Value = Prev> + 'static,
@@ -127,6 +171,7 @@ where
     }
 }
 
+#[cfg(feature = "stores")]
 impl<T> From<Field<T>> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
@@ -137,6 +182,7 @@ where
     }
 }
 
+#[cfg(feature = "stores")]
 impl<T> From<Store<T>> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
@@ -147,6 +193,7 @@ where
     }
 }
 
+#[cfg(feature = "stores")]
 impl<T> From<ArcField<T>> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
@@ -157,6 +204,7 @@ where
     }
 }
 
+#[cfg(feature = "stores")]
 impl<T> From<ArcStore<T>> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
