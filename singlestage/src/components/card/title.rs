@@ -151,7 +151,11 @@ pub fn CardTitle(
     };
 
     view! {
-        <h2 {..global_attrs_1} {..global_attrs_2}>
+        <h2
+            class=move || { format!("singlestage-card-title {}", class.get().unwrap_or_default()) }
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </h2>
     }
