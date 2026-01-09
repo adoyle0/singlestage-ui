@@ -35,7 +35,7 @@ tokio = "1"
 tower = "0.5"
 tower-http = "0.6"
 uuid = "1.17"
-wasm-bindgen = "=0.2.105"
+wasm-bindgen = "0.2"
 
 # Macros
 serde = "1.0"
