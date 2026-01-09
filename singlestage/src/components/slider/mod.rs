@@ -15,6 +15,11 @@ pub fn Slider(
     #[prop(optional, into)]
     value: Reactive<f64>,
 
+    // LEPTOS ATTRIBUTES
+    /// A reactive reference to a DOM node that can be used with the node_ref attribute.
+    #[prop(optional, into)]
+    node_ref: MaybeProp<NodeRef<leptos::html::Input>>,
+
     // RANGE ATTRIBUTES
     //
     /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
@@ -150,7 +155,13 @@ pub fn Slider(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let slider_ref = NodeRef::<leptos::html::Input>::new();
+    let slider_ref = {
+        if let Some(node_ref) = node_ref.get_untracked() {
+            node_ref
+        } else {
+            NodeRef::<leptos::html::Input>::new()
+        }
+    };
 
     let max_default = 100.;
     let min_default = 0.;

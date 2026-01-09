@@ -31,6 +31,11 @@ pub fn Checkbox(
     #[prop(optional, into)]
     value: MaybeProp<String>,
 
+    // LEPTOS ATTRIBUTES
+    /// A reactive reference to a DOM node that can be used with the node_ref attribute.
+    #[prop(optional, into)]
+    node_ref: MaybeProp<NodeRef<leptos::html::Input>>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -136,7 +141,13 @@ pub fn Checkbox(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let checkbox_ref = NodeRef::<leptos::html::Input>::new();
+    let checkbox_ref = {
+        if let Some(node_ref) = node_ref.get_untracked() {
+            node_ref
+        } else {
+            NodeRef::<leptos::html::Input>::new()
+        }
+    };
 
     let on_change = move |ev| {
         let checkbox_checked = event_target_checked(&ev);

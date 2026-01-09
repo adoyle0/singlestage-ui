@@ -21,6 +21,11 @@ pub fn Textarea(
     #[prop(optional, into)]
     value: Reactive<String>,
 
+    // LEPTOS ATTRIBUTES
+    /// A reactive reference to a DOM node that can be used with the node_ref attribute.
+    #[prop(optional, into)]
+    node_ref: MaybeProp<NodeRef<leptos::html::Textarea>>,
+
     // TEXTAREA ATTRIBUTES
     //
     /// Controls [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete).
@@ -172,7 +177,13 @@ pub fn Textarea(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let textarea_ref = NodeRef::<leptos::html::Textarea>::new();
+    let textarea_ref = {
+        if let Some(node_ref) = node_ref.get_untracked() {
+            node_ref
+        } else {
+            NodeRef::<leptos::html::Textarea>::new()
+        }
+    };
 
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
