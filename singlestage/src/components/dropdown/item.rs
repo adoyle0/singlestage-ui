@@ -1,4 +1,4 @@
-use crate::DropdownMenuContext;
+use crate::{DropdownMenuContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains a menu item.
@@ -9,6 +9,9 @@ pub fn DropdownMenuItem(
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: MaybeProp<bool>,
+    /// Toggle whether clicking this item dismisses its parent menu
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismiss: Reactive<bool>,
     /// Set the display variant of the item.
     ///
     /// Accepted values: "destructive"
@@ -175,18 +178,18 @@ pub fn DropdownMenuItem(
             {..global_attrs_2}
         >
             <button
-                aria-controls=move || menu.menu_id.get()
-                aria-haspopup="menu"
+                aria-controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                aria-haspopup=move || if dismiss.get() { Some("menu") } else { None }
                 data-disabled=move || disabled.get().unwrap_or_default()
                 data-variant=move || variant.get().unwrap_or_default()
                 on:click=move |ev| {
-                    if !menu.dismissable {
+                    if !menu.dismissable.get() && dismiss.get() {
                         ev.prevent_default();
                         menu.open.set(false);
                     }
                 }
-                popovertarget=move || menu.menu_id.get()
-                popovertargetaction="toggle"
+                popovertarget=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                popovertargetaction=move || if dismiss.get() { Some("toggle") } else { None }
                 type="button"
             >
                 {children()}

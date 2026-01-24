@@ -36,6 +36,15 @@ pub fn DebugDropdown() -> impl IntoView {
             </DropdownMenuContent>
         </DropdownMenu>
 
+        <DropdownMenu>
+            <DropdownMenuTrigger>
+                <Button>"No dismiss"</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem dismiss=false>"no dismiss"</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+
         // top
 
         <DropdownMenu>

@@ -327,12 +327,12 @@ pub fn Button(
             on:click=move |ev| {
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
-                        if !dropdown.dismissable {
+                        if !dropdown.dismissable.get_untracked() {
                             ev.prevent_default();
                             dropdown.open.set(!dropdown.open.get_untracked());
                         }
                     } else if let Some(popover) = use_context::<PopoverContext>() {
-                        if !popover.dismissable {
+                        if !popover.dismissable.get_untracked() {
                             ev.prevent_default();
                             popover.open.set(!popover.open.get_untracked());
                         }

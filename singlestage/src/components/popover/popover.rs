@@ -8,8 +8,8 @@ pub fn Popover(
 
     /// Set whether or not this popover can be light dismissed. Use this with the `open` signal for
     /// a manually managed popover
-    #[prop(optional, into, default = true)]
-    dismissable: bool,
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismissable: Reactive<bool>,
     /// Reactive signal that can remotely control the open state of the popover **but is not
     /// coupled to the actual open state of the popover**
     #[prop(optional, into)]

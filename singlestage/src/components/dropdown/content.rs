@@ -179,7 +179,7 @@ pub fn DropdownMenuContent(
                 menu.menu_id.set(menu_id.clone());
                 menu_id
             }
-            popover=move || if menu.dismissable { "auto" } else { "manual" }
+            popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
             style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
 
