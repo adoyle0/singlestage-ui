@@ -179,6 +179,12 @@ pub fn DropdownMenuItem(
                 aria-haspopup="menu"
                 data-disabled=move || disabled.get().unwrap_or_default()
                 data-variant=move || variant.get().unwrap_or_default()
+                on:click=move |ev| {
+                    if !menu.dismissable {
+                        ev.prevent_default();
+                        menu.open.set(false);
+                    }
+                }
                 popovertarget=move || menu.menu_id.get()
                 popovertargetaction="toggle"
                 type="button"

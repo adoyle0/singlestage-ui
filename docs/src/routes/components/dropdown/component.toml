@@ -3,14 +3,14 @@ description = """Displays a menu to the user — such as a set of actions or fun
 by a button."""
 
 [info]
-title = "This component could use some work"
-description = """While this component does make use of the new popover browser API, proper \
-positioning is still not widely supported. There are hacks in place to try to work around this \
-issue while still taking advantage of the rest of the API. Until this is implemented (hopefully \
-soon - Aug 03, 2025) that puts this component in only a 'Good Enough' state. "<singlestage::Link \
-style="color: var(--foreground)" \
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility"> "More \
-Info"</singlestage::Link>""""
+title = "This component uses newly available browser features"
+description = """"<p>"This component uses CSS Anchor Positioning which has only been widely \
+supported since January 2026. If you're targeting older or less mainstream browsers then maybe \
+this component isn't for you, yet. "</p><p>" Alternatively you can use Singlestage 0.4 which \
+positions the component correctly but with limited flexibility for alignment, or roll your own \
+using Singlestage CSS classes for consistent styling. "</p><singlestage::Link style="color: \
+var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info" \
+</singlestage::Link>""""
 
 [[examples]]
 name = "Dropdown Menu"

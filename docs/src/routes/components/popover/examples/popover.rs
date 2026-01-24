@@ -8,7 +8,7 @@ pub fn PopoverExample() -> impl IntoView {
             <PopoverTrigger>
                 <Button variant="outline">"Open popover"</Button>
             </PopoverTrigger>
-            <PopoverContent class="w-80">
+            <PopoverContent class="p-4">
                 <form>
                     <FieldSet>
                         <FieldLegend>"Dimensions"</FieldLegend>

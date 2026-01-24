@@ -16,11 +16,14 @@ pub use separator::*;
 pub use shortcut::*;
 pub use trigger::*;
 
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct DropdownMenuContext {
+    pub dismissable: bool,
     pub menu_id: RwSignal<String>,
+    pub open: Reactive<bool>,
     pub trigger_id: RwSignal<String>,
 }
 

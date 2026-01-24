@@ -6,6 +6,19 @@ use leptos::prelude::*;
 pub fn PopoverContent(
     children: Children,
 
+    /// Set how to align the dropdown menu
+    ///
+    /// Accepted values: "start" | "center" | "end"
+    /// Default is "start"
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side the dropdown menu opens relative to the trigger
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left"
+    /// Default is "bottom"
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -106,6 +119,13 @@ pub fn PopoverContent(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu = expect_context::<PopoverContext>();
+    let menu_ref = NodeRef::<leptos::html::Menu>::new();
+
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(menu.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -145,19 +165,28 @@ pub fn PopoverContent(
 
     view! {
         <menu
-            class=move || { format!("singlestage-popover {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-popover singlestage-popover-{}-{} {}",
+                    side.get().unwrap_or("bottom".to_string()),
+                    align.get().unwrap_or("start".to_string()),
+                    class.get().unwrap_or_default(),
+                )
+            }
+            node_ref=menu_ref
             id={
                 let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                 menu.menu_id.set(menu_id.clone());
                 menu_id
             }
-            popover="auto"
+            popover=move || if menu.dismissable { "auto" } else { "manual" }
+            style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <div class="singlestage-popover-content">{children()}</div>
         </menu>
     }
 }

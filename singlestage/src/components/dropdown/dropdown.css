@@ -1,39 +1,6 @@
 @layer components {
-  /* Hacks to render properly until anchor support
-      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
-    */
-  /* Webkit -- HAS TO BE FIRST */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    .singlestage-dropdown-menu {
-      @apply relative
-      bg-transparent;
-      position-area: bottom span-right;
-      inset: unset;
-    }
-  }
-
-  /* Firefox */
-  @-moz-document url-prefix() {
-    .singlestage-dropdown-menu {
-      @apply relative
-      bg-transparent;
-      inset: unset;
-    }
-  }
-  /* End hacks */
-
-  .singlestage-dropdown-menu {
-    @apply bg-popover
-    border
-    min-w-[8rem]
-    overflow-x-hidden
-    overflow-y-auto
-    p-1
-    rounded-md
-    shadow-md
-    text-nowrap
-    text-popover-foreground
-    z-50;
+  .singlestage-dropdown-menu-content {
+    @apply text-nowrap;
 
     .singlestage-radio-group {
       @appply block

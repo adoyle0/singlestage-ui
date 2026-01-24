@@ -1,36 +1,104 @@
 @layer components {
-  /* Hacks to render properly until anchor support
-      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
-    */
-  /* Webkit -- HAS TO BE FIRST */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    .singlestage-popover {
-      @apply relative
-      bg-transparent;
-      position-area: bottom span-right;
-      inset: unset;
-    }
-  }
-
-  /* Firefox */
-  @-moz-document url-prefix() {
-    .singlestage-popover {
-      @apply relative
-      bg-transparent;
-      inset: unset;
-    }
-  }
-  /* End hacks */
-
   .singlestage-popover {
-    @apply bg-popover
-    border
+    inset: unset;
+
+    @apply absolute
+    bg-popover
     overflow-x-hidden
     overflow-y-auto
-    p-4
+    m-0
+    min-w-[8rem]
+    outline-hidden
+    p-1
+    ring-foreground/10
+    ring-1
     rounded-md
     shadow-md
     text-popover-foreground
     z-50;
+  }
+
+  .singlestage-popover-content {
+    @apply flex
+    flex-col
+    gap-2.5
+    p-2.5
+    text-sm
+    w-72;
+  }
+
+  .singlestage-popover-description {
+    @apply text-muted-foreground;
+  }
+
+  .singlestage-popover-header {
+    @apply flex
+    flex-col
+    gap-0.5
+    text-sm;
+  }
+
+  .singlestage-popover-title {
+    @apply font-medium;
+  }
+
+  .singlestage-popover-top-start {
+    bottom: anchor(top);
+    left: anchor(left);
+  }
+
+  .singlestage-popover-top-center {
+    bottom: anchor(top);
+    justify-self: anchor-center;
+  }
+
+  .singlestage-popover-top-end {
+    bottom: anchor(top);
+    right: anchor(right);
+  }
+
+  .singlestage-popover-right-start {
+    left: anchor(right);
+    bottom: anchor(top);
+  }
+
+  .singlestage-popover-right-center {
+    left: anchor(right);
+    align-self: anchor-center;
+  }
+
+  .singlestage-popover-right-end {
+    left: anchor(right);
+    top: anchor(bottom);
+  }
+
+  .singlestage-popover-bottom-start {
+    top: anchor(bottom);
+    left: anchor(left);
+  }
+
+  .singlestage-popover-bottom-center {
+    top: anchor(bottom);
+    justify-self: anchor-center;
+  }
+
+  .singlestage-popover-bottom-end {
+    top: anchor(bottom);
+    right: anchor(right);
+  }
+
+  .singlestage-popover-left-start {
+    right: anchor(left);
+    bottom: anchor(top);
+  }
+
+  .singlestage-popover-left-center {
+    right: anchor(left);
+    align-self: anchor-center;
+  }
+
+  .singlestage-popover-left-end {
+    right: anchor(left);
+    top: anchor(bottom);
   }
 }
