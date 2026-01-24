@@ -6,13 +6,13 @@ use leptos::prelude::*;
 pub fn PopoverContent(
     children: Children,
 
-    /// Set how to align the dropdown menu
+    /// Set how to align the popover
     ///
     /// Accepted values: "start" | "center" | "end"
     /// Default is "start"
     #[prop(optional, into)]
     align: MaybeProp<String>,
-    /// Set which side the dropdown menu opens relative to the trigger
+    /// Set which side the popover opens relative to the trigger
     ///
     /// Accepted values: "top" | "right" | "bottom" | "left"
     /// Default is "bottom"

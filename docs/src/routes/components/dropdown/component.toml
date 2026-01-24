@@ -21,7 +21,14 @@ description = "Contains all the parts of a dropdown menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "dismissable", attr_type = "bool", default = "true", description = """Set whether or \
+    not this popover can be light dismissed. Use this with the `open` signal for a manually \
+    managed popover.""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
 
 [[references]]
 name = "DropdownMenuContent"
@@ -29,7 +36,13 @@ description = "The component that pops out when the dropdown menu is open."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
+    align the popover. Accepted values are "start" | "center" | "end"""" },
+  { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
+    side the popover opens relative to the trigger. Accepted values are "top" | "right" | \
+    "bottom" | "left". """ },
+]
 
 [[references]]
 name = "DropdownMenuGroup"
@@ -50,8 +63,10 @@ attributes."""
 attrs = [
   { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
     whether the item appears disabled or not.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
-    variant of the item.""" },
+    variant of the item. Accepted values are "destructive"""" },
 ]
 
 [[references]]
@@ -60,7 +75,10 @@ description = "Labels groups."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+]
 
 [[references]]
 name = "DropdownMenuSeparator"

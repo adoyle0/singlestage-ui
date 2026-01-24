@@ -8,7 +8,7 @@ pub fn DropdownMenuExample() -> impl IntoView {
             <DropdownMenuTrigger>
                 <Button variant="outline">"Open"</Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent class="w-40" align="start">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"My Account"</DropdownMenuLabel>
                     <DropdownMenuItem>
@@ -19,9 +19,6 @@ pub fn DropdownMenuExample() -> impl IntoView {
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         "Settings" <DropdownMenuShortcut>"⌘S"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        "Keyboard shortcuts" <DropdownMenuShortcut>"⌘K"</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

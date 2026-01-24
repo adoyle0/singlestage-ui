@@ -12,6 +12,9 @@ pub fn DropdownMenuItem(
     /// Toggle whether clicking this item dismisses its parent menu
     #[prop(optional, into, default = Reactive::new(true))]
     dismiss: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
     /// Set the display variant of the item.
     ///
     /// Accepted values: "destructive"
@@ -169,7 +172,15 @@ pub fn DropdownMenuItem(
     view! {
         <li
             class=move || {
-                format!("singlestage-dropdown-menu-item {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-item{} {}",
+                    if inset.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-inset"
+                    } else {
+                        ""
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
             role="menuitem"
             value=move || value.get()

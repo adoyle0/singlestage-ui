@@ -8,6 +8,10 @@
     }
   }
 
+  .singlestage-dropdown-menu-inset {
+    @apply !pl-8;
+  }
+
   .singlestage-dropdown-menu-item {
     > button {
       @apply [&_svg:not([class*='size-'])]:size-4
@@ -18,7 +22,6 @@
       cursor-default
       data-[disabled]:opacity-50
       data-[disabled]:pointer-events-none
-      data-[inset]:pl-8
       data-[variant=destructive]:*:[svg]:!text-destructive
       data-[variant=destructive]:focus:bg-destructive/10
       data-[variant=destructive]:focus:text-destructive
@@ -48,11 +51,11 @@
   }
 
   .singlestage-dropdown-menu-label {
-    @apply data-[inset]:pl-8
-    font-medium
-    px-2
-    py-1.5
-    text-sm;
+    @apply font-medium
+    px-1.5
+    py-1
+    text-muted-foreground
+    text-xs;
   }
 
   .singlestage-dropdown-menu-separator {
