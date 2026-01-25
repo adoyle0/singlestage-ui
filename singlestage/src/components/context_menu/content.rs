@@ -148,7 +148,10 @@ pub fn ContextMenuContent(
     view! {
         <menu
             class=move || {
-                format!("singlestage-context-menu-content {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-content singlestage-context-menu {}",
+                    class.get().unwrap_or_default(),
+                )
             }
             id=uuid
             node_ref=menu_ref
@@ -157,7 +160,8 @@ pub fn ContextMenuContent(
             }
             popover="auto"
             role="menu"
-            style=move || { format!("left: {}px; top: {}px", menu.x.get(), menu.y.get()) }
+            style:left=move || format!("{}px", menu.x.get())
+            style:top=move || format!("{}px", menu.y.get())
 
             {..global_attrs_1}
             {..global_attrs_2}

@@ -173,11 +173,20 @@ pub fn DropdownMenuItem(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{} {}",
+                    "singlestage-dropdown-menu-item{}{}{} {}",
+                    if disabled.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-item-disabled"
+                    } else {
+                        ""
+                    },
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
                         ""
+                    },
+                    match variant.get().unwrap_or_default().as_str() {
+                        "destructive" => " singlestage-dropdown-menu-item-destructive",
+                        _ => "",
                     },
                     class.get().unwrap_or_default(),
                 )
@@ -189,10 +198,8 @@ pub fn DropdownMenuItem(
             {..global_attrs_2}
         >
             <button
-                aria-controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
-                aria-haspopup=move || if dismiss.get() { Some("menu") } else { None }
-                data-disabled=move || disabled.get().unwrap_or_default()
-                data-variant=move || variant.get().unwrap_or_default()
+                aria_controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                aria_haspopup=move || if dismiss.get() { Some("menu") } else { None }
                 on:click=move |ev| {
                     if !menu.dismissable.get() && dismiss.get() {
                         ev.prevent_default();

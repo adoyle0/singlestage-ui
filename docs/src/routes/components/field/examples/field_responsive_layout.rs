@@ -18,7 +18,7 @@ pub fn FieldResponsiveLayoutExample() -> impl IntoView {
                                     "Provide your full name for identification"
                                 </FieldDescription>
                             </FieldContent>
-                            <Input placeholder="Evil Rabbit" />
+                            <Input class="sm:min-w-[300px]" placeholder="Evil Rabbit" />
                         </Field>
                         <FieldSeparator />
                         <Field orientation="responsive">

@@ -167,7 +167,7 @@ pub fn DropdownMenuContent(
         <menu
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-{}-{} {}",
+                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-animation singlestage-popover-{} singlestage-popover-{} {}",
                     side.get().unwrap_or("bottom".to_string()),
                     align.get().unwrap_or("start".to_string()),
                     class.get().unwrap_or_default(),

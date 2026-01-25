@@ -151,7 +151,7 @@ pub fn ContextMenuLabel(
         <h6
             id=uuid
             class=move || {
-                format!("singlestage-context-menu-label {}", class.get().unwrap_or_default())
+                format!("singlestage-dropdown-menu-label {}", class.get().unwrap_or_default())
             }
 
             {..global_attrs_1}

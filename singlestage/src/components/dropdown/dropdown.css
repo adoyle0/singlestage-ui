@@ -1,6 +1,7 @@
 @layer components {
   .singlestage-dropdown-menu-content {
-    @apply text-nowrap;
+    @apply min-w-32
+    p-1;
 
     .singlestage-radio-group {
       @appply block
@@ -14,31 +15,21 @@
 
   .singlestage-dropdown-menu-item {
     > button {
-      @apply [&_svg:not([class*='size-'])]:size-4
-      [&_svg:not([class*='text-'])]:text-muted-foreground
-      [&_svg]:pointer-events-none
-      [&_svg]:shrink-0
-      content-center
+      @apply content-center
       cursor-default
-      data-[disabled]:opacity-50
-      data-[disabled]:pointer-events-none
-      data-[variant=destructive]:*:[svg]:!text-destructive
-      data-[variant=destructive]:focus:bg-destructive/10
-      data-[variant=destructive]:focus:text-destructive
-      data-[variant=destructive]:text-destructive
       focus:bg-accent
       focus:text-accent-foreground
       flex
-      gap-2
+      gap-1.5
       h-full
       hover:bg-accent
       hover:text-accent-foreground
       items-center
       outline-hidden
-      px-2
-      py-1.5
+      px-1.5
+      py-1
       relative
-      rounded-sm
+      rounded-md
       select-none
       text-sm
       w-full;
@@ -47,6 +38,38 @@
     > .singlestage-label {
       @apply h-full
       w-full;
+    }
+
+    svg {
+      @apply pointer-events-none
+        shrink-0;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
+      }
+
+      &:not([class*="text-"]) {
+        @apply text-muted-foreground;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      @apply focus:!bg-destructive/10
+      focus:!text-destructive
+      !text-destructive;
+    }
+
+    svg {
+      @apply !text-destructive;
+    }
+  }
+
+  .singlestage-dropdown-menu-item-disabled {
+    > button {
+      @apply opacity-50
+      pointer-events-none;
     }
   }
 

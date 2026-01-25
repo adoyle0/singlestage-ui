@@ -9,6 +9,9 @@ pub fn ContextMenuItem(
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: MaybeProp<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
     /// Set the display variant of the item.
     ///
     /// Accepted values: "destructive"
@@ -166,7 +169,24 @@ pub fn ContextMenuItem(
     view! {
         <li
             class=move || {
-                format!("singlestage-context-menu-item {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-item{}{}{} {}",
+                    if disabled.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-item-disabled"
+                    } else {
+                        ""
+                    },
+                    if inset.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-inset"
+                    } else {
+                        ""
+                    },
+                    match variant.get().unwrap_or_default().as_str() {
+                        "destructive" => " singlestage-dropdown-menu-item-destructive",
+                        _ => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
             role="menuitem"
             value=move || value.get()
@@ -175,10 +195,8 @@ pub fn ContextMenuItem(
             {..global_attrs_2}
         >
             <button
-                aria-controls=move || menu.menu_id.get()
-                aria-haspopup="menu"
-                data-disabled=move || disabled.get().unwrap_or_default()
-                data-variant=move || variant.get().unwrap_or_default()
+                aria_controls=move || menu.menu_id.get()
+                aria_haspopup="menu"
                 popovertarget=move || menu.menu_id.get()
                 popovertargetaction="toggle"
                 type="button"

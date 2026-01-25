@@ -40,6 +40,8 @@ attributes."""
 attrs = [
   { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
     whether the item appears disabled or not.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
     variant of the item. Accepted values: \"destructive\".""" },
 ]

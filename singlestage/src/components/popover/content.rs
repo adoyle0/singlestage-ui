@@ -167,7 +167,7 @@ pub fn PopoverContent(
         <menu
             class=move || {
                 format!(
-                    "singlestage-popover singlestage-popover-{}-{} {}",
+                    "singlestage-popover-content singlestage-popover singlestage-popover-animation singlestage-popover-{} singlestage-popover-{} {}",
                     side.get().unwrap_or("bottom".to_string()),
                     align.get().unwrap_or("start".to_string()),
                     class.get().unwrap_or_default(),
@@ -186,7 +186,7 @@ pub fn PopoverContent(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <div class="singlestage-popover-content">{children()}</div>
+            {children()}
         </menu>
     }
 }
