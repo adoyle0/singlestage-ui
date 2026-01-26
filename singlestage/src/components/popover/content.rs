@@ -167,9 +167,18 @@ pub fn PopoverContent(
         <menu
             class=move || {
                 format!(
-                    "singlestage-popover-content singlestage-popover singlestage-popover-animation singlestage-popover-{} singlestage-popover-{} {}",
-                    side.get().unwrap_or("bottom".to_string()),
-                    align.get().unwrap_or("start".to_string()),
+                    "singlestage-popover-content singlestage-popover singlestage-popover-animations {} {} {}",
+                    match side.get().unwrap_or_default().as_str() {
+                        "top" => "singlestage-popover-top",
+                        "right" => "singlestage-popover-right",
+                        "left" => "singlestage-popover-left",
+                        _ => "singlestage-popover-bottom",
+                    },
+                    match align.get().unwrap_or_default().as_str() {
+                        "center" => "singlestage-popover-center",
+                        "end" => "singlestage-popover-end",
+                        _ => "singlestage-popover-start",
+                    },
                     class.get().unwrap_or_default(),
                 )
             }
@@ -180,6 +189,7 @@ pub fn PopoverContent(
                 menu_id
             }
             popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
+            style:position="absolute"
             style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
 

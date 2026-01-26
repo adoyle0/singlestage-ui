@@ -149,7 +149,7 @@ pub fn ContextMenuContent(
         <menu
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-content singlestage-context-menu {}",
+                    "singlestage-dropdown-menu-content singlestage-popover {}",
                     class.get().unwrap_or_default(),
                 )
             }

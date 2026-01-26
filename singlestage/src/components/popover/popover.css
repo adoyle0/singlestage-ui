@@ -1,6 +1,6 @@
 @layer components {
   :root {
-    /* --transform-origin: 0% 339px; */
+    --transform-origin: 0% 339px;
     --transform-scale: scale3d(0.95, 0.95, 0.95);
     --transform-translate-step: 0.25rem;
     --transition-duration: 0.15s;
@@ -8,9 +8,9 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .singlestage-popover-animation {
+    .singlestage-popover-animations {
       opacity: 0;
-      /* transform-origin: var(--transform-origin); */
+      transform-origin: var(--transform-origin);
       transform: var(--transform-scale);
       transition-timing-function: var(--transition-timing-function);
       transition: all var(--transition-duration) allow-discrete;
@@ -20,6 +20,7 @@
         transform: scale3d(1, 1, 1);
         transform: translateY(0);
         transform: translateX(0);
+        transform: none;
       }
 
       @starting-style {
@@ -73,14 +74,17 @@
 
   .singlestage-popover {
     inset: unset;
-    position: absolute;
     margin: 0;
 
     &:popover-open {
-      position: absolute;
       @apply overflow-x-hidden
       overflow-y-auto;
     }
+
+    /* using flex fixes animating out on firefox but breaks animating in on chrome... */
+    /* shadcn also uses flex here, I'm not sure if it's really needed */
+    /* @apply flex */
+    /* flex-col; */
 
     @apply bg-popover
     outline-hidden
@@ -93,9 +97,7 @@
   }
 
   .singlestage-popover-content {
-    @apply flex
-    flex-col
-    gap-2.5
+    @apply gap-2.5
     p-2.5
     text-sm
     w-72;
