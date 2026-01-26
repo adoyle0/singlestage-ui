@@ -35,7 +35,7 @@ pub fn Button(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -252,7 +252,9 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(dropdown.menu_id.get())
-                    } else { use_context::<PopoverContext>().map(|popover| popover.menu_id.get()) }
+                    } else {
+                        use_context::<PopoverContext>().map(|popover| popover.menu_id.get())
+                    }
                 } else {
                     None
                 }
