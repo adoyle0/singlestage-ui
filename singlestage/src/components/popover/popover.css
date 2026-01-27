@@ -72,21 +72,34 @@
     }
   }
 
+  html:has(.singlestage-context-menu > [popover]:popover-open) {
+    overflow: hidden;
+  }
+
+  .singlestage-context-menu {
+    .singlestage-popover {
+      position: fixed;
+    }
+  }
+
   .singlestage-popover {
     inset: unset;
+    position: absolute;
     margin: 0;
+    position-try-fallbacks: flip-block, flip-inline;
 
     &:popover-open {
-      @apply overflow-x-hidden
+      @apply flex
+      overflow-x-hidden
       overflow-y-auto;
     }
 
-    /* using flex fixes animating out on firefox but breaks animating in on chrome... */
-    /* shadcn also uses flex here, I'm not sure if it's really needed */
-    /* @apply flex */
-    /* flex-col; */
+    [popover] {
+      top: anchor(top);
+    }
 
     @apply bg-popover
+    flex-col
     outline-hidden
     ring-1
     ring-foreground/10

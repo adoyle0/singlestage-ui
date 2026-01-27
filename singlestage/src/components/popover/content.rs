@@ -189,7 +189,6 @@ pub fn PopoverContent(
                 menu_id
             }
             popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
-            style:position="absolute"
             style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
 

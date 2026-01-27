@@ -15,6 +15,16 @@ var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info
 [[examples]]
 name = "Dropdown Menu"
 
+[[examples]]
+name = "Dropdown Basic"
+title = "Basic"
+description = "A basic dropdown menu with labels and separators."
+
+[[examples]]
+name = "Dropdown Sub"
+title = "Submenu"
+description = "Use DropdownMenuSub to nest secondary actions."
+
 [[references]]
 name = "DropdownMenu"
 description = "Contains all the parts of a dropdown menu."
@@ -95,6 +105,39 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
+
+[[references]]
+name = "DropdownMenuSub"
+description = "Contains all the parts of a sub menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuSubContent"
+description = "The component that pops out when the sub trigger is triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuSubTrigger"
+description = "Defines the area where a sub menu can be triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
 
 [[references]]
 name = "DropdownMenuTrigger"

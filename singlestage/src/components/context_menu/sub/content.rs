@@ -1,9 +1,9 @@
-use crate::ContextMenuContext;
-use leptos::{context::Provider, prelude::*};
+use crate::ContextMenuSubContext;
+use leptos::prelude::*;
 
-/// Contains all the parts of a context menu.
+/// The component that pops out when the sub trigger is triggered.
 #[component]
-pub fn ContextMenu(
+pub fn ContextMenuSubContent(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -47,9 +47,6 @@ pub fn ContextMenu(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
-    /// Set the id of this element.
-    #[prop(optional, into)]
-    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -84,12 +81,6 @@ pub fn ContextMenu(
     /// List of the part names of the element.
     #[prop(optional, into)]
     part: MaybeProp<String>,
-    /// Designate an element as a popover element.
-    #[prop(optional, into)]
-    popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -111,14 +102,10 @@ pub fn ContextMenu(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu_id = RwSignal::new(String::new());
+    let sub = expect_context::<ContextMenuSubContext>();
 
-    let context = ContextMenuContext {
-        menu_id,
-        menu_ref: RwSignal::new(None),
-        x: RwSignal::new(i32::default()),
-        y: RwSignal::new(i32::default()),
-    };
+    let uuid = uuid::Uuid::new_v4();
+    sub.menu_id.set(uuid.to_string());
 
     let global_attrs_1 = view! {
         <{..}
@@ -131,7 +118,6 @@ pub fn ContextMenu(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -148,8 +134,6 @@ pub fn ContextMenu(
             lang=move || lang.get()
             nonce=move || nonce.get()
             part=move || part.get()
-            popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -160,13 +144,22 @@ pub fn ContextMenu(
     };
 
     view! {
-        <div
-            class=move || format!("singlestage-context-menu {}", class.get().unwrap_or_default())
+        <menu
+            class=move || {
+                format!(
+                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-right singlestage-popover-animations {}",
+                    class.get().unwrap_or_default(),
+                )
+            }
+            id=move || uuid.to_string()
+            popover="auto"
+            role="menu"
+            style:position-anchor=move || { format!("--{}", sub.trigger_id.get()) }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
-        </div>
+            {children()}
+        </menu>
     }
 }

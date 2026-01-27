@@ -5,6 +5,7 @@ mod label;
 mod menu;
 mod separator;
 mod shortcut;
+mod sub;
 mod trigger;
 
 pub use content::*;
@@ -14,6 +15,7 @@ pub use label::*;
 pub use menu::*;
 pub use separator::*;
 pub use shortcut::*;
+pub use sub::*;
 pub use trigger::*;
 
 use crate::Reactive;

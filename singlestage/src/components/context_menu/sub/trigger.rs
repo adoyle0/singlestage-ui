@@ -1,10 +1,28 @@
-use crate::ContextMenuContext;
-use leptos::{context::Provider, prelude::*};
+use crate::ContextMenuSubContext;
+use leptos::prelude::*;
 
-/// Contains all the parts of a context menu.
+/// Defines the area where a sub menu can be triggered.
 #[component]
-pub fn ContextMenu(
+pub fn ContextMenuSubTrigger(
     children: Children,
+
+    /// Controls whether the item appears disabled and is clickable.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
+    /// Set the display variant of the item.
+    ///
+    /// Accepted values: "destructive"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -87,9 +105,6 @@ pub fn ContextMenu(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -111,14 +126,7 @@ pub fn ContextMenu(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu_id = RwSignal::new(String::new());
-
-    let context = ContextMenuContext {
-        menu_id,
-        menu_ref: RwSignal::new(None),
-        x: RwSignal::new(i32::default()),
-        y: RwSignal::new(i32::default()),
-    };
+    let sub = expect_context::<ContextMenuSubContext>();
 
     let global_attrs_1 = view! {
         <{..}
@@ -131,7 +139,6 @@ pub fn ContextMenu(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -149,7 +156,6 @@ pub fn ContextMenu(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -160,13 +166,63 @@ pub fn ContextMenu(
     };
 
     view! {
-        <div
-            class=move || format!("singlestage-context-menu {}", class.get().unwrap_or_default())
+        <li
+            class=move || {
+                format!(
+                    "singlestage-dropdown-menu-item{}{}{} {}",
+                    if disabled.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-item-disabled"
+                    } else {
+                        ""
+                    },
+                    if inset.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-inset"
+                    } else {
+                        ""
+                    },
+                    match variant.get().unwrap_or_default().as_str() {
+                        "destructive" => " singlestage-dropdown-menu-item-destructive",
+                        _ => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
+            role="menuitem"
+            value=move || value.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
-        </div>
+            <button
+                aria_controls=move || sub.menu_id.get()
+                aria_haspopup="menu"
+                id={
+                    let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                    sub.menu_id.set(trigger_id.clone());
+                    trigger_id
+                }
+                popovertarget=move || sub.menu_id.get()
+                popovertargetaction="toggle"
+                style:anchor-name=move || format!("--{}", sub.trigger_id.get())
+                type="button"
+            >
+
+                {children()}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ml-auto"
+                >
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </li>
     }
 }

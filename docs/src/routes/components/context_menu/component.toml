@@ -2,8 +2,23 @@ name = "Context Menu"
 description = """Displays a menu to the user — such as a set of actions or functions — triggered \
 by a button."""
 
+[info]
+title = "This component uses newly available browser features"
+description = """"<p>"This component uses CSS Anchor Positioning which has only been widely \
+supported since January 2026. If you're targeting older or less mainstream browsers then maybe \
+this component isn't for you, yet. "</p><p>" Alternatively you can use Singlestage 0.4 which \
+positions the component correctly but with limited flexibility for alignment, or roll your own \
+using Singlestage CSS classes for consistent styling. "</p><singlestage::Link style="color: \
+var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info" \
+</singlestage::Link>""""
+
 [[examples]]
 name = "Context Menu"
+
+[[examples]]
+name = "Context Sub"
+title = "Submenu"
+description = "Use ContextMenuSub to nest secondary actions."
 
 [[references]]
 name = "ContextMenu"
@@ -69,6 +84,39 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
+
+[[references]]
+name = "ContextSubMenu"
+description = "Contains all the parts of a sub menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuSubContent"
+description = "The component that pops out when the sub trigger is triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "ContextMenuSubTrigger"
+description = "Defines the area where a sub menu can be triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
 
 [[references]]
 name = "ContextMenuTrigger"

@@ -28,7 +28,6 @@
       outline-hidden
       px-1.5
       py-1
-      relative
       rounded-md
       select-none
       text-sm
@@ -46,10 +45,6 @@
 
       &:not([class*="size-"]) {
         @apply size-4;
-      }
-
-      &:not([class*="text-"]) {
-        @apply text-muted-foreground;
       }
     }
   }
@@ -93,20 +88,6 @@
     text-muted-foreground
     text-xs
     tracking-widest;
-  }
-
-  .singlestage-dropdown-menu-sub-trigger {
-    @apply cursor-default
-    flex
-    focus:bg-accent
-    focus:text-accent-foreground
-    items-center
-    outline-hidden
-    px-2
-    py-1.5
-    rounded-sm
-    select-none
-    text-sm;
   }
 
   .singlestage-dropdown-menu-sub-content {

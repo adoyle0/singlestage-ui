@@ -1,9 +1,20 @@
-use crate::ContextMenuContext;
+mod content;
+mod trigger;
+
+pub use content::*;
+pub use trigger::*;
+
 use leptos::{context::Provider, prelude::*};
 
-/// Contains all the parts of a context menu.
+#[derive(Clone)]
+pub struct DropdownMenuSubContext {
+    pub menu_id: RwSignal<String>,
+    pub trigger_id: RwSignal<String>,
+}
+
+/// Contains all the parts of a sub menu.
 #[component]
-pub fn ContextMenu(
+pub fn DropdownMenuSub(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -112,12 +123,11 @@ pub fn ContextMenu(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu_id = RwSignal::new(String::new());
+    let trigger_id = RwSignal::new(String::new());
 
-    let context = ContextMenuContext {
+    let context = DropdownMenuSubContext {
         menu_id,
-        menu_ref: RwSignal::new(None),
-        x: RwSignal::new(i32::default()),
-        y: RwSignal::new(i32::default()),
+        trigger_id,
     };
 
     let global_attrs_1 = view! {
@@ -125,6 +135,7 @@ pub fn ContextMenu(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -161,7 +172,6 @@ pub fn ContextMenu(
 
     view! {
         <div
-            class=move || format!("singlestage-context-menu {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
