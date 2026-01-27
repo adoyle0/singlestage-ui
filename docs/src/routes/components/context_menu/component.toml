@@ -16,9 +16,49 @@ var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info
 name = "Context Menu"
 
 [[examples]]
+name = "Context Basic"
+title = "Basic"
+description = "A simple context menu with a few actions."
+
+[[examples]]
 name = "Context Sub"
 title = "Submenu"
 description = "Use ContextMenuSub to nest secondary actions."
+
+[[examples]]
+name = "Context Shortcuts"
+title = "Shortcuts"
+description = "Add ContextMenuShortcut to show keyboard hints."
+
+[[examples]]
+name = "Context Groups"
+title = "Groups"
+description = "Group related actions and separate them with dividers."
+
+[[examples]]
+name = "Context Icons"
+title = "Icons"
+description = "Combine icons with labels for quick scanning."
+
+[[examples]]
+name = "Context Checkboxes"
+title = "Checkboxes"
+description = "Checkboxes can be used in context menus."
+
+[[examples]]
+name = "Context Radio"
+title = "Radio"
+description = "Radio buttons can be used in context menus."
+
+[[examples]]
+name = "Context Destructive"
+title = "Destructive"
+description = "Use the destructive variant for irreversible actions."
+
+# [[examples]]
+# name = "Context Sides"
+# title = "Sides"
+# description = "Control submenu placement with side and align props."
 
 [[references]]
 name = "ContextMenu"

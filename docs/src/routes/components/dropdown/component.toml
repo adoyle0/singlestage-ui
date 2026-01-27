@@ -25,6 +25,51 @@ name = "Dropdown Sub"
 title = "Submenu"
 description = "Use DropdownMenuSub to nest secondary actions."
 
+[[examples]]
+name = "Dropdown Shortcuts"
+title = "Shortcuts"
+description = "Add DropdownMenuShortcut to show keyboard hints."
+
+[[examples]]
+name = "Dropdown Icons"
+title = "Icons"
+description = "Combine icons with labels for quick scanning."
+
+[[examples]]
+name = "Dropdown Checkboxes"
+title = "Checkboxes"
+description = "Dropdown menus can use Checkboxes."
+
+[[examples]]
+name = "Dropdown Checkbox Icons"
+title = "Checkbox Icons"
+description = "Icons can be added to checkbox items."
+
+[[examples]]
+name = "Dropdown Radio Group"
+title = "Radio Group"
+description = "Dropdown menus can use RadioGroups."
+
+[[examples]]
+name = "Dropdown Radio Icons"
+title = "Radio Icons"
+description = "Icons can be added to radio items.."
+
+[[examples]]
+name = "Dropdown Destructive"
+title = "Destructive"
+description = "Use the destructive variant for irreversible actions."
+
+[[examples]]
+name = "Dropdown Avatar"
+title = "Avatar"
+description = "An account switcher dropdown triggered by an avatar."
+
+[[examples]]
+name = "Dropdown Complex"
+title = "Complex"
+description = "A richer example combining groups, icons, and submenus."
+
 [[references]]
 name = "DropdownMenu"
 description = "Contains all the parts of a dropdown menu."

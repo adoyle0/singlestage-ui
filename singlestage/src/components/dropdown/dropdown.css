@@ -51,9 +51,11 @@
 
   .singlestage-dropdown-menu-item-destructive {
     > button {
-      @apply focus:!bg-destructive/10
+      @apply !text-destructive
+      focus:!bg-destructive/10
       focus:!text-destructive
-      !text-destructive;
+      hover:!bg-destructive/10
+      hover:!text-destructive;
     }
 
     svg {

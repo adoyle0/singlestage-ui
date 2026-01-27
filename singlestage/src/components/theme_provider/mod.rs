@@ -55,6 +55,13 @@ static DARK_COMMON: &str = r#"
 // TODO: This code is dead and here for future reference
 static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      @apply focus:!bg-destructive/20
+      hover:!bg-destructive/20
+    }
+  }
+
   .singlestage-input-group {
     @apply dark:bg-input/30;
 
@@ -196,6 +203,19 @@ static _DARK_OVERRIDES_TW: &str = r#"
 }"#;
 
 static DARK_OVERRIDES: &str = r#"@layer components {
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      &:hover {
+        @media (hover: hover) {
+          background-color: color-mix(in oklab, oklch(0.704 0.191 22.216) 20%, transparent)!important;
+        }
+      }
+      &:focus {
+        background-color: color-mix(in oklab, oklch(0.704 0.191 22.216) 20%, transparent)!important;
+      }
+    }
+  }
+
   .singlestage-input-group {
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
