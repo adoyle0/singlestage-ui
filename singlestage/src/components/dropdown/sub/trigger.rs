@@ -197,7 +197,7 @@ pub fn DropdownMenuSubTrigger(
                 aria_haspopup="menu"
                 id={
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                    sub.menu_id.set(trigger_id.clone());
+                    sub.trigger_id.set(trigger_id.clone());
                     trigger_id
                 }
                 popovertarget=move || sub.menu_id.get()
