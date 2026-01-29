@@ -331,12 +331,11 @@ pub fn Button(
                             ev.prevent_default();
                             dropdown.open.set(!dropdown.open.get_untracked());
                         }
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        if !popover.dismissable.get_untracked() {
+                    } else if let Some(popover) = use_context::<PopoverContext>()
+                        && !popover.dismissable.get_untracked() {
                             ev.prevent_default();
                             popover.open.set(!popover.open.get_untracked());
                         }
-                    }
                 }
             }
             popovertarget=move || {
@@ -366,11 +365,7 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(format!("--{}", dropdown.trigger_id.get()))
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        Some(format!("--{}", popover.trigger_id.get()))
-                    } else {
-                        None
-                    }
+                    } else { use_context::<PopoverContext>().map(|popover| format!("--{}", popover.trigger_id.get())) }
                 } else {
                     None
                 }
