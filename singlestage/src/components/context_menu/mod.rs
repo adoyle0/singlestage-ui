@@ -18,12 +18,12 @@ pub use shortcut::*;
 pub use sub::*;
 pub use trigger::*;
 
-use leptos::{html::Menu, prelude::*};
+use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct ContextMenuContext {
     menu_id: RwSignal<String>,
-    menu_ref: RwSignal<Option<NodeRef<Menu>>>,
+    pub open: RwSignal<bool>,
     x: RwSignal<i32>,
     y: RwSignal<i32>,
 }

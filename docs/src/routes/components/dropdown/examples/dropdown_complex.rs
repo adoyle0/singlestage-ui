@@ -7,13 +7,11 @@ pub fn DropdownComplexExample() -> impl IntoView {
 
     struct Notifications {
         email: RwSignal<bool>,
-        sms: RwSignal<bool>,
         push: RwSignal<bool>,
     }
 
     let notifications = Notifications {
         email: RwSignal::new(true),
-        sms: RwSignal::new(false),
         push: RwSignal::new(true),
     };
 
@@ -81,10 +79,10 @@ pub fn DropdownComplexExample() -> impl IntoView {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"View"</DropdownMenuLabel>
-                    <Checkbox checked=notifications
-                        .email>{icon!(icondata::LuEye)} "Show Sidebar"</Checkbox>
-                    <Checkbox checked=notifications
-                        .sms>{icon!(icondata::FiLayout)} "Show Status Bar"</Checkbox>
+                    <CheckboxItem checked=true>
+                        {icon!(icondata::LuEye)} "Show Sidebar"
+                    </CheckboxItem>
+                    <CheckboxItem>{icon!(icondata::FiLayout)} "Show Status Bar"</CheckboxItem>
                     <DropdownMenuSub>
                         <DropdownMenuSubTrigger>
                             {icon!(icondata::LuPalette)} "Theme"
@@ -93,11 +91,15 @@ pub fn DropdownComplexExample() -> impl IntoView {
                             <DropdownMenuGroup>
                                 <DropdownMenuLabel>"Appearance"</DropdownMenuLabel>
                                 <RadioGroup value=theme>
-                                    <Radio value="light">{icon!(icondata::LuSun)} "Light"</Radio>
-                                    <Radio value="dark">{icon!(icondata::LuMoon)} "Dark"</Radio>
-                                    <Radio value="system">
+                                    <RadioItem value="light">
+                                        {icon!(icondata::LuSun)} "Light"
+                                    </RadioItem>
+                                    <RadioItem value="dark">
+                                        {icon!(icondata::LuMoon)} "Dark"
+                                    </RadioItem>
+                                    <RadioItem value="system">
                                         {icon!(icondata::LuMonitor)} "System"
-                                    </Radio>
+                                    </RadioItem>
                                 </RadioGroup>
                             </DropdownMenuGroup>
                         </DropdownMenuSubContent>
@@ -131,14 +133,14 @@ pub fn DropdownComplexExample() -> impl IntoView {
                                     <DropdownMenuSubContent>
                                         <DropdownMenuGroup>
                                             <DropdownMenuLabel>"Notification Types"</DropdownMenuLabel>
-                                            <Checkbox checked=notifications
+                                            <CheckboxItem checked=notifications
                                                 .push>
                                                 {icon!(icondata::LuBell)} "Push Notifications"
-                                            </Checkbox>
-                                            <Checkbox checked=notifications
+                                            </CheckboxItem>
+                                            <CheckboxItem checked=notifications
                                                 .email>
                                                 {icon!(icondata::LuMail)} "Email Notifications"
-                                            </Checkbox>
+                                            </CheckboxItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuSubContent>
                                 </DropdownMenuSub>

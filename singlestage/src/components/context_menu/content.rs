@@ -108,7 +108,11 @@ pub fn ContextMenuContent(
     let menu = expect_context::<ContextMenuContext>();
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
-    menu.menu_ref.set(Some(menu_ref));
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(menu.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}

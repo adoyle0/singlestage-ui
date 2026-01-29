@@ -1,12 +1,27 @@
 @layer components {
+  .singlestage-checkbox-item,
+  .singlestage-radio-item {
+    @apply appearance-none
+    outline-none
+    shrink-0
+    size-4
+    transition-shadow;
+
+    &:checked:after {
+      @apply bg-accent-foreground
+      block
+      content-['']
+      mask-[image:var(--check-icon)]
+      mask-center
+      mask-no-repeat
+      mask-size-[calc(4*var(--spacing))]
+      size-4;
+    }
+  }
+
   .singlestage-dropdown-menu-content {
     @apply min-w-32
     p-1;
-
-    .singlestage-radio-group {
-      @appply block
-      gap-0;
-    }
   }
 
   .singlestage-dropdown-menu-inset {
@@ -14,6 +29,7 @@
   }
 
   .singlestage-dropdown-menu-item {
+    > label,
     > button {
       @apply content-center
       cursor-default
@@ -30,6 +46,7 @@
       py-1
       rounded-md
       select-none
+      text-nowrap
       text-sm
       w-full;
     }
@@ -46,6 +63,11 @@
       &:not([class*="size-"]) {
         @apply size-4;
       }
+    }
+
+    .singlestage-checkbox,
+    .singlestage-radio {
+      @apply ml-auto;
     }
   }
 
@@ -64,7 +86,7 @@
   }
 
   .singlestage-dropdown-menu-item-disabled {
-    > button {
+    * {
       @apply opacity-50
       pointer-events-none;
     }

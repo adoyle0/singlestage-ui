@@ -14,9 +14,9 @@ pub fn DropdownRadioGroupExample() -> impl IntoView {
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Panel Position"</DropdownMenuLabel>
                     <RadioGroup value=position>
-                        <Radio value="top">"Top"</Radio>
-                        <Radio value="bottom">"Bottom"</Radio>
-                        <Radio value="right">"Right"</Radio>
+                        <RadioItem value="top">"Top"</RadioItem>
+                        <RadioItem value="bottom">"Bottom"</RadioItem>
+                        <RadioItem value="right">"Right"</RadioItem>
                     </RadioGroup>
                 </DropdownMenuGroup>
             </DropdownMenuContent>

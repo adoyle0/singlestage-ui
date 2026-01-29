@@ -16,17 +16,17 @@ pub fn ContextRadioExample() -> impl IntoView {
                 <ContextMenuGroup>
                     <ContextMenuLabel>"People"</ContextMenuLabel>
                     <RadioGroup value=user>
-                        <Radio value="pedro">"Pedro Duarte"</Radio>
-                        <Radio value="colm">"Colm Tuite"</Radio>
+                        <RadioItem value="pedro">"Pedro Duarte"</RadioItem>
+                        <RadioItem value="colm">"Colm Tuite"</RadioItem>
                     </RadioGroup>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
                     <ContextMenuLabel>"Theme"</ContextMenuLabel>
                     <RadioGroup value=theme>
-                        <Radio value="light">"Light"</Radio>
-                        <Radio value="dark">"Dark"</Radio>
-                        <Radio value="system">"System"</Radio>
+                        <RadioItem value="light">"Light"</RadioItem>
+                        <RadioItem value="dark">"Dark"</RadioItem>
+                        <RadioItem value="system">"System"</RadioItem>
                     </RadioGroup>
                 </ContextMenuGroup>
             </ContextMenuContent>

@@ -1,10 +1,33 @@
-use crate::ContextMenuContext;
+use crate::{ContextMenuContext, DropdownMenuContext, Radio, Reactive};
 use leptos::prelude::*;
 
-/// Defines the area where the context menu can be triggered.
+/// Contains a menu item.
 #[component]
-pub fn ContextMenuTrigger(
+pub fn RadioItem(
     children: Children,
+
+    #[prop(optional, into)] checked: Reactive<bool>,
+
+    /// Controls whether the item appears disabled and is clickable.
+    #[prop(optional, into)]
+    disabled: MaybeProp<bool>,
+    /// Toggle whether clicking this item dismisses its parent menu
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismiss: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
+    /// Set the display variant of the item.
+    ///
+    /// Accepted values: "destructive"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -98,6 +121,9 @@ pub fn ContextMenuTrigger(
     /// Define CSS to be applied to the element.
     #[prop(optional, into)]
     style: MaybeProp<String>,
+    /// Controls how an element behaves when a user navigates using the tab key.
+    #[prop(optional, into)]
+    tabindex: MaybeProp<usize>,
     /// Describes the content of the element to screen readers.
     #[prop(optional, into)]
     title: MaybeProp<String>,
@@ -105,14 +131,11 @@ pub fn ContextMenuTrigger(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<ContextMenuContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -140,32 +163,54 @@ pub fn ContextMenuTrigger(
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
+            tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
         />
     };
 
     view! {
-        <div
-            on:contextmenu=move |ev| {
-                ev.prevent_default();
-                menu.x.set(ev.x());
-                menu.y.set(ev.y());
-                menu.open.set(true);
+        <li
+            class=move || {
+                format!(
+                    "singlestage-dropdown-menu-item{}{}{} {}",
+                    if disabled.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-item-disabled"
+                    } else {
+                        ""
+                    },
+                    if inset.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-inset"
+                    } else {
+                        ""
+                    },
+                    match variant.get().unwrap_or_default().as_str() {
+                        "destructive" => " singlestage-dropdown-menu-item-destructive",
+                        _ => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
-            on:mousedown=move |_ev| {
-                menu.open.set(false);
-            }
-            on:mouseup=move |ev| {
-                if ev.button() == 2 {
-                    menu.open.set(true);
+            on:click=move |_| {
+                if dismiss.get() {
+                    if let Some(menu) = use_context::<DropdownMenuContext>() {
+                        if menu.dismissable.get() {
+                            menu.open.set(false);
+                        }
+                    } else if let Some(menu) = use_context::<ContextMenuContext>() {
+                        menu.open.set(false);
+                    }
                 }
             }
+            role="menuitem"
+            value=move || value.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
-        </div>
+            <label>
+                {children()} <Radio class="singlestage-radio-item" checked disabled value />
+            </label>
+        </li>
     }
 }

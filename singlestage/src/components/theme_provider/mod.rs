@@ -104,7 +104,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     hover:bg-input/50;
   }
 
-  .singlestage-input[type="radio"] {
+    .singlestage-radio:not(.singlestage-radio-item) {
     @apply aria-invalid:ring-destructive/40
     bg-input/30;
   }
@@ -127,7 +127,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     aria-invalid:ring-destructive/40;
   }
 
-  .singlestage-input[type="checkbox"]:not([role="switch"]) {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply aria-invalid:ring-destructive/40
     bg-input/30
     checked:bg-primary;
@@ -146,7 +146,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     }
   }
 
-  .singlestage-input[type="checkbox"][role="switch"] {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply before:bg-foreground
     bg-input/80
     checked:before:bg-primary-foreground
@@ -267,8 +267,8 @@ static DARK_OVERRIDES: &str = r#"@layer components {
   }
 
   .singlestage-btn-primary {
-    .singlestage-input[type="checkbox"],
-    .singlestage-input[type="radio"] {
+    .singlestage-checkbox:not(.singlestage-checkbox-item),
+    .singlestage-radio:not(.singlestage-radio-item) {
       @supports (color: color-mix(in lab, red, red)) {
         border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent) !important;
       }
@@ -315,7 +315,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="radio"] {
+    .singlestage-radio:not(.singlestage-radio-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
@@ -360,7 +360,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="checkbox"]:not([role="switch"]) {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
@@ -398,7 +398,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="checkbox"][role="switch"] {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 80%, transparent);
