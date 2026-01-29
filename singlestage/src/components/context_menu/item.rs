@@ -1,4 +1,4 @@
-use crate::ContextMenuContext;
+use crate::{ContextMenuContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains a menu item.
@@ -9,6 +9,9 @@ pub fn ContextMenuItem(
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: MaybeProp<bool>,
+    /// Toggle whether clicking this item dismisses its parent menu
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismiss: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     #[prop(optional, into)]
     inset: MaybeProp<bool>,
@@ -195,10 +198,10 @@ pub fn ContextMenuItem(
             {..global_attrs_2}
         >
             <button
-                aria_controls=move || menu.menu_id.get()
-                aria_haspopup="menu"
-                popovertarget=move || menu.menu_id.get()
-                popovertargetaction="toggle"
+                aria_controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                aria_haspopup=move || if dismiss.get() { Some("menu") } else { None }
+                popovertarget=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                popovertargetaction=move || if dismiss.get() { Some("toggle") } else { None }
                 type="button"
             >
                 {children()}

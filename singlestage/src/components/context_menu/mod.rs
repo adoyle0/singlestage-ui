@@ -18,12 +18,13 @@ pub use shortcut::*;
 pub use sub::*;
 pub use trigger::*;
 
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct ContextMenuContext {
     menu_id: RwSignal<String>,
-    pub open: RwSignal<bool>,
+    pub open: Reactive<bool>,
     x: RwSignal<i32>,
     y: RwSignal<i32>,
 }

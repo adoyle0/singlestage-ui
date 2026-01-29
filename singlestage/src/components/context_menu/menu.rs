@@ -1,10 +1,15 @@
-use crate::ContextMenuContext;
+use crate::{ContextMenuContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a context menu.
 #[component]
 pub fn ContextMenu(
     children: Children,
+
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -112,7 +117,6 @@ pub fn ContextMenu(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu_id = RwSignal::new(String::new());
-    let open = RwSignal::new(false);
 
     let context = ContextMenuContext {
         menu_id,

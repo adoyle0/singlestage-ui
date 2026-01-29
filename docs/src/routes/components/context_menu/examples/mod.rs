@@ -6,7 +6,6 @@ mod context_icons;
 mod context_menu;
 mod context_radio;
 mod context_shortcuts;
-// mod context_sides;
 mod context_sub;
 
 pub use context_basic::*;
@@ -17,5 +16,4 @@ pub use context_icons::*;
 pub use context_menu::*;
 pub use context_radio::*;
 pub use context_shortcuts::*;
-// pub use context_sides::*;
 pub use context_sub::*;

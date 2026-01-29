@@ -55,10 +55,24 @@ name = "Context Destructive"
 title = "Destructive"
 description = "Use the destructive variant for irreversible actions."
 
-# [[examples]]
-# name = "Context Sides"
-# title = "Sides"
-# description = "Control submenu placement with side and align props."
+[[references]]
+name = "CheckboxItem"
+description = "A checkbox item for popover menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
 
 [[references]]
 name = "ContextMenu"
@@ -66,7 +80,11 @@ description = "Contains all the parts of a context menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
 
 [[references]]
 name = "ContextMenuContent"
@@ -95,6 +113,8 @@ attributes."""
 attrs = [
   { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
     whether the item appears disabled or not.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
   { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
     this element should display inset from its normal position.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
@@ -107,7 +127,10 @@ description = "Labels groups."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+]
 
 [[references]]
 name = "ContextMenuSeparator"
@@ -131,7 +154,11 @@ description = "Contains all the parts of a sub menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
 
 [[references]]
 name = "ContextMenuSubContent"
@@ -165,3 +192,22 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
+
+[[references]]
+name = "RadioItem"
+description = "A radio item for popover menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]

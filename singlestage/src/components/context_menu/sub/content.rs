@@ -103,9 +103,16 @@ pub fn ContextMenuSubContent(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let sub = expect_context::<ContextMenuSubContext>();
+    let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     let uuid = uuid::Uuid::new_v4();
     sub.menu_id.set(uuid.to_string());
+
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(sub.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -152,6 +159,7 @@ pub fn ContextMenuSubContent(
                 )
             }
             id=move || uuid.to_string()
+            node_ref=menu_ref
             popover="auto"
             role="menu"
             style:position-anchor=move || { format!("--{}", sub.trigger_id.get()) }

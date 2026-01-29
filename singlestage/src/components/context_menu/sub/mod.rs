@@ -4,11 +4,13 @@ mod trigger;
 pub use content::*;
 pub use trigger::*;
 
+use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
 pub struct ContextMenuSubContext {
     pub menu_id: RwSignal<String>,
+    pub open: Reactive<bool>,
     pub trigger_id: RwSignal<String>,
 }
 
@@ -16,6 +18,11 @@ pub struct ContextMenuSubContext {
 #[component]
 pub fn ContextMenuSub(
     children: Children,
+
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -127,6 +134,7 @@ pub fn ContextMenuSub(
 
     let context = ContextMenuSubContext {
         menu_id,
+        open,
         trigger_id,
     };
 
