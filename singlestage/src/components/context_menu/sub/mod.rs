@@ -143,6 +143,7 @@ pub fn ContextMenuSub(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -179,9 +180,8 @@ pub fn ContextMenuSub(
 
     view! {
         <div
-            class=move || {
-                format!("singlestage-dropdown-menu-sub {}", class.get().unwrap_or_default())
-            }
+            on:mouseenter=move |_| { open.set(true) }
+            on:mouseleave=move |_| { open.set(false) }
 
             {..global_attrs_1}
             {..global_attrs_2}

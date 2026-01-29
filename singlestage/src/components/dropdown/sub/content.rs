@@ -106,6 +106,13 @@ pub fn DropdownMenuSubContent(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let sub = expect_context::<DropdownMenuSubContext>();
+    let menu_ref = NodeRef::<leptos::html::Menu>::new();
+
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(sub.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -156,6 +163,7 @@ pub fn DropdownMenuSubContent(
                 sub.menu_id.set(menu_id.clone());
                 menu_id
             }
+            node_ref=menu_ref
             style:position-anchor=move || { format!("--{}", sub.trigger_id.get()) }
             popover="auto"
             role="menu"
