@@ -10,7 +10,7 @@ pub fn RadioItem(
 
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Toggle whether clicking this item dismisses its parent menu
     #[prop(optional, into, default = Reactive::new(true))]
     dismiss: Reactive<bool>,
@@ -174,11 +174,7 @@ pub fn RadioItem(
             class=move || {
                 format!(
                     "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-item-disabled"
-                    } else {
-                        ""
-                    },
+                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {

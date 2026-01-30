@@ -174,11 +174,7 @@ pub fn ContextMenuItem(
             class=move || {
                 format!(
                     "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-item-disabled"
-                    } else {
-                        ""
-                    },
+                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
