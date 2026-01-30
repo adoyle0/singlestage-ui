@@ -8,7 +8,7 @@ pub fn DropdownMenuItem(
 
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Toggle whether clicking this item dismisses its parent menu
     #[prop(optional, into, default = Reactive::new(true))]
     dismiss: Reactive<bool>,

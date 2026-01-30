@@ -12,10 +12,10 @@ pub fn Textarea(
     default: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    invalid: Reactive<bool>,
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
@@ -198,10 +198,8 @@ pub fn Textarea(
     });
 
     Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked()
-            && let Some(disabled) = disabled.get()
-        {
-            textarea.set_disabled(disabled)
+        if let Some(textarea) = textarea_ref.get_untracked() {
+            textarea.set_disabled(disabled.get())
         }
     });
 
@@ -265,7 +263,7 @@ pub fn Textarea(
             }
             aria-invalid=move || {
                 match invalid.get() {
-                    Some(true) => Some("true"),
+                    true => Some("true"),
                     _ => None,
                 }
             }
