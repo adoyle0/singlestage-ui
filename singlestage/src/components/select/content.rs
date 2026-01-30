@@ -1,4 +1,4 @@
-use crate::SelectContext;
+use crate::{Reactive, SelectContext};
 use leptos::prelude::*;
 
 /// Contains a group of items for the Select.
@@ -8,7 +8,7 @@ pub fn SelectContent(
 
     /// Set whether or not the items in the group are appear as disabled and can be selected.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Label this group of content.
     #[prop(optional, into)]
     label: MaybeProp<String>,

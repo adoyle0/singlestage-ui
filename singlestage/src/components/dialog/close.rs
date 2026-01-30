@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// An optional button that renders in the top-right corner and closes the dialog when clicked.
@@ -21,7 +22,7 @@ pub fn DialogClose(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,

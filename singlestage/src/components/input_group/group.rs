@@ -1,4 +1,4 @@
-use crate::InputGroupContext;
+use crate::{InputGroupContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// The main component that wraps inputs and addons.
@@ -8,7 +8,7 @@ pub fn InputGroup(
 
     /// Toggle whether or not this input group should appear disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -155,9 +155,7 @@ pub fn InputGroup(
     view! {
         <div
             class=move || { format!("singlestage-input-group {}", class.get().unwrap_or_default()) }
-            data-disabled=move || {
-                if disabled.get().unwrap_or_default() { Some("true".to_string()) } else { None }
-            }
+            data-disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
             role="group"
 
             {..global_attrs_1}

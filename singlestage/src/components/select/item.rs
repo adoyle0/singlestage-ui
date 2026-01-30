@@ -9,7 +9,7 @@ pub fn SelectItem(
 
     /// Set whether or not this item appears disabled and is checkable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Set a label describing the meaning of this item.
     #[prop(optional, into)]
     label: MaybeProp<String>,

@@ -25,7 +25,7 @@ pub fn Radio(
     required: MaybeProp<bool>,
     /// Whether the form control is disabled
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
     value: MaybeProp<String>,
@@ -179,7 +179,7 @@ pub fn Radio(
 
     Effect::new(move || {
         if let Some(radio) = radio_ref.get_untracked() {
-            radio.set_disabled(disabled.get().unwrap_or_default());
+            radio.set_disabled(disabled.get());
         }
     });
 

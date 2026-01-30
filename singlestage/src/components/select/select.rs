@@ -12,7 +12,7 @@ pub fn Select(
     default: MaybeProp<String>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    invalid: Reactive<bool>,
     /// The placeholder value for the select.
     #[prop(optional, into)]
     placeholder: MaybeProp<String>,
@@ -32,7 +32,7 @@ pub fn Select(
     autocomplete: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -184,7 +184,7 @@ pub fn Select(
 
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {
-            select.set_disabled(disabled.get().unwrap_or_default());
+            select.set_disabled(disabled.get());
         }
     });
 
@@ -262,7 +262,7 @@ pub fn Select(
             }
             aria-invalid=move || {
                 match invalid.get() {
-                    Some(true) => Some("true"),
+                    true => Some("true"),
                     _ => None,
                 }
             }
