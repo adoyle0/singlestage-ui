@@ -151,7 +151,14 @@ pub fn PopoverDescription(
     };
 
     view! {
-        <p class="singlestage-popover-description" {..global_attrs_1} {..global_attrs_2}>
+        <p
+            class=move || {
+                format!("singlestage-popover-description {}", class.get().unwrap_or_default())
+            }
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </p>
     }

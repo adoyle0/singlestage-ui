@@ -151,7 +151,12 @@ pub fn PopoverHeader(
     };
 
     view! {
-        <hgroup class="singlestage-popover-header" {..global_attrs_1} {..global_attrs_2}>
+        <hgroup
+            class=move || format!("singlestage-popover-header {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </hgroup>
     }

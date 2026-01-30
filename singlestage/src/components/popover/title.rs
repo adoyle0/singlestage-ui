@@ -151,7 +151,14 @@ pub fn PopoverTitle(
     };
 
     view! {
-        <h1 class="singlestage-popover-title" {..global_attrs_1} {..global_attrs_2}>
+        <h1
+            class=move || {
+                format!("singlestage-popover-title {}", class.get().unwrap_or_default())
+            }
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </h1>
     }
