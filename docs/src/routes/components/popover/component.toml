@@ -2,17 +2,32 @@ name = "Popover"
 description = "Displays rich content in a portal, triggered by a button."
 
 [info]
-title = "This component could use some work"
-description = """While this component does make use of the new popover browser API, proper \
-positioning is still not widely supported. There are hacks in place to try to work around this \
-issue while still taking advantage of the rest of the API. Until this is implemented (hopefully \
-soon - Aug 03, 2025) that puts this component in only a 'Good Enough' state. "<singlestage::Link \
-style="color: var(--foreground)" \
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility"> "More \
-Info"</singlestage::Link>""""
+title = "This component uses newly available browser features"
+description = """"<p>"This component uses CSS Anchor Positioning which has only been widely \
+supported since January 2026. If you're targeting older or less mainstream browsers then maybe \
+this component isn't for you, yet. "</p><p>" Alternatively you can use Singlestage 0.4 which \
+positions the component correctly but with limited flexibility for alignment, or roll your own \
+using Singlestage CSS classes for consistent styling. "</p><singlestage::Link style="color: \
+var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info" \
+</singlestage::Link>""""
 
 [[examples]]
 name = "popover"
+
+[[examples]]
+name = "popover basic"
+title = "Basic"
+description = "A simple popover with a header, title, and description."
+
+[[examples]]
+name = "popover align"
+title = "Align"
+description = "Use the align prop on PopoverContent to control the horizontal alignment."
+
+[[examples]]
+name = "popover form"
+title = "With Form"
+description = "A popover with form fields inside."
 
 [[references]]
 name = "Popover"
@@ -20,11 +35,48 @@ description = "Contains all the parts of a popover."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "dismissable", attr_type = "bool", default = "true", description = """Set whether or \
+    not this popover can be light dismissed. Use this with the `open` signal for a manually \
+    managed popover.""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
 
 [[references]]
 name = "PopoverContent"
 description = "The component that pops out when the popover is open."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
+    align the popover. Accepted values are "start" | "center" | "end"""" },
+  { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
+    side the popover opens relative to the trigger. Accepted values are "top" | "right" | \
+    "bottom" | "left". """ },
+]
+
+[[references]]
+name = "PopoverDescription"
+description = "Displays a description of popover content"
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PopoverHeader"
+description = "A styled header container for use inside a PopoverContent."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "PopoverTitle"
+description = "Contains the title of the popover."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

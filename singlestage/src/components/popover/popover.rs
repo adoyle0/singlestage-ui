@@ -1,10 +1,19 @@
-use crate::PopoverContext;
+use crate::{PopoverContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a popover.
 #[component]
 pub fn Popover(
     children: Children,
+
+    /// Set whether or not this popover can be light dismissed. Use this with the `open` signal for
+    /// a manually managed popover
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismissable: Reactive<bool>,
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -115,7 +124,9 @@ pub fn Popover(
     let trigger_id = RwSignal::new(String::new());
 
     let context = PopoverContext {
+        dismissable,
         menu_id,
+        open,
         trigger_id,
     };
 
