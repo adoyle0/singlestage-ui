@@ -17,7 +17,7 @@ pub fn Input(
     input_type: MaybeProp<String>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    invalid: Reactive<bool>,
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
@@ -58,7 +58,7 @@ pub fn Input(
     dirname: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -278,10 +278,8 @@ pub fn Input(
     });
 
     Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(disabled) = disabled.get()
-        {
-            input.set_disabled(disabled);
+        if let Some(input) = input_ref.get_untracked() {
+            input.set_disabled(disabled.get());
         }
     });
 
@@ -397,7 +395,7 @@ pub fn Input(
             }
             aria_invalid=move || {
                 match invalid.get() {
-                    Some(true) => Some("true"),
+                    true => Some("true"),
                     _ => None,
                 }
             }

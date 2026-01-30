@@ -25,7 +25,7 @@ pub fn Switch(
     required: MaybeProp<bool>,
     /// Whether the form control is disabled
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
     value: MaybeProp<String>,
@@ -196,10 +196,8 @@ pub fn Switch(
     });
 
     Effect::new(move || {
-        if let Some(switch) = switch_ref.get_untracked()
-            && let Some(disabled) = disabled.get()
-        {
-            switch.set_disabled(disabled);
+        if let Some(switch) = switch_ref.get_untracked() {
+            switch.set_disabled(disabled.get());
         }
     });
 

@@ -1,4 +1,4 @@
-use crate::DropdownMenuContext;
+use crate::{DropdownMenuContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains a menu item.
@@ -8,7 +8,7 @@ pub fn DropdownMenuItem(
 
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Set the display variant of the item.
     ///
     /// Accepted values: "destructive"
@@ -177,7 +177,7 @@ pub fn DropdownMenuItem(
             <button
                 aria-controls=move || menu.menu_id.get()
                 aria-haspopup="menu"
-                data-disabled=move || disabled.get().unwrap_or_default()
+                data-disabled=move || if disabled.get() { Some(true) } else { None }
                 data-variant=move || variant.get().unwrap_or_default()
                 popovertarget=move || menu.menu_id.get()
                 popovertargetaction="toggle"

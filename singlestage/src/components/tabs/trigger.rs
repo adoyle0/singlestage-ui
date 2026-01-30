@@ -1,4 +1,5 @@
 use super::TabsContext;
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// The button that activates its associated content.
@@ -23,7 +24,7 @@ pub fn TabsTrigger(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,

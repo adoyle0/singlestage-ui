@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Container that renders a semantic fieldset with spacing presets.
@@ -9,7 +10,7 @@ pub fn FieldSet(
     //
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,

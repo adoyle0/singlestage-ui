@@ -30,7 +30,7 @@ pub fn Slider(
     autocomplete: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -204,7 +204,7 @@ pub fn Slider(
     // On disabled
     Effect::new(move || {
         if let Some(slider) = slider_ref.get_untracked() {
-            slider.set_disabled(disabled.get().unwrap_or_default());
+            slider.set_disabled(disabled.get());
         }
     });
 
