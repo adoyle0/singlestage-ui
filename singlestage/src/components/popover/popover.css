@@ -1,36 +1,173 @@
 @layer components {
-  /* Hacks to render properly until anchor support
-      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
-    */
-  /* Webkit -- HAS TO BE FIRST */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    .singlestage-popover {
-      @apply relative
-      bg-transparent;
-      position-area: bottom span-right;
-      inset: unset;
+  :root {
+    --transform-origin: 0% 339px;
+    --transform-scale: scale3d(0.95, 0.95, 0.95);
+    --transform-translate-step: 0.25rem;
+    --transition-duration: 0.15s;
+    --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-popover-animations {
+      opacity: 0;
+      transform-origin: var(--transform-origin);
+      transform: var(--transform-scale);
+      transition-timing-function: var(--transition-timing-function);
+      transition: all var(--transition-duration) allow-discrete;
+
+      &:popover-open {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+        transform: translateY(0);
+        transform: translateX(0);
+        transform: none;
+      }
+
+      @starting-style {
+        &:popover-open {
+          opacity: 0;
+          transform: var(--transform-scale);
+        }
+      }
+    }
+
+    .singlestage-popover-top {
+      transform: translateY(calc(2 * var(--transform-translate-step)));
+
+      @starting-style {
+        &:popover-open {
+          transform: translateY(calc(2 * var(--transform-translate-step)));
+        }
+      }
+    }
+
+    .singlestage-popover-right {
+      transform: translateX(calc(-2 * var(--transform-translate-step)));
+
+      @starting-style {
+        &:popover-open {
+          transform: translateX(calc(-2 * var(--transform-translate-step)));
+        }
+      }
+    }
+
+    .singlestage-popover-bottom {
+      transform: translateY(calc(-2 * var(--transform-translate-step)));
+
+      @starting-style {
+        &:popover-open {
+          transform: translateY(calc(-2 * var(--transform-translate-step)));
+        }
+      }
+    }
+
+    .singlestage-popover-left {
+      transform: translateX(calc(2 * var(--transform-translate-step)));
+
+      @starting-style {
+        &:popover-open {
+          transform: translateX(calc(2 * var(--transform-translate-step)));
+        }
+      }
     }
   }
 
-  /* Firefox */
-  @-moz-document url-prefix() {
+  html:has(.singlestage-context-menu > [popover]:popover-open) {
+    overflow: hidden;
+  }
+
+  .singlestage-context-menu {
     .singlestage-popover {
-      @apply relative
-      bg-transparent;
-      inset: unset;
+      position: fixed;
     }
   }
-  /* End hacks */
 
   .singlestage-popover {
+    inset: unset;
+    position: absolute;
+    margin: 0;
+    position-try-fallbacks: flip-block, flip-inline;
+
+    &:popover-open {
+      @apply flex
+      overflow-x-hidden
+      overflow-y-auto;
+    }
+
+    [popover] {
+      top: anchor(top);
+    }
+
     @apply bg-popover
-    border
-    overflow-x-hidden
-    overflow-y-auto
-    p-4
-    rounded-md
+    flex-col
+    outline-hidden
+    ring-1
+    ring-foreground/10
+    rounded-lg
     shadow-md
     text-popover-foreground
     z-50;
+  }
+
+  .singlestage-popover-content {
+    @apply gap-2.5
+    p-2.5
+    text-sm
+    w-72;
+  }
+
+  .singlestage-popover-description {
+    @apply text-muted-foreground;
+  }
+
+  .singlestage-popover-header {
+    @apply flex
+    flex-col
+    gap-0.5
+    text-sm;
+  }
+
+  .singlestage-popover-title {
+    @apply font-medium;
+  }
+
+  .singlestage-popover-top,
+  .singlestage-popover-left.singlestage-popover-start,
+  .singlestage-popover-right.singlestage-popover-start {
+    bottom: anchor(top);
+  }
+
+  .singlestage-popover-right {
+    left: anchor(right);
+  }
+
+  .singlestage-popover-bottom,
+  .singlestage-popover-right.singlestage-popover-end,
+  .singlestage-popover-left.singlestage-popover-end {
+    top: anchor(bottom);
+  }
+
+  .singlestage-popover-left {
+    right: anchor(left);
+  }
+
+  .singlestage-popover-top.singlestage-popover-start,
+  .singlestage-popover-bottom.singlestage-popover-start {
+    left: anchor(left);
+  }
+
+  .singlestage-popover-top.singlestage-popover-end,
+  .singlestage-popover-bottom.singlestage-popover-end {
+    right: anchor(right);
+  }
+
+  .singlestage-popover-left.singlestage-popover-center,
+  .singlestage-popover-right.singlestage-popover-center {
+    align-self: anchor-center;
+  }
+
+  .singlestage-popover-top.singlestage-popover-center,
+  .singlestage-popover-bottom.singlestage-popover-center {
+    justify-self: anchor-center;
   }
 }

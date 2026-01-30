@@ -254,7 +254,9 @@ pub fn Radio(
                 }
             }
             checked=move || checked.get_untracked()
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!("singlestage-input singlestage-radio {}", class.get().unwrap_or_default())
+            }
             disabled=disabled.get_untracked()
             form=move || form.get()
             name=radio_group.name.clone()

@@ -164,8 +164,8 @@ pub fn AccordionTrigger(
         <summary>
             <h3 {..global_attrs_1} {..global_attrs_2}>
                 {children()}
-                {if accordion_icon.is_some() {
-                    (accordion_icon.unwrap().children)().into_any()
+                {if let Some(accordion_icon) = accordion_icon {
+                    (accordion_icon.children)().into_any()
                 } else {
                     view! {
                         <svg

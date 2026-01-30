@@ -1,10 +1,15 @@
-use crate::ContextMenuContext;
+use crate::{ContextMenuContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a context menu.
 #[component]
 pub fn ContextMenu(
     children: Children,
+
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -115,7 +120,7 @@ pub fn ContextMenu(
 
     let context = ContextMenuContext {
         menu_id,
-        menu_ref: RwSignal::new(None),
+        open,
         x: RwSignal::new(i32::default()),
         y: RwSignal::new(i32::default()),
     };
@@ -161,9 +166,7 @@ pub fn ContextMenu(
 
     view! {
         <div
-            class=move || {
-                format!("singlestage-context-menu {}", class.get().unwrap_or_default())
-            }
+            class=move || format!("singlestage-context-menu {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}

@@ -47,6 +47,9 @@ pub fn ContextMenuContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -104,10 +107,12 @@ pub fn ContextMenuContent(
 ) -> impl IntoView {
     let menu = expect_context::<ContextMenuContext>();
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
-    let uuid = uuid::Uuid::new_v4().to_string();
 
-    menu.menu_id.set(uuid.clone());
-    menu.menu_ref.set(Some(menu_ref));
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(menu.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -148,16 +153,24 @@ pub fn ContextMenuContent(
     view! {
         <menu
             class=move || {
-                format!("singlestage-context-menu-content {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-content singlestage-popover {}",
+                    class.get().unwrap_or_default(),
+                )
             }
-            id=uuid
+            id={
+                let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                menu.menu_id.set(menu_id.clone());
+                menu_id
+            }
             node_ref=menu_ref
             on:contextmenu=move |ev| {
                 ev.prevent_default();
             }
             popover="auto"
             role="menu"
-            style=move || { format!("left: {}px; top: {}px", menu.x.get(), menu.y.get()) }
+            style:left=move || format!("{}px", menu.x.get())
+            style:top=move || format!("{}px", menu.y.get())
 
             {..global_attrs_1}
             {..global_attrs_2}

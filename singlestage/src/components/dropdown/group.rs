@@ -152,7 +152,7 @@ pub fn DropdownMenuGroup(
 
     view! {
         <div
-            aria-labelledby=move || heading_id.get()
+            aria_labelledby=move || heading_id.get()
             class=move || {
                 format!("singlestage-dropdown-menu-group {}", class.get().unwrap_or_default())
             }

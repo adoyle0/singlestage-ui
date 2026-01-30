@@ -6,6 +6,19 @@ use leptos::prelude::*;
 pub fn DropdownMenuContent(
     children: Children,
 
+    /// Set how to align the popover
+    ///
+    /// Accepted values: "start" | "center" | "end"
+    /// Default is "start"
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side the popover opens relative to the trigger
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left"
+    /// Default is "bottom"
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -106,6 +119,13 @@ pub fn DropdownMenuContent(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu = expect_context::<DropdownMenuContext>();
+    let menu_ref = NodeRef::<leptos::html::Menu>::new();
+
+    Effect::new(move || {
+        if let Some(popover) = menu_ref.get_untracked() {
+            let _ = popover.toggle_popover_with_force(menu.open.get());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -146,14 +166,30 @@ pub fn DropdownMenuContent(
     view! {
         <menu
             class=move || {
-                format!("singlestage-dropdown-menu {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-animations {} {} {}",
+                    match side.get().unwrap_or_default().as_str() {
+                        "top" => "singlestage-popover-top",
+                        "right" => "singlestage-popover-right",
+                        "left" => "singlestage-popover-left",
+                        _ => "singlestage-popover-bottom",
+                    },
+                    match align.get().unwrap_or_default().as_str() {
+                        "center" => "singlestage-popover-center",
+                        "end" => "singlestage-popover-end",
+                        _ => "singlestage-popover-start",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
+            node_ref=menu_ref
             id={
                 let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                 menu.menu_id.set(menu_id.clone());
                 menu_id
             }
-            popover="auto"
+            popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
+            style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
 
             {..global_attrs_1}

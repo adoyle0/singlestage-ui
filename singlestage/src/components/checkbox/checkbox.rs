@@ -252,7 +252,7 @@ pub fn Checkbox(
                     None
                 }
             }
-            aria-invalid=move || {
+            aria_invalid=move || {
                 if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
                     checkbox_group.invalid.get().to_string()
                 } else {

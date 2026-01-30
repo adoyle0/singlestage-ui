@@ -55,6 +55,13 @@ static DARK_COMMON: &str = r#"
 // TODO: This code is dead and here for future reference
 static _DARK_OVERRIDES_TW: &str = r#"
 @layer components {
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      @apply focus:!bg-destructive/20
+      hover:!bg-destructive/20
+    }
+  }
+
   .singlestage-input-group {
     @apply dark:bg-input/30;
 
@@ -97,7 +104,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     hover:bg-input/50;
   }
 
-  .singlestage-input[type="radio"] {
+    .singlestage-radio:not(.singlestage-radio-item) {
     @apply aria-invalid:ring-destructive/40
     bg-input/30;
   }
@@ -120,7 +127,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     aria-invalid:ring-destructive/40;
   }
 
-  .singlestage-input[type="checkbox"]:not([role="switch"]) {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply aria-invalid:ring-destructive/40
     bg-input/30
     checked:bg-primary;
@@ -139,7 +146,7 @@ static _DARK_OVERRIDES_TW: &str = r#"
     }
   }
 
-  .singlestage-input[type="checkbox"][role="switch"] {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply before:bg-foreground
     bg-input/80
     checked:before:bg-primary-foreground
@@ -196,6 +203,19 @@ static _DARK_OVERRIDES_TW: &str = r#"
 }"#;
 
 static DARK_OVERRIDES: &str = r#"@layer components {
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      &:hover {
+        @media (hover: hover) {
+          background-color: color-mix(in oklab, oklch(0.704 0.191 22.216) 20%, transparent)!important;
+        }
+      }
+      &:focus {
+        background-color: color-mix(in oklab, oklch(0.704 0.191 22.216) 20%, transparent)!important;
+      }
+    }
+  }
+
   .singlestage-input-group {
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
@@ -247,8 +267,8 @@ static DARK_OVERRIDES: &str = r#"@layer components {
   }
 
   .singlestage-btn-primary {
-    .singlestage-input[type="checkbox"],
-    .singlestage-input[type="radio"] {
+    .singlestage-checkbox:not(.singlestage-checkbox-item),
+    .singlestage-radio:not(.singlestage-radio-item) {
       @supports (color: color-mix(in lab, red, red)) {
         border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent) !important;
       }
@@ -295,7 +315,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="radio"] {
+    .singlestage-radio:not(.singlestage-radio-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
@@ -340,7 +360,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="checkbox"]:not([role="switch"]) {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 30%, transparent);
@@ -378,7 +398,7 @@ static DARK_OVERRIDES: &str = r#"@layer components {
       }
     }
   }
-  .singlestage-input[type="checkbox"][role="switch"] {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     background-color: var(--input);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--input) 80%, transparent);

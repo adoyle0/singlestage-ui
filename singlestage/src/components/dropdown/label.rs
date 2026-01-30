@@ -6,6 +6,10 @@ use leptos::prelude::*;
 pub fn DropdownMenuLabel(
     children: Children,
 
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -151,7 +155,15 @@ pub fn DropdownMenuLabel(
         <h6
             id=uuid
             class=move || {
-                format!("singlestage-dropdown-menu-label {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dropdown-menu-label{} {}",
+                    if inset.get().unwrap_or_default() {
+                        " singlestage-dropdown-menu-inset"
+                    } else {
+                        ""
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
 
             {..global_attrs_1}

@@ -516,7 +516,7 @@ dependencies = [
 
 [[package]]
 name = "docs_macro"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "serde",
  "syntect",
@@ -2640,7 +2640,7 @@ checksum = "e320a6c5ad31d271ad523dcf3ad13e2767ad8b1cb8f047f75a8aeaf8da139da2"
 
 [[package]]
 name = "singlestage"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "leptos",
  "leptos_meta",
@@ -2654,7 +2654,7 @@ dependencies = [
 
 [[package]]
 name = "singlestage_docs"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "axum",
  "console_error_panic_hook",
