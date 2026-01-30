@@ -1,9 +1,15 @@
 mod content;
+mod description;
+mod header;
 mod popover;
+mod title;
 mod trigger;
 
 pub use content::*;
+pub use description::*;
+pub use header::*;
 pub use popover::*;
+pub use title::*;
 pub use trigger::*;
 
 use crate::Reactive;
@@ -19,18 +25,3 @@ pub struct PopoverContext {
 
 #[derive(Clone)]
 pub struct PopoverTriggerContext {}
-
-#[component]
-pub fn PopoverHeader(children: Children) -> impl IntoView {
-    view! { <div class="singlestage-popover-header">{children()}</div> }
-}
-
-#[component]
-pub fn PopoverTitle(children: Children) -> impl IntoView {
-    view! { <h1 class="singlestage-popover-title">{children()}</h1> }
-}
-
-#[component]
-pub fn PopoverDescription(children: Children) -> impl IntoView {
-    view! { <p class="singlestage-popover-description">{children()}</p> }
-}
