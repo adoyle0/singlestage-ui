@@ -1,75 +1,52 @@
 @layer components {
-  /* Hacks to render properly until anchor support
-      https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility
-    */
-  /* Webkit -- HAS TO BE FIRST */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    .singlestage-dropdown-menu {
-      @apply relative
-      bg-transparent;
-      position-area: bottom span-right;
-      inset: unset;
+  .singlestage-checkbox-item,
+  .singlestage-radio-item {
+    @apply appearance-none
+    outline-none
+    shrink-0
+    size-4
+    transition-shadow;
+
+    &:checked:after {
+      @apply bg-accent-foreground
+      block
+      content-['']
+      mask-[image:var(--check-icon)]
+      mask-center
+      mask-no-repeat
+      mask-size-[calc(4*var(--spacing))]
+      size-4;
     }
   }
 
-  /* Firefox */
-  @-moz-document url-prefix() {
-    .singlestage-dropdown-menu {
-      @apply relative
-      bg-transparent;
-      inset: unset;
-    }
+  .singlestage-dropdown-menu-content {
+    @apply min-w-32
+    p-1;
   }
-  /* End hacks */
 
-  .singlestage-dropdown-menu {
-    @apply bg-popover
-    border
-    min-w-[8rem]
-    overflow-x-hidden
-    overflow-y-auto
-    p-1
-    rounded-md
-    shadow-md
-    text-nowrap
-    text-popover-foreground
-    z-50;
-
-    .singlestage-radio-group {
-      @appply block
-      gap-0;
-    }
+  .singlestage-dropdown-menu-inset {
+    @apply !pl-8;
   }
 
   .singlestage-dropdown-menu-item {
+    > label,
     > button {
-      @apply [&_svg:not([class*='size-'])]:size-4
-      [&_svg:not([class*='text-'])]:text-muted-foreground
-      [&_svg]:pointer-events-none
-      [&_svg]:shrink-0
-      content-center
+      @apply content-center
       cursor-default
-      data-[disabled]:opacity-50
-      data-[disabled]:pointer-events-none
-      data-[inset]:pl-8
-      data-[variant=destructive]:*:[svg]:!text-destructive
-      data-[variant=destructive]:focus:bg-destructive/10
-      data-[variant=destructive]:focus:text-destructive
-      data-[variant=destructive]:text-destructive
       focus:bg-accent
       focus:text-accent-foreground
       flex
-      gap-2
+      gap-1.5
       h-full
       hover:bg-accent
       hover:text-accent-foreground
       items-center
       outline-hidden
-      px-2
-      py-1.5
-      relative
-      rounded-sm
+      px-1.5
+      py-1
+      rounded-md
       select-none
+      text-nowrap
       text-sm
       w-full;
     }
@@ -78,14 +55,49 @@
       @apply h-full
       w-full;
     }
+
+    svg {
+      @apply pointer-events-none
+        shrink-0;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
+      }
+    }
+
+    .singlestage-checkbox,
+    .singlestage-radio {
+      @apply ml-auto;
+    }
+  }
+
+  .singlestage-dropdown-menu-item-destructive {
+    > button {
+      @apply !text-destructive
+      focus:!bg-destructive/10
+      focus:!text-destructive
+      hover:!bg-destructive/10
+      hover:!text-destructive;
+    }
+
+    svg {
+      @apply !text-destructive;
+    }
+  }
+
+  .singlestage-dropdown-menu-item-disabled {
+    * {
+      @apply opacity-50
+      pointer-events-none;
+    }
   }
 
   .singlestage-dropdown-menu-label {
-    @apply data-[inset]:pl-8
-    font-medium
-    px-2
-    py-1.5
-    text-sm;
+    @apply font-medium
+    px-1.5
+    py-1
+    text-muted-foreground
+    text-xs;
   }
 
   .singlestage-dropdown-menu-separator {
@@ -100,20 +112,6 @@
     text-muted-foreground
     text-xs
     tracking-widest;
-  }
-
-  .singlestage-dropdown-menu-sub-trigger {
-    @apply cursor-default
-    flex
-    focus:bg-accent
-    focus:text-accent-foreground
-    items-center
-    outline-hidden
-    px-2
-    py-1.5
-    rounded-sm
-    select-none
-    text-sm;
   }
 
   .singlestage-dropdown-menu-sub-content {

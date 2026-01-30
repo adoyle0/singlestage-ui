@@ -14,10 +14,7 @@ pub fn BreadcrumbExample() -> impl IntoView {
             <BreadcrumbItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger>
-                        <Button
-                            class="flex size-9 items-center justify-center h-4 w-4 hover:text-(--foreground) cursor-pointer"
-                            variant="ghost"
-                        >
+                        <Button size="icon-sm" variant="ghost">
                             {icon!(icondata::VsEllipsis)}
                         </Button>
                     </DropdownMenuTrigger>

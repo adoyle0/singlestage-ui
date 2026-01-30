@@ -146,7 +146,7 @@ pub fn ContextMenuSeparator(
     view! {
         <hr
             class=move || {
-                format!("singlestage-context-menu-separator {}", class.get().unwrap_or_default())
+                format!("singlestage-dropdown-menu-separator {}", class.get().unwrap_or_default())
             }
             role="separator"
 

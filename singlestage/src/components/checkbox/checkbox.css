@@ -1,7 +1,5 @@
 @layer components {
-  .singlestage-checkbox.singlestage-input[type="checkbox"]:not(
-      [role="switch"]
-    ) {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply appearance-none
     aria-invalid:border-destructive
     aria-invalid:ring-destructive/20
@@ -34,7 +32,7 @@
     }
   }
 
-  .singlestage-checkbox-group {
+  .singlestage-checkbox-group:not(:has(.singlestage-checkbox-item)) {
     @apply flex
     flex-col
     font-normal

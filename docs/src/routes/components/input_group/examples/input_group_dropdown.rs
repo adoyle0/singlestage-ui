@@ -14,7 +14,7 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                                 {icon!(icondata::FiMoreHorizontal)}
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent>
+                        <DropdownMenuContent align="end">
                             <DropdownMenuItem>"Settings"</DropdownMenuItem>
                             <DropdownMenuItem>"Copy path"</DropdownMenuItem>
                             <DropdownMenuItem>"Open location"</DropdownMenuItem>
@@ -31,7 +31,7 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                                 "Search In..." {icon!(icondata::LuChevronDown, class="size-3")}
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent class="[--radius:0.95rem]">
+                        <DropdownMenuContent align="end" class="[--radius:0.95rem]">
                             <DropdownMenuItem>"Documentation"</DropdownMenuItem>
                             <DropdownMenuItem>"Blog Posts"</DropdownMenuItem>
                             <DropdownMenuItem>"Changelog"</DropdownMenuItem>

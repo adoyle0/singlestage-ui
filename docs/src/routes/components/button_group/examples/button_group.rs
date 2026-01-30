@@ -22,7 +22,7 @@ pub fn ButtonGroupExample() -> impl IntoView {
                             {icon!(icondata::FiMoreHorizontal)}
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent class="w-52">
+                    <DropdownMenuContent align="end" class="w-52">
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 {icon!(icondata::LuMailCheck)} "Mark as Read"

@@ -130,7 +130,6 @@ fn main() {
         "card",
         "carousel",
         "checkbox",
-        "context_menu",
         "dialog",
         "dropdown",
         "empty",

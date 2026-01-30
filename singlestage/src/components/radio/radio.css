@@ -1,5 +1,5 @@
 @layer components {
-  .singlestage-input[type="radio"] {
+  .singlestage-radio:not(.singlestage-radio-item) {
     @apply appearance-none
     aria-invalid:border-destructive
     aria-invalid:ring-destructive/20
@@ -33,7 +33,7 @@
     }
   }
 
-  .singlestage-radio-group {
+  .singlestage-radio-group:not(:has(.singlestage-radio-item)) {
     @apply gap-3
     grid;
 

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::context_menu::*;
+use singlestage::*;
 
 #[component]
 pub fn ContextMenuAnatomy() -> impl IntoView {
@@ -14,6 +14,23 @@ pub fn ContextMenuAnatomy() -> impl IntoView {
                     </ContextMenuItem>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
+                <ContextMenuSub>
+                    <ContextMenuSubTrigger />
+                    <ContextMenuSubContent>
+                        <ContextMenuGroup>
+                            <CheckboxItem />
+                            <CheckboxItem />
+                        </ContextMenuGroup>
+                        <ContextMenuSeparator />
+                        <ContextMenuGroup>
+                            <RadioGroup>
+                                <RadioItem />
+                                <RadioItem />
+                                <RadioItem />
+                            </RadioGroup>
+                        </ContextMenuGroup>
+                    </ContextMenuSubContent>
+                </ContextMenuSub>
             </ContextMenuContent>
         </ContextMenu>
     }

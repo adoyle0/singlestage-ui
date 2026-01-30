@@ -5,6 +5,7 @@ mod label;
 mod menu;
 mod separator;
 mod shortcut;
+mod sub;
 mod trigger;
 
 pub use content::*;
@@ -14,14 +15,16 @@ pub use label::*;
 pub use menu::*;
 pub use separator::*;
 pub use shortcut::*;
+pub use sub::*;
 pub use trigger::*;
 
-use leptos::{html::Menu, prelude::*};
+use crate::Reactive;
+use leptos::prelude::*;
 
 #[derive(Clone)]
 pub struct ContextMenuContext {
     menu_id: RwSignal<String>,
-    menu_ref: RwSignal<Option<NodeRef<Menu>>>,
+    pub open: Reactive<bool>,
     x: RwSignal<i32>,
     y: RwSignal<i32>,
 }

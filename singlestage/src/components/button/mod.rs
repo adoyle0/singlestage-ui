@@ -252,7 +252,9 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(dropdown.menu_id.get())
-                    } else { use_context::<PopoverContext>().map(|popover| popover.menu_id.get()) }
+                    } else {
+                        use_context::<PopoverContext>().map(|popover| popover.menu_id.get())
+                    }
                 } else {
                     None
                 }
@@ -322,6 +324,20 @@ pub fn Button(
                     id.get()
                 }
             }
+            on:click=move |ev| {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        if !dropdown.dismissable.get_untracked() {
+                            ev.prevent_default();
+                            dropdown.open.set(!dropdown.open.get_untracked());
+                        }
+                    } else if let Some(popover) = use_context::<PopoverContext>()
+                        && !popover.dismissable.get_untracked() {
+                            ev.prevent_default();
+                            popover.open.set(!popover.open.get_untracked());
+                        }
+                }
+            }
             popovertarget=move || {
                 if button_is_trigger {
                     let mut target_id = None;
@@ -345,6 +361,15 @@ pub fn Button(
                 }
             }
             prop:disabled=move || disabled.get()
+            style:anchor-name=move || {
+                if button_is_trigger {
+                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                        Some(format!("--{}", dropdown.trigger_id.get()))
+                    } else { use_context::<PopoverContext>().map(|popover| format!("--{}", popover.trigger_id.get())) }
+                } else {
+                    None
+                }
+            }
             type=move || {
                 if let Some(button_type) = button_type.get() {
                     Some(button_type)

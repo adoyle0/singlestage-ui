@@ -5,40 +5,52 @@ use singlestage::*;
 pub fn ContextMenuExample() -> impl IntoView {
     view! {
         <ContextMenu>
-            <ContextMenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
-                "Right click here"
+            <ContextMenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-xl border border-dashed text-sm">
+                <span class="pointer-fine:hidden">"Long press here"</span>
+                <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <ContextMenuContent>
+            <ContextMenuContent class="w-48">
                 <ContextMenuGroup>
-                    <ContextMenuLabel>"My Account"</ContextMenuLabel>
                     <ContextMenuItem>
-                        "Profile" <ContextMenuShortcut>"⇧⌘P"</ContextMenuShortcut>
+                        "Back" <ContextMenuShortcut>"⌘["</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem disabled=true>
+                        "Forward" <ContextMenuShortcut>"⌘]"</ContextMenuShortcut>
                     </ContextMenuItem>
                     <ContextMenuItem>
-                        "Billing" <ContextMenuShortcut>"⌘B"</ContextMenuShortcut>
+                        "Reload" <ContextMenuShortcut>"⌘R"</ContextMenuShortcut>
                     </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Settings" <ContextMenuShortcut>"⌘S"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Keyboard shortcuts" <ContextMenuShortcut>"⌘K"</ContextMenuShortcut>
-                    </ContextMenuItem>
+                    <ContextMenuSub>
+                        <ContextMenuSubTrigger>"More Tools"</ContextMenuSubTrigger>
+                        <ContextMenuSubContent class="w-44">
+                            <ContextMenuGroup>
+                                <ContextMenuItem>"Save Page..."</ContextMenuItem>
+                                <ContextMenuItem>"Create Shortcut..."</ContextMenuItem>
+                                <ContextMenuItem>"Name Window..."</ContextMenuItem>
+                            </ContextMenuGroup>
+                            <ContextMenuSeparator />
+                            <ContextMenuGroup>
+                                <ContextMenuItem>"Developer Tools"</ContextMenuItem>
+                            </ContextMenuGroup>
+                            <ContextMenuSeparator />
+                            <ContextMenuGroup>
+                                <ContextMenuItem variant="destructive">"Delete"</ContextMenuItem>
+                            </ContextMenuGroup>
+                        </ContextMenuSubContent>
+                    </ContextMenuSub>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
-                    <ContextMenuItem>"GitHub"</ContextMenuItem>
-                    <ContextMenuItem>"Support"</ContextMenuItem>
-                    <ContextMenuItem disabled=true>"API"</ContextMenuItem>
+                    <CheckboxItem checked=true>"Show Bookmarks"</CheckboxItem>
+                    <CheckboxItem>"Show Full URLs"</CheckboxItem>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
-                    <ContextMenuItem variant="destructive">
-                        {icon!(icondata::LuTrash2)} "Delete Account"
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        {icon!(icondata::LuLogOut)} "Logout"
-                        <ContextMenuShortcut>"⇧⌘Q"</ContextMenuShortcut>
-                    </ContextMenuItem>
+                    <RadioGroup value="pedro">
+                        <ContextMenuLabel>"People"</ContextMenuLabel>
+                        <RadioItem value="pedro">"Pedro Duarte"</RadioItem>
+                        <RadioItem value="colm">"Colm Tuite"</RadioItem>
+                    </RadioGroup>
                 </ContextMenuGroup>
             </ContextMenuContent>
         </ContextMenu>
