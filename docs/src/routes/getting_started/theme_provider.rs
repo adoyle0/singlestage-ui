@@ -26,7 +26,7 @@ pub fn ThemeProviderRoute() -> impl IntoView {
         <p class="my-4">"By default, the theme provider expands to look like this:"</p>
 
         <CodeBlock code=r#"<pre>
-<span><</span><span>ThemeProvider mode="auto" theme=Theme::Default></span>
+<span><</span><span>ThemeProvider mode="auto" theme=Theme::Neutral></span>
 </pre>"#
             .to_string() />
 
@@ -38,7 +38,7 @@ pub fn ThemeProviderRoute() -> impl IntoView {
         </ul>
 
         <p class="my-4">
-            "These modes correspond to parts of the theme, in this case Theme::Default.
+            "These modes correspond to parts of the theme, in this case Theme::Neutral.
             Each theme has three parts which are just a collection of CSS variables that override
             the main template:"
         </p>

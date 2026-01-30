@@ -6,7 +6,7 @@ use singlestage::*;
 pub fn ThemeSwitcher() -> impl IntoView {
     let theme_context = expect_context::<ThemeProviderContext>();
     let prefers_dark = RwSignal::new(false);
-    let selected_theme = RwSignal::new("default".to_string());
+    let selected_theme = RwSignal::new("neutral".to_string());
 
     // TODO: Make reactive
     Effect::new(move || {
@@ -81,9 +81,9 @@ pub fn ThemeSwitcher() -> impl IntoView {
             .set(match selected_theme.get().as_str() {
                 "amber" => Theme::Amber,
                 "blue" => Theme::Blue,
-                "default" => Theme::Default,
                 "lime" => Theme::Lime,
                 "mono" => Theme::Mono,
+                "neutral" => Theme::Neutral,
                 "orange" => Theme::Orange,
                 "purple" => Theme::Purple,
                 "red" => Theme::Red,
@@ -92,7 +92,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
                 "teal" => Theme::Teal,
                 "violet" => Theme::Violet,
                 "yellow" => Theme::Yellow,
-                _ => Theme::Default,
+                _ => Theme::Neutral,
             })
     });
 
@@ -101,7 +101,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
             <Tooltip side="bottom" value="Select theme">
                 <Select value=selected_theme class="h-8">
                     <SelectContent label="Colors">
-                        <SelectItem value="default">"Default"</SelectItem>
+                        <SelectItem value="neutral">"Neutral"</SelectItem>
                         <SelectItem value="amber">"Amber"</SelectItem>
                         <SelectItem value="blue">"Blue"</SelectItem>
                         <SelectItem value="lime">"Lime"</SelectItem>

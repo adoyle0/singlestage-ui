@@ -3,7 +3,7 @@ use std::borrow::Cow;
 
 #[allow(non_upper_case_globals)]
 /// Uses tailwind neutral and blue palettes
-pub const Default: Theme = Theme {
+pub const Neutral: Theme = Theme {
     common: Cow::Borrowed(
         r#"
   --color-blue-50: oklch(97% 0.014 254.604);

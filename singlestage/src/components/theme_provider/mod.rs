@@ -541,7 +541,7 @@ pub fn ThemeProviderInner(
     theme: MaybeProp<Theme::Theme>,
 ) -> impl IntoView {
     let mode = RwSignal::<Mode>::new(mode.get_untracked().unwrap_or_default().into());
-    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Default));
+    let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Neutral));
 
     let context = ThemeProviderContext { theme, mode };
     provide_context(context);
@@ -618,7 +618,7 @@ pub fn ThemeProvider(
     provide_meta_context();
     view! {
         <ThemeProviderInner
-            theme=theme.unwrap_or(Theme::Default)
+            theme=theme.unwrap_or(Theme::Neutral)
             mode=mode.unwrap_or("auto".into())
         >
             {children()}
