@@ -1,0 +1,107 @@
+@layer components {
+  .singlestage-btn {
+    @apply aria-invalid:border-destructive
+    aria-invalid:ring-destructive/20
+    disabled:opacity-50
+    disabled:pointer-events-none
+    focus-visible:border-ring
+    focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
+    font-medium
+    gap-2
+    inline-flex
+    items-center
+    justify-center
+    outline-none
+    rounded-md
+    shrink-0
+    text-sm
+    transition-all
+    whitespace-nowrap;
+
+    &svg {
+      @apply pointer-events-none
+      shrink-0;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
+      }
+    }
+  }
+
+  .singlestage-btn-primary {
+    @apply bg-primary
+    hover:bg-primary/90
+    shadow-xs
+    text-primary-foreground;
+  }
+
+  .singlestage-btn-destructive {
+    @apply bg-destructive
+    focus-visible:ring-destructive/20
+    hover:bg-destructive/90
+    shadow-xs
+    text-white;
+  }
+
+  .singlestage-btn-outline {
+    @apply bg-background
+    border
+    hover:bg-accent
+    hover:text-accent-foreground
+    shadow-xs;
+  }
+
+  .singlestage-btn-secondary {
+    @apply bg-secondary
+    hover:bg-secondary/80
+    shadow-xs
+    text-secondary-foreground;
+  }
+
+  .singlestage-btn-ghost {
+    @apply hover:bg-accent
+    hover:text-accent-foreground;
+  }
+
+  .singlestage-btn-link {
+    @apply hover:underline
+    text-primary
+    underline-offset-4;
+  }
+
+  .singlestage-btn-size-default {
+    @apply h-9
+    px-4
+    py-2;
+
+    :has(> svg) {
+      @apply px-3;
+    }
+  }
+
+  .singlestage-btn-size-sm {
+    @apply gap-1.5
+    h-8
+    px-3
+    rounded-md;
+
+    :has(> svg) {
+      @apply px-2.5;
+    }
+  }
+
+  .singlestage-btn-size-lg {
+    @apply h-10
+    px-6
+    rounded-md;
+
+    :has(> svg) {
+      @apply px-4;
+    }
+  }
+
+  .singlestage-btn-size-icon {
+    @apply size-9;
+  }
+}

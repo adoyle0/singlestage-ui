@@ -1,0 +1,20 @@
+@layer components {
+  .singlestage-btn {
+    @apply aria-invalid:ring-destructive/40;
+  }
+
+  .singlestage-btn-destructive {
+    @apply bg-destructive/60
+    focus-visible:ring-destructive/40;
+  }
+
+  .singlestage-btn-outline {
+    @apply bg-input/30
+    border-input
+    hover:bg-input/50;
+  }
+
+  .singlestage-btn-ghost {
+    @apply hover:bg-accent/50;
+  }
+}

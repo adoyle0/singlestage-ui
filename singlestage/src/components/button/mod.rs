@@ -263,7 +263,7 @@ pub fn Button(
             aria_label=move || aria_label.get()
             class=move || {
                 format!(
-                    "{}{} {} {} {}",
+                    "singlestage-btn {}{} {} {} {}",
                     if button_is_trigger { "singlestage-trigger " } else { "" },
                     match variant.get().unwrap_or_default().as_str() {
                         "primary" => "singlestage-btn-primary",
@@ -283,16 +283,20 @@ pub fn Button(
                         }
                     },
                     match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-btn-sm",
-                        "small" => "singlestage-btn-sm",
-                        "lg" => "singlestage-btn-lg",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "icon-sm" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        "icon-lg" => "singlestage-btn-lg-icon",
-                        _ => "",
+                        "xs" | "extra small" => "singlestage-btn-size-xs",
+                        "sm" | "small" => "singlestage-btn-size-sm",
+                        "lg" | "large" => "singlestage-btn-size-lg",
+                        "icon" => "singlestage-btn-size-icon",
+                        "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                            "singlestage-btn-size-icon-xs"
+                        }
+                        "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                            "singlestage-btn-size-icon-sm"
+                        }
+                        "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                            "singlestage-btn-size-icon-lg"
+                        }
+                        _ => "singlestage-btn-size-default",
                     },
                     if use_context::<InputGroupContext>().is_some() {
                         format!(
@@ -332,10 +336,11 @@ pub fn Button(
                             dropdown.open.set(!dropdown.open.get_untracked());
                         }
                     } else if let Some(popover) = use_context::<PopoverContext>()
-                        && !popover.dismissable.get_untracked() {
-                            ev.prevent_default();
-                            popover.open.set(!popover.open.get_untracked());
-                        }
+                        && !popover.dismissable.get_untracked()
+                    {
+                        ev.prevent_default();
+                        popover.open.set(!popover.open.get_untracked());
+                    }
                 }
             }
             popovertarget=move || {
@@ -365,7 +370,10 @@ pub fn Button(
                 if button_is_trigger {
                     if let Some(dropdown) = use_context::<DropdownMenuContext>() {
                         Some(format!("--{}", dropdown.trigger_id.get()))
-                    } else { use_context::<PopoverContext>().map(|popover| format!("--{}", popover.trigger_id.get())) }
+                    } else {
+                        use_context::<PopoverContext>()
+                            .map(|popover| format!("--{}", popover.trigger_id.get()))
+                    }
                 } else {
                     None
                 }

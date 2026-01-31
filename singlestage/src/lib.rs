@@ -12,3 +12,5 @@ pub use singlestage_macro::*;
 
 #[cfg(feature = "theme_provider")]
 static CSS: &str = include_str!(concat!(env!("OUT_DIR"), "/singlestage.css"));
+#[cfg(feature = "theme_provider")]
+static CSS_DARK: &str = include_str!(concat!(env!("OUT_DIR"), "/singlestage_dark.css"));

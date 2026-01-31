@@ -28,8 +28,13 @@ macro_rules! features {
 }
 
 fn bundle_css(input: PathBuf, mut output: &File) {
-    let file = File::open(&input).unwrap_or_else(|_| panic!("Error opening {}", &input.display()));
-    let mut buf_reader = BufReader::new(file);
+    let file = File::open(&input);
+
+    if file.is_err() {
+        return;
+    }
+
+    let mut buf_reader = BufReader::new(file.unwrap());
     let mut contents = String::new();
 
     buf_reader
@@ -67,38 +72,45 @@ fn download_file(download_url: &str, file_path: &PathBuf) {
 fn run_tailwind(
     tailwind_path: Option<&Path>,
     bundle_path: &PathBuf,
+    bundle_dark_path: &PathBuf,
     singlestage_path: &PathBuf,
+    singlestage_dark_path: &PathBuf,
 ) -> Result<(), ()> {
-    let output;
-
-    if let Some(tailwind_path) = tailwind_path {
-        output = Command::new(tailwind_path)
-            .arg("-i")
-            .arg(bundle_path)
-            .arg("-o")
-            .arg(singlestage_path)
-            .arg("-m")
-            .output()
-    } else {
-        output = Command::new("tailwindcss")
-            .arg("-i")
-            .arg(bundle_path)
-            .arg("-o")
-            .arg(singlestage_path)
-            .arg("-m")
-            .output()
-    }
+    let output = Command::new(tailwind_path.unwrap_or(Path::new("tailwindcss")))
+        .arg("-i")
+        .arg(bundle_path)
+        .arg("-o")
+        .arg(singlestage_path)
+        .arg("-m")
+        .output();
 
     if let Ok(output) = output {
-        if output.status.success() {
-            Ok(())
-        } else {
+        if !output.status.success() {
             let error = String::from_utf8(output.stderr).unwrap();
             panic!("{}", error);
         }
     } else {
-        Err(())
+        return Err(());
     }
+
+    let output_dark = Command::new(tailwind_path.unwrap_or(Path::new("tailwindcss")))
+        .arg("-i")
+        .arg(bundle_dark_path)
+        .arg("-o")
+        .arg(singlestage_dark_path)
+        .arg("-m")
+        .output();
+
+    if let Ok(output_dark) = output_dark {
+        if !output_dark.status.success() {
+            let error = String::from_utf8(output_dark.stderr).unwrap();
+            panic!("{}", error);
+        }
+    } else {
+        return Err(());
+    }
+
+    Ok(())
 }
 
 fn main() {
@@ -109,7 +121,9 @@ fn main() {
 
     let out_dir = env::var_os("OUT_DIR").expect("\nError reading OUT_DIR from env. (1)\n");
     let bundle_path = Path::new(&out_dir).join("bundle.css");
+    let bundle_dark_path = Path::new(&out_dir).join("bundle_dark.css");
     let singlestage_path = Path::new(&out_dir).join("singlestage.css");
+    let singlestage_dark_path = Path::new(&out_dir).join("singlestage_dark.css");
 
     // Skip css bundling and tailwind for docs.rs
     if env::var("DOCS_RS").is_ok() {
@@ -167,25 +181,76 @@ fn main() {
         .open(&bundle_path)
         .expect("\nError opening bundle file.\n");
 
+    let bundle_dark = fs::OpenOptions::new()
+        .write(true)
+        .create(true)
+        .truncate(true)
+        .open(&bundle_dark_path)
+        .expect("\nError opening bundle file.\n");
+
     // Theme provider goes first
     #[cfg(feature = "theme_provider")]
-    let main_css_path = Path::new("src")
-        .join("components")
-        .join("theme_provider")
-        .join("main.css");
+    bundle_css(
+        Path::new("src")
+            .join("components")
+            .join("theme_provider")
+            .join("main.css"),
+        &bundle,
+    );
     #[cfg(feature = "theme_provider")]
-    bundle_css(main_css_path, &bundle);
+    bundle_css(
+        Path::new("src")
+            .join("components")
+            .join("theme_provider")
+            .join("main.css"),
+        &bundle_dark,
+    );
+    #[cfg(feature = "theme_provider")]
+    bundle_css(
+        Path::new("src")
+            .join("components")
+            .join("theme_provider")
+            .join("main_dark.css"),
+        &bundle_dark,
+    );
 
     // Bundle css for each feature
     for feature in features {
         let feature_flag = format!("CARGO_FEATURE_{}", feature.to_uppercase());
 
         if env::var(&feature_flag).is_ok() {
+            let feature_base_css = Path::new("src")
+                .join("components")
+                .join(feature)
+                .join("style")
+                .join("base")
+                .join("vega")
+                .join(format!("{}.css", &feature));
+
+            let feature_base_dark_css = Path::new("src")
+                .join("components")
+                .join(feature)
+                .join("style")
+                .join("base")
+                .join("vega")
+                .join(format!("{}_dark.css", &feature));
+
             let feature_css = Path::new("src")
                 .join("components")
                 .join(feature)
+                .join("style")
                 .join(format!("{}.css", &feature));
+
+            let feature_dark_css = Path::new("src")
+                .join("components")
+                .join(feature)
+                .join("style")
+                .join(format!("{}_dark.css", &feature));
+
+            bundle_css(feature_base_css, &bundle);
+            bundle_css(feature_base_dark_css, &bundle_dark);
             bundle_css(feature_css, &bundle);
+            bundle_css(feature_dark_css, &bundle_dark);
         }
     }
 
@@ -198,7 +263,9 @@ fn main() {
         if run_tailwind(
             Some(Path::new(&tailwind_path)),
             &bundle_path,
+            &bundle_dark_path,
             &singlestage_path,
+            &singlestage_dark_path,
         )
         .is_ok()
         {
@@ -212,7 +279,15 @@ fn main() {
     }
 
     // Try system tailwind
-    if run_tailwind(None, &bundle_path, &singlestage_path).is_ok() {
+    if run_tailwind(
+        None,
+        &bundle_path,
+        &bundle_dark_path,
+        &singlestage_path,
+        &singlestage_dark_path,
+    )
+    .is_ok()
+    {
         // System tailwind worked, bail
         return;
     }
@@ -246,7 +321,9 @@ fn main() {
     if run_tailwind(
         Some(&downloaded_tailwind_path),
         &bundle_path,
+        &bundle_dark_path,
         &singlestage_path,
+        &singlestage_dark_path,
     )
     .is_ok()
     {
@@ -315,6 +392,8 @@ fn main() {
     let _ = run_tailwind(
         Some(&downloaded_tailwind_path),
         &bundle_path,
+        &bundle_dark_path,
         &singlestage_path,
+        &singlestage_dark_path,
     );
 }
