@@ -66,8 +66,6 @@
   .singlestage-btn-size-xs {
     @apply gap-1
     h-6
-    /* TODO in-data */
-    in-data-[slot=button-group]:rounded-md
     px-2
     rounded-[min(var(--radius-md),8px)]
     text-xs;
@@ -88,8 +86,6 @@
   .singlestage-btn-size-sm {
     @apply gap-1
     h-8
-    /* TODO in-data */
-    in-data-[slot=button-group]:rounded-md
     px-2.5
     rounded-[min(var(--radius-md),10px)];
 
@@ -105,8 +101,6 @@
   .singlestage-btn-size-default {
     @apply gap-1.5
     h-9
-    /* TODO in-data */
-    in-data-[slot=button-group]:rounded-md
     px-2.5;
 
     &:has(svg:first-child) {
@@ -133,9 +127,7 @@
   }
 
   .singlestage-btn-size-icon-xs {
-    @apply /* TODO in-data */
-    in-data-[slot=button-group]:rounded-md
-    rounded-[min(var(--radius-md),8px)]
+    @apply rounded-[min(var(--radius-md),8px)]
     size-6;
 
     svg:not([class*="size-"]) {
@@ -144,9 +136,7 @@
   }
 
   .singlestage-btn-size-icon-sm {
-    /* TODO in-data */
-    @apply in-data-[slot=button-group]:rounded-md
-    rounded-[min(var(--radius-md),10px)]
+    @apply rounded-[min(var(--radius-md),10px)]
     size-8;
   }
 

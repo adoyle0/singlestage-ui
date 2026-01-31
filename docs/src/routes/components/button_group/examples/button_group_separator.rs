@@ -8,7 +8,7 @@ pub fn ButtonGroupSeparatorExample() -> impl IntoView {
             <Button variant="secondary" size="sm">
                 "Copy"
             </Button>
-            <ButtonGroupSeparator />
+            <Separator />
             <Button variant="secondary" size="sm">
                 "Paste"
             </Button>

@@ -1,0 +1,48 @@
+@layer base {
+  .singlestage-button-group {
+    &:has(
+      *[aria-hidden="true"]:last-child > .singlestage-trigger:last-of-type
+    ) {
+      @apply rounded-r-md;
+    }
+
+    &:has(> .singlestage-button-group) {
+      @apply gap-2;
+    }
+
+    .singlestage-btn-size-sm,
+    .singlestage-btn-size-xs,
+    .singlestage-btn-size-default,
+    .singlestage-btn-size-icon-xs,
+    .singlestage-btn-size-icon-sm {
+      @apply rounded-md;
+    }
+
+    .singlestage-separator {
+      @apply !bg-input;
+    }
+  }
+
+  .singlestage-button-group-orientation-horizontal {
+    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-md!;
+  }
+
+  .singlestage-button-group-orientation-vertical {
+    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-md!;
+  }
+
+  .singlestage-button-group-text {
+    @apply bg-muted
+    border
+    font-medium
+    gap-2
+    px-2.5
+    rounded-md
+    shadow-xs
+    text-sm;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+}

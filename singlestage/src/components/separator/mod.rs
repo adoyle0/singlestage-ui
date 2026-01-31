@@ -154,13 +154,16 @@ pub fn Separator(
 
     view! {
         <div
-            class=move || format!("singlestage-separator {}", class.get().unwrap_or_default())
-            data-orientation=match vertical.get().unwrap_or_default() {
-                false => "horizontal",
-                true => "vertical",
+            class=move || {
+                format!(
+                    "singlestage-separator {} {}",
+                    match vertical.get().unwrap_or_default() {
+                        true => "singlestage-separator-vertical",
+                        _ => "singlestage-separator-horizontal",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
-                .to_string()
-            data-slot="separator"
 
             {..global_attrs_1}
             {..global_attrs_2}

@@ -1,4 +1,4 @@
-@layer components {
+@layer base {
   .singlestage-separator {
     @apply bg-border
     shrink-0;
@@ -10,7 +10,7 @@
   }
 
   .singlestage-separator-vertical {
-    @apply self-stretch
+    @apply h-full
     w-px;
   }
 }
