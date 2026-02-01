@@ -1,0 +1,11 @@
+@layer base {
+  .singlestage-accordion-trigger {
+    @apply py-4
+    rounded-md;
+  }
+
+  .singlestage-accordion-content-inner {
+    @apply pb-4
+    pt-0;
+  }
+}

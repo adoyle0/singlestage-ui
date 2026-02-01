@@ -161,7 +161,7 @@ pub fn AccordionTrigger(
     };
 
     view! {
-        <summary>
+        <summary class="singlestage-accordion-trigger">
             <h3 {..global_attrs_1} {..global_attrs_2}>
                 {children()}
                 {if let Some(accordion_icon) = accordion_icon {
