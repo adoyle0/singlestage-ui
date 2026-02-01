@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn AvatarGroupExample() -> impl IntoView {
+pub fn AvatarGroupWithIconExample() -> impl IntoView {
     view! {
         <AvatarGroup class="grayscale">
             <Avatar>
@@ -17,6 +17,7 @@ pub fn AvatarGroupExample() -> impl IntoView {
                 <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
                 <AvatarFallback>"ER"</AvatarFallback>
             </Avatar>
+            <AvatarGroupCount>{icon!(icondata::LuPlus)}</AvatarGroupCount>
         </AvatarGroup>
     }
 }
