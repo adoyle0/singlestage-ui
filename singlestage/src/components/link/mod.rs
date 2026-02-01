@@ -6,13 +6,16 @@ use leptos::prelude::*;
 pub fn Link(
     children: Children,
 
-    /// Set whether or not this `Link` should appear as a `Button`.
+    /// Set whether or not this `Link` should appear as something else. This is similar to
+    /// `asChild`.
+    ///
+    /// Accepted values: "button" | "badge"
     #[prop(optional, into)]
-    as_button: MaybeProp<bool>,
-    /// For use with `as_button`, specify the size to render the button.
+    render_as: MaybeProp<String>,
+    /// For use with `render_as`, specify the size to render the element.
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// For use with `as_button`, specify the style of button to render.
+    /// For use with `render_as`, specify the variant of the element to render.
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -204,59 +207,74 @@ pub fn Link(
     view! {
         <a
             class=move || {
-                if as_button.get().unwrap_or_default() {
-                    format!(
-                        "singlestage-btn {} {} {} {}",
-                        match variant.get().unwrap_or_default().as_str() {
-                            "primary" => "singlestage-btn-primary",
-                            "secondary" => "singlestage-btn-secondary",
-                            "outline" => "singlestage-btn-outline",
-                            "ghost" => "singlestage-btn-ghost",
-                            "link" => "singlestage-btn-link",
-                            "destructive" => "singlestage-btn-destructive",
-                            _ => {
-                                if use_context::<InputGroupContext>().is_some()
-                                    && variant.get().is_none()
-                                {
-                                    "singlestage-btn-ghost"
-                                } else {
-                                    "singlestage-btn-primary"
+                match render_as.get().unwrap_or_default().as_str() {
+                    "button" => {
+                        format!(
+                            "singlestage-btn {} {} {} {}",
+                            match variant.get().unwrap_or_default().as_str() {
+                                "primary" => "singlestage-btn-primary",
+                                "secondary" => "singlestage-btn-secondary",
+                                "outline" => "singlestage-btn-outline",
+                                "ghost" => "singlestage-btn-ghost",
+                                "link" => "singlestage-btn-link",
+                                "destructive" => "singlestage-btn-destructive",
+                                _ => {
+                                    if use_context::<InputGroupContext>().is_some()
+                                        && variant.get().is_none()
+                                    {
+                                        "singlestage-btn-ghost"
+                                    } else {
+                                        "singlestage-btn-primary"
+                                    }
                                 }
-                            }
-                        },
-                        match size.get().unwrap_or_default().as_str() {
-                            "xs" | "extra small" => "singlestage-btn-size-xs",
-                            "sm" | "small" => "singlestage-btn-size-sm",
-                            "lg" | "large" => "singlestage-btn-size-lg",
-                            "icon" => "singlestage-btn-size-icon",
-                            "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                                "singlestage-btn-size-icon-xs"
-                            }
-                            "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                                "singlestage-btn-size-icon-sm"
-                            }
-                            "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                                "singlestage-btn-size-icon-lg"
-                            }
-                            _ => "singlestage-btn-size-default",
-                        },
-                        if use_context::<InputGroupContext>().is_some() {
-                            format!(
-                                "singlestage-input-group-button {}",
-                                match size.get().unwrap_or_default().as_str() {
-                                    "sm" => "singlestage-input-group-button-sm",
-                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                    _ => "singlestage-input-group-button-xs",
-                                },
-                            )
-                        } else {
-                            "".to_string()
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                } else {
-                    format!("singlestage-link {}", class.get().unwrap_or_default())
+                            },
+                            match size.get().unwrap_or_default().as_str() {
+                                "xs" | "extra small" => "singlestage-btn-size-xs",
+                                "sm" | "small" => "singlestage-btn-size-sm",
+                                "lg" | "large" => "singlestage-btn-size-lg",
+                                "icon" => "singlestage-btn-size-icon",
+                                "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                                    "singlestage-btn-size-icon-xs"
+                                }
+                                "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                    "singlestage-btn-size-icon-sm"
+                                }
+                                "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                    "singlestage-btn-size-icon-lg"
+                                }
+                                _ => "singlestage-btn-size-default",
+                            },
+                            if use_context::<InputGroupContext>().is_some() {
+                                format!(
+                                    "singlestage-input-group-button {}",
+                                    match size.get().unwrap_or_default().as_str() {
+                                        "sm" => "singlestage-input-group-button-sm",
+                                        "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                        "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                        _ => "singlestage-input-group-button-xs",
+                                    },
+                                )
+                            } else {
+                                "".to_string()
+                            },
+                            class.get().unwrap_or_default(),
+                        )
+                    }
+                    "badge" => {
+                        format!(
+                            "singlestage-badge {} {}",
+                            match variant.get().unwrap_or_default().as_str() {
+                                "secondary" => "singlestage-badge-variant-secondary",
+                                "destructive" => "singlestage-badge-variant-destructive",
+                                "outline" => "singlestage-badge-variant-outline",
+                                "ghost" => "singlestage-badge-variant-ghost",
+                                "link" => "singlestage-badge-variant-link",
+                                _ => "singlestage-badge-variant-default",
+                            },
+                            class.get().unwrap_or_default(),
+                        )
+                    }
+                    _ => format!("singlestage-link {}", class.get().unwrap_or_default()),
                 }
             }
 

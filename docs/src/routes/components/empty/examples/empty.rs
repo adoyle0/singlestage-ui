@@ -19,7 +19,7 @@ pub fn EmptyExample() -> impl IntoView {
                     <Button variant="outline">"Import Project"</Button>
                 </div>
             </EmptyContent>
-            <Link as_button=true size="sm" class="text-(--muted-foreground)" href="#">
+            <Link render_as="button" size="sm" class="text-(--muted-foreground)" href="#">
                 "Learn More"
                 {icon!(icondata::LuArrowUpRight)}
             </Link>

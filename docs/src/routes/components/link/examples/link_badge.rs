@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn BadgeLinkExample() -> impl IntoView {
+pub fn LinkBadgeExample() -> impl IntoView {
     view! {
         <Link render_as="badge" href="#link">
             <span>"Open Link "</span>

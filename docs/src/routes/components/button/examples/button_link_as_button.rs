@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn ButtonLinkAsButtonExample() -> impl IntoView {
     view! {
-        <Link as_button=true href="/login">
+        <Link render_as="button" href="/login">
             "Log in"
         </Link>
     }
