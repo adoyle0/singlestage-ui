@@ -1,14 +1,9 @@
 use leptos::prelude::*;
 
-/// Contains the contents of the alert.
+/// Displays actionable inputs in the top right corner of the alert.
 #[component]
-pub fn Alert(
+pub fn AlertAction(
     children: Children,
-
-    /// Set the variant of the alert. Leave empty for default.
-    /// Other variants: "destructive"
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -157,14 +152,7 @@ pub fn Alert(
     view! {
         <div
             class=move || {
-                format!(
-                    "singlestage-alert {} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => "singlestage-alert-variant-destructive",
-                        _ => "singlestage-alert-variant-default",
-                    },
-                    class.get().unwrap_or_default(),
-                )
+                format!("singlestage-alert-action {}", class.get().unwrap_or_default())
             }
 
             {..global_attrs_1}

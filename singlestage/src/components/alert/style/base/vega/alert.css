@@ -1,0 +1,22 @@
+@layer base {
+  .singlestage-alert {
+    @apply px-4
+    py-3;
+
+    &:has(> svg) {
+      @apply gap-x-2.5;
+    }
+  }
+
+  .singlestage-alert-description {
+    @apply md:text-pretty
+    text-balance
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-alert-action {
+    @apply right-3
+    top-2.5;
+  }
+}

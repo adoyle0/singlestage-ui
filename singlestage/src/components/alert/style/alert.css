@@ -1,59 +1,84 @@
 @layer components {
-  .singlestage-alert,
-  .singlestage-alert-destructive {
-    @apply [&>svg]:size-4
-    [&>svg]:text-current
-    [&>svg]:translate-y-0.5
-    border
-    gap-y-0.5
+  .singlestage-alert {
+    @apply border
+    gap-0.5
     grid
-    grid-cols-[0_1fr]
-    has-[>svg]:gap-x-3
-    has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr]
-    items-start
-    px-4
-    py-3
-    relative
+    px-2.5
+    py-2
     rounded-lg
+    text-left
     text-sm
     w-full;
 
-    h2 {
-      @apply col-start-2
-      font-medium
-      line-clamp-1
-      min-h-4
-      tracking-tight;
+    &:has(> svg) {
+      @apply gap-x-2
+      grid-cols-[auto_1fr];
     }
-    section {
-      @apply [&_p]:leading-relaxed
-      col-start-2
-      gap-1
-      grid
-      justify-items-start
-      text-muted-foreground
-      text-sm;
 
-      ul {
-        @apply list-disc
-        list-inside
-        text-sm;
+    &:has(.singlestage-alert-action) {
+      @apply pr-18
+      relative;
+    }
+
+    svg {
+      @apply row-span-2
+      text-current
+      translate-y-0.5;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
       }
     }
   }
 
-  .singlestage-alert {
+  .singlestage-alert-variant-default {
     @apply bg-card
     text-card-foreground;
   }
 
-  .singlestage-alert-destructive {
-    @apply [&>svg]:text-current
-    bg-card
+  .singlestage-alert-variant-destructive {
+    @apply bg-card
     text-destructive;
 
-    section {
-      @apply text-destructive;
+    svg {
+      @apply text-current;
     }
+
+    .singlestage-alert-description {
+      @apply text-destructive/90;
+    }
+  }
+  .singlestage-alert-title {
+    @apply font-medium
+    group-has-[>svg]/alert:col-start-2;
+
+    a {
+      @apply hover:text-foreground
+      underline
+      underline-offset-3;
+    }
+  }
+
+  .singlestage-alert-description {
+    @apply md:text-pretty
+    text-balance
+    text-muted-foreground
+    text-sm;
+
+    a {
+      @apply hover:text-foreground
+      underline
+      underline-offset-3;
+    }
+
+    p:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+
+  .singlestage-alert-action {
+    @apply absolute
+    right-2
+    top-2;
   }
 }
