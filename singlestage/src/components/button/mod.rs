@@ -18,7 +18,7 @@ pub fn Button(
     #[prop(optional, into)]
     size: MaybeProp<String>,
     /// The display variant of the button. Defaults to `primary`
-    /// Variants: primary | secondary | outline | ghost | link | destructive
+    /// Variants: primary | secondary | outline | ghost | link | destructive | none
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -262,57 +262,61 @@ pub fn Button(
             aria_haspopup=move || { if button_is_trigger { Some("menu") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
-                format!(
-                    "singlestage-btn {}{} {} {} {}",
-                    if button_is_trigger { "singlestage-trigger " } else { "" },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => {
-                            if use_context::<InputGroupContext>().is_some()
-                                && variant.get().is_none()
-                            {
-                                "singlestage-btn-ghost"
-                            } else {
-                                "singlestage-btn-primary"
+                if variant.get().unwrap_or_default().as_str() == "none" {
+                    class.get().unwrap_or_default()
+                } else {
+                    format!(
+                        "singlestage-btn {}{} {} {} {}",
+                        if button_is_trigger { "singlestage-trigger " } else { "" },
+                        match variant.get().unwrap_or_default().as_str() {
+                            "primary" => "singlestage-btn-primary",
+                            "secondary" => "singlestage-btn-secondary",
+                            "outline" => "singlestage-btn-outline",
+                            "ghost" => "singlestage-btn-ghost",
+                            "link" => "singlestage-btn-link",
+                            "destructive" => "singlestage-btn-destructive",
+                            _ => {
+                                if use_context::<InputGroupContext>().is_some()
+                                    && variant.get().is_none()
+                                {
+                                    "singlestage-btn-ghost"
+                                } else {
+                                    "singlestage-btn-primary"
+                                }
                             }
-                        }
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "xs" | "extra small" => "singlestage-btn-size-xs",
-                        "sm" | "small" => "singlestage-btn-size-sm",
-                        "lg" | "large" => "singlestage-btn-size-lg",
-                        "icon" => "singlestage-btn-size-icon",
-                        "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                            "singlestage-btn-size-icon-xs"
-                        }
-                        "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                            "singlestage-btn-size-icon-sm"
-                        }
-                        "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                            "singlestage-btn-size-icon-lg"
-                        }
-                        _ => "singlestage-btn-size-default",
-                    },
-                    if use_context::<InputGroupContext>().is_some() {
-                        format!(
-                            "singlestage-input-group-button {}",
-                            match size.get().unwrap_or_default().as_str() {
-                                "sm" => "singlestage-input-group-button-sm",
-                                "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                _ => "singlestage-input-group-button-xs",
-                            },
-                        )
-                    } else {
-                        "".to_string()
-                    },
-                    class.get().unwrap_or_default(),
-                )
+                        },
+                        match size.get().unwrap_or_default().as_str() {
+                            "xs" | "extra small" => "singlestage-btn-size-xs",
+                            "sm" | "small" => "singlestage-btn-size-sm",
+                            "lg" | "large" => "singlestage-btn-size-lg",
+                            "icon" => "singlestage-btn-size-icon",
+                            "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                                "singlestage-btn-size-icon-xs"
+                            }
+                            "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                "singlestage-btn-size-icon-sm"
+                            }
+                            "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                "singlestage-btn-size-icon-lg"
+                            }
+                            _ => "singlestage-btn-size-default",
+                        },
+                        if use_context::<InputGroupContext>().is_some() {
+                            format!(
+                                "singlestage-input-group-button {}",
+                                match size.get().unwrap_or_default().as_str() {
+                                    "sm" => "singlestage-input-group-button-sm",
+                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                    _ => "singlestage-input-group-button-xs",
+                                },
+                            )
+                        } else {
+                            "".to_string()
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
             }
             disabled=disabled.get_untracked()
             id=move || {

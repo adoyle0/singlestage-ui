@@ -1,16 +1,8 @@
 use leptos::prelude::*;
 
-/// Separates breadcrumb items. Can render any children as a custom marker.
+/// Displays an ellipsis in place of collapsed breadcrumb items.
 #[component]
-pub fn BreadcrumbSeparator(
-    #[prop(optional)] children: Option<Children>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
-
+pub fn BreadcrumbEllipsis(
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -150,39 +142,37 @@ pub fn BreadcrumbSeparator(
             translate=move || translate.get()
         />
     };
+
     view! {
-        <li
+        <span
+            aria_current="page"
             aria_hidden="true"
             class=move || {
-                format!("singlestage-breadcrumb-separator {}", class.get().unwrap_or_default())
+                format!("singlestage-breadcrumb-ellipsis {}", class.get().unwrap_or_default())
             }
-            role="presentation"
-            value=move || value.get()
+            role="link"
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if let Some(children) = children {
-                children()
-            } else {
-                view! {
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-chevron-right-icon lucide-chevron-right"
-                    >
-                        <path d="m9 18 6-6-6-6" />
-                    </svg>
-                }
-                    .into_any()
-            }}
-        </li>
+            <svg
+                class=""
+                style=""
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+            >
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+            </svg>
+            <span class="sr-only">"More"</span>
+        </span>
     }
 }

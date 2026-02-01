@@ -1,15 +1,27 @@
 use leptos::prelude::*;
 
-/// Separates breadcrumb items. Can render any children as a custom marker.
+/// Displays the ordered list of breadcrumb items.
 #[component]
-pub fn BreadcrumbSeparator(
-    #[prop(optional)] children: Option<Children>,
+pub fn BreadcrumbList(
+    children: Children,
 
-    // LI ATTRIBRUTES
+    // OL ATTRIBUTES
     //
-    /// The current ordinal value of the item.
+    /// The numbering type.
+    ///
+    /// * `a` for lowercase letters
+    /// * `A` for uppercase letters
+    /// * `i` for lowercase Roman numerals
+    /// * `I` for uppercase Roman numerals
+    /// * `1` for numbers (default)
     #[prop(optional, into)]
-    value: MaybeProp<String>,
+    number_type: MaybeProp<usize>,
+    /// Toggle whether or not the list should be reversed.
+    #[prop(optional, into)]
+    reversed: MaybeProp<bool>,
+    /// Set which item to start counting from starting with 1.
+    #[prop(optional, into)]
+    start: MaybeProp<usize>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -92,6 +104,9 @@ pub fn BreadcrumbSeparator(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -118,6 +133,7 @@ pub fn BreadcrumbSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -142,6 +158,7 @@ pub fn BreadcrumbSeparator(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -150,39 +167,20 @@ pub fn BreadcrumbSeparator(
             translate=move || translate.get()
         />
     };
+
     view! {
-        <li
-            aria_hidden="true"
+        <ol
             class=move || {
-                format!("singlestage-breadcrumb-separator {}", class.get().unwrap_or_default())
+                format!("singlestage-breadcrumb-list {}", class.get().unwrap_or_default())
             }
-            role="presentation"
-            value=move || value.get()
+            type=move || number_type.get()
+            reversed=move || reversed.get()
+            start=move || start.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if let Some(children) = children {
-                children()
-            } else {
-                view! {
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-chevron-right-icon lucide-chevron-right"
-                    >
-                        <path d="m9 18 6-6-6-6" />
-                    </svg>
-                }
-                    .into_any()
-            }}
-        </li>
+            {children()}
+        </ol>
     }
 }

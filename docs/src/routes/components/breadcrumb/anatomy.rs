@@ -1,12 +1,21 @@
 use leptos::prelude::*;
-use singlestage::breadcrumb::*;
+use singlestage*;
 
 #[component]
 pub fn BreadcrumbAnatomy() -> impl IntoView {
     view! {
         <Breadcrumb>
-            <BreadcrumbItem />
-            <BreadcrumbSeparator />
+            <BreadcrumbList>
+                <BreadcrumbItem />
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                    <BreadcrumbEllipsis />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                    {icon!(icondata::LuDot)}
+                </BreadcrumbSeparator>
+                <BreadcrumbPage />
+            </BreadcrumbList>
         </Breadcrumb>
     }
 }

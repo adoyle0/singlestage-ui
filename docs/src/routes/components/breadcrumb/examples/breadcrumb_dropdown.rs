@@ -2,20 +2,20 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn BreadcrumbExample() -> impl IntoView {
+pub fn BreadcrumbDropdownExample() -> impl IntoView {
     view! {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <Link href="#">"Home"</Link>
+                    <Link href="/">Home</Link>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Button size="icon-sm" variant="ghost">
-                                <BreadcrumbEllipsis />
-                                <span class="sr-only">"Toggle menu"</span>
+                            <Button class="flex items-center gap-1" variant="none">
+                                "Components"
+                                {icon!(icondata::LuChevronDown, class="size-3.5")}
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start">
@@ -27,11 +27,7 @@ pub fn BreadcrumbExample() -> impl IntoView {
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <Link href="#">"Components"</Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>
                     <BreadcrumbPage>"Breadcrumb"</BreadcrumbPage>
                 </BreadcrumbItem>

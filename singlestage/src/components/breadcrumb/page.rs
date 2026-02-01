@@ -1,15 +1,9 @@
 use leptos::prelude::*;
 
-/// Separates breadcrumb items. Can render any children as a custom marker.
+/// Displays the current page in the breadcrumb (non-clickable).
 #[component]
-pub fn BreadcrumbSeparator(
-    #[prop(optional)] children: Option<Children>,
-
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
+pub fn BreadcrumbPage(
+    children: Children,
 
     // GLOBAL ATTRIBUTES
     //
@@ -150,39 +144,20 @@ pub fn BreadcrumbSeparator(
             translate=move || translate.get()
         />
     };
+
     view! {
-        <li
-            aria_hidden="true"
+        <span
+            aria_current="page"
+            aria_disabled="true"
             class=move || {
-                format!("singlestage-breadcrumb-separator {}", class.get().unwrap_or_default())
+                format!("singlestage-breadcrumb-page {}", class.get().unwrap_or_default())
             }
-            role="presentation"
-            value=move || value.get()
+            role="link"
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if let Some(children) = children {
-                children()
-            } else {
-                view! {
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-chevron-right-icon lucide-chevron-right"
-                    >
-                        <path d="m9 18 6-6-6-6" />
-                    </svg>
-                }
-                    .into_any()
-            }}
-        </li>
+            {children()}
+        </span>
     }
 }

@@ -1,0 +1,5 @@
+@layer base {
+  .singlestage-breadcrumb-list {
+    @apply sm:gap-2.5;
+  }
+}
