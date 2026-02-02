@@ -34,33 +34,33 @@ pub fn FieldExample() -> impl IntoView {
                                 <Field>
                                     <FieldLabel>"Month"</FieldLabel>
                                     <Select placeholder="MM">
-                                        <SelectContent>
-                                            <SelectItem value="01">"01"</SelectItem>
-                                            <SelectItem value="02">"02"</SelectItem>
-                                            <SelectItem value="03">"03"</SelectItem>
-                                            <SelectItem value="04">"04"</SelectItem>
-                                            <SelectItem value="05">"05"</SelectItem>
-                                            <SelectItem value="06">"06"</SelectItem>
-                                            <SelectItem value="07">"07"</SelectItem>
-                                            <SelectItem value="08">"08"</SelectItem>
-                                            <SelectItem value="09">"09"</SelectItem>
-                                            <SelectItem value="10">"10"</SelectItem>
-                                            <SelectItem value="11">"11"</SelectItem>
-                                            <SelectItem value="12">"12"</SelectItem>
-                                        </SelectContent>
+                                        <SelectOptGroup>
+                                            <SelectOption value="01">"01"</SelectOption>
+                                            <SelectOption value="02">"02"</SelectOption>
+                                            <SelectOption value="03">"03"</SelectOption>
+                                            <SelectOption value="04">"04"</SelectOption>
+                                            <SelectOption value="05">"05"</SelectOption>
+                                            <SelectOption value="06">"06"</SelectOption>
+                                            <SelectOption value="07">"07"</SelectOption>
+                                            <SelectOption value="08">"08"</SelectOption>
+                                            <SelectOption value="09">"09"</SelectOption>
+                                            <SelectOption value="10">"10"</SelectOption>
+                                            <SelectOption value="11">"11"</SelectOption>
+                                            <SelectOption value="12">"12"</SelectOption>
+                                        </SelectOptGroup>
                                     </Select>
                                 </Field>
                                 <Field>
                                     <FieldLabel>"Year"</FieldLabel>
                                     <Select placeholder="YYYY">
-                                        <SelectContent>
-                                            <SelectItem value="2024">"2024"</SelectItem>
-                                            <SelectItem value="2025">"2025"</SelectItem>
-                                            <SelectItem value="2026">"2026"</SelectItem>
-                                            <SelectItem value="2027">"2027"</SelectItem>
-                                            <SelectItem value="2028">"2028"</SelectItem>
-                                            <SelectItem value="2029">"2029"</SelectItem>
-                                        </SelectContent>
+                                        <SelectOptGroup>
+                                            <SelectOption value="2024">"2024"</SelectOption>
+                                            <SelectOption value="2025">"2025"</SelectOption>
+                                            <SelectOption value="2026">"2026"</SelectOption>
+                                            <SelectOption value="2027">"2027"</SelectOption>
+                                            <SelectOption value="2028">"2028"</SelectOption>
+                                            <SelectOption value="2029">"2029"</SelectOption>
+                                        </SelectOptGroup>
                                     </Select>
                                 </Field>
                                 <Field>

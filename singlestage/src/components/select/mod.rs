@@ -1,9 +1,9 @@
-mod content;
-mod item;
+mod opt_group;
+mod option;
 mod select;
 
-pub use content::*;
-pub use item::*;
+pub use opt_group::*;
+pub use option::*;
 pub use select::*;
 
 use crate::Reactive;
@@ -11,6 +11,7 @@ use leptos::prelude::MaybeProp;
 
 #[derive(Clone)]
 pub struct SelectContext {
+    multiple: MaybeProp<bool>,
     placeholder: MaybeProp<String>,
     value: Reactive<String>,
 }

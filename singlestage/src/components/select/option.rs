@@ -1,17 +1,24 @@
-use crate::{Reactive, SelectContext};
+use super::SelectContext;
+use crate::Reactive;
 use leptos::prelude::*;
 
-/// Contains a group of items for the Select.
+/// Contains an item with a value to be selected.
 #[component]
-pub fn SelectContent(
+pub fn SelectOption(
     children: Children,
 
-    /// Set whether or not the items in the group are appear as disabled and can be selected.
+    /// Set whether or not this item appears disabled and is checkable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,
-    /// Label this group of content.
+    /// Set a label describing the meaning of this item.
     #[prop(optional, into)]
     label: MaybeProp<String>,
+    /// Set if this item is initially selected.
+    #[prop(optional, into)]
+    selected: Reactive<bool>,
+    /// Set the value of this item to be submitted with form data.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -118,7 +125,21 @@ pub fn SelectContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let select = expect_context::<SelectContext>();
+    let select_context = expect_context::<SelectContext>();
+
+    if let Some(value) = value.get_untracked() {
+        if !select_context.multiple.get_untracked().unwrap_or_default() {
+            selected.set(value == select_context.value.get_untracked())
+        }
+    };
+
+    Effect::new(move || {
+        if !select_context.multiple.get_untracked().unwrap_or_default() {
+            if let Some(value) = value.get() {
+                selected.set(value == select_context.value.get())
+            }
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -161,24 +182,16 @@ pub fn SelectContent(
     };
 
     view! {
-        <optgroup
+        <option
             disabled=move || disabled.get()
             label=move || label.get()
+            selected=move || selected.get()
+            value=move || value.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if let Some(placeholder) = select.placeholder.get_untracked() {
-                view! {
-                    <option value="singlestage-select-placeholder" disabled hidden selected>
-                        {placeholder}
-                    </option>
-                }
-                    .into_any()
-            } else {
-                "".into_any()
-            }}
             {children()}
-        </optgroup>
+        </option>
     }
 }

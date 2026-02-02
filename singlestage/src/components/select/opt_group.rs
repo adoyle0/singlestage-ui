@@ -1,24 +1,17 @@
-use super::SelectContext;
-use crate::Reactive;
+use crate::{Reactive, SelectContext};
 use leptos::prelude::*;
 
-/// Contains an item with a value to be selected.
+/// Contains a group of items for the Select.
 #[component]
-pub fn SelectItem(
+pub fn SelectOptGroup(
     children: Children,
 
-    /// Set whether or not this item appears disabled and is checkable.
+    /// Set whether or not the items in the group are appear as disabled and can be selected.
     #[prop(optional, into)]
     disabled: Reactive<bool>,
-    /// Set a label describing the meaning of this item.
+    /// Label this group of content.
     #[prop(optional, into)]
     label: MaybeProp<String>,
-    /// Set if this item is initially selected.
-    #[prop(optional, into)]
-    selected: Reactive<bool>,
-    /// Set the value of this item to be submitted with form data.
-    #[prop(optional, into)]
-    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -125,17 +118,7 @@ pub fn SelectItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let select_context = expect_context::<SelectContext>();
-
-    if let Some(value) = value.get_untracked() {
-        selected.set(value == select_context.value.get_untracked())
-    };
-
-    Effect::new(move || {
-        if let Some(value) = value.get() {
-            selected.set(value == select_context.value.get())
-        }
-    });
+    let select = expect_context::<SelectContext>();
 
     let global_attrs_1 = view! {
         <{..}
@@ -178,16 +161,24 @@ pub fn SelectItem(
     };
 
     view! {
-        <option
+        <optgroup
             disabled=move || disabled.get()
             label=move || label.get()
-            selected=move || selected.get()
-            value=move || value.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
+            {if let Some(placeholder) = select.placeholder.get_untracked() {
+                view! {
+                    <option value="singlestage-select-placeholder" disabled hidden selected>
+                        {placeholder}
+                    </option>
+                }
+                    .into_any()
+            } else {
+                "".into_any()
+            }}
             {children()}
-        </option>
+        </optgroup>
     }
 }

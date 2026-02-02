@@ -100,23 +100,23 @@ pub fn ThemeSwitcher() -> impl IntoView {
         <span class="flex space-x-2">
             <Tooltip side="bottom" value="Select theme">
                 <Select value=selected_theme class="h-8">
-                    <SelectContent label="Colors">
-                        <SelectItem value="neutral">"Neutral"</SelectItem>
-                        <SelectItem value="amber">"Amber"</SelectItem>
-                        <SelectItem value="blue">"Blue"</SelectItem>
-                        <SelectItem value="lime">"Lime"</SelectItem>
-                        <SelectItem value="orange">"Orange"</SelectItem>
-                        <SelectItem value="purple">"Purple"</SelectItem>
-                        <SelectItem value="red">"Red"</SelectItem>
-                        <SelectItem value="rose">"Rose"</SelectItem>
-                        <SelectItem value="teal">"Teal"</SelectItem>
-                        <SelectItem value="violet">"Violet"</SelectItem>
-                        <SelectItem value="yellow">"Yellow"</SelectItem>
-                    </SelectContent>
-                    <SelectContent label="Layout">
-                        <SelectItem value="mono">"Mono"</SelectItem>
-                        <SelectItem value="scaled">"Scaled"</SelectItem>
-                    </SelectContent>
+                    <SelectOptGroup label="Colors">
+                        <SelectOption value="neutral">"Neutral"</SelectOption>
+                        <SelectOption value="amber">"Amber"</SelectOption>
+                        <SelectOption value="blue">"Blue"</SelectOption>
+                        <SelectOption value="lime">"Lime"</SelectOption>
+                        <SelectOption value="orange">"Orange"</SelectOption>
+                        <SelectOption value="purple">"Purple"</SelectOption>
+                        <SelectOption value="red">"Red"</SelectOption>
+                        <SelectOption value="rose">"Rose"</SelectOption>
+                        <SelectOption value="teal">"Teal"</SelectOption>
+                        <SelectOption value="violet">"Violet"</SelectOption>
+                        <SelectOption value="yellow">"Yellow"</SelectOption>
+                    </SelectOptGroup>
+                    <SelectOptGroup label="Layout">
+                        <SelectOption value="mono">"Mono"</SelectOption>
+                        <SelectOption value="scaled">"Scaled"</SelectOption>
+                    </SelectOptGroup>
                 </Select>
             </Tooltip>
             <Tooltip side="bottom" value="Toggle dark mode">

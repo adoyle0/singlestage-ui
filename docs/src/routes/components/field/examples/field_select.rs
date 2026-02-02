@@ -10,16 +10,16 @@ pub fn FieldSelectExample() -> impl IntoView {
                     <Field>
                         <FieldLabel>"Department"</FieldLabel>
                         <Select placeholder="Choose department">
-                            <SelectContent>
-                                <SelectItem value="engineering">"Engineering"</SelectItem>
-                                <SelectItem value="design">"Design"</SelectItem>
-                                <SelectItem value="marketing">"Marketing"</SelectItem>
-                                <SelectItem value="sales">"Sales"</SelectItem>
-                                <SelectItem value="support">"Customer Support"</SelectItem>
-                                <SelectItem value="hr">"Human Resources"</SelectItem>
-                                <SelectItem value="finance">"Finance"</SelectItem>
-                                <SelectItem value="operations">"Operations"</SelectItem>
-                            </SelectContent>
+                            <SelectOptGroup>
+                                <SelectOption value="engineering">"Engineering"</SelectOption>
+                                <SelectOption value="design">"Design"</SelectOption>
+                                <SelectOption value="marketing">"Marketing"</SelectOption>
+                                <SelectOption value="sales">"Sales"</SelectOption>
+                                <SelectOption value="support">"Customer Support"</SelectOption>
+                                <SelectOption value="hr">"Human Resources"</SelectOption>
+                                <SelectOption value="finance">"Finance"</SelectOption>
+                                <SelectOption value="operations">"Operations"</SelectOption>
+                            </SelectOptGroup>
                         </Select>
                         <FieldDescription>
                             "Select your department or area of work."

@@ -162,7 +162,11 @@ pub fn Select(
         }
     };
 
-    let on_change = move |ev| value.set(event_target_value(&ev));
+    let on_change = move |ev| {
+        if !multiple.get_untracked().unwrap_or_default() {
+            value.set(event_target_value(&ev))
+        }
+    };
 
     if let Some(default) = default.get_untracked() {
         value.set(default);
@@ -180,7 +184,11 @@ pub fn Select(
         }
     }
 
-    let context = SelectContext { placeholder, value };
+    let context = SelectContext {
+        multiple,
+        placeholder,
+        value,
+    };
 
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {
@@ -251,53 +259,81 @@ pub fn Select(
     let input_id = uuid::Uuid::new_v4();
 
     view! {
-        <select
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                match invalid.get() {
-                    true => Some("true"),
-                    _ => None,
-                }
-            }
-            aria_labelledby=move || {
-                use_context::<FieldContext>().map(|field| field.label_id.get())
-            }
-            node_ref=select_ref
-            on:change=on_change
-            class=move || {
-                format!(
-                    "singlestage-select{} {}",
-                    match value.get().as_str() {
-                        "singlestage-select-placeholder" => " singlestage-select-placeholder",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
-                }
-            } else {
-                id.get_untracked()
-            }}
+        <div class="singlestage-select-wrapper">
+            <Provider value=context>
+                <select
+                    aria_describedby=move || {
+                        if let Some(field) = use_context::<FieldContext>() {
+                            let description_id = field.description_id.get();
+                            if description_id.is_empty() { None } else { Some(description_id) }
+                        } else {
+                            None
+                        }
+                    }
+                    aria_invalid=move || {
+                        match invalid.get() {
+                            true => Some("true"),
+                            _ => None,
+                        }
+                    }
+                    aria_labelledby=move || {
+                        use_context::<FieldContext>().map(|field| field.label_id.get())
+                    }
+                    class=move || {
+                        format!(
+                            "singlestage-select{}{} {}",
+                            match multiple.get() {
+                                Some(true) => " singlestage-select-multi",
+                                _ => "",
+                            },
+                            match value.get().as_str() {
+                                "singlestage-select-placeholder" => {
+                                    " singlestage-select-placeholder"
+                                }
+                                _ => "",
+                            },
+                            class.get().unwrap_or_default(),
+                        )
+                    }
+                    node_ref=select_ref
+                    on:change=on_change
+                    id=move || {
+                        if let Some(field) = use_context::<FieldContext>() {
+                            if let Some(id) = id.get_untracked() {
+                                field.input_id.set(id.clone());
+                                Some(id)
+                            } else {
+                                field.input_id.set(input_id.to_string());
+                                Some(input_id.to_string())
+                            }
+                        } else {
+                            id.get_untracked()
+                        }
+                    }
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-            {..select_attrs}
-        >
-            <Provider value=context>{children()}</Provider>
-        </select>
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..select_attrs}
+                >
+                    {children()}
+                </select>
+                <Show when=move || !multiple.get().is_some()>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="singlestage-select-icon"
+                    >
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </Show>
+            </Provider>
+        </div>
     }
 }

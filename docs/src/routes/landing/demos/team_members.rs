@@ -23,10 +23,10 @@ pub fn TeamMembers() -> impl IntoView {
                         </div>
 
                         <Select default="owner">
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 
@@ -42,11 +42,11 @@ pub fn TeamMembers() -> impl IntoView {
                         </div>
 
                         <Select>
-                            <SelectItem value="empty">"Empty"</SelectItem>
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                            <SelectOption value="empty">"Empty"</SelectOption>
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 
@@ -62,10 +62,10 @@ pub fn TeamMembers() -> impl IntoView {
                         </div>
 
                         <Select default="viewer">
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 

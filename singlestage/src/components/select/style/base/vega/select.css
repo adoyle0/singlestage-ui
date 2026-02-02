@@ -1,0 +1,13 @@
+@layer base {
+  .singlestage-select {
+    @apply data-[size=sm]:h-8
+    min-w-0
+    rounded-md
+    shadow-xs
+    transition-[color,box-shadow];
+
+    &:not(.singlestage-select-multi) {
+      @apply h-9;
+    }
+  }
+}

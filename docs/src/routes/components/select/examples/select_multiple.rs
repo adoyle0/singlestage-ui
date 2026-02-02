@@ -2,9 +2,9 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn SelectDefaultExample() -> impl IntoView {
+pub fn SelectMultipleExample() -> impl IntoView {
     view! {
-        <Select default="pineapple">
+        <Select multiple=true class="h-32">
             <SelectOptGroup label="Fruits">
                 <SelectOption value="apple">"Apple"</SelectOption>
                 <SelectOption value="banana">"Banana"</SelectOption>
