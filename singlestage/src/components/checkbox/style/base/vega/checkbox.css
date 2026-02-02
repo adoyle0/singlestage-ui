@@ -1,0 +1,6 @@
+@layer base {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
+    @apply shadow-xs
+    transition-shadow;
+  }
+}

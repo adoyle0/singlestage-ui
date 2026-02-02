@@ -7,6 +7,10 @@ use leptos::prelude::*;
 pub fn Checkbox(
     #[prop(optional)] children: Option<Children>,
 
+    /// Whether the checkbox is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+
     // CHECKBOX ATTRIBUTES
     //
     /// Reactive signal coupled to the checkbox's checked value.
@@ -242,6 +246,22 @@ pub fn Checkbox(
     let label_id = uuid::Uuid::new_v4();
     let has_children = children.is_some();
 
+    let disabled_invalid = view! {
+        <{..}
+            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_invalid=move || {
+                if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+                    && checkbox_group.invalid.get()
+                {
+                    Some("true".to_string())
+                } else if invalid.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
+        />
+    };
     let custom_attrs = view! {
         <{..}
             aria_describedby=move || {
@@ -250,13 +270,6 @@ pub fn Checkbox(
                     if description_id.is_empty() { None } else { Some(description_id) }
                 } else {
                     None
-                }
-            }
-            aria_invalid=move || {
-                if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-                    checkbox_group.invalid.get().to_string()
-                } else {
-                    false.to_string()
                 }
             }
             aria_labelledby=move || {
@@ -297,9 +310,12 @@ pub fn Checkbox(
                         {..global_attrs_1}
                         {..global_attrs_2}
                         {..custom_attrs}
+                        {..disabled_invalid}
                     />
                     <FieldLabel
                         class=class.get_untracked()
+                        disabled
+                        invalid
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
@@ -312,6 +328,7 @@ pub fn Checkbox(
                         class=move || {
                             format!("singlestage-label {}", class.get().unwrap_or_default())
                         }
+                        {..disabled_invalid}
                         for=move || id.get().unwrap_or(input_id.to_string())
                         id=label_id.to_string()
                     >
@@ -322,6 +339,7 @@ pub fn Checkbox(
                             {..global_attrs_1}
                             {..global_attrs_2}
                             {..custom_attrs}
+                            {..disabled_invalid.clone()}
                         />
                         {children()}
                     </label>
@@ -348,6 +366,7 @@ pub fn Checkbox(
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..custom_attrs}
+                {..disabled_invalid}
             />
         }
         .into_any()

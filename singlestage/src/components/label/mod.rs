@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Renders an accessible label associated with controls
@@ -5,6 +6,12 @@ use leptos::prelude::*;
 pub fn Label(
     children: Children,
 
+    /// Whether the element renders as disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Whether the element renders as invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The id of the labeled element if it's not a child
     #[prop(optional, into)]
     label_for: MaybeProp<String>,
@@ -156,6 +163,8 @@ pub fn Label(
 
     view! {
         <label
+            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true".to_string()) } else { None } }
             for=move || label_for.get()
             class=move || format!("singlestage-label {}", class.get().unwrap_or_default())
 

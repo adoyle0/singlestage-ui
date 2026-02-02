@@ -1,4 +1,4 @@
-use crate::FieldContext;
+use crate::{FieldContext, Reactive};
 use leptos::prelude::*;
 
 /// A styled label associated with the input for a Field.
@@ -6,6 +6,12 @@ use leptos::prelude::*;
 pub fn FieldLabel(
     children: Children,
 
+    /// Whether the element renders as disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Whether the element renders as invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The id of the labeled element if it's not a child
     #[prop(optional, into)]
     label_for: MaybeProp<String>,
@@ -157,6 +163,8 @@ pub fn FieldLabel(
 
     view! {
         <label
+            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true".to_string()) } else { None } }
             class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
             for=move || {
                 if let Some(label_for) = label_for.get() {

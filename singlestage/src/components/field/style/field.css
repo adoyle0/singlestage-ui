@@ -7,9 +7,16 @@
     w-full;
   }
 
-  .singlestage-field:has(> *:disabled) {
+  .singlestage-field:has(*:invalid),
+  .singlestage-field:invalid {
+    @apply text-destructive;
+  }
+
+  .singlestage-field:has(*:disabled),
+  .singlestage-field:disabled {
     .singlestage-field-label {
-      @apply opacity-50;
+      @apply cursor-not-allowed
+      opacity-50;
     }
   }
 

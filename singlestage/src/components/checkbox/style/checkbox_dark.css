@@ -1,0 +1,14 @@
+@layer component {
+  .singlestage-checkbox:not(.singlestage-checkbox-item) {
+    @apply bg-input/30;
+
+    &:checked {
+      @apply bg-primary;
+    }
+
+    &:invalid {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+}

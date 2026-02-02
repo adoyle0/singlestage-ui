@@ -1,34 +1,59 @@
-@layer components {
+@layer component {
   .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply appearance-none
-    aria-invalid:border-destructive
-    aria-invalid:ring-destructive/20
     border
     border-input
-    checked:bg-primary
-    checked:border-primary
-    disabled:cursor-not-allowed
-    disabled:opacity-50
-    focus-visible:border-ring
-    focus-visible:ring-[3px]
-    focus-visible:ring-ring/50
+    duration-100
+    flex
+    items-center
+    justify-center
     outline-none
+    relative
     rounded-[4px]
-    shadow-xs
     shrink-0
     size-4
-    transition-shadow;
+    transition-all;
 
-    &:checked:after {
-      @apply bg-primary-foreground
-      block
-      content-['']
-      size-3.5;
+    &::after {
+      @apply -inset-x-3
+      -inset-y-2
+      absolute;
+    }
 
-      @apply mask-[image:var(--check-icon)]
-      mask-center
-      mask-no-repeat
-      mask-size-[0.875rem];
+    &:checked {
+      @apply bg-primary
+      border-primary
+      text-primary-foreground;
+
+      &:after {
+        @apply bg-primary-foreground
+        content-['']
+        mask-[image:var(--check-icon)]
+        mask-center
+        mask-no-repeat
+        mask-size-[0.875rem];
+      }
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-50;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:invalid {
+      @apply border-destructive
+      ring-[3px]
+      ring-destructive/20;
+
+      &:checked {
+        @apply border-primary;
+      }
     }
   }
 

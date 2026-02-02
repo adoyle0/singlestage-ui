@@ -1,4 +1,4 @@
-use crate::FieldContext;
+use crate::{FieldContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// The core wrapper for a single field. Provides orientation control, invalid state styling, and
@@ -7,6 +7,12 @@ use leptos::{context::Provider, prelude::*};
 pub fn Field(
     children: Children,
 
+    /// Sets whether this Field is disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Sets whether this Field is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// Sets the display orientation.
     ///
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
@@ -166,6 +172,8 @@ pub fn Field(
 
     view! {
         <div
+            aria_disabled=move || if disabled.get() { Some("true".to_string()) } else { None }
+            aria_invalid=move || if invalid.get() { Some("true".to_string()) } else { None }
             class=move || {
                 format!(
                     "singlestage-field{}{}{}",
