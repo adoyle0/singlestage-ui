@@ -1,48 +1,51 @@
 use leptos::prelude::*;
-use singlestage::{card::*, Button, Input, Label};
+use singlestage::*;
 
 #[component]
 pub fn CardExample() -> impl IntoView {
     view! {
-        <Card class="w-full sm:w-sm">
+        <Card class="w-full max-w-sm">
             <CardHeader>
-                <CardTitle>"Log in to your account"</CardTitle>
-                <CardDescription>
-                    "Enter your details below to log in to your account"
-                </CardDescription>
+                <CardTitle>"Login to your account"</CardTitle>
+                <CardDescription>"Enter your email below to login to your account"</CardDescription>
+                <CardAction>
+                    <Button variant="link">"Sign Up"</Button>
+                </CardAction>
             </CardHeader>
             <CardContent>
-                <form class="form grid gap-6">
-                    <div class="grid gap-2">
-                        <Label label_for="demo-card-form-email">"Email"</Label>
-                        <Input input_type="email" id="demo-card-form-email" />
-                    </div>
-                    <div class="grid gap-2">
-                        <div class="flex items-center gap-2">
-                            <Label label_for="demo-card-form-password">"Password"</Label>
-                            <a
-                                href="#"
-                                class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                            >
-                                "Forgot your password?"
-                            </a>
+                <form>
+                    <div class="flex flex-col gap-6">
+                        <div class="grid gap-2">
+                            <Label label_for="email">"Email"</Label>
+                            <Input
+                                id="email"
+                                input_type="email"
+                                placeholder="m@example.com"
+                                required=true
+                            />
                         </div>
-                        <Input input_type="password" id="demo-card-form-password" />
+                        <div class="grid gap-2">
+                            <div class="flex items-center">
+                                <Label label_for="password">"Password"</Label>
+                                <a
+                                    href="#"
+                                    class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                                >
+                                    "Forgot your password?"
+                                </a>
+                            </div>
+                            <Input id="password" input_type="password" required=true />
+                        </div>
                     </div>
                 </form>
             </CardContent>
-            <CardFooter class="flex flex-col items-center gap-2">
-                <Button button_type="button" class="w-full">
-                    "Log in"
+            <CardFooter class="flex-col gap-2">
+                <Button button_type="submit" class="w-full">
+                    "Login"
                 </Button>
-                <Button button_type="button" variant="outline" class="w-full">
-                    "Log in with Google"
+                <Button variant="outline" class="w-full">
+                    "Login with Google"
                 </Button>
-                <p class="mt-4 text-center text-sm">
-                    "Don't have an account? "<a href="#" class="underline-offset-4 hover:underline">
-                        "Sign up"
-                    </a>
-                </p>
             </CardFooter>
         </Card>
     }

@@ -1,8 +1,8 @@
 use leptos::prelude::*;
 
-/// Renders at the top of the card. Contains the card title and card description.
+/// Renders content like a button or a badge in the top-right of the header.
 #[component]
-pub fn CardHeader(
+pub fn CardAction(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -150,12 +150,12 @@ pub fn CardHeader(
     };
 
     view! {
-        <hgroup
-            class=move || { format!("singlestage-card-header {}", class.get().unwrap_or_default()) }
+        <div
+            class=move || { format!("singlestage-card-action {}", class.get().unwrap_or_default()) }
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </hgroup>
+        </div>
     }
 }

@@ -1,46 +1,108 @@
-@layer components {
+@layer component {
+  .singlestage-card-title {
+    @apply font-medium
+    leading-snug
+    text-base;
+  }
+
+  .singlestage-card-description {
+    @apply text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-card-action {
+    @apply col-start-2
+    justify-self-end
+    row-span-2
+    row-start-1
+    self-start;
+  }
+
+  .singlestage-card-content {
+    @apply px-4;
+  }
+
+  .singlestage-card-footer {
+    @apply bg-muted/50
+    border-t
+    flex
+    items-center
+    p-4
+    rounded-b-xl;
+  }
+
+  .singlestage-card-header {
+    @apply auto-rows-min
+    gap-1
+    grid
+    items-start
+    px-4
+    rounded-t-xl;
+
+    &.border-b {
+      @apply pb-4;
+    }
+
+    &:has(.singlestage-card-action) {
+      @apply grid-cols-[1fr_auto];
+    }
+
+    &:has(.singlestage-card-description) {
+      @apply grid-rows-[auto_auto];
+    }
+  }
+
   .singlestage-card {
     @apply bg-card
-    border
     flex
     flex-col
-    gap-6
-    py-6
+    gap-4
+    overflow-hidden
+    py-4
+    ring-1
+    ring-foreground/10
     rounded-xl
-    shadow-sm
-    text-card-foreground;
+    text-card-foreground
+    text-sm;
 
-    > header {
-      @apply @container/card-header
-      [.border-b]:pb-6
-      auto-rows-min
-      gap-1.5
-      grid
-      grid-rows-[auto_auto]
-      has-data-[slot=card-action]:grid-cols-[1fr_auto]
-      items-start
-      px-6;
+    &.singlestage-card-size-sm {
+      @apply gap-3
+      py-3;
 
-      h2 {
-        @apply font-semibold
-        leading-none;
+      .singlestage-card-header {
+        @apply px-3;
+
+        &.border-b {
+          @apply pb-3;
+        }
       }
 
-      p {
-        @apply text-muted-foreground
-        text-sm;
+      .singlestage-card-title {
+        @apply text-sm;
+      }
+
+      .singlestage-card-content {
+        @apply px-3;
+      }
+
+      .singlestage-card-footer {
+        @apply p-3;
       }
     }
 
-    > section {
-      @apply px-6;
+    img:first-child {
+      @apply rounded-t-xl;
+    }
+    img:last-child {
+      @apply rounded-b-xl;
     }
 
-    > footer {
-      @apply [.border-t]:pt-6
-      flex
-      items-center
-      px-6;
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+
+    &:has(.singlestage-card-footer) {
+      @apply pb-0;
     }
   }
 }
