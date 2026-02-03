@@ -246,8 +246,16 @@ pub fn Checkbox(
     let label_id = uuid::Uuid::new_v4();
     let has_children = children.is_some();
 
-    let disabled_invalid = view! {
+    let custom_attrs = view! {
         <{..}
+            aria_describedby=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    let description_id = field.description_id.get();
+                    if description_id.is_empty() { None } else { Some(description_id) }
+                } else {
+                    None
+                }
+            }
             aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
             aria_invalid=move || {
                 if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
@@ -256,18 +264,6 @@ pub fn Checkbox(
                     Some("true".to_string())
                 } else if invalid.get() {
                     Some("true".to_string())
-                } else {
-                    None
-                }
-            }
-        />
-    };
-    let custom_attrs = view! {
-        <{..}
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
                 } else {
                     None
                 }
@@ -290,6 +286,19 @@ pub fn Checkbox(
             }
             disabled=disabled.get_untracked()
             form=move || form.get()
+            id=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        Some(id)
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        Some(input_id.to_string())
+                    }
+                } else {
+                    id.get_untracked()
+                }
+            }
             name=move || name.get()
             node_ref=checkbox_ref
             on:change=on_change
@@ -302,73 +311,18 @@ pub fn Checkbox(
 
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <input
-                        id=move || id.get().unwrap_or(input_id.to_string())
-
-                        {..global_attrs_1}
-                        {..global_attrs_2}
-                        {..custom_attrs}
-                        {..disabled_invalid}
-                    />
-                    <Label
-                        class=class.get_untracked()
-                        disabled
-                        invalid
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </Label>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!("singlestage-label {}", class.get().unwrap_or_default())
-                        }
-                        {..disabled_invalid}
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        <input
-                            class="singlestage-checkbox singlestage-input"
-                            id=move || id.get().unwrap_or(input_id.to_string())
-
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                            {..custom_attrs}
-                            {..disabled_invalid.clone()}
-                        />
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+            <Label
+                class
+                disabled
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                <input {..global_attrs_1} {..global_attrs_2} {..custom_attrs} />
+                {children()}
+            </Label>
         }
         .into_any()
     } else {
-        view! {
-            <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..custom_attrs}
-                {..disabled_invalid}
-            />
-        }
-        .into_any()
+        view! { <input {..global_attrs_1} {..global_attrs_2} {..custom_attrs} /> }.into_any()
     }
 }
