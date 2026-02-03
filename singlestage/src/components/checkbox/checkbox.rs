@@ -7,7 +7,7 @@ use leptos::prelude::*;
 pub fn Checkbox(
     #[prop(optional)] children: Option<Children>,
 
-    /// Whether the checkbox is invalid
+    /// Whether the input is invalid
     #[prop(optional, into)]
     invalid: Reactive<bool>,
 
@@ -246,7 +246,7 @@ pub fn Checkbox(
     let label_id = uuid::Uuid::new_v4();
     let has_children = children.is_some();
 
-    let custom_attrs = view! {
+    let checkbox_attrs = view! {
         <{..}
             aria_describedby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -286,7 +286,7 @@ pub fn Checkbox(
             }
             disabled=disabled.get_untracked()
             form=move || form.get()
-            id=move || {
+            id={
                 if let Some(field) = use_context::<FieldContext>() {
                     if let Some(id) = id.get_untracked() {
                         field.input_id.set(id.clone());
@@ -317,12 +317,12 @@ pub fn Checkbox(
                 invalid
                 label_for=id.get_untracked().unwrap_or(input_id.to_string())
             >
-                <input {..global_attrs_1} {..global_attrs_2} {..custom_attrs} />
+                <input {..global_attrs_1} {..global_attrs_2} {..checkbox_attrs} />
                 {children()}
             </Label>
         }
         .into_any()
     } else {
-        view! { <input {..global_attrs_1} {..global_attrs_2} {..custom_attrs} /> }.into_any()
+        view! { <input {..global_attrs_1} {..global_attrs_2} {..checkbox_attrs} /> }.into_any()
     }
 }

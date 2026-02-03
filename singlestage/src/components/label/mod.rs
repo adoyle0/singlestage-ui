@@ -165,6 +165,8 @@ pub fn Label(
         />
     };
 
+    let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+
     view! {
         <label
             aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
@@ -204,13 +206,11 @@ pub fn Label(
 
             id={if use_context::<PopoverMenuContext>().is_some() {
                 let group = expect_context::<PopoverMenuGroupContext>();
-                let uuid = uuid::Uuid::new_v4();
-                group.heading_id.set(uuid.to_string());
-                Some(uuid.to_string())
+                group.heading_id.set(label_id.clone());
+                Some(label_id.to_owned())
             } else if let Some(field_context) = use_context::<FieldContext>() {
-                let label_id = id.get_untracked().unwrap_or(uuid::Uuid::new_v4().to_string());
                 field_context.label_id.set(label_id.clone());
-                Some(label_id)
+                Some(label_id.to_owned())
             } else {
                 None
             }}

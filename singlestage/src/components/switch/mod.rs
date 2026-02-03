@@ -6,6 +6,10 @@ use leptos::prelude::*;
 pub fn Switch(
     #[prop(optional)] children: Option<Children>,
 
+    /// Whether the input is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+
     // CHECKBOX ATTRIBUTES
     //
     /// Whether the command or control is checked
@@ -243,7 +247,7 @@ pub fn Switch(
     let label_id = uuid::Uuid::new_v4();
     let has_children = children.is_some();
 
-    let custom_attrs = view! {
+    let switch_attrs = view! {
         <{..}
             aria_describedby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -253,7 +257,8 @@ pub fn Switch(
                     None
                 }
             }
-            aria-invalid=move || {
+            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_invalid=move || {
                 if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
                     checkbox_group.invalid.get().to_string()
                 } else {
@@ -273,6 +278,19 @@ pub fn Switch(
             class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
             disabled=disabled.get_untracked()
             form=move || form.get()
+            id={
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        Some(id)
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        Some(input_id.to_string())
+                    }
+                } else {
+                    id.get_untracked()
+                }
+            }
             name=move || name.get()
             node_ref=switch_ref
             on:change=on_change
@@ -286,66 +304,13 @@ pub fn Switch(
 
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <input
-                        id=move || id.get().unwrap_or(input_id.to_string())
-
-                        {..global_attrs_1}
-                        {..global_attrs_2}
-                        {..custom_attrs}
-                    />
-                    <Label
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </Label>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!("singlestage-label {}", class.get().unwrap_or_default())
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        <input
-                            id=move || id.get().unwrap_or(input_id.to_string())
-
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                            {..custom_attrs}
-                        />
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+            <Label class disabled invalid label_for=id.get().unwrap_or(input_id.to_string())>
+                <input {..global_attrs_1} {..global_attrs_2} {..switch_attrs} />
+                {children()}
+            </Label>
         }
         .into_any()
     } else {
-        view! {
-            <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..custom_attrs}
-            />
-        }
-        .into_any()
+        view! { <input {..global_attrs_1} {..global_attrs_2} {..switch_attrs} /> }.into_any()
     }
 }
