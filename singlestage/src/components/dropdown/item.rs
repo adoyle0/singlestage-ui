@@ -1,9 +1,9 @@
-use crate::{DropdownMenuContext, Reactive};
+use crate::{PopoverMenuContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains a menu item.
 #[component]
-pub fn DropdownMenuItem(
+pub fn MenuItem(
     children: Children,
 
     /// Controls whether the item appears disabled and is clickable.
@@ -129,7 +129,7 @@ pub fn DropdownMenuItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<DropdownMenuContext>();
+    let menu = expect_context::<PopoverMenuContext>();
 
     let global_attrs_1 = view! {
         <{..}

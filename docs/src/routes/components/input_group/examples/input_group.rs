@@ -30,14 +30,14 @@ pub fn InputGroupExample() -> impl IntoView {
                         {icon!(icondata::LuPlus)}
                     </Button>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <MenuTrigger>
                             <Button>"Auto"</Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent class="[--radius:0.95rem]">
-                            <DropdownMenuItem>"Auto"</DropdownMenuItem>
-                            <DropdownMenuItem>"Agent"</DropdownMenuItem>
-                            <DropdownMenuItem>"Manual"</DropdownMenuItem>
-                        </DropdownMenuContent>
+                        </MenuTrigger>
+                        <MenuContent class="[--radius:0.95rem]">
+                            <MenuItem>"Auto"</MenuItem>
+                            <MenuItem>"Agent"</MenuItem>
+                            <MenuItem>"Manual"</MenuItem>
+                        </MenuContent>
                     </DropdownMenu>
                     <InputGroupText class="ml-auto">"52% used"</InputGroupText>
                     <Separator vertical=true class="!h-4" />

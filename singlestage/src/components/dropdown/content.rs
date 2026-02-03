@@ -1,9 +1,9 @@
-use crate::DropdownMenuContext;
+use crate::{ContextMenuContext, PopoverMenuContext};
 use leptos::prelude::*;
 
 /// The component that pops out when the dropdown menu is open.
 #[component]
-pub fn DropdownMenuContent(
+pub fn MenuContent(
     children: Children,
 
     /// Set how to align the popover
@@ -118,7 +118,7 @@ pub fn DropdownMenuContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<DropdownMenuContext>();
+    let menu = expect_context::<PopoverMenuContext>();
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     Effect::new(move || {
@@ -167,30 +167,48 @@ pub fn DropdownMenuContent(
         <menu
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-animations {} {} {}",
-                    match side.get().unwrap_or_default().as_str() {
-                        "top" => "singlestage-popover-top",
-                        "right" => "singlestage-popover-right",
-                        "left" => "singlestage-popover-left",
-                        _ => "singlestage-popover-bottom",
-                    },
-                    match align.get().unwrap_or_default().as_str() {
-                        "center" => "singlestage-popover-center",
-                        "end" => "singlestage-popover-end",
-                        _ => "singlestage-popover-start",
+                    "singlestage-dropdown-menu-content singlestage-popover {} {}",
+                    if use_context::<ContextMenuContext>().is_some() {
+                        "".to_owned()
+                    } else {
+                        format!(
+                            "singlestage-popover-animations {} {}",
+                            match side.get().unwrap_or_default().as_str() {
+                                "top" => "singlestage-popover-top",
+                                "right" => "singlestage-popover-right",
+                                "left" => "singlestage-popover-left",
+                                _ => "singlestage-popover-bottom",
+                            },
+                            match align.get().unwrap_or_default().as_str() {
+                                "center" => "singlestage-popover-center",
+                                "end" => "singlestage-popover-end",
+                                _ => "singlestage-popover-start",
+                            },
+                        )
                     },
                     class.get().unwrap_or_default(),
                 )
             }
-            node_ref=menu_ref
             id={
                 let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                 menu.menu_id.set(menu_id.clone());
                 menu_id
             }
+            node_ref=menu_ref
+            on:contextmenu=move |ev| {
+                if use_context::<ContextMenuContext>().is_some() {
+                    ev.prevent_default();
+                }
+            }
             popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
-            style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
             role="menu"
+            style=move || {
+                if let Some(context_menu) = use_context::<ContextMenuContext>() {
+                    format!("left: {}px; top: {}px", context_menu.x.get(), context_menu.y.get())
+                } else {
+                    format!("position-anchor: --{}", menu.trigger_id.get())
+                }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

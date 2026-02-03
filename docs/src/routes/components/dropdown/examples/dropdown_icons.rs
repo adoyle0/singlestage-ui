@@ -5,18 +5,16 @@ use singlestage::*;
 pub fn DropdownIconsExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">"Open"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem>{icon!(icondata::LuUser)} "Profile"</DropdownMenuItem>
-                <DropdownMenuItem>{icon!(icondata::LuCreditCard)} "Billing"</DropdownMenuItem>
-                <DropdownMenuItem>{icon!(icondata::LuSettings)} "Settings"</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">
-                    {icon!(icondata::LuLogOut)} "Log out"
-                </DropdownMenuItem>
-            </DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuItem>{icon!(icondata::LuUser)} "Profile"</MenuItem>
+                <MenuItem>{icon!(icondata::LuCreditCard)} "Billing"</MenuItem>
+                <MenuItem>{icon!(icondata::LuSettings)} "Settings"</MenuItem>
+                <Separator />
+                <MenuItem variant="destructive">{icon!(icondata::LuLogOut)} "Log out"</MenuItem>
+            </MenuContent>
         </DropdownMenu>
     }
 }

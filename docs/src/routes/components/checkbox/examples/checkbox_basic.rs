@@ -7,9 +7,7 @@ pub fn CheckboxBasicExample() -> impl IntoView {
         <FieldGroup class="mx-auto w-56">
             <Field orientation="horizontal">
                 <Checkbox id="terms-checkbox-basic" name="terms-checkbox-basic" />
-                <FieldLabel label_for="terms-checkbox-basic">
-                    "Accept terms and conditions"
-                </FieldLabel>
+                <Label label_for="terms-checkbox-basic">"Accept terms and conditions"</Label>
             </Field>
         </FieldGroup>
     }

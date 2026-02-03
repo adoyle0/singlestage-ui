@@ -8,7 +8,7 @@ pub fn FieldSelectExample() -> impl IntoView {
             <FieldSet>
                 <FieldGroup>
                     <Field>
-                        <FieldLabel>"Department"</FieldLabel>
+                        <Label>"Department"</Label>
                         <Select placeholder="Choose department">
                             <SelectOptGroup>
                                 <SelectOption value="engineering">"Engineering"</SelectOption>

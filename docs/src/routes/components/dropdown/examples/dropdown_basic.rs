@@ -1,25 +1,25 @@
 use leptos::prelude::*;
-use singlestage::{Button, dropdown::*};
+use singlestage::*;
 
 #[component]
 pub fn DropdownBasicExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">"Open"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"My Account"</DropdownMenuLabel>
-                    <DropdownMenuItem>"Profile"</DropdownMenuItem>
-                    <DropdownMenuItem>"Billing"</DropdownMenuItem>
-                    <DropdownMenuItem>"Settings"</DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>"GitHub"</DropdownMenuItem>
-                <DropdownMenuItem>"Support"</DropdownMenuItem>
-                <DropdownMenuItem disabled=true>"API"</DropdownMenuItem>
-            </DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuGroup>
+                    <Label>"My Account"</Label>
+                    <MenuItem>"Profile"</MenuItem>
+                    <MenuItem>"Billing"</MenuItem>
+                    <MenuItem>"Settings"</MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuItem>"GitHub"</MenuItem>
+                <MenuItem>"Support"</MenuItem>
+                <MenuItem disabled=true>"API"</MenuItem>
+            </MenuContent>
         </DropdownMenu>
     }
 }

@@ -1,4 +1,4 @@
-use crate::{FieldContext, FieldLabel, Reactive};
+use crate::{FieldContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// Creates a textarea that takes children as a default value.
@@ -299,12 +299,12 @@ pub fn Textarea(
         view! {
             {if use_context::<FieldContext>().is_some() {
                 view! {
-                    <FieldLabel
+                    <Label
                         class=class.get_untracked()
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
-                    </FieldLabel>
+                    </Label>
                 }
                     .into_any()
             } else {

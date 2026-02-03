@@ -11,6 +11,10 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display as disabled.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display as invalid.""" },
   { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \
     <label> `for` attribute to avoid name collisions.""" },
 ]

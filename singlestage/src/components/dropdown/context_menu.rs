@@ -1,14 +1,16 @@
-use crate::ContextMenuGroupContext;
-use leptos::prelude::*;
+use crate::PopoverMenuContext;
+use leptos::{context::Provider, prelude::*};
 
-/// Labels groups.
+#[derive(Clone, Default)]
+pub struct ContextMenuContext {
+    pub x: RwSignal<i32>,
+    pub y: RwSignal<i32>,
+}
+
+/// Contains all the parts of a context menu.
 #[component]
-pub fn ContextMenuLabel(
+pub fn ContextMenu(
     children: Children,
-
-    /// Set whether or not this element should display inset from its normal position.
-    #[prop(optional, into)]
-    inset: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -51,6 +53,9 @@ pub fn ContextMenuLabel(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -88,6 +93,9 @@ pub fn ContextMenuLabel(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -109,10 +117,12 @@ pub fn ContextMenuLabel(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let group = expect_context::<ContextMenuGroupContext>();
-
-    let uuid = uuid::Uuid::new_v4().to_string();
-    group.heading_id.set(uuid.clone());
+    let context = PopoverMenuContext {
+        ..Default::default()
+    };
+    let context_menu = ContextMenuContext {
+        ..Default::default()
+    };
 
     let global_attrs_1 = view! {
         <{..}
@@ -125,6 +135,7 @@ pub fn ContextMenuLabel(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -142,6 +153,7 @@ pub fn ContextMenuLabel(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -152,24 +164,15 @@ pub fn ContextMenuLabel(
     };
 
     view! {
-        <h6
-            id=uuid
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-label{} {}",
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <div
+            class=move || format!("singlestage-context-menu {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
-        </h6>
+            <Provider value=context_menu>
+                <Provider value=context>{children()}</Provider>
+            </Provider>
+        </div>
     }
 }

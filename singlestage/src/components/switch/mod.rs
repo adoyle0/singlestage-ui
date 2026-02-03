@@ -1,4 +1,4 @@
-use crate::{CheckboxGroupContext, FieldContext, FieldLabel, Reactive};
+use crate::{CheckboxGroupContext, FieldContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// A control that allows the user to toggle between checked and not checked.
@@ -295,12 +295,12 @@ pub fn Switch(
                         {..global_attrs_2}
                         {..custom_attrs}
                     />
-                    <FieldLabel
+                    <Label
                         class=class.get_untracked()
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
-                    </FieldLabel>
+                    </Label>
                 }
                     .into_any()
             } else {

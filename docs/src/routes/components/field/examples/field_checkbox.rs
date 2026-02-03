@@ -31,7 +31,7 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                 <FieldSeparator />
                 <Field orientation="horizontal">
                     <Checkbox checked=true />
-                    <FieldLabel>
+                    <Label>
                         <FieldContent>
                             <FieldTitle>"Sync Desktop & Documents folders"</FieldTitle>
                             <FieldDescription>
@@ -39,7 +39,7 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                                 Drive. You can access them from other devices."
                             </FieldDescription>
                         </FieldContent>
-                    </FieldLabel>
+                    </Label>
                 </Field>
             </FieldGroup>
         </div>

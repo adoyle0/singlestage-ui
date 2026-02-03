@@ -11,7 +11,7 @@ pub fn CheckboxDisabledExample() -> impl IntoView {
                     name="toggle-checkbox-disabled"
                     disabled=true
                 />
-                <FieldLabel label_for="toggle-checkbox-disabled">"Enable notifications"</FieldLabel>
+                <Label label_for="toggle-checkbox-disabled">"Enable notifications"</Label>
             </Field>
         </FieldGroup>
     }

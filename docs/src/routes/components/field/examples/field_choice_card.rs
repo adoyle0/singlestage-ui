@@ -13,25 +13,25 @@ pub fn FieldChoiceCardExample() -> impl IntoView {
                 <FieldGroup>
                     <RadioGroup default="kubernetes">
                         <Field orientation="horizontal" variant="button">
-                            <FieldLabel>
+                            <Label>
                                 <FieldContent>
                                     <FieldTitle>"Kubernetes"</FieldTitle>
                                     <FieldDescription>
                                         "Run GPU workloads on a K8s configured cluster."
                                     </FieldDescription>
                                 </FieldContent>
-                            </FieldLabel>
+                            </Label>
                             <Radio value="kubernetes" />
                         </Field>
                         <Field orientation="horizontal" variant="button">
-                            <FieldLabel>
+                            <Label>
                                 <FieldContent>
                                     <FieldTitle>"Virtual Machine"</FieldTitle>
                                     <FieldDescription>
                                         "Access a VM configured cluster to run GPU workloads."
                                     </FieldDescription>
                                 </FieldContent>
-                            </FieldLabel>
+                            </Label>
                             <Radio value="vm" />
                         </Field>
                     </RadioGroup>

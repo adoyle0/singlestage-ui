@@ -15,19 +15,19 @@ pub fn PopoverExample() -> impl IntoView {
                         <FieldDescription>"Set the dimensions for the layer."</FieldDescription>
                         <FieldGroup class="gap-2 [&_input]:max-w-48 [&_input]:h-8">
                             <Field orientation="horizontal">
-                                <FieldLabel>"Width"</FieldLabel>
+                                <Label>"Width"</Label>
                                 <Input value="100%" autofocus=true />
                             </Field>
                             <Field orientation="horizontal">
-                                <FieldLabel>"Max. width"</FieldLabel>
+                                <Label>"Max. width"</Label>
                                 <Input value="300px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <FieldLabel>"Height"</FieldLabel>
+                                <Label>"Height"</Label>
                                 <Input value="25px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <FieldLabel>"Max. height"</FieldLabel>
+                                <Label>"Max. height"</Label>
                                 <Input value="none" />
                             </Field>
                         </FieldGroup>

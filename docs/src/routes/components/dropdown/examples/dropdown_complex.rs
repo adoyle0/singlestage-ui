@@ -17,79 +17,69 @@ pub fn DropdownComplexExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">"Complex Menu"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="w-44">
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"File"</DropdownMenuLabel>
-                    <DropdownMenuItem>
-                        {icon!(icondata::LuFile)} "New File"
-                        <DropdownMenuShortcut>"⌘N"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
+            </MenuTrigger>
+            <MenuContent class="w-44">
+                <MenuGroup>
+                    <Label>"File"</Label>
+                    <MenuItem>
+                        {icon!(icondata::LuFile)} "New File" <MenuShortcut>"⌘N"</MenuShortcut>
+                    </MenuItem>
+                    <MenuItem>
                         {icon!(icondata::LuFolder)} "New Folder"
-                        <DropdownMenuShortcut>"⇧⌘N"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuSub>
-                        <DropdownMenuSubTrigger>
+                        <MenuShortcut>"⇧⌘N"</MenuShortcut>
+                    </MenuItem>
+                    <MenuSub>
+                        <MenuSubTrigger>
                             {icon!(icondata::LuFolderOpen)} "Open Recent"
-                        </DropdownMenuSubTrigger>
-                        <DropdownMenuSubContent>
-                            <DropdownMenuGroup>
-                                <DropdownMenuLabel>"Recent Projects"</DropdownMenuLabel>
-                                <DropdownMenuItem>
-                                    {icon!(icondata::LuFileCode)} "Project Alpha"
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    {icon!(icondata::LuFileCode)} "Project Beta"
-                                </DropdownMenuItem>
-                                <DropdownMenuSub>
-                                    <DropdownMenuSubTrigger>
+                        </MenuSubTrigger>
+                        <MenuSubContent>
+                            <MenuGroup>
+                                <Label>"Recent Projects"</Label>
+                                <MenuItem>{icon!(icondata::LuFileCode)} "Project Alpha"</MenuItem>
+                                <MenuItem>{icon!(icondata::LuFileCode)} "Project Beta"</MenuItem>
+                                <MenuSub>
+                                    <MenuSubTrigger>
                                         {icon!(icondata::FiMoreHorizontal)} "More Projects"
-                                    </DropdownMenuSubTrigger>
-                                    <DropdownMenuSubContent>
-                                        <DropdownMenuItem>
+                                    </MenuSubTrigger>
+                                    <MenuSubContent>
+                                        <MenuItem>
                                             {icon!(icondata::LuFileCode)} "Project Gamma"
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
+                                        </MenuItem>
+                                        <MenuItem>
                                             {icon!(icondata::LuFileCode)} "Project Delta"
-                                        </DropdownMenuItem>
-                                    </DropdownMenuSubContent>
-                                </DropdownMenuSub>
-                            </DropdownMenuGroup>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem>
-                                    {icon!(icondata::LuFolderSearch)} "Browse..."
-                                </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                        </DropdownMenuSubContent>
-                    </DropdownMenuSub>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                        {icon!(icondata::LuSave)} "Save"
-                        <DropdownMenuShortcut>"⌘S"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
+                                        </MenuItem>
+                                    </MenuSubContent>
+                                </MenuSub>
+                            </MenuGroup>
+                            <Separator />
+                            <MenuGroup>
+                                <MenuItem>{icon!(icondata::LuFolderSearch)} "Browse..."</MenuItem>
+                            </MenuGroup>
+                        </MenuSubContent>
+                    </MenuSub>
+                    <Separator />
+                    <MenuItem>
+                        {icon!(icondata::LuSave)} "Save" <MenuShortcut>"⌘S"</MenuShortcut>
+                    </MenuItem>
+                    <MenuItem>
                         {icon!(icondata::LuDownload)} "Export"
-                        <DropdownMenuShortcut>"⇧⌘E"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"View"</DropdownMenuLabel>
+                        <MenuShortcut>"⇧⌘E"</MenuShortcut>
+                    </MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <Label>"View"</Label>
                     <CheckboxItem checked=true>
                         {icon!(icondata::LuEye)} "Show Sidebar"
                     </CheckboxItem>
                     <CheckboxItem>{icon!(icondata::FiLayout)} "Show Status Bar"</CheckboxItem>
-                    <DropdownMenuSub>
-                        <DropdownMenuSubTrigger>
-                            {icon!(icondata::LuPalette)} "Theme"
-                        </DropdownMenuSubTrigger>
-                        <DropdownMenuSubContent>
-                            <DropdownMenuGroup>
-                                <DropdownMenuLabel>"Appearance"</DropdownMenuLabel>
+                    <MenuSub>
+                        <MenuSubTrigger>{icon!(icondata::LuPalette)} "Theme"</MenuSubTrigger>
+                        <MenuSubContent>
+                            <MenuGroup>
+                                <Label>"Appearance"</Label>
                                 <RadioGroup value=theme>
                                     <RadioItem value="light">
                                         {icon!(icondata::LuSun)} "Light"
@@ -101,38 +91,33 @@ pub fn DropdownComplexExample() -> impl IntoView {
                                         {icon!(icondata::LuMonitor)} "System"
                                     </RadioItem>
                                 </RadioGroup>
-                            </DropdownMenuGroup>
-                        </DropdownMenuSubContent>
-                    </DropdownMenuSub>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"Account"</DropdownMenuLabel>
-                    <DropdownMenuItem>
-                        {icon!(icondata::LuUser)} "Profile"
-                        <DropdownMenuShortcut>"⇧⌘P"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>{icon!(icondata::LuCreditCard)} "Billing"</DropdownMenuItem>
-                    <DropdownMenuSub>
-                        <DropdownMenuSubTrigger>
-                            {icon!(icondata::LuSettings)} "Settings"
-                        </DropdownMenuSubTrigger>
-                        <DropdownMenuSubContent>
-                            <DropdownMenuGroup>
-                                <DropdownMenuLabel>"Preferences"</DropdownMenuLabel>
-                                <DropdownMenuItem>
+                            </MenuGroup>
+                        </MenuSubContent>
+                    </MenuSub>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <Label>"Account"</Label>
+                    <MenuItem>
+                        {icon!(icondata::LuUser)} "Profile" <MenuShortcut>"⇧⌘P"</MenuShortcut>
+                    </MenuItem>
+                    <MenuItem>{icon!(icondata::LuCreditCard)} "Billing"</MenuItem>
+                    <MenuSub>
+                        <MenuSubTrigger>{icon!(icondata::LuSettings)} "Settings"</MenuSubTrigger>
+                        <MenuSubContent>
+                            <MenuGroup>
+                                <Label>"Preferences"</Label>
+                                <MenuItem>
                                     {icon!(icondata::LuKeyboard)} "Keyboard Shortcuts"
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    {icon!(icondata::LuLanguages)} "Language"
-                                </DropdownMenuItem>
-                                <DropdownMenuSub>
-                                    <DropdownMenuSubTrigger>
+                                </MenuItem>
+                                <MenuItem>{icon!(icondata::LuLanguages)} "Language"</MenuItem>
+                                <MenuSub>
+                                    <MenuSubTrigger>
                                         {icon!(icondata::LuBell)} "Notifications"
-                                    </DropdownMenuSubTrigger>
-                                    <DropdownMenuSubContent>
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuLabel>"Notification Types"</DropdownMenuLabel>
+                                    </MenuSubTrigger>
+                                    <MenuSubContent>
+                                        <MenuGroup>
+                                            <Label>"Notification Types"</Label>
                                             <CheckboxItem checked=notifications
                                                 .push>
                                                 {icon!(icondata::LuBell)} "Push Notifications"
@@ -141,36 +126,32 @@ pub fn DropdownComplexExample() -> impl IntoView {
                                                 .email>
                                                 {icon!(icondata::LuMail)} "Email Notifications"
                                             </CheckboxItem>
-                                        </DropdownMenuGroup>
-                                    </DropdownMenuSubContent>
-                                </DropdownMenuSub>
-                            </DropdownMenuGroup>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem>
+                                        </MenuGroup>
+                                    </MenuSubContent>
+                                </MenuSub>
+                            </MenuGroup>
+                            <Separator />
+                            <MenuGroup>
+                                <MenuItem>
                                     {icon!(icondata::LuShield)} "Privacy & Security"
-                                </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                        </DropdownMenuSubContent>
-                    </DropdownMenuSub>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        {icon!(icondata::FiHelpCircle)} "Help & Support"
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        {icon!(icondata::LuFileText)} "Documentation"
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem variant="destructive">
+                                </MenuItem>
+                            </MenuGroup>
+                        </MenuSubContent>
+                    </MenuSub>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <MenuItem>{icon!(icondata::FiHelpCircle)} "Help & Support"</MenuItem>
+                    <MenuItem>{icon!(icondata::LuFileText)} "Documentation"</MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <MenuItem variant="destructive">
                         {icon!(icondata::LuLogOut)} "Sign Out"
-                        <DropdownMenuShortcut>"⇧⌘Q"</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-            </DropdownMenuContent>
+                        <MenuShortcut>"⇧⌘Q"</MenuShortcut>
+                    </MenuItem>
+                </MenuGroup>
+            </MenuContent>
         </DropdownMenu>
     }
 }

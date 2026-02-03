@@ -8,7 +8,7 @@ pub fn FieldSwitchExample() -> impl IntoView {
             <FieldSet>
                 <FieldGroup>
                     <Field orientation="horizontal">
-                        <FieldLabel>
+                        <Label>
                             <FieldContent>
                                 <FieldTitle>"Multi-factor authentication"</FieldTitle>
                                 <FieldDescription>
@@ -16,7 +16,7 @@ pub fn FieldSwitchExample() -> impl IntoView {
                                     device, you can use a one-time code sent to your email."
                                 </FieldDescription>
                             </FieldContent>
-                        </FieldLabel>
+                        </Label>
                         <Switch />
                     </Field>
                 </FieldGroup>

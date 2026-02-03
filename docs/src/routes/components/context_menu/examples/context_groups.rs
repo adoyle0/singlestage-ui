@@ -5,52 +5,36 @@ use singlestage::*;
 pub fn ContextGroupsExample() -> impl IntoView {
     view! {
         <ContextMenu>
-            <ContextMenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-xl border border-dashed text-sm">
+            <MenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-xl border border-dashed text-sm">
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
-            </ContextMenuTrigger>
-            <ContextMenuContent>
-                <ContextMenuGroup>
-                    <ContextMenuLabel>"File"</ContextMenuLabel>
-                    <ContextMenuItem>
-                        "New File" <ContextMenuShortcut>"⌘N"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Open File" <ContextMenuShortcut>"⌘O"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Save" <ContextMenuShortcut>"⌘S"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                </ContextMenuGroup>
-                <ContextMenuSeparator />
-                <ContextMenuGroup>
-                    <ContextMenuLabel>"Edit"</ContextMenuLabel>
-                    <ContextMenuItem>
-                        "Undo" <ContextMenuShortcut>"⌘Z"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Redo" <ContextMenuShortcut>"⇧⌘Z"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                </ContextMenuGroup>
-                <ContextMenuSeparator />
-                <ContextMenuGroup>
-                    <ContextMenuItem>
-                        "Cut" <ContextMenuShortcut>"⌘X"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Copy" <ContextMenuShortcut>"⌘C"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                        "Paste" <ContextMenuShortcut>"⌘V"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                </ContextMenuGroup>
-                <ContextMenuSeparator />
-                <ContextMenuGroup>
-                    <ContextMenuItem variant="destructive">
-                        "Delete" <ContextMenuShortcut>"⌫"</ContextMenuShortcut>
-                    </ContextMenuItem>
-                </ContextMenuGroup>
-            </ContextMenuContent>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuGroup>
+                    <Label>"File"</Label>
+                    <MenuItem>"New File" <MenuShortcut>"⌘N"</MenuShortcut></MenuItem>
+                    <MenuItem>"Open File" <MenuShortcut>"⌘O"</MenuShortcut></MenuItem>
+                    <MenuItem>"Save" <MenuShortcut>"⌘S"</MenuShortcut></MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <Label>"Edit"</Label>
+                    <MenuItem>"Undo" <MenuShortcut>"⌘Z"</MenuShortcut></MenuItem>
+                    <MenuItem>"Redo" <MenuShortcut>"⇧⌘Z"</MenuShortcut></MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <MenuItem>"Cut" <MenuShortcut>"⌘X"</MenuShortcut></MenuItem>
+                    <MenuItem>"Copy" <MenuShortcut>"⌘C"</MenuShortcut></MenuItem>
+                    <MenuItem>"Paste" <MenuShortcut>"⌘V"</MenuShortcut></MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <MenuItem variant="destructive">
+                        "Delete" <MenuShortcut>"⌫"</MenuShortcut>
+                    </MenuItem>
+                </MenuGroup>
+            </MenuContent>
         </ContextMenu>
     }
 }

@@ -1,4 +1,4 @@
-use crate::{FieldContext, FieldLabel, Reactive};
+use crate::{FieldContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// A simple component containing all parts of a slider.
@@ -375,12 +375,12 @@ pub fn Slider(
         view! {
             {if use_context::<FieldContext>().is_some() {
                 view! {
-                    <FieldLabel
+                    <Label
                         class=class.get_untracked()
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
-                    </FieldLabel>
+                    </Label>
                 }
                     .into_any()
             } else {

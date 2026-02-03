@@ -1,3 +1,4 @@
+use crate::PopoverMenuContext;
 use leptos::prelude::*;
 
 /// The separator.
@@ -152,21 +153,40 @@ pub fn Separator(
         />
     };
 
-    view! {
-        <div
-            class=move || {
-                format!(
-                    "singlestage-separator {} {}",
-                    match vertical.get().unwrap_or_default() {
-                        true => "singlestage-separator-vertical",
-                        _ => "singlestage-separator-horizontal",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+    if use_context::<PopoverMenuContext>().is_some() {
+        view! {
+            <hr
+                class=move || {
+                    format!(
+                        "singlestage-dropdown-menu-separator {}",
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                role="separator"
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        ></div>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+        }
+        .into_any()
+    } else {
+        view! {
+            <div
+                class=move || {
+                    format!(
+                        "singlestage-separator {} {}",
+                        match vertical.get().unwrap_or_default() {
+                            true => "singlestage-separator-vertical",
+                            _ => "singlestage-separator-horizontal",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            ></div>
+        }
+        .into_any()
     }
 }

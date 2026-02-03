@@ -3,11 +3,7 @@ use singlestage::*;
 
 #[component]
 fn Item() -> impl IntoView {
-    view! {
-        <DropdownMenuItem on:click=move |_| {
-            leptos::logging::log!("hey")
-        }>"Click me"</DropdownMenuItem>
-    }
+    view! { <MenuItem on:click=move |_| { leptos::logging::log!("hey") }>"Click me"</MenuItem> }
 }
 
 #[component]
@@ -28,137 +24,137 @@ pub fn DebugDropdown() -> impl IntoView {
         <Switch checked=open />
 
         <DropdownMenu open dismissable=false>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Signal"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"No dismiss"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem dismiss=false>"no dismiss"</DropdownMenuItem>
-            </DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuItem dismiss=false>"no dismiss"</MenuItem>
+            </MenuContent>
         </DropdownMenu>
 
         // top
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Top Start"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="top">
+            </MenuTrigger>
+            <MenuContent side="top">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Top Center"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" side="top">
+            </MenuTrigger>
+            <MenuContent align="center" side="top">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Top End"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" side="top">
+            </MenuTrigger>
+            <MenuContent align="end" side="top">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         // right
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Right Start"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="right">
+            </MenuTrigger>
+            <MenuContent side="right">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Right Center"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" side="right">
+            </MenuTrigger>
+            <MenuContent align="center" side="right">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Right End"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" side="right">
+            </MenuTrigger>
+            <MenuContent align="end" side="right">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         // bottom
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Bottom Start"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button size="sm">"Bottom Center"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center">
+            </MenuTrigger>
+            <MenuContent align="center">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Bottom End"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            </MenuTrigger>
+            <MenuContent align="end">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         // left
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Left Start"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="left">
+            </MenuTrigger>
+            <MenuContent side="left">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Left Center"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" side="left">
+            </MenuTrigger>
+            <MenuContent align="center" side="left">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button>"Left End"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" side="left">
+            </MenuTrigger>
+            <MenuContent align="end" side="left">
                 <Item />
-            </DropdownMenuContent>
+            </MenuContent>
         </DropdownMenu>
     }
 }

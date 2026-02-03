@@ -9,16 +9,16 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter file name" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <MenuTrigger>
                             <Button aria_label="More" title="More">
                                 {icon!(icondata::FiMoreHorizontal)}
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem>"Settings"</DropdownMenuItem>
-                            <DropdownMenuItem>"Copy path"</DropdownMenuItem>
-                            <DropdownMenuItem>"Open location"</DropdownMenuItem>
-                        </DropdownMenuContent>
+                        </MenuTrigger>
+                        <MenuContent align="end">
+                            <MenuItem>"Settings"</MenuItem>
+                            <MenuItem>"Copy path"</MenuItem>
+                            <MenuItem>"Open location"</MenuItem>
+                        </MenuContent>
                     </DropdownMenu>
                 </InputGroupAddon>
             </InputGroup>
@@ -26,16 +26,16 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter search query" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <MenuTrigger>
                             <Button class="!pr-1.5 text-xs">
                                 "Search In..." {icon!(icondata::LuChevronDown, class="size-3")}
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" class="[--radius:0.95rem]">
-                            <DropdownMenuItem>"Documentation"</DropdownMenuItem>
-                            <DropdownMenuItem>"Blog Posts"</DropdownMenuItem>
-                            <DropdownMenuItem>"Changelog"</DropdownMenuItem>
-                        </DropdownMenuContent>
+                        </MenuTrigger>
+                        <MenuContent align="end" class="[--radius:0.95rem]">
+                            <MenuItem>"Documentation"</MenuItem>
+                            <MenuItem>"Blog Posts"</MenuItem>
+                            <MenuItem>"Changelog"</MenuItem>
+                        </MenuContent>
                     </DropdownMenu>
                 </InputGroupAddon>
             </InputGroup>

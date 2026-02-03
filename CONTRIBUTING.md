@@ -108,12 +108,6 @@ provided by default, but it can be overridden by adding an `AccordionTriggerIcon
 components display their defaults when they have no children, but override those defaults with
 arbitrary content provided as children.
 
-### Avoid using other Singlestage components internally
-
-An example of this is the `DropdownMenuTrigger`. Instead of using a `Button`, it re-implements the
-`Button` itself. This avoids a layer of complexity and prevents updates to `Button` breaking
-`DropdownMenuTrigger`. Remember to add feature dependencies to `Cargo.toml` when using CSS classes
-from other components.
 
 ### Prefix CSS classes with `singlestage-` to avoid name collisions
 

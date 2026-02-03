@@ -19,49 +19,41 @@ pub fn ButtonGroupExample() -> impl IntoView {
             <ButtonGroup>
                 <Button variant="outline">"Snooze"</Button>
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
+                    <MenuTrigger>
                         <Button variant="outline" size="icon" aria_label="More Options">
                             {icon!(icondata::FiMoreHorizontal)}
                         </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                {icon!(icondata::LuMailCheck)} "Mark as Read"
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                {icon!(icondata::LuArchive)} "Archive"
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>{icon!(icondata::LuClock)} "Snooze"</DropdownMenuItem>
-                            <DropdownMenuItem>
-                                {icon!(icondata::LuCalendarPlus)} "Add to Calendar"
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                {icon!(icondata::LuListPlus)} "Add to List"
-                            </DropdownMenuItem>
-                            <DropdownMenuSub>
-                                <DropdownMenuSubTrigger>
+                    </MenuTrigger>
+                    <MenuContent align="end">
+                        <MenuGroup>
+                            <MenuItem>{icon!(icondata::LuMailCheck)} "Mark as Read"</MenuItem>
+                            <MenuItem>{icon!(icondata::LuArchive)} "Archive"</MenuItem>
+                        </MenuGroup>
+                        <Separator />
+                        <MenuGroup>
+                            <MenuItem>{icon!(icondata::LuClock)} "Snooze"</MenuItem>
+                            <MenuItem>{icon!(icondata::LuCalendarPlus)} "Add to Calendar"</MenuItem>
+                            <MenuItem>{icon!(icondata::LuListPlus)} "Add to List"</MenuItem>
+                            <MenuSub>
+                                <MenuSubTrigger>
                                     {icon!(icondata::LuTag)} "Label As..."
-                                </DropdownMenuSubTrigger>
-                                <DropdownMenuSubContent>
+                                </MenuSubTrigger>
+                                <MenuSubContent>
                                     <RadioGroup value=label>
                                         <RadioItem value="personal">"Personal"</RadioItem>
                                         <RadioItem value="work">"Work"</RadioItem>
                                         <RadioItem value="other">"Other"</RadioItem>
                                     </RadioGroup>
-                                </DropdownMenuSubContent>
-                            </DropdownMenuSub>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem variant="destructive">
+                                </MenuSubContent>
+                            </MenuSub>
+                        </MenuGroup>
+                        <Separator />
+                        <MenuGroup>
+                            <MenuItem variant="destructive">
                                 {icon!(icondata::LuTrash2)} "Trash"
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                    </DropdownMenuContent>
+                            </MenuItem>
+                        </MenuGroup>
+                    </MenuContent>
                 </DropdownMenu>
             </ButtonGroup>
         </ButtonGroup>

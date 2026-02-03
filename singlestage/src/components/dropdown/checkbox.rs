@@ -1,4 +1,4 @@
-use crate::{Checkbox, ContextMenuContext, DropdownMenuContext, Reactive};
+use crate::{Checkbox, PopoverMenuContext, Reactive};
 use leptos::prelude::*;
 
 /// Contains a menu item.
@@ -189,11 +189,11 @@ pub fn CheckboxItem(
             }
             on:click=move |_| {
                 if dismiss.get() {
-                    if let Some(menu) = use_context::<DropdownMenuContext>() {
+                    if let Some(menu) = use_context::<PopoverMenuContext>() {
                         if menu.dismissable.get() {
                             menu.open.set(false);
                         }
-                    } else if let Some(menu) = use_context::<ContextMenuContext>() {
+                    } else if let Some(menu) = use_context::<PopoverMenuContext>() {
                         menu.open.set(false);
                     }
                 }

@@ -12,19 +12,19 @@ pub fn BreadcrumbExample() -> impl IntoView {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <MenuTrigger>
                             <Button size="icon-sm" variant="ghost">
                                 <BreadcrumbEllipsis />
                                 <span class="sr-only">"Toggle menu"</span>
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start">
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem>"Documentation"</DropdownMenuItem>
-                                <DropdownMenuItem>"Themes"</DropdownMenuItem>
-                                <DropdownMenuItem>"GitHub"</DropdownMenuItem>
-                            </DropdownMenuGroup>
-                        </DropdownMenuContent>
+                        </MenuTrigger>
+                        <MenuContent align="start">
+                            <MenuGroup>
+                                <MenuItem>"Documentation"</MenuItem>
+                                <MenuItem>"Themes"</MenuItem>
+                                <MenuItem>"GitHub"</MenuItem>
+                            </MenuGroup>
+                        </MenuContent>
                     </DropdownMenu>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />

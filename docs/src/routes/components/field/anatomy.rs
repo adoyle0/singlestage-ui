@@ -9,7 +9,7 @@ pub fn FieldAnatomy() -> impl IntoView {
             <FieldDescription />
             <FieldGroup>
                 <Field>
-                    <FieldLabel />
+                    <Label />
                     <FieldError />
                     <Input />
                     <FieldDescription />
@@ -18,12 +18,12 @@ pub fn FieldAnatomy() -> impl IntoView {
             <FieldSeparator />
             <FieldGroup>
                 <Field>
-                    <FieldLabel>
+                    <Label>
                         <FieldContent>
                             <FieldTitle />
                             <FieldDescription />
                         </FieldContent>
-                    </FieldLabel>
+                    </Label>
                     <Checkbox />
                 </Field>
             </FieldGroup>

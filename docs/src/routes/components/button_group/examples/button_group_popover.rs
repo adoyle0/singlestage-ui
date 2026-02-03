@@ -20,9 +20,9 @@ pub fn ButtonGroupPopoverExample() -> impl IntoView {
                         </PopoverDescription>
                     </PopoverHeader>
                     <Field>
-                        <FieldLabel label_for="task" class="sr-only">
+                        <Label label_for="task" class="sr-only">
                             "Task Description"
-                        </FieldLabel>
+                        </Label>
                         <Textarea id="task" placeholder="I need to..." class="resize-none" />
                         <FieldDescription>
                             "Copilot will open a pull request for review."

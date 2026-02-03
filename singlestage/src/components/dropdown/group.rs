@@ -1,9 +1,9 @@
-use crate::DropdownMenuGroupContext;
+use crate::PopoverMenuGroupContext;
 use leptos::{context::Provider, prelude::*};
 
 /// Contains multiple items.
 #[component]
-pub fn DropdownMenuGroup(
+pub fn MenuGroup(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -110,7 +110,7 @@ pub fn DropdownMenuGroup(
 ) -> impl IntoView {
     let heading_id = RwSignal::new(String::new());
 
-    let context = DropdownMenuGroupContext { heading_id };
+    let context = PopoverMenuGroupContext { heading_id };
 
     let global_attrs_1 = view! {
         <{..}

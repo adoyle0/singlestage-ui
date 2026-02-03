@@ -23,12 +23,12 @@ description = "A basic dropdown menu with labels and separators."
 [[examples]]
 name = "Dropdown Sub"
 title = "Submenu"
-description = "Use DropdownMenuSub to nest secondary actions."
+description = "Use MenuSub to nest secondary actions."
 
 [[examples]]
 name = "Dropdown Shortcuts"
 title = "Shortcuts"
-description = "Add DropdownMenuShortcut to show keyboard hints."
+description = "Add MenuShortcut to show keyboard hints."
 
 [[examples]]
 name = "Dropdown Icons"
@@ -105,7 +105,18 @@ attrs = [
 ]
 
 [[references]]
-name = "DropdownMenuContent"
+name = "Label"
+description = "Labels groups."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display as invalid.""" },
+]
+
+[[references]]
+name = "MenuContent"
 description = "The component that pops out when the dropdown menu is open."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -119,7 +130,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DropdownMenuGroup"
+name = "MenuGroup"
 description = "Contains multiple items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -127,7 +138,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DropdownMenuItem"
+name = "MenuItem"
 description = "Contains a menu item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -146,26 +157,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DropdownMenuLabel"
-description = "Labels groups."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = [
-  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
-    this element should display inset from its normal position.""" },
-]
-
-[[references]]
-name = "DropdownMenuSeparator"
-description = "Visually separates groups of menu items."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = []
-
-[[references]]
-name = "DropdownMenuShortcut"
+name = "MenuShortcut"
 description = "Displays next to the item content and indicates keyboard shortcuts."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -173,7 +165,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DropdownMenuSub"
+name = "MenuSub"
 description = "Contains all the parts of a sub menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -181,7 +173,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DropdownMenuSubContent"
+name = "MenuSubContent"
 description = "The component that pops out when the sub trigger is triggered."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -189,7 +181,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DropdownMenuSubTrigger"
+name = "MenuSubTrigger"
 description = "Defines the area where a sub menu can be triggered."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -206,7 +198,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DropdownMenuTrigger"
+name = "MenuTrigger"
 description = "Provides context to a Button that triggers a DropdownMenu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -231,3 +223,11 @@ attrs = [
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
     variant of the item. Accepted values: \"destructive\".""" },
 ]
+
+[[references]]
+name = "Separator"
+description = "Visually separates groups of menu items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

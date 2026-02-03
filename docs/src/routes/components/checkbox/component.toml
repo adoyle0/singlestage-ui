@@ -12,7 +12,7 @@ description = "Set invalid on either the Checkbox or a Field wrapper to display 
 [[examples]]
 name = "checkbox basic"
 title = "Basic"
-description = "Pair the checkbox with Field and FieldLabel for proper layout and labeling."
+description = "Pair the checkbox with Field and Label for proper layout and labeling."
 
 [[examples]]
 name = "checkbox description"

@@ -32,7 +32,7 @@ pub fn FieldExample() -> impl IntoView {
                             </Field>
                             <FieldGroup class="grid grid-cols-3">
                                 <Field>
-                                    <FieldLabel>"Month"</FieldLabel>
+                                    <Label>"Month"</Label>
                                     <Select placeholder="MM">
                                         <SelectOptGroup>
                                             <SelectOption value="01">"01"</SelectOption>
@@ -51,7 +51,7 @@ pub fn FieldExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <FieldLabel>"Year"</FieldLabel>
+                                    <Label>"Year"</Label>
                                     <Select placeholder="YYYY">
                                         <SelectOptGroup>
                                             <SelectOption value="2024">"2024"</SelectOption>

@@ -1,4 +1,4 @@
-use crate::{FieldContext, FieldLabel, RadioGroupContext, Reactive};
+use crate::{FieldContext, Label, RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// An item in the group that can be checked
@@ -280,12 +280,12 @@ pub fn Radio(
                         {..global_attrs_2}
                         {..radio_attrs}
                     />
-                    <FieldLabel
+                    <Label
                         class=class.get_untracked()
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
-                    </FieldLabel>
+                    </Label>
                 }
                     .into_any()
             } else {

@@ -1,23 +1,21 @@
 mod checkbox;
 mod content;
+mod context_menu;
 mod group;
 mod item;
-mod label;
 mod menu;
 mod radio;
-mod separator;
 mod shortcut;
 mod sub;
 mod trigger;
 
 pub use checkbox::*;
 pub use content::*;
+pub use context_menu::*;
 pub use group::*;
 pub use item::*;
-pub use label::*;
 pub use menu::*;
 pub use radio::*;
-pub use separator::*;
 pub use shortcut::*;
 pub use sub::*;
 pub use trigger::*;
@@ -25,8 +23,8 @@ pub use trigger::*;
 use crate::Reactive;
 use leptos::prelude::*;
 
-#[derive(Clone)]
-pub struct DropdownMenuContext {
+#[derive(Clone, Default)]
+pub struct PopoverMenuContext {
     pub dismissable: Reactive<bool>,
     pub menu_id: RwSignal<String>,
     pub open: Reactive<bool>,
@@ -37,6 +35,6 @@ pub struct DropdownMenuContext {
 pub struct DropdownTriggerContext {}
 
 #[derive(Clone)]
-pub struct DropdownMenuGroupContext {
-    heading_id: RwSignal<String>,
+pub struct PopoverMenuGroupContext {
+    pub heading_id: RwSignal<String>,
 }

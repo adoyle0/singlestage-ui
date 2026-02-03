@@ -2,7 +2,7 @@ use leptos::prelude::*;
 
 /// Displays next to the item content and indicates keyboard shortcuts.
 #[component]
-pub fn DropdownMenuShortcut(
+pub fn MenuShortcut(
     children: Children,
 
     // GLOBAL ATTRIBUTES

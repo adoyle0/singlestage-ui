@@ -15,15 +15,15 @@ pub fn PopoverFormExample() -> impl IntoView {
                 </PopoverHeader>
                 <FieldGroup class="gap-4">
                     <Field orientation="horizontal">
-                        <FieldLabel label_for="width" class="w-1/2">
+                        <Label label_for="width" class="w-1/2">
                             "Width"
-                        </FieldLabel>
+                        </Label>
                         <Input id="width" value="100%" />
                     </Field>
                     <Field orientation="horizontal">
-                        <FieldLabel label_for="height" class="w-1/2">
+                        <Label label_for="height" class="w-1/2">
                             "Height"
-                        </FieldLabel>
+                        </Label>
                         <Input id="height" value="25px" />
                     </Field>
                 </FieldGroup>

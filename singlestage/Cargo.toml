@@ -44,7 +44,6 @@ default = [
   "card",
   "carousel",
   "checkbox",
-  "context_menu",
   "dialog",
   "dropdown",
   "empty",
@@ -87,7 +86,6 @@ button_group = []
 card = []
 carousel = []
 checkbox = ["field", "label"]
-context_menu = ["dropdown"]
 dialog = []
 dropdown = ["popover"]
 empty = []

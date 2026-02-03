@@ -1,4 +1,4 @@
-use crate::{DropdownMenuContext, Reactive};
+use crate::{PopoverMenuContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a dropdown menu.
@@ -123,7 +123,7 @@ pub fn DropdownMenu(
     let menu_id = RwSignal::new(String::new());
     let trigger_id = RwSignal::new(String::new());
 
-    let context = DropdownMenuContext {
+    let context = PopoverMenuContext {
         dismissable,
         menu_id,
         open,

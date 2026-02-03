@@ -5,35 +5,35 @@ use singlestage::*;
 pub fn DropdownMenuAnatomy() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel />
-                    <DropdownMenuItem>
-                        <DropdownMenuShortcut />
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuSub>
-                    <DropdownMenuSubTrigger />
-                    <DropdownMenuSubContent>
-                        <DropdownMenuGroup>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuGroup>
+                    <Label />
+                    <MenuItem>
+                        <MenuShortcut />
+                    </MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuSub>
+                    <MenuSubTrigger />
+                    <MenuSubContent>
+                        <MenuGroup>
                             <CheckboxItem />
                             <CheckboxItem />
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
+                        </MenuGroup>
+                        <Separator />
+                        <MenuGroup>
                             <RadioGroup>
                                 <RadioItem />
                                 <RadioItem />
                                 <RadioItem />
                             </RadioGroup>
-                        </DropdownMenuGroup>
-                    </DropdownMenuSubContent>
-                </DropdownMenuSub>
-            </DropdownMenuContent>
+                        </MenuGroup>
+                    </MenuSubContent>
+                </MenuSub>
+            </MenuContent>
         </DropdownMenu>
     }
 }

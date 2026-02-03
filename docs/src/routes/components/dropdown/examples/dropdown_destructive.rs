@@ -5,21 +5,19 @@ use singlestage::*;
 pub fn DropdownDestructiveExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">"Actions"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuGroup>
-                    <DropdownMenuItem>{icon!(icondata::LuPencil)} "Edit"</DropdownMenuItem>
-                    <DropdownMenuItem>{icon!(icondata::LuShare)} "Share"</DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem variant="destructive">
-                        {icon!(icondata::LuTrash)} "Delete"
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-            </DropdownMenuContent>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuGroup>
+                    <MenuItem>{icon!(icondata::LuPencil)} "Edit"</MenuItem>
+                    <MenuItem>{icon!(icondata::LuShare)} "Share"</MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuGroup>
+                    <MenuItem variant="destructive">{icon!(icondata::LuTrash)} "Delete"</MenuItem>
+                </MenuGroup>
+            </MenuContent>
         </DropdownMenu>
     }
 }

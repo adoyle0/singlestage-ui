@@ -1,9 +1,9 @@
-use crate::DropdownMenuSubContext;
+use crate::MenuSubContext;
 use leptos::prelude::*;
 
 /// The component that pops out when the sub trigger is triggered.
 #[component]
-pub fn DropdownMenuSubContent(
+pub fn MenuSubContent(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -105,7 +105,7 @@ pub fn DropdownMenuSubContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sub = expect_context::<DropdownMenuSubContext>();
+    let sub = expect_context::<MenuSubContext>();
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     Effect::new(move || {

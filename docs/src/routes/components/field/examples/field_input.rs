@@ -14,7 +14,7 @@ pub fn FieldInputExample() -> impl IntoView {
                         </FieldDescription>
                     </Field>
                     <Field>
-                        <FieldLabel>"Password"</FieldLabel>
+                        <Label>"Password"</Label>
                         <FieldDescription>"Must be at least 8 characters long."</FieldDescription>
                         <Input input_type="password" placeholder="••••••••" />
                     </Field>

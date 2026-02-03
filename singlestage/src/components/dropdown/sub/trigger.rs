@@ -1,8 +1,8 @@
-use crate::DropdownMenuSubContext;
+use crate::MenuSubContext;
 use leptos::prelude::*;
 
 #[component]
-pub fn DropdownMenuSubTrigger(
+pub fn MenuSubTrigger(
     children: Children,
 
     /// Controls whether the item appears disabled and is clickable.
@@ -125,7 +125,7 @@ pub fn DropdownMenuSubTrigger(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sub = expect_context::<DropdownMenuSubContext>();
+    let sub = expect_context::<MenuSubContext>();
 
     let global_attrs_1 = view! {
         <{..}

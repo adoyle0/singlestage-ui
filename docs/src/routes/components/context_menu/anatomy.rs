@@ -5,33 +5,33 @@ use singlestage::*;
 pub fn ContextMenuAnatomy() -> impl IntoView {
     view! {
         <ContextMenu>
-            <ContextMenuTrigger />
-            <ContextMenuContent>
-                <ContextMenuGroup>
-                    <ContextMenuLabel />
-                    <ContextMenuItem>
-                        <ContextMenuShortcut />
-                    </ContextMenuItem>
-                </ContextMenuGroup>
-                <ContextMenuSeparator />
-                <ContextMenuSub>
-                    <ContextMenuSubTrigger />
-                    <ContextMenuSubContent>
-                        <ContextMenuGroup>
+            <MenuTrigger />
+            <MenuContent>
+                <MenuGroup>
+                    <Label />
+                    <MenuItem>
+                        <MenuShortcut />
+                    </MenuItem>
+                </MenuGroup>
+                <Separator />
+                <MenuSub>
+                    <MenuSubTrigger />
+                    <MenuSubContent>
+                        <MenuGroup>
                             <CheckboxItem />
                             <CheckboxItem />
-                        </ContextMenuGroup>
-                        <ContextMenuSeparator />
-                        <ContextMenuGroup>
+                        </MenuGroup>
+                        <Separator />
+                        <MenuGroup>
                             <RadioGroup>
                                 <RadioItem />
                                 <RadioItem />
                                 <RadioItem />
                             </RadioGroup>
-                        </ContextMenuGroup>
-                    </ContextMenuSubContent>
-                </ContextMenuSub>
-            </ContextMenuContent>
+                        </MenuGroup>
+                    </MenuSubContent>
+                </MenuSub>
+            </MenuContent>
         </ContextMenu>
     }
 }

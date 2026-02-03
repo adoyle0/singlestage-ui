@@ -9,19 +9,19 @@ pub fn DropdownCheckboxesExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">Open</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="w-40">
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"Appearance"</DropdownMenuLabel>
+            </MenuTrigger>
+            <MenuContent class="w-40">
+                <MenuGroup>
+                    <Label>"Appearance"</Label>
                     <CheckboxItem checked=show_status_bar>"Status Bar"</CheckboxItem>
                     <CheckboxItem checked=show_activity_bar disabled=true>
                         "Activity Bar"
                     </CheckboxItem>
                     <CheckboxItem checked=show_panel>"Panel"</CheckboxItem>
-                </DropdownMenuGroup>
-            </DropdownMenuContent>
+                </MenuGroup>
+            </MenuContent>
         </DropdownMenu>
     }
 }

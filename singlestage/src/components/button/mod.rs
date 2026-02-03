@@ -1,5 +1,5 @@
 use crate::{
-    DropdownMenuContext, DropdownTriggerContext, InputGroupContext, PopoverContext,
+    DropdownTriggerContext, InputGroupContext, PopoverContext, PopoverMenuContext,
     PopoverTriggerContext, Reactive,
 };
 use leptos::prelude::*;
@@ -250,7 +250,7 @@ pub fn Button(
         <button
             aria_controls=move || {
                 if button_is_trigger {
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         Some(dropdown.menu_id.get())
                     } else {
                         use_context::<PopoverContext>().map(|popover| popover.menu_id.get())
@@ -322,7 +322,7 @@ pub fn Button(
             id=move || {
                 if button_is_trigger {
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         dropdown.trigger_id.set(trigger_id.clone());
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         popover.trigger_id.set(trigger_id.clone());
@@ -334,7 +334,7 @@ pub fn Button(
             }
             on:click=move |ev| {
                 if button_is_trigger {
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         if !dropdown.dismissable.get_untracked() {
                             ev.prevent_default();
                             dropdown.open.set(!dropdown.open.get_untracked());
@@ -352,7 +352,7 @@ pub fn Button(
                     let mut target_id = None;
                     if let Some(popovertarget) = popovertarget.get() {
                         target_id = Some(popovertarget);
-                    } else if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    } else if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         target_id = Some(dropdown.menu_id.get())
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         target_id = Some(popover.menu_id.get())
@@ -372,7 +372,7 @@ pub fn Button(
             prop:disabled=move || disabled.get()
             style:anchor-name=move || {
                 if button_is_trigger {
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         Some(format!("--{}", dropdown.trigger_id.get()))
                     } else {
                         use_context::<PopoverContext>()

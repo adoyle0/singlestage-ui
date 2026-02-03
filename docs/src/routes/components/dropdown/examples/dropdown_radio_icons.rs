@@ -6,12 +6,12 @@ pub fn DropdownRadioIconsExample() -> impl IntoView {
     let payment_method = RwSignal::new("card".to_string());
     view! {
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <MenuTrigger>
                 <Button variant="outline">"Payment Method"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="min-w-56">
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>"Select Payment Method"</DropdownMenuLabel>
+            </MenuTrigger>
+            <MenuContent class="min-w-56">
+                <MenuGroup>
+                    <Label>"Select Payment Method"</Label>
                     <RadioGroup value=payment_method>
                         <RadioItem value="card">
                             {icon!(icondata::LuCreditCard)} "Credit Card"
@@ -21,8 +21,8 @@ pub fn DropdownRadioIconsExample() -> impl IntoView {
                             {icon!(icondata::LuBuilding2)} "Bank Transfer"
                         </RadioItem>
                     </RadioGroup>
-                </DropdownMenuGroup>
-            </DropdownMenuContent>
+                </MenuGroup>
+            </MenuContent>
         </DropdownMenu>
     }
 }

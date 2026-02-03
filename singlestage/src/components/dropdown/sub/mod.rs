@@ -8,7 +8,7 @@ use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct DropdownMenuSubContext {
+pub struct MenuSubContext {
     pub menu_id: RwSignal<String>,
     pub open: Reactive<bool>,
     pub trigger_id: RwSignal<String>,
@@ -16,7 +16,7 @@ pub struct DropdownMenuSubContext {
 
 /// Contains all the parts of a sub menu.
 #[component]
-pub fn DropdownMenuSub(
+pub fn MenuSub(
     children: Children,
 
     /// Reactive signal that can remotely control the open state of the popover **but is not
@@ -132,7 +132,7 @@ pub fn DropdownMenuSub(
     let menu_id = RwSignal::new(String::new());
     let trigger_id = RwSignal::new(String::new());
 
-    let context = DropdownMenuSubContext {
+    let context = MenuSubContext {
         menu_id,
         open,
         trigger_id,

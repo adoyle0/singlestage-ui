@@ -7,11 +7,11 @@ pub fn CheckboxInvalidExample() -> impl IntoView {
         <FieldGroup class="mx-auto w-56">
             <Field orientation="horizontal">
                 <Checkbox invalid=true />
-                <FieldLabel>"Accept terms and conditions"</FieldLabel>
+                <Label>"Accept terms and conditions"</Label>
             </Field>
             <Field orientation="horizontal" invalid=true>
                 <Checkbox />
-                <FieldLabel>"Accept terms and conditions"</FieldLabel>
+                <Label>"Accept terms and conditions"</Label>
             </Field>
         </FieldGroup>
     }

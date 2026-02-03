@@ -1,4 +1,4 @@
-use crate::Reactive;
+use crate::{FieldContext, PopoverMenuContext, PopoverMenuGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// Renders an accessible label associated with controls
@@ -9,6 +9,10 @@ pub fn Label(
     /// Whether the element renders as disabled
     #[prop(optional, into)]
     disabled: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    /// (For use in popover menus)
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
     /// Whether the element renders as invalid
     #[prop(optional, into)]
     invalid: Reactive<bool>,
@@ -133,7 +137,7 @@ pub fn Label(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
+            // id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -165,8 +169,51 @@ pub fn Label(
         <label
             aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
             aria_invalid=move || { if invalid.get() { Some("true".to_string()) } else { None } }
-            for=move || label_for.get()
-            class=move || format!("singlestage-label {}", class.get().unwrap_or_default())
+
+            // TODO: Do this with CSS.
+            class=move || {
+                format!(
+                    "{} {}",
+                    if use_context::<PopoverMenuContext>().is_some() {
+                        format!(
+                            "singlestage-dropdown-menu-label{}",
+                            if inset.get().unwrap_or_default() {
+                                " singlestage-dropdown-menu-inset"
+                            } else {
+                                ""
+                            },
+                        )
+                    } else if use_context::<FieldContext>().is_some() {
+                        "singlestage-field-label".to_owned()
+                    } else {
+                        "singlestage-label".to_string()
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
+
+            for=move || {
+                if let Some(label_for) = label_for.get() {
+                    Some(label_for)
+                } else if let Some(field_context) = use_context::<FieldContext>() {
+                    Some(field_context.input_id.get())
+                } else {
+                    None
+                }
+            }
+
+            id={if use_context::<PopoverMenuContext>().is_some() {
+                let group = expect_context::<PopoverMenuGroupContext>();
+                let uuid = uuid::Uuid::new_v4();
+                group.heading_id.set(uuid.to_string());
+                Some(uuid.to_string())
+            } else if let Some(field_context) = use_context::<FieldContext>() {
+                let label_id = id.get_untracked().unwrap_or(uuid::Uuid::new_v4().to_string());
+                field_context.label_id.set(label_id.clone());
+                Some(label_id)
+            } else {
+                None
+            }}
 
             {..global_attrs_1}
             {..global_attrs_2}

@@ -10,7 +10,7 @@ pub fn FieldSliderExample() -> impl IntoView {
             <FieldSet>
                 <FieldGroup>
                     <Field>
-                        <FieldLabel>"Price Range"</FieldLabel>
+                        <Label>"Price Range"</Label>
                         <FieldDescription>
                             "Set your budget range ($"
                             <span class="font-medium tabular-nums">"0"</span> " - $"

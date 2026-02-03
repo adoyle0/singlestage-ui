@@ -1,4 +1,4 @@
-use crate::{CheckboxGroupContext, FieldContext, FieldLabel, Reactive};
+use crate::{CheckboxGroupContext, FieldContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// A control that allows the user to toggle
@@ -312,14 +312,14 @@ pub fn Checkbox(
                         {..custom_attrs}
                         {..disabled_invalid}
                     />
-                    <FieldLabel
+                    <Label
                         class=class.get_untracked()
                         disabled
                         invalid
                         label_for=id.get_untracked().unwrap_or(input_id.to_string())
                     >
                         {children()}
-                    </FieldLabel>
+                    </Label>
                 }
                     .into_any()
             } else {
