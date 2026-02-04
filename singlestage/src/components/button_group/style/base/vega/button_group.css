@@ -17,10 +17,6 @@
     .singlestage-btn-size-icon-sm {
       @apply rounded-md;
     }
-
-    .singlestage-separator {
-      @apply !bg-input;
-    }
   }
 
   .singlestage-button-group-orientation-horizontal {
@@ -32,9 +28,7 @@
   }
 
   .singlestage-button-group-text {
-    @apply bg-muted
-    border
-    font-medium
+    @apply font-medium
     gap-2
     px-2.5
     rounded-md

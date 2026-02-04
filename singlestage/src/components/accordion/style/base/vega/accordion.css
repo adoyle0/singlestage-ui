@@ -1,11 +1,20 @@
 @layer base {
   .singlestage-accordion-trigger {
     @apply py-4
-    rounded-md;
+    rounded-md
+    text-sm;
   }
 
   .singlestage-accordion-content-inner {
     @apply pb-4
     pt-0;
+
+    p:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+
+  .singlestage-accordion-content {
+    @apply text-sm;
   }
 }

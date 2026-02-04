@@ -12,6 +12,10 @@
     & > input {
       @apply flex-1;
     }
+
+    .singlestage-separator {
+      @apply !bg-input;
+    }
   }
 
   .singlestage-button-group-horizontal {
@@ -63,7 +67,9 @@
   }
 
   .singlestage-button-group-text {
-    @apply flex
+    @apply bg-muted
+    border
+    flex
     items-center;
 
     svg {

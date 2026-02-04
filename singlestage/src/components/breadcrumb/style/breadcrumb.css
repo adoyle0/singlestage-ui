@@ -3,15 +3,12 @@
     @apply break-words
     flex
     flex-wrap
-    gap-1.5
     items-center
-    text-muted-foreground
-    text-sm;
+    text-muted-foreground;
   }
 
   .singlestage-breadcrumb-item {
-    @apply gap-1
-    inline-flex
+    @apply inline-flex
     items-center;
 
     /* unset/reset singlestage-link */
@@ -19,8 +16,11 @@
       text-decoration-line: unset;
       font-weight: unset;
 
-      @apply hover:text-foreground!
-      transition-colors;
+      @apply transition-colors;
+
+      &:hover {
+        @apply text-foreground!;
+      }
     }
   }
 
@@ -29,19 +29,10 @@
     text-foreground;
   }
 
-  .singlestage-breadcrumb-separator {
-    @apply [&>svg]:size-3.5;
-  }
-
   .singlestage-breadcrumb-ellipsis {
     @apply flex
     items-center
-    justify-center
-    size-5;
-
-    & > svg {
-      @apply size-4;
-    }
+    justify-center;
 
     & > .sr-only {
       @apply sr-only;

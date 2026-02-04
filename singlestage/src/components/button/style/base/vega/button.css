@@ -1,66 +1,22 @@
 @layer base {
   .singlestage-btn {
-    @apply aria-invalid:border-destructive
-    aria-invalid:ring-[3px]
-    aria-invalid:ring-destructive/20
-    bg-clip-padding
-    border
-    border-transparent
-    focus-visible:border-ring
-    focus-visible:ring-[3px]
-    focus-visible:ring-ring/50
+    @apply font-medium
+    gap-2
     font-medium
     rounded-md
     text-sm;
 
+    &:focus-visible {
+      @apply ring-[3px];
+    }
+
+    &:invalid {
+      @apply ring-[3px];
+    }
+
     svg:not([class*="size-"]) {
       @apply size-4;
     }
-  }
-
-  .singlestage-btn-primary {
-    @apply bg-primary
-    hover:bg-primary/80
-    text-primary-foreground;
-  }
-
-  .singlestage-btn-outline {
-    @apply aria-expanded:bg-muted
-    aria-expanded:text-foreground
-    bg-background
-    border-border
-    hover:bg-muted
-    hover:text-foreground
-    shadow-xs;
-  }
-
-  .singlestage-btn-secondary {
-    @apply aria-expanded:bg-secondary
-    aria-expanded:text-secondary-foreground
-    bg-secondary
-    hover:bg-secondary/80
-    text-secondary-foreground;
-  }
-
-  .singlestage-btn-ghost {
-    @apply aria-expanded:bg-muted
-    aria-expanded:text-foreground
-    hover:bg-muted
-    hover:text-foreground;
-  }
-
-  .singlestage-btn-destructive {
-    @apply bg-destructive/10
-    focus-visible:border-destructive/40
-    focus-visible:ring-destructive/20
-    hover:bg-destructive/20
-    text-destructive;
-  }
-
-  .singlestage-btn-link {
-    @apply hover:underline
-    text-primary
-    underline-offset-4;
   }
 
   .singlestage-btn-size-xs {

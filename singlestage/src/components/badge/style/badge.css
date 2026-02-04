@@ -1,87 +1,82 @@
 @layer components {
   .singlestage-badge {
-    @apply aria-invalid:border-destructive
-        aria-invalid:ring-destructive/20
-        border
-        border-transparent
-        focus-visible:border-ring
-        focus-visible:ring-[3px]
-        focus-visible:ring-ring/50
-        font-medium
-        gap-1
-        h-5
-        inline-flex
-        items-center
-        justify-center
-        overflow-hidden
-        px-2
-        py-0.5
-        rounded-4xl
-        shrink-0
-        text-xs
-        transition-all
-        w-fit
-        whitespace-nowrap;
+    @apply border
+    border-transparent
+    inline-flex
+    items-center
+    justify-center
+    overflow-hidden
+    shrink-0
+    transition-all
+    w-fit
+    whitespace-nowrap;
 
-    &:has(svg:first-child) {
-      @apply pl-1.5;
+    &:invalid {
+      @apply border-destructive
+      ring-destructive/20;
     }
 
-    &:has(svg:last-child) {
-      @apply pr-1.5;
+    &:focus-visible {
+      @apply border-ring
+      ring-ring/50;
     }
 
     svg {
-      @apply pointer-events-none
-        size-3!;
+      @apply pointer-events-none;
     }
   }
 
   .singlestage-badge-variant-default {
     @apply bg-primary
-        text-primary-foreground;
+    text-primary-foreground;
 
-    a {
-      @apply hover:bg-primary/80;
+    a:hover {
+      @apply bg-primary/80;
     }
   }
 
   .singlestage-badge-variant-secondary {
     @apply bg-secondary
-        text-secondary-foreground;
-    a {
-      @apply hover:bg-secondary/80;
+    text-secondary-foreground;
+
+    a:hover {
+      @apply bg-secondary/80;
     }
   }
 
   .singlestage-badge-variant-destructive {
     @apply bg-destructive/10
-        focus-visible:ring-destructive/20
-        text-destructive;
+    text-destructive;
 
-    a {
-      @apply hover:bg-destructive/20;
+    &:focus-visible {
+      @apply ring-destructive/20;
+    }
+
+    a:hover {
+      @apply bg-destructive/20;
     }
   }
 
   .singlestage-badge-variant-outline {
     @apply border-border
-        text-foreground;
+    text-foreground;
 
-    a {
-      @apply hover:bg-muted
-        hover:text-muted-foreground;
+    a:hover {
+      @apply bg-muted
+        text-muted-foreground;
     }
   }
 
-  .singlestage-badge-variant-ghost {
-    @apply hover:bg-muted
-        hover:text-muted-foreground;
+  .singlestage-badge-variant-ghost:hover {
+    @apply bg-muted
+    text-muted-foreground;
   }
 
   .singlestage-badge-variant-link {
-    @apply text-primary
-        underline-offset-4
-        hover:underline;
+    @apply text-primary;
+
+    &:hover {
+      @apply underline;
+    }
   }
 }

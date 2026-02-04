@@ -1,5 +1,5 @@
 @layer components {
-  .singlestage-avatar {
-    @apply after:mix-blend-lighten;
+  .singlestage-avatar::after {
+    @apply mix-blend-lighten;
   }
 }

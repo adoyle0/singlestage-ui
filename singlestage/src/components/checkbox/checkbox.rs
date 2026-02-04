@@ -296,7 +296,7 @@ pub fn Checkbox(
                         Some(input_id.to_string())
                     }
                 } else {
-                    id.get_untracked()
+                    Some(id.get_untracked().unwrap_or(input_id.to_string()))
                 }
             }
             name=move || name.get()

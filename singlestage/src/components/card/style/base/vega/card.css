@@ -1,8 +1,61 @@
 @layer base {
+  .singlestage-card-header {
+    @apply auto-rows-min
+    gap-1
+    px-6
+    rounded-t-xl;
+
+    &.border-b {
+      @apply pb-6;
+    }
+  }
+
+  .singlestage-card-title {
+    @apply font-medium
+    leading-normal;
+  }
+
+  .singlestage-card-description {
+    @apply text-sm;
+  }
+
+  .singlestage-card-content {
+    @apply px-6;
+  }
+
+  .singlestage-card-action {
+    @apply col-start-2
+    justify-self-end
+    row-span-2
+    row-start-1
+    self-start;
+
+    &:has(.singlestage-card-action) {
+      @apply grid-cols-[1fr_auto];
+    }
+
+    &:has(.singlestage-card-description) {
+      @apply grid-rows-[auto_auto];
+    }
+  }
+
+  .singlestage-card-footer {
+    @apply pb-6
+    px-6
+    rounded-b-xl;
+
+    &.border-t {
+      @apply pt-6;
+    }
+  }
+
   .singlestage-card {
     @apply gap-6
     py-6
-    shadow-xs;
+    ring-1
+    rounded-xl
+    shadow-xs
+    text-sm;
 
     &.singlestage-card-size-sm {
       @apply gap-4
@@ -10,6 +63,10 @@
 
       .singlestage-card-header {
         @apply px-4;
+
+        .singlestage-card-title {
+          @apply text-sm;
+        }
 
         &.border-b {
           @apply pb-4;
@@ -21,36 +78,29 @@
       }
 
       .singlestage-card-footer {
-        @apply px-4;
+        @apply pb-4
+        px-4;
 
         &.border-t {
           @apply pt-4;
         }
       }
+
+      img:first-child {
+        @apply rounded-t-xl;
+      }
+
+      img:last-child {
+        @apply rounded-b-xl;
+      }
     }
-  }
 
-  .singlestage-card-header {
-    @apply px-6;
-
-    &.border-b {
-      @apply pb-6;
+    &:has(> img:first-child) {
+      @apply pt-0;
     }
-  }
 
-  .singlestage-card-title {
-    @apply leading-normal;
-  }
-
-  .singlestage-card-content {
-    @apply px-6;
-  }
-
-  .singlestage-card-footer {
-    @apply px-6;
-
-    &.border-t {
-      @apply pt-6;
+    &:has(.singlestage-card-footer) {
+      @apply pb-0;
     }
   }
 }

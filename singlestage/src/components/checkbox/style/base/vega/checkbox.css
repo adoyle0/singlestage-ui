@@ -1,6 +1,28 @@
 @layer base {
   .singlestage-checkbox:not(.singlestage-checkbox-item) {
     @apply shadow-xs
-    transition-shadow;
+    rounded-[4px]
+    transition-shadow
+    size-4;
+
+    &:checked:after {
+      @apply mask-size-[0.875rem];
+    }
+
+    &:focus-visible {
+      @apply ring-[3px];
+    }
+
+    &:invalid {
+      @apply ring-[3px];
+    }
+  }
+
+  .singlestage-checkbox-group:not(:has(.singlestage-checkbox-item)) {
+    @apply gap-2;
+  }
+
+  > legend {
+    @apply mb-3;
   }
 }

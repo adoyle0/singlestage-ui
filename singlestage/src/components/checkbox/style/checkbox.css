@@ -9,9 +9,7 @@
     justify-center
     outline-none
     relative
-    rounded-[4px]
     shrink-0
-    size-4
     transition-all;
 
     &::after {
@@ -30,8 +28,7 @@
         content-['']
         mask-[image:var(--check-icon)]
         mask-center
-        mask-no-repeat
-        mask-size-[0.875rem];
+        mask-no-repeat;
       }
     }
 
@@ -42,13 +39,11 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-[3px]
       ring-ring/50;
     }
 
     &:invalid {
       @apply border-destructive
-      ring-[3px]
       ring-destructive/20;
 
       &:checked {
@@ -61,12 +56,10 @@
     @apply flex
     flex-col
     font-normal
-    gap-2
     leading-tight;
 
     > legend {
       @apply font-medium
-      mb-3
       text-base;
     }
   }

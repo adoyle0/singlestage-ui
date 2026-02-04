@@ -1,18 +1,45 @@
 @layer base {
   .singlestage-alert {
-    @apply px-4
-    py-3;
+    @apply gap-0.5
+    grid
+    px-4
+    py-3
+    rounded-lg
+    text-sm;
 
     &:has(> svg) {
-      @apply gap-x-2.5;
+      @apply gap-x-2.5
+      grid-cols-[auto_1fr];
+
+      .singlestage-alert-title {
+        @apply col-start-2;
+      }
+    }
+
+    &:has(.singlestage-alert-action) {
+      @apply pr-18;
+    }
+
+    svg {
+      @apply row-span-2
+      translate-y-0.5;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
+      }
     }
   }
 
   .singlestage-alert-description {
-    @apply md:text-pretty
-    text-balance
-    text-muted-foreground
-    text-sm;
+    @apply text-sm;
+
+    p:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+
+  .singlestage-alert-title {
+    @apply font-medium;
   }
 
   .singlestage-alert-action {

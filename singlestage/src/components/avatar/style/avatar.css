@@ -2,66 +2,14 @@
   .singlestage-avatar {
     @apply flex
     relative
-    rounded-full
     select-none
-    shrink-0
-    size-8;
+    shrink-0;
 
     &::after {
       @apply absolute
-      border
       border-border
-      inset-0
-      mix-blend-darken
-      rounded-full;
+      mix-blend-darken;
     }
-
-    &.singlestage-avatar-size-sm {
-      @apply size-6;
-
-      .singlestage-avatar-fallback {
-        @apply text-xs;
-      }
-
-      .singlestage-avatar-badge {
-        @apply size-2;
-
-        & > svg {
-          @apply hidden;
-        }
-      }
-    }
-
-    &.singlestage-avatar-size-default {
-      @apply size-8;
-
-      .singlestage-avatar-badge {
-        @apply size-2.5;
-
-        & > svg {
-          @apply size-2;
-        }
-      }
-    }
-
-    &.singlestage-avatar-size-lg {
-      @apply size-10;
-
-      .singlestage-avatar-badge {
-        @apply size-3;
-
-        & > svg {
-          @apply size-2;
-        }
-      }
-    }
-  }
-
-  .singlestage-avatar-image {
-    @apply aspect-square
-    object-cover
-    rounded-full
-    size-full;
   }
 
   .singlestage-avatar-fallback {
@@ -69,55 +17,27 @@
     flex
     items-center
     justify-center
-    rounded-full
-    size-full
-    text-muted-foreground
-    text-sm;
+    text-muted-foreground;
   }
 
   .singlestage-avatar-badge {
     @apply absolute
     bg-blend-color
     bg-primary
-    bottom-0
     inline-flex
     items-center
     justify-center
-    right-0
-    ring-2
     ring-background
-    rounded-full
     select-none
     text-primary-foreground
     z-10;
   }
 
   .singlestage-avatar-group {
-    @apply -space-x-2
-    flex;
+    @apply flex;
 
     .singlestage-avatar {
-      @apply ring-2
-      ring-background;
-    }
-
-    &:has(.singlestage-avatar-size-sm) {
-      .singlestage-avatar-group-count {
-        @apply size-6;
-        & > svg {
-          @apply size-3;
-        }
-      }
-    }
-
-    &:has(.singlestage-avatar-size-lg) {
-      .singlestage-avatar-group-count {
-        @apply size-10;
-
-        & > svg {
-          @apply size-5;
-        }
-      }
+      @apply ring-background;
     }
   }
 
@@ -127,16 +47,8 @@
     items-center
     justify-center
     relative
-    ring-2
     ring-background
-    rounded-full
     shrink-0
-    size-8
-    text-muted-foreground
-    text-sm;
-
-    & > svg {
-      @apply size-4;
-    }
+    text-muted-foreground;
   }
 }

@@ -6,8 +6,10 @@ pub fn CardExample() -> impl IntoView {
     view! {
         <Card class="w-full max-w-sm">
             <CardHeader>
-                <CardTitle>"Login to your account"</CardTitle>
-                <CardDescription>"Enter your email below to login to your account"</CardDescription>
+                <CardTitle>"Log in to your account"</CardTitle>
+                <CardDescription>
+                    "Enter your email below to Log in to your account"
+                </CardDescription>
                 <CardAction>
                     <Button variant="link">"Sign Up"</Button>
                 </CardAction>
@@ -39,12 +41,12 @@ pub fn CardExample() -> impl IntoView {
                     </div>
                 </form>
             </CardContent>
-            <CardFooter class="flex-col gap-2">
+            <CardFooter class="flex-col gap-2 border-t">
                 <Button button_type="submit" class="w-full">
-                    "Login"
+                    "Log in"
                 </Button>
                 <Button variant="outline" class="w-full">
-                    "Login with Google"
+                    "Log in with Google"
                 </Button>
             </CardFooter>
         </Card>

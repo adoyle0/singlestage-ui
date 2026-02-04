@@ -6,7 +6,9 @@
   }
 
   .singlestage-accordion-item {
-    @apply not-last:border-b;
+    &:not(&:last-child) {
+      @apply border-b;
+    }
 
     &::details-content {
       block-size: 0;
@@ -32,24 +34,33 @@
   .singlestage-accordion-trigger {
     @apply border
     border-transparent
-    disabled:opacity-50
-    disabled:pointer-events-none
-    focus-visible:after:border-ring
-    focus-visible:border-ring
-    focus-visible:ring-[3px]
-    focus-visible:ring-ring/50
     font-medium
-    hover:underline
     items-start
     list-none
     outline-none
-    py-2.5
     relative
-    rounded-lg
     text-left
-    text-sm
     transition-all
     transition-discrete;
+
+    &:disabled {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+
+      &:after {
+        @appy border-ring;
+      }
+    }
+
+    &:hover {
+      @apply underline;
+    }
 
     /* Safari */
     &::-webkit-details-marker {
@@ -75,25 +86,17 @@
   .singlestage-accordion-content {
     @apply duration-200
     transition-all
-    overflow-hidden
-    text-sm;
+    overflow-hidden;
   }
 
   .singlestage-accordion-content-inner {
-    @apply data-ending-style:h-0
-    data-starting-style:h-0
-    h-(--accordion-panel-height)
-    pb-2.5
-    pt-0;
-
-    &a {
-      @apply hover:text-foreground
-      underline
+    a {
+      @apply underline
       underline-offset-3;
-    }
 
-    &p:not(:last-child) {
-      @apply mb-4;
+      &:hover {
+        @apply text-foreground;
+      }
     }
   }
 }
