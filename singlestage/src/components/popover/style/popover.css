@@ -1,4 +1,32 @@
 @layer components {
+  .singlestage-popover-content {
+    @apply bg-popover
+    flex
+    flex-col
+    outline-hidden
+    ring-1
+    ring-foreground/10
+    text-popover-foreground
+    w-72
+    z-50;
+
+    &:popover-open {
+      @apply flex
+      overflow-x-hidden
+      overflow-y-auto;
+    }
+  }
+  .singlestage-popover-header {
+    @apply flex
+    flex-col;
+  }
+
+  .singlestage-popover-description {
+    @apply text-muted-foreground;
+  }
+
+  /* Behavior */
+
   :root {
     --transform-origin: 0% 339px;
     --transform-scale: scale3d(0.95, 0.95, 0.95);
@@ -7,6 +35,7 @@
     --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* Animations */
   @media (prefers-reduced-motion: no-preference) {
     .singlestage-popover-animations {
       opacity: 0;
@@ -17,10 +46,10 @@
 
       &:popover-open {
         opacity: 1;
-        transform: scale3d(1, 1, 1);
-        transform: translateY(0);
-        transform: translateX(0);
         transform: none;
+        transform: scale3d(1, 1, 1);
+        transform: translateX(0);
+        transform: translateY(0);
       }
 
       @starting-style {
@@ -72,93 +101,76 @@
     }
   }
 
+  /* Disable scrolling while popover is open */
   html:has(.singlestage-context-menu > [popover]:popover-open) {
     overflow: hidden;
   }
 
+  /* Context menus need to be fixed or they won't spawn in the right place */
   .singlestage-context-menu {
     .singlestage-popover {
       position: fixed;
     }
   }
 
+  /* Dropdown/generic stuff */
   .singlestage-popover {
     inset: unset;
-    position: absolute;
     margin: 0;
+    overflow: hidden;
     position-try-fallbacks: flip-block, flip-inline;
+    position: absolute;
 
-    &:popover-open {
-      @apply flex
-      overflow-x-hidden
-      overflow-y-auto;
+    &:not(&:popover-open) {
+      display: none;
     }
 
+    /* Align sub-menus with the trigger */
     [popover] {
       top: anchor(top);
     }
-
-    @apply bg-popover
-    flex-col
-    outline-hidden
-    ring-1
-    ring-foreground/10
-    rounded-lg
-    shadow-md
-    text-popover-foreground
-    z-50;
   }
 
-  .singlestage-popover-content {
-    @apply gap-2.5
-    p-2.5
-    text-sm
-    w-72;
-  }
-
-  .singlestage-popover-description {
-    @apply text-muted-foreground;
-  }
-
-  .singlestage-popover-header {
-    @apply flex
-    flex-col
-    gap-0.5
-    text-sm;
-  }
-
-  .singlestage-popover-title {
-    @apply font-medium;
-  }
-
-  .singlestage-popover-top,
-  .singlestage-popover-left.singlestage-popover-start,
-  .singlestage-popover-right.singlestage-popover-start {
-    bottom: anchor(top);
+  /* Anchor side with spacing */
+  .singlestage-popover-top {
+    bottom: calc(var(--transform-translate-step) + anchor(top));
   }
 
   .singlestage-popover-right {
-    left: anchor(right);
+    left: calc(var(--transform-translate-step) + anchor(right));
   }
 
-  .singlestage-popover-bottom,
-  .singlestage-popover-right.singlestage-popover-end,
-  .singlestage-popover-left.singlestage-popover-end {
-    top: anchor(bottom);
+  .singlestage-popover-bottom {
+    top: calc(var(--transform-translate-step) + anchor(bottom));
   }
 
   .singlestage-popover-left {
-    right: anchor(left);
+    right: calc(var(--transform-translate-step) + anchor(left));
   }
 
-  .singlestage-popover-top.singlestage-popover-start,
-  .singlestage-popover-bottom.singlestage-popover-start {
-    left: anchor(left);
+  /* Don't space sub-menus */
+  .singlestage-popover {
+    .singlestage-popover-top {
+      bottom: anchor(top);
+    }
+
+    .singlestage-popover-right {
+      left: anchor(right);
+    }
+
+    .singlestage-popover-bottom {
+      top: anchor(bottom);
+    }
+
+    .singlestage-popover-left {
+      right: anchor(left);
+    }
   }
 
-  .singlestage-popover-top.singlestage-popover-end,
-  .singlestage-popover-bottom.singlestage-popover-end {
-    right: anchor(right);
+  /* Anchor Align */
+  .singlestage-popover-left.singlestage-popover-start,
+  .singlestage-popover-right.singlestage-popover-start {
+    bottom: anchor(top);
   }
 
   .singlestage-popover-left.singlestage-popover-center,
@@ -166,8 +178,23 @@
     align-self: anchor-center;
   }
 
+  .singlestage-popover-right.singlestage-popover-end,
+  .singlestage-popover-left.singlestage-popover-end {
+    top: anchor(bottom);
+  }
+
+  .singlestage-popover-top.singlestage-popover-start,
+  .singlestage-popover-bottom.singlestage-popover-start {
+    left: anchor(left);
+  }
+
   .singlestage-popover-top.singlestage-popover-center,
   .singlestage-popover-bottom.singlestage-popover-center {
     justify-self: anchor-center;
+  }
+
+  .singlestage-popover-top.singlestage-popover-end,
+  .singlestage-popover-bottom.singlestage-popover-end {
+    right: anchor(right);
   }
 }

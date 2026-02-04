@@ -173,8 +173,7 @@ pub fn MenuItem(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
+                    "singlestage-dropdown-menu-item{}{} {}",
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
@@ -195,7 +194,9 @@ pub fn MenuItem(
         >
             <button
                 aria_controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
+                aria_disabled=move || if disabled.get() { Some("true") } else { None }
                 aria_haspopup=move || if dismiss.get() { Some("menu") } else { None }
+                disabled=move || disabled.get()
                 on:click=move |ev| {
                     if !menu.dismissable.get() && dismiss.get() {
                         ev.prevent_default();

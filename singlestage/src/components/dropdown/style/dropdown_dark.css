@@ -1,0 +1,22 @@
+@layer components {
+  .singlestage-dropdown-menu-item-destructive {
+    > button,
+    > label {
+      @apply text-destructive;
+
+      &:focus {
+        @apply bg-destructive/20
+        text-destructive;
+      }
+
+      &:hover {
+        @apply bg-destructive/20
+        text-destructive;
+      }
+
+      svg {
+        @apply text-destructive;
+      }
+    }
+  }
+}

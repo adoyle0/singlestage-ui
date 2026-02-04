@@ -1,4 +1,4 @@
-use crate::PopoverMenuContext;
+use crate::{PopoverMenuContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone, Default)]
@@ -118,6 +118,7 @@ pub fn ContextMenu(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let context = PopoverMenuContext {
+        dismissable: Reactive::new(true),
         ..Default::default()
     };
     let context_menu = ContextMenuContext {

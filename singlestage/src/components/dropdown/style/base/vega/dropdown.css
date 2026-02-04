@@ -1,0 +1,46 @@
+@layer base {
+  .singlestage-dropdown-menu-content {
+    @apply border
+    outline-none
+    p-1
+    ring-1
+    ring-foreground/10
+    rounded-md
+    shadow-lg
+    shadow-md;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-dropdown-menu-item {
+    > button,
+    > label {
+      @apply gap-2
+      px-2
+      py-1.5
+      rounded-sm
+      text-sm;
+    }
+  }
+
+  .singlestage-dropdown-menu-label {
+    @apply font-medium
+    px-2
+    py-1.5
+    text-xs;
+  }
+
+  .singlestage-dropdown-menu-separator {
+    @apply -mx-1
+    h-px
+    my-1;
+  }
+
+  .singlestage-dropdown-menu-shortcut {
+    @apply ml-auto
+    text-xs
+    tracking-widest;
+  }
+}

@@ -173,8 +173,7 @@ pub fn RadioItem(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
+                    "singlestage-dropdown-menu-item{}{} {}",
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
@@ -204,9 +203,9 @@ pub fn RadioItem(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <label>
-                {children()} <Radio class="singlestage-radio-item" checked disabled value />
-            </label>
+            <label aria_disabled=move || {
+                if disabled.get() { Some("true") } else { None }
+            }>{children()} <Radio class="singlestage-radio-item" checked disabled value /></label>
         </li>
     }
 }

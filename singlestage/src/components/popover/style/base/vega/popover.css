@@ -1,0 +1,18 @@
+@layer base {
+  .singlestage-popover-content {
+    @apply gap-4
+    p-4
+    rounded-md
+    shadow-md
+    text-sm;
+  }
+
+  .singlestage-popover-header {
+    @apply gap-1
+    text-sm;
+  }
+
+  .singlestage-popover-title {
+    @apply font-medium;
+  }
+}

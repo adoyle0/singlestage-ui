@@ -173,8 +173,7 @@ pub fn CheckboxItem(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
+                    "singlestage-dropdown-menu-item{}{} {}",
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
@@ -204,9 +203,9 @@ pub fn CheckboxItem(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <label>
-                {children()} <Checkbox class="singlestage-checkbox-item" checked disabled />
-            </label>
+            <label aria_disabled=move || {
+                if disabled.get() { Some("true") } else { None }
+            }>{children()} <Checkbox class="singlestage-checkbox-item" checked disabled /></label>
         </li>
     }
 }

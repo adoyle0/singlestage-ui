@@ -146,6 +146,11 @@ pub fn MenuTrigger(
     };
 
     if let Some(context_menu) = use_context::<ContextMenuContext>() {
+        // Keep track of when the user triggers the menu
+        // So it doesn't flicker when tapping on the trigger area
+        // If the menu wasn't opened previously
+        let triggered = RwSignal::new(false);
+
         view! {
             <div
                 on:contextmenu=move |ev| {
@@ -153,13 +158,32 @@ pub fn MenuTrigger(
                     context_menu.x.set(ev.x());
                     context_menu.y.set(ev.y());
                     menu.open.set(true);
+                    triggered.set(true);
                 }
-                on:mousedown=move |_ev| {
-                    menu.open.set(false);
-                }
+
+                // Prevent the menu getting immediately soft dismissed after opening
                 on:mouseup=move |ev| {
                     if ev.button() == 2 {
                         menu.open.set(true);
+                    }
+                }
+                on:touchend=move |_ev| {
+                    if triggered.get() {
+                        menu.open.set(true);
+                    }
+                }
+
+                // Allow closing the menu if the trigger area is touched/clicked again
+                on:mousedown=move |_ev| {
+                    if menu.open.get_untracked() && menu.dismissable.get_untracked() {
+                        menu.open.set(false);
+                        triggered.set(false);
+                    }
+                }
+                on:touchstart=move |_ev| {
+                    if menu.open.get_untracked() && menu.dismissable.get_untracked() {
+                        menu.open.set(false);
+                        triggered.set(false);
                     }
                 }
 
