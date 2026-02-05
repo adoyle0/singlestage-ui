@@ -24,4 +24,4 @@ pub struct PopoverContext {
 }
 
 #[derive(Clone)]
-pub struct PopoverTriggerContext {}
+pub struct TriggerContext {}

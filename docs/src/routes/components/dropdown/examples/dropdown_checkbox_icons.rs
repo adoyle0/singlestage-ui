@@ -17,9 +17,9 @@ pub fn DropdownCheckboxIconsExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Notifications"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-48">
                 <MenuGroup>
                     <Label>"Notification Preferences"</Label>

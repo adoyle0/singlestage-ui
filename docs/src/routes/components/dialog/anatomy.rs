@@ -5,7 +5,7 @@ use singlestage::dialog::*;
 pub fn DialogAnatomy -> impl IntoView {
     view!{
         <Dialog>
-            <DialogTrigger slot />
+            <Trigger />
             <DialogHeader>
                 <DialogTitle />
                 <DialogDescription />

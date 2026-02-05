@@ -1,6 +1,6 @@
 use crate::{
-    DropdownTriggerContext, InputGroupContext, PopoverContext, PopoverMenuContext,
-    PopoverTriggerContext, Reactive,
+    DialogCloseContext, DialogContext, InputGroupContext, PopoverContext, PopoverMenuContext,
+    Reactive, TriggerContext,
 };
 use leptos::prelude::*;
 
@@ -243,8 +243,7 @@ pub fn Button(
         />
     };
 
-    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some()
-        || use_context::<PopoverTriggerContext>().is_some();
+    let button_is_trigger: bool = use_context::<TriggerContext>().is_some();
 
     view! {
         <button
@@ -339,12 +338,20 @@ pub fn Button(
                             ev.prevent_default();
                             dropdown.open.set(!dropdown.open.get_untracked());
                         }
+                    } else if let Some(dialog) = use_context::<DialogContext>()
+                        && !dialog.alert.get_untracked()
+                    {
+                        dialog.open.set(true);
                     } else if let Some(popover) = use_context::<PopoverContext>()
                         && !popover.dismissable.get_untracked()
                     {
                         ev.prevent_default();
                         popover.open.set(!popover.open.get_untracked());
                     }
+                } else if let Some(dialog) = use_context::<DialogContext>()
+                    && use_context::<DialogCloseContext>().is_some()
+                {
+                    dialog.open.set(false);
                 }
             }
             popovertarget=move || {

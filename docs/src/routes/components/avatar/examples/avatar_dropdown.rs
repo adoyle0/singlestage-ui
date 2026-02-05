@@ -5,14 +5,14 @@ use singlestage::*;
 pub fn AvatarDropdownExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="ghost" size="icon" class="rounded-full">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
                         <AvatarFallback>"CN"</AvatarFallback>
                     </Avatar>
                 </Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-32">
                 <MenuGroup>
                     <MenuItem>"Profile"</MenuItem>

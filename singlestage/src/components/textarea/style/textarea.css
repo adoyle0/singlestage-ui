@@ -10,7 +10,7 @@
     field-sizing-content
     flex
     focus-visible:border-ring
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     md:text-sm
     min-h-16

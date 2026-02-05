@@ -1,7 +1,6 @@
 use leptos::prelude::*;
 
-/// Displays at the bottom of the dialog, contains calls to action. Submit events such as button
-/// clicks in this area automatically trigger closing of the dialog.
+/// Contains the dialog title and a description to be rendered in the open dialog.
 #[component]
 pub fn DialogFooter(
     children: Children,
@@ -116,7 +115,6 @@ pub fn DialogFooter(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,10 +150,13 @@ pub fn DialogFooter(
     };
 
     view! {
-        <footer>
-            <form method="dialog" {..global_attrs_1} {..global_attrs_2}>
-                {children()}
-            </form>
+        <footer
+            class=move || format!("singlestage-dialog-footer {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
         </footer>
     }
 }

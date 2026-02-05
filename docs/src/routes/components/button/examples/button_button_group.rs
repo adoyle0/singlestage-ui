@@ -19,11 +19,11 @@ pub fn ButtonButtonGroupExample() -> impl IntoView {
             <ButtonGroup>
                 <Button variant="outline">"Snooze"</Button>
                 <DropdownMenu>
-                    <MenuTrigger>
+                    <Trigger>
                         <Button variant="outline" size="icon" aria_label="More Options">
                             {icon!(icondata::FiMoreHorizontal)}
                         </Button>
-                    </MenuTrigger>
+                    </Trigger>
                     <MenuContent align="end" class="w-40">
                         <MenuGroup>
                             <MenuItem>{icon!(icondata::LuMailCheck)} "Mark as Read"</MenuItem>

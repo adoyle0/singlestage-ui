@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DropdownIconsExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Open"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent>
                 <MenuItem>{icon!(icondata::LuUser)} "Profile"</MenuItem>
                 <MenuItem>{icon!(icondata::LuCreditCard)} "Billing"</MenuItem>

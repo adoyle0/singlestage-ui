@@ -10,11 +10,11 @@
     }
 
     &:focus-visible {
-      @apply ring-[3px];
+      @apply ring-3;
     }
 
     &:invalid {
-      @apply ring-[3px];
+      @apply ring-3;
     }
   }
 

@@ -115,7 +115,6 @@ pub fn DialogHeader(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,8 +150,13 @@ pub fn DialogHeader(
     };
 
     view! {
-        <header {..global_attrs_1} {..global_attrs_2}>
+        <hgroup
+            class=move || format!("singlestage-dialog-header {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
-        </header>
+        </hgroup>
     }
 }

@@ -1,6 +1,9 @@
 use crate::{PopoverMenuContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
+#[derive(Clone)]
+pub struct DropdownMenuContext {}
+
 /// Contains all the parts of a dropdown menu.
 #[component]
 pub fn DropdownMenu(
@@ -176,7 +179,9 @@ pub fn DropdownMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
+            <Provider value=DropdownMenuContext {}>
+                <Provider value=context>{children()}</Provider>
+            </Provider>
         </div>
     }
 }

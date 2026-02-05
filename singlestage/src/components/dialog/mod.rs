@@ -5,7 +5,6 @@ mod dialog;
 mod footer;
 mod header;
 mod title;
-mod trigger;
 
 pub use close::*;
 pub use content::*;
@@ -14,12 +13,14 @@ pub use dialog::*;
 pub use footer::*;
 pub use header::*;
 pub use title::*;
-pub use trigger::*;
 
+use crate::Reactive;
 use leptos::prelude::*;
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct DialogContext {
-    pub labeled_by: RwSignal<String>,
+    pub alert: Reactive<bool>,
     pub described_by: RwSignal<String>,
+    pub labelled_by: RwSignal<String>,
+    pub open: Reactive<bool>,
 }

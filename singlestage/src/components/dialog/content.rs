@@ -1,9 +1,12 @@
+use crate::DialogContext;
 use leptos::prelude::*;
 
 /// Contains content to be rendered in the main body of the dialog.
 #[component]
 pub fn DialogContent(
     children: Children,
+
+    #[prop(optional, into)] close_button: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -110,12 +113,29 @@ pub fn DialogContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let dialog_context = expect_context::<DialogContext>();
+    let dialog_ref = NodeRef::<leptos::html::Dialog>::new();
+
+    Effect::new(move || {
+        if let Some(dialog) = dialog_ref.get_untracked() {
+            match dialog_context.open.get() {
+                true => {
+                    let _ = dialog.show_modal();
+                    leptos::logging::log!("Show");
+                }
+                false => {
+                    dialog.close();
+                    leptos::logging::log!("Hide");
+                }
+            }
+        }
+    });
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,8 +171,35 @@ pub fn DialogContent(
     };
 
     view! {
-        <section {..global_attrs_1} {..global_attrs_2}>
-            {children()}
-        </section>
+        <div class="singlestage-dialog">
+            <dialog
+                aria_describedby=move || dialog_context.described_by.get()
+                aria_labelledby=move || dialog_context.labelled_by.get()
+                aria_modal="true"
+                class=move || {
+                    format!("singlestage-dialog-content {}", class.get().unwrap_or_default())
+                }
+                node_ref=dialog_ref
+                on:click=move |ev| {
+                    if let Some(dialog) = dialog_ref.get_untracked() {
+                        let click_x = ev.x() as f64;
+                        let click_y = ev.y() as f64;
+                        let rect = dialog.get_bounding_client_rect();
+                        let click_inside_dialog = rect.top() <= click_y
+                            && click_y <= (rect.top() + rect.height()) && rect.left() <= click_x
+                            && click_x <= (rect.left() + rect.width())
+                            && !dialog_context.alert.get_untracked();
+                        if !click_inside_dialog {
+                            dialog.close()
+                        }
+                    }
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </dialog>
+        </div>
     }
 }

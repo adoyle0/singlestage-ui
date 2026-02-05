@@ -50,7 +50,7 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-[3px]
+      ring-3
       ring-ring/50;
 
       &:after {

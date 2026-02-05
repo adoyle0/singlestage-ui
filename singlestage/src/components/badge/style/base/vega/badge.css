@@ -9,7 +9,7 @@
     text-xs;
 
     &:focus-visible {
-      @apply ring-[3px];
+      @apply ring-3;
     }
 
     &:has(svg:first-child) {

@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn PopoverFormExample() -> impl IntoView {
     view! {
         <Popover>
-            <PopoverTrigger>
+            <Trigger>
                 <Button variant="outline">"Open Popover"</Button>
-            </PopoverTrigger>
+            </Trigger>
             <PopoverContent class="w-64" align="start">
                 <PopoverHeader>
                     <PopoverTitle>"Dimensions"</PopoverTitle>

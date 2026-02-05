@@ -30,9 +30,9 @@ pub fn InputGroupExample() -> impl IntoView {
                         {icon!(icondata::LuPlus)}
                     </Button>
                     <DropdownMenu>
-                        <MenuTrigger>
+                        <Trigger>
                             <Button>"Auto"</Button>
-                        </MenuTrigger>
+                        </Trigger>
                         <MenuContent class="[--radius:0.95rem]">
                             <MenuItem>"Auto"</MenuItem>
                             <MenuItem>"Agent"</MenuItem>

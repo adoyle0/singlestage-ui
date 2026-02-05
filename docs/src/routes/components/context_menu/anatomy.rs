@@ -5,7 +5,7 @@ use singlestage::*;
 pub fn ContextMenuAnatomy() -> impl IntoView {
     view! {
         <ContextMenu>
-            <MenuTrigger />
+            <Trigger />
             <MenuContent>
                 <MenuGroup>
                     <Label />

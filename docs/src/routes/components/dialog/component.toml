@@ -5,9 +5,29 @@ description = "A window overlaid on either the primary window or another dialog 
 name = "Dialog"
 
 [[examples]]
-name = "Dialog Alert"
-title = "Alert Dialog"
-description = "A modal dialog that interrupts the user with important content and expects a response."
+name = "Dialog custom close button"
+title = "Custom Close Button"
+description = "Replace the default close control with your own button."
+
+[[examples]]
+name = "Dialog no close button"
+title = "No Close Button"
+description = "Use close_button=false to hide the close button."
+
+[[examples]]
+name = "Dialog sticky footer"
+title = "Sticky Footer"
+description = "Keep actions visible while the content scrolls."
+
+[[examples]]
+name = "Dialog scrollable content"
+title = "Scrollable Content"
+description = "Long content can scroll while the header stays in view."
+
+# [[examples]]
+# name = "Dialog Alert"
+# title = "Alert Dialog"
+# description = "A modal dialog that interrupts the user with important content and expects a response."
 
 [[references]]
 name = "Dialog"

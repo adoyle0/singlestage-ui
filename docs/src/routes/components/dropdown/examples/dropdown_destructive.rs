@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DropdownDestructiveExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Actions"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent>
                 <MenuGroup>
                     <MenuItem>{icon!(icondata::LuPencil)} "Edit"</MenuItem>

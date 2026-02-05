@@ -1,7 +1,7 @@
 @layer components {
   .singlestage-scroll-area {
     @apply focus-visible:outline-1
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     outline-none
     overflow-hidden

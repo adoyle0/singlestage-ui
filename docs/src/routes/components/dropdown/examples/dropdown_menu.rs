@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DropdownMenuExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Open"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-40" align="start">
                 <MenuGroup>
                     <Label>"My Account"</Label>

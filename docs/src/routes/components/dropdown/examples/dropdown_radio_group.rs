@@ -7,9 +7,9 @@ pub fn DropdownRadioGroupExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Open"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-32">
                 <MenuGroup>
                     <Label>"Panel Position"</Label>

@@ -22,6 +22,7 @@ leptos_axum = "0.8"
 
 # Singlestage
 icondata_core = "0.1"
+web-sys = "0.3.83"
 
 # Singlestage build
 reqwest = "0.12"

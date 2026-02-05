@@ -20,6 +20,7 @@ leptos = { workspace = true }
 leptos_meta = { workspace = true }
 serde = { workspace = true, optional = true }
 uuid = { workspace = true, features = ["v4", "js"] }
+web-sys = { workspace = true, features = ["DomRect", "Element"] }
 
 [build-dependencies]
 reqwest = { workspace = true, features = ["blocking"] }

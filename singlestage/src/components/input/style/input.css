@@ -30,7 +30,7 @@
     file:text-sm
     flex
     focus-visible:border-ring
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     h-9
     md:text-sm
@@ -59,7 +59,7 @@
     disabled:pointer-events-none
     flex
     focus-visible:border-ring
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     size-9
     outline-none

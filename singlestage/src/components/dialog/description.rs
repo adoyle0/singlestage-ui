@@ -1,7 +1,6 @@
-use crate::DialogContext;
 use leptos::prelude::*;
 
-/// A short description/subheading describing dialog content.
+/// Contains the dialog title and a description to be rendered in the open dialog.
 #[component]
 pub fn DialogDescription(
     children: Children,
@@ -47,9 +46,9 @@ pub fn DialogDescription(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
-    // /// Set the id of this element.
-    // #[prop(optional, into)]
-    // id: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -111,24 +110,18 @@ pub fn DialogDescription(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog = expect_context::<DialogContext>();
-
-    let uuid: String = uuid::Uuid::new_v4().to_string();
-    dialog.described_by.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            // id=move || id.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -155,8 +148,16 @@ pub fn DialogDescription(
             translate=move || translate.get()
         />
     };
+
     view! {
-        <p {..global_attrs_1} {..global_attrs_2} id=uuid>
+        <p
+            class=move || {
+                format!("singlestage-dialog-description {}", class.get().unwrap_or_default())
+            }
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </p>
     }

@@ -5,10 +5,10 @@ use singlestage::*;
 pub fn ContextMenuExample() -> impl IntoView {
     view! {
         <ContextMenu>
-            <MenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-xl border border-dashed text-sm">
+            <Trigger class="flex h-[150px] w-[300px] items-center justify-center rounded-xl border border-dashed text-sm">
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-48">
                 <MenuGroup>
                     <MenuItem>"Back" <MenuShortcut>"⌘["</MenuShortcut></MenuItem>

@@ -1,8 +1,7 @@
 @layer components {
   .singlestage-toggle-default,
   .singlestage-toggle-outline {
-    @apply
-    inline-flex
+    @apply inline-flex
     items-center
     justify-center
     gap-2
@@ -20,7 +19,7 @@
     [&_svg]:shrink-0
     focus-visible:border-ring
     focus-visible:ring-ring/50
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     outline-none
     transition-[color,box-shadow]
     aria-invalid:ring-destructive/20
@@ -30,30 +29,26 @@
     h-9
     px-2
     min-w-9;
-}
+  }
 
   .singlestage-toggle-sm {
-    @apply
-    h-8
+    @apply h-8
     px-1.5
     min-w-8;
   }
 
   .singlestage-toggle-lg {
-    @apply
-    h-10
+    @apply h-10
     px-2.5
     min-w-10;
   }
 
   .singlestage-toggle-outline {
-    @apply 
-    border
+    @apply border
     border-input
     bg-transparent
     shadow-xs
     hover:bg-accent 
     hover:text-accent-foreground;
   }
-
 }

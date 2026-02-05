@@ -12,12 +12,12 @@ pub fn BreadcrumbDropdownExample() -> impl IntoView {
                 <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>
                     <DropdownMenu>
-                        <MenuTrigger>
+                        <Trigger>
                             <Button class="flex items-center gap-1" variant="none">
                                 "Components"
                                 {icon!(icondata::LuChevronDown, class="size-3.5")}
                             </Button>
-                        </MenuTrigger>
+                        </Trigger>
                         <MenuContent align="start">
                             <MenuGroup>
                                 <MenuItem>"Documentation"</MenuItem>

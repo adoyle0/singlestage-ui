@@ -13,7 +13,7 @@
     flex
     flex-wrap
     focus-visible:border-ring
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     items-center
     outline-none

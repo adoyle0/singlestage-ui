@@ -1,16 +1,9 @@
 @layer components {
   .singlestage-radio:not(.singlestage-radio-item) {
     @apply appearance-none
-    aria-invalid:border-destructive
-    aria-invalid:ring-destructive/20
     aspect-square
     border
     border-input
-    disabled:cursor-not-allowed
-    disabled:opacity-50
-    focus-visible:border-ring
-    focus-visible:ring-[3px]
-    focus-visible:ring-ring/50
     outline-none
     relative
     rounded-full
@@ -30,6 +23,22 @@
       rounded-full
       size-2
       top-1/2;
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-50;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+    }
+
+    &:invalid {
+      @apply border-destructive
+      ring-destructive/20;
     }
   }
 

@@ -178,7 +178,7 @@ attrs = [
 ]
 
 [[references]]
-name = "MenuTrigger"
+name = "Trigger"
 description = "Defines the area where the context menu can be triggered."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

@@ -24,18 +24,18 @@ pub fn DebugDropdown() -> impl IntoView {
         <Switch checked=open />
 
         <DropdownMenu open dismissable=false>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Signal"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent>
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"No dismiss"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent>
                 <MenuItem dismiss=false>"no dismiss"</MenuItem>
             </MenuContent>
@@ -44,27 +44,27 @@ pub fn DebugDropdown() -> impl IntoView {
         // top
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Top Start"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent side="top">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Top Center"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="center" side="top">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Top End"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="end" side="top">
                 <Item />
             </MenuContent>
@@ -73,27 +73,27 @@ pub fn DebugDropdown() -> impl IntoView {
         // right
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Right Start"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent side="right">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Right Center"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="center" side="right">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Right End"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="end" side="right">
                 <Item />
             </MenuContent>
@@ -102,27 +102,27 @@ pub fn DebugDropdown() -> impl IntoView {
         // bottom
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Bottom Start"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent>
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button size="sm">"Bottom Center"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="center">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Bottom End"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="end">
                 <Item />
             </MenuContent>
@@ -131,27 +131,27 @@ pub fn DebugDropdown() -> impl IntoView {
         // left
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Left Start"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent side="left">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Left Center"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="center" side="left">
                 <Item />
             </MenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button>"Left End"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent align="end" side="left">
                 <Item />
             </MenuContent>

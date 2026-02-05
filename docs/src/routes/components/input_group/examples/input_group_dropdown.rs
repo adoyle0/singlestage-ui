@@ -9,11 +9,11 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter file name" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <MenuTrigger>
+                        <Trigger>
                             <Button aria_label="More" title="More">
                                 {icon!(icondata::FiMoreHorizontal)}
                             </Button>
-                        </MenuTrigger>
+                        </Trigger>
                         <MenuContent align="end">
                             <MenuItem>"Settings"</MenuItem>
                             <MenuItem>"Copy path"</MenuItem>
@@ -26,11 +26,11 @@ pub fn InputGroupDropdownExample() -> impl IntoView {
                 <Input placeholder="Enter search query" />
                 <InputGroupAddon align="inline-end">
                     <DropdownMenu>
-                        <MenuTrigger>
+                        <Trigger>
                             <Button class="!pr-1.5 text-xs">
                                 "Search In..." {icon!(icondata::LuChevronDown, class="size-3")}
                             </Button>
-                        </MenuTrigger>
+                        </Trigger>
                         <MenuContent align="end" class="[--radius:0.95rem]">
                             <MenuItem>"Documentation"</MenuItem>
                             <MenuItem>"Blog Posts"</MenuItem>

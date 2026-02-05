@@ -38,13 +38,13 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-[3px]
+      ring-3
       ring-ring/50;
     }
 
     &:invalid {
       @apply border-destructive
-      ring-[3px]
+      ring-3
       ring-destructive/20;
     }
 

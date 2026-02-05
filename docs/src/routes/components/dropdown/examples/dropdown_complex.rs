@@ -17,9 +17,9 @@ pub fn DropdownComplexExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Complex Menu"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="w-44">
                 <MenuGroup>
                     <Label>"File"</Label>

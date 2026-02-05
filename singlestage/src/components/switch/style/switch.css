@@ -17,7 +17,7 @@
     disabled:cursor-not-allowed
     disabled:opacity-50
     focus-visible:border-ring
-    focus-visible:ring-[3px]
+    focus-visible:ring-3
     focus-visible:ring-ring/50
     h-[1.15rem]
     inline-flex

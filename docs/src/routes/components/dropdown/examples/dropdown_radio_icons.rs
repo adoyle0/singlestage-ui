@@ -6,9 +6,9 @@ pub fn DropdownRadioIconsExample() -> impl IntoView {
     let payment_method = RwSignal::new("card".to_string());
     view! {
         <DropdownMenu>
-            <MenuTrigger>
+            <Trigger>
                 <Button variant="outline">"Payment Method"</Button>
-            </MenuTrigger>
+            </Trigger>
             <MenuContent class="min-w-56">
                 <MenuGroup>
                     <Label>"Select Payment Method"</Label>

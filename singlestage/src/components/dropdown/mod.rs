@@ -7,7 +7,6 @@ mod item;
 mod radio;
 mod shortcut;
 mod sub;
-mod trigger;
 
 pub use checkbox::*;
 pub use content::*;
@@ -18,7 +17,6 @@ pub use item::*;
 pub use radio::*;
 pub use shortcut::*;
 pub use sub::*;
-pub use trigger::*;
 
 use crate::Reactive;
 use leptos::prelude::*;
@@ -32,7 +30,7 @@ pub struct PopoverMenuContext {
 }
 
 #[derive(Clone)]
-pub struct DropdownTriggerContext {}
+pub struct DropdownMenuContext {}
 
 #[derive(Clone)]
 pub struct PopoverMenuGroupContext {

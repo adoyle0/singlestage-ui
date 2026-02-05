@@ -1,8 +1,14 @@
 @layer components {
   .singlestage-select {
-    @apply aria-invalid:border-destructive/50
-    aria-invalid:ring-destructive/40
-    bg-input/30
-    hover:bg-input/50;
+    @apply bg-input/30;
+
+    &:hover {
+      @apply bg-input/50;
+    }
+
+    &:invalid {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
   }
 }
