@@ -2,18 +2,18 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn AlertDialogExample() -> impl IntoView {
+pub fn AlertDialogMediaExample() -> impl IntoView {
     view! {
         <AlertDialog>
             <Trigger>
-                <Button variant="outline">"Show Dialog"</Button>
+                <Button variant="outline">"Share Project"</Button>
             </Trigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>"Are you absolutely sure?"</DialogTitle>
+                    <DialogMedia>{icon!(icondata::LuCircleFadingPlus)}</DialogMedia>
+                    <DialogTitle>"Share this project?"</DialogTitle>
                     <DialogDescription>
-                        "This action cannot be undone. This will permanently delete your
-                        account from our servers."
+                        "Anyone with the link will be able to view and edit this project."
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
@@ -21,7 +21,7 @@ pub fn AlertDialogExample() -> impl IntoView {
                         <Button>"Cancel"</Button>
                     </DialogCancel>
                     <DialogAction>
-                        <Button>"Continue"</Button>
+                        <Button>"Share"</Button>
                     </DialogAction>
                 </DialogFooter>
             </DialogContent>

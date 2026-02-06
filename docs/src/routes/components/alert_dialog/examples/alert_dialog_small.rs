@@ -2,26 +2,25 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn AlertDialogExample() -> impl IntoView {
+pub fn AlertDialogSmallExample() -> impl IntoView {
     view! {
         <AlertDialog>
             <Trigger>
                 <Button variant="outline">"Show Dialog"</Button>
             </Trigger>
-            <DialogContent>
+            <DialogContent size="sm">
                 <DialogHeader>
-                    <DialogTitle>"Are you absolutely sure?"</DialogTitle>
+                    <DialogTitle>"Allow accessory to connect?"</DialogTitle>
                     <DialogDescription>
-                        "This action cannot be undone. This will permanently delete your
-                        account from our servers."
+                        "Do you want to allow the USB accessory to connect to this device?"
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <DialogCancel>
-                        <Button>"Cancel"</Button>
+                        <Button>"Don't allow"</Button>
                     </DialogCancel>
                     <DialogAction>
-                        <Button>"Continue"</Button>
+                        <Button>"Allow"</Button>
                     </DialogAction>
                 </DialogFooter>
             </DialogContent>

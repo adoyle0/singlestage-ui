@@ -1,12 +1,21 @@
-use crate::DialogContext;
-use leptos::prelude::*;
+use crate::{Button, DialogCloseContext, DialogContext};
+use leptos::{context::Provider, prelude::*};
 
 /// Contains content to be rendered in the main body of the dialog.
 #[component]
 pub fn DialogContent(
     children: Children,
 
-    #[prop(optional, into)] close_button: MaybeProp<bool>,
+    /// Toggles whether or not a close button should appear in the top right corner of the dialog.
+    ///
+    /// Defaults to `true` for `Dialog` and `false` for `AlertDialog`
+    #[prop(optional, into)]
+    close_button: MaybeProp<bool>,
+    /// Set the size of dialog to render.
+    ///
+    /// Accepted values are "sm"
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -121,11 +130,9 @@ pub fn DialogContent(
             match dialog_context.open.get() {
                 true => {
                     let _ = dialog.show_modal();
-                    leptos::logging::log!("Show");
                 }
                 false => {
                     dialog.close();
-                    leptos::logging::log!("Hide");
                 }
             }
         }
@@ -177,7 +184,14 @@ pub fn DialogContent(
                 aria_labelledby=move || dialog_context.labelled_by.get()
                 aria_modal="true"
                 class=move || {
-                    format!("singlestage-dialog-content {}", class.get().unwrap_or_default())
+                    format!(
+                        "singlestage-dialog-content{} {}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" | "small" => " singlestage-dialog-size-sm",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
                 }
                 node_ref=dialog_ref
                 on:click=move |ev| {
@@ -187,9 +201,8 @@ pub fn DialogContent(
                         let rect = dialog.get_bounding_client_rect();
                         let click_inside_dialog = rect.top() <= click_y
                             && click_y <= (rect.top() + rect.height()) && rect.left() <= click_x
-                            && click_x <= (rect.left() + rect.width())
-                            && !dialog_context.alert.get_untracked();
-                        if !click_inside_dialog {
+                            && click_x <= (rect.left() + rect.width());
+                        if !click_inside_dialog && !dialog_context.alert {
                             dialog.close()
                         }
                     }
@@ -199,6 +212,28 @@ pub fn DialogContent(
                 {..global_attrs_2}
             >
                 {children()}
+                <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
+                    <Provider value=DialogCloseContext {}>
+                        <Button class="singlestage-dialog-close" variant="ghost" size="icon-sm">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-x-icon lucide-x"
+                            >
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                            <span class="sr-only">"Close"</span>
+                        </Button>
+                    </Provider>
+                </Show>
             </dialog>
         </div>
     }

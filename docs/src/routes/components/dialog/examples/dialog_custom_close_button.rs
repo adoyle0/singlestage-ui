@@ -28,9 +28,9 @@ pub fn DialogCustomCloseButtonExample() -> impl IntoView {
                     </div>
                 </div>
                 <DialogFooter class="sm:justify-start">
-                    <DialogClose>
+                    <DialogCancel>
                         <Button button_type="button">"Close"</Button>
-                    </DialogClose>
+                    </DialogCancel>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

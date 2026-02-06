@@ -24,33 +24,33 @@ name = "Dialog scrollable content"
 title = "Scrollable Content"
 description = "Long content can scroll while the header stays in view."
 
-# [[examples]]
-# name = "Dialog Alert"
-# title = "Alert Dialog"
-# description = "A modal dialog that interrupts the user with important content and expects a response."
-
 [[references]]
 name = "Dialog"
-description = "Contains all the parts of an alert dialog."
+description = "Contains all the parts of a Dialog component."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#attributes">dialog</a> \
 attributes."""
 attrs = [
-  { attr = "alert", attr_type = "bool", default = "false", description = """Specify whether or \
-    not alert styling should be used.""" },
-  { attr = "open", attr_type = "bool", default = "false", description = """Toggle whether or not \
-    the dialog is open.""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover **but is not coupled to the actual open \
+    state of the popover**""" },
 ]
 
 [[references]]
-name = "DialogClose"
-description = "An optional button that renders in the top-right corner and closes the dialog when clicked."
+name = "DialogAction"
+description = "Wraps a button that the user presses to acknowledge the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogCancel"
+description = "Wraps a button that the user presses to dismiss the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 
@@ -60,7 +60,12 @@ description = "Contains content to be rendered in the main body of the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "close_button", attr_type = "bool", default = "true", description = """Toggles \
+    whether or not a close button should appear in the top right corner of the dialog.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Set the size of \
+    dialog to render.""" },
+]
 
 [[references]]
 name = "DialogDescription"
@@ -72,8 +77,7 @@ attrs = []
 
 [[references]]
 name = "DialogFooter"
-description = """Displays at the bottom of the dialog, contains calls to action. Submit events \
-such as button clicks in this area automatically trigger closing of the dialog."""
+description = """Displays at the bottom of the dialog, contains calls to action."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -89,14 +93,14 @@ attrs = []
 
 [[references]]
 name = "DialogTitle"
-description = "The title of the dialog."
+description = "A title describing dialog content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 
 [[references]]
-name = "DialogTrigger"
+name = "Trigger"
 description = "Used to wrap other elements and trigger the dialog on click."
 extra = "Note: the slot attribute is required."
 attrs = []

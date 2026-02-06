@@ -1,10 +1,15 @@
-use crate::DialogContext;
-use leptos::prelude::*;
+use crate::{DialogContext, Reactive};
+use leptos::{context::Provider, prelude::*};
 
-/// Displays at the bottom of the dialog, contains calls to action.
+/// Contains all the parts of a Dialog component.
 #[component]
-pub fn DialogFooter(
+pub fn AlertDialog(
     children: Children,
+
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -111,13 +116,18 @@ pub fn DialogFooter(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog = expect_context::<DialogContext>();
+    let context = DialogContext {
+        alert: true,
+        open,
+        ..Default::default()
+    };
 
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -153,22 +163,8 @@ pub fn DialogFooter(
     };
 
     view! {
-        <footer
-            class=move || {
-                format!(
-                    "singlestage-dialog-footer{} {}",
-                    match dialog.alert {
-                        true => " singlestage-alert-dialog-footer",
-                        false => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-
-            {..global_attrs_1}
-            {..global_attrs_2}
-        >
-            {children()}
-        </footer>
+        <div {..global_attrs_1} {..global_attrs_2}>
+            <Provider value=context>{children()}</Provider>
+        </div>
     }
 }

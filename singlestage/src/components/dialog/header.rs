@@ -1,3 +1,4 @@
+use crate::DialogContext;
 use leptos::prelude::*;
 
 /// Contains the dialog title and a description to be rendered in the open dialog.
@@ -110,6 +111,8 @@ pub fn DialogHeader(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let dialog = expect_context::<DialogContext>();
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -151,7 +154,16 @@ pub fn DialogHeader(
 
     view! {
         <hgroup
-            class=move || format!("singlestage-dialog-header {}", class.get().unwrap_or_default())
+            class=move || {
+                format!(
+                    "{} {}",
+                    match dialog.alert {
+                        true => "singlestage-alert-dialog-header",
+                        false => "singlestage-dialog-header",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

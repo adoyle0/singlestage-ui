@@ -1,10 +1,13 @@
-use crate::DialogContext;
 use leptos::prelude::*;
 
-/// Displays at the bottom of the dialog, contains calls to action.
+/// Contains a media element such as an icon or image to render in the header of the dialog.
 #[component]
-pub fn DialogFooter(
+pub fn DialogMedia(
     children: Children,
+
+    /// The display variant of the media element such as "destructive".
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -111,8 +114,6 @@ pub fn DialogFooter(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog = expect_context::<DialogContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -153,13 +154,13 @@ pub fn DialogFooter(
     };
 
     view! {
-        <footer
+        <div
             class=move || {
                 format!(
-                    "singlestage-dialog-footer{} {}",
-                    match dialog.alert {
-                        true => " singlestage-alert-dialog-footer",
-                        false => "",
+                    "singlestage-alert-dialog-media{} {}",
+                    match variant.get().unwrap_or_default().as_str() {
+                        "destructive" => " singlestage-alert-dialog-media-destructive",
+                        _ => "",
                     },
                     class.get().unwrap_or_default(),
                 )
@@ -169,6 +170,6 @@ pub fn DialogFooter(
             {..global_attrs_2}
         >
             {children()}
-        </footer>
+        </div>
     }
 }

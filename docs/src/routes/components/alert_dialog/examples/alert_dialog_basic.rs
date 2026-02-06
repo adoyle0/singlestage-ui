@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn AlertDialogExample() -> impl IntoView {
+pub fn AlertDialogBasicExample() -> impl IntoView {
     view! {
         <AlertDialog>
             <Trigger>
@@ -13,7 +13,7 @@ pub fn AlertDialogExample() -> impl IntoView {
                     <DialogTitle>"Are you absolutely sure?"</DialogTitle>
                     <DialogDescription>
                         "This action cannot be undone. This will permanently delete your
-                        account from our servers."
+                        account and remove your data from our servers."
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>

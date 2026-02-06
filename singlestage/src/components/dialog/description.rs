@@ -1,6 +1,7 @@
+use crate::DialogContext;
 use leptos::prelude::*;
 
-/// Contains the dialog title and a description to be rendered in the open dialog.
+/// A short description/subheading describing dialog content.
 #[component]
 pub fn DialogDescription(
     children: Children,
@@ -110,6 +111,8 @@ pub fn DialogDescription(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let dialog = expect_context::<DialogContext>();
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -152,7 +155,14 @@ pub fn DialogDescription(
     view! {
         <p
             class=move || {
-                format!("singlestage-dialog-description {}", class.get().unwrap_or_default())
+                format!(
+                    "singlestage-dialog-description{} {}",
+                    match dialog.alert {
+                        true => " singlestage-alert-dialog-description",
+                        false => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
 
             {..global_attrs_1}

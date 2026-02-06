@@ -33,9 +33,9 @@ pub fn DialogStickyFooterExample() -> impl IntoView {
                     </For>
                 </div>
                 <DialogFooter>
-                    <DialogClose>
+                    <DialogCancel>
                         <Button variant="outline">"Close"</Button>
-                    </DialogClose>
+                    </DialogCancel>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

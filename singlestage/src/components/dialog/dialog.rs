@@ -6,10 +6,6 @@ use leptos::{context::Provider, prelude::*};
 pub fn Dialog(
     children: Children,
 
-    /// Set whether or not this popover can be light dismissed. Use this with the `open` signal for
-    /// a manually managed popover
-    #[prop(optional, into)]
-    alert: Reactive<bool>,
     /// Reactive signal that can remotely control the open state of the popover **but is not
     /// coupled to the actual open state of the popover**
     #[prop(optional, into)]
@@ -121,7 +117,7 @@ pub fn Dialog(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let context = DialogContext {
-        alert,
+        alert: false,
         open,
         ..Default::default()
     };
@@ -131,6 +127,7 @@ pub fn Dialog(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -166,12 +163,7 @@ pub fn Dialog(
     };
 
     view! {
-        <div
-            // class=move || format!("singlestage-dialog {}", class.get().unwrap_or_default())
-
-            {..global_attrs_1}
-            {..global_attrs_2}
-        >
+        <div {..global_attrs_1} {..global_attrs_2}>
             <Provider value=context>{children()}</Provider>
         </div>
     }

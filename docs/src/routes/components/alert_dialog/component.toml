@@ -4,53 +4,62 @@ description = "A modal dialog that interrupts the user with important content an
 [[examples]]
 name = "Alert Dialog"
 
-# [[examples]]
-# name = "Dialog custom close button"
-# title = "Custom Close Button"
-# description = "Replace the default close control with your own button."
-#
-# [[examples]]
-# name = "Dialog no close button"
-# title = "No Close Button"
-# description = "Use close_button=false to hide the close button."
-#
-# [[examples]]
-# name = "Dialog sticky footer"
-# title = "Sticky Footer"
-# description = "Keep actions visible while the content scrolls."
-#
-# [[examples]]
-# name = "Dialog scrollable content"
-# title = "Scrollable Content"
-# description = "Long content can scroll while the header stays in view."
+[[examples]]
+name = "alert dialog basic"
+title = "Basic"
+description = "A basic alert dialog with a title, description, and cancel and continue buttons."
 
-# [[examples]]
-# name = "Dialog Alert"
-# title = "Alert Dialog"
-# description = "A modal dialog that interrupts the user with important content and expects a response."
+[[examples]]
+name = "alert dialog small"
+title = "Small"
+description = "Use the size prop to make the alert dialog smaller."
+
+[[examples]]
+name = "alert dialog media"
+title = "Media"
+description = """Use the DialogMedia component to add a media element such as an icon or image to \
+the alert dialog."""
+
+[[examples]]
+name = "alert dialog small with media"
+title = "Small with Media"
+description = """Use the size prop to make the alert dialog smaller and the AlertDialogMedia \
+component to add a media element such as an icon or image to the alert dialog."""
+
+
+[[examples]]
+name = "alert dialog destructive"
+title = "Destructive"
+description = """Use the AlertDialogAction component to add a destructive action button to the \
+alert dialog."""
 
 [[references]]
-name = "Dialog"
-description = "Contains all the parts of an alert dialog."
+name = "AlertDialog"
+description = "Contains all the parts of a Dialog component."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#attributes">dialog</a> \
 attributes."""
 attrs = [
-  { attr = "alert", attr_type = "bool", default = "false", description = """Specify whether or \
-    not alert styling should be used.""" },
-  { attr = "open", attr_type = "bool", default = "false", description = """Toggle whether or not \
-    the dialog is open.""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover **but is not coupled to the actual open \
+    state of the popover**""" },
 ]
 
 [[references]]
-name = "DialogClose"
-description = "An optional button that renders in the top-right corner and closes the dialog when clicked."
+name = "DialogAction"
+description = "Wraps a button that the user presses to acknowledge the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DialogCancel"
+description = "Wraps a button that the user presses to dismiss the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 
@@ -60,7 +69,12 @@ description = "Contains content to be rendered in the main body of the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "close_button", attr_type = "bool", default = "false", description = """Toggles \
+    whether or not a close button should appear in the top right corner of the dialog.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Set the size of \
+    dialog to render.""" },
+]
 
 [[references]]
 name = "DialogDescription"
@@ -72,8 +86,7 @@ attrs = []
 
 [[references]]
 name = "DialogFooter"
-description = """Displays at the bottom of the dialog, contains calls to action. Submit events \
-such as button clicks in this area automatically trigger closing of the dialog."""
+description = """Displays at the bottom of the dialog, contains calls to action."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -88,15 +101,27 @@ attributes."""
 attrs = []
 
 [[references]]
+name = "DialogMedia"
+description = """Contains a media element such as an icon or image to render in the header of the \
+dialog."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the style \
+    variant of the media element. Accepted values: \"destructive\".""" },
+]
+
+[[references]]
 name = "DialogTitle"
-description = "The title of the dialog."
+description = "A title describing dialog content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 
 [[references]]
-name = "DialogTrigger"
+name = "Trigger"
 description = "Used to wrap other elements and trigger the dialog on click."
 extra = "Note: the slot attribute is required."
 attrs = []

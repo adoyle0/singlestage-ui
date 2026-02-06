@@ -1,6 +1,6 @@
 use crate::{
-    DialogCloseContext, DialogContext, InputGroupContext, PopoverContext, PopoverMenuContext,
-    Reactive, TriggerContext,
+    DialogActionContext, DialogCancelContext, DialogCloseContext, DialogContext, InputGroupContext,
+    PopoverContext, PopoverMenuContext, Reactive, TriggerContext,
 };
 use leptos::prelude::*;
 
@@ -275,7 +275,9 @@ pub fn Button(
                             "link" => "singlestage-btn-link",
                             "destructive" => "singlestage-btn-destructive",
                             _ => {
-                                if use_context::<InputGroupContext>().is_some()
+                                if use_context::<DialogCancelContext>().is_some() {
+                                    "singlestage-btn-outline"
+                                } else if use_context::<InputGroupContext>().is_some()
                                     && variant.get().is_none()
                                 {
                                     "singlestage-btn-ghost"
@@ -310,6 +312,10 @@ pub fn Button(
                                     _ => "singlestage-input-group-button-xs",
                                 },
                             )
+                        } else if use_context::<DialogActionContext>().is_some() {
+                            "singlestage-alert-dialog-action".to_string()
+                        } else if use_context::<DialogCancelContext>().is_some() {
+                            "singlestage-alert-dialog-cancel".to_string()
                         } else {
                             "".to_string()
                         },
@@ -338,9 +344,7 @@ pub fn Button(
                             ev.prevent_default();
                             dropdown.open.set(!dropdown.open.get_untracked());
                         }
-                    } else if let Some(dialog) = use_context::<DialogContext>()
-                        && !dialog.alert.get_untracked()
-                    {
+                    } else if let Some(dialog) = use_context::<DialogContext>() {
                         dialog.open.set(true);
                     } else if let Some(popover) = use_context::<PopoverContext>()
                         && !popover.dismissable.get_untracked()
@@ -348,10 +352,13 @@ pub fn Button(
                         ev.prevent_default();
                         popover.open.set(!popover.open.get_untracked());
                     }
-                } else if let Some(dialog) = use_context::<DialogContext>()
-                    && use_context::<DialogCloseContext>().is_some()
-                {
-                    dialog.open.set(false);
+                } else if let Some(dialog) = use_context::<DialogContext>() {
+                    if use_context::<DialogActionContext>().is_some()
+                        || use_context::<DialogCancelContext>().is_some()
+                        || use_context::<DialogCloseContext>().is_some()
+                    {
+                        dialog.open.set(false)
+                    }
                 }
             }
             popovertarget=move || {
