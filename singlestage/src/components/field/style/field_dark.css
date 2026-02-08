@@ -1,0 +1,8 @@
+@layer components {
+  .singlestage-field-label {
+    .singlestage-field:has(*:checked) {
+      @apply bg-primary/10
+      border-primary/20;
+    }
+  }
+}

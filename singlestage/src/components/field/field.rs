@@ -176,7 +176,7 @@ pub fn Field(
             aria_invalid=move || if invalid.get() { Some("true".to_string()) } else { None }
             class=move || {
                 format!(
-                    "singlestage-field{}{}{}",
+                    "singlestage-field{}{} {}",
                     match orientation.get().unwrap_or_default().as_str() {
                         "horizontal" => " singlestage-field-horizontal",
                         "responsive" => " singlestage-field-responsive",

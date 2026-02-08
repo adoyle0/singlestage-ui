@@ -46,7 +46,7 @@ Radio, Checkbox and Switch components."""
 [[examples]]
 name = "field group"
 title = "Field Group"
-description = "Stack Field components with FieldGroup. Add FieldSeparator to divide them."
+description = "Stack Field components with FieldGroup. Add Separator to divide them."
 
 [[examples]]
 name = "field responsive layout"
@@ -131,8 +131,8 @@ attrs = [
 ]
 
 [[references]]
-name = "FieldSeparator"
-description = """Visual divider to separate sections inside a FieldGroup. Accepts optional inline \
+name = "Separator"
+description = """Visual divider to separate sections inside a FieldSet. Accepts optional inline \
 content."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

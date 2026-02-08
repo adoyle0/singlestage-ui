@@ -1,4 +1,4 @@
-use crate::{Reactive, SelectContext};
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Contains a group of items for the Select.
@@ -118,8 +118,6 @@ pub fn SelectOptGroup(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let select = expect_context::<SelectContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -168,16 +166,6 @@ pub fn SelectOptGroup(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {if let Some(placeholder) = select.placeholder.get_untracked() {
-                view! {
-                    <option value="singlestage-select-placeholder" disabled hidden selected>
-                        {placeholder}
-                    </option>
-                }
-                    .into_any()
-            } else {
-                "".into_any()
-            }}
             {children()}
         </optgroup>
     }

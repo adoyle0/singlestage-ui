@@ -1,9 +1,11 @@
-use crate::PopoverMenuContext;
+use crate::{FieldSetContext, PopoverMenuContext};
 use leptos::prelude::*;
 
 /// The separator.
 #[component]
 pub fn Separator(
+    #[prop(optional)] children: Option<Children>,
+
     /// Toggle whether or not the separator should display vertically.
     #[prop(optional, into)]
     vertical: MaybeProp<bool>,
@@ -167,6 +169,22 @@ pub fn Separator(
                 {..global_attrs_1}
                 {..global_attrs_2}
             />
+        }
+        .into_any()
+    } else if use_context::<FieldSetContext>().is_some() {
+        view! {
+            <div class=move || {
+                format!("singlestage-field-separator {}", class.get().unwrap_or_default())
+            }>
+                <div class="singlestage-separator singlestage-separator-horizontal singlestage-field-separator-separator" />
+                {if let Some(children) = children {
+                    view! { <span class="singlestage-field-separator-content">{children()}</span> }
+                        .into_any()
+                } else {
+                    "".into_any()
+                }}
+
+            </div>
         }
         .into_any()
     } else {

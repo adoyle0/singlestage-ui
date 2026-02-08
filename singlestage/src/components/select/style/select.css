@@ -1,7 +1,8 @@
 @layer components {
   .singlestage-select-wrapper {
-    @apply relative
-    w-fit;
+    @apply max-w-48
+    relative
+    w-full;
 
     &:has(.singlestage-select:disabled) {
       @apply opacity-50;

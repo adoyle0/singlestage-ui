@@ -1,4 +1,4 @@
-use crate::{FieldContext, PopoverMenuContext, PopoverMenuGroupContext, Reactive};
+use crate::{FieldContext, FieldSetContext, PopoverMenuContext, PopoverMenuGroupContext, Reactive};
 use leptos::prelude::*;
 
 /// Renders an accessible label associated with controls
@@ -185,7 +185,9 @@ pub fn Label(
                                 ""
                             },
                         )
-                    } else if use_context::<FieldContext>().is_some() {
+                    } else if use_context::<FieldContext>().is_some()
+                        || use_context::<FieldSetContext>().is_some()
+                    {
                         "singlestage-field-label".to_owned()
                     } else {
                         "singlestage-label".to_string()

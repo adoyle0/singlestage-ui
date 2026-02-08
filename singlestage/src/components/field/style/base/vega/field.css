@@ -1,0 +1,116 @@
+@layer base {
+  .singlestage-field-set {
+    @apply gap-6;
+
+    &:has(.singlestage-checkbox-group, .singlestage-radio-group) {
+      @apply gap-3;
+    }
+  }
+
+  .singlestage-field-legend {
+    @apply font-medium
+    mb-3;
+  }
+
+  .singlestage-field-legend-label {
+    @apply text-sm;
+  }
+
+  .singlestage-field-content {
+    @apply gap-1;
+  }
+
+  .singlestage-field-title {
+    @apply font-medium
+    gap-2
+    text-sm;
+  }
+
+  .singlestage-field-description {
+    @apply text-left
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-field-separator {
+    @apply -my-2
+    h-5
+    text-sm;
+  }
+
+  .singlestage-field-separator-separator {
+    @apply absolute
+    inset-0
+    top-1/2;
+  }
+
+  .singlestage-field-separator-content {
+    @apply px-2
+    text-muted-foreground;
+  }
+
+  .singlestage-field-error {
+    @apply text-destructive
+    text-sm;
+  }
+
+  .singlestage-field-group {
+    @apply /* *:data-[slot=field-group]:gap-4 */
+    /* data-[slot=checkbox-group]:gap-3 */
+    gap-7;
+
+    .singlestage-field-group {
+      @apply gap-4;
+    }
+
+    > .singlestage-checkbox-group {
+      @apply gap-3;
+    }
+  }
+
+  .singlestage-field-group-outline {
+    .singlestage-field-separator {
+      @apply -mb-2;
+    }
+  }
+
+  .singlestage-field {
+    @apply gap-3;
+
+    &:disabled {
+      .singlestage-field-label,
+      .singlestage-field-title {
+        @apply opacity-50;
+      }
+    }
+
+    &:invalid {
+      @apply text-destructive;
+    }
+  }
+
+  .singlestage-field-label {
+    @apply gap-2;
+
+    &:has(.singlestage-field) {
+      @apply border
+      rounded-md;
+    }
+
+    &:has(*:checked) {
+      @apply bg-primary/5
+      border-primary/30;
+    }
+
+    .singlestage-field {
+      @apply p-3;
+    }
+  }
+
+  .singlestage-field-legend-legend {
+    @apply text-base;
+    & + .singlestage-field-description {
+      @apply -mt-1.5;
+    }
+  }
+}

@@ -315,6 +315,11 @@ pub fn Select(
                     {..global_attrs_2}
                     {..select_attrs}
                 >
+                    <Show when=move || placeholder.get().is_some()>
+                        <option value="singlestage-select-placeholder" disabled hidden selected>
+                            {move || placeholder.get()}
+                        </option>
+                    </Show>
                     {children()}
                 </select>
                 <Show when=move || !multiple.get().is_some()>

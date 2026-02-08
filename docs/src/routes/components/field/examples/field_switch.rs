@@ -4,23 +4,9 @@ use singlestage::*;
 #[component]
 pub fn FieldSwitchExample() -> impl IntoView {
     view! {
-        <div class="w-full max-w-md">
-            <FieldSet>
-                <FieldGroup>
-                    <Field orientation="horizontal">
-                        <Label>
-                            <FieldContent>
-                                <FieldTitle>"Multi-factor authentication"</FieldTitle>
-                                <FieldDescription>
-                                    "Enable multi-factor authentication. If you do not have a two-factor
-                                    device, you can use a one-time code sent to your email."
-                                </FieldDescription>
-                            </FieldContent>
-                        </Label>
-                        <Switch />
-                    </Field>
-                </FieldGroup>
-            </FieldSet>
-        </div>
+        <Field orientation="horizontal" class="w-fit">
+            <Label label_for="2fa">"Multi-factor authentication"</Label>
+            <Switch id="2fa" />
+        </Field>
     }
 }

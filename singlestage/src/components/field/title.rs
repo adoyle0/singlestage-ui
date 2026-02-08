@@ -150,13 +150,13 @@ pub fn FieldTitle(
     };
 
     view! {
-        <span
+        <div
             class=move || { format!("singlestage-field-title {}", class.get().unwrap_or_default()) }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </span>
+        </div>
     }
 }

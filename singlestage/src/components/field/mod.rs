@@ -4,7 +4,6 @@ mod error;
 mod field;
 mod group;
 mod legend;
-mod separator;
 mod set;
 mod title;
 
@@ -14,7 +13,6 @@ pub use error::*;
 pub use field::*;
 pub use group::*;
 pub use legend::*;
-pub use separator::*;
 pub use set::*;
 pub use title::*;
 
@@ -26,3 +24,6 @@ pub struct FieldContext {
     pub input_id: RwSignal<String>,
     pub label_id: RwSignal<String>,
 }
+
+#[derive(Clone)]
+pub struct FieldSetContext {}
