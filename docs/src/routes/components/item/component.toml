@@ -1,5 +1,6 @@
 name = "Item"
-description = "A versatile component used to display any content."
+description = """A versatile component for displaying content with media, title, description, and \
+actions."""
 
 [[examples]]
 name = "Item"
@@ -7,10 +8,18 @@ name = "Item"
 [[examples]]
 name = "item variants"
 title = "Variants"
+description = "Use the variant prop to change the visual style of the item."
+
+[[examples]]
+name = "item size"
+title = "Size"
+description = """Use the size prop to change the size of the item. Available sizes are default, \
+sm, and xs."""
 
 [[examples]]
 name = "item icon"
 title = "Icon"
+description = "Use the ItemMedia icon variant to display an icon."
 
 [[examples]]
 name = "item avatar"
@@ -19,18 +28,23 @@ title = "Avatar"
 [[examples]]
 name = "item image"
 title = "Image"
+description = "Use the ItemMedia image variant to display an icon."
 
 [[examples]]
 name = "item group"
 title = "Group"
+description = "Use ItemGroup to group related items together."
 
 [[examples]]
 name = "item header"
 title = "Header"
+description = "Use ItemHeader to add a header above the item content."
 
 [[examples]]
 name = "item link"
 title = "Link"
+description = """To make an Item a link, just wrap it with an anchor and it'll automatically \
+apply hover and focus styling."""
 
 [[examples]]
 name = "item dropdown"
@@ -43,10 +57,10 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "size", attr_type = "String", default = """"default"""", description = """Set the \
-    display size of the Item.""" },
-  { attr = "variant", attr_type = "String", default = """"default"""", description = """Set the \
-    display variant of the Item.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Set the display \
+    size of the Item. Accepted values: "outline" | "muted".""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the Item. Accepted values: "outline" | "muted".""" },
 ]
 
 [[references]]
@@ -104,19 +118,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "variant", attr_type = "String", default = """"default"""", description = """Set the \
-    display variant of the ItemMedia.""" },
-]
-
-[[references]]
-name = "ItemSeparator"
-description = "Separates Item content."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = [
-  { attr = "vertical", attr_type = "bool", default = "false", description = """Toggle whether or \
-    not the separator should display vertically.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the ItemMedia. Accepted values: "icon" | "image".""" },
 ]
 
 [[references]]

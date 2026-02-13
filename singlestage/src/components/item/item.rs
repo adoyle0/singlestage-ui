@@ -1,4 +1,5 @@
-use leptos::prelude::*;
+use crate::ItemContext;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains the contents of an Item.
 #[component]
@@ -7,12 +8,12 @@ pub fn Item(
 
     /// Set the display size of the `Item`.
     ///
-    /// Accepted values: small | default
+    /// Accepted values: "xs" | "sm" | "default"
     #[prop(optional, into)]
     size: MaybeProp<String>,
     /// Set the display style of the `Item`.
     ///
-    /// Accepted values: outline | muted | default
+    /// Accepted values: "outline" | "muted" | "default"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -167,13 +168,13 @@ pub fn Item(
                 format!(
                     "singlestage-item {} {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "muted" => "singlestage-item-muted",
-                        "outline" => "singlestage-item-outline",
-                        _ => "singlestage-item-default",
+                        "muted" => "singlestage-item-variant-muted",
+                        "outline" => "singlestage-item-variant-outline",
+                        _ => "singlestage-item-variant-default",
                     },
                     match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-item-size-small",
-                        "small" => "singlestage-item-size-small",
+                        "xs" | "extra-small" => "singlestage-item-size-xs",
+                        "sm" | "small" => "singlestage-item-size-sm",
                         _ => "singlestage-item-size-default",
                     },
                     class.get().unwrap_or_default(),
@@ -183,7 +184,7 @@ pub fn Item(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
+            <Provider value=ItemContext {}>{children()}</Provider>
         </div>
     }
 }

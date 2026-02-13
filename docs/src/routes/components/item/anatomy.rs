@@ -17,7 +17,7 @@ pub fn ItemAnatomy() -> impl IntoView {
                 </ItemActions>
                 <ItemFooter />
             </Item>
-            <ItemSeparator />
+            <Separator />
         </ItemGroup>
     }
 }

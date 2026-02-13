@@ -29,32 +29,38 @@ pub fn ItemDropdownExample() -> impl IntoView {
     ]);
 
     view! {
-        <div class="flex min-h-64 w-full max-w-md flex-col items-center gap-6">
-            <DropdownMenu>
-                <Trigger>
-                    <Button variant="outline" size="sm" class="w-fit">
-                        "Select"
-                        {icon!(icondata::LuChevronDown)}
-                    </Button>
-                </Trigger>
-                <MenuContent class="w-72 [--radius:0.65rem]">
-                    <For each=move || people.get() key=|person| person.username.clone() let(person)>
-                        <MenuItem class="p-0">
-                            <Item size="sm" class="w-full p-2">
-                                <ItemMedia>
-                                    <Avatar class="size-8">
-                                        <AvatarImage src=person.avatar class="grayscale" />
-                                    </Avatar>
-                                </ItemMedia>
-                                <ItemContent class="gap-0.5">
-                                    <ItemTitle>{person.username}</ItemTitle>
-                                    <ItemDescription>{person.email}</ItemDescription>
-                                </ItemContent>
-                            </Item>
-                        </MenuItem>
-                    </For>
-                </MenuContent>
-            </DropdownMenu>
-        </div>
+        <DropdownMenu>
+            <Trigger>
+                <Button variant="outline">"Select" {icon!(icondata::LuChevronDown)}</Button>
+            </Trigger>
+            <MenuContent class="w-48" align="center">
+                <For each=move || people.get() key=|person| person.username.clone() let(person)>
+                    {
+                        let username = person.username.clone();
+
+                        view! {
+                            <MenuItem class="p-0">
+                                <Item size="xs" class="w-full">
+                                    <ItemMedia>
+                                        <Avatar class="size-[--spacing(6.5)]">
+                                            <AvatarImage src=person.avatar class="grayscale" />
+                                            <AvatarFallback>
+                                                {username[..2].to_uppercase()}
+                                            </AvatarFallback>
+                                        </Avatar>
+                                    </ItemMedia>
+                                    <ItemContent class="gap-0">
+                                        <ItemTitle>{person.username}</ItemTitle>
+                                        <ItemDescription class="leading-none">
+                                            {person.email}
+                                        </ItemDescription>
+                                    </ItemContent>
+                                </Item>
+                            </MenuItem>
+                        }
+                    }
+                </For>
+            </MenuContent>
+        </DropdownMenu>
     }
 }

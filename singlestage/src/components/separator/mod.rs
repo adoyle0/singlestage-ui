@@ -1,4 +1,4 @@
-use crate::{FieldSetContext, PopoverMenuContext};
+use crate::{FieldSetContext, ItemContext, PopoverMenuContext};
 use leptos::prelude::*;
 
 /// The separator.
@@ -120,7 +120,6 @@ pub fn Separator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -155,7 +154,11 @@ pub fn Separator(
         />
     };
 
-    if use_context::<PopoverMenuContext>().is_some() {
+    let in_popover: bool = use_context::<PopoverMenuContext>().is_some();
+    let in_fieldset: bool = use_context::<FieldSetContext>().is_some();
+    let in_item: bool = use_context::<ItemContext>().is_some();
+
+    if in_popover {
         view! {
             <hr
                 class=move || {
@@ -171,7 +174,7 @@ pub fn Separator(
             />
         }
         .into_any()
-    } else if use_context::<FieldSetContext>().is_some() {
+    } else if in_fieldset {
         view! {
             <div class=move || {
                 format!("singlestage-field-separator {}", class.get().unwrap_or_default())
@@ -192,7 +195,8 @@ pub fn Separator(
             <div
                 class=move || {
                     format!(
-                        "singlestage-separator {} {}",
+                        "singlestage-separator{} {} {}",
+                        if in_item { " singlestage-item-separator" } else { "" },
                         match vertical.get().unwrap_or_default() {
                             true => "singlestage-separator-vertical",
                             _ => "singlestage-separator-horizontal",
