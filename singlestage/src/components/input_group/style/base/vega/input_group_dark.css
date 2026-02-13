@@ -1,0 +1,8 @@
+@layer base {
+  .singlestage-input-group {
+    @apply bg-input/30;
+    &:has(*:invalid, *[aria-invalid="true"]) {
+      @apply ring-destructive/40;
+    }
+  }
+}

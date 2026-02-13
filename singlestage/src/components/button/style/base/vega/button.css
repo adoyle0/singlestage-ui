@@ -103,4 +103,31 @@
   .singlestage-btn-size-icon-lg {
     @apply size-10;
   }
+
+  .singlestage-input-group-button {
+    @apply gap-2
+    text-sm;
+  }
+
+  .singlestage-input-group-button-size-xs {
+    @apply gap-1
+    h-6
+    px-1.5
+    rounded-[calc(var(--radius)-5px)];
+
+    svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-input-group-button-size-icon-xs {
+    @apply p-0
+    rounded-[calc(var(--radius)-5px)]
+    size-6;
+  }
+
+  .singlestage-input-group-button-size-icon-sm {
+    @apply p-0
+    size-8;
+  }
 }

@@ -278,12 +278,7 @@ pub fn Checkbox(
                 }
             }
             checked=checked.get_untracked()
-            class=move || {
-                format!(
-                    "singlestage-checkbox singlestage-input {}",
-                    class.get().unwrap_or_default(),
-                )
-            }
+            class=move || { format!("singlestage-checkbox {}", class.get().unwrap_or_default()) }
             disabled=disabled.get_untracked()
             form=move || form.get()
             id={

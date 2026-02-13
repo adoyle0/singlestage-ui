@@ -1,5 +1,5 @@
 @layer components {
-  .singlestage-input[type="range"] {
+  .singlestage-range {
     @apply appearance-none
     disabled:cursor-not-allowed
     disabled:opacity-50

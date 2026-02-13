@@ -275,7 +275,7 @@ pub fn Switch(
                 }
             }
             checked=checked.get_untracked()
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            class=move || { format!("singlestage-switch {}", class.get().unwrap_or_default()) }
             disabled=disabled.get_untracked()
             form=move || form.get()
             id={

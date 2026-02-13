@@ -17,7 +17,7 @@
 
   .singlestage-field-vertical {
     @apply flex-col;
-    * {
+    > * {
       @apply w-full;
     }
     > .sr-only {
@@ -54,7 +54,7 @@
       @apply md:flex-row
       md:items-center;
 
-      * {
+      > * {
         @apply md:w-auto;
       }
 
@@ -75,7 +75,7 @@
 
   .singlestage-field-responsive,
   .singlestage-field-vertical {
-    * {
+    > * {
       @apply w-full;
     }
 

@@ -1,0 +1,139 @@
+@layer base {
+  .singlestage-input-group {
+    @apply border
+    border-input
+    h-9
+    /* TODO: combobox content */
+    /* in-data-[slot=combobox-content]:focus-within:border-inherit */
+    /* in-data-[slot=combobox-content]:focus-within:ring-0 */
+    rounded-md
+    shadow-xs
+    transition-[color,box-shadow];
+
+    &:has(> .singlestage-input-group-addon-align-inline-start) {
+      & > input {
+        @apply pl-1.5;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-inline-end) {
+      & > input {
+        @apply pr-1.5;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-block-start) {
+      @apply flex-col
+      h-auto;
+
+      & > input {
+        @apply pb-3;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-block-end) {
+      @apply flex-col
+      h-auto;
+
+      & > input {
+        @apply pt-3;
+      }
+    }
+
+    &:has(.singlestage-input-group-control:focus-visible) {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+    }
+
+    &:has(*:invalid, *[aria-invalid="true"]) {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+
+    &:has(> input) {
+      .singlestage-input-group-addon-align-block-end {
+        @apply pb-2;
+      }
+
+      .singlestage-input-group-addon-align-block-start {
+        @apply pt-2;
+      }
+    }
+
+    &:disabled {
+      .singlestage-input-group-addon {
+        @apply opacity-50;
+      }
+    }
+  }
+
+  .singlestage-input-group-addon {
+    @apply font-medium
+    gap-2
+    h-auto
+    py-1.5
+    text-muted-foreground
+    text-sm;
+
+    > kbd {
+      @apply rounded-[calc(var(--radius)-5px)];
+    }
+
+    > svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-input-group-addon-align-inline-start {
+    @apply pl-2;
+    &:has(> button) {
+      @apply -ml-1;
+    }
+
+    &:has(> kbd) {
+      @apply ml-[-0.15rem];
+    }
+  }
+
+  .singlestage-input-group-addon-align-inline-end {
+    @apply pr-2;
+
+    &:has(> button) {
+      @apply -mr-1;
+    }
+
+    &:has(> kbd) {
+      @apply mr-[-0.15rem];
+    }
+  }
+
+  .singlestage-input-group-addon-align-block-start {
+    @apply pt-2
+    px-2.5;
+
+    &.border-t {
+      @apply pb-2;
+    }
+  }
+
+  .singlestage-input-group-addon-align-block-end {
+    @apply pb-2
+    px-2.5;
+
+    &.border-t {
+      @apply pt-2;
+    }
+  }
+
+  .singlestage-input-group-text {
+    @apply gap-2
+    text-muted-foreground
+    text-sm;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+}

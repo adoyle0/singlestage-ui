@@ -1,0 +1,45 @@
+@layer base {
+  .singlestage-textarea {
+    @apply bg-transparent
+    border
+    border-input
+    md:text-sm
+    px-2.5
+    py-2
+    rounded-md
+    shadow-xs
+    text-base
+    transition-[color,box-shadow];
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+  }
+
+  .singlestage-input-group-textarea {
+    @apply bg-transparent
+    border-0
+    py-2
+    ring-0
+    rounded-none
+    shadow-none;
+
+    &:focus-visible {
+      @apply ring-0;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply ring-0;
+    }
+  }
+}

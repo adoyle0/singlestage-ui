@@ -1,31 +1,26 @@
 @layer components {
   .singlestage-textarea {
-    @apply aria-invalid:border-destructive
-    aria-invalid:ring-destructive/20
-    bg-transparent
-    border
-    border-input
-    disabled:cursor-not-allowed
-    disabled:opacity-50
-    field-sizing-content
+    @apply field-sizing-content
     flex
-    focus-visible:border-ring
-    focus-visible:ring-3
-    focus-visible:ring-ring/50
-    md:text-sm
     min-h-16
     outline-none
-    placeholder:text-muted-foreground
-    px-3
-    py-2
-    rounded-md
-    shadow-xs
-    text-base
-    transition-[color,box-shadow]
+    rounded-lg
+    transition-colors
     w-full;
+
+    &:disabled {
+      @apply bg-input/50
+      cursor-not-allowed
+      opacity-50;
+    }
+
+    ::placeholder {
+      @apply text-muted-foreground;
+    }
   }
 
-  .singlestage-textarea-label {
-    @apply my-3;
+  .singlestage-input-group-textarea {
+    @apply flex-1
+    resize-none;
   }
 }

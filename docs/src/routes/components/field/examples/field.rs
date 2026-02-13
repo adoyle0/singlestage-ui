@@ -15,11 +15,8 @@ pub fn FieldExample() -> impl IntoView {
                         <FieldGroup>
                             <Field>
                                 <Label label_for="checkout-7j9-card-name-43j">"Name on Card"</Label>
-                                <Input
-                                    id="checkout-7j9-card-name-43j"
-                                    placeholder="Evil Rabbit"
-                                    required=true
-                                />
+                                <Input id="checkout-7j9-card-name-43j" placeholder="Evil Rabbit" />
+
                             </Field>
                             <Field>
                                 <Label label_for="checkout-7j9-card-number-uw1">
@@ -28,8 +25,8 @@ pub fn FieldExample() -> impl IntoView {
                                 <Input
                                     id="checkout-7j9-card-number-uw1"
                                     placeholder="1234 5678 9012 3456"
-                                    required=true
                                 />
+
                                 <FieldDescription>
                                     "Enter your 16-digit card number"
                                 </FieldDescription>
@@ -65,7 +62,7 @@ pub fn FieldExample() -> impl IntoView {
                                 </Field>
                                 <Field>
                                     <Label label_for="checkout-7j9-cvv">"CVV"</Label>
-                                    <Input id="checkout-7j9-cvv" placeholder="123" required=true />
+                                    <Input id="checkout-7j9-cvv" placeholder="123" />
                                 </Field>
                             </div>
                         </FieldGroup>

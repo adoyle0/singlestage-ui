@@ -184,11 +184,7 @@ pub fn Select(
         }
     }
 
-    let context = SelectContext {
-        multiple,
-        placeholder,
-        value,
-    };
+    let context = SelectContext { multiple, value };
 
     Effect::new(move || {
         if let Some(select) = select_ref.get_untracked() {

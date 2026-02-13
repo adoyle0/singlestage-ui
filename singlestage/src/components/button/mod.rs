@@ -243,12 +243,16 @@ pub fn Button(
         />
     };
 
-    let button_is_trigger: bool = use_context::<TriggerContext>().is_some();
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    let is_dialog_action: bool = use_context::<DialogActionContext>().is_some();
+    let is_dialog_cancel: bool = use_context::<DialogCancelContext>().is_some();
+    let is_dialog_close: bool = use_context::<DialogCloseContext>().is_some();
+    let is_trigger: bool = use_context::<TriggerContext>().is_some();
 
     view! {
         <button
             aria_controls=move || {
-                if button_is_trigger {
+                if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         Some(dropdown.menu_id.get())
                     } else {
@@ -258,15 +262,23 @@ pub fn Button(
                     None
                 }
             }
-            aria_haspopup=move || { if button_is_trigger { Some("menu") } else { None } }
+            aria_haspopup=move || { if is_trigger { Some("menu") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
                 if variant.get().unwrap_or_default().as_str() == "none" {
                     class.get().unwrap_or_default()
                 } else {
                     format!(
-                        "singlestage-btn {}{} {} {} {}",
-                        if button_is_trigger { "singlestage-trigger " } else { "" },
+                        "singlestage-btn{}{}{} {} {} {}",
+                        if in_input_group { " singlestage-input-group-button" } else { "" },
+                        if is_trigger { " singlestage-trigger" } else { "" },
+                        if is_dialog_action {
+                            " singlestage-alert-dialog-action"
+                        } else if is_dialog_cancel {
+                            " singlestage-alert-dialog-cancel"
+                        } else {
+                            ""
+                        },
                         match variant.get().unwrap_or_default().as_str() {
                             "primary" => "singlestage-btn-primary",
                             "secondary" => "singlestage-btn-secondary",
@@ -275,57 +287,55 @@ pub fn Button(
                             "link" => "singlestage-btn-link",
                             "destructive" => "singlestage-btn-destructive",
                             _ => {
-                                if use_context::<DialogCancelContext>().is_some() {
+                                if is_dialog_cancel {
                                     "singlestage-btn-outline"
-                                } else if use_context::<InputGroupContext>().is_some()
-                                    && variant.get().is_none()
-                                {
+                                } else if in_input_group && variant.get().is_none() {
                                     "singlestage-btn-ghost"
                                 } else {
                                     "singlestage-btn-primary"
                                 }
                             }
                         },
-                        match size.get().unwrap_or_default().as_str() {
-                            "xs" | "extra small" => "singlestage-btn-size-xs",
-                            "sm" | "small" => "singlestage-btn-size-sm",
-                            "lg" | "large" => "singlestage-btn-size-lg",
-                            "icon" => "singlestage-btn-size-icon",
-                            "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                                "singlestage-btn-size-icon-xs"
-                            }
-                            "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                                "singlestage-btn-size-icon-sm"
-                            }
-                            "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                                "singlestage-btn-size-icon-lg"
-                            }
-                            _ => "singlestage-btn-size-default",
-                        },
-                        if use_context::<InputGroupContext>().is_some() {
-                            format!(
-                                "singlestage-input-group-button {}",
+                        format!(
+                            "{}{}",
+                            match size.get().unwrap_or_default().as_str() {
+                                "xs" | "extra small" => "singlestage-btn-size-xs",
+                                "sm" | "small" => "singlestage-btn-size-sm",
+                                "lg" | "large" => "singlestage-btn-size-lg",
+                                "icon" => "singlestage-btn-size-icon",
+                                "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                                    "singlestage-btn-size-icon-xs"
+                                }
+                                "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                    "singlestage-btn-size-icon-sm"
+                                }
+                                "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                    "singlestage-btn-size-icon-lg"
+                                }
+                                _ => "singlestage-btn-size-default",
+                            },
+                            if in_input_group {
                                 match size.get().unwrap_or_default().as_str() {
-                                    "sm" => "singlestage-input-group-button-sm",
-                                    "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                    "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                    _ => "singlestage-input-group-button-xs",
-                                },
-                            )
-                        } else if use_context::<DialogActionContext>().is_some() {
-                            "singlestage-alert-dialog-action".to_string()
-                        } else if use_context::<DialogCancelContext>().is_some() {
-                            "singlestage-alert-dialog-cancel".to_string()
-                        } else {
-                            "".to_string()
-                        },
+                                    "sm" | "small" => " singlestage-input-group-button-sm",
+                                    "icon-xs" | "xs-icon" => {
+                                        " singlestage-input-group-button-icon-xs"
+                                    }
+                                    "icon-sm" | "sm-icon" => {
+                                        " singlestage-input-group-button-icon-sm"
+                                    }
+                                    _ => " singlestage-input-group-button-xs",
+                                }
+                            } else {
+                                ""
+                            },
+                        ),
                         class.get().unwrap_or_default(),
                     )
                 }
             }
             disabled=disabled.get_untracked()
             id=move || {
-                if button_is_trigger {
+                if is_trigger {
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         dropdown.trigger_id.set(trigger_id.clone());
@@ -338,7 +348,7 @@ pub fn Button(
                 }
             }
             on:click=move |ev| {
-                if button_is_trigger {
+                if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         if !dropdown.dismissable.get_untracked() {
                             ev.prevent_default();
@@ -353,16 +363,13 @@ pub fn Button(
                         popover.open.set(!popover.open.get_untracked());
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
-                    if use_context::<DialogActionContext>().is_some()
-                        || use_context::<DialogCancelContext>().is_some()
-                        || use_context::<DialogCloseContext>().is_some()
-                    {
+                    if is_dialog_action || is_dialog_cancel || is_dialog_close {
                         dialog.open.set(false)
                     }
                 }
             }
             popovertarget=move || {
-                if button_is_trigger {
+                if is_trigger {
                     let mut target_id = None;
                     if let Some(popovertarget) = popovertarget.get() {
                         target_id = Some(popovertarget);
@@ -377,15 +384,11 @@ pub fn Button(
                 }
             }
             popovertargetaction=move || {
-                if button_is_trigger {
-                    Some("toggle".to_string())
-                } else {
-                    popovertargetaction.get()
-                }
+                if is_trigger { Some("toggle".to_string()) } else { popovertargetaction.get() }
             }
             prop:disabled=move || disabled.get()
             style:anchor-name=move || {
-                if button_is_trigger {
+                if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         Some(format!("--{}", dropdown.trigger_id.get()))
                     } else {
@@ -399,7 +402,7 @@ pub fn Button(
             type=move || {
                 if let Some(button_type) = button_type.get() {
                     Some(button_type)
-                } else if use_context::<InputGroupContext>().is_some() {
+                } else if in_input_group {
                     Some("button".to_string())
                 } else {
                     None

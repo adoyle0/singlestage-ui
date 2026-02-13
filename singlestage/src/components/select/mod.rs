@@ -12,6 +12,5 @@ use leptos::prelude::MaybeProp;
 #[derive(Clone)]
 pub struct SelectContext {
     multiple: MaybeProp<bool>,
-    placeholder: MaybeProp<String>,
     value: Reactive<String>,
 }

@@ -1,4 +1,4 @@
-use crate::{FieldContext, Label, Reactive};
+use crate::{FieldContext, InputGroupContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// A form input field.
@@ -381,7 +381,10 @@ pub fn Input(
 
     let input_id = uuid::Uuid::new_v4();
     let label_id = uuid::Uuid::new_v4();
-    let has_children = children.is_some();
+
+    let has_children: bool = children.is_some();
+    let in_field: bool = use_context::<FieldContext>().is_some();
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
 
     let custom_attrs = view! {
         <{..}
@@ -409,7 +412,17 @@ pub fn Input(
                     None
                 }
             }
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-input{} {}",
+                    if in_input_group {
+                        " singlestage-input-group-input singlestage-input-group-control"
+                    } else {
+                        ""
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
             disabled=move || disabled.get()
             node_ref=input_ref
             on:input=on_input
@@ -430,7 +443,7 @@ pub fn Input(
 
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
+            {if in_field {
                 view! {
                     <Label
                         class=class.get_untracked()

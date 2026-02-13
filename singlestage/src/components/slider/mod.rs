@@ -357,7 +357,7 @@ pub fn Slider(
                     Some(field.label_id.get())
                 } else if has_children { Some(label_id.to_string()) } else { None }
             }
-            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+            class=move || format!("singlestage-range {}", class.get().unwrap_or_default())
             disabled=disabled.get_untracked()
             max=update_max
             min=update_min
