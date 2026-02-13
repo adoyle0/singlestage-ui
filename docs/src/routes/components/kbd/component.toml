@@ -15,6 +15,12 @@ title = "Button"
 description = """Use the Kbd component inside a Button component to display a keyboard key inside \
 a button."""
 
+[[examples]]
+name = "Kbd input group"
+title = "Input Group"
+description = """You can use the Kbd component inside a InputGroupAddon component to display a \
+keyboard key inside an input group."""
+
 [[references]]
 name = "Kbd"
 description = "Contains a single styled input indication."
