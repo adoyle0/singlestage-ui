@@ -1,0 +1,14 @@
+@layer base {
+  .singlestage-label {
+    @apply font-medium
+    gap-2
+    leading-none
+    peer-disabled:opacity-50
+    text-sm;
+  }
+
+  *:disabled,
+  *[aria-disabled="true"] {
+    @apply opacity-50;
+  }
+}
