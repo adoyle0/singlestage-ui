@@ -255,7 +255,12 @@ pub fn Select(
     let input_id = uuid::Uuid::new_v4();
 
     view! {
-        <div class="singlestage-select-wrapper">
+        <div
+            class=move || format!("singlestage-select-wrapper {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             <Provider value=context>
                 <select
                     aria_describedby=move || {
@@ -277,7 +282,7 @@ pub fn Select(
                     }
                     class=move || {
                         format!(
-                            "singlestage-select{}{} {}",
+                            "singlestage-select{}{}",
                             match multiple.get() {
                                 Some(true) => " singlestage-select-multi",
                                 _ => "",
@@ -288,7 +293,6 @@ pub fn Select(
                                 }
                                 _ => "",
                             },
-                            class.get().unwrap_or_default(),
                         )
                     }
                     node_ref=select_ref
@@ -307,8 +311,6 @@ pub fn Select(
                         }
                     }
 
-                    {..global_attrs_1}
-                    {..global_attrs_2}
                     {..select_attrs}
                 >
                     <Show when=move || placeholder.get().is_some()>

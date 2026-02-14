@@ -2,13 +2,10 @@ use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
-pub fn PaginationExample() -> impl IntoView {
+pub fn PaginationSimpleExample() -> impl IntoView {
     view! {
         <Pagination>
             <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious href="#" />
-                </PaginationItem>
                 <PaginationItem>
                     <PaginationLink href="#">"1"</PaginationLink>
                 </PaginationItem>
@@ -21,10 +18,10 @@ pub fn PaginationExample() -> impl IntoView {
                     <PaginationLink href="#">"3"</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                    <PaginationEllipsis />
+                    <PaginationLink href="#">"4"</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                    <PaginationNext href="#" />
+                    <PaginationLink href="#">"5"</PaginationLink>
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

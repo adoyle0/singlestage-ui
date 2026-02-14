@@ -1,3 +1,4 @@
+use crate::Link;
 use leptos::prelude::*;
 
 /// A pagination link
@@ -8,6 +9,7 @@ pub fn PaginationLink(
     /// Toggle whether or not this button should render with active styling
     #[prop(optional, into)]
     active: MaybeProp<bool>,
+    #[prop(optional, into)] size: MaybeProp<String>,
 
     // A ATTRIBUTES
     //
@@ -36,6 +38,10 @@ pub fn PaginationLink(
     /// Specify where to display the linked content
     #[prop(optional, into)]
     target: MaybeProp<String>,
+
+    // Aria ATTRIBUTES
+    //
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -147,7 +153,7 @@ pub fn PaginationLink(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -196,26 +202,22 @@ pub fn PaginationLink(
     };
 
     view! {
-        <a {..a_attrs}>
-            <button
-                class=move || {
-                    format!(
-                        "{} singlestage-btn-icon {}",
-                        {
-                            match active.get() {
-                                Some(true) => "singlestage-btn-outline",
-                                _ => "singlestage-btn-ghost",
-                            }
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                }
+        <Link
+            aria_current=if active.get_untracked().unwrap_or_default() {
+                Some("page".to_string())
+            } else {
+                None
+            }
+            aria_label=aria_label.get_untracked()
+            render_as="button"
+            size=size.get().unwrap_or("icon".to_string())
+            variant=if active.get_untracked().unwrap_or_default() { "outline" } else { "ghost" }
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {children()}
-            </button>
-        </a>
+            {..a_attrs}
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </Link>
     }
 }

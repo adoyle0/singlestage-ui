@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::pagination::*;
+use singlestage::*;
 
 #[component]
 pub fn PaginationAnatomy() -> impl IntoView {

@@ -47,6 +47,11 @@ pub fn Link(
     #[prop(optional, into)]
     target: MaybeProp<String>,
 
+    // ARIA ATTRIBUTES
+    //
+    #[prop(optional, into)] aria_current: MaybeProp<String>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -206,6 +211,8 @@ pub fn Link(
 
     view! {
         <a
+            aria_current=move || aria_current.get()
+            aria_label=move || aria_label.get()
             class=move || {
                 match render_as.get().unwrap_or_default().as_str() {
                     "button" => {
