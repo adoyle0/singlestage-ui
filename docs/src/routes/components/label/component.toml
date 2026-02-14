@@ -4,6 +4,16 @@ description = "Renders an accessible label associated with controls."
 [[examples]]
 name = "label"
 
+[[examples]]
+name = "labels implicit"
+title = "Implicit Labeling"
+description = "Input components use child text as their label and automatically handle association."
+
+[[examples]]
+name = "labels in fields"
+title = "Labels in Fields"
+description = "Labels used in Fields automatically associate with Field inputs."
+
 [[references]]
 name = "Label"
 description = "Renders an accessible label associated with controls."
