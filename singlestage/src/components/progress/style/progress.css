@@ -1,18 +1,32 @@
 @layer components {
   .singlestage-progress {
-    @apply bg-primary/20
-    h-2
-    overflow-hidden
-    relative
-    rounded-full
-    w-full;
+    @apply w-full;
+
+    /* Track */
+    &,
+    &::-webkit-progress-bar {
+      @apply bg-muted
+      h-1.5
+      rounded-full;
+    }
+
+    /* Indicator */
+    &::-moz-progress-bar,
+    &::-webkit-progress-value {
+      @apply bg-primary
+      h-1.5
+      rounded-full;
+    }
   }
 
-  .singlestage-progress-indicator {
-    @apply bg-primary
-    flex-1
-    h-full
-    transition-all
-    w-full;
+  /* Animate, but it only works for webkit for now */
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-progress {
+      /* Indicator */
+      &::-moz-progress-bar,
+      &::-webkit-progress-value {
+        @apply transition-all;
+      }
+    }
   }
 }
