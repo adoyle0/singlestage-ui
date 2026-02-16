@@ -5,15 +5,26 @@
     peer-disabled:cursor-not-allowed
     select-none;
 
-    &:has(> *:disabled),
-    &:has(+ *:disabled) {
+    &:has(.singlestage-field) {
+      @apply flex-col
+      w-full;
+    }
+
+    &:has(> *:disabled, > *[aria-disabled="true"]),
+    &:has(+ *:disabled, + *[aria-disabled="true"]),
+    &:disabled,
+    &[aria-disabled="true"],
+    *:disabled,
+    *[aria-disabled="true"] {
       @apply opacity-50
       pointer-events-none;
     }
-  }
 
-  *:disabled,
-  *[aria-disabled="true"] {
-    @apply pointer-events-none;
+    &:has(> *:invalid, > *[aria-invalid="true"]),
+    &:has(+ *:invalid, + *[aria-invalid="true"]),
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply text-destructive;
+    }
   }
 }

@@ -38,7 +38,7 @@
       }
     }
 
-    .singlestage-field-label {
+    .singlestage-label {
       @apply flex-auto;
     }
 
@@ -58,7 +58,7 @@
         @apply md:w-auto;
       }
 
-      .singlestage-field-label {
+      .singlestage-label {
         @apply md:flex-auto;
       }
 
@@ -89,16 +89,6 @@
     flex-1
     flex-col
     leading-snug;
-  }
-
-  .singlestage-field-label {
-    @apply flex
-    leading-snug;
-
-    &:has(.singlestage-field) {
-      @apply flex-col
-      w-full;
-    }
   }
 
   .singlestage-field-title {

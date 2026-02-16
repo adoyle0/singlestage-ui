@@ -1,0 +1,28 @@
+@layer base {
+  .singlestage-radio-group:not(:has(.singlestage-radio-item)) {
+    @apply gap-3
+    grid;
+  }
+
+  .singlestage-radio:not(.singlestage-radio-item) {
+    @apply border-input
+    flex
+    rounded-full
+    shadow-xs
+    size-4
+    text-primary;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+  }
+}

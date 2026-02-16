@@ -18,7 +18,13 @@ pub fn DebugTextarea() -> impl IntoView {
             <li>"Invalid: "{move || invalid.get().to_string()}</li>
         </ul>
 
-        <Textarea disabled invalid />
+        <Textarea disabled invalid>
+            "Solo"
+        </Textarea>
+
+        <Field disabled invalid>
+            <Textarea>"Field"</Textarea>
+        </Field>
 
         <span class="space-x-2">
             <Button variant="outline" on:click=move |_| disabled.set(!disabled.get())>

@@ -32,7 +32,8 @@
       }
     }
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled="true"] {
       @apply cursor-not-allowed
       opacity-50;
     }
@@ -42,13 +43,14 @@
       ring-ring/50;
     }
 
-    &:invalid {
+    &:invalid,
+    &[aria-invalid="true"] {
       @apply border-destructive
       ring-destructive/20;
 
-      &:checked {
-        @apply border-primary;
-      }
+      /* &:checked { */
+      /*   @apply border-primary; */
+      /* } */
     }
   }
 

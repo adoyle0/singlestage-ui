@@ -9,6 +9,6 @@ pub use radio::*;
 #[derive(Clone)]
 pub struct RadioGroupContext {
     name: String,
-    invalid: Reactive<bool>,
+    pub invalid: Reactive<bool>,
     value: Reactive<String>,
 }

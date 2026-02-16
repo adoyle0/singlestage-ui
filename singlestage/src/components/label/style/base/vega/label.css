@@ -2,13 +2,27 @@
   .singlestage-label {
     @apply font-medium
     gap-2
-    leading-none
+    leading-snug
     peer-disabled:opacity-50
     text-sm;
-  }
 
-  *:disabled,
-  *[aria-disabled="true"] {
-    @apply opacity-50;
+    &:has(.singlestage-field) {
+      @apply border
+      rounded-md;
+
+      &:has(*:checked) {
+        @apply bg-primary/5
+        border-primary/30;
+      }
+    }
+
+    .singlestage-field {
+      @apply p-3;
+    }
+
+    *:disabled,
+    *[aria-disabled="true"] {
+      @apply opacity-50;
+    }
   }
 }

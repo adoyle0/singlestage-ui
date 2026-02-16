@@ -1,5 +1,5 @@
 @layer base {
-  .singlestage-input {
+  .singlestage-radio:not(.singlestage-radio-item) {
     @apply bg-input/30;
 
     &:invalid,
@@ -7,9 +7,5 @@
       @apply border-destructive/50
       ring-destructive/40;
     }
-  }
-
-  .singlestage-input-group-input {
-    @apply bg-transparent;
   }
 }

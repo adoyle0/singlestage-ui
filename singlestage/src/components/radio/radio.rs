@@ -244,9 +244,21 @@ pub fn Radio(
                     None
                 }
             }
-            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_disabled=move || {
+                if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                        Some("true".to_string())
+                    } else {
+                        None
+                    }
+                }
+            }
             aria_invalid=move || {
-                if let Some(radio_group) = use_context::<RadioGroupContext>()
+                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                    Some("true".to_string())
+                } else if let Some(radio_group) = use_context::<RadioGroupContext>()
                     && radio_group.invalid.get()
                 {
                     Some("true".to_string())
@@ -269,19 +281,21 @@ pub fn Radio(
             class=move || { format!("singlestage-radio {}", class.get().unwrap_or_default()) }
             disabled=disabled.get_untracked()
             form=move || form.get()
-            id={
-                if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
+
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
                 } else {
-                    id.get_untracked()
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
                 }
-            }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
+
             name=move || {
                 if let Some(radio_group) = use_context::<RadioGroupContext>() {
                     Some(radio_group.name.clone())
@@ -303,6 +317,7 @@ pub fn Radio(
             <Label
                 class
                 disabled
+                id=label_id.to_string()
                 invalid
                 label_for=id.get_untracked().unwrap_or(input_id.to_string())
             >

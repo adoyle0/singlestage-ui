@@ -277,12 +277,6 @@ pub fn Input(
         }
     });
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            input.set_disabled(disabled.get());
-        }
-    });
-
     Effect::new(
         move || match input_type.get_untracked().unwrap_or_default().as_str() {
             "file" => {
@@ -396,10 +390,22 @@ pub fn Input(
                     None
                 }
             }
+            aria_disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some("true".to_string())
+                } else if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
             aria_invalid=move || {
-                match invalid.get() {
-                    true => Some("true"),
-                    _ => None,
+                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                    Some("true".to_string())
+                } else if invalid.get() {
+                    Some("true".to_string())
+                } else {
+                    None
                 }
             }
             aria_label=move || aria_label.get()
@@ -423,7 +429,28 @@ pub fn Input(
                     class.get().unwrap_or_default(),
                 )
             }
-            disabled=move || disabled.get()
+            disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some("true".to_string())
+                } else if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
+                } else {
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
+                }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
             node_ref=input_ref
             on:input=on_input
             type=move || {
@@ -443,36 +470,20 @@ pub fn Input(
 
     if let Some(children) = children {
         view! {
-            {if in_field {
-                view! {
-                    <Label
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </Label>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!(
-                                "singlestage-label singlestage-input-label {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+            <Label
+                class=format!(
+                    "{}{}",
+                    if in_field { "" } else { "singlestage-input-label " },
+                    class.get_untracked().unwrap_or_default(),
+                )
+                disabled
+                id=label_id.to_string()
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                {children()}
+            </Label>
             <input
-                id=move || id.get().unwrap_or(input_id.to_string())
-
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..input_attrs_1}
@@ -484,18 +495,6 @@ pub fn Input(
     } else {
         view! {
             <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..input_attrs_1}

@@ -1,4 +1,6 @@
-use crate::{FieldContext, FieldSetContext, PopoverMenuContext, PopoverMenuGroupContext, Reactive};
+use crate::{
+    FieldContext, PopoverMenuContext, PopoverMenuGroupContext, RadioGroupContext, Reactive,
+};
 use leptos::prelude::*;
 
 /// Renders an accessible label associated with controls
@@ -166,17 +168,42 @@ pub fn Label(
     };
 
     let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+    let in_popover_menu: bool = use_context::<PopoverMenuContext>().is_some();
 
     view! {
         <label
-            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
-            aria_invalid=move || { if invalid.get() { Some("true".to_string()) } else { None } }
+            aria_disabled=move || {
+                if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                        Some("true".to_string())
+                    } else {
+                        None
+                    }
+                }
+            }
+            aria_invalid=move || {
+                if invalid.get() {
+                    Some("true".to_string())
+                } else {
+                    if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                        Some("true".to_string())
+                    } else if let Some(radio_group) = use_context::<RadioGroupContext>()
+                        && radio_group.invalid.get()
+                    {
+                        Some("true".to_string())
+                    } else {
+                        None
+                    }
+                }
+            }
 
             // TODO: Do this with CSS.
             class=move || {
                 format!(
                     "{} {}",
-                    if use_context::<PopoverMenuContext>().is_some() {
+                    if in_popover_menu {
                         format!(
                             "singlestage-dropdown-menu-label{}",
                             if inset.get().unwrap_or_default() {
@@ -185,10 +212,6 @@ pub fn Label(
                                 ""
                             },
                         )
-                    } else if use_context::<FieldContext>().is_some()
-                        || use_context::<FieldSetContext>().is_some()
-                    {
-                        "singlestage-field-label".to_owned()
                     } else {
                         "singlestage-label".to_string()
                     },
@@ -206,7 +229,7 @@ pub fn Label(
                 }
             }
 
-            id={if use_context::<PopoverMenuContext>().is_some() {
+            id={if in_popover_menu {
                 let group = expect_context::<PopoverMenuGroupContext>();
                 group.heading_id.set(label_id.clone());
                 Some(label_id.to_owned())
@@ -214,7 +237,7 @@ pub fn Label(
                 field_context.label_id.set(label_id.clone());
                 Some(label_id.to_owned())
             } else {
-                None
+                id.get()
             }}
 
             {..global_attrs_1}

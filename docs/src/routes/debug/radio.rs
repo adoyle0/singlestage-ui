@@ -26,10 +26,19 @@ pub fn DebugRadio() -> impl IntoView {
         </ul>
 
         <RadioGroup disabled invalid value>
+            <legend>"Group"</legend>
             <Radio value="one">"One"</Radio>
             <Radio value="two">"Two"</Radio>
             <Radio value="three">"Three"</Radio>
         </RadioGroup>
+
+        <Radio disabled invalid>
+            "Solo"
+        </Radio>
+
+        <Field disabled invalid>
+            <Radio>"in Field"</Radio>
+        </Field>
 
         <span class="space-x-2">
             <Button variant="outline" on:click=move |_| { disabled.set(!disabled.get_untracked()) }>

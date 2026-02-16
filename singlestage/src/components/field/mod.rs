@@ -16,12 +16,15 @@ pub use legend::*;
 pub use set::*;
 pub use title::*;
 
+use crate::Reactive;
 use leptos::prelude::RwSignal;
 
 #[derive(Clone)]
 pub struct FieldContext {
     pub description_id: RwSignal<String>,
+    pub disabled: Reactive<bool>,
     pub input_id: RwSignal<String>,
+    pub invalid: Reactive<bool>,
     pub label_id: RwSignal<String>,
 }
 

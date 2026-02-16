@@ -256,7 +256,15 @@ pub fn Checkbox(
                     None
                 }
             }
-            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
+            aria_disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some("true".to_string())
+                } else if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
             aria_invalid=move || {
                 if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
                     && checkbox_group.invalid.get()
@@ -281,19 +289,19 @@ pub fn Checkbox(
             class=move || { format!("singlestage-checkbox {}", class.get().unwrap_or_default()) }
             disabled=disabled.get_untracked()
             form=move || form.get()
-            id={
-                if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
                 } else {
-                    Some(id.get_untracked().unwrap_or(input_id.to_string()))
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
                 }
-            }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
             name=move || name.get()
             node_ref=checkbox_ref
             on:change=on_change
@@ -309,6 +317,7 @@ pub fn Checkbox(
             <Label
                 class
                 disabled
+                id=label_id.to_string()
                 invalid
                 label_for=id.get_untracked().unwrap_or(input_id.to_string())
             >

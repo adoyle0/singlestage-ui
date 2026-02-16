@@ -199,13 +199,20 @@ pub fn Textarea(
 
     Effect::new(move || {
         if let Some(textarea) = textarea_ref.get_untracked() {
-            textarea.set_disabled(disabled.get())
+            textarea.set_value(&value.get());
         }
     });
 
+    // HACK: this needs to be forced for some reason and will
+    // probably cause issues when setting disabled on the
+    // Textarea directly while it's inside of a field
     Effect::new(move || {
         if let Some(textarea) = textarea_ref.get_untracked() {
-            textarea.set_value(&value.get());
+            if let Some(field) = use_context::<FieldContext>() {
+                textarea.set_disabled(field.disabled.get())
+            } else {
+                textarea.set_disabled(disabled.get());
+            }
         }
     });
 
@@ -264,10 +271,22 @@ pub fn Textarea(
                     None
                 }
             }
+            aria_disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some("true".to_string())
+                } else if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
             aria_invalid=move || {
-                match invalid.get() {
-                    true => Some("true"),
-                    _ => None,
+                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                    Some("true".to_string())
+                } else if invalid.get() {
+                    Some("true".to_string())
+                } else {
+                    None
                 }
             }
             aria_labelledby=move || {
@@ -293,8 +312,29 @@ pub fn Textarea(
                 )
             }
             dirname=move || dirname.get()
-            disabled=move || disabled.get()
+            disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some(true)
+                } else if disabled.get() {
+                    Some(true)
+                } else {
+                    None
+                }
+            }
             form=move || form.get()
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
+                } else {
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
+                }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
             maxlength=move || maxlength.get()
             minlength=move || minlength.get()
             name=move || name.get()
@@ -310,39 +350,18 @@ pub fn Textarea(
 
     if let Some(children) = children {
         view! {
-            {if in_field {
-                view! {
-                    <Label
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </Label>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!(
-                                "singlestage-label singlestage-textarea-label {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
-            <textarea
-                id=move || id.get().unwrap_or(input_id.to_string())
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..textarea_attrs}
+            <Label
+                class=format!(
+                    "{}{}",
+                    if in_field { "" } else { "singlestage-textarea-label " },
+                    class.get_untracked().unwrap_or_default(),
+                )
+                id=label_id.to_string()
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
             >
+                {children()}
+            </Label>
+            <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
                 {if let Some(default) = default.get_untracked() {
                     default
                 } else {
@@ -354,17 +373,6 @@ pub fn Textarea(
     } else {
         view! {
             <textarea
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
 
                 {..global_attrs_1}
                 {..global_attrs_2}

@@ -18,7 +18,13 @@ pub fn DebugInput() -> impl IntoView {
             <li>"Invalid: "{move || invalid.get().to_string()}</li>
         </ul>
 
-        <Input disabled invalid />
+        <Input disabled invalid>
+            "Solo"
+        </Input>
+
+        <Field disabled invalid>
+            <Input>"Field"</Input>
+        </Field>
 
         <span class="space-x-2">
             <Button variant="outline" on:click=move |_| disabled.set(!disabled.get())>

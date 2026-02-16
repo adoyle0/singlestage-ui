@@ -6,6 +6,7 @@ mod context_menu;
 mod dropdown;
 mod form_reset;
 mod input;
+mod label;
 mod radio;
 mod select;
 mod slider;
@@ -18,6 +19,7 @@ use context_menu::*;
 use dropdown::*;
 use form_reset::*;
 use input::*;
+use label::*;
 use radio::*;
 use select::*;
 use slider::*;
@@ -39,6 +41,7 @@ pub fn ReactiveDebug() -> impl IntoView {
             <DebugToggle />
             <DebugDropdown />
             <DebugContextMenu />
+            <DebugLabel />
         </div>
     }
 }

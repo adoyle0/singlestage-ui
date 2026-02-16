@@ -78,7 +78,7 @@
     @apply gap-3;
 
     &:disabled {
-      .singlestage-field-label,
+      .singlestage-label,
       .singlestage-field-title {
         @apply opacity-50;
       }
@@ -86,24 +86,6 @@
 
     &:invalid {
       @apply text-destructive;
-    }
-  }
-
-  .singlestage-field-label {
-    @apply gap-2;
-
-    &:has(.singlestage-field) {
-      @apply border
-      rounded-md;
-    }
-
-    &:has(*:checked) {
-      @apply bg-primary/5
-      border-primary/30;
-    }
-
-    .singlestage-field {
-      @apply p-3;
     }
   }
 
