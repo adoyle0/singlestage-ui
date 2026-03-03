@@ -115,7 +115,7 @@ pub fn SidebarMenu(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,7 +151,12 @@ pub fn SidebarMenu(
     };
 
     view! {
-        <ul {..global_attrs_1} {..global_attrs_2}>
+        <ul
+            class=move || format!("singlestage-sidebar-menu {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </ul>
     }

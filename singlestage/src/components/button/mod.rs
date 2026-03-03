@@ -1,6 +1,7 @@
 use crate::{
-    DialogActionContext, DialogCancelContext, DialogCloseContext, DialogContext, InputGroupContext,
-    PopoverContext, PopoverMenuContext, Reactive, TriggerContext,
+    CollapsibleContext, DialogActionContext, DialogCancelContext, DialogCloseContext,
+    DialogContext, InputGroupContext, PopoverContext, PopoverMenuContext, Reactive,
+    SidebarMenuButtonContext, TriggerContext,
 };
 use leptos::prelude::*;
 
@@ -191,6 +192,21 @@ pub fn Button(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let button_attrs = view! {
+        <{..}
+            command=move || command.get()
+            commandfor=move || commandfor.get()
+            form=move || form.get()
+            formaction=move || formaction.get()
+            formenctype=move || formenctype.get()
+            formmethod=move || formmethod.get()
+            formnovalidate=move || formnovalidate.get()
+            formtarget=move || formtarget.get()
+            name=move || name.get()
+            value=move || value.get()
+        />
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -206,11 +222,11 @@ pub fn Button(
             inputmode=move || inputmode.get()
             is=move || is.get()
             itemid=move || itemid.get()
+            itemprop=move || itemprop.get()
         />
     };
     let global_attrs_2 = view! {
         <{..}
-            itemprop=move || itemprop.get()
             itemref=move || itemref.get()
             itemscope=move || itemscope.get()
             itemtype=move || itemtype.get()
@@ -228,22 +244,8 @@ pub fn Button(
         />
     };
 
-    let button_attrs = view! {
-        <{..}
-            command=move || command.get()
-            commandfor=move || commandfor.get()
-            form=move || form.get()
-            formaction=move || formaction.get()
-            formenctype=move || formenctype.get()
-            formmethod=move || formmethod.get()
-            formnovalidate=move || formnovalidate.get()
-            formtarget=move || formtarget.get()
-            name=move || name.get()
-            value=move || value.get()
-        />
-    };
-
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
     let is_dialog_action: bool = use_context::<DialogActionContext>().is_some();
     let is_dialog_cancel: bool = use_context::<DialogCancelContext>().is_some();
     let is_dialog_close: bool = use_context::<DialogCloseContext>().is_some();
@@ -255,8 +257,23 @@ pub fn Button(
                 if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         Some(dropdown.menu_id.get())
+                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        Some(popover.menu_id.get())
                     } else {
-                        use_context::<PopoverContext>().map(|popover| popover.menu_id.get())
+                        None
+                    }
+                } else {
+                    None
+                }
+            }
+            aria_expanded=move || {
+                if is_trigger {
+                    if let Some(collapsible) = use_context::<CollapsibleContext>()
+                        && collapsible.open.get()
+                    {
+                        Some("true")
+                    } else {
+                        None
                     }
                 } else {
                     None
@@ -267,6 +284,11 @@ pub fn Button(
             class=move || {
                 if variant.get().unwrap_or_default().as_str() == "none" {
                     class.get().unwrap_or_default()
+                } else if in_sidebar_menu_button {
+                    format!(
+                        "singlestage-sidebar-menu-button singlestage-sidebar-menu-button-size-default singlestage-sidebar-menu-button-variant-default {}",
+                        class.get().unwrap_or_default(),
+                    )
                 } else {
                     format!(
                         "singlestage-btn{}{}{} {} {} {}",
@@ -361,6 +383,8 @@ pub fn Button(
                     {
                         ev.prevent_default();
                         popover.open.set(!popover.open.get_untracked());
+                    } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
+                        collapsible.open.set(!collapsible.open.get_untracked())
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
                     if is_dialog_action || is_dialog_cancel || is_dialog_close {

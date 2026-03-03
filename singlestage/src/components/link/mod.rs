@@ -1,4 +1,4 @@
-use crate::InputGroupContext;
+use crate::{InputGroupContext, SidebarMenuButtonContext};
 use leptos::prelude::*;
 
 /// Creates a styled hyperlink.
@@ -209,80 +209,90 @@ pub fn Link(
         />
     };
 
+    let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+
     view! {
         <a
             aria_current=move || aria_current.get()
             aria_label=move || aria_label.get()
             class=move || {
-                match render_as.get().unwrap_or_default().as_str() {
-                    "button" => {
-                        format!(
-                            "singlestage-btn {} {} {} {}",
-                            match variant.get().unwrap_or_default().as_str() {
-                                "primary" => "singlestage-btn-primary",
-                                "secondary" => "singlestage-btn-secondary",
-                                "outline" => "singlestage-btn-outline",
-                                "ghost" => "singlestage-btn-ghost",
-                                "link" => "singlestage-btn-link",
-                                "destructive" => "singlestage-btn-destructive",
-                                _ => {
-                                    if use_context::<InputGroupContext>().is_some()
-                                        && variant.get().is_none()
-                                    {
-                                        "singlestage-btn-ghost"
-                                    } else {
-                                        "singlestage-btn-primary"
+                format!(
+                    "{} {}",
+                    match render_as.get().unwrap_or_default().as_str() {
+                        "button" => {
+                            format!(
+                                "singlestage-btn {} {} {}",
+                                match variant.get().unwrap_or_default().as_str() {
+                                    "primary" => "singlestage-btn-primary",
+                                    "secondary" => "singlestage-btn-secondary",
+                                    "outline" => "singlestage-btn-outline",
+                                    "ghost" => "singlestage-btn-ghost",
+                                    "link" => "singlestage-btn-link",
+                                    "destructive" => "singlestage-btn-destructive",
+                                    _ => {
+                                        if use_context::<InputGroupContext>().is_some()
+                                            && variant.get().is_none()
+                                        {
+                                            "singlestage-btn-ghost"
+                                        } else {
+                                            "singlestage-btn-primary"
+                                        }
                                     }
-                                }
-                            },
-                            match size.get().unwrap_or_default().as_str() {
-                                "xs" | "extra small" => "singlestage-btn-size-xs",
-                                "sm" | "small" => "singlestage-btn-size-sm",
-                                "lg" | "large" => "singlestage-btn-size-lg",
-                                "icon" => "singlestage-btn-size-icon",
-                                "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                                    "singlestage-btn-size-icon-xs"
-                                }
-                                "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                                    "singlestage-btn-size-icon-sm"
-                                }
-                                "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                                    "singlestage-btn-size-icon-lg"
-                                }
-                                _ => "singlestage-btn-size-default",
-                            },
-                            if use_context::<InputGroupContext>().is_some() {
-                                format!(
-                                    "singlestage-input-group-button {}",
-                                    match size.get().unwrap_or_default().as_str() {
-                                        "sm" => "singlestage-input-group-button-sm",
-                                        "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                        "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                        _ => "singlestage-input-group-button-xs",
-                                    },
-                                )
+                                },
+                                match size.get().unwrap_or_default().as_str() {
+                                    "xs" | "extra small" => "singlestage-btn-size-xs",
+                                    "sm" | "small" => "singlestage-btn-size-sm",
+                                    "lg" | "large" => "singlestage-btn-size-lg",
+                                    "icon" => "singlestage-btn-size-icon",
+                                    "xs-icon" | "icon-xs" | "icon extra small"
+                                    | "extra small icon" => "singlestage-btn-size-icon-xs",
+                                    "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                        "singlestage-btn-size-icon-sm"
+                                    }
+                                    "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                        "singlestage-btn-size-icon-lg"
+                                    }
+                                    _ => "singlestage-btn-size-default",
+                                },
+                                if use_context::<InputGroupContext>().is_some() {
+                                    format!(
+                                        "singlestage-input-group-button {}",
+                                        match size.get().unwrap_or_default().as_str() {
+                                            "sm" => "singlestage-input-group-button-sm",
+                                            "icon-xs" => "singlestage-input-group-button-icon-xs",
+                                            "icon-sm" => "singlestage-input-group-button-icon-sm",
+                                            _ => "singlestage-input-group-button-xs",
+                                        },
+                                    )
+                                } else {
+                                    "".to_string()
+                                },
+                            )
+                        }
+                        "badge" => {
+                            format!(
+                                "singlestage-badge {}",
+                                match variant.get().unwrap_or_default().as_str() {
+                                    "secondary" => "singlestage-badge-variant-secondary",
+                                    "destructive" => "singlestage-badge-variant-destructive",
+                                    "outline" => "singlestage-badge-variant-outline",
+                                    "ghost" => "singlestage-badge-variant-ghost",
+                                    "link" => "singlestage-badge-variant-link",
+                                    _ => "singlestage-badge-variant-default",
+                                },
+                            )
+                        }
+                        _ => {
+                            if in_sidebar_menu_button {
+                                "singlestage-sidebar-menu-button singlestage-sidebar-menu-button-size-default singlestage-sidebar-menu-button-variant-default"
+                                    .to_string()
                             } else {
-                                "".to_string()
-                            },
-                            class.get().unwrap_or_default(),
-                        )
-                    }
-                    "badge" => {
-                        format!(
-                            "singlestage-badge {} {}",
-                            match variant.get().unwrap_or_default().as_str() {
-                                "secondary" => "singlestage-badge-variant-secondary",
-                                "destructive" => "singlestage-badge-variant-destructive",
-                                "outline" => "singlestage-badge-variant-outline",
-                                "ghost" => "singlestage-badge-variant-ghost",
-                                "link" => "singlestage-badge-variant-link",
-                                _ => "singlestage-badge-variant-default",
-                            },
-                            class.get().unwrap_or_default(),
-                        )
-                    }
-                    _ => format!("singlestage-link {}", class.get().unwrap_or_default()),
-                }
+                                "singlestage-link".to_string()
+                            }
+                        }
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
 
             {..global_attrs_1}

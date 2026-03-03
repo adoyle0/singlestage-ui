@@ -1,12 +1,15 @@
-// TODO: Make generic with label primitive
-
-use crate::sidebar::*;
 use leptos::prelude::*;
 
-/// The label displayed above the group.
+/// A menu item within the SidebarMenuSub menu.
 #[component]
-pub fn SidebarGroupLabel(
+pub fn SidebarMenuSubItem(
     children: Children,
+
+    // LI ATTRIBRUTES
+    //
+    /// The current ordinal value of the item.
+    #[prop(optional, into)]
+    value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -113,11 +116,6 @@ pub fn SidebarGroupLabel(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let group = expect_context::<SidebarGroupContext>();
-
-    let uuid = uuid::Uuid::new_v4();
-    group.label_id.set(uuid.to_string());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -159,16 +157,16 @@ pub fn SidebarGroupLabel(
     };
 
     view! {
-        <h3
+        <li
             class=move || {
-                format!("singlestage-sidebar-group-label {}", class.get().unwrap_or_default())
+                format!("singlestage-sidebar-menu-sub-item {}", class.get().unwrap_or_default())
             }
+            value=move || value.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
-            id=uuid.to_string()
         >
             {children()}
-        </h3>
+        </li>
     }
 }

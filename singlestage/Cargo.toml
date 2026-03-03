@@ -45,6 +45,7 @@ default = [
   "card",
   "carousel",
   "checkbox",
+  "collapsible",
   "dialog",
   "dropdown",
   "empty",
@@ -87,6 +88,7 @@ button_group = []
 card = []
 carousel = []
 checkbox = ["field", "label"]
+collapsible = []
 dialog = []
 dropdown = ["popover"]
 empty = []

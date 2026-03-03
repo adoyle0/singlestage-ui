@@ -48,11 +48,6 @@
     border-border
     shadow-xs;
 
-    &[aria-expanded="true"] {
-      @apply bg-muted
-      text-foreground;
-    }
-
     &:hover {
       @apply bg-muted
       text-foreground;
@@ -64,22 +59,12 @@
     shadow-xs
     text-secondary-foreground;
 
-    &[aria-expanded="true"] {
-      @apply bg-secondary
-      text-secondary-foreground;
-    }
-
     &:hover {
       @apply bg-secondary/80;
     }
   }
 
   .singlestage-btn-ghost {
-    &[aria-expanded="true"] {
-      @apply bg-muted
-      text-foreground;
-    }
-
     &:hover {
       @apply bg-muted
       text-foreground;
@@ -118,6 +103,24 @@
 
     :has(> svg) {
       @apply px-2.5;
+    }
+  }
+
+  /* Highlight some buttons when they expand something
+     or are manually told they expanded something */
+  .singlestage-btn {
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      &.singlestage-btn-ghost,
+      &.singlestage-btn-outline {
+        @apply bg-muted
+        text-foreground;
+      }
+
+      &.singlestage-btn-secondary {
+        @apply bg-secondary
+        text-secondary-foreground;
+      }
     }
   }
 }

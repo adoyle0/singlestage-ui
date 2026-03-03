@@ -47,9 +47,9 @@ pub fn CollapsibleContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
-    // /// Set the id of this element.
-    // #[prop(optional, into)]
-    // id: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -125,7 +125,7 @@ pub fn CollapsibleContent(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            // id=move || id.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -154,13 +154,16 @@ pub fn CollapsibleContent(
     };
 
     view! {
-        <ul
-            id=format!("{}-content", collapsible.id)
+        <section
+            style:display=move || match collapsible.open.get() {
+                true => None,
+                false => Some("none"),
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </ul>
+        </section>
     }
 }

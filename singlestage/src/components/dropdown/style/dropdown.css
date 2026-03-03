@@ -58,6 +58,14 @@
         @apply ml-auto;
       }
     }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      > button {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+    }
   }
 
   .singlestage-checkbox-item,

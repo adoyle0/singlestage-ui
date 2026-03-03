@@ -144,9 +144,10 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
 
         <SidebarMenuItem>
             <SidebarMenuButton>
-                <A href="/components/{}">
+                <Link
+                    href="/components/{}">
                     <span>"{}"</span>
-                </A>
+                </Link>
             </SidebarMenuButton>
         </SidebarMenuItem>
         "#,

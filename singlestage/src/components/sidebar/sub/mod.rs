@@ -1,28 +1,13 @@
-use crate::CollapsibleContext;
-use leptos::{context::Provider, prelude::*};
+mod item;
 
-/// A button that opens the collapsible menu.
-#[slot]
-pub struct CollapsibleTrigger {
-    children: ChildrenFn,
-}
+pub use item::*;
 
-/// Creates a collapsible menu.
+use leptos::prelude::*;
+
+/// Wraps a submenu within a SidebarMenu.
 #[component]
-pub fn Collapsible(
+pub fn SidebarMenuSub(
     children: Children,
-    /// A button that opens the collapsible menu.
-    collapsible_trigger: CollapsibleTrigger,
-
-    // DETAILS ATTRIBUTES
-    //
-    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
-    #[prop(optional, into)]
-    open: MaybeProp<bool>,
-    /// Sets the name of the `details` element.
-    /// Set the same name for each `AccordionItem` to only allow one open at a time.
-    #[prop(optional, into)]
-    name: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -129,15 +114,11 @@ pub fn Collapsible(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let uuid = uuid::Uuid::new_v4().to_string();
-    let context = CollapsibleContext { id: uuid.clone() };
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -173,17 +154,15 @@ pub fn Collapsible(
     };
 
     view! {
-        <details id=uuid.clone() name=move || name.get() open=move || open.get()>
-            <summary
-                aria-controls=format!("{}-content", uuid)
-                on:click=move |ev| ev.stop_propagation()
+        <div
+            class=move || {
+                format!("singlestage-sidebar-menu-sub {}", class.get().unwrap_or_default())
+            }
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {(collapsible_trigger.children)().into_any()}
-            </summary>
-            <Provider value=context>{children()}</Provider>
-        </details>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </div>
     }
 }

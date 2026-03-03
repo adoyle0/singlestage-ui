@@ -1,251 +1,396 @@
 @layer components {
+  .singlestage-sidebar-wrapper {
+    @apply flex
+    min-h-svh
+    w-full;
+
+    &:has(.singlestage-sidebar-variant-inset) {
+      @apply bg-sidebar;
+    }
+  }
+
   .singlestage-sidebar {
-    &:not([data-sidebar-initialized]) {
-      @apply max-md:hidden;
-    }
+    @apply hidden
+    md:block
+    text-sidebar-foreground;
+  }
 
-    &:not([aria-hidden]),
-    &[aria-hidden="false"] {
-      @apply max-md:bg-black/50
-      max-md:fixed
-      max-md:inset-0
-      max-md:z-40;
-    }
+  .singlestage-sidebar-gap {
+    @apply bg-transparent
+    relative
+    w-(--sidebar-width);
+  }
 
-    & + * {
-      @apply transition-[margin]
-      ease-in-out
-      duration-300;
-    }
+  .singlestage-sidebar-container {
+    @apply duration-200
+    ease-linear
+    fixed
+    h-svh
+    hidden
+    inset-y-0
+    md:flex
+    transition-[left,right,width]
+    w-(--sidebar-width)
+    z-10;
+  }
 
-    &:not([data-side]),
-    &[data-side="left"] {
-      nav {
-        @apply border-r
-        left-0;
-      }
+  .singlestage-sidebar-inner {
+    @apply flex
+    flex-col
+    size-full;
+  }
 
-      & + * {
-        @apply md:ml-(--sidebar-width)
-        relative;
-      }
+  .singlestage-sidebar-rail {
+    @apply absolute
+  /* [[data-side=left][data-state=collapsed]_&]:cursor-e-resize */
+  /* [[data-side=right][data-state=collapsed]_&]:cursor-w-resize */
+    ease-linear
+    hidden
+    inset-y-0
+    ltr:-translate-x-1/2
+    rtl:-translate-x-1/2
+    sm:flex
+    transition-all
+    w-4
+    z-20;
 
-      &[aria-hidden="true"] {
-        nav {
-          @apply -translate-x-full;
-        }
-
-        & + * {
-          @apply md:ml-0;
-        }
-      }
-    }
-
-    &[data-side="right"] {
-      nav {
-        @apply border-l
-        right-0;
-      }
-
-      & + * {
-        @apply md:mr-(--sidebar-width)
-        relative;
-      }
-
-      &[aria-hidden="true"] {
-        nav {
-          @apply translate-x-full;
-        }
-
-        & + * {
-          @apply md:mr-0;
-        }
-      }
-    }
-
-    nav {
-      @apply bg-sidebar
-      duration-300
-      ease-in-out
-      fixed
-      flex
-      flex-col
+    &:after {
+      @apply absolute
       inset-y-0
-      md:w-(--sidebar-width)
-      text-sidebar-foreground
-      transition-transform
-      w-(--sidebar-mobile-width)
-      z-50;
+      start-1/2
+      w-[2px];
+    }
+  }
 
-      > header,
-      > footer {
-        @apply flex
-        flex-col
-        gap-2
-        p-2;
-      }
+  .singlestage-sidebar-inset {
+    @apply flex
+    flex-1
+    flex-col
+    relative
+    w-full;
+  }
 
-      [role="separator"] {
-        @apply border-sidebar-border
-        mx-2
-        w-auto;
-      }
+  .singlestage-sidebar-header {
+    @apply flex
+    flex-col;
+  }
 
-      > section {
-        @apply flex
-        flex-1
-        flex-col
-        gap-2
-        min-h-0
-        overflow-y-auto
-        overscroll-none;
+  .singlestage-sidebar-footer {
+    @apply flex
+    flex-col;
+  }
 
-        > [role="group"] {
-          @apply flex
-          flex-col
-          min-w-0
-          p-2
-          relative
-          w-full;
-        }
+  .singlestage-sidebar-separator {
+    @apply w-auto;
+  }
 
-        h3 {
-          @apply [&>svg]:shrink-0
-          [&>svg]:size-4
-          duration-200
-          ease-linear
-          flex
-          focus-visible:ring-2
-          font-medium
-          h-8
-          items-center
-          outline-hidden
-          px-2
-          ring-sidebar-ring
-          rounded-md
-          shrink-0
-          text-sidebar-foreground/70
-          text-xs
-          transition-[margin,opacity];
-        }
+  .singlestage-sidebar-content {
+    @apply flex
+    flex-1
+    flex-col
+    min-h-0
+    overflow-auto;
+  }
 
-        ul {
-          @apply flex
-          w-full
-          min-w-0
-          flex-col
-          gap-1;
+  .singlestage-sidebar-group {
+    @apply flex
+    flex-col
+    min-w-0
+    relative
+    w-full;
+  }
 
-          li {
-            @apply relative;
+  .singlestage-sidebar-group-label {
+    @apply flex
+    items-center
+    outline-hidden
+    shrink-0;
 
-            > a,
-            > details > summary {
-              @apply [&>span:last-child]:truncate
-              [&>svg]:shrink-0
-              [&>svg]:size-4
-              [&[aria-current=page]]:bg-sidebar-accent
-              [&[aria-current=page]]:font-medium
-              [&[aria-current=page]]:text-sidebar-accent-foreground
-              active:bg-sidebar-accent
-              active:text-sidebar-accent-foreground
-              aria-disabled:opacity-50
-              aria-disabled:pointer-events-none
-              disabled:opacity-50
-              disabled:pointer-events-none
-              flex
-              focus-visible:ring-2
-              gap-2
-              hover:bg-sidebar-accent
-              hover:text-sidebar-accent-foreground
-              items-center
-              outline-hidden
-              overflow-hidden
-              p-2
-              ring-sidebar-ring
-              rounded-md
-              text-left
-              text-sm
-              transition-[width,height,padding]
-              w-full;
+    > svg {
+      @apply shrink-0;
+    }
+  }
 
-              &:not([data-variant]),
-              &[data-variant="default"] {
-                @apply hover:bg-sidebar-accent
-                hover:text-sidebar-accent-foreground;
-              }
+  .singlestage-sidebar-group-action {
+    @apply aspect-square
+    flex
+    items-center
+    justify-center
+    md:after:hidden
+    outline-hidden
+    transition-transform;
 
-              &[data-variant="outline"] {
-                @apply bg-background
-                hover:bg-sidebar-accent
-                hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]
-                hover:text-sidebar-accent-foreground
-                shadow-[0_0_0_1px_hsl(var(--sidebar-border))];
-              }
+    &:after {
+      @apply -inset-2
+      absolute;
+    }
 
-              &:not([data-size]),
-              &[data-size="default"] {
-                @apply h-8
-                text-sm;
-              }
+    > svg {
+      @apply shrink-0;
+    }
+  }
 
-              &[data-size="sm"] {
-                @apply h-7
-                text-xs;
-              }
+  .singlestage-sidebar-group-content {
+    @apply w-full;
+  }
 
-              &[data-size="lg"] {
-                @apply group-data-[collapsible=icon]:p-0!
-                h-12
-                text-sm;
-              }
-            }
+  .singlestage-sidebar-menu {
+    @apply flex
+    flex-col
+    min-w-0
+    w-full;
+  }
 
-            > details {
-              &:not([open]) {
-                > summary {
-                  &::after {
-                    @apply -rotate-90;
-                  }
-                }
-              }
+  .singlestage-sidebar-menu-item {
+    @apply relative;
 
-              > summary {
-                &::after {
-                  @apply bg-muted-foreground
-                  block
-                  content-['']
-                  ease-linear
-                  mask-[image:var(--chevron-down-icon)]
-                  mask-center
-                  mask-no-repeat
-                  mask-size-[1rem]
-                  ml-auto
-                  size-3.5
-                  transition-transform;
-                }
-              }
-
-              &::details-content {
-                @apply px-3.5;
-              }
-            }
-          }
-
-          ul {
-            @apply border-l
-            border-sidebar-border
-            flex
-            flex-col
-            gap-1
-            min-w-0
-            px-2.5
-            py-0.5
-            translate-x-px
-            w-full;
-          }
-        }
+    &:focus-within,
+    &:hover {
+      .singlestage-sidebar-menu-action-show-on-hover {
+        @apply opacity-100;
       }
     }
+  }
+
+  .singlestage-sidebar-menu-button {
+    @apply flex
+    items-center
+    outline-hidden
+    overflow-hidden
+    w-full;
+
+    &:active {
+      .singlestage-sidebar-menu-action-show-on-hover {
+        @apply text-sidebar-accent-foreground;
+      }
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    > span:last-child {
+      @apply truncate;
+    }
+
+    svg {
+      @apply shrink-0
+      size-4;
+    }
+  }
+
+  .singlestage-sidebar-menu-action {
+    @apply flex
+    items-center
+    justify-center
+    md:after:hidden
+    outline-hidden
+    transition-transform;
+
+    &:after {
+      @apply -inset-2
+      absolute;
+    }
+
+    > svg {
+      @apply shrink-0;
+    }
+  }
+
+  .singlestage-sidebar-menu-action-show-on-hover {
+    @apply md:opacity-0;
+
+    &[aria-expanded="true"] {
+      @apply opacity-100;
+    }
+  }
+
+  .singlestage-sidebar-menu-badge {
+    @apply flex
+    items-center
+    justify-center
+    select-none
+    tabular-nums;
+  }
+
+  .singlestage-sidebar-menu-skeleton {
+    @apply flex
+    items-center;
+  }
+
+  .singlestage-sidebar-menu-skeleton-text {
+    @apply flex-1
+    /* random % between 50 and 90 */
+    max-w-(--skeleton-width);
+  }
+
+  .singlestage-sidebar-menu-sub {
+    @apply flex
+    flex-col
+    min-w-0;
+  }
+
+  .singlestage-sidebar-menu-sub-item {
+    @apply relative;
+  }
+
+  .singlestage-sidebar-menu-sub-button {
+    @apply -translate-x-px
+    flex
+    items-center
+    min-w-0
+    outline-hidden
+    overflow-hidden;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    > span:last-child {
+      @apply truncate;
+    }
+
+    svg {
+      @apply shrink-0;
+    }
+  }
+
+  .singlestage-sidebar-side-left {
+    .singlestage-sidebar-container {
+      @apply left-0;
+    }
+
+    .singlestage-sidebar-rail {
+      @apply -right-4
+      cursor-w-resize;
+    }
+  }
+
+  .singlestage-sidebar-side-right {
+    .singlestage-sidebar-container {
+      @apply right-0;
+    }
+
+    .singlestage-sidebar-gap {
+      @apply rotate-180;
+    }
+
+    .singlestage-sidebar-rail {
+      @apply cursor-e-resize
+      left-0;
+    }
+  }
+
+  .singlestage-sidebar-variant-floating,
+  .singlestage-sidebar-variant-inset {
+    .singlestage-sidebar-container {
+      @apply p-2;
+    }
+
+    &.singlestage-sidebar-collapsible-icon {
+      .singlestage-sidebar-gap {
+        @apply w-[calc(var(--sidebar-width-icon)+(--spacing(4)))];
+      }
+
+      .singlestage-sidebar-container {
+        @apply w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)];
+      }
+    }
+  }
+
+  .singlestage-sidebar-variant-sidebar {
+    &.singlestage-sidebar-collapsible-icon {
+      .singlestage-sidebar-gap {
+        @apply w-(--sidebar-width-icon);
+      }
+
+      .singlestage-sidebar-container {
+        @apply w-(--sidebar-width-icon);
+      }
+    }
+
+    &.singlestage-sidebar-side-left {
+      .singlestage-sidebar-container {
+        @apply border-r;
+      }
+    }
+
+    &.singlestage-sidebar-side-right {
+      .singlestage-sidebar-container {
+        @apply border-l;
+      }
+    }
+  }
+
+  .singlestage-sidebar-collapsible-offcanvas {
+    .singlestage-sidebar-gap {
+      @apply w-0;
+    }
+
+    .singlestage-sidebar-rail {
+      @apply translate-x-0;
+
+      &:after {
+        @apply left-full;
+      }
+
+      &:hover {
+        @apply bg-sidebar;
+      }
+    }
+
+    &.singlestage-sidebar-side-left {
+      .singlestage-sidebar-container {
+        @apply left-[calc(var(--sidebar-width)*-1)];
+      }
+
+      .singlestage-sidebar-rail {
+        @apply -right-2;
+      }
+    }
+
+    &.singlestage-sidebar-side-right {
+      .singlestage-sidebar-container {
+        @apply right-[calc(var(--sidebar-width)*-1)];
+      }
+
+      .singlestage-sidebar-rail {
+        @apply -left-2;
+      }
+    }
+  }
+
+  .singlestage-sidebar-collapsible-icon {
+    .singlestage-sidebar-content {
+      @apply overflow-hidden;
+    }
+
+    .singlestage-sidebar-group-action {
+      @apply hidden;
+    }
+
+    .singlestage-sidebar-menu-action {
+      @apply hidden;
+    }
+
+    .singlestage-sideabar-menu-badge {
+      @apply hidden;
+    }
+
+    .singlestage-sidebar-menu-sub-button {
+      @apply hidden;
+    }
+  }
+
+  .singlestage-sidebar-collapsible-none {
+    @apply bg-sidebar
+    flex
+    h-full
+    text-sidebar-foreground
+    w-(--sidebar-width) flex-col;
   }
 }

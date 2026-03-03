@@ -53,6 +53,11 @@ pub mod checkbox;
 #[cfg(feature = "checkbox")]
 pub use checkbox::*;
 
+#[cfg(feature = "collapsible")]
+pub mod collapsible;
+#[cfg(feature = "collapsible")]
+pub use collapsible::*;
+
 #[cfg(feature = "dialog")]
 pub mod dialog;
 #[cfg(feature = "dialog")]

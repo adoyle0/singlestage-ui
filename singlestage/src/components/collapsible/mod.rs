@@ -1,16 +1,25 @@
-use crate::SidebarContext;
-use leptos::prelude::*;
+mod content;
+mod trigger;
 
-/// A menu item within the SidebarMenuSub menu.
+pub use content::*;
+pub use trigger::*;
+
+use crate::Reactive;
+use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone)]
+pub struct CollapsibleContext {
+    pub open: Reactive<bool>,
+}
+
+/// An interactive component which expands/collapses a panel.
 #[component]
-pub fn SidebarMenuSubItem(
+pub fn Collapsible(
     children: Children,
 
-    // LI ATTRIBRUTES
-    //
-    /// The current ordinal value of the item.
+    /// Set whether the Item is open (`true`) or closed (`false`). Defaults to `false`
     #[prop(optional, into)]
-    value: MaybeProp<String>,
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -117,14 +126,11 @@ pub fn SidebarMenuSubItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -160,14 +166,13 @@ pub fn SidebarMenuSubItem(
     };
 
     view! {
-        <li
-            on:click=move |_| sidebar.close_if_small_screen()
-            value=move || value.get()
+        <div
+            class=move || format!("singlestage-collapsible {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
-        </li>
+            <Provider value=CollapsibleContext { open }>{children()}</Provider>
+        </div>
     }
 }
