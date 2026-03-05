@@ -24,9 +24,9 @@ pub fn FieldGroupExample() -> impl IntoView {
             </FieldSet>
             <Separator />
             <FieldSet>
-                <Label>Tasks</Label>
+                <Label>"Tasks"</Label>
                 <FieldDescription>
-                    "Get notified when tasks you&apos;ve created have updates.{" "}"
+                    "Get notified when tasks you've created have updates. "
                     <a href="#">"Manage tasks"</a>
                 </FieldDescription>
                 <FieldGroup>

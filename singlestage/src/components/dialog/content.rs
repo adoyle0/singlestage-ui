@@ -196,13 +196,12 @@ pub fn DialogContent(
                 node_ref=dialog_ref
                 on:click=move |ev| {
                     if let Some(dialog) = dialog_ref.get_untracked() {
-                        let click_x = ev.x() as f64;
-                        let click_y = ev.y() as f64;
-                        let rect = dialog.get_bounding_client_rect();
-                        let click_inside_dialog = rect.top() <= click_y
-                            && click_y <= (rect.top() + rect.height()) && rect.left() <= click_x
-                            && click_x <= (rect.left() + rect.width());
-                        if !click_inside_dialog && !dialog_context.alert {
+                        let x = ev.x() as f64;
+                        let y = ev.y() as f64;
+                        let r = dialog.get_bounding_client_rect();
+                        let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
+                            && x <= (r.left() + r.width());
+                        if !r_clicked && !dialog_context.alert {
                             dialog.close()
                         }
                     }

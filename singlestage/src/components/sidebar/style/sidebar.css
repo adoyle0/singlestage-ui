@@ -11,8 +11,19 @@
 
   .singlestage-sidebar {
     @apply hidden
-    md:block
+    min-[48rem]:block
     text-sidebar-foreground;
+  }
+
+  .singlestage-sidebar-mobile {
+    @apply bg-sidebar
+    p-0
+    text-sidebar-foreground
+    w-(--sidebar-width);
+
+    & > button {
+      @apply hidden;
+    }
   }
 
   .singlestage-sidebar-gap {

@@ -1,0 +1,98 @@
+@layer base {
+  .singlestage-sheet-overlay::backdrop {
+    @apply bg-black/10
+    /* data-closed:animate-out */
+    /* data-closed:fade-out-0 */
+    /* data-ending-style:opacity-0 */
+    /* data-open:animate-in */
+    /* data-open:fade-in-0 */
+    /* data-starting-style:opacity-0 */
+    duration-100
+    supports-backdrop-filter:backdrop-blur-xs;
+  }
+
+  .singlestage-sheet-content {
+    @apply bg-background
+    bg-clip-padding
+    /* data-closed:animate-out */
+    /* data-closed:fade-out-0 */
+    /* data-open:animate-in */
+    /* data-open:fade-in-0 */
+    duration-200
+    ease-in-out
+    fixed
+    flex
+    flex-col
+    gap-4
+    shadow-lg
+    text-sm
+    transition
+    z-50;
+  }
+
+  .singlestage-sheet-side-top {
+    @apply border-b
+    /* data-closed:slide-out-to-top-10 */
+    /* data-open:slide-in-from-top-10 */
+    h-auto
+    inset-x-0
+    top-0;
+  }
+
+  .singlestage-sheet-side-right {
+    @apply border-l
+    /* data-closed:slide-out-to-right-10 */
+    /* data-open:slide-in-from-right-10 */
+    h-full
+    inset-y-0
+    right-0
+    sm:max-w-sm
+    w-3/4;
+  }
+
+  .singlestage-sheet-side-bottom {
+    @apply border-t
+    bottom-0
+    /* data-closed:slide-out-to-bottom-10 */
+    /* data-open:slide-in-from-bottom-10 */
+    h-auto
+    inset-x-0;
+  }
+
+  .singlestage-sheet-side-left {
+    @apply border-r
+    /* data-closed:slide-out-to-left-10 */
+    /* data-open:slide-in-from-left-10 */
+    h-full
+    inset-y-0
+    left-0
+    sm:max-w-sm
+    w-3/4;
+  }
+
+  .singlestage-sheet-close {
+    @apply absolute
+    top-4
+    right-4;
+  }
+
+  .singlestage-sheet-header {
+    @apply gap-1.5
+    p-4;
+  }
+
+  .singlestage-sheet-footer {
+    @apply gap-2
+    p-4;
+  }
+
+  .singlestage-sheet-title {
+    @apply font-medium
+    text-foreground;
+  }
+
+  .singlestage-sheet-description {
+    @apply text-muted-foreground
+    text-sm;
+  }
+}

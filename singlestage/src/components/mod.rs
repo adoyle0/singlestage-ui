@@ -143,6 +143,11 @@ pub mod separator;
 #[cfg(feature = "separator")]
 pub use separator::*;
 
+#[cfg(feature = "sheet")]
+pub mod sheet;
+#[cfg(feature = "sheet")]
+pub use sheet::*;
+
 #[cfg(feature = "sidebar")]
 pub mod sidebar;
 #[cfg(feature = "sidebar")]

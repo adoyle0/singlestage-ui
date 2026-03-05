@@ -1,4 +1,4 @@
-use crate::{InputGroupContext, SidebarMenuButtonContext};
+use crate::{InputGroupContext, SheetContext, SidebarMenuButtonContext};
 use leptos::prelude::*;
 
 /// Creates a styled hyperlink.
@@ -293,6 +293,11 @@ pub fn Link(
                     },
                     class.get().unwrap_or_default(),
                 )
+            }
+            on:click=move |_| {
+                if let Some(sheet) = use_context::<SheetContext>() && in_sidebar_menu_button {
+                    sheet.open.set(false)
+                }
             }
 
             {..global_attrs_1}

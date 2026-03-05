@@ -161,6 +161,7 @@ fn main() {
         "scroll_area",
         "select",
         "separator",
+        "sheet",
         "sidebar",
         "skeleton",
         "slider",

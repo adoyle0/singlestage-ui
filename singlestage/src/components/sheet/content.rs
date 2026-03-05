@@ -1,65 +1,11 @@
-use super::*;
-use crate::{Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle};
+use crate::{Button, Reactive, SheetClose, SheetContext};
 use leptos::prelude::*;
 
-// Large/small screen breakpoint magic numbers for show/hide
-const BREAKPOINT_REM: usize = 48;
-const BREAKPOINT_PX: usize = 768;
-
-/// Get current viewport width
-fn get_screen_width() -> Option<f64> {
-    if let Ok(js_width) = window().inner_width()
-        && let Some(f64_width) = js_width.as_f64()
-    {
-        return Some(f64_width);
-    }
-
-    None
-}
-
-/// Get the font size setting of the browser viewing the page
-fn get_font_size() -> Option<usize> {
-    if let Some(dom) = document().document_element()
-        && let Ok(Some(css)) = window().get_computed_style(&dom)
-        && let Ok(mut font_size) = css.get_property_value("font-size")
-    {
-        // Cut off "px"
-        let _ = font_size.split_off(font_size.len() - 2);
-
-        if let Ok(parsed_font_size) = font_size.parse::<usize>() {
-            return Some(parsed_font_size);
-        }
-    }
-
-    None
-}
-
-/// Determine if the viewport is smaller than 48rem wide
-fn screen_is_small() -> bool {
-    let breakpoint;
-    if let Some(font_size) = get_font_size() {
-        breakpoint = font_size * BREAKPOINT_REM;
-    } else {
-        breakpoint = BREAKPOINT_PX;
-    }
-
-    if let Some(screen_width) = get_screen_width()
-        && screen_width < breakpoint as f64
-    {
-        return true;
-    }
-
-    false
-}
-
-/// The sidebar container.
 #[component]
-pub fn Sidebar(
-    children: ChildrenFn,
-
-    #[prop(optional, into)] collapsible: MaybeProp<String>,
-    #[prop(optional, into)] side: MaybeProp<String>,
-    #[prop(optional, into)] variant: MaybeProp<String>,
+pub fn SheetContent(
+    children: Children,
+    #[prop(optional, into)] side: Reactive<String>,
+    #[prop(optional, into, default = true.into())] show_close_button: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -166,26 +112,20 @@ pub fn Sidebar(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-    let is_mobile = RwSignal::new(false);
+    let sheet_context = expect_context::<SheetContext>();
+    let overlay_ref = NodeRef::<leptos::html::Dialog>::new();
+    let sheet_ref = NodeRef::<leptos::html::Aside>::new();
 
-    // client init
     Effect::new(move || {
-        is_mobile.set(screen_is_small());
-        sidebar.open.set(!is_mobile.get_untracked());
-    });
-
-    window_event_listener(leptos::ev::resize, move |_| {
-        // possibly useless optimization
-        let screen_is_small = screen_is_small();
-
-        // this should only run when breakpoint is hit
-        if is_mobile.get_untracked() != screen_is_small {
-            if screen_is_small {
-                sidebar.open.set(false);
+        if let Some(overlay) = overlay_ref.get_untracked() {
+            match sheet_context.open.get() {
+                true => {
+                    let _ = overlay.show_modal();
+                }
+                false => {
+                    overlay.close();
+                }
             }
-
-            is_mobile.set(screen_is_small);
         }
     });
 
@@ -228,58 +168,71 @@ pub fn Sidebar(
         />
     };
 
-    // TODO: revisit swapping between mobile and non because it takes too long and feels like shit
-    let children = StoredValue::new(children);
-
     view! {
-        <Show
-            when=move || is_mobile.get()
-            fallback=move || {
-                view! {
-                    <aside class=move || {
-                        format!(
-                            "singlestage-sidebar{} {} {}",
-                            if !sidebar.open.get() {
-                                match collapsible.get().unwrap_or_default().as_str() {
-                                    "icon" => " singlestage-sidebar-collapsible-icon",
-                                    _ => " singlestage-sidebar-collapsible-offcanvas",
-                                }
-                            } else {
-                                ""
-                            },
-                            match side.get().unwrap_or_default().as_str() {
-                                "right" => "singlestage-sidebar-side-right",
-                                _ => "singlestage-sidebar-side-left",
-                            },
-                            match variant.get().unwrap_or_default().as_str() {
-                                "floating" => "singlestage-sidebar-variant-floating",
-                                "inset" => "singlestage-sidebar-variant-inset",
-                                _ => "singlestage-sidebar-variant-sidebar",
-                            },
-                        )
-                    }>
-                        <div class="singlestage-sidebar-gap" />
-                        <div class="singlestage-sidebar-container">
-                            <div class=move || {
-                                format!(
-                                    "singlestage-sidebar-inner {}",
-                                    class.get().unwrap_or_default(),
-                                )
-                            }>{children.read_value()()}</div>
-                        </div>
-                    </aside>
+        <dialog
+            class="singlestage-sheet-overlay"
+            id={
+                let content_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                sheet_context.content_id.set(content_id.clone());
+                content_id
+            }
+            node_ref=overlay_ref
+            on:click=move |ev| {
+                if let Some(sheet_ref) = sheet_ref.get_untracked() {
+                    let x = ev.x() as f64;
+                    let y = ev.y() as f64;
+                    let r = sheet_ref.get_bounding_client_rect();
+                    let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
+                        && x <= (r.left() + r.width());
+                    if !r_clicked {
+                        sheet_context.open.set(false)
+                    }
                 }
             }
+            popover="auto"
         >
-            <Sheet open=sidebar.open>
-                <SheetContent class="singlestage-sidebar-mobile" side=sidebar.side>
-                    <SheetHeader class="sr-only">
-                        <SheetTitle>"Sidebar"</SheetTitle>
-                        <SheetDescription>"Displays the mobile sidebar."</SheetDescription>
-                    </SheetHeader>
-                    <div class="flex h-full w-full flex-col">{children.read_value()()}</div>
-                </SheetContent>
-            </Sheet>
-        </Show>
+            <aside
+                class=move || {
+                    format!(
+                        "singlestage-sheet-content {} {}",
+                        match side.get().as_str() {
+                            "top" => "singlestage-sheet-side-top",
+                            "bottom" => "singlestage-sheet-side-bottom",
+                            "left" => "singlestage-sheet-side-left",
+                            _ => "singlestage-sheet-side-right",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+                node_ref=sheet_ref
+            >
+                {children()}
+                <Show when=move || show_close_button.get().unwrap_or_default()>
+                    <SheetClose>
+                        <Button variant="ghost" class="singlestage-sheet-close" size="icon-sm">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-x-icon lucide-x"
+                            >
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                            <span class="sr-only">"Close"</span>
+                        </Button>
+                    </SheetClose>
+                </Show>
+            </aside>
+        </dialog>
     }
 }

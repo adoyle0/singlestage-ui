@@ -15,7 +15,14 @@ pub fn AppSidebar() -> impl IntoView {
     view! {
         <Sidebar class="inset-shadow-sm">
             <SidebarHeader>
-                <a href="/">
+                <a
+                    href="/"
+                    on:click=move |_| {
+                        if let Some(sheet) = use_context::<SheetContext>() {
+                            sheet.open.set(false)
+                        }
+                    }
+                >
                     <div class="flex m-2">
                         <div class="flex justify-center items-center max-h-12 rounded-md shadow-sm bg-(--primary) text-(--primary-foreground) min-w-12 max-w-12 min-h-12">
                             <svg
@@ -106,7 +113,16 @@ pub fn AppSidebar() -> impl IntoView {
             </SidebarContent>
             <SidebarSeparator />
             <SidebarFooter>
-                <a class="kofi-btn" href="https://ko-fi.com/K3K41INGJM" target="_blank">
+                <a
+                    class="kofi-btn"
+                    href="https://ko-fi.com/K3K41INGJM"
+                    on:click=move |_| {
+                        if let Some(sheet) = use_context::<SheetContext>() {
+                            sheet.open.set(false)
+                        }
+                    }
+                    target="_blank"
+                >
                     <Button class="w-full" variant="secondary">
                         <img src="/kofi_symbol.svg" />
                         "Buy me a coffee"

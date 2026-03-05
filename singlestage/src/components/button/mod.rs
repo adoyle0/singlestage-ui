@@ -1,7 +1,7 @@
 use crate::{
     CollapsibleContext, DialogActionContext, DialogCancelContext, DialogCloseContext,
     DialogContext, InputGroupContext, PopoverContext, PopoverMenuContext, Reactive,
-    SidebarMenuButtonContext, TriggerContext,
+    SheetCloseContext, SheetContext, SidebarMenuButtonContext, TriggerContext,
 };
 use leptos::prelude::*;
 
@@ -249,6 +249,7 @@ pub fn Button(
     let is_dialog_action: bool = use_context::<DialogActionContext>().is_some();
     let is_dialog_cancel: bool = use_context::<DialogCancelContext>().is_some();
     let is_dialog_close: bool = use_context::<DialogCloseContext>().is_some();
+    let is_sheet_close: bool = use_context::<SheetCloseContext>().is_some();
     let is_trigger: bool = use_context::<TriggerContext>().is_some();
 
     view! {
@@ -259,6 +260,8 @@ pub fn Button(
                         Some(dropdown.menu_id.get())
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         Some(popover.menu_id.get())
+                    } else if let Some(sheet) = use_context::<SheetContext>() {
+                        Some(sheet.content_id.get())
                     } else {
                         None
                     }
@@ -363,6 +366,8 @@ pub fn Button(
                         dropdown.trigger_id.set(trigger_id.clone());
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         popover.trigger_id.set(trigger_id.clone());
+                    } else if let Some(sheet) = use_context::<SheetContext>() {
+                        sheet.trigger_id.set(trigger_id.clone());
                     }
                     Some(trigger_id)
                 } else {
@@ -385,10 +390,20 @@ pub fn Button(
                         popover.open.set(!popover.open.get_untracked());
                     } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
                         collapsible.open.set(!collapsible.open.get_untracked())
+                    } else if let Some(sheet) = use_context::<SheetContext>()
+                        && !in_sidebar_menu_button
+                    {
+                        sheet.open.set(!sheet.open.get_untracked())
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
                     if is_dialog_action || is_dialog_cancel || is_dialog_close {
                         dialog.open.set(false)
+                    }
+                } else if let Some(sheet) = use_context::<SheetContext>() {
+                    if is_sheet_close {
+                        sheet.open.set(false)
+                    } else if in_sidebar_menu_button {
+                        sheet.open.set(false)
                     }
                 }
             }
@@ -401,6 +416,8 @@ pub fn Button(
                         target_id = Some(dropdown.menu_id.get())
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         target_id = Some(popover.menu_id.get())
+                    } else if let Some(sheet) = use_context::<SheetContext>() {
+                        target_id = Some(sheet.content_id.get())
                     }
                     target_id
                 } else {

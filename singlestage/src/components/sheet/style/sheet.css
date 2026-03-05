@@ -1,0 +1,23 @@
+@layer components {
+  .singlestage-sheet-overlay::backdrop {
+    @apply fixed
+    inset-0
+    z-50;
+  }
+
+  .singlestage-sheet-header {
+    @apply flex
+    flex-col;
+  }
+
+  .singlestage-sheet-footer {
+    @apply flex
+    flex-col
+    mt-auto;
+  }
+
+  /* Disable scrolling while popover is open */
+  html:has(.singlestage-sheet-overlay:popover-open) {
+    overflow: hidden;
+  }
+}
