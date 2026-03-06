@@ -1,11 +1,17 @@
-use crate::{PopoverMenuContext, Reactive};
-use leptos::prelude::*;
+use crate::{Button, Reactive};
+use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone)]
+pub struct MenuItemContext {
+    pub dismiss: Reactive<bool>,
+}
 
 /// Contains a menu item.
 #[component]
 pub fn MenuItem(
     children: Children,
 
+    #[prop(optional, into)] as_child: MaybeProp<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,
@@ -129,8 +135,6 @@ pub fn MenuItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<PopoverMenuContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -188,27 +192,26 @@ pub fn MenuItem(
             }
             role="menuitem"
             value=move || value.get()
-
-            {..global_attrs_1}
-            {..global_attrs_2}
         >
-            <button
-                aria_controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
-                aria_disabled=move || if disabled.get() { Some("true") } else { None }
-                aria_haspopup=move || if dismiss.get() { Some("menu") } else { None }
-                disabled=move || disabled.get()
-                on:click=move |ev| {
-                    if !menu.dismissable.get() && dismiss.get() {
-                        ev.prevent_default();
-                        menu.open.set(false);
+            <Provider value=MenuItemContext {
+                dismiss,
+            }>
+                {if as_child.get().unwrap_or_default() {
+                    children().into_any()
+                } else {
+                    view! {
+                        <Button
+                            disabled
+
+                            {..global_attrs_1}
+                            {..global_attrs_2}
+                        >
+                            {children()}
+                        </Button>
                     }
-                }
-                popovertarget=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
-                popovertargetaction=move || if dismiss.get() { Some("toggle") } else { None }
-                type="button"
-            >
-                {children()}
-            </button>
+                        .into_any()
+                }}
+            </Provider>
         </li>
     }
 }

@@ -7,8 +7,75 @@ fn Item() -> impl IntoView {
 }
 
 #[component]
+pub fn DropdownTriggersDialog() -> impl IntoView {
+    let open = RwSignal::new(false);
+
+    view! {
+        <Dialog open>
+            <DialogContent>"hey"</DialogContent>
+
+            <DropdownMenu>
+                <DropdownMenuTrigger>
+                    <Button>"Dialog Menu"</Button>
+                </DropdownMenuTrigger>
+                <MenuContent>
+                    <MenuItem>"Close dropdown"</MenuItem>
+                    <MenuItem dismiss=false>"Don't dismiss"</MenuItem>
+                    <Trigger>
+                        <MenuItem>"Implicit trigger"</MenuItem>
+                    </Trigger>
+                    <Trigger>
+                        <MenuItem>"Implicit no dismiss"</MenuItem>
+                    </Trigger>
+                    <MenuItem on:click={move |ev| {
+                        ev.prevent_default();
+                        open.set(true);
+                    }}>"Open with signal"</MenuItem>
+                    <MenuItem
+                        dismiss=false
+                        on:click={move |ev| {
+                            ev.prevent_default();
+                            open.set(true);
+                        }}
+                    >
+                        "Open with signal no dismiss"
+                    </MenuItem>
+                    <MenuItem as_child=true>
+                        <Button on:click={move |ev| {
+                            ev.prevent_default();
+                            open.set(true);
+                        }}>"Child open with signal"</Button>
+                    </MenuItem>
+                    <MenuItem dismiss=false as_child=true>
+                        <Button on:click={move |ev| {
+                            ev.prevent_default();
+                            open.set(true);
+                        }}>"Child open with signal no dismiss"</Button>
+                    </MenuItem>
+                </MenuContent>
+            </DropdownMenu>
+        </Dialog>
+    }
+}
+
+#[component]
 pub fn DebugDropdown() -> impl IntoView {
     let open = RwSignal::new(false);
+
+    let variations = [
+        ("top", "start"),
+        ("top", "center"),
+        ("top", "end"),
+        ("right", "start"),
+        ("right", "center"),
+        ("right", "end"),
+        ("bottom", "start"),
+        ("bottom", "center"),
+        ("bottom", "end"),
+        ("left", "start"),
+        ("left", "center"),
+        ("left", "end"),
+    ];
 
     view! {
         <h1 class="text-4xl font-semibold">"Dropdown Menu"</h1>
@@ -29,6 +96,7 @@ pub fn DebugDropdown() -> impl IntoView {
             </Trigger>
             <MenuContent>
                 <Item />
+                <MenuItem dismiss=false>"No dismiss"</MenuItem>
             </MenuContent>
         </DropdownMenu>
 
@@ -41,120 +109,19 @@ pub fn DebugDropdown() -> impl IntoView {
             </MenuContent>
         </DropdownMenu>
 
-        // top
+        <p>"Positioning"</p>
+        <For each=move || variations key=|_| "42" let(variation)>
+            <DropdownMenu>
+                <Trigger>
+                    <Button size="xs">{variation.0}" "{variation.1}</Button>
+                </Trigger>
+                <MenuContent side={variation.0} align={variation.1}>
+                    <Item />
+                </MenuContent>
+            </DropdownMenu>
+        </For>
 
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Top Start"</Button>
-            </Trigger>
-            <MenuContent side="top">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Top Center"</Button>
-            </Trigger>
-            <MenuContent align="center" side="top">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Top End"</Button>
-            </Trigger>
-            <MenuContent align="end" side="top">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        // right
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Right Start"</Button>
-            </Trigger>
-            <MenuContent side="right">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Right Center"</Button>
-            </Trigger>
-            <MenuContent align="center" side="right">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Right End"</Button>
-            </Trigger>
-            <MenuContent align="end" side="right">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        // bottom
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Bottom Start"</Button>
-            </Trigger>
-            <MenuContent>
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button size="sm">"Bottom Center"</Button>
-            </Trigger>
-            <MenuContent align="center">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Bottom End"</Button>
-            </Trigger>
-            <MenuContent align="end">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        // left
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Left Start"</Button>
-            </Trigger>
-            <MenuContent side="left">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Left Center"</Button>
-            </Trigger>
-            <MenuContent align="center" side="left">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <Trigger>
-                <Button>"Left End"</Button>
-            </Trigger>
-            <MenuContent align="end" side="left">
-                <Item />
-            </MenuContent>
-        </DropdownMenu>
+        <p>"Dialog Trigger"</p>
+        <DropdownTriggersDialog />
     }
 }
