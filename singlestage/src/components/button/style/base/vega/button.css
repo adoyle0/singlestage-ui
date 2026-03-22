@@ -6,6 +6,10 @@
     rounded-md
     text-sm;
 
+    &:active {
+      @apply translate-y-px;
+    }
+
     &:focus-visible {
       @apply ring-3;
     }
