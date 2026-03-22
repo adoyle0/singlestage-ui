@@ -11,13 +11,6 @@ pub fn DebugMenu() -> impl IntoView {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="/reactive-debug">
-                                        {icon!(icondata::BsJoystick)} <span>"Reactivity"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
                                 <Collapsible>
                                     <CollapsibleTrigger>
                                         <SidebarMenuButton>
