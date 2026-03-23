@@ -3,7 +3,11 @@ use singlestage::*;
 
 #[component]
 fn Item() -> impl IntoView {
-    view! { <MenuItem on:click=move |_| { leptos::logging::log!("hey") }>"Click me"</MenuItem> }
+    view! {
+        <DropdownMenuItem on:click=move |_| {
+            leptos::logging::log!("hey")
+        }>"Click me"</DropdownMenuItem>
+    }
 }
 
 #[component]
@@ -18,20 +22,20 @@ pub fn DropdownTriggersDialog() -> impl IntoView {
                 <DropdownMenuTrigger>
                     <Button>"Dialog Menu"</Button>
                 </DropdownMenuTrigger>
-                <MenuContent>
-                    <MenuItem>"Close dropdown"</MenuItem>
-                    <MenuItem dismiss=false>"Don't dismiss"</MenuItem>
-                    <Trigger>
-                        <MenuItem>"Implicit trigger"</MenuItem>
-                    </Trigger>
-                    <Trigger>
-                        <MenuItem>"Implicit no dismiss"</MenuItem>
-                    </Trigger>
-                    <MenuItem on:click={move |ev| {
+                <DropdownMenuContent>
+                    <DropdownMenuItem>"Close dropdown"</DropdownMenuItem>
+                    <DropdownMenuItem dismiss=false>"Don't dismiss"</DropdownMenuItem>
+                    <DialogTrigger>
+                        <DropdownMenuItem>"Implicit trigger"</DropdownMenuItem>
+                    </DialogTrigger>
+                    <DialogTrigger>
+                        <DropdownMenuItem>"Implicit no dismiss"</DropdownMenuItem>
+                    </DialogTrigger>
+                    <DropdownMenuItem on:click={move |ev| {
                         ev.prevent_default();
                         open.set(true);
-                    }}>"Open with signal"</MenuItem>
-                    <MenuItem
+                    }}>"Open with signal"</DropdownMenuItem>
+                    <DropdownMenuItem
                         dismiss=false
                         on:click={move |ev| {
                             ev.prevent_default();
@@ -39,20 +43,20 @@ pub fn DropdownTriggersDialog() -> impl IntoView {
                         }}
                     >
                         "Open with signal no dismiss"
-                    </MenuItem>
-                    <MenuItem as_child=true>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem as_child=true>
                         <Button on:click={move |ev| {
                             ev.prevent_default();
                             open.set(true);
                         }}>"Child open with signal"</Button>
-                    </MenuItem>
-                    <MenuItem dismiss=false as_child=true>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem dismiss=false as_child=true>
                         <Button on:click={move |ev| {
                             ev.prevent_default();
                             open.set(true);
                         }}>"Child open with signal no dismiss"</Button>
-                    </MenuItem>
-                </MenuContent>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
             </DropdownMenu>
         </Dialog>
     }
@@ -91,33 +95,33 @@ pub fn DebugDropdown() -> impl IntoView {
         <Switch checked=open />
 
         <DropdownMenu open dismissable=false>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button>"Signal"</Button>
-            </Trigger>
-            <MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
                 <Item />
-                <MenuItem dismiss=false>"No dismiss"</MenuItem>
-            </MenuContent>
+                <DropdownMenuItem dismiss=false>"No dismiss"</DropdownMenuItem>
+            </DropdownMenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button>"No dismiss"</Button>
-            </Trigger>
-            <MenuContent>
-                <MenuItem dismiss=false>"no dismiss"</MenuItem>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem dismiss=false>"no dismiss"</DropdownMenuItem>
+            </DropdownMenuContent>
         </DropdownMenu>
 
         <p>"Positioning"</p>
         <For each=move || variations key=|_| "42" let(variation)>
             <DropdownMenu>
-                <Trigger>
+                <DropdownMenuTrigger>
                     <Button size="xs">{variation.0}" "{variation.1}</Button>
-                </Trigger>
-                <MenuContent side={variation.0} align={variation.1}>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side={variation.0} align={variation.1}>
                     <Item />
-                </MenuContent>
+                </DropdownMenuContent>
             </DropdownMenu>
         </For>
 

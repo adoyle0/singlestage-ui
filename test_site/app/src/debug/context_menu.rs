@@ -15,12 +15,14 @@ pub fn DebugContextMenu() -> impl IntoView {
         </ul>
 
         <ContextMenu>
-            <Trigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+            <ContextMenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
                 "Right click here"
-            </Trigger>
-            <MenuContent>
-                <MenuItem on:click=move |_| { leptos::logging::log!("hey") }>"Click me"</MenuItem>
-            </MenuContent>
+            </ContextMenuTrigger>
+            <ContextMenuContent>
+                <ContextMenuItem on:click=move |_| {
+                    leptos::logging::log!("hey")
+                }>"Click me"</ContextMenuItem>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

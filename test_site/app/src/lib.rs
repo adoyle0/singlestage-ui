@@ -62,6 +62,7 @@ pub fn SidebarButton() -> impl IntoView {
 #[component]
 pub fn SidebarComponent() -> impl IntoView {
     let routes = StoredValue::new([
+        "All",
         "Button",
         "Checkbox",
         "Context Menu",
@@ -79,6 +80,20 @@ pub fn SidebarComponent() -> impl IntoView {
     view! {
         <SidebarProvider>
             <Sidebar>
+                <SidebarHeader>
+                    <a href="/">
+                        <h1 class="text-2xl font-semibold">
+                            "test_site"
+                            {if cfg!(feature = "csr") {
+                                " csr"
+                            } else if cfg!(feature = "ssr") {
+                                " ssr"
+                            } else {
+                                ""
+                            }}
+                        </h1>
+                    </a>
+                </SidebarHeader>
                 <SidebarContent>
                     <SidebarGroup>
                         <SidebarGroupLabel>"Components"</SidebarGroupLabel>
@@ -108,18 +123,6 @@ pub fn SidebarComponent() -> impl IntoView {
                     <SidebarTrigger>
                         <SidebarButton />
                     </SidebarTrigger>
-                    <a href="/">
-                        <h1 class="text-2xl font-semibold">
-                            "test_site"
-                            {if cfg!(feature = "csr") {
-                                " csr"
-                            } else if cfg!(feature = "ssr") {
-                                " ssr"
-                            } else {
-                                ""
-                            }}
-                        </h1>
-                    </a>
                 </header>
 
                 <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
@@ -149,7 +152,6 @@ pub fn App() -> impl IntoView {
         <Title text="test_site" />
 
         <ThemeProvider>
-
             <Router>
                 <Routes fallback=NotFound>
                     <ParentRoute path=StaticSegment("") view=SidebarComponent>

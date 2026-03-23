@@ -17,6 +17,7 @@ log = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 simple_logger = "*"
+# singlestage = { version = "0.4", features = ["nightly"] }
 singlestage = { path = "../singlestage", features = ["nightly"] }
 tauri = "*"
 tauri-build = "*"

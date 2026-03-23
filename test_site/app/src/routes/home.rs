@@ -3,5 +3,5 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Home() -> impl IntoView {
-    view! { <main class="mx-4 w-sm space-y-4">"harness"</main> }
+    view! {}
 }
