@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogNoCloseButtonExample() -> impl IntoView {
     view! {
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button variant="outline">"No Close Button"</Button>
-            </Trigger>
+            </DialogTrigger>
             <DialogContent close_button=false>
                 <DialogHeader>
                     <DialogTitle>"No Close Button"</DialogTitle>

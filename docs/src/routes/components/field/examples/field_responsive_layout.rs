@@ -12,7 +12,7 @@ pub fn FieldResponsiveLayoutExample() -> impl IntoView {
                     <FieldGroup>
                         <Field orientation="responsive">
                             <FieldContent>
-                                <Label label_for="name">"Name"</Label>
+                                <FieldLabel label_for="name">"Name"</FieldLabel>
                                 <FieldDescription>
                                     "Provide your full name for identification"
                                 </FieldDescription>
@@ -21,7 +21,7 @@ pub fn FieldResponsiveLayoutExample() -> impl IntoView {
                         </Field>
                         <Field orientation="responsive">
                             <FieldContent>
-                                <Label>"Message"</Label>
+                                <FieldLabel>"Message"</FieldLabel>
                                 <FieldDescription>
                                     "You can write your message here. Keep it short, preferably
                                     under 100 characters."

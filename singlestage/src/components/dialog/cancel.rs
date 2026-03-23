@@ -1,8 +1,8 @@
-use crate::DialogCancelContext;
-use leptos::{context::Provider, prelude::*};
+use crate::primitives::*;
+use leptos::prelude::*;
 
 /// Wraps Button that the user presses to dismiss the dialog.
 #[component]
 pub fn DialogCancel(children: Children) -> impl IntoView {
-    view! { <Provider value=DialogCancelContext {}>{children()}</Provider> }
+    view! { <DialogCancelPrimitive>{children()}</DialogCancelPrimitive> }
 }

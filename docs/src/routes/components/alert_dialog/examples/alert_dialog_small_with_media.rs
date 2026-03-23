@@ -5,26 +5,26 @@ use singlestage::*;
 pub fn AlertDialogSmallWithMediaExample() -> impl IntoView {
     view! {
         <AlertDialog>
-            <Trigger>
+            <AlertDialogTrigger>
                 <Button variant="outline">"Show Dialog"</Button>
-            </Trigger>
-            <DialogContent size="sm">
-                <DialogHeader>
-                    <DialogMedia>{icon!(icondata::LuBluetooth)}</DialogMedia>
-                    <DialogTitle>"Allow accessory to connect?"</DialogTitle>
-                    <DialogDescription>
+            </AlertDialogTrigger>
+            <AlertDialogContent size="sm">
+                <AlertDialogHeader>
+                    <AlertDialogMedia>{icon!(icondata::LuBluetooth)}</AlertDialogMedia>
+                    <AlertDialogTitle>"Allow accessory to connect?"</AlertDialogTitle>
+                    <AlertDialogDescription>
                         "Do you want to allow the USB accessory to connect to this device?"
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                    <DialogCancel>
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>
                         <Button>"Don't allow"</Button>
-                    </DialogCancel>
-                    <DialogAction>
+                    </AlertDialogCancel>
+                    <AlertDialogAction>
                         <Button>"Allow"</Button>
-                    </DialogAction>
-                </DialogFooter>
-            </DialogContent>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     }
 }

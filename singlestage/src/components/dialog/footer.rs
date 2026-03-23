@@ -1,4 +1,4 @@
-use crate::DialogContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Displays at the bottom of the dialog, contains calls to action.
@@ -118,6 +118,7 @@ pub fn DialogFooter(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -153,22 +154,12 @@ pub fn DialogFooter(
     };
 
     view! {
-        <footer
-            class=move || {
-                format!(
-                    "singlestage-dialog-footer{} {}",
-                    match dialog.alert {
-                        true => " singlestage-alert-dialog-footer",
-                        false => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <DialogFooterPrimitive
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </footer>
+        </DialogFooterPrimitive>
     }
 }

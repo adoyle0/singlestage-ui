@@ -1,5 +1,5 @@
-use crate::{Button, DialogCloseContext, DialogContext};
-use leptos::{context::Provider, prelude::*};
+use crate::primitives::*;
+use leptos::prelude::*;
 
 /// Contains content to be rendered in the main body of the dialog.
 #[component]
@@ -178,62 +178,14 @@ pub fn DialogContent(
     };
 
     view! {
-        <div class="singlestage-dialog">
-            <dialog
-                aria_describedby=move || dialog_context.described_by.get()
-                aria_labelledby=move || dialog_context.labelled_by.get()
-                aria_modal="true"
-                class=move || {
-                    format!(
-                        "singlestage-dialog-content{} {}",
-                        match size.get().unwrap_or_default().as_str() {
-                            "sm" | "small" => " singlestage-dialog-size-sm",
-                            _ => "",
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                }
-                node_ref=dialog_ref
-                on:click=move |ev| {
-                    if let Some(dialog) = dialog_ref.get_untracked() {
-                        let x = ev.x() as f64;
-                        let y = ev.y() as f64;
-                        let r = dialog.get_bounding_client_rect();
-                        let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
-                            && x <= (r.left() + r.width());
-                        if !r_clicked && !dialog_context.alert {
-                            dialog.close()
-                        }
-                    }
-                }
+        <DialogContentPrimitive
+            close_button
+            size
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {children()}
-                <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
-                    <Provider value=DialogCloseContext {}>
-                        <Button class="singlestage-dialog-close" variant="ghost" size="icon-sm">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-x-icon lucide-x"
-                            >
-                                <path d="M18 6 6 18" />
-                                <path d="m6 6 12 12" />
-                            </svg>
-                            <span class="sr-only">"Close"</span>
-                        </Button>
-                    </Provider>
-                </Show>
-            </dialog>
-        </div>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </DialogContentPrimitive>
     }
 }

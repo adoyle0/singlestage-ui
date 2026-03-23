@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogScrollableContentExample() -> impl IntoView {
     view! {
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button variant="outline">"Scrollable Content"</Button>
-            </Trigger>
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>"Scrollable Content"</DialogTitle>

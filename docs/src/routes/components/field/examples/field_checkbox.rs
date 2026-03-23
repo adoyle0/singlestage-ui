@@ -13,30 +13,33 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                 <FieldGroup class="gap-3">
                     <Field orientation="horizontal">
                         <Checkbox id="finder-pref-9k2-hard-disks-ljj" checked=true />
-                        <Label label_for="finder-pref-9k2-hard-disks-ljj" class="font-normal">
+                        <FieldLabel label_for="finder-pref-9k2-hard-disks-ljj" class="font-normal">
                             "Hard disks"
-                        </Label>
+                        </FieldLabel>
                     </Field>
                     <Field orientation="horizontal">
                         <Checkbox id="finder-pref-9k2-external-disks-1yg" />
-                        <Label label_for="finder-pref-9k2-external-disks-1yg" class="font-normal">
+                        <FieldLabel
+                            label_for="finder-pref-9k2-external-disks-1yg"
+                            class="font-normal"
+                        >
                             "External disks"
-                        </Label>
+                        </FieldLabel>
                     </Field>
                     <Field orientation="horizontal">
                         <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
-                        <Label label_for="finder-pref-9k2-cds-dvds-fzt" class="font-normal">
+                        <FieldLabel label_for="finder-pref-9k2-cds-dvds-fzt" class="font-normal">
                             "CDs, DVDs, and iPods"
-                        </Label>
+                        </FieldLabel>
                     </Field>
                     <Field orientation="horizontal">
                         <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
-                        <Label
+                        <FieldLabel
                             label_for="finder-pref-9k2-connected-servers-6l2"
                             class="font-normal"
                         >
                             "Connected servers"
-                        </Label>
+                        </FieldLabel>
                     </Field>
                 </FieldGroup>
             </FieldSet>
@@ -44,9 +47,9 @@ pub fn FieldCheckboxExample() -> impl IntoView {
             <Field orientation="horizontal">
                 <Checkbox id="finder-pref-9k2-sync-folders-nep" checked=true />
                 <FieldContent>
-                    <Label label_for="finder-pref-9k2-sync-folders-nep">
+                    <FieldLabel label_for="finder-pref-9k2-sync-folders-nep">
                         "Sync Desktop & Documents folders"
-                    </Label>
+                    </FieldLabel>
                     <FieldDescription>
                         "Your Desktop & Documents folders are being synced with iCloud Drive.
                         You can access them from other devices."

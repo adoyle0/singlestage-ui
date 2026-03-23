@@ -36,6 +36,7 @@ stores = ["dep:reactive_stores"]
 default = [
   "accordion",
   "alert",
+  "alert_dialog",
   "aspect_ratio",
   "avatar",
   "badge",
@@ -46,6 +47,7 @@ default = [
   "carousel",
   "checkbox",
   "collapsible",
+  "context_menu",
   "dialog",
   "dropdown",
   "empty",
@@ -80,6 +82,7 @@ default = [
 
 accordion = []
 alert = []
+alert_dialog = []
 aspect_ratio = []
 avatar = []
 badge = []
@@ -90,6 +93,7 @@ card = []
 carousel = []
 checkbox = ["field", "label"]
 collapsible = []
+context_menu = []
 dialog = []
 dropdown = ["popover"]
 empty = []

@@ -189,7 +189,8 @@ pub fn Sidebar(
         }
     });
 
-    let global_attrs_1 = view! {
+    // TODO: Hook this up
+    let _global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
@@ -208,7 +209,8 @@ pub fn Sidebar(
         />
     };
 
-    let global_attrs_2 = view! {
+    // TODO: Hook this up
+    let _global_attrs_2 = view! {
         <{..}
             itemprop=move || itemprop.get()
             itemref=move || itemref.get()

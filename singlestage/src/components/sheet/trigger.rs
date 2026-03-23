@@ -1,7 +1,7 @@
-use crate::TriggerContext;
-use leptos::{context::Provider, prelude::*};
+use crate::primitives::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn SheetTrigger(children: Children) -> impl IntoView {
-    view! { <Provider value=TriggerContext {}>{children()}</Provider> }
+    view! { <TriggerPrimitive>{children()}</TriggerPrimitive> }
 }

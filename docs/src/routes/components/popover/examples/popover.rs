@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn PopoverExample() -> impl IntoView {
     view! {
         <Popover>
-            <Trigger>
+            <PopoverTrigger>
                 <Button variant="outline">"Open popover"</Button>
-            </Trigger>
+            </PopoverTrigger>
             <PopoverContent class="w-80">
                 <form>
                     <FieldSet class="gap-4">
@@ -15,19 +15,19 @@ pub fn PopoverExample() -> impl IntoView {
                         <FieldDescription>"Set the dimensions for the layer."</FieldDescription>
                         <FieldGroup class="gap-2 [&_input]:max-w-48 [&_input]:h-8">
                             <Field orientation="horizontal">
-                                <Label>"Width"</Label>
+                                <FieldLabel>"Width"</FieldLabel>
                                 <Input value="100%" autofocus=true />
                             </Field>
                             <Field orientation="horizontal">
-                                <Label>"Max. width"</Label>
+                                <FieldLabel>"Max. width"</FieldLabel>
                                 <Input value="300px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <Label>"Height"</Label>
+                                <FieldLabel>"Height"</FieldLabel>
                                 <Input value="25px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <Label>"Max. height"</Label>
+                                <FieldLabel>"Max. height"</FieldLabel>
                                 <Input value="none" />
                             </Field>
                         </FieldGroup>

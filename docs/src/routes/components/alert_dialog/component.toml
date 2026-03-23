@@ -48,7 +48,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DialogAction"
+name = "AlertDialogAction"
 description = "Wraps a button that the user presses to acknowledge the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -56,7 +56,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DialogCancel"
+name = "AlertDialogCancel"
 description = "Wraps a button that the user presses to dismiss the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -64,7 +64,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DialogContent"
+name = "AlertDialogContent"
 description = "Contains content to be rendered in the main body of the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -77,7 +77,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DialogDescription"
+name = "AlertDialogDescription"
 description = "A short description/subheading describing dialog content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -85,7 +85,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DialogFooter"
+name = "AlertDialogFooter"
 description = """Displays at the bottom of the dialog, contains calls to action."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -93,7 +93,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DialogHeader"
+name = "AlertDialogHeader"
 description = "Contains the dialog title and a description to be rendered in the open dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -101,7 +101,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "DialogMedia"
+name = "AlertDialogMedia"
 description = """Contains a media element such as an icon or image to render in the header of the \
 dialog."""
 extra = """Implements <a class="singlestage-link" \
@@ -113,7 +113,7 @@ attrs = [
 ]
 
 [[references]]
-name = "DialogTitle"
+name = "AlertDialogTitle"
 description = "A title describing dialog content."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -121,7 +121,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "Trigger"
+name = "AlertDialogTrigger"
 description = "Used to wrap other elements and trigger the dialog on click."
 extra = "Note: the slot attribute is required."
 attrs = []

@@ -14,14 +14,16 @@ pub fn FieldExample() -> impl IntoView {
                         </FieldDescription>
                         <FieldGroup>
                             <Field>
-                                <Label label_for="checkout-7j9-card-name-43j">"Name on Card"</Label>
+                                <FieldLabel label_for="checkout-7j9-card-name-43j">
+                                    "Name on Card"
+                                </FieldLabel>
                                 <Input id="checkout-7j9-card-name-43j" placeholder="Evil Rabbit" />
 
                             </Field>
                             <Field>
-                                <Label label_for="checkout-7j9-card-number-uw1">
+                                <FieldLabel label_for="checkout-7j9-card-number-uw1">
                                     "Card Number"
-                                </Label>
+                                </FieldLabel>
                                 <Input
                                     id="checkout-7j9-card-number-uw1"
                                     placeholder="1234 5678 9012 3456"
@@ -33,7 +35,9 @@ pub fn FieldExample() -> impl IntoView {
                             </Field>
                             <div class="grid grid-cols-3 gap-4">
                                 <Field>
-                                    <Label label_for="checkout-exp-month-ts6">"Month"</Label>
+                                    <FieldLabel label_for="checkout-exp-month-ts6">
+                                        "Month"
+                                    </FieldLabel>
                                     <Select placeholder="MM" id="checkout-exp-month-ts6">
                                         <SelectOption value="01">"01"</SelectOption>
                                         <SelectOption value="02">"02"</SelectOption>
@@ -50,7 +54,9 @@ pub fn FieldExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <Label label_for="checkout-7j9-exp-year-f59">"Year"</Label>
+                                    <FieldLabel label_for="checkout-7j9-exp-year-f59">
+                                        "Year"
+                                    </FieldLabel>
                                     <Select id="checkout-7j9-exp-year-f59" placeholder="YYYY">
                                         <SelectOption value="2024">"2024"</SelectOption>
                                         <SelectOption value="2025">"2025"</SelectOption>
@@ -61,7 +67,7 @@ pub fn FieldExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <Label label_for="checkout-7j9-cvv">"CVV"</Label>
+                                    <FieldLabel label_for="checkout-7j9-cvv">"CVV"</FieldLabel>
                                     <Input id="checkout-7j9-cvv" placeholder="123" />
                                 </Field>
                             </div>
@@ -76,19 +82,21 @@ pub fn FieldExample() -> impl IntoView {
                         <FieldGroup>
                             <Field orientation="horizontal">
                                 <Checkbox id="checkout-7j9-same-as-shipping-wgm" checked=true />
-                                <Label
+                                <FieldLabel
                                     label_for="checkout-7j9-same-as-shipping-wgm"
                                     class="font-normal"
                                 >
                                     "Same as shipping address"
-                                </Label>
+                                </FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
                     <FieldSet>
                         <FieldGroup>
                             <Field>
-                                <Label label_for="checkout-7j9-optional-comments">"Comments"</Label>
+                                <FieldLabel label_for="checkout-7j9-optional-comments">
+                                    "Comments"
+                                </FieldLabel>
                                 <Textarea
                                     id="checkout-7j9-optional-comments"
                                     placeholder="Add any additional comments"

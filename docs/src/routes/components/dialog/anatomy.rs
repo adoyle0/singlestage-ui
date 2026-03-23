@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogAnatomy -> impl IntoView {
     view!{
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button />
-            </Trigger>
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle />

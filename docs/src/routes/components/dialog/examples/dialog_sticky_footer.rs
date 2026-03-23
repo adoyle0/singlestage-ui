@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogStickyFooterExample() -> impl IntoView {
     view! {
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button variant="outline">"Sticky Footer"</Button>
-            </Trigger>
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>"Sticky Footer"</DialogTitle>

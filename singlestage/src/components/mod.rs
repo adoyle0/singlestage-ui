@@ -8,6 +8,11 @@ pub mod alert;
 #[cfg(feature = "alert")]
 pub use alert::*;
 
+#[cfg(feature = "alert_dialog")]
+pub mod alert_dialog;
+#[cfg(feature = "alert_dialog")]
+pub use alert_dialog::*;
+
 #[cfg(feature = "aspect_ratio")]
 pub mod aspect_ratio;
 #[cfg(feature = "aspect_ratio")]
@@ -57,6 +62,11 @@ pub use checkbox::*;
 pub mod collapsible;
 #[cfg(feature = "collapsible")]
 pub use collapsible::*;
+
+#[cfg(feature = "context_menu")]
+pub mod context_menu;
+#[cfg(feature = "context_menu")]
+pub use context_menu::*;
 
 #[cfg(feature = "dialog")]
 pub mod dialog;

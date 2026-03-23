@@ -6,7 +6,7 @@ pub fn FieldGroupExample() -> impl IntoView {
     view! {
         <FieldGroup class="w-full max-w-xs">
             <FieldSet>
-                <Label>"Responses"</Label>
+                <FieldLabel>"Responses"</FieldLabel>
                 <FieldDescription>
                     "Get notified when ChatGPT responds to requests that take time, like
                     research or image generation."
@@ -15,16 +15,16 @@ pub fn FieldGroupExample() -> impl IntoView {
                     <CheckboxGroup>
                         <Field orientation="horizontal">
                             <Checkbox id="push" checked=true disabled=true />
-                            <Label label_for="push" class="font-normal">
+                            <FieldLabel label_for="push" class="font-normal">
                                 "Push notifications"
-                            </Label>
+                            </FieldLabel>
                         </Field>
                     </CheckboxGroup>
                 </FieldGroup>
             </FieldSet>
             <Separator />
             <FieldSet>
-                <Label>"Tasks"</Label>
+                <FieldLabel>"Tasks"</FieldLabel>
                 <FieldDescription>
                     "Get notified when tasks you've created have updates. "
                     <a href="#">"Manage tasks"</a>
@@ -33,15 +33,15 @@ pub fn FieldGroupExample() -> impl IntoView {
                     <CheckboxGroup>
                         <Field orientation="horizontal">
                             <Checkbox id="push-tasks" />
-                            <Label label_for="push-tasks" class="font-normal">
+                            <FieldLabel label_for="push-tasks" class="font-normal">
                                 "Push notifications"
-                            </Label>
+                            </FieldLabel>
                         </Field>
                         <Field orientation="horizontal">
                             <Checkbox id="email-tasks" />
-                            <Label label_for="email-tasks" class="font-normal">
+                            <FieldLabel label_for="email-tasks" class="font-normal">
                                 "Email notifications"
-                            </Label>
+                            </FieldLabel>
                         </Field>
                     </CheckboxGroup>
                 </FieldGroup>

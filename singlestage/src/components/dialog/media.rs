@@ -1,3 +1,4 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Contains a media element such as an icon or image to render in the header of the dialog.
@@ -154,22 +155,13 @@ pub fn DialogMedia(
     };
 
     view! {
-        <div
-            class=move || {
-                format!(
-                    "singlestage-alert-dialog-media{} {}",
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-alert-dialog-media-destructive",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <DialogMediaPrimitive
+            variant
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </div>
+        </DialogMediaPrimitive>
     }
 }

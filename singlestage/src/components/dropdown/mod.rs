@@ -1,22 +1,22 @@
 mod checkbox;
 mod content;
-mod context_menu;
-mod dropdown_menu;
 mod group;
 mod item;
+mod menu;
 mod radio;
 mod shortcut;
 mod sub;
+mod trigger;
 
 pub use checkbox::*;
 pub use content::*;
-pub use context_menu::*;
-pub use dropdown_menu::*;
 pub use group::*;
 pub use item::*;
+pub use menu::*;
 pub use radio::*;
 pub use shortcut::*;
 pub use sub::*;
+pub use trigger::*;
 
 use crate::Reactive;
 use leptos::prelude::*;

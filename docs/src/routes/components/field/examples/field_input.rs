@@ -7,14 +7,14 @@ pub fn FieldInputExample() -> impl IntoView {
         <FieldSet class="w-full max-w-xs">
             <FieldGroup>
                 <Field>
-                    <Label label_for="username">"Username"</Label>
+                    <FieldLabel label_for="username">"Username"</FieldLabel>
                     <Input id="username" input_type="text" placeholder="Max Leiter" />
                     <FieldDescription>
                         "Choose a unique username for your account."
                     </FieldDescription>
                 </Field>
                 <Field>
-                    <Label label_for="password">"Password"</Label>
+                    <FieldLabel label_for="password">"Password"</FieldLabel>
                     <FieldDescription>"Must be at least 8 characters long."</FieldDescription>
                     <Input
                         id="password"

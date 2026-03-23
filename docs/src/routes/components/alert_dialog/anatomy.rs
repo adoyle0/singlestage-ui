@@ -5,20 +5,20 @@ use singlestage::*;
 pub fn AlertDialogAnatomy -> impl IntoView {
     view!{
         <AlertDialog>
-            <Trigger>
+            <AlertDialogTrigger>
                 <Button />
-            </Trigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogMedia />
-                    <DialogTitle />
-                    <DialogDescription />
-                </DialogHeader>
-                <DialogFooter>
-                    <DialogCancel />
-                    <DialogAction />
-                </DialogFooter>
-            </DialogContent>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogMedia />
+                    <AlertDialogTitle />
+                    <AlertDialogDescription />
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel />
+                    <AlertDialogAction />
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     }
 }

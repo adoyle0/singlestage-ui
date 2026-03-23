@@ -5,7 +5,7 @@ use singlestage::*;
 pub fn FieldSelectExample() -> impl IntoView {
     view! {
         <Field class="w-full max-w-xs">
-            <Label>"Department"</Label>
+            <FieldLabel>"Department"</FieldLabel>
             <Select placeholder="Choose department">
                 <SelectOption value="engineering">"Engineering"</SelectOption>
                 <SelectOption value="design">"Design"</SelectOption>

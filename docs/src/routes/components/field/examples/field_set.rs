@@ -9,16 +9,16 @@ pub fn FieldSetExample() -> impl IntoView {
             <FieldDescription>"We need your address to deliver your order."</FieldDescription>
             <FieldGroup>
                 <Field>
-                    <Label label_for="street">"Street Address"</Label>
+                    <FieldLabel label_for="street">"Street Address"</FieldLabel>
                     <Input id="street" input_type="text" placeholder="123 Main St" />
                 </Field>
                 <div class="grid grid-cols-2 gap-4">
                     <Field>
-                        <Label label_for="city">City</Label>
+                        <FieldLabel label_for="city">City</FieldLabel>
                         <Input id="city" input_type="text" placeholder="New York" />
                     </Field>
                     <Field>
-                        <Label label_for="zip">Postal Code</Label>
+                        <FieldLabel label_for="zip">Postal Code</FieldLabel>
                         <Input id="zip" input_type="text" placeholder="90502" />
                     </Field>
                 </div>

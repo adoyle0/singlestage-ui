@@ -22,6 +22,3 @@ pub struct PopoverContext {
     pub open: Reactive<bool>,
     pub trigger_id: RwSignal<String>,
 }
-
-#[derive(Clone)]
-pub struct TriggerContext {}

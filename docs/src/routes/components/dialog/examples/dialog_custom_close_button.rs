@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogCustomCloseButtonExample() -> impl IntoView {
     view! {
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button variant="outline">"Share"</Button>
-            </Trigger>
+            </DialogTrigger>
             <DialogContent class="sm:max-w-md">
                 <DialogHeader>
                     <DialogTitle>"Share link"</DialogTitle>

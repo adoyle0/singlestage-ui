@@ -5,27 +5,29 @@ use singlestage::*;
 pub fn AlertDialogDestructiveExample() -> impl IntoView {
     view! {
         <AlertDialog>
-            <Trigger>
+            <AlertDialogTrigger>
                 <Button variant="destructive">"Delete Chat"</Button>
-            </Trigger>
-            <DialogContent size="sm">
-                <DialogHeader>
-                    <DialogMedia variant="destructive">{icon!(icondata::LuTrash2)}</DialogMedia>
-                    <DialogTitle>"Delete chat?"</DialogTitle>
-                    <DialogDescription>
+            </AlertDialogTrigger>
+            <AlertDialogContent size="sm">
+                <AlertDialogHeader>
+                    <AlertDialogMedia variant="destructive">
+                        {icon!(icondata::LuTrash2)}
+                    </AlertDialogMedia>
+                    <AlertDialogTitle>"Delete chat?"</AlertDialogTitle>
+                    <AlertDialogDescription>
                         "This will permanently delete this chat conversation. View "
                         <a href="#">"Settings"</a>
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                    <DialogCancel>
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>
                         <Button variant="ghost">"Cancel"</Button>
-                    </DialogCancel>
-                    <DialogAction>
+                    </AlertDialogCancel>
+                    <AlertDialogAction>
                         <Button variant="destructive">"Delete"</Button>
-                    </DialogAction>
-                </DialogFooter>
-            </DialogContent>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     }
 }

@@ -7,7 +7,7 @@ pub fn FieldTextareaExample() -> impl IntoView {
         <FieldSet class="w-full max-w-xs">
             <FieldGroup>
                 <Field>
-                    <Label label_for="feedback">"Feedback"</Label>
+                    <FieldLabel label_for="feedback">"Feedback"</FieldLabel>
                     <Textarea
                         id="feedback"
                         placeholder="Your feedback helps us improve..."

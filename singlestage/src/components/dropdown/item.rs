@@ -1,14 +1,9 @@
-use crate::{Button, Reactive};
-use leptos::{context::Provider, prelude::*};
+use crate::{Reactive, primitives::*};
+use leptos::prelude::*;
 
-#[derive(Clone)]
-pub struct MenuItemContext {
-    pub dismiss: Reactive<bool>,
-}
-
-/// Contains a menu item.
+/// Contains a dropdown menu item.
 #[component]
-pub fn MenuItem(
+pub fn DropdownMenuItem(
     children: Children,
 
     #[prop(optional, into)] as_child: MaybeProp<bool>,
@@ -140,6 +135,7 @@ pub fn MenuItem(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -174,44 +170,18 @@ pub fn MenuItem(
     };
 
     view! {
-        <li
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-item{}{} {}",
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-dropdown-menu-item-destructive",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            role="menuitem"
-            value=move || value.get()
-        >
-            <Provider value=MenuItemContext {
-                dismiss,
-            }>
-                {if as_child.get().unwrap_or_default() {
-                    children().into_any()
-                } else {
-                    view! {
-                        <Button
-                            disabled
+        <MenuItemPrimitive
+            as_child
+            disabled
+            dismiss
+            inset
+            variant
+            value
 
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                        >
-                            {children()}
-                        </Button>
-                    }
-                        .into_any()
-                }}
-            </Provider>
-        </li>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </MenuItemPrimitive>
     }
 }

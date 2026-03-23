@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn DialogExample() -> impl IntoView {
     view! {
         <Dialog>
-            <Trigger>
+            <DialogTrigger>
                 <Button variant="outline">"Open Dialog"</Button>
-            </Trigger>
+            </DialogTrigger>
             <DialogContent class="sm:max-w-sm">
                 <DialogHeader>
                     <DialogTitle>"Edit profile"</DialogTitle>
@@ -19,11 +19,11 @@ pub fn DialogExample() -> impl IntoView {
                 <form>
                     <FieldGroup>
                         <Field>
-                            <Label label_for="name-1">"Name"</Label>
+                            <FieldLabel label_for="name-1">"Name"</FieldLabel>
                             <Input id="name-1" name="name" value="Pedro Duarte" />
                         </Field>
                         <Field>
-                            <Label label_for="username-1">"Username"</Label>
+                            <FieldLabel label_for="username-1">"Username"</FieldLabel>
                             <Input id="username-1" name="username" value="@peduarte" />
                         </Field>
                     </FieldGroup>

@@ -11,7 +11,7 @@ pub fn FieldChoiceCardExample() -> impl IntoView {
                     "Select the compute environment for your cluster."
                 </FieldDescription>
                 <RadioGroup value="kubernetes">
-                    <Label label_for="kubernetes-r2h">
+                    <FieldLabel label_for="kubernetes-r2h">
                         <Field orientation="horizontal">
                             <FieldContent>
                                 <FieldTitle>"Kubernetes"</FieldTitle>
@@ -21,8 +21,8 @@ pub fn FieldChoiceCardExample() -> impl IntoView {
                             </FieldContent>
                             <Radio value="kubernetes" id="kubernetes-r2h" />
                         </Field>
-                    </Label>
-                    <Label label_for="vm-z4k">
+                    </FieldLabel>
+                    <FieldLabel label_for="vm-z4k">
                         <Field orientation="horizontal">
                             <FieldContent>
                                 <FieldTitle>"Virtual Machine"</FieldTitle>
@@ -32,7 +32,7 @@ pub fn FieldChoiceCardExample() -> impl IntoView {
                             </FieldContent>
                             <Radio value="vm" id="vm-z4k" />
                         </Field>
-                    </Label>
+                    </FieldLabel>
                 </RadioGroup>
             </FieldSet>
         </FieldGroup>

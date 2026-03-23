@@ -109,7 +109,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "Label"
+name = "FieldLabel"
 description = "A styled label associated with the input for a Field."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

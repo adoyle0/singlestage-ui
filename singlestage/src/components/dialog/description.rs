@@ -1,4 +1,4 @@
-use crate::DialogContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// A short description/subheading describing dialog content.
@@ -118,6 +118,7 @@ pub fn DialogDescription(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -153,22 +154,12 @@ pub fn DialogDescription(
     };
 
     view! {
-        <p
-            class=move || {
-                format!(
-                    "singlestage-dialog-description{} {}",
-                    match dialog.alert {
-                        true => " singlestage-alert-dialog-description",
-                        false => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <DialogDescriptionPrimitive
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </p>
+        </DialogDescriptionPrimitive>
     }
 }

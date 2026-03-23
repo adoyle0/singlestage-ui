@@ -55,14 +55,14 @@ pub fn FieldErrorsExample() -> impl IntoView {
             <FieldSet>
                 <FieldGroup>
                     <Field>
-                        <Label>"Username *"</Label>
+                        <FieldLabel>"Username *"</FieldLabel>
                         <Show when=move || username_invalid.get()>
                             <FieldError>"Username is required"</FieldError>
                         </Show>
                         <Input invalid=username_invalid on:input=username_validate />
                     </Field>
                     <Field>
-                        <Label>"Password *"</Label>
+                        <FieldLabel>"Password *"</FieldLabel>
                         <FieldError errors=password_errors />
                         <Input
                             input_type="password"

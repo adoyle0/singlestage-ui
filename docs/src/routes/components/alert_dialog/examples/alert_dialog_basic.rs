@@ -5,26 +5,26 @@ use singlestage::*;
 pub fn AlertDialogBasicExample() -> impl IntoView {
     view! {
         <AlertDialog>
-            <Trigger>
+            <AlertDialogTrigger>
                 <Button variant="outline">"Show Dialog"</Button>
-            </Trigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>"Are you absolutely sure?"</DialogTitle>
-                    <DialogDescription>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>"Are you absolutely sure?"</AlertDialogTitle>
+                    <AlertDialogDescription>
                         "This action cannot be undone. This will permanently delete your
                         account and remove your data from our servers."
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                    <DialogCancel>
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>
                         <Button>"Cancel"</Button>
-                    </DialogCancel>
-                    <DialogAction>
+                    </AlertDialogCancel>
+                    <AlertDialogAction>
                         <Button>"Continue"</Button>
-                    </DialogAction>
-                </DialogFooter>
-            </DialogContent>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     }
 }

@@ -1,15 +1,21 @@
-use crate::{DialogContext, Reactive};
+use crate::{Button, DialogCloseContext, DialogContext};
 use leptos::{context::Provider, prelude::*};
 
-/// Contains all the parts of a Dialog component.
+/// Contains content to be rendered in the main body of the dialog.
 #[component]
-pub fn AlertDialog(
+pub fn DialogContentPrimitive(
     children: Children,
 
-    /// Reactive signal that can remotely control the open state of the popover **but is not
-    /// coupled to the actual open state of the popover**
+    /// Toggles whether or not a close button should appear in the top right corner of the dialog.
+    ///
+    /// Defaults to `true` for `Dialog` and `false` for `AlertDialog`
     #[prop(optional, into)]
-    open: Reactive<bool>,
+    close_button: MaybeProp<bool>,
+    /// Set the size of dialog to render.
+    ///
+    /// Accepted values are "sm"
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -116,18 +122,27 @@ pub fn AlertDialog(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = DialogContext {
-        alert: true,
-        open,
-        ..Default::default()
-    };
+    let dialog_context = expect_context::<DialogContext>();
+    let dialog_ref = NodeRef::<leptos::html::Dialog>::new();
+
+    Effect::new(move || {
+        if let Some(dialog) = dialog_ref.get_untracked() {
+            match dialog_context.open.get() {
+                true => {
+                    let _ = dialog.show_modal();
+                }
+                false => {
+                    dialog.close();
+                }
+            }
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -163,8 +178,62 @@ pub fn AlertDialog(
     };
 
     view! {
-        <div {..global_attrs_1} {..global_attrs_2}>
-            <Provider value=context>{children()}</Provider>
+        <div class="singlestage-dialog">
+            <dialog
+                aria_describedby=move || dialog_context.described_by.get()
+                aria_labelledby=move || dialog_context.labelled_by.get()
+                aria_modal="true"
+                class=move || {
+                    format!(
+                        "singlestage-dialog-content{} {}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" | "small" => " singlestage-dialog-size-sm",
+                            _ => "",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                node_ref=dialog_ref
+                on:click=move |ev| {
+                    if let Some(dialog) = dialog_ref.get_untracked() {
+                        let x = ev.x() as f64;
+                        let y = ev.y() as f64;
+                        let r = dialog.get_bounding_client_rect();
+                        let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
+                            && x <= (r.left() + r.width());
+                        if !r_clicked && !dialog_context.alert {
+                            dialog.close()
+                        }
+                    }
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+                <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
+                    <Provider value=DialogCloseContext {}>
+                        <Button class="singlestage-dialog-close" variant="ghost" size="icon-sm">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-x-icon lucide-x"
+                            >
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                            <span class="sr-only">"Close"</span>
+                        </Button>
+                    </Provider>
+                </Show>
+            </dialog>
         </div>
     }
 }

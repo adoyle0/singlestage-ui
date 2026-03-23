@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn PopoverAnatomy() -> impl IntoView {
     view! {
         <Popover>
-            <Trigger>
+            <PopoverTrigger>
                 <Button />
-            </Trigger>
+            </PopoverTrigger>
             <PopoverContent>
                 <PopoverHeader>
                     <PopoverTitle />

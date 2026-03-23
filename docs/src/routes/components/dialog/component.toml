@@ -100,7 +100,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "Trigger"
+name = "DialogTrigger"
 description = "Used to wrap other elements and trigger the dialog on click."
 extra = "Note: the slot attribute is required."
 attrs = []
