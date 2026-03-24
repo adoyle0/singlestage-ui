@@ -9,13 +9,13 @@ pub fn ContextBasicExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>"Back"</MenuItem>
-                    <MenuItem disabled=true>"Forward"</MenuItem>
-                    <MenuItem>"Reload"</MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuItem>"Back"</ContextMenuItem>
+                    <ContextMenuItem disabled=true>"Forward"</ContextMenuItem>
+                    <ContextMenuItem>"Reload"</ContextMenuItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

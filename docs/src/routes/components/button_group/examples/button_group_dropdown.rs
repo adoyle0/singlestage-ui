@@ -7,31 +7,37 @@ pub fn ButtonGroupDropdownExample() -> impl IntoView {
         <ButtonGroup>
             <Button variant="outline">"Follow"</Button>
             <DropdownMenu>
-                <Trigger>
+                <DropdownMenuTrigger>
                     <Button variant="outline" class="!px-2">
                         {icon!(icondata::LuChevronDown)}
                     </Button>
-                </Trigger>
-                <MenuContent align="end">
-                    <MenuGroup>
-                        <MenuItem>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuGroup>
+                        <DropdownMenuItem>
                             {icon!(icondata::BiVolumeMuteRegular)} "Mute Conversation"
-                        </MenuItem>
-                        <MenuItem>{icon!(icondata::LuCheck)} "Mark as Read"</MenuItem>
-                        <MenuItem>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            {icon!(icondata::LuCheck)} "Mark as Read"
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
                             {icon!(icondata::FiAlertTriangle)} "Report Conversation"
-                        </MenuItem>
-                        <MenuItem>{icon!(icondata::LuUserX)} "Block User"</MenuItem>
-                        <MenuItem>{icon!(icondata::LuShare)} "Share Conversation"</MenuItem>
-                        <MenuItem>{icon!(icondata::LuCopy)} "Copy Conversation"</MenuItem>
-                    </MenuGroup>
-                    <Separator />
-                    <MenuGroup>
-                        <MenuItem variant="destructive">
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>{icon!(icondata::LuUserX)} "Block User"</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            {icon!(icondata::LuShare)} "Share Conversation"
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            {icon!(icondata::LuCopy)} "Copy Conversation"
+                        </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                        <DropdownMenuItem variant="destructive">
                             {icon!(icondata::LuTrash)}"Delete Conversation"
-                        </MenuItem>
-                    </MenuGroup>
-                </MenuContent>
+                        </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                </DropdownMenuContent>
             </DropdownMenu>
         </ButtonGroup>
     }

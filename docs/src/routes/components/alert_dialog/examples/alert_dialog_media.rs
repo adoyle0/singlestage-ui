@@ -5,26 +5,26 @@ use singlestage::*;
 pub fn AlertDialogMediaExample() -> impl IntoView {
     view! {
         <AlertDialog>
-            <Trigger>
+            <AlertDialogTrigger>
                 <Button variant="outline">"Share Project"</Button>
-            </Trigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogMedia>{icon!(icondata::LuCircleFadingPlus)}</DialogMedia>
-                    <DialogTitle>"Share this project?"</DialogTitle>
-                    <DialogDescription>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogMedia>{icon!(icondata::LuCircleFadingPlus)}</AlertDialogMedia>
+                    <AlertDialogTitle>"Share this project?"</AlertDialogTitle>
+                    <AlertDialogDescription>
                         "Anyone with the link will be able to view and edit this project."
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                    <DialogCancel>
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>
                         <Button>"Cancel"</Button>
-                    </DialogCancel>
-                    <DialogAction>
+                    </AlertDialogCancel>
+                    <AlertDialogAction>
                         <Button>"Share"</Button>
-                    </DialogAction>
-                </DialogFooter>
-            </DialogContent>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
         </AlertDialog>
     }
 }

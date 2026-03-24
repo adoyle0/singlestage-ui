@@ -30,16 +30,15 @@ pub fn ItemDropdownExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button variant="outline">"Select" {icon!(icondata::LuChevronDown)}</Button>
-            </Trigger>
-            <MenuContent class="w-48" align="center">
+            </DropdownMenuTrigger>
+            <DropdownMenuContent class="w-48" align="center">
                 <For each=move || people.get() key=|person| person.username.clone() let(person)>
                     {
                         let username = person.username.clone();
-
                         view! {
-                            <MenuItem class="p-0">
+                            <DropdownMenuItem class="p-0">
                                 <Item size="xs" class="w-full">
                                     <ItemMedia>
                                         <Avatar class="size-[--spacing(6.5)]">
@@ -56,11 +55,11 @@ pub fn ItemDropdownExample() -> impl IntoView {
                                         </ItemDescription>
                                     </ItemContent>
                                 </Item>
-                            </MenuItem>
+                            </DropdownMenuItem>
                         }
                     }
                 </For>
-            </MenuContent>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

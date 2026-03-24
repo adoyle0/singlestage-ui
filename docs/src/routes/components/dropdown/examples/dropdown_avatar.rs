@@ -5,23 +5,23 @@ use singlestage::*;
 pub fn DropdownAvatarExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button variant="ghost" size="icon" class="rounded-full">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
                         <AvatarFallback>"LR"</AvatarFallback>
                     </Avatar>
                 </Button>
-            </Trigger>
-            <MenuContent align="end">
-                <MenuGroup>
-                    <MenuItem>{icon!(icondata::LuBadgeCheck)} "Account"</MenuItem>
-                    <MenuItem>{icon!(icondata::LuCreditCard)} "Billing"</MenuItem>
-                    <MenuItem>{icon!(icondata::LuBell)} "Notifications"</MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuItem>{icon!(icondata::LuLogOut)} "Sign Out"</MenuItem>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>{icon!(icondata::LuBadgeCheck)} "Account"</DropdownMenuItem>
+                    <DropdownMenuItem>{icon!(icondata::LuCreditCard)} "Billing"</DropdownMenuItem>
+                    <DropdownMenuItem>{icon!(icondata::LuBell)} "Notifications"</DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>{icon!(icondata::LuLogOut)} "Sign Out"</DropdownMenuItem>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

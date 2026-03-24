@@ -6,32 +6,32 @@ pub fn ContextMenuAnatomy() -> impl IntoView {
     view! {
         <ContextMenu>
             <ContextMenuTrigger />
-            <MenuContent>
-                <MenuGroup>
-                    <Label />
-                    <MenuItem>
-                        <MenuShortcut />
-                    </MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuSub>
-                    <MenuSubTrigger />
-                    <MenuSubContent>
-                        <MenuGroup>
-                            <CheckboxItem />
-                            <CheckboxItem />
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <RadioGroup>
-                                <RadioItem />
-                                <RadioItem />
-                                <RadioItem />
-                            </RadioGroup>
-                        </MenuGroup>
-                    </MenuSubContent>
-                </MenuSub>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuLabel />
+                    <ContextMenuItem>
+                        <ContextMenuShortcut />
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuSub>
+                    <ContextMenuSubTrigger />
+                    <ContextMenuSubContent>
+                        <ContextMenuGroup>
+                            <ContextMenuCheckboxItem />
+                            <ContextMenuCheckboxItem />
+                        </ContextMenuGroup>
+                        <ContextMenuSeparator />
+                        <ContextMenuGroup>
+                            <ContextMenuRadioGroup>
+                                <ContextMenuRadioItem />
+                                <ContextMenuRadioItem />
+                                <ContextMenuRadioItem />
+                            </ContextMenuRadioGroup>
+                        </ContextMenuGroup>
+                    </ContextMenuSubContent>
+                </ContextMenuSub>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

@@ -1,4 +1,4 @@
-use crate::{PopoverMenuContext, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone, Default)]
@@ -117,11 +117,11 @@ pub fn ContextMenu(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = PopoverMenuContext {
+    let popover_context = PopoverMenuContext {
         dismissable: Reactive::new(true),
         ..Default::default()
     };
-    let context_menu = ContextMenuContext {
+    let menu_context = ContextMenuContext {
         ..Default::default()
     };
 
@@ -171,8 +171,8 @@ pub fn ContextMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context_menu>
-                <Provider value=context>{children()}</Provider>
+            <Provider value=menu_context>
+                <Provider value=popover_context>{children()}</Provider>
             </Provider>
         </div>
     }

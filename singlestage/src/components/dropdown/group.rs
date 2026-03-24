@@ -1,9 +1,9 @@
-use crate::PopoverMenuGroupContext;
-use leptos::{context::Provider, prelude::*};
+use crate::primitives::*;
+use leptos::prelude::*;
 
 /// Contains multiple items.
 #[component]
-pub fn MenuGroup(
+pub fn DropdownMenuGroup(
     children: Children,
 
     // GLOBAL ATTRIBUTES
@@ -108,15 +108,12 @@ pub fn MenuGroup(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let heading_id = RwSignal::new(String::new());
-
-    let context = PopoverMenuGroupContext { heading_id };
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,17 +148,12 @@ pub fn MenuGroup(
     };
 
     view! {
-        <div
-            aria_labelledby=move || heading_id.get()
-            class=move || {
-                format!("singlestage-dropdown-menu-group {}", class.get().unwrap_or_default())
-            }
-            role="group"
+        <MenuGroupPrimitive
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
-        </div>
+            {children()}
+        </MenuGroupPrimitive>
     }
 }

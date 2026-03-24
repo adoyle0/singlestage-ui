@@ -171,6 +171,8 @@ pub fn DropdownMenuItem(
 
     view! {
         <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::Item
+
             as_child
             disabled
             dismiss

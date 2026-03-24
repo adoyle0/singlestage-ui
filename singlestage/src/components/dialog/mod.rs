@@ -19,12 +19,3 @@ pub use header::*;
 pub use media::*;
 pub use title::*;
 pub use trigger::*;
-
-use crate::Reactive;
-use leptos::prelude::*;
-
-#[derive(Clone)]
-pub struct DialogCancelContext {}
-
-#[derive(Clone)]
-pub struct DialogCloseContext {}

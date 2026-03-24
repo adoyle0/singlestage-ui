@@ -5,33 +5,35 @@ use singlestage::*;
 pub fn DropdownSubExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button variant="outline">"Open"</Button>
-            </Trigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>"Team"</MenuItem>
-                    <MenuSub>
-                        <MenuSubTrigger>"Invite users"</MenuSubTrigger>
-                        <MenuSubContent>
-                            <MenuItem>"Email"</MenuItem>
-                            <MenuItem>"Message"</MenuItem>
-                            <MenuSub>
-                                <MenuSubTrigger>"More options"</MenuSubTrigger>
-                                <MenuSubContent>
-                                    <MenuItem>"Calendly"</MenuItem>
-                                    <MenuItem>"Slack"</MenuItem>
-                                    <Separator />
-                                    <MenuItem>"Webhook"</MenuItem>
-                                </MenuSubContent>
-                            </MenuSub>
-                            <Separator />
-                            <MenuItem>"Advanced..."</MenuItem>
-                        </MenuSubContent>
-                    </MenuSub>
-                    <MenuItem>"New Team" <MenuShortcut>"⌘+T"</MenuShortcut></MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>"Team"</DropdownMenuItem>
+                    <DropdownMenuSub>
+                        <DropdownMenuSubTrigger>"Invite users"</DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent>
+                            <DropdownMenuItem>"Email"</DropdownMenuItem>
+                            <DropdownMenuItem>"Message"</DropdownMenuItem>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>"More options"</DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuItem>"Calendly"</DropdownMenuItem>
+                                    <DropdownMenuItem>"Slack"</DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem>"Webhook"</DropdownMenuItem>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>"Advanced..."</DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+                    <DropdownMenuItem>
+                        "New Team" <DropdownMenuShortcut>"⌘+T"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

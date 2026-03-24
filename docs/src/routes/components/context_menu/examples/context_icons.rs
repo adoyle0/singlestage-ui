@@ -9,17 +9,19 @@ pub fn ContextIconsExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>{icon!(icondata::LuCopy)} "Copy"</MenuItem>
-                    <MenuItem>{icon!(icondata::LuScissors)} "Cut"</MenuItem>
-                    <MenuItem>{icon!(icondata::LuClipboardPaste)} "Paste"</MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem variant="destructive">{icon!(icondata::LuTrash)} "Delete"</MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuItem>{icon!(icondata::LuCopy)} "Copy"</ContextMenuItem>
+                    <ContextMenuItem>{icon!(icondata::LuScissors)} "Cut"</ContextMenuItem>
+                    <ContextMenuItem>{icon!(icondata::LuClipboardPaste)} "Paste"</ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuGroup>
+                    <ContextMenuItem variant="destructive">
+                        {icon!(icondata::LuTrash)} "Delete"
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

@@ -1,8 +1,16 @@
-use crate::{ContextMenuContext, PopoverMenuContext};
+use super::{MenuSubContext, PopoverMenuContext};
+use crate::ContextMenuContext;
 use leptos::prelude::*;
+
+pub enum MenuContentPrimitiveType {
+    Main,
+    Sub,
+}
 
 #[component]
 pub fn MenuContentPrimitive(
+    primitive_type: MenuContentPrimitiveType,
+
     children: Children,
 
     /// Set how to align the popover
@@ -118,11 +126,16 @@ pub fn MenuContentPrimitive(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let menu = expect_context::<PopoverMenuContext>();
+
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     Effect::new(move || {
         if let Some(popover) = menu_ref.get_untracked() {
-            let _ = popover.toggle_popover_with_force(menu.open.get());
+            let _ = if let Some(sub) = use_context::<MenuSubContext>() {
+                popover.toggle_popover_with_force(sub.open.get())
+            } else {
+                popover.toggle_popover_with_force(menu.open.get())
+            };
         }
     });
 
@@ -161,13 +174,18 @@ pub fn MenuContentPrimitive(
             translate=move || translate.get()
         />
     };
+    let is_context_menu = use_context::<ContextMenuContext>().is_some();
+    let is_sub = StoredValue::new(match primitive_type {
+        MenuContentPrimitiveType::Main => false,
+        MenuContentPrimitiveType::Sub => true,
+    });
 
     view! {
         <menu
             class=move || {
                 format!(
                     "singlestage-dropdown-menu-content singlestage-popover {} {}",
-                    if use_context::<ContextMenuContext>().is_some() {
+                    if is_context_menu && !is_sub.get_value() {
                         "".to_owned()
                     } else {
                         format!(
@@ -176,7 +194,13 @@ pub fn MenuContentPrimitive(
                                 "top" => "singlestage-popover-top",
                                 "right" => "singlestage-popover-right",
                                 "left" => "singlestage-popover-left",
-                                _ => "singlestage-popover-bottom",
+                                _ => {
+                                    if is_sub.get_value() {
+                                        "singlestage-popover-right"
+                                    } else {
+                                        "singlestage-popover-bottom"
+                                    }
+                                }
                             },
                             match align.get().unwrap_or_default().as_str() {
                                 "center" => "singlestage-popover-center",
@@ -190,7 +214,11 @@ pub fn MenuContentPrimitive(
             }
             id={
                 let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                menu.menu_id.set(menu_id.clone());
+                if let Some(sub) = use_context::<MenuSubContext>() {
+                    sub.menu_id.set(menu_id.clone());
+                } else {
+                    menu.menu_id.set(menu_id.clone());
+                }
                 menu_id
             }
             node_ref=menu_ref
@@ -199,13 +227,26 @@ pub fn MenuContentPrimitive(
                     ev.prevent_default();
                 }
             }
-            popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
+            popover=move || {
+                if menu.dismissable.get() || is_sub.get_value() { "auto" } else { "manual" }
+            }
             role="menu"
             style=move || {
-                if let Some(context_menu) = use_context::<ContextMenuContext>() {
-                    format!("left: {}px; top: {}px", context_menu.x.get(), context_menu.y.get())
+                if let Some(context_menu) = use_context::<ContextMenuContext>()
+                    && !is_sub.get_value()
+                {
+                    Some(
+                        format!("left: {}px; top: {}px", context_menu.x.get(), context_menu.y.get()),
+                    )
                 } else {
-                    format!("position-anchor: --{}", menu.trigger_id.get())
+                    None
+                }
+            }
+            style:position-anchor=move || {
+                if let Some(sub) = use_context::<MenuSubContext>() {
+                    sub.trigger_id.get()
+                } else {
+                    menu.trigger_id.get()
                 }
             }
 

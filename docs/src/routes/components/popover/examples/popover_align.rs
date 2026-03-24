@@ -6,31 +6,31 @@ pub fn PopoverAlignExample() -> impl IntoView {
     view! {
         <div class="flex gap-6">
             <Popover>
-                <Trigger>
+                <PopoverTrigger>
                     <Button variant="outline" size="sm">
                         "Start"
                     </Button>
-                </Trigger>
+                </PopoverTrigger>
                 <PopoverContent align="start" class="w-40">
                     "Aligned to start"
                 </PopoverContent>
             </Popover>
             <Popover>
-                <Trigger>
+                <PopoverTrigger>
                     <Button variant="outline" size="sm">
                         "Center"
                     </Button>
-                </Trigger>
+                </PopoverTrigger>
                 <PopoverContent align="center" class="w-40">
                     "Aligned to center"
                 </PopoverContent>
             </Popover>
             <Popover>
-                <Trigger>
+                <PopoverTrigger>
                     <Button variant="outline" size="sm">
                         "End"
                     </Button>
-                </Trigger>
+                </PopoverTrigger>
                 <PopoverContent align="end" class="w-40">
                     "Aligned to end"
                 </PopoverContent>

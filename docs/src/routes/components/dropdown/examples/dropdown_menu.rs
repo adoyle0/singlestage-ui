@@ -5,41 +5,51 @@ use singlestage::*;
 pub fn DropdownMenuExample() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button variant="outline">"Open"</Button>
-            </Trigger>
-            <MenuContent class="w-40" align="start">
-                <MenuGroup>
-                    <Label>"My Account"</Label>
-                    <MenuItem>"Profile" <MenuShortcut>"⇧⌘P"</MenuShortcut></MenuItem>
-                    <MenuItem>"Billing" <MenuShortcut>"⌘B"</MenuShortcut></MenuItem>
-                    <MenuItem>"Settings" <MenuShortcut>"⌘S"</MenuShortcut></MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem>"Team"</MenuItem>
-                    <MenuSub>
-                        <MenuSubTrigger>"Invite users"</MenuSubTrigger>
-                        <MenuSubContent>
-                            <MenuItem>"Email"</MenuItem>
-                            <MenuItem>"Message"</MenuItem>
-                            <Separator />
-                            <MenuItem>"More..."</MenuItem>
-                        </MenuSubContent>
-                    </MenuSub>
-                    <MenuItem>"New Team" <MenuShortcut>"⌘+T"</MenuShortcut></MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem>"GitHub"</MenuItem>
-                    <MenuItem>"Support"</MenuItem>
-                    <MenuItem disabled=true>"API"</MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem>"Log out" <MenuShortcut>"⇧⌘Q"</MenuShortcut></MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent class="w-40" align="start">
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel>"My Account"</DropdownMenuLabel>
+                    <DropdownMenuItem>
+                        "Profile" <DropdownMenuShortcut>"⇧⌘P"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        "Billing" <DropdownMenuShortcut>"⌘B"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        "Settings" <DropdownMenuShortcut>"⌘S"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>"Team"</DropdownMenuItem>
+                    <DropdownMenuSub>
+                        <DropdownMenuSubTrigger>"Invite users"</DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent>
+                            <DropdownMenuItem>"Email"</DropdownMenuItem>
+                            <DropdownMenuItem>"Message"</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>"More..."</DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+                    <DropdownMenuItem>
+                        "New Team" <DropdownMenuShortcut>"⌘+T"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>"GitHub"</DropdownMenuItem>
+                    <DropdownMenuItem>"Support"</DropdownMenuItem>
+                    <DropdownMenuItem disabled=true>"API"</DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                        "Log out" <DropdownMenuShortcut>"⇧⌘Q"</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

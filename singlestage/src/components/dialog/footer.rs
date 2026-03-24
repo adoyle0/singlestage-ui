@@ -111,8 +111,6 @@ pub fn DialogFooter(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog = expect_context::<DialogContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()

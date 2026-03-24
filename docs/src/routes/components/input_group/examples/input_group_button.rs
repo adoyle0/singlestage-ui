@@ -36,11 +36,11 @@ pub fn InputGroupButtonExample() -> impl IntoView {
             <InputGroup class="rounded-full">
                 <InputGroupAddon>
                     <Popover>
-                        <Trigger>
+                        <PopoverTrigger>
                             <Button class="rounded-full" variant="secondary" size="icon-xs">
                                 {icon!(icondata::LuInfo)}
                             </Button>
-                        </Trigger>
+                        </PopoverTrigger>
                         <PopoverContent class="gap-1 text-sm max-w-2xs">
                             <p class="font-medium">"Your connection is not secure."</p>
                             <p>"You should not enter any sensitive information on this site."</p>

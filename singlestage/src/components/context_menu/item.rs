@@ -171,6 +171,8 @@ pub fn ContextMenuItem(
 
     view! {
         <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::Item
+
             as_child
             disabled
             dismiss

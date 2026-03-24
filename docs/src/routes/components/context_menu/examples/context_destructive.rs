@@ -9,16 +9,18 @@ pub fn ContextDestructiveExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>{icon!(icondata::LuPencil)} "Edit"</MenuItem>
-                    <MenuItem>{icon!(icondata::LuShare)} "Share"</MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem variant="destructive">{icon!(icondata::LuTrash)} "Delete"</MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuItem>{icon!(icondata::LuPencil)} "Edit"</ContextMenuItem>
+                    <ContextMenuItem>{icon!(icondata::LuShare)} "Share"</ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuGroup>
+                    <ContextMenuItem variant="destructive">
+                        {icon!(icondata::LuTrash)} "Delete"
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

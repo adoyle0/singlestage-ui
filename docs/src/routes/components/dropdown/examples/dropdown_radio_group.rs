@@ -7,19 +7,19 @@ pub fn DropdownRadioGroupExample() -> impl IntoView {
 
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button variant="outline">"Open"</Button>
-            </Trigger>
-            <MenuContent class="w-32">
-                <MenuGroup>
-                    <Label>"Panel Position"</Label>
-                    <RadioGroup value=position>
-                        <RadioItem value="top">"Top"</RadioItem>
-                        <RadioItem value="bottom">"Bottom"</RadioItem>
-                        <RadioItem value="right">"Right"</RadioItem>
-                    </RadioGroup>
-                </MenuGroup>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent class="w-32">
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel>"Panel Position"</DropdownMenuLabel>
+                    <DropdownMenuRadioGroup value=position>
+                        <DropdownMenuRadioItem value="top">"Top"</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bottom">"Bottom"</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="right">"Right"</DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                </DropdownMenuGroup>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

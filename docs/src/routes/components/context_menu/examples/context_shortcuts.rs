@@ -9,18 +9,28 @@ pub fn ContextShortcutsExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>"Back" <MenuShortcut>"⌘["</MenuShortcut></MenuItem>
-                    <MenuItem disabled=true>"Forward" <MenuShortcut>"⌘]"</MenuShortcut></MenuItem>
-                    <MenuItem>"Reload" <MenuShortcut>"⌘R"</MenuShortcut></MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <MenuItem>"Save" <MenuShortcut>"⌘S"</MenuShortcut></MenuItem>
-                    <MenuItem>"Save As..." <MenuShortcut>"⇧⌘S"</MenuShortcut></MenuItem>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuItem>
+                        "Back" <ContextMenuShortcut>"⌘["</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem disabled=true>
+                        "Forward" <ContextMenuShortcut>"⌘]"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem>
+                        "Reload" <ContextMenuShortcut>"⌘R"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuGroup>
+                    <ContextMenuItem>
+                        "Save" <ContextMenuShortcut>"⌘S"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem>
+                        "Save As..." <ContextMenuShortcut>"⇧⌘S"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

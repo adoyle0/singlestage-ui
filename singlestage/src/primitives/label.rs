@@ -1,6 +1,8 @@
-use crate::{
-    FieldContext, PopoverMenuContext, PopoverMenuGroupContext, RadioGroupContext, Reactive,
-};
+// TODO: Use primitive_type enum instead of contexts?
+// and if it works then do it everywhere
+
+use crate::primitives::*;
+use crate::{FieldContext, RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
 #[component]

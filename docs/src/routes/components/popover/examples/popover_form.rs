@@ -5,9 +5,9 @@ use singlestage::*;
 pub fn PopoverFormExample() -> impl IntoView {
     view! {
         <Popover>
-            <Trigger>
+            <PopoverTrigger>
                 <Button variant="outline">"Open Popover"</Button>
-            </Trigger>
+            </PopoverTrigger>
             <PopoverContent class="w-64" align="start">
                 <PopoverHeader>
                     <PopoverTitle>"Dimensions"</PopoverTitle>
@@ -15,15 +15,15 @@ pub fn PopoverFormExample() -> impl IntoView {
                 </PopoverHeader>
                 <FieldGroup class="gap-4">
                     <Field orientation="horizontal">
-                        <Label label_for="width" class="w-1/2">
+                        <FieldLabel label_for="width" class="w-1/2">
                             "Width"
-                        </Label>
+                        </FieldLabel>
                         <Input id="width" value="100%" />
                     </Field>
                     <Field orientation="horizontal">
-                        <Label label_for="height" class="w-1/2">
+                        <FieldLabel label_for="height" class="w-1/2">
                             "Height"
-                        </Label>
+                        </FieldLabel>
                         <Input id="height" value="25px" />
                     </Field>
                 </FieldGroup>

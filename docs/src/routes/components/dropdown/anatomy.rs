@@ -5,35 +5,35 @@ use singlestage::*;
 pub fn DropdownMenuAnatomy() -> impl IntoView {
     view! {
         <DropdownMenu>
-            <Trigger>
+            <DropdownMenuTrigger>
                 <Button />
-            </Trigger>
-            <MenuContent>
-                <MenuGroup>
-                    <Label />
-                    <MenuItem>
-                        <MenuShortcut />
-                    </MenuItem>
-                </MenuGroup>
-                <Separator />
-                <MenuSub>
-                    <MenuSubTrigger />
-                    <MenuSubContent>
-                        <MenuGroup>
-                            <CheckboxItem />
-                            <CheckboxItem />
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <RadioGroup>
-                                <RadioItem />
-                                <RadioItem />
-                                <RadioItem />
-                            </RadioGroup>
-                        </MenuGroup>
-                    </MenuSubContent>
-                </MenuSub>
-            </MenuContent>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel />
+                    <DropdownMenuItem>
+                        <DropdownMenuShortcut />
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger />
+                    <DropdownMenuSubContent>
+                        <DropdownMenuGroup>
+                            <DropdownMenuCheckboxItem />
+                            <DropdownMenuCheckboxItem />
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuRadioGroup>
+                                <DropdownMenuRadioItem />
+                                <DropdownMenuRadioItem />
+                                <DropdownMenuRadioItem />
+                            </DropdownMenuRadioGroup>
+                        </DropdownMenuGroup>
+                    </DropdownMenuSubContent>
+                </DropdownMenuSub>
+            </DropdownMenuContent>
         </DropdownMenu>
     }
 }

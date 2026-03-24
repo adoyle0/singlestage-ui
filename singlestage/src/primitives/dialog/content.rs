@@ -1,5 +1,9 @@
-use crate::{Button, DialogCloseContext, DialogContext};
+use super::DialogContext;
+use crate::Button;
 use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone)]
+pub struct DialogCloseContext {}
 
 /// Contains content to be rendered in the main body of the dialog.
 #[component]

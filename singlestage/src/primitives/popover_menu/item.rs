@@ -1,5 +1,13 @@
-use crate::{Button, Reactive};
+use super::{MenuSubContext, PopoverMenuContext};
+use crate::{Button, Checkbox, Radio, Reactive};
 use leptos::{context::Provider, prelude::*};
+
+pub enum MenuItemPrimitiveType {
+    Item,
+    Checkbox,
+    Radio,
+    SubTrigger,
+}
 
 #[derive(Clone)]
 pub struct MenuItemContext {
@@ -8,7 +16,11 @@ pub struct MenuItemContext {
 
 #[component]
 pub fn MenuItemPrimitive(
+    primitive_type: MenuItemPrimitiveType,
+
     children: Children,
+
+    #[prop(optional, into)] checked: Reactive<bool>,
 
     #[prop(optional, into)] as_child: MaybeProp<bool>,
     /// Controls whether the item appears disabled and is clickable.
@@ -176,7 +188,8 @@ pub fn MenuItemPrimitive(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{}{} {}",
+                    "singlestage-dropdown-menu-item{}{}{} {}",
+                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
@@ -189,28 +202,118 @@ pub fn MenuItemPrimitive(
                     class.get().unwrap_or_default(),
                 )
             }
+            on:click=move |_| {
+                match primitive_type {
+                    MenuItemPrimitiveType::Checkbox | MenuItemPrimitiveType::Radio => {
+                        if dismiss.get() {
+                            if let Some(menu) = use_context::<PopoverMenuContext>()
+                                && menu.dismissable.get()
+                            {
+                                menu.open.set(false);
+                            } else if let Some(menu) = use_context::<PopoverMenuContext>() {
+                                menu.open.set(false);
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
+
             role="menuitem"
             value=move || value.get()
-        >
-            <Provider value=MenuItemContext {
-                dismiss,
-            }>
-                {if as_child.get().unwrap_or_default() {
-                    children().into_any()
-                } else {
-                    view! {
-                        <Button
-                            disabled
 
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                        >
-                            {children()}
-                        </Button>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {match primitive_type {
+                MenuItemPrimitiveType::Item => {
+                    view! {
+                        <Provider value=MenuItemContext {
+                            dismiss,
+                        }>
+                            {if as_child.get().unwrap_or_default() {
+                                children().into_any()
+                            } else {
+                                view! { <Button disabled>{children()}</Button> }.into_any()
+                            }}
+                        </Provider>
                     }
                         .into_any()
-                }}
-            </Provider>
+                }
+                MenuItemPrimitiveType::Checkbox | MenuItemPrimitiveType::Radio => {
+                    view! {
+                        <label aria_disabled=move || {
+                            if disabled.get() { Some("true") } else { None }
+                        }>
+                            {children()}
+                            {match primitive_type {
+                                MenuItemPrimitiveType::Checkbox => {
+                                    view! {
+                                        <Checkbox
+                                            class="singlestage-checkbox-item"
+                                            checked
+                                            disabled
+                                        />
+                                    }
+                                        .into_any()
+                                }
+                                MenuItemPrimitiveType::Radio => {
+                                    view! {
+                                        <Radio
+                                            class="singlestage-radio-item"
+                                            checked
+                                            disabled
+                                            value
+                                        />
+                                    }
+                                        .into_any()
+                                }
+                                _ => view! {}.into_any(),
+                            }}
+                        </label>
+                    }
+                        .into_any()
+                }
+                MenuItemPrimitiveType::SubTrigger => {
+                    let sub = expect_context::<MenuSubContext>();
+
+                    view! {
+                        <button
+                            aria_controls=move || sub.menu_id.get()
+                            aria_haspopup="menu"
+                            id={
+                                let trigger_id = id
+                                    .get()
+                                    .unwrap_or(uuid::Uuid::new_v4().to_string());
+                                sub.trigger_id.set(trigger_id.clone());
+                                trigger_id
+                            }
+                            popovertarget=move || sub.menu_id.get()
+                            popovertargetaction="toggle"
+                            style:anchor-name=move || format!("--{}", sub.trigger_id.get())
+                            type="button"
+                        >
+
+                            {children()}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="ml-auto"
+                            >
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </button>
+                    }
+                        .into_any()
+                }
+            }}
         </li>
     }
 }

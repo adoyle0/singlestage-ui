@@ -9,30 +9,34 @@ pub fn ContextSubExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <MenuItem>"Copy" <MenuShortcut>"⌘C"</MenuShortcut></MenuItem>
-                    <MenuItem>"Cut" <MenuShortcut>"⌘X"</MenuShortcut></MenuItem>
-                </MenuGroup>
-                <MenuSub>
-                    <MenuSubTrigger>"More Tools"</MenuSubTrigger>
-                    <MenuSubContent>
-                        <MenuGroup>
-                            <MenuItem>"Save Page..."</MenuItem>
-                            <MenuItem>"Create Shortcut..."</MenuItem>
-                            <MenuItem>"Name Window..."</MenuItem>
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <MenuItem>"Developer Tools"</MenuItem>
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <MenuItem variant="destructive">"Delete"</MenuItem>
-                        </MenuGroup>
-                    </MenuSubContent>
-                </MenuSub>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuItem>
+                        "Copy" <ContextMenuShortcut>"⌘C"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem>
+                        "Cut" <ContextMenuShortcut>"⌘X"</ContextMenuShortcut>
+                    </ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSub>
+                    <ContextMenuSubTrigger>"More Tools"</ContextMenuSubTrigger>
+                    <ContextMenuSubContent>
+                        <ContextMenuGroup>
+                            <ContextMenuItem>"Save Page..."</ContextMenuItem>
+                            <ContextMenuItem>"Create Shortcut..."</ContextMenuItem>
+                            <ContextMenuItem>"Name Window..."</ContextMenuItem>
+                        </ContextMenuGroup>
+                        <ContextMenuSeparator />
+                        <ContextMenuGroup>
+                            <ContextMenuItem>"Developer Tools"</ContextMenuItem>
+                        </ContextMenuGroup>
+                        <ContextMenuSeparator />
+                        <ContextMenuGroup>
+                            <ContextMenuItem variant="destructive">"Delete"</ContextMenuItem>
+                        </ContextMenuGroup>
+                    </ContextMenuSubContent>
+                </ContextMenuSub>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

@@ -122,27 +122,12 @@ pub fn AlertDialogContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog_context = expect_context::<DialogContext>();
-    let dialog_ref = NodeRef::<leptos::html::Dialog>::new();
-
-    Effect::new(move || {
-        if let Some(dialog) = dialog_ref.get_untracked() {
-            match dialog_context.open.get() {
-                true => {
-                    let _ = dialog.show_modal();
-                }
-                false => {
-                    dialog.close();
-                }
-            }
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()

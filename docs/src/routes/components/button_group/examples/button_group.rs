@@ -19,41 +19,55 @@ pub fn ButtonGroupExample() -> impl IntoView {
             <ButtonGroup>
                 <Button variant="outline">"Snooze"</Button>
                 <DropdownMenu>
-                    <Trigger>
+                    <DropdownMenuTrigger>
                         <Button variant="outline" size="icon" aria_label="More Options">
                             {icon!(icondata::FiMoreHorizontal)}
                         </Button>
-                    </Trigger>
-                    <MenuContent align="end">
-                        <MenuGroup>
-                            <MenuItem>{icon!(icondata::LuMailCheck)} "Mark as Read"</MenuItem>
-                            <MenuItem>{icon!(icondata::LuArchive)} "Archive"</MenuItem>
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <MenuItem>{icon!(icondata::LuClock)} "Snooze"</MenuItem>
-                            <MenuItem>{icon!(icondata::LuCalendarPlus)} "Add to Calendar"</MenuItem>
-                            <MenuItem>{icon!(icondata::LuListPlus)} "Add to List"</MenuItem>
-                            <MenuSub>
-                                <MenuSubTrigger>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem>
+                                {icon!(icondata::LuMailCheck)} "Mark as Read"
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                {icon!(icondata::LuArchive)} "Archive"
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem>{icon!(icondata::LuClock)} "Snooze"</DropdownMenuItem>
+                            <DropdownMenuItem>
+                                {icon!(icondata::LuCalendarPlus)} "Add to Calendar"
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                {icon!(icondata::LuListPlus)} "Add to List"
+                            </DropdownMenuItem>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>
                                     {icon!(icondata::LuTag)} "Label As..."
-                                </MenuSubTrigger>
-                                <MenuSubContent>
-                                    <RadioGroup value=label>
-                                        <RadioItem value="personal">"Personal"</RadioItem>
-                                        <RadioItem value="work">"Work"</RadioItem>
-                                        <RadioItem value="other">"Other"</RadioItem>
-                                    </RadioGroup>
-                                </MenuSubContent>
-                            </MenuSub>
-                        </MenuGroup>
-                        <Separator />
-                        <MenuGroup>
-                            <MenuItem variant="destructive">
+                                </DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuRadioGroup value=label>
+                                        <DropdownMenuRadioItem value="personal">
+                                            "Personal"
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="work">
+                                            "Work"
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="other">
+                                            "Other"
+                                        </DropdownMenuRadioItem>
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem variant="destructive">
                                 {icon!(icondata::LuTrash2)} "Trash"
-                            </MenuItem>
-                        </MenuGroup>
-                    </MenuContent>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
                 </DropdownMenu>
             </ButtonGroup>
         </ButtonGroup>

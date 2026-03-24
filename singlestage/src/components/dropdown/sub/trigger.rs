@@ -1,13 +1,13 @@
-use crate::MenuSubContext;
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 #[component]
-pub fn MenuSubTrigger(
+pub fn DropdownMenuSubTrigger(
     children: Children,
 
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     #[prop(optional, into)]
     inset: MaybeProp<bool>,
@@ -125,19 +125,19 @@ pub fn MenuSubTrigger(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sub = expect_context::<MenuSubContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
             contenteditable=move || contenteditable.get()
+            class=move || class.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
+            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -166,62 +166,17 @@ pub fn MenuSubTrigger(
     };
 
     view! {
-        <li
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-item-disabled"
-                    } else {
-                        ""
-                    },
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-dropdown-menu-item-destructive",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            role="menuitem"
+        <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::SubTrigger
+
+            disabled
+            inset
+            variant
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <button
-                aria_controls=move || sub.menu_id.get()
-                aria_haspopup="menu"
-                id={
-                    let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                    sub.trigger_id.set(trigger_id.clone());
-                    trigger_id
-                }
-                popovertarget=move || sub.menu_id.get()
-                popovertargetaction="toggle"
-                style:anchor-name=move || format!("--{}", sub.trigger_id.get())
-                type="button"
-            >
-
-                {children()}
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="ml-auto"
-                >
-                    <path d="m9 18 6-6-6-6" />
-                </svg>
-            </button>
-        </li>
+            {children()}
+        </MenuItemPrimitive>
     }
 }

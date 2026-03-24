@@ -9,13 +9,17 @@ pub fn ContextCheckboxesExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <CheckboxItem checked=true>"Show Bookmarks Bar"</CheckboxItem>
-                    <CheckboxItem>"Show Full URLs"</CheckboxItem>
-                    <CheckboxItem checked=true>"Show Developer Tools"</CheckboxItem>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuCheckboxItem checked=true>
+                        "Show Bookmarks Bar"
+                    </ContextMenuCheckboxItem>
+                    <ContextMenuCheckboxItem>"Show Full URLs"</ContextMenuCheckboxItem>
+                    <ContextMenuCheckboxItem checked=true>
+                        "Show Developer Tools"
+                    </ContextMenuCheckboxItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

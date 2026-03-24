@@ -12,24 +12,24 @@ pub fn ContextRadioExample() -> impl IntoView {
                 <span class="pointer-fine:hidden">"Long press here"</span>
                 <span class="pointer-coarse:hidden">"Right click here"</span>
             </ContextMenuTrigger>
-            <MenuContent>
-                <MenuGroup>
-                    <Label>"People"</Label>
-                    <RadioGroup value=user>
-                        <RadioItem value="pedro">"Pedro Duarte"</RadioItem>
-                        <RadioItem value="colm">"Colm Tuite"</RadioItem>
-                    </RadioGroup>
-                </MenuGroup>
-                <Separator />
-                <MenuGroup>
-                    <Label>"Theme"</Label>
-                    <RadioGroup value=theme>
-                        <RadioItem value="light">"Light"</RadioItem>
-                        <RadioItem value="dark">"Dark"</RadioItem>
-                        <RadioItem value="system">"System"</RadioItem>
-                    </RadioGroup>
-                </MenuGroup>
-            </MenuContent>
+            <ContextMenuContent>
+                <ContextMenuGroup>
+                    <ContextMenuLabel>"People"</ContextMenuLabel>
+                    <ContextMenuRadioGroup value=user>
+                        <ContextMenuRadioItem value="pedro">"Pedro Duarte"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="colm">"Colm Tuite"</ContextMenuRadioItem>
+                    </ContextMenuRadioGroup>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuGroup>
+                    <ContextMenuLabel>"Theme"</ContextMenuLabel>
+                    <ContextMenuRadioGroup value=theme>
+                        <ContextMenuRadioItem value="light">"Light"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="dark">"Dark"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="system">"System"</ContextMenuRadioItem>
+                    </ContextMenuRadioGroup>
+                </ContextMenuGroup>
+            </ContextMenuContent>
         </ContextMenu>
     }
 }

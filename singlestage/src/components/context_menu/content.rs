@@ -158,6 +158,8 @@ pub fn ContextMenuContent(
 
     view! {
         <MenuContentPrimitive
+            primitive_type=MenuContentPrimitiveType::Main
+
             align
             side
 
