@@ -131,7 +131,7 @@ attrs = [
 ]
 
 [[references]]
-name = "Separator"
+name = "FieldSeparator"
 description = """Visual divider to separate sections inside a FieldSet. Accepts optional inline \
 content."""
 extra = """Implements <a class="singlestage-link" \

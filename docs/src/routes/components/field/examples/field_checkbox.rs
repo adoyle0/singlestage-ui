@@ -43,7 +43,7 @@ pub fn FieldCheckboxExample() -> impl IntoView {
                     </Field>
                 </FieldGroup>
             </FieldSet>
-            <Separator />
+            <FieldSeparator />
             <Field orientation="horizontal">
                 <Checkbox id="finder-pref-9k2-sync-folders-nep" checked=true />
                 <FieldContent>

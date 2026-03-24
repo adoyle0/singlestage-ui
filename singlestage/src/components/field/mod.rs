@@ -5,6 +5,7 @@ mod field;
 mod group;
 mod label;
 mod legend;
+mod separator;
 mod set;
 mod title;
 
@@ -15,6 +16,7 @@ pub use field::*;
 pub use group::*;
 pub use label::*;
 pub use legend::*;
+pub use separator::*;
 pub use set::*;
 pub use title::*;
 

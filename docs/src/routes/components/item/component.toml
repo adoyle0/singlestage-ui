@@ -123,6 +123,15 @@ attrs = [
 ]
 
 [[references]]
+name = "ItemSeparator"
+description = """Visual divider to separate sections inside an Item. Accepts optional inline \
+content."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
 name = "ItemTitle"
 description = "Contains title text for an Item."
 extra = """Implements <a class="singlestage-link" \

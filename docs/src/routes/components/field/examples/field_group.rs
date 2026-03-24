@@ -22,7 +22,7 @@ pub fn FieldGroupExample() -> impl IntoView {
                     </CheckboxGroup>
                 </FieldGroup>
             </FieldSet>
-            <Separator />
+            <FieldSeparator />
             <FieldSet>
                 <FieldLabel>"Tasks"</FieldLabel>
                 <FieldDescription>

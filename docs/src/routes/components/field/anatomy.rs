@@ -15,7 +15,7 @@ pub fn FieldAnatomy() -> impl IntoView {
                     <FieldDescription />
                 </Field>
             </FieldGroup>
-            <Separator />
+            <FieldSeparator />
             <FieldGroup>
                 <Field>
                     <FieldLabel>

@@ -73,7 +73,7 @@ pub fn FieldExample() -> impl IntoView {
                             </div>
                         </FieldGroup>
                     </FieldSet>
-                    <Separator />
+                    <FieldSeparator />
                     <FieldSet>
                         <FieldLegend>"Billing Address"</FieldLegend>
                         <FieldDescription>
