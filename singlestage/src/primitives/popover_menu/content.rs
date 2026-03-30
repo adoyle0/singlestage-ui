@@ -247,10 +247,11 @@ pub fn MenuContentPrimitive(
                 }
             }
             style:position-anchor=move || {
-                if let Some(sub) = use_context::<MenuSubContext>() {
-                    sub.trigger_id.get()
+                if is_sub.get_value() {
+                    let sub = expect_context::<MenuSubContext>();
+                    format!("--{}", sub.trigger_id.get())
                 } else {
-                    menu.trigger_id.get()
+                    format!("--{}", menu.trigger_id.get())
                 }
             }
 
