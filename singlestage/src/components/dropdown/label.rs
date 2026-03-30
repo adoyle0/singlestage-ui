@@ -129,14 +129,12 @@ pub fn DropdownMenuLabel(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -166,7 +164,9 @@ pub fn DropdownMenuLabel(
 
     view! {
         <LabelPrimitive
+            class
             disabled
+            id
             inset
             invalid
             label_for

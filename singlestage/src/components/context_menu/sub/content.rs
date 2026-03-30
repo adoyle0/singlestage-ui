@@ -123,14 +123,12 @@ pub fn ContextMenuSubContent(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -149,7 +147,6 @@ pub fn ContextMenuSubContent(
             part=move || part.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
-            style=move || style.get()
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
@@ -161,7 +158,10 @@ pub fn ContextMenuSubContent(
             primitive_type=MenuContentPrimitiveType::Sub
 
             align
+            class
+            id
             side
+            style
 
             {..global_attrs_1}
             {..global_attrs_2}

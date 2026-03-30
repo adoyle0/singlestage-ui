@@ -169,8 +169,11 @@ pub fn DropdownMenuSubTrigger(
         <MenuItemPrimitive
             primitive_type=MenuItemPrimitiveType::SubTrigger
 
+            class
             disabled
+            id
             inset
+            value
             variant
 
             {..global_attrs_1}

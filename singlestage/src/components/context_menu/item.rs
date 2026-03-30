@@ -174,8 +174,10 @@ pub fn ContextMenuItem(
             primitive_type=MenuItemPrimitiveType::Item
 
             as_child
+            class
             disabled
             dismiss
+            id
             inset
             variant
             value

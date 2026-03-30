@@ -26,7 +26,7 @@ pub fn DialogMediaPrimitive(
     #[prop(optional, into)]
     autofocus: MaybeProp<bool>,
     /// Apply classes to the element.
-    #[prop(optional, into)]
+    #[prop(into)]
     class: MaybeProp<String>,
     /// Allows client-side editing of the element by the user.
     ///

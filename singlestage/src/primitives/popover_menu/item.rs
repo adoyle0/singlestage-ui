@@ -41,7 +41,7 @@ pub fn MenuItemPrimitive(
     // LI ATTRIBRUTES
     //
     /// The current ordinal value of the item.
-    #[prop(optional, into)]
+    #[prop(into)]
     value: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
@@ -61,7 +61,7 @@ pub fn MenuItemPrimitive(
     #[prop(optional, into)]
     autofocus: MaybeProp<bool>,
     /// Apply classes to the element.
-    #[prop(optional, into)]
+    #[prop(into)]
     class: MaybeProp<String>,
     /// Allows client-side editing of the element by the user.
     ///
@@ -86,7 +86,7 @@ pub fn MenuItemPrimitive(
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
     /// Set the id of this element.
-    #[prop(optional, into)]
+    #[prop(into)]
     id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
@@ -157,7 +157,6 @@ pub fn MenuItemPrimitive(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -234,7 +233,12 @@ pub fn MenuItemPrimitive(
                             {if as_child.get().unwrap_or_default() {
                                 children().into_any()
                             } else {
-                                view! { <Button disabled>{children()}</Button> }.into_any()
+                                view! {
+                                    <Button disabled id>
+                                        {children()}
+                                    </Button>
+                                }
+                                    .into_any()
                             }}
                         </Provider>
                     }
@@ -253,6 +257,7 @@ pub fn MenuItemPrimitive(
                                             class="singlestage-checkbox-item"
                                             checked
                                             disabled
+                                            id
                                         />
                                     }
                                         .into_any()
@@ -263,6 +268,7 @@ pub fn MenuItemPrimitive(
                                             class="singlestage-radio-item"
                                             checked
                                             disabled
+                                            id
                                             value
                                         />
                                     }

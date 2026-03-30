@@ -175,8 +175,10 @@ pub fn ContextMenuCheckboxItem(
             primitive_type=MenuItemPrimitiveType::Checkbox
 
             checked
+            class
             disabled
             dismiss
+            id
             inset
             variant
             value

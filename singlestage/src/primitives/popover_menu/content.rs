@@ -43,7 +43,7 @@ pub fn MenuContentPrimitive(
     #[prop(optional, into)]
     autofocus: MaybeProp<bool>,
     /// Apply classes to the element.
-    #[prop(optional, into)]
+    #[prop(into)]
     class: MaybeProp<String>,
     /// Allows client-side editing of the element by the user.
     ///
@@ -68,7 +68,7 @@ pub fn MenuContentPrimitive(
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
     /// Set the id of this element.
-    #[prop(optional, into)]
+    #[prop(into)]
     id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
@@ -113,7 +113,7 @@ pub fn MenuContentPrimitive(
     #[prop(optional, into)]
     spellcheck: MaybeProp<String>,
     /// Define CSS to be applied to the element.
-    #[prop(optional, into)]
+    #[prop(into)]
     style: MaybeProp<String>,
     /// Controls how an element behaves when a user navigates using the tab key.
     #[prop(optional, into)]
@@ -168,7 +168,6 @@ pub fn MenuContentPrimitive(
             part=move || part.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
-            style=move || style.get()
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
@@ -236,10 +235,15 @@ pub fn MenuContentPrimitive(
                     && !is_sub.get_value()
                 {
                     Some(
-                        format!("left: {}px; top: {}px", context_menu.x.get(), context_menu.y.get()),
+                        format!(
+                            "left: {}px; top: {}px; {}",
+                            context_menu.x.get(),
+                            context_menu.y.get(),
+                            style.get().unwrap_or_default(),
+                        ),
                     )
                 } else {
-                    None
+                    style.get()
                 }
             }
             style:position-anchor=move || {

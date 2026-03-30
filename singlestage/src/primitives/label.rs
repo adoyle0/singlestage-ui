@@ -10,17 +10,17 @@ pub fn LabelPrimitive(
     children: Children,
 
     /// Whether the element renders as disabled
-    #[prop(optional, into)]
+    #[prop(into)]
     disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     /// (For use in popover menus)
-    #[prop(optional, into)]
+    #[prop(into)]
     inset: MaybeProp<bool>,
     /// Whether the element renders as invalid
-    #[prop(optional, into)]
+    #[prop(into)]
     invalid: Reactive<bool>,
     /// The id of the labeled element if it's not a child
-    #[prop(optional, into)]
+    #[prop(into)]
     label_for: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
@@ -40,7 +40,7 @@ pub fn LabelPrimitive(
     #[prop(optional, into)]
     autofocus: MaybeProp<bool>,
     /// Apply classes to the element.
-    #[prop(optional, into)]
+    #[prop(into)]
     class: MaybeProp<String>,
     /// Allows client-side editing of the element by the user.
     ///
@@ -65,7 +65,7 @@ pub fn LabelPrimitive(
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
     /// Set the id of this element.
-    #[prop(optional, into)]
+    #[prop(into)]
     id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
@@ -133,14 +133,12 @@ pub fn LabelPrimitive(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            // id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()

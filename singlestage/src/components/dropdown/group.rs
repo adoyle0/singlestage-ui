@@ -113,7 +113,6 @@ pub fn DropdownMenuGroup(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -149,6 +148,7 @@ pub fn DropdownMenuGroup(
 
     view! {
         <MenuGroupPrimitive
+            class
 
             {..global_attrs_1}
             {..global_attrs_2}

@@ -127,7 +127,6 @@ pub fn AlertDialogContent(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -164,6 +163,7 @@ pub fn AlertDialogContent(
 
     view! {
         <DialogContentPrimitive
+            class
             close_button
             size
 

@@ -175,8 +175,10 @@ pub fn DropdownMenuRadioItem(
             primitive_type=MenuItemPrimitiveType::Radio
 
             checked
+            class
             disabled
             dismiss
+            id
             inset
             variant
             value
