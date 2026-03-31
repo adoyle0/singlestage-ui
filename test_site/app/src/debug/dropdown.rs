@@ -15,6 +15,8 @@ pub fn DropdownTriggersDialog() -> impl IntoView {
     let open = RwSignal::new(false);
 
     view! {
+        <p>"Dialog Trigger"</p>
+
         <Dialog open>
             <DialogContent>"hey"</DialogContent>
 
@@ -63,9 +65,40 @@ pub fn DropdownTriggersDialog() -> impl IntoView {
 }
 
 #[component]
-pub fn DebugDropdown() -> impl IntoView {
+pub fn DropdownSignal() -> impl IntoView {
     let open = RwSignal::new(false);
 
+    view! {
+        <Switch checked=open />
+
+        <DropdownMenu open dismissable=false>
+            <DropdownMenuTrigger>
+                <Button>"Signal"</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <Item />
+                <DropdownMenuItem dismiss=false>"No dismiss"</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    }
+}
+
+#[component]
+pub fn DropdownDismiss() -> impl IntoView {
+    view! {
+        <DropdownMenu>
+            <DropdownMenuTrigger>
+                <Button>"No dismiss"</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem dismiss=false>"no dismiss"</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    }
+}
+
+#[component]
+pub fn DropdownPosition() -> impl IntoView {
     let variations = [
         ("top", "start"),
         ("top", "center"),
@@ -82,37 +115,6 @@ pub fn DebugDropdown() -> impl IntoView {
     ];
 
     view! {
-        <h1 class="text-4xl font-semibold">"Dropdown Menu"</h1>
-        <ul class="singlestage-ulist text-(--muted-foreground)">
-            <li>"Console should log \"hey\" when clicked"</li>
-            <li>"Console should log \"hey\" when tapped"</li>
-            <li>
-                "Console should log \"hey\" when selected with keyboard and "<Kbd>"Enter"</Kbd>
-                " is pressed"
-            </li>
-        </ul>
-
-        <Switch checked=open />
-
-        <DropdownMenu open dismissable=false>
-            <DropdownMenuTrigger>
-                <Button>"Signal"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <Item />
-                <DropdownMenuItem dismiss=false>"No dismiss"</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-            <DropdownMenuTrigger>
-                <Button>"No dismiss"</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem dismiss=false>"no dismiss"</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-
         <p>"Positioning"</p>
         <For each=move || variations key=|_| "42" let(variation)>
             <DropdownMenu>
@@ -124,8 +126,26 @@ pub fn DebugDropdown() -> impl IntoView {
                 </DropdownMenuContent>
             </DropdownMenu>
         </For>
+    }
+}
 
-        <p>"Dialog Trigger"</p>
+#[component]
+pub fn DebugDropdown() -> impl IntoView {
+    view! {
+        <h1 class="text-4xl font-semibold">"Dropdown Menu"</h1>
+        <ul class="singlestage-ulist text-(--muted-foreground)">
+            <li>"Console should log \"hey\" when clicked"</li>
+            <li>"Console should log \"hey\" when tapped"</li>
+            <li>
+                "Console should log \"hey\" when selected with keyboard and "<Kbd>"Enter"</Kbd>
+                " is pressed"
+            </li>
+        </ul>
+
+        <DropdownSignal />
+        <DropdownDismiss />
+        <DropdownPosition />
+
         <DropdownTriggersDialog />
     }
 }

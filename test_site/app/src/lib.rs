@@ -62,7 +62,7 @@ pub fn SidebarButton() -> impl IntoView {
 #[component]
 pub fn SidebarComponent() -> impl IntoView {
     let routes = StoredValue::new([
-        "All",
+        // "All",
         "Button",
         "Checkbox",
         "Context Menu",
@@ -156,7 +156,8 @@ pub fn App() -> impl IntoView {
                 <Routes fallback=NotFound>
                     <ParentRoute path=StaticSegment("") view=SidebarComponent>
                         <Route path=StaticSegment("/") view=Home />
-                        <Route path=StaticSegment("/all") view=DebugAll />
+                        // TODO: Figure out why Trunk won't compile this
+                        // <Route path=StaticSegment("/all") view=DebugAll />
                         <Route path=StaticSegment("/button") view=DebugButton />
                         <Route path=StaticSegment("/checkbox") view=DebugCheckbox />
                         <Route path=StaticSegment("/context_menu") view=DebugContextMenu />
