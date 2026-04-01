@@ -21,4 +21,4 @@ pub use separator::*;
 pub use title::*;
 
 #[derive(Clone)]
-pub struct ItemContext {}
+pub(crate) struct ItemContext {}

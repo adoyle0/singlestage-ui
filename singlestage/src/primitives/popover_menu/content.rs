@@ -130,16 +130,12 @@ pub fn MenuContentPrimitive(
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     Effect::new(move || {
-        // Do this outside of the `if let Some(popover)` otherwise the signal doesn't get picked up
-        // for tracking with client routing for some reason
-        let open = if let Some(sub) = use_context::<MenuSubContext>() {
-            sub.open.get()
-        } else {
-            menu.open.get()
-        };
-
-        if let Some(popover) = menu_ref.get_untracked() {
-            let _ = popover.toggle_popover_with_force(open);
+        if let Some(popover) = menu_ref.get() {
+            if let Some(sub) = use_context::<MenuSubContext>() {
+                let _ = popover.toggle_popover_with_force(sub.open.get());
+            } else {
+                let _ = popover.toggle_popover_with_force(menu.open.get());
+            };
         }
     });
 

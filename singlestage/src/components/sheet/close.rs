@@ -1,7 +1,7 @@
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct SheetCloseContext {}
+pub(crate) struct SheetCloseContext {}
 
 #[component]
 pub fn SheetClose(children: Children) -> impl IntoView {

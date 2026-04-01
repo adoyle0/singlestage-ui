@@ -10,7 +10,7 @@ use crate::Reactive;
 use leptos::prelude::MaybeProp;
 
 #[derive(Clone)]
-pub struct SelectContext {
+pub(crate) struct SelectContext {
     multiple: MaybeProp<bool>,
     value: Reactive<String>,
 }

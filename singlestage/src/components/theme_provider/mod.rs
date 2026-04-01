@@ -8,8 +8,6 @@ pub use mode::*;
 use leptos::prelude::*;
 use leptos_meta::Style;
 
-// TODO: CSS should be in an actual css file and run through tailwind somehow. This works for now
-
 #[derive(Clone)]
 pub struct ThemeProviderContext {
     /// Set the theme's light/dark mode behavior. Defaults to `Mode::Auto`.

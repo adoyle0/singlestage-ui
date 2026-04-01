@@ -1,7 +1,7 @@
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct DialogCancelContext {}
+pub(crate) struct DialogCancelContext {}
 
 #[component]
 pub fn DialogCancelPrimitive(children: Children) -> impl IntoView {

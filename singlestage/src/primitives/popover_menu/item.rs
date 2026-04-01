@@ -10,7 +10,7 @@ pub enum MenuItemPrimitiveType {
 }
 
 #[derive(Clone)]
-pub struct MenuItemContext {
+pub(crate) struct MenuItemContext {
     pub dismiss: Reactive<bool>,
 }
 

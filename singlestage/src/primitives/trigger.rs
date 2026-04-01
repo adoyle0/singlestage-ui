@@ -1,7 +1,7 @@
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct TriggerContext {}
+pub(crate) struct TriggerContext {}
 
 #[component]
 pub fn TriggerPrimitive(children: Children) -> impl IntoView {

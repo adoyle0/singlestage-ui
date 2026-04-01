@@ -2,7 +2,7 @@ use crate::{Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct DropdownMenuContext {}
+pub(crate) struct DropdownMenuContext {}
 
 /// Contains all the parts of a dropdown menu.
 #[component]

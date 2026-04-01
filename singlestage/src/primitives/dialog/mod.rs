@@ -22,7 +22,7 @@ use crate::Reactive;
 use leptos::prelude::*;
 
 #[derive(Clone, Default)]
-pub struct DialogContext {
+pub(crate) struct DialogContext {
     pub alert: bool,
     pub described_by: RwSignal<String>,
     pub labelled_by: RwSignal<String>,

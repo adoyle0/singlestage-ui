@@ -8,7 +8,7 @@ use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct CollapsibleContext {
+pub(crate) struct CollapsibleContext {
     pub open: Reactive<bool>,
 }
 

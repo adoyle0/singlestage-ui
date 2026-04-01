@@ -2,7 +2,7 @@ use crate::{Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone, Default)]
-pub struct ContextMenuContext {
+pub(crate) struct ContextMenuContext {
     pub x: RwSignal<i32>,
     pub y: RwSignal<i32>,
 }

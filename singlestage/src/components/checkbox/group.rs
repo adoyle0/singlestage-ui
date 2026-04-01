@@ -171,7 +171,13 @@ pub fn CheckboxGroup(
 
     let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
 
-    let context = CheckboxGroupContext { invalid, value };
+    let context = CheckboxGroupContext {
+        name: name
+            .get_untracked()
+            .unwrap_or(uuid::Uuid::new_v4().to_string()),
+        invalid,
+        value,
+    };
 
     view! {
         <fieldset

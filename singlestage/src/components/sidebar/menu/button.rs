@@ -3,7 +3,7 @@
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
-pub struct SidebarMenuButtonContext {}
+pub(crate) struct SidebarMenuButtonContext {}
 
 #[component]
 pub fn SidebarMenuButton(children: Children) -> impl IntoView {
