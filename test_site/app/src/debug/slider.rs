@@ -36,7 +36,6 @@ pub fn DebugSlider() -> impl IntoView {
 
         <form id="slider">
             <Slider disabled max min step value />
-            <Slider default=42. />
         </form>
         <Label>"Min" <Slider min=0. max=value step value=min /></Label>
         <Label>"Max" <Slider min=value max=100. step value=max /></Label>

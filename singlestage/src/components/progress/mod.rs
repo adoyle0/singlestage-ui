@@ -1,14 +1,15 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Displays progress.
 #[component]
 pub fn Progress(
     /// The value that represents 100%, or full.
-    #[prop(optional, into)]
-    max: MaybeProp<f64>,
+    #[prop(optional, into, default = Reactive::new(100.))]
+    max: Reactive<f64>,
     /// The current progress value to be rendered.
     #[prop(optional, into)]
-    value: MaybeProp<f64>,
+    value: Reactive<f64>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -23,7 +24,7 @@ pub fn Progress(
     #[prop(optional, into)]
     autocapitalize: MaybeProp<String>,
     /// Grabs focus once the page has finished loading. Only one element on the page can be focused
-    /// at a time.
+    /// at a time.unwrap_unwrap_
     #[prop(optional, into)]
     autofocus: MaybeProp<bool>,
     /// Apply classes to the element.
@@ -157,7 +158,7 @@ pub fn Progress(
     view! {
         <progress
             class=move || format!("singlestage-progress {}", class.get().unwrap_or_default())
-            max=move || max.get().unwrap_or(100.)
+            max=move || max.get()
             value=move || value.get()
 
             {..global_attrs_1}
