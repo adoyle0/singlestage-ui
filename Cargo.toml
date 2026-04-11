@@ -45,6 +45,9 @@ toml = "1.0"
 quote = "1.0"
 syn = "2.0"
 
+# Docs macro
+rayon = "1.11"
+
 [profile.wasm-release]
 inherits = "release"
 opt-level = 'z'
