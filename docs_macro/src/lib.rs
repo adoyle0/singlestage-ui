@@ -6,12 +6,10 @@ use highlight::*;
 use proc_macro::TokenStream;
 use rayon::prelude::*;
 use serde::Deserialize;
-use std::fmt::Write;
-use std::path::PathBuf;
 use std::{
     fs::*,
     io::{BufReader, Read},
-    path::Path,
+    path::{Path, PathBuf},
 };
 
 #[derive(Deserialize)]
@@ -158,29 +156,26 @@ fn string_to_snake(input: &str) -> String {
         .collect()
 }
 
-fn get_component_paths() -> Vec<Option<PathBuf>> {
+fn get_component_paths() -> Vec<PathBuf> {
     let comp_path = Path::new("./docs/src/routes/components");
 
-    read_dir(comp_path)
-        .unwrap()
-        .into_iter()
-        .map(|dir| {
-            let path = dir.unwrap().path();
-            if path.is_dir() {
-                if exists(path.join("component.toml")).unwrap() {
-                    Some(path)
-                } else {
-                    println!(
-                        "WARN: component.toml not found at {}",
-                        path.to_str().unwrap()
-                    );
-                    None
-                }
+    let mut buf = vec![];
+
+    read_dir(comp_path).unwrap().into_iter().for_each(|dir| {
+        let path = dir.unwrap().path();
+        if path.is_dir() {
+            if exists(path.join("component.toml")).unwrap() {
+                buf.push(path)
             } else {
-                None
+                println!(
+                    "WARN: component.toml not found at {}",
+                    path.to_str().unwrap()
+                );
             }
-        })
-        .collect()
+        }
+    });
+
+    buf
 }
 
 #[proc_macro]
@@ -188,28 +183,19 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
     let mut names = get_component_paths()
         .par_iter()
         .map(|path| {
-            if let Some(path) = path {
-                let component = ComponentPage::from_path(path);
+            let component = ComponentPage::from_path(path);
 
-                component.name.to_lowercase()
-            } else {
-                "".into()
-            }
+            component.name.to_lowercase()
         })
         .collect::<Vec<String>>();
 
-    if names.is_empty() {
-        panic!("Names list is empty")
-    }
-
-    let mut output = String::from("view!{");
-
     names.sort();
-    for name in names {
-        write!(
-            output,
-            r#"
 
+    let links = names
+        .par_iter()
+        .map(|name| {
+            format!(
+                r#"
         <SidebarMenuItem>
             <SidebarMenuButton>
                 <Link
@@ -219,15 +205,15 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
             </SidebarMenuButton>
         </SidebarMenuItem>
         "#,
-            string_to_kebab(&name),
-            string_to_title(&name)
-        )
-        .unwrap()
-    }
+                string_to_kebab(&name),
+                string_to_title(&name)
+            )
+        })
+        .collect::<String>();
 
-    output.push('}');
-
-    output.parse().expect("Error parsing output")
+    format!("view!{{{}}}", links)
+        .parse()
+        .expect("Error parsing output")
 }
 
 #[proc_macro]
@@ -235,25 +221,17 @@ pub fn generate_component_routes(_input: TokenStream) -> TokenStream {
     let routes = get_component_paths()
         .par_iter()
         .map(|path| {
-            if let Some(path) = path {
-                let component = ComponentPage::from_path(path);
+            let component = ComponentPage::from_path(path);
 
-                format!(
-                    r#"
+            format!(
+                r#"
             <Route path=StaticSegment("/{}") view={}Route />
 "#,
-                    string_to_kebab(&component.name),
-                    string_to_pascal(&component.name)
-                )
-            } else {
-                "".into()
-            }
+                string_to_kebab(&component.name),
+                string_to_pascal(&component.name)
+            )
         })
         .collect::<String>();
-
-    if routes.is_empty() {
-        panic!("Routes list is empty")
-    }
 
     format!(
         r#"
@@ -278,102 +256,114 @@ pub fn ComponentRoutes() -> impl MatchNestedRoutes + Clone {{
 
 #[proc_macro]
 pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
+    // Set up some syntax highlighting stuff up front so it's not done per thread
+    use std::sync::Arc;
+    use syntect::{
+        highlighting::ThemeSet, html::start_highlighted_html_snippet, parsing::SyntaxSet,
+    };
+
+    let ss = Arc::new(SyntaxSet::load_defaults_newlines());
+    let ts = ThemeSet::load_defaults();
+    let theme = Arc::new(&ts.themes["Solarized (light)"]);
+    let (_, bg) = start_highlighted_html_snippet(&theme);
+    let bg = Arc::new(bg);
+
     get_component_paths()
         .par_iter()
         .map(|path| {
-            let mut buf = String::new();
+            let component = ComponentPage::from_path(&path);
+            let component_module_name = path.iter().last().unwrap().to_str().unwrap();
 
-            if let Some(path) = path {
-                let component = ComponentPage::from_path(&path);
-                let component_module_name = path.iter().last().unwrap().to_str().unwrap();
-
-                // Generate info block
-                let mut info = String::new();
-
-                if let Some(special_info) = component.info {
-                    write!(
-                        info,
-                        r#"<Alert>
+            // Generate info block
+            let info = if let Some(special_info) = component.info {
+                format!(
+                    r#"<Alert>
                 {{icon!(icondata::LuInfo)}}
                 <AlertTitle>"{}"</AlertTitle>
                 <AlertDescription>"{}"</AlertDescription>
             </Alert>
             "#,
-                        special_info.title, special_info.description
-                    )
-                    .unwrap();
-                }
+                    special_info.title, special_info.description
+                )
+            } else {
+                String::new()
+            };
 
-                // Generate examples
-                let examples = if let Some(component_examples) = component.examples {
-                    Some(
-                        component_examples
-                            .par_iter()
-                            .map(|example| {
-                                let title = if let Some(example_title) = example.title.to_owned() {
-                                    Some(format!(r#"name="{}" "#, example_title))
-                                } else {
-                                    None
-                                };
+            // Generate examples
+            let examples = if let Some(component_examples) = component.examples {
+                Some(
+                    component_examples
+                        .par_iter()
+                        .map(|example| {
+                            let title = if let Some(example_title) = example.title.to_owned() {
+                                Some(format!(r#"name="{}" "#, example_title))
+                            } else {
+                                None
+                            };
 
-                                let description = if let Some(example_description) =
-                                    example.description.to_owned()
-                                {
+                            let description =
+                                if let Some(example_description) = example.description.to_owned() {
                                     Some(format!(r#"description="{}" "#, example_description))
                                 } else {
                                     None
                                 };
 
-                                let path = format!(
-                                    "./docs/src/routes/components/{}/examples/{}.rs",
-                                    component_module_name,
-                                    string_to_snake(&example.name)
-                                );
+                            let path = format!(
+                                "./docs/src/routes/components/{}/examples/{}.rs",
+                                component_module_name,
+                                string_to_snake(&example.name)
+                            );
 
-                                let example_code = highlight_html_from_file(path);
+                            let example_code = highlight_html_from_file(
+                                path,
+                                ss.clone(),
+                                theme.clone(),
+                                bg.clone(),
+                            );
 
-                                format!(
-                                    r##"<Example {}{}view={}Example.into_any() code=r#"{}"# />
+                            format!(
+                                r##"<Example {}{}view={}Example.into_any() code=r#"{}"# />
             "##,
-                                    title.unwrap_or_default(),
-                                    description.unwrap_or_default(),
-                                    string_to_pascal(&example.name),
-                                    example_code
-                                )
-                            })
-                            .collect::<String>(),
-                    )
-                } else {
-                    None
-                };
+                                title.unwrap_or_default(),
+                                description.unwrap_or_default(),
+                                string_to_pascal(&example.name),
+                                example_code
+                            )
+                        })
+                        .collect::<String>(),
+                )
+            } else {
+                None
+            };
 
-                // Generate API references
-                let mut references = String::new();
-
-                for reference in &component.references {
+            // Generate API references
+            let references = component
+                .references
+                .par_iter()
+                .map(|reference| {
                     let attrs = if reference.attrs.is_empty() {
                         None
                     } else {
-                        let mut buf = String::new();
-                        for attr in &reference.attrs {
-                            write!(
-                                buf,
-                                r##"
+                        let mut buf = reference
+                            .attrs
+                            .par_iter()
+                            .map(|attr| {
+                                format!(
+                                    r##"
                             (r#"{}"#,r#"{}"#,r#"{}"#,r#"{}"#),"##,
-                                attr.attr,
-                                attr.attr_type,
-                                attr.default,
-                                attr.description.to_owned().unwrap_or_default()
-                            )
-                            .unwrap();
-                        }
+                                    attr.attr,
+                                    attr.attr_type,
+                                    attr.default,
+                                    attr.description.to_owned().unwrap_or_default()
+                                )
+                            })
+                            .collect::<String>();
                         // Remove trailing comma
                         let _ = buf.pop();
                         Some(buf)
                     };
 
-                    write!(
-                        references,
+                    format!(
                         r###"
                 <Reference
                     name="{}"
@@ -391,19 +381,18 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
                             "None".into()
                         },
                     )
-                    .unwrap();
-                }
+                })
+                .collect::<String>();
 
-                // Generate anatomy snippet
-                let path = format!(
-                    "./docs/src/routes/components/{}/anatomy.rs",
-                    component_module_name
-                );
-                let anatomy = highlight_html_from_file(path);
+            // Generate anatomy snippet
+            let path = format!(
+                "./docs/src/routes/components/{}/anatomy.rs",
+                component_module_name
+            );
+            let anatomy = highlight_html_from_file(path, ss.clone(), theme.clone(), bg.clone());
 
-                write!(
-                    buf,
-                    r##"
+            format!(
+                r##"
 mod {};
 use {}::*;
 
@@ -420,20 +409,16 @@ pub fn {}Route() -> impl IntoView {{
     }}
 }}
 "##,
-                    component_module_name,
-                    component_module_name,
-                    string_to_pascal(&component.name),
-                    string_to_title(&component.name),
-                    component.description,
-                    info,
-                    examples.unwrap_or_default(),
-                    anatomy,
-                    references
-                )
-                .unwrap();
-            }
-
-            buf
+                component_module_name,
+                component_module_name,
+                string_to_pascal(&component.name),
+                string_to_title(&component.name),
+                component.description,
+                info,
+                examples.unwrap_or_default(),
+                anatomy,
+                references
+            )
         })
         .collect::<String>()
         .parse()
