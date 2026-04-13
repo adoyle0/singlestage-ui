@@ -1,5 +1,6 @@
 @layer components {
-  .singlestage-btn:invalid {
+  .singlestage-btn:invalid,
+  .singlestage-btn[aria-invalid="true"] {
     @apply border-destructive/50
     ring-destructive/40;
   }

@@ -185,36 +185,39 @@ pub fn Textarea(
         }
     };
 
+    Effect::new(move || {
+        if let Some(val) = default.get()
+            && let Some(input) = textarea_ref.get()
+        {
+            let _ = input.set_default_value(&val);
+
+            value.set(val);
+        }
+    });
+
+    let update_disabled = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_disabled = field.disabled.get();
+            disabled.set(is_disabled);
+            is_disabled
+        } else {
+            disabled.get()
+        }
+    };
+
+    let update_invalid = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_invalid = field.invalid.get();
+            invalid.set(is_invalid);
+            is_invalid
+        } else {
+            invalid.get()
+        }
+    };
+
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
     };
-
-    Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked()
-            && let Some(default_value) = default.get()
-        {
-            let _ = textarea.set_default_value(&default_value);
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked() {
-            textarea.set_value(&value.get());
-        }
-    });
-
-    // HACK: this needs to be forced for some reason and will
-    // probably cause issues when setting disabled on the
-    // Textarea directly while it's inside of a field
-    Effect::new(move || {
-        if let Some(textarea) = textarea_ref.get_untracked() {
-            if let Some(field) = use_context::<FieldContext>() {
-                textarea.set_disabled(field.disabled.get())
-            } else {
-                textarea.set_disabled(disabled.get());
-            }
-        }
-    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -271,24 +274,8 @@ pub fn Textarea(
                     None
                 }
             }
-            aria_disabled=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                    Some("true".to_string())
-                } else if disabled.get() {
-                    Some("true".to_string())
-                } else {
-                    None
-                }
-            }
-            aria_invalid=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
-                    Some("true".to_string())
-                } else if invalid.get() {
-                    Some("true".to_string())
-                } else {
-                    None
-                }
-            }
+            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
+            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
@@ -312,15 +299,8 @@ pub fn Textarea(
                 )
             }
             dirname=move || dirname.get()
-            disabled=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                    Some(true)
-                } else if disabled.get() {
-                    Some(true)
-                } else {
-                    None
-                }
-            }
+            disabled=update_disabled
+            prop:disabled=update_disabled
             form=move || form.get()
             id={if let Some(field) = use_context::<FieldContext>() {
                 if let Some(id) = id.get_untracked() {
@@ -344,6 +324,7 @@ pub fn Textarea(
             readonly=move || readonly.get()
             required=move || required.get()
             rows=move || rows.get()
+            prop:value=move || value.get()
             wrap=move || wrap.get()
         />
     };
@@ -362,11 +343,7 @@ pub fn Textarea(
                 {children()}
             </Label>
             <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
-                {if let Some(default) = default.get_untracked() {
-                    default
-                } else {
-                    value.get_untracked()
-                }}
+                {default.get_untracked().unwrap_or(value.get_untracked())}
             </textarea>
         }
         .into_any()
@@ -378,11 +355,7 @@ pub fn Textarea(
                 {..global_attrs_2}
                 {..textarea_attrs}
             >
-                {if let Some(default) = default.get_untracked() {
-                    default
-                } else {
-                    value.get_untracked()
-                }}
+                {default.get_untracked().unwrap_or(value.get_untracked())}
             </textarea>
         }
         .into_any()

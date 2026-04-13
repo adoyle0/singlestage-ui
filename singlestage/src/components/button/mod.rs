@@ -1,6 +1,6 @@
 use crate::{
-    CollapsibleContext, InputGroupContext, PopoverContext, Reactive, SheetCloseContext,
-    SheetContext, SidebarMenuButtonContext, primitives::*,
+    CollapsibleContext, FieldContext, InputGroupContext, PopoverContext, Reactive,
+    SheetCloseContext, SheetContext, SidebarMenuButtonContext, primitives::*,
 };
 use leptos::prelude::*;
 
@@ -13,6 +13,9 @@ pub fn Button(
     /// Button types: submit | button | reset
     #[prop(optional, into)]
     button_type: MaybeProp<String>,
+    /// Whether the input is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The size of the button. Leave this empty for the default size.
     /// Sizes: small | large | icon | sm-icon | lg-icon
     #[prop(optional, into)]
@@ -191,6 +194,26 @@ pub fn Button(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let update_disabled = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_disabled = field.disabled.get();
+            disabled.set(is_disabled);
+            is_disabled
+        } else {
+            disabled.get()
+        }
+    };
+
+    let update_invalid = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_invalid = field.invalid.get();
+            invalid.set(is_invalid);
+            is_invalid
+        } else {
+            invalid.get()
+        }
+    };
+
     let button_attrs = view! {
         <{..}
             command=move || command.get()
@@ -279,6 +302,7 @@ pub fn Button(
                     None
                 }
             }
+            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
             aria_expanded=move || {
                 if is_trigger {
                     if let Some(collapsible) = use_context::<CollapsibleContext>()
@@ -295,6 +319,7 @@ pub fn Button(
             aria_haspopup=move || {
                 if is_trigger || in_popover_menu_item { Some("menu") } else { None }
             }
+            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
                 if variant.get().unwrap_or_default().as_str() == "none" || in_popover_menu_item {
@@ -370,7 +395,8 @@ pub fn Button(
                     )
                 }
             }
-            disabled=disabled.get_untracked()
+            disabled=update_disabled
+            prop:disabled=update_disabled
             id=move || {
                 if is_trigger {
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
@@ -472,7 +498,6 @@ pub fn Button(
                     popovertargetaction.get()
                 }
             }
-            prop:disabled=move || disabled.get()
             style:anchor-name=move || {
                 if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {

@@ -130,7 +130,7 @@ pub fn DialogContentPrimitive(
     let dialog_ref = NodeRef::<leptos::html::Dialog>::new();
 
     Effect::new(move || {
-        if let Some(dialog) = dialog_ref.get_untracked() {
+        if let Some(dialog) = dialog_ref.get() {
             match dialog_context.open.get() {
                 true => {
                     let _ = dialog.show_modal();

@@ -68,6 +68,8 @@ attributes."""
 attrs = [
   { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed <button> \
     `type` attribute to avoid name collisions.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
+    the input is disabled.""" },
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
     render the button.""" },
   { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specify \

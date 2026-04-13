@@ -269,30 +269,37 @@ pub fn Input(
         }
     };
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(default) = default.get()
-        {
-            input.set_default_value(&default);
-        }
-    });
+    let update_default = move || {
+        if let Some(val) = default.get() {
+            if let Some(input) = input_ref.get() {
+                let _ = input.set_default_value(&val);
+            }
 
-    Effect::new(
-        move || match input_type.get_untracked().unwrap_or_default().as_str() {
-            "file" => {
-                if value.get().is_empty()
-                    && let Some(input) = input_ref.get_untracked()
-                {
-                    input.set_value("");
-                }
-            }
-            _ => {
-                if let Some(input) = input_ref.get_untracked() {
-                    input.set_value(&value.get());
-                }
-            }
-        },
-    );
+            value.set(val);
+        }
+
+        default.get()
+    };
+
+    let update_disabled = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_disabled = field.disabled.get();
+            disabled.set(is_disabled);
+            is_disabled
+        } else {
+            disabled.get()
+        }
+    };
+
+    let update_invalid = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_invalid = field.invalid.get();
+            invalid.set(is_invalid);
+            is_invalid
+        } else {
+            invalid.get()
+        }
+    };
 
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
@@ -390,24 +397,8 @@ pub fn Input(
                     None
                 }
             }
-            aria_disabled=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                    Some("true".to_string())
-                } else if disabled.get() {
-                    Some("true".to_string())
-                } else {
-                    None
-                }
-            }
-            aria_invalid=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
-                    Some("true".to_string())
-                } else if invalid.get() {
-                    Some("true".to_string())
-                } else {
-                    None
-                }
-            }
+            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
+            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -429,15 +420,10 @@ pub fn Input(
                     class.get().unwrap_or_default(),
                 )
             }
-            disabled=move || {
-                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                    Some("true".to_string())
-                } else if disabled.get() {
-                    Some("true".to_string())
-                } else {
-                    None
-                }
-            }
+            default=update_default
+            prop:default=update_default
+            disabled=update_disabled
+            prop:disabled=update_disabled
             id={if let Some(field) = use_context::<FieldContext>() {
                 if let Some(id) = id.get_untracked() {
                     field.input_id.set(id.clone());
@@ -461,10 +447,8 @@ pub fn Input(
                     "text".to_string()
                 }
             }
-            value={
-                let value = value.get_untracked();
-                if value.is_empty() { None } else { Some(value) }
-            }
+            value=default.get_untracked().unwrap_or(value.get_untracked())
+            prop:value=move || value.get()
         />
     };
 

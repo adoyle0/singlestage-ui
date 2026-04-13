@@ -1,5 +1,5 @@
 #![allow(clippy::module_inception)]
-use std::include_str;
+#![feature(stmt_expr_attributes)]
 
 mod components;
 pub mod reactive;
@@ -12,6 +12,8 @@ pub(crate) mod primitives;
 extern crate singlestage_macro;
 #[cfg(feature = "macro")]
 pub use singlestage_macro::*;
+
+use std::include_str;
 
 #[cfg(feature = "theme_provider")]
 static CSS: &str = include_str!(concat!(env!("OUT_DIR"), "/singlestage.css"));

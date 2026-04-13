@@ -14,7 +14,8 @@
       @apply ring-3;
     }
 
-    &:invalid {
+    &:invalid,
+    &[aria-invalid="true"] {
       @apply ring-3;
     }
 
