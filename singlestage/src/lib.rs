@@ -1,5 +1,4 @@
 #![allow(clippy::module_inception)]
-#![feature(stmt_expr_attributes)]
 
 mod components;
 pub mod reactive;
