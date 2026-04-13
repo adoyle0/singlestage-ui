@@ -10,15 +10,11 @@ pub fn DebugFormReset() -> impl IntoView {
 
     let update_text = move |_| {
         input_value.set(String::from("updated value"));
-        input_default.set(String::from("updated value"));
         text_value.set(String::from("updated value"));
-        text_default.set(String::from("updated value"));
     };
 
     let reset_text = move |_| {
-        input_value.set(String::from("reset value"));
         input_default.set(String::from("reset value"));
-        text_value.set(String::from("reset value"));
         text_default.set(String::from("reset value"));
     };
 
@@ -40,37 +36,40 @@ pub fn DebugFormReset() -> impl IntoView {
 
         <form class="space-y-3" style="width: 540px;">
 
-            <Label attr:r#for="controlled-input">"Controlled Input"</Label>
-            <Input attr:id="controlled-input" value=input_value default=input_default />
+            <Input value=input_value default=input_default>
+                "Controlled Input"
+            </Input>
 
-            <Label attr:r#for="html-input">"HTML Input"</Label>
+            <Label label_for="html-input">"HTML Input"</Label>
             <input
                 id="html-input"
                 type="text"
                 class="singlestage-input"
-                value=move || input_default.get()
+                value=move || input_default.get_untracked()
                 prop:value=move || input_value.get()
             />
 
-            <Label attr:r#for="controlled-textarea">"Controlled Textarea"</Label>
-            <Textarea attr:id="controlled-textarea" value=text_value default=text_default />
+            <Textarea value=text_value default=text_default>
+                "Controlled Textarea"
+            </Textarea>
 
-            <Label attr:r#for="html-textarea">"HTML Textarea"</Label>
+            <Label label_for="html-textarea">"HTML Textarea"</Label>
             <textarea
                 class="singlestage-textarea"
                 id="html-textarea"
-                prop:textContent=move || text_default.get()
                 prop:value=move || text_value.get()
-            />
+            >
+                {move || text_default.get_untracked()}
+            </textarea>
 
             <span class="space-x-2">
-                <Button variant="outline" attr:r#type="button" on:click=update_text>
-                    "Controlled Update Text"
+                <Button variant="outline" button_type="button" on:click=update_text>
+                    "Controlled Update Text (value)"
                 </Button>
-                <Button variant="outline" attr:r#type="button" on:click=reset_text>
-                    "Controlled Reset Text"
+                <Button variant="outline" button_type="button" on:click=reset_text>
+                    "Controlled Reset Text (default)"
                 </Button>
-                <Button variant="outline" attr:r#type="reset">
+                <Button variant="outline" button_type="reset">
                     "HTML Reset"
                 </Button>
             </span>
