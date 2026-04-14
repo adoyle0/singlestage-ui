@@ -17,6 +17,9 @@ pub fn CheckboxPrimitive(
     /// Whether the input is invalid
     #[prop(into)]
     invalid: Reactive<bool>,
+    /// Set the size to render the Switch
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
 
     // CHECKBOX ATTRIBUTES
     //
@@ -160,38 +163,6 @@ pub fn CheckboxPrimitive(
         }
     };
 
-    let on_change = move |ev| {
-        let input_checked = event_target_checked(&ev);
-
-        checked.set(input_checked);
-
-        match primitive_type {
-            CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
-                if let Some(input_value) = value.get_untracked()
-                    && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-                {
-                    match input_checked {
-                        true => checkbox_group.value.update(|group_value| {
-                            group_value.push(input_value);
-                        }),
-                        false => checkbox_group.value.update(|group_value| {
-                            if let Some(index) =
-                                group_value.iter().position(|el| *el == input_value)
-                            {
-                                group_value.swap_remove(index);
-                            }
-                        }),
-                    }
-                }
-            }
-            CheckboxPrimitiveType::Radio => {
-                if let Some(radio_group) = use_context::<RadioGroupContext>() {
-                    radio_group.value.set(event_target_value(&ev));
-                }
-            }
-        }
-    };
-
     let update_checked = move || {
         if let Some(value) = value.get() {
             match primitive_type {
@@ -226,6 +197,64 @@ pub fn CheckboxPrimitive(
             is_disabled
         } else {
             disabled.get()
+        }
+    };
+
+    let update_invalid = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_invalid = field.invalid.get() || invalid.get();
+            is_invalid
+        } else {
+            match primitive_type {
+                CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
+                    if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                        let is_invalid = checkbox_group.invalid.get() || invalid.get();
+                        is_invalid
+                    } else {
+                        invalid.get()
+                    }
+                }
+                CheckboxPrimitiveType::Radio => {
+                    if let Some(radio_group) = use_context::<RadioGroupContext>() {
+                        let is_invalid = radio_group.invalid.get() || invalid.get();
+                        is_invalid
+                    } else {
+                        invalid.get()
+                    }
+                }
+            }
+        }
+    };
+
+    let on_change = move |ev| {
+        let input_checked = event_target_checked(&ev);
+
+        checked.set(input_checked);
+
+        match primitive_type {
+            CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
+                if let Some(input_value) = value.get_untracked()
+                    && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+                {
+                    match input_checked {
+                        true => checkbox_group.value.update(|group_value| {
+                            group_value.push(input_value);
+                        }),
+                        false => checkbox_group.value.update(|group_value| {
+                            if let Some(index) =
+                                group_value.iter().position(|el| *el == input_value)
+                            {
+                                group_value.swap_remove(index);
+                            }
+                        }),
+                    }
+                }
+            }
+            CheckboxPrimitiveType::Radio => {
+                if let Some(radio_group) = use_context::<RadioGroupContext>() {
+                    radio_group.value.set(event_target_value(&ev));
+                }
+            }
         }
     };
 
@@ -271,6 +300,7 @@ pub fn CheckboxPrimitive(
 
     let input_attrs = view! {
         <{..}
+            aria_checked=move || { if update_checked() { Some("true") } else { None } }
             aria_describedby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
@@ -280,34 +310,7 @@ pub fn CheckboxPrimitive(
                 }
             }
             aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
-            aria_invalid=move || {
-                match primitive_type {
-                    CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
-                        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-                            && checkbox_group.invalid.get()
-                        {
-                            Some("true".to_string())
-                        } else if invalid.get() {
-                            Some("true".to_string())
-                        } else {
-                            None
-                        }
-                    }
-                    CheckboxPrimitiveType::Radio => {
-                        if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
-                            Some("true".to_string())
-                        } else if let Some(radio_group) = use_context::<RadioGroupContext>()
-                            && radio_group.invalid.get()
-                        {
-                            Some("true".to_string())
-                        } else if invalid.get() {
-                            Some("true".to_string())
-                        } else {
-                            None
-                        }
-                    }
-                }
-            }
+            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
@@ -323,9 +326,17 @@ pub fn CheckboxPrimitive(
                 format!(
                     "{} {}",
                     match primitive_type {
-                        CheckboxPrimitiveType::Checkbox => "singlestage-checkbox",
-                        CheckboxPrimitiveType::Switch => "singlestage-switch",
-                        CheckboxPrimitiveType::Radio => "singlestage-radio",
+                        CheckboxPrimitiveType::Checkbox => "singlestage-checkbox".to_owned(),
+                        CheckboxPrimitiveType::Switch => {
+                            format!(
+                                "singlestage-switch {}",
+                                match size.get().unwrap_or_default().as_str() {
+                                    "small" | "sm" => "singlestage-switch-size-sm",
+                                    _ => "singlestage-switch-size-default",
+                                },
+                            )
+                        }
+                        CheckboxPrimitiveType::Radio => "singlestage-radio".to_owned(),
                     },
                     class.get().unwrap_or_default(),
                 )

@@ -9,6 +9,9 @@ pub fn Switch(
     /// Whether the input is invalid
     #[prop(optional, into)]
     invalid: Reactive<bool>,
+    /// Set the size to render the Switch
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
 
     // CHECKBOX ATTRIBUTES
     //
@@ -195,6 +198,7 @@ pub fn Switch(
                 node_ref
                 readonly
                 required
+                size
                 value
 
                 {..global_attrs_1}
@@ -219,6 +223,7 @@ pub fn Switch(
                 node_ref
                 readonly
                 required
+                size
                 value
 
                 {..global_attrs_1}

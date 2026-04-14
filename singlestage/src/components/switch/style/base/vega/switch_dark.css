@@ -1,0 +1,21 @@
+@layer base {
+  .singlestage-switch {
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+
+    &:not(&:checked) {
+      @apply bg-input/80;
+    }
+
+    &:not(&:checked):before {
+      @apply bg-foreground;
+    }
+
+    &:checked:after {
+      @apply bg-primary-foreground;
+    }
+  }
+}
