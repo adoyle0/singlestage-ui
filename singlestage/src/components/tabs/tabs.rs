@@ -7,6 +7,10 @@ use leptos::{context::Provider, prelude::*};
 pub fn Tabs(
     children: Children,
 
+    /// Set which direction the tabs should flow.
+    /// Accepted values: "horizontal" | "vertical"
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
     /// Reactive signal coupled to the value of the current selected tab
     #[prop(optional, into)]
     value: Reactive<String>,
@@ -160,7 +164,16 @@ pub fn Tabs(
 
     view! {
         <div
-            class=move || { format!("singlestage-tabs {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-tabs {} {}",
+                    match orientation.get().unwrap_or_default().as_str() {
+                        "vertical" => "singlestage-tabs-orientation-vertical",
+                        _ => "singlestage-tabs-orientation-horizontal",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

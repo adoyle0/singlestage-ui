@@ -4,6 +4,24 @@ description = "A set of layered sections of content—known as tab panels—that
 [[examples]]
 name = "tabs"
 
+[[examples]]
+name = "tabs line"
+title = "Line"
+description = "Use the line variant for a line style."
+
+[[examples]]
+name = "tabs vertical"
+title = "Vertical"
+description = "Use the vertical orientation for vertical tabs."
+
+[[examples]]
+name = "tabs disabled"
+title = "Disabled"
+
+[[examples]]
+name = "tabs icons"
+title = "Icons"
+
 [[references]]
 name = "Tabs"
 description = "Contains all the tabs component parts."
@@ -11,6 +29,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Set \
+    which direction the tabs should flow. Accepted values: "horizontal" | "vertical".""" },
   { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """Reactive \
     signal coupled to the `value` of the current selected tab.""" },
 ]
@@ -32,7 +52,10 @@ description = "Contains the triggers that are aligned along the edge of the acti
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "variant", attr_type = "String", default = """"default"""", description = """Set the \
+    display variant of the tab buttons. Accepted values: "default" | "line".""" },
+]
 
 [[references]]
 name = "TabsTrigger"

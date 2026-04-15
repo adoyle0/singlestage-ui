@@ -1,58 +1,112 @@
 @layer components {
   .singlestage-tabs {
-    @apply flex
-    flex-col
-    gap-2;
+    @apply flex;
+  }
 
-    [role="tablist"] {
-      @apply bg-muted
-      h-9
-      inline-flex
-      items-center
-      justify-center
-      p-[3px]
-      rounded-lg
-      text-muted-foreground
-      w-fit;
+  .singlestage-tabs-list {
+    @apply inline-flex
+    items-center
+    justify-center
+    text-muted-foreground
+    w-fit;
+  }
 
-      [role="tab"] {
-        @apply [&_svg:not([class*='size-'])]:size-4
-        [&_svg]:pointer-events-none
-        [&_svg]:shrink-0
-        border
-        border-transparent
-        disabled:opacity-50
-        disabled:pointer-events-none
-        flex-1
-        focus-visible:border-ring
-        focus-visible:outline-1
-        focus-visible:outline-ring
-        focus-visible:ring-3
-        focus-visible:ring-ring/50
-        font-medium
-        gap-1.5
-        h-[calc(100%_-_1px)]
-        inline-flex
-        items-center
-        justify-center
-        px-2
-        py-1
-        rounded-md
-        text-foreground
-        text-sm
-        transition-[color,box-shadow]
-        whitespace-nowrap;
+  .singlestage-tabs-trigger {
+    @apply flex-1
+    h-[calc(100%-1px)]
+    inline-flex
+    items-center
+    justify-center
+    relative
+    text-foreground/60
+    transition-all
+    whitespace-nowrap;
 
-        &[aria-selected="true"] {
-          @apply bg-background
-          shadow-sm;
-        }
-      }
+    /* Underline */
+    @apply after:absolute
+    after:bg-foreground
+    after:opacity-0
+    after:transition-opacity;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
     }
 
-    [role="tabpanel"] {
-      @apply flex-1
-      outline-none;
+    &:focus-visible {
+      @apply border-ring
+      outline-1
+      outline-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:hover {
+      @apply text-foreground;
+    }
+
+    &[aria-selected="true"] {
+      @apply bg-background
+      text-foreground;
+    }
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
+  }
+
+  .singlestage-tabs-content {
+    @apply flex-1
+    outline-none;
+  }
+
+  .singlestage-tabs-list-variant-default {
+    @apply bg-muted;
+  }
+
+  .singlestage-tabs-list-variant-line {
+    @apply bg-transparent
+    gap-1;
+
+    .singlestage-tabs-trigger {
+      @apply bg-transparent;
+
+      &[aria-selected="true"] {
+        @apply bg-transparent;
+
+        /* Underline */
+        @apply after:opacity-100;
+      }
+    }
+  }
+
+  .singlestage-tabs-orientation-horizontal {
+    @apply flex-col;
+
+    .singlestage-tabs-trigger {
+      /* Underline */
+      @apply after:bottom-[-5px]
+      after:h-0.5
+      after:inset-x-0;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-list {
+      @apply flex-col
+      h-fit;
+    }
+
+    .singlestage-tabs-trigger {
+      @apply justify-start
+      w-full;
+
+      /* Underline */
+      @apply after:-right-1
+      after:inset-y-0
+      after:w-0.5;
     }
   }
 }
