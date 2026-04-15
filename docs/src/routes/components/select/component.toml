@@ -49,8 +49,8 @@ attrs = [
     appearance and behavior.""" },
   { attr = "placeholder", attr_type = "String", default = """""""", description = """Sets a \
     placeholder value displayed on initial load. Setting default will override this value.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
-    reactive value coupled to the currently selected item's value.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive value \
+    coupled to the currently selected item's value.""" },
 ]
 
 [[references]]

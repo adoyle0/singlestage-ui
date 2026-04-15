@@ -45,10 +45,10 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#additional_attributes">checkbox</a> \
 attributes."""
 attrs = [
-  { attr = "checked", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal coupled to the Switch's checked value.""" },
-  { attr = "invalid", attr_type = "Reactive<bool>", default = "false", description = """Set \
-    whether to render the Switch as invalid.""" },
-  { attr = "size", attr_type = "MaybeProp<String>", default = """"default"""", description = """\
-    Set the size to render the Switch.""" },
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the Switch's checked value.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether to \
+    render the Switch as invalid.""" },
+  { attr = "size", attr_type = "String", default = """"default"""", description = """ Set the \
+    size to render the Switch.""" },
 ]

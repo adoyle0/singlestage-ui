@@ -31,8 +31,8 @@ attributes."""
 attrs = [
   { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Set \
     which direction the tabs should flow. Accepted values: "horizontal" | "vertical".""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """Reactive \
-    signal coupled to the `value` of the current selected tab.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """Reactive signal \
+    coupled to the `value` of the current selected tab.""" },
 ]
 
 [[references]]

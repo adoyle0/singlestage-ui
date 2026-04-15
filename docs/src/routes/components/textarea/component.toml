@@ -35,6 +35,6 @@ attrs = [
     not the textarea is disabled.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggles invalid \
     appearance.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """Reactive \
-    signal coupled to the value of the textarea.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """Reactive signal \
+    coupled to the value of the textarea.""" },
 ]

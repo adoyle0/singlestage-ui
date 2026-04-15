@@ -35,8 +35,8 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio#additional_attributes">radio</a> \
 attributes."""
 attrs = [
-  { attr = "checked", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal coupled to the radio button's checked value.""" },
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the radio button's checked value.""" },
 ]
 
 [[references]]
@@ -52,6 +52,6 @@ attrs = [
     or update the default selected value for the RadioGroup.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """A \
     reactive signal that toggles whether all the children Radios appear invalid or not.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
-    reactive value coupled to the currently selected Radio's value.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive value \
+    coupled to the currently selected Radio's value.""" },
 ]
