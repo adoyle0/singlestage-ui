@@ -12,11 +12,11 @@
       @apply ring-3;
     }
 
-    &:has(svg:first-child) {
+    &:has(svg:first-child:not(svg:last-child)) {
       @apply pl-1.5;
     }
 
-    &:has(svg:last-child) {
+    &:has(svg:last-child:not(svg:first-child)) {
       @apply pr-1.5;
     }
 

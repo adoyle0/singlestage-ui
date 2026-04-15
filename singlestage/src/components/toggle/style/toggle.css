@@ -1,54 +1,28 @@
 @layer components {
-  .singlestage-toggle-default,
-  .singlestage-toggle-outline {
+  .singlestage-toggle {
     @apply inline-flex
     items-center
     justify-center
-    gap-2
-    rounded-md
-    text-sm
-    font-medium
-    hover:bg-muted
-    hover:text-muted-foreground
-    disabled:pointer-events-none
-    disabled:opacity-50
-    data-[state=on]:bg-accent
-    data-[state=on]:text-accent-foreground
-    [&_svg]:pointer-events-none
-    [&_svg:not([class*='size-'])]:size-4
-    [&_svg]:shrink-0
-    focus-visible:border-ring
-    focus-visible:ring-ring/50
-    focus-visible:ring-3
     outline-none
-    transition-[color,box-shadow]
-    aria-invalid:ring-destructive/20
-    dark:aria-invalid:ring-destructive/40
-    aria-invalid:border-destructive 
-    whitespace-nowrap
-    h-9
-    px-2
-    min-w-9;
-  }
+    whitespace-nowrap;
 
-  .singlestage-toggle-sm {
-    @apply h-8
-    px-1.5
-    min-w-8;
-  }
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
 
-  .singlestage-toggle-lg {
-    @apply h-10
-    px-2.5
-    min-w-10;
-  }
+    &:focus-visible {
+      @apply ring-[3px];
+    }
 
-  .singlestage-toggle-outline {
-    @apply border
-    border-input
-    bg-transparent
-    shadow-xs
-    hover:bg-accent 
-    hover:text-accent-foreground;
+    &:hover {
+      @apply bg-muted;
+    }
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
   }
 }

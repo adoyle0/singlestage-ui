@@ -1,4 +1,4 @@
-use crate::Reactive;
+use crate::{FieldContext, Reactive};
 use leptos::prelude::*;
 
 /// A two-state button that toggles between on and off.
@@ -8,13 +8,13 @@ pub fn Toggle(
 
     // TOGGLE ATTRIBUTES
     //
+    /// Reactive signal coupled to the toggle's pressed state.
+    #[prop(optional, into)]
+    pressed: Reactive<bool>,
     /// The size of the toggle. Leave this empty for the default size.
     /// Sizes: sm / small | lg / large
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// Reactive signal coupled to the toggle's pressed state.
-    #[prop(optional, into)]
-    pressed: Reactive<bool>,
     /// The display variant of the toggle. Leave this empty for the default variant.
     /// Variants: outline
     #[prop(optional, into)]
@@ -77,6 +77,12 @@ pub fn Toggle(
     /// The value associated with this button's `name` when submitted with form data.
     #[prop(optional, into)]
     value: MaybeProp<String>,
+
+    // ARIA ATTRIBUTES
+    //
+    /// Defines an accessible string value that can be used to name an element.
+    #[prop(optional, into)]
+    aria_label: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -182,10 +188,17 @@ pub fn Toggle(
     /// Defines localization behavior for the element.
     #[prop(optional, into)]
     translate: MaybeProp<String>,
-    /// Defines an accessible string value that can be used to name an element.
-    #[prop(optional, into)]
-    aria_label: MaybeProp<String>,
 ) -> impl IntoView {
+    let update_disabled = move || {
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_disabled = field.disabled.get();
+            disabled.set(is_disabled);
+            is_disabled
+        } else {
+            disabled.get()
+        }
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -204,6 +217,7 @@ pub fn Toggle(
             itemid=move || itemid.get()
         />
     };
+
     let global_attrs_2 = view! {
         <{..}
             itemprop=move || itemprop.get()
@@ -221,9 +235,9 @@ pub fn Toggle(
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
-            aria-label=move || aria_label.get()
         />
     };
+
     let button_attrs = view! {
         <{..}
             command=move || command.get()
@@ -240,31 +254,31 @@ pub fn Toggle(
             value=move || value.get()
         />
     };
+
     view! {
         <button
-            type="button"
+            aria_disabled=move || if update_disabled() { Some("true") } else { None }
+            aria_label=move || aria_label.get()
+            aria_pressed=move || if pressed.get() { Some("true") } else { None }
             class=move || {
                 format!(
-                    "{} {} {}",
+                    "singlestage-toggle {} {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "outline" => "singlestage-toggle-outline",
-                        _ => "singlestage-toggle-default",
+                        "outline" => "singlestage-toggle-variant-outline",
+                        _ => "singlestage-toggle-variant-default",
                     },
                     match size.get().unwrap_or_default().as_str() {
-                        "small" => "singlestage-toggle-sm",
-                        "sm" => "singlestage-toggle-sm",
-                        "large" => "singlestage-toggle-lg",
-                        "lg" => "singlestage-toggle-lg",
-                        _ => "",
+                        "sm" | "small" => "singlestage-toggle-size-sm",
+                        "lg" | "large" => "singlestage-toggle-size-lg",
+                        _ => "singlestage-toggle-size-default",
                     },
                     class.get().unwrap_or_default(),
                 )
             }
-            data-state=move || if pressed.get() { "on" } else { "off" }
-            aria-pressed=move || pressed.get().to_string()
-            disabled=move || disabled.get_untracked()
-            prop:disabled=move || disabled.get()
+            disabled=update_disabled
+            prop:disabled=update_disabled
             on:click=move |_| pressed.set(!pressed.get_untracked())
+            type="button"
 
             {..global_attrs_1}
             {..global_attrs_2}
