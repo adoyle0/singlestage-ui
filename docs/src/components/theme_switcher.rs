@@ -98,6 +98,11 @@ pub fn ThemeSwitcher() -> impl IntoView {
 
     view! {
         <span class="flex space-x-2">
+            <Tooltip side="bottom" value="Select base theme">
+                <Select class="h-8">
+                    <SelectOption>"Vega"</SelectOption>
+                </Select>
+            </Tooltip>
             <Tooltip side="bottom" value="Select theme">
                 <Select value=selected_theme class="h-8">
                     <SelectOptGroup label="Colors">
@@ -125,11 +130,14 @@ pub fn ThemeSwitcher() -> impl IntoView {
                         Mode::Light => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
                         Mode::Dark => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
                         _ => {
-                            view! {
-                                <span class="block dark:hidden">{icon!(icondata::LuSun)}</span>
-                                <span class="hidden dark:block">{icon!(icondata::LuMoon)}</span>
+                            match prefers_dark.get() {
+                                false => {
+
+                                    view! { <span>{icon!(icondata::LuSun)}</span> }
+                                        .into_any()
+                                }
+                                true => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
                             }
-                                .into_any()
                         }
                     }}
                 </Button>
