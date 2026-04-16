@@ -36,25 +36,30 @@ pub fn SidebarButton() -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();
 
     view! {
-        <Tooltip side="bottom" align="start" value="Toggle sidebar">
-            <Button
-                variant="ghost"
-                size="sm-icon"
-                class="flex gap-2 justify-between items-center px-4 w-full h-14"
-            >
-                <Show
-                    when=move || { !sidebar.open.get() }
-                    fallback=move || match sidebar.side.get().as_str() {
-                        "right" => view! { {icon!(icondata::LuPanelRightClose)} }.into_any(),
-                        _ => view! { {icon!(icondata::LuPanelLeftClose)} }.into_any(),
-                    }
+        <Tooltip>
+            <TooltipTrigger>
+                <Button
+                    variant="ghost"
+                    size="sm-icon"
+                    class="flex gap-2 justify-between items-center px-4 w-full h-14"
                 >
-                    {match sidebar.side.get().as_str() {
-                        "right" => view! { {icon!(icondata::LuPanelRightOpen)} }.into_any(),
-                        _ => view! { {icon!(icondata::LuPanelLeftOpen)} }.into_any(),
-                    }}
-                </Show>
-            </Button>
+                    <Show
+                        when=move || { !sidebar.open.get() }
+                        fallback=move || match sidebar.side.get().as_str() {
+                            "right" => view! { {icon!(icondata::LuPanelRightClose)} }.into_any(),
+                            _ => view! { {icon!(icondata::LuPanelLeftClose)} }.into_any(),
+                        }
+                    >
+                        {match sidebar.side.get().as_str() {
+                            "right" => view! { {icon!(icondata::LuPanelRightOpen)} }.into_any(),
+                            _ => view! { {icon!(icondata::LuPanelLeftOpen)} }.into_any(),
+                        }}
+                    </Show>
+                </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" align="start">
+                <p>"Toggle sidebar"</p>
+            </TooltipContent>
         </Tooltip>
     }
 }
@@ -75,6 +80,7 @@ pub fn SidebarComponent() -> impl IntoView {
         "Slider",
         "Textarea",
         "Toggle",
+        "Tooltip",
     ]);
 
     view! {
@@ -170,6 +176,7 @@ pub fn App() -> impl IntoView {
                         <Route path=StaticSegment("/slider") view=DebugSlider />
                         <Route path=StaticSegment("/textarea") view=DebugTextarea />
                         <Route path=StaticSegment("/toggle") view=DebugToggle />
+                        <Route path=StaticSegment("/tooltip") view=DebugTooltip />
                     </ParentRoute>
                 </Routes>
             </Router>

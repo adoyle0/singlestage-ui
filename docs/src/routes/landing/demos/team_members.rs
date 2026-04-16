@@ -22,7 +22,7 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"m@example.com"</p>
                         </div>
 
-                        <Select default="owner">
+                        <Select class="w-fit" default="owner">
                             <SelectOption value="viewer">"Viewer"</SelectOption>
                             <SelectOption value="developer">"Developer"</SelectOption>
                             <SelectOption value="billing">"Billing"</SelectOption>
@@ -41,7 +41,7 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"p@example.com"</p>
                         </div>
 
-                        <Select>
+                        <Select class="w-fit">
                             <SelectOption value="empty">"Empty"</SelectOption>
                             <SelectOption value="viewer">"Viewer"</SelectOption>
                             <SelectOption value="developer">"Developer"</SelectOption>
@@ -61,7 +61,7 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"i@example.com"</p>
                         </div>
 
-                        <Select default="viewer">
+                        <Select class="w-fit" default="viewer">
                             <SelectOption value="viewer">"Viewer"</SelectOption>
                             <SelectOption value="developer">"Developer"</SelectOption>
                             <SelectOption value="billing">"Billing"</SelectOption>

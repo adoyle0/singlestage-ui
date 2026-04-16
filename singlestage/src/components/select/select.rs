@@ -187,14 +187,14 @@ pub fn Select(
     let context = SelectContext { multiple, value };
 
     Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
+        if let Some(select) = select_ref.get() {
             select.set_disabled(disabled.get());
         }
     });
 
     // Update value reactively
     Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
+        if let Some(select) = select_ref.get() {
             let value = value.get();
             if !value.is_empty() {
                 select.set_value(&value);

@@ -98,54 +98,78 @@ pub fn ThemeSwitcher() -> impl IntoView {
 
     view! {
         <span class="flex space-x-2">
-            <Tooltip side="bottom" value="Select base theme">
-                <Select class="h-8">
-                    <SelectOption>"Vega"</SelectOption>
-                </Select>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Select class="h-8">
+                        <SelectOption>"Vega"</SelectOption>
+                    </Select>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Select base theme"</p>
+                </TooltipContent>
             </Tooltip>
-            <Tooltip side="bottom" value="Select theme">
-                <Select value=selected_theme class="h-8">
-                    <SelectOptGroup label="Colors">
-                        <SelectOption value="neutral">"Neutral"</SelectOption>
-                        <SelectOption value="amber">"Amber"</SelectOption>
-                        <SelectOption value="blue">"Blue"</SelectOption>
-                        <SelectOption value="lime">"Lime"</SelectOption>
-                        <SelectOption value="orange">"Orange"</SelectOption>
-                        <SelectOption value="purple">"Purple"</SelectOption>
-                        <SelectOption value="red">"Red"</SelectOption>
-                        <SelectOption value="rose">"Rose"</SelectOption>
-                        <SelectOption value="teal">"Teal"</SelectOption>
-                        <SelectOption value="violet">"Violet"</SelectOption>
-                        <SelectOption value="yellow">"Yellow"</SelectOption>
-                    </SelectOptGroup>
-                    <SelectOptGroup label="Layout">
-                        <SelectOption value="mono">"Mono"</SelectOption>
-                        <SelectOption value="scaled">"Scaled"</SelectOption>
-                    </SelectOptGroup>
-                </Select>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Select value=selected_theme class="h-8">
+                        <SelectOptGroup label="Colors">
+                            <SelectOption value="neutral">"Neutral"</SelectOption>
+                            <SelectOption value="amber">"Amber"</SelectOption>
+                            <SelectOption value="blue">"Blue"</SelectOption>
+                            <SelectOption value="lime">"Lime"</SelectOption>
+                            <SelectOption value="orange">"Orange"</SelectOption>
+                            <SelectOption value="purple">"Purple"</SelectOption>
+                            <SelectOption value="red">"Red"</SelectOption>
+                            <SelectOption value="rose">"Rose"</SelectOption>
+                            <SelectOption value="teal">"Teal"</SelectOption>
+                            <SelectOption value="violet">"Violet"</SelectOption>
+                            <SelectOption value="yellow">"Yellow"</SelectOption>
+                        </SelectOptGroup>
+                        <SelectOptGroup label="Layout">
+                            <SelectOption value="mono">"Mono"</SelectOption>
+                            <SelectOption value="scaled">"Scaled"</SelectOption>
+                        </SelectOptGroup>
+                    </Select>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Select color scheme"</p>
+                </TooltipContent>
             </Tooltip>
-            <Tooltip side="bottom" value="Toggle dark mode">
-                <Button variant="outline" size="sm-icon" on:click=swap_theme>
-                    {move || match theme_context.mode.get() {
-                        Mode::Light => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
-                        Mode::Dark => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
-                        _ => {
-                            match prefers_dark.get() {
-                                false => {
-
-                                    view! { <span>{icon!(icondata::LuSun)}</span> }
-                                        .into_any()
-                                }
-                                true => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
+            <Tooltip>
+                <TooltipTrigger>
+                    <Button variant="outline" size="sm-icon" on:click=swap_theme>
+                        {move || match theme_context.mode.get() {
+                            Mode::Light => {
+                                view! { <span>{icon!(icondata::LuSun)}</span> }.into_any()
                             }
-                        }
-                    }}
-                </Button>
+                            Mode::Dark => {
+                                view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any()
+                            }
+                            _ => {
+                                match prefers_dark.get() {
+                                    false => {
+                                        view! { <span>{icon!(icondata::LuSun)}</span> }.into_any()
+                                    }
+                                    true => {
+                                        view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any()
+                                    }
+                                }
+                            }
+                        }}
+                    </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Toggle dark mode"</p>
+                </TooltipContent>
             </Tooltip>
-            <Tooltip side="bottom" align="end" value="GitHub repository">
-                <a href="https://github.com/adoyle0/singlestage-ui">
-                    <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
-                </a>
+            <Tooltip>
+                <TooltipTrigger>
+                    <a href="https://github.com/adoyle0/singlestage-ui">
+                        <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
+                    </a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" align="end">
+                    <p>"GitHub repository"</p>
+                </TooltipContent>
             </Tooltip>
         </span>
     }

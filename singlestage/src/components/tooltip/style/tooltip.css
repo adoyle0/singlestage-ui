@@ -1,102 +1,38 @@
 @layer components {
-  @media (hover: hover) and (pointer: fine) {
-    [data-tooltip] {
-      @apply relative
-      w-fit;
+  .singlestage-tooltip-content {
+    @apply bg-foreground
+    max-w-xs
+    text-background
+    w-fit
+    z-50;
 
-      &:before {
-        @apply absolute
-        bg-primary
-        content-[attr(data-tooltip)]
-        invisible
-        max-w-xs
-        opacity-0
-        pointer-events-none
-        px-3
-        py-1.5
-        rounded-md
-        scale-95
-        text-primary-foreground
-        text-xs
-        transition-all
-        truncate
-        w-fit
-        z-[60];
-      }
-
-      &:hover:before {
-        @apply opacity-100
-        scale-100
-        visible;
-      }
-
-      &:focus-visible:not(:hover):before {
-        @apply hidden;
-      }
-
-      &:not([data-side]),
-      &[data-side="top"] {
-        @apply before:bottom-full
-        before:mb-1.5
-        before:translate-y-2
-        hover:before:translate-y-0;
-      }
-
-      &[data-side="bottom"] {
-        @apply before:-translate-y-2
-        before:mt-1.5
-        before:top-full
-        hover:before:translate-y-0;
-      }
-
-      &:not([data-side]),
-      &[data-side="top"],
-      &[data-side="bottom"] {
-        &[data-align="start"] {
-          @apply before:left-0;
-        }
-
-        &[data-align="end"] {
-          @apply before:right-0;
-        }
-
-        &:not([data-align]),
-        &[data-align="center"] {
-          @apply before:-translate-x-1/2
-          before:left-1/2;
-        }
-      }
-
-      &[data-side="left"] {
-        @apply before:mr-1.5
-        before:right-full
-        before:translate-x-2
-        hover:before:translate-x-0;
-      }
-
-      &[data-side="right"] {
-        @apply before:-translate-x-2
-        before:left-full
-        before:ml-1.5
-        hover:before:translate-x-0;
-      }
-
-      &[data-side="left"],
-      &[data-side="right"] {
-        &[data-align="start"] {
-          @apply before:top-0;
-        }
-
-        &[data-align="end"] {
-          @apply before:bottom-0;
-        }
-
-        &:not([data-align]),
-        &[data-align="center"] {
-          @apply before:-translate-y-1/2
-          before:top-1/2;
-        }
-      }
+    /* TODO: Arrows */
+    &.singlestage-popover-top {
+      @apply mb-1.5;
+    }
+    &.singlestage-popover-right {
+      @apply ml-1.5;
+    }
+    &.singlestage-popover-bottom {
+      @apply mt-1.5;
+    }
+    &.singlestage-popover-left {
+      @apply mr-1.5;
     }
   }
+
+  /* TODO: Arrows */
+  /* .singlestage-tooltip-arrow { */
+  /*   @apply bg-foreground */
+  /*   data-[side=bottom]:top-1 */
+  /*   data-[side=left]:-right-1 */
+  /*   data-[side=left]:-translate-y-1/2 */
+  /*   data-[side=left]:top-1/2! */
+  /*   data-[side=right]:-left-1 */
+  /*   data-[side=right]:-translate-y-1/2 */
+  /*   data-[side=right]:top-1/2! */
+  /*   data-[side=top]:-bottom-2.5 */
+  /*   fill-foreground */
+  /*   z-50; */
+  /* } */
 }

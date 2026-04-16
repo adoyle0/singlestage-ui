@@ -12,6 +12,7 @@ mod select;
 mod slider;
 mod textarea;
 mod toggle;
+mod tooltip;
 
 pub use button::*;
 pub use checkbox::*;
@@ -25,6 +26,7 @@ pub use select::*;
 pub use slider::*;
 pub use textarea::*;
 pub use toggle::*;
+pub use tooltip::*;
 
 #[component]
 pub fn DebugAll() -> impl IntoView {
@@ -42,6 +44,7 @@ pub fn DebugAll() -> impl IntoView {
             <DebugSlider />
             <DebugTextarea />
             <DebugToggle />
+            <DebugTooltip />
         </div>
     }
 }

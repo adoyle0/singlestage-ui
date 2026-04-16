@@ -1,11 +1,20 @@
-use crate::{Button, Reactive, SheetClose, SheetContext};
+use crate::TooltipContext;
 use leptos::prelude::*;
 
 #[component]
-pub fn SheetContent(
+pub fn TooltipContent(
     children: Children,
-    #[prop(optional, into)] side: Reactive<String>,
-    #[prop(optional, into, default = true.into())] show_close_button: MaybeProp<bool>,
+
+    /// Set where the tooltip is rendered along the chosen side.
+    ///
+    /// Accepted values: "start" | "center" | "end". Default is "center".
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side of the triggering element that the tooltip will spawn from.
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left". Default is "top".
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -85,9 +94,6 @@ pub fn SheetContent(
     /// List of the part names of the element.
     #[prop(optional, into)]
     part: MaybeProp<String>,
-    /// Designate an element as a popover element.
-    #[prop(optional, into)]
-    popover: MaybeProp<String>,
     /// Define the semantic meaning of content.
     #[prop(optional, into)]
     role: MaybeProp<String>,
@@ -112,20 +118,12 @@ pub fn SheetContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sheet_context = expect_context::<SheetContext>();
-    let overlay_ref = NodeRef::<leptos::html::Dialog>::new();
-    let sheet_ref = NodeRef::<leptos::html::Aside>::new();
+    let tooltip = expect_context::<TooltipContext>();
+    let content_ref = NodeRef::<leptos::html::Div>::new();
 
     Effect::new(move || {
-        if let Some(overlay) = overlay_ref.get() {
-            match sheet_context.open.get() {
-                true => {
-                    let _ = overlay.show_modal();
-                }
-                false => {
-                    overlay.close();
-                }
-            }
+        if let Some(content) = content_ref.get() {
+            let _ = content.toggle_popover_with_force(tooltip.open.get());
         }
     });
 
@@ -157,7 +155,6 @@ pub fn SheetContent(
             lang=move || lang.get()
             nonce=move || nonce.get()
             part=move || part.get()
-            popover=move || popover.get()
             role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
@@ -169,70 +166,32 @@ pub fn SheetContent(
     };
 
     view! {
-        <dialog
-            class="singlestage-sheet-overlay"
-            id={
-                let content_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                sheet_context.content_id.set(content_id.clone());
-                content_id
+        <div
+            class=move || {
+                format!(
+                    "singlestage-tooltip-content singlestage-popover singlestage-popover-animations {} {} {}",
+                    match side.get().unwrap_or_default().as_str() {
+                        "right" => "singlestage-popover-right",
+                        "bottom" => "singlestage-popover-bottom",
+                        "left" => "singlestage-popover-left",
+                        _ => "singlestage-popover-top",
+                    },
+                    match align.get().unwrap_or_default().as_str() {
+                        "start" => "singlestage-popover-start",
+                        "end" => "singlestage-popover-end",
+                        _ => "singlestage-popover-center",
+                    },
+                    class.get().unwrap_or_default(),
+                )
             }
-            node_ref=overlay_ref
-            on:click=move |ev| {
-                if let Some(sheet_ref) = sheet_ref.get_untracked() {
-                    let x = ev.x() as f64;
-                    let y = ev.y() as f64;
-                    let r = sheet_ref.get_bounding_client_rect();
-                    let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
-                        && x <= (r.left() + r.width());
-                    if !r_clicked {
-                        sheet_context.open.set(false)
-                    }
-                }
-            }
-            popover="auto"
-        >
-            <aside
-                class=move || {
-                    format!(
-                        "singlestage-sheet-content {} {}",
-                        match side.get().as_str() {
-                            "top" => "singlestage-sheet-side-top",
-                            "bottom" => "singlestage-sheet-side-bottom",
-                            "left" => "singlestage-sheet-side-left",
-                            _ => "singlestage-sheet-side-right",
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                }
+            node_ref=content_ref
+            popover="manual"
+            style:position-anchor=move || format!("--{}", tooltip.trigger_id.get())
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-                node_ref=sheet_ref
-            >
-                {children()}
-                <Show when=move || show_close_button.get().unwrap_or_default()>
-                    <SheetClose>
-                        <Button variant="ghost" class="singlestage-sheet-close" size="icon-sm">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-x-icon lucide-x"
-                            >
-                                <path d="M18 6 6 18" />
-                                <path d="m6 6 12 12" />
-                            </svg>
-                            <span class="sr-only">"Close"</span>
-                        </Button>
-                    </SheetClose>
-                </Show>
-            </aside>
-        </dialog>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </div>
     }
 }

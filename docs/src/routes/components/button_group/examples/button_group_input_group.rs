@@ -45,14 +45,19 @@ pub fn ButtonGroupInputGroupExample() -> impl IntoView {
                 <InputGroup class="rounded-full">
                     <Input placeholder disabled=voice_enabled />
                     <InputGroupAddon align="inline-end">
-                        <Tooltip value="Voice Mode">
-                            <Button
-                                on:click=move |_| voice_enabled.set(!voice_enabled.get())
-                                size="icon-xs"
-                                class
-                            >
-                                {icon!(icondata::LuAudioLines)}
-                            </Button>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button
+                                    on:click=move |_| voice_enabled.set(!voice_enabled.get())
+                                    size="icon-xs"
+                                    class
+                                >
+                                    {icon!(icondata::LuAudioLines)}
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>"Voice Mode"</p>
+                            </TooltipContent>
                         </Tooltip>
                     </InputGroupAddon>
                 </InputGroup>

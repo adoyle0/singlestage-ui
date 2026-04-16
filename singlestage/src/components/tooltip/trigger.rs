@@ -1,11 +1,9 @@
-use crate::{Button, Reactive, SheetClose, SheetContext};
+use crate::TooltipContext;
 use leptos::prelude::*;
 
 #[component]
-pub fn SheetContent(
+pub fn TooltipTrigger(
     children: Children,
-    #[prop(optional, into)] side: Reactive<String>,
-    #[prop(optional, into, default = true.into())] show_close_button: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -112,22 +110,7 @@ pub fn SheetContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sheet_context = expect_context::<SheetContext>();
-    let overlay_ref = NodeRef::<leptos::html::Dialog>::new();
-    let sheet_ref = NodeRef::<leptos::html::Aside>::new();
-
-    Effect::new(move || {
-        if let Some(overlay) = overlay_ref.get() {
-            match sheet_context.open.get() {
-                true => {
-                    let _ = overlay.show_modal();
-                }
-                false => {
-                    overlay.close();
-                }
-            }
-        }
-    });
+    let tooltip = expect_context::<TooltipContext>();
 
     let global_attrs_1 = view! {
         <{..}
@@ -140,7 +123,6 @@ pub fn SheetContent(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -169,70 +151,21 @@ pub fn SheetContent(
     };
 
     view! {
-        <dialog
-            class="singlestage-sheet-overlay"
+        <div
+            class=move || format!("singlestage-tooltip-trigger {}", class.get().unwrap_or_default())
             id={
-                let content_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                sheet_context.content_id.set(content_id.clone());
-                content_id
+                let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                tooltip.trigger_id.set(trigger_id.clone());
+                trigger_id
             }
-            node_ref=overlay_ref
-            on:click=move |ev| {
-                if let Some(sheet_ref) = sheet_ref.get_untracked() {
-                    let x = ev.x() as f64;
-                    let y = ev.y() as f64;
-                    let r = sheet_ref.get_bounding_client_rect();
-                    let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
-                        && x <= (r.left() + r.width());
-                    if !r_clicked {
-                        sheet_context.open.set(false)
-                    }
-                }
-            }
-            popover="auto"
-        >
-            <aside
-                class=move || {
-                    format!(
-                        "singlestage-sheet-content {} {}",
-                        match side.get().as_str() {
-                            "top" => "singlestage-sheet-side-top",
-                            "bottom" => "singlestage-sheet-side-bottom",
-                            "left" => "singlestage-sheet-side-left",
-                            _ => "singlestage-sheet-side-right",
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                }
+            on:mouseenter=move |_| { tooltip.open.set(true) }
+            on:mouseleave=move |_| { tooltip.open.set(false) }
+            style:anchor-name=move || format!("--{}", tooltip.trigger_id.get())
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-                node_ref=sheet_ref
-            >
-                {children()}
-                <Show when=move || show_close_button.get().unwrap_or_default()>
-                    <SheetClose>
-                        <Button variant="ghost" class="singlestage-sheet-close" size="icon-sm">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-x-icon lucide-x"
-                            >
-                                <path d="M18 6 6 18" />
-                                <path d="m6 6 12 12" />
-                            </svg>
-                            <span class="sr-only">"Close"</span>
-                        </Button>
-                    </SheetClose>
-                </Show>
-            </aside>
-        </dialog>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </div>
     }
 }
