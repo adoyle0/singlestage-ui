@@ -112,6 +112,11 @@
     @apply antialiased bg-background overscroll-none text-foreground;
   }
 
+  a:active,
+  button:active {
+    @apply opacity-60 md:opacity-100;
+  }
+
   .singlestage-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
