@@ -4,30 +4,21 @@ pub use mode::*;
 #[allow(non_snake_case)]
 pub mod Theme;
 
+#[allow(non_snake_case)]
+pub mod ThemeBase;
+
 use crate::{CSS, CSS_DARK};
-#[cfg(feature = "style_luma")]
-use crate::{CSS_LUMA, CSS_LUMA_DARK};
-#[cfg(feature = "style_lyra")]
-use crate::{CSS_LYRA, CSS_LYRA_DARK};
-#[cfg(feature = "style_maia")]
-use crate::{CSS_MAIA, CSS_MAIA_DARK};
-#[cfg(feature = "style_mira")]
-use crate::{CSS_MIRA, CSS_MIRA_DARK};
-#[cfg(feature = "style_nova")]
-use crate::{CSS_NOVA, CSS_NOVA_DARK};
-#[cfg(feature = "style_sera")]
-use crate::{CSS_SERA, CSS_SERA_DARK};
-#[cfg(feature = "style_vega")]
-use crate::{CSS_VEGA, CSS_VEGA_DARK};
 
 use leptos::prelude::*;
 use leptos_meta::Style;
 
 #[derive(Clone)]
 pub struct ThemeProviderContext {
-    /// Set the theme's light/dark mode behavior. Defaults to `Mode::Auto`.
+    /// Set which theme base to use
+    pub base: RwSignal<ThemeBase::ThemeBase>,
+    /// Set the theme's light/dark mode behavior
     pub mode: RwSignal<Mode>,
-    /// The get/set/update the current theme in use.
+    /// Set the current theme
     pub theme: RwSignal<Theme::Theme>,
 }
 
@@ -36,6 +27,9 @@ pub struct ThemeProviderContext {
 #[component]
 pub fn ThemeProviderInner(
     children: Children,
+    /// Set the initial theme base Defaults to ThemeBase::Vega.
+    #[prop(optional, into)]
+    base: MaybeProp<ThemeBase::ThemeBase>,
     /// Set the initial light/dark mode behavior. Defaults to `auto`/`Mode::Auto`.
     ///
     /// Accepted values: `auto` | `dark` | `light` or a `Mode`
@@ -47,8 +41,9 @@ pub fn ThemeProviderInner(
 ) -> impl IntoView {
     let mode = RwSignal::<Mode>::new(mode.get_untracked().unwrap_or_default().into());
     let theme = RwSignal::new(theme.get_untracked().unwrap_or(Theme::Neutral));
+    let base = RwSignal::new(base.get_untracked().unwrap_or(ThemeBase::Vega));
 
-    let context = ThemeProviderContext { theme, mode };
+    let context = ThemeProviderContext { base, mode, theme };
     provide_context(context);
 
     // TODO: Consider slicing up the base theme and merging everything to reduce css
@@ -59,13 +54,15 @@ pub fn ThemeProviderInner(
             id="theme-base"
             inner_html=move || {
                 match mode.get() {
-                    Mode::Dark => format!("{}{}", CSS_VEGA, CSS_VEGA_DARK),
-                    Mode::Light => CSS_VEGA.to_string(),
+                    Mode::Dark => {
+                        format!("{}{}", base.get().light.to_string(), base.get().dark.to_string())
+                    }
+                    Mode::Light => base.get().light.to_string(),
                     Mode::Auto => {
                         format!(
                             "{}\n\n@media (prefers-color-scheme: dark) {{{}}}",
-                            CSS_VEGA,
-                            CSS_VEGA_DARK,
+                            base.get().light.to_string(),
+                            base.get().dark.to_string(),
                         )
                     }
                 }

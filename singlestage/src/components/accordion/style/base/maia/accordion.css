@@ -1,24 +1,26 @@
 @layer base {
-  .singlestage-accordion-item:not(&:last-child) {
-    @apply border-b;
+  .singlestage-accordion {
+    @apply border
+    overflow-hidden
+    rounded-2xl;
+  }
+
+  .singlestage-accordion-item {
+    &:not(&:last-child) {
+      @apply border-b;
+    }
+
+    &[open] {
+      @apply bg-muted/50;
+    }
   }
 
   .singlestage-accordion-trigger {
     @apply font-medium
-    py-4
-    rounded-md
+    gap-6
+    p-4
     text-left
     text-sm;
-
-    &:focus-visible {
-      @apply border-ring
-      ring-3
-      ring-ring/50;
-
-      &:after {
-        @appy border-ring;
-      }
-    }
 
     &:hover {
       @apply underline;
@@ -33,14 +35,15 @@
     }
   }
 
+  .singlestage-accordion-content {
+    @apply duration-150
+    px-4
+    text-sm
+    transition-all;
+  }
+
   .singlestage-accordion-content-inner {
     @apply pb-4
     pt-0;
-  }
-
-  .singlestage-accordion-content {
-    @apply duration-150
-    text-sm
-    transition-all;
   }
 }

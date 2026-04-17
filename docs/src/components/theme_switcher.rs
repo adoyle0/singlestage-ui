@@ -7,6 +7,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
     let theme_context = expect_context::<ThemeProviderContext>();
     let prefers_dark = RwSignal::new(false);
     let selected_theme = RwSignal::new("neutral".to_string());
+    let selected_base = RwSignal::new("vega".to_string());
 
     // TODO: Make reactive
     Effect::new(move || {
@@ -96,12 +97,34 @@ pub fn ThemeSwitcher() -> impl IntoView {
             })
     });
 
+    Effect::new(move || {
+        // let _ = document()
+        //     .unchecked_ref::<web_sys::HtmlDocument>()
+        //     .set_cookie(format!("theme={}; Path=/", selected_theme.get()).as_str());
+
+        theme_context.base.set(match selected_base.get().as_str() {
+            "luma" => ThemeBase::Luma,
+            "lyra" => ThemeBase::Lyra,
+            "maia" => ThemeBase::Maia,
+            "mira" => ThemeBase::Mira,
+            "nova" => ThemeBase::Nova,
+            "sera" => ThemeBase::Sera,
+            _ => ThemeBase::Vega,
+        })
+    });
+
     view! {
         <span class="flex space-x-2">
             <Tooltip>
                 <TooltipTrigger>
-                    <Select class="h-8">
-                        <SelectOption>"Vega"</SelectOption>
+                    <Select value=selected_base class="h-8">
+                        <SelectOption value="luma">"Luma"</SelectOption>
+                        <SelectOption value="lyra">"Lyra"</SelectOption>
+                        <SelectOption value="maia">"Maia"</SelectOption>
+                        <SelectOption value="mira">"Mira"</SelectOption>
+                        <SelectOption value="nova">"Nova"</SelectOption>
+                        <SelectOption value="sera">"Sera"</SelectOption>
+                        <SelectOption value="vega">"Vega"</SelectOption>
                     </Select>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -161,16 +184,16 @@ pub fn ThemeSwitcher() -> impl IntoView {
                     <p>"Toggle dark mode"</p>
                 </TooltipContent>
             </Tooltip>
-            <Tooltip>
-                <TooltipTrigger>
-                    <a href="https://github.com/adoyle0/singlestage-ui">
-                        <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
-                    </a>
-                </TooltipTrigger>
-                <TooltipContent side="bottom" align="end">
-                    <p>"GitHub repository"</p>
-                </TooltipContent>
-            </Tooltip>
+        // <Tooltip>
+        // <TooltipTrigger>
+        // <a href="https://github.com/adoyle0/singlestage-ui">
+        // <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
+        // </a>
+        // </TooltipTrigger>
+        // <TooltipContent side="bottom" align="end">
+        // <p>"GitHub repository"</p>
+        // </TooltipContent>
+        // </Tooltip>
         </span>
     }
 }

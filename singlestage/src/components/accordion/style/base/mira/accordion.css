@@ -1,0 +1,49 @@
+@layer base {
+  .singlestage-accordion {
+    @apply border
+    overflow-hidden
+    rounded-md;
+  }
+
+  .singlestage-accordion-item {
+    &:not(&:last-child) {
+      @apply border-b;
+    }
+
+    #[open] {
+      @apply bg-muted/50;
+    }
+  }
+
+  .singlestage-accordion-trigger {
+    @apply font-medium
+    gap-6
+    p-2
+    text-left
+    text-xs/relaxed;
+
+    &:hover {
+      @apply underline;
+    }
+
+    > h3 {
+      > svg {
+        @apply ml-auto
+        size-4
+        text-muted-foreground;
+      }
+    }
+  }
+
+  .singlestage-accordion-content {
+    @apply duration-150
+    px-2
+    text-xs/relaxed
+    transition-all;
+  }
+
+  .singlestage-accordion-content-inner {
+    @apply pb-4
+    pt-0;
+  }
+}

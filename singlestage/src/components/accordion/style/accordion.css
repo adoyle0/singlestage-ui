@@ -6,10 +6,6 @@
   }
 
   .singlestage-accordion-item {
-    &:not(&:last-child) {
-      @apply border-b;
-    }
-
     &::details-content {
       block-size: 0;
       @apply block
@@ -34,32 +30,16 @@
   .singlestage-accordion-trigger {
     @apply border
     border-transparent
-    font-medium
     items-start
     list-none
     outline-none
     relative
-    text-left
     transition-all
     transition-discrete;
 
     &:disabled {
       @apply opacity-50
       pointer-events-none;
-    }
-
-    &:focus-visible {
-      @apply border-ring
-      ring-3
-      ring-ring/50;
-
-      &:after {
-        @appy border-ring;
-      }
-    }
-
-    &:hover {
-      @apply underline;
     }
 
     /* Safari */
@@ -74,19 +54,14 @@
       pointer-events-none;
 
       > svg {
-        @apply duration-200
-        ml-auto
-        size-4
-        text-muted-foreground
+        @apply duration-150
         transition-transform;
       }
     }
   }
 
   .singlestage-accordion-content {
-    @apply duration-200
-    transition-all
-    overflow-hidden;
+    @apply overflow-hidden;
   }
 
   .singlestage-accordion-content-inner {
@@ -97,6 +72,10 @@
       &:hover {
         @apply text-foreground;
       }
+    }
+
+    p:not(:last-child) {
+      @apply mb-4;
     }
   }
 }

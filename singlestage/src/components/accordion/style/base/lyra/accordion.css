@@ -5,14 +5,14 @@
 
   .singlestage-accordion-trigger {
     @apply font-medium
-    py-4
-    rounded-md
-    text-left
-    text-sm;
+        py-2.5
+        rounded-none
+        text-left
+        text-xs;
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-1
       ring-ring/50;
 
       &:after {
@@ -33,14 +33,14 @@
     }
   }
 
-  .singlestage-accordion-content-inner {
-    @apply pb-4
-    pt-0;
-  }
-
   .singlestage-accordion-content {
     @apply duration-150
-    text-sm
+    text-xs
     transition-all;
+  }
+
+  .singlestage-accordion-content-inner {
+    @apply pb-2.5
+    pt-0;
   }
 }

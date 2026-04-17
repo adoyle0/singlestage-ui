@@ -203,8 +203,6 @@ fn main() {
     }
 
     // Bundling
-    println!("Bundling CSS...");
-
     let features = [
         "accordion",
         "alert",
@@ -307,9 +305,9 @@ fn main() {
         );
         let bundle_path = Path::new(&out_dir).join(format!("bundle{}.css", mode));
         let output_path = Path::new(&out_dir).join(format!("singlestage{}.css", mode));
+        println!("Bundling css{}...", mode);
         run_tailwind(&tailwind_path, &bundle_path, &output_path, component_css);
         // TODO: Reduce dark style bloat
-        println!("Bundled css{}...", mode);
 
         base_styles.par_iter().for_each(|base_style| {
             if env::var(&format!(
@@ -357,10 +355,10 @@ fn main() {
                     Path::new(&out_dir).join(format!("bundle_{}{}.css", base_style, mode));
                 let output_path =
                     Path::new(&out_dir).join(format!("singlestage_{}{}.css", base_style, mode));
+                println!("Bundling base_{}{}...", base_style, mode);
                 run_tailwind(&tailwind_path, &bundle_path, &output_path, base_css);
                 // TODO: Reduce dark style bloat
                 // TODO: Reduce base style bloat
-                println!("Bundled base_{}{}...", base_style, mode);
             }
         });
     });
