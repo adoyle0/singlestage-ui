@@ -1,11 +1,16 @@
 @layer base {
   .singlestage-alert {
-    @apply border
-    gap-0.5
+    @apply after:-inset-y-px
+    after:-left-px
+    after:absolute
+    after:w-0.5
+    bg-background
+    border
+    gap-1
     grid
     px-4
     py-3
-    rounded-lg
+    relative
     text-left
     text-sm;
 
@@ -35,12 +40,14 @@
   }
 
   .singlestage-alert-variant-default {
-    @apply bg-card
+    @apply after:bg-foreground
+    bg-card
     text-card-foreground;
   }
 
   .singlestage-alert-variant-destructive {
-    @apply bg-card
+    @apply after:bg-destructive
+    bg-card
     text-destructive;
 
     .singlestage-alert-description {
@@ -53,7 +60,8 @@
   }
 
   .singlestage-alert-title {
-    @apply font-medium;
+    @apply font-semibold
+    text-sm;
   }
 
   .singlestage-alert-description {

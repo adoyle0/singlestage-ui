@@ -1,35 +1,9 @@
 @layer components {
   .singlestage-alert {
-    @apply border
-    text-left
+    @apply relative
     w-full;
-
-    &:has(.singlestage-alert-action) {
-      @apply relative;
-    }
-
-    svg {
-      @apply text-current;
-    }
   }
 
-  .singlestage-alert-variant-default {
-    @apply bg-card
-    text-card-foreground;
-  }
-
-  .singlestage-alert-variant-destructive {
-    @apply bg-card
-    text-destructive;
-
-    svg {
-      @apply text-current;
-    }
-
-    .singlestage-alert-description {
-      @apply text-destructive/90;
-    }
-  }
   .singlestage-alert-title {
     a {
       @apply underline
@@ -47,13 +21,12 @@
     text-muted-foreground;
 
     a {
-      @apply hover:text-foreground
-      underline
+      @apply underline
       underline-offset-3;
-    }
-  }
 
-  .singlestage-alert-action {
-    @apply absolute;
+      &:hover {
+        @apply text-foreground;
+      }
+    }
   }
 }

@@ -1,8 +1,14 @@
 @layer base {
   .singlestage-alert {
-    @apply border
+    @apply *:[svg:not([class*='size-'])]:size-4
+    *:[svg]:row-span-2
+    *:[svg]:text-current
+    *:[svg]:translate-y-0.5
+    border
     gap-0.5
     grid
+    has-data-[slot=alert-action]:pr-18
+    has-data-[slot=alert-action]:relative
     px-4
     py-3
     rounded-lg
@@ -15,21 +21,6 @@
 
       .singlestage-alert-title {
         @apply col-start-2;
-      }
-    }
-
-    &:has(.singlestage-alert-action) {
-      @apply pr-18
-      relative;
-    }
-
-    svg {
-      @apply row-span-2
-      text-current
-      translate-y-0.5;
-
-      &:not([class*="size-"]) {
-        @apply size-4;
       }
     }
   }

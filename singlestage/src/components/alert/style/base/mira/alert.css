@@ -3,14 +3,14 @@
     @apply border
     gap-0.5
     grid
-    px-4
-    py-3
+    px-2
+    py-1.5
     rounded-lg
     text-left
-    text-sm;
+    text-xs/relaxed;
 
     &:has(> svg) {
-      @apply gap-x-2.5
+      @apply gap-x-1.5
       grid-cols-[auto_1fr];
 
       .singlestage-alert-title {
@@ -29,7 +29,7 @@
       translate-y-0.5;
 
       &:not([class*="size-"]) {
-        @apply size-4;
+        @apply size-3.5;
       }
     }
   }
@@ -60,7 +60,7 @@
     @apply md:text-pretty
     text-balance
     text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
 
     p:not(:last-child) {
       @apply mb-4;
@@ -69,7 +69,7 @@
 
   .singlestage-alert-action {
     @apply absolute
-    right-3
-    top-2.5;
+    right-2
+    top-1.5;
   }
 }
