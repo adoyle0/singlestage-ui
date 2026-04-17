@@ -1,9 +1,24 @@
+mod mode;
+pub use mode::*;
+
 #[allow(non_snake_case)]
 pub mod Theme;
-mod mode;
 
 use crate::{CSS, CSS_DARK};
-pub use mode::*;
+#[cfg(feature = "style_luma")]
+use crate::{CSS_LUMA, CSS_LUMA_DARK};
+#[cfg(feature = "style_lyra")]
+use crate::{CSS_LYRA, CSS_LYRA_DARK};
+#[cfg(feature = "style_maia")]
+use crate::{CSS_MAIA, CSS_MAIA_DARK};
+#[cfg(feature = "style_mira")]
+use crate::{CSS_MIRA, CSS_MIRA_DARK};
+#[cfg(feature = "style_nova")]
+use crate::{CSS_NOVA, CSS_NOVA_DARK};
+#[cfg(feature = "style_sera")]
+use crate::{CSS_SERA, CSS_SERA_DARK};
+#[cfg(feature = "style_vega")]
+use crate::{CSS_VEGA, CSS_VEGA_DARK};
 
 use leptos::prelude::*;
 use leptos_meta::Style;
@@ -36,8 +51,26 @@ pub fn ThemeProviderInner(
     let context = ThemeProviderContext { theme, mode };
     provide_context(context);
 
+    // TODO: Consider slicing up the base theme and merging everything to reduce css
+    // bloat/duplication
     view! {
         <Style id="singlestage">{CSS}</Style>
+        <style
+            id="theme-base"
+            inner_html=move || {
+                match mode.get() {
+                    Mode::Dark => format!("{}{}", CSS_VEGA, CSS_VEGA_DARK),
+                    Mode::Light => CSS_VEGA.to_string(),
+                    Mode::Auto => {
+                        format!(
+                            "{}\n\n@media (prefers-color-scheme: dark) {{{}}}",
+                            CSS_VEGA,
+                            CSS_VEGA_DARK,
+                        )
+                    }
+                }
+            }
+        ></style>
         <style
             id="theme"
             inner_html=move || {

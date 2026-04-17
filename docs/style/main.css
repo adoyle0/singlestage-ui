@@ -15,6 +15,14 @@
   }
 }
 
+.singlestage-ulist {
+  @apply list-disc ml-6 my-6;
+}
+
+.singlestage-olist {
+  @apply list-decimal ml-6 my-6;
+}
+
 /* donate button */
 .kofi-btn {
   button {

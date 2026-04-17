@@ -23,6 +23,7 @@ uuid = { workspace = true, features = ["v4", "js"] }
 web-sys = { workspace = true, features = ["DomRect", "Element"] }
 
 [build-dependencies]
+rayon = { workspace = true }
 reqwest = { workspace = true, features = ["blocking"] }
 sha256 = { workspace = true }
 
@@ -71,6 +72,13 @@ default = [
   "skeleton",
   "slider",
   "spinner",
+  # "style_luma",
+  # "style_lyra",
+  # "style_maia",
+  # "style_mira",
+  # "style_nova",
+  # "style_sera",
+  "style_vega",
   "switch",
   "table",
   "tabs",
@@ -118,6 +126,13 @@ sidebar = []
 skeleton = []
 slider = ["field", "label"]
 spinner = []
+style_luma = ["theme_provider"]
+style_lyra = ["theme_provider"]
+style_maia = ["theme_provider"]
+style_mira = ["theme_provider"]
+style_nova = ["theme_provider"]
+style_sera = ["theme_provider"]
+style_vega = ["theme_provider"]
 switch = ["field", "checkbox", "label"]
 table = []
 tabs = []
