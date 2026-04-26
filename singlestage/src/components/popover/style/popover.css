@@ -16,6 +16,7 @@
       overflow-y-auto;
     }
   }
+
   .singlestage-popover-header {
     @apply flex
     flex-col;
@@ -23,16 +24,6 @@
 
   .singlestage-popover-description {
     @apply text-muted-foreground;
-  }
-
-  /* Behavior */
-
-  :root {
-    --transform-origin: 0% 339px;
-    --transform-scale: scale3d(0.95, 0.95, 0.95);
-    --transform-translate-step: 0.25rem;
-    --transition-duration: 0.15s;
-    --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Animations */

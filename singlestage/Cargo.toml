@@ -90,7 +90,7 @@ default = [
 
 accordion = []
 alert = []
-alert_dialog = []
+alert_dialog = ["dialog"]
 aspect_ratio = []
 avatar = []
 badge = []

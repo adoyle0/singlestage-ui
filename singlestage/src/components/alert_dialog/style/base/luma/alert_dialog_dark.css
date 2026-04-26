@@ -1,0 +1,5 @@
+@layer base {
+  .singlestage-alert-dialog-content {
+    @apply ring-foreground/10;
+  }
+}

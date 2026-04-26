@@ -1,109 +1,109 @@
-@layer base {
-  .singlestage-dialog-header {
-    @apply gap-2;
-  }
-
-  .singlestage-alert-dialog-header {
-    @apply gap-1.5
-    grid
-    grid-rows-[auto_1fr]
-    place-items-center
-    text-center;
-
-    &:has(.singlestage-alert-dialog-media) {
-      @apply gap-x-6
-      grid-rows-[auto_auto_1fr];
-    }
-  }
-
-  .singlestage-dialog-title {
-    @apply font-medium
-    leading-none;
-  }
-
-  .singlestage-alert-dialog-title {
-    @apply font-medium
-    text-lg;
-  }
-
-  .singlestage-dialog-description {
-    @apply text-sm;
-
-    a {
-      @apply underline
-      underline-offset-3;
-    }
-  }
-
-  .singlestage-alert-dialog-description {
-    @apply md:text-pretty
-    text-balance;
-  }
-
-  .singlestage-dialog-close {
-    @apply right-4
-    top-4;
-  }
-
-  .singlestage-alert-dialog-media {
-    @apply inline-flex
-    items-center
-    justify-center
-    mb-2
-    rounded-md
-    size-16;
-
-    svg:not([class*="size-"]) {
-      @apply size-8;
-    }
-  }
-
-  .singlestage-dialog-footer {
-    @apply flex
-    flex-col-reverse
-    gap-2
-    sm:flex-row
-    sm:justify-end;
-  }
-
-  .singlestage-dialog-size-sm {
-    @apply max-w-xs;
-
-    .singlestage-alert-dialog-footer {
-      @apply grid
-      grid-cols-2;
-    }
-  }
-
-  .singlestage-dialog-content {
-    @apply gap-6
-    max-w-[calc(100%-2rem)]
-    outline-none
-    p-6
-    ring-1
-    rounded-xl
-    sm:max-w-md
-    text-sm;
-
-    &:not(.singlestage-dialog-size-sm) {
-      &:has(.singlestage-alert-dialog-media) {
-        .singlestage-alert-dialog-title {
-          @apply sm:col-start-2;
-        }
-      }
-
-      .singlestage-alert-dialog-header {
-        @apply sm:place-items-start
-        sm:text-left;
-
-        &:has(.singlestage-alert-dialog-media) {
-          @apply sm:grid-rows-[auto_1fr];
-        }
-      }
-
-      .singlestage-alert-dialog-media {
-        @apply sm:row-span-2;
-      }
-    }
-  }
-}
+/* @layer base { */
+/*   .singlestage-dialog-header { */
+/*     @apply gap-2; */
+/*   } */
+/**/
+/*   .singlestage-alert-dialog-header { */
+/*     @apply gap-1.5 */
+/*     grid */
+/*     grid-rows-[auto_1fr] */
+/*     place-items-center */
+/*     text-center; */
+/**/
+/*     &:has(.singlestage-alert-dialog-media) { */
+/*       @apply gap-x-6 */
+/*       grid-rows-[auto_auto_1fr]; */
+/*     } */
+/*   } */
+/**/
+/*   .singlestage-dialog-title { */
+/*     @apply font-medium */
+/*     leading-none; */
+/*   } */
+/**/
+/*   .singlestage-alert-dialog-title { */
+/*     @apply font-medium */
+/*     text-lg; */
+/*   } */
+/**/
+/*   .singlestage-dialog-description { */
+/*     @apply text-sm; */
+/**/
+/*     a { */
+/*       @apply underline */
+/*       underline-offset-3; */
+/*     } */
+/*   } */
+/**/
+/*   .singlestage-alert-dialog-description { */
+/*     @apply md:text-pretty */
+/*     text-balance; */
+/*   } */
+/**/
+/*   .singlestage-dialog-close { */
+/*     @apply right-4 */
+/*     top-4; */
+/*   } */
+/**/
+/*   .singlestage-alert-dialog-media { */
+/*     @apply inline-flex */
+/*     items-center */
+/*     justify-center */
+/*     mb-2 */
+/*     rounded-md */
+/*     size-16; */
+/**/
+/*     svg:not([class*="size-"]) { */
+/*       @apply size-8; */
+/*     } */
+/*   } */
+/**/
+/*   .singlestage-dialog-footer { */
+/*     @apply flex */
+/*     flex-col-reverse */
+/*     gap-2 */
+/*     sm:flex-row */
+/*     sm:justify-end; */
+/*   } */
+/**/
+/*   .singlestage-dialog-size-sm { */
+/*     @apply max-w-xs; */
+/**/
+/*     .singlestage-alert-dialog-footer { */
+/*       @apply grid */
+/*       grid-cols-2; */
+/*     } */
+/*   } */
+/**/
+/*   .singlestage-dialog-content { */
+/*     @apply gap-6 */
+/*     max-w-[calc(100%-2rem)] */
+/*     outline-none */
+/*     p-6 */
+/*     ring-1 */
+/*     rounded-xl */
+/*     sm:max-w-md */
+/*     text-sm; */
+/**/
+/*     &:not(.singlestage-dialog-size-sm) { */
+/*       &:has(.singlestage-alert-dialog-media) { */
+/*         .singlestage-alert-dialog-title { */
+/*           @apply sm:col-start-2; */
+/*         } */
+/*       } */
+/**/
+/*       .singlestage-alert-dialog-header { */
+/*         @apply sm:place-items-start */
+/*         sm:text-left; */
+/**/
+/*         &:has(.singlestage-alert-dialog-media) { */
+/*           @apply sm:grid-rows-[auto_1fr]; */
+/*         } */
+/*       } */
+/**/
+/*       .singlestage-alert-dialog-media { */
+/*         @apply sm:row-span-2; */
+/*       } */
+/*     } */
+/*   } */
+/* } */

@@ -182,40 +182,39 @@ pub fn DialogContentPrimitive(
     };
 
     view! {
-        <div class="singlestage-dialog">
-            <dialog
-                aria_describedby=move || dialog_context.described_by.get()
-                aria_labelledby=move || dialog_context.labelled_by.get()
-                aria_modal="true"
-                class=move || {
-                    format!(
-                        "singlestage-dialog-content{} {}",
-                        match size.get().unwrap_or_default().as_str() {
-                            "sm" | "small" => " singlestage-dialog-size-sm",
-                            _ => "",
-                        },
-                        class.get().unwrap_or_default(),
-                    )
-                }
-                node_ref=dialog_ref
-                on:click=move |ev| {
-                    if let Some(dialog) = dialog_ref.get_untracked() {
-                        let x = ev.x() as f64;
-                        let y = ev.y() as f64;
-                        let r = dialog.get_bounding_client_rect();
-                        let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
-                            && x <= (r.left() + r.width());
-                        if !r_clicked && !dialog_context.alert {
-                            dialog.close()
-                        }
-                    }
-                }
+        <dialog
+            // aria_describedby=move || dialog_context.described_by.get()
+            // aria_labelledby=move || dialog_context.labelled_by.get()
+            // aria_modal="true"
+            class=move || {
+                format!(
+                    "{} {} {}",
+                    match dialog_context.alert {
+                        true => "singlestage-alert-dialog-overlay",
+                        false => "singlestage-dialog-overlay",
+                    },
+                    match size.get().unwrap_or_default().as_str() {
+                        "sm" => "singlestage-alert-dialog-size-sm",
+                        _ => "singlestage-alert-dialog-size-default",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
+            node_ref=dialog_ref
+            closedby={match dialog_context.alert {
+                true => "closerequest",
+                false => "any",
+            }}
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {children()}
-                <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            <div class={if dialog_context.alert {
+                "singlestage-alert-dialog-content"
+            } else {
+                "singlestage-dialog-content"
+            }}>
+                {children()} <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
                     <Provider value=DialogCloseContext {}>
                         <Button class="singlestage-dialog-close" variant="ghost" size="icon-sm">
                             <svg
@@ -237,7 +236,7 @@ pub fn DialogContentPrimitive(
                         </Button>
                     </Provider>
                 </Show>
-            </dialog>
-        </div>
+            </div>
+        </dialog>
     }
 }

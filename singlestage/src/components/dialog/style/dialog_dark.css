@@ -1,5 +1,0 @@
-@layer components {
-  .singlestage-alert-dialog-media-destructive {
-    @apply bg-destructive/20;
-  }
-}

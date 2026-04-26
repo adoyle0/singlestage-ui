@@ -206,6 +206,7 @@ fn main() {
     let features = [
         "accordion",
         "alert",
+        "alert_dialog",
         "aspect_ratio",
         "avatar",
         "badge",
