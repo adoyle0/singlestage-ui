@@ -2,40 +2,37 @@
   .singlestage-alert-dialog-overlay {
     @apply bg-popover
     ring-1
-    ring-foreground/5
-    rounded-4xl
-    shadow-xl
-    text-popover-foreground;
+    ring-foreground/10
+    rounded-xl;
 
     &::backdrop {
-      @apply supports-backdrop-filter:backdrop-blur-sm;
+      @apply supports-backdrop-filter:backdrop-blur-xs;
     }
 
     &[open]::backdrop {
-      @apply bg-black/30;
+      @apply bg-black/80;
     }
   }
 
   .singlestage-alert-dialog-content {
     @apply bg-popover
-    gap-6
-    p-6
+    gap-3
+    p-4
     ring-1
-    ring-foreground/5
-    rounded-4xl
-    shadow-xl
+    ring-foreground/10
+    rounded-xl
     text-popover-foreground;
   }
 
   .singlestage-alert-dialog-header {
-    @apply gap-1.5
+    @apply gap-1
     grid
     grid-rows-[auto_1fr]
     place-items-center
     text-center;
 
     &:has(.singlestage-alert-dialog-media) {
-      @apply gap-x-6
+      @apply gap-x-4
       grid-rows-[auto_auto_1fr];
     }
   }
@@ -46,24 +43,24 @@
     items-center
     justify-center
     mb-2
-    rounded-full
-    size-16;
+    rounded-md
+    size-8;
 
     svg:not([class*="size-"]) {
-      @apply size-8;
+      @apply size-4;
     }
   }
 
   .singlestage-alert-dialog-title {
-    @apply text-lg
-    font-medium;
+    @apply font-medium
+    text-sm;
   }
 
   .singlestage-alert-dialog-description {
     @apply md:text-pretty
     text-balance
     text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
 
     a {
       @apply underline
@@ -76,12 +73,12 @@
   }
 
   .singlestage-alert-dialog-size-sm {
-    @apply max-w-xs;
+    @apply max-w-64;
   }
 
   .singlestage-alert-dialog-size-default {
     @apply max-w-xs
-    sm:max-w-md;
+    sm:max-w-sm;
 
     &:has(.singlestage-alert-dialog-media) {
       .singlestage-alert-dialog-title {

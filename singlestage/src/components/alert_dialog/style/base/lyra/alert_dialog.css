@@ -2,40 +2,37 @@
   .singlestage-alert-dialog-overlay {
     @apply bg-popover
     ring-1
-    ring-foreground/5
-    rounded-4xl
-    shadow-xl
-    text-popover-foreground;
+    ring-foreground/10
+    rounded-none;
 
     &::backdrop {
-      @apply supports-backdrop-filter:backdrop-blur-sm;
+      @apply supports-backdrop-filter:backdrop-blur-xs;
     }
 
     &[open]::backdrop {
-      @apply bg-black/30;
+      @apply bg-black/10;
     }
   }
 
   .singlestage-alert-dialog-content {
     @apply bg-popover
-    gap-6
-    p-6
+    gap-4
+    p-4
     ring-1
-    ring-foreground/5
-    rounded-4xl
-    shadow-xl
+    ring-foreground/10
+    rounded-none
     text-popover-foreground;
   }
 
   .singlestage-alert-dialog-header {
-    @apply gap-1.5
-    grid
+    @apply grid
     grid-rows-[auto_1fr]
     place-items-center
+    gap-1.5
     text-center;
 
     &:has(.singlestage-alert-dialog-media) {
-      @apply gap-x-6
+      @apply gap-x-4
       grid-rows-[auto_auto_1fr];
     }
   }
@@ -46,28 +43,28 @@
     items-center
     justify-center
     mb-2
-    rounded-full
-    size-16;
+    rounded-none
+    size-10;
 
     svg:not([class*="size-"]) {
-      @apply size-8;
+      @apply size-6;
     }
   }
 
   .singlestage-alert-dialog-title {
-    @apply text-lg
+    @apply text-sm
     font-medium;
   }
 
   .singlestage-alert-dialog-description {
     @apply md:text-pretty
-    text-balance
-    text-muted-foreground
-    text-sm;
+      text-balance
+      text-muted-foreground
+      text-xs/relaxed;
 
     a {
       @apply underline
-      underline-offset-3;
+        underline-offset-3;
 
       &:hover {
         @apply text-foreground;
@@ -81,7 +78,7 @@
 
   .singlestage-alert-dialog-size-default {
     @apply max-w-xs
-    sm:max-w-md;
+      sm:max-w-sm;
 
     &:has(.singlestage-alert-dialog-media) {
       .singlestage-alert-dialog-title {
@@ -91,7 +88,7 @@
 
     .singlestage-alert-dialog-header {
       @apply sm:place-items-start
-      sm:text-left;
+        sm:text-left;
 
       &:has(.singlestage-alert-dialog-media) {
         @apply sm:grid-rows-[auto_1fr];

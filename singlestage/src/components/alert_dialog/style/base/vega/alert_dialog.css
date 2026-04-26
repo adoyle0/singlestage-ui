@@ -80,18 +80,18 @@
     @apply max-w-xs
     sm:max-w-lg;
 
+    &:has(.singlestage-alert-dialog-media) {
+      .singlestage-alert-dialog-title {
+        @apply sm:col-start-2;
+      }
+    }
+
     .singlestage-alert-dialog-header {
       @apply sm:place-items-start
       sm:text-left;
-    }
 
-    &:has(.singlestage-alert-dialog-media) {
-      .singlestage-alert-dialog-header {
+      &:has(.singlestage-alert-dialog-media) {
         @apply sm:grid-rows-[auto_1fr];
-      }
-
-      .singlestage-alert-dialog-title {
-        @apply sm:col-start-2;
       }
     }
 
