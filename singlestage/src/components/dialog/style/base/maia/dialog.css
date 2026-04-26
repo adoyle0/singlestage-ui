@@ -3,8 +3,8 @@
     @apply bg-popover
     max-w-[calc(100%-2rem)]
     ring-1
-    ring-foreground/10
-    rounded-xl
+    ring-foreground/5
+    rounded-4xl
     sm:max-w-md;
 
     &::backdrop {
@@ -12,7 +12,7 @@
     }
 
     &[open]::backdrop {
-      @apply bg-black/10;
+      @apply bg-black/80;
     }
   }
 
@@ -22,8 +22,8 @@
     grid
     p-6
     ring-1
-    ring-foreground/10
-    rounded-xl
+    ring-foreground/5
+    rounded-4xl
     text-popover-foreground
     text-sm;
   }
@@ -44,7 +44,8 @@
 
   .singlestage-dialog-title {
     @apply font-medium
-    leading-none;
+    leading-none
+    text-base;
   }
 
   .singlestage-dialog-description {

@@ -188,14 +188,18 @@ pub fn DialogContentPrimitive(
             // aria_modal="true"
             class=move || {
                 format!(
-                    "{} {} {}",
+                    "{}{} {}",
                     match dialog_context.alert {
                         true => "singlestage-alert-dialog-overlay",
                         false => "singlestage-dialog-overlay",
                     },
-                    match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-alert-dialog-size-sm",
-                        _ => "singlestage-alert-dialog-size-default",
+                    if dialog_context.alert {
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" => " singlestage-alert-dialog-size-sm",
+                            _ => " singlestage-alert-dialog-size-default",
+                        }
+                    } else {
+                        ""
                     },
                     class.get().unwrap_or_default(),
                 )

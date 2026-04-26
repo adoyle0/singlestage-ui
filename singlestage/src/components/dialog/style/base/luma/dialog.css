@@ -3,16 +3,17 @@
     @apply bg-popover
     max-w-[calc(100%-2rem)]
     ring-1
-    ring-foreground/10
-    rounded-xl
+    ring-foreground/5
+    rounded-4xl
+    shadow-xl
     sm:max-w-md;
 
     &::backdrop {
-      @apply supports-backdrop-filter:backdrop-blur-xs;
+      @apply supports-backdrop-filter:backdrop-blur-sm;
     }
 
     &[open]::backdrop {
-      @apply bg-black/10;
+      @apply bg-black/30;
     }
   }
 
@@ -22,20 +23,22 @@
     grid
     p-6
     ring-1
-    ring-foreground/10
-    rounded-xl
+    ring-foreground/5
+    rounded-4xl
+    shadow-xl
     text-popover-foreground
     text-sm;
   }
 
   .singlestage-dialog-close {
     @apply absolute
+    bg-secondary
     right-4
     top-4;
   }
 
   .singlestage-dialog-header {
-    @apply gap-2;
+    @apply gap-1.5;
   }
 
   .singlestage-dialog-footer {
@@ -44,7 +47,8 @@
 
   .singlestage-dialog-title {
     @apply font-medium
-    leading-none;
+    leading-none
+    text-base;
   }
 
   .singlestage-dialog-description {

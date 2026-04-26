@@ -4,15 +4,16 @@
     max-w-[calc(100%-2rem)]
     ring-1
     ring-foreground/10
-    rounded-xl
+    rounded-none
+    shadow-md
     sm:max-w-md;
 
     &::backdrop {
-      @apply supports-backdrop-filter:backdrop-blur-xs;
+      @apply supports-backdrop-filter:backdrop-blur-sm;
     }
 
     &[open]::backdrop {
-      @apply bg-black/10;
+      @apply bg-black/20;
     }
   }
 
@@ -23,15 +24,17 @@
     p-6
     ring-1
     ring-foreground/10
-    rounded-xl
+    rounded-none
+    shadow-md
     text-popover-foreground
     text-sm;
   }
 
   .singlestage-dialog-close {
     @apply absolute
-    right-4
-    top-4;
+    bg-secondary
+    right-5
+    top-5;
   }
 
   .singlestage-dialog-header {
@@ -43,12 +46,17 @@
   }
 
   .singlestage-dialog-title {
-    @apply font-medium
-    leading-none;
+    @apply font-semibold
+    leading-none
+    text-lg
+    tracking-wider
+    uppercase;
   }
 
   .singlestage-dialog-description {
-    @apply text-muted-foreground
+    @apply leading-relaxed
+    mt-0.5
+    text-muted-foreground
     text-sm;
 
     a {

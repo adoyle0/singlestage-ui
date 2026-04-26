@@ -159,7 +159,7 @@ pub fn DialogMediaPrimitive(
                 format!(
                     "singlestage-alert-dialog-media{} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-alert-dialog-media-destructive",
+                        "destructive" => " singlestage-alert-dialog-media-variant-destructive",
                         _ => "",
                     },
                     class.get().unwrap_or_default(),

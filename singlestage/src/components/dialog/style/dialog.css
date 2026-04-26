@@ -1,122 +1,105 @@
-/* @layer base { */
-/*   /* Animations */ */
-/**/
-/*   /* @media (prefers-reduced-motion: no-preference) { */ */
-/*   /*   .singlestage-dialog-overlay, */ */
-/*   /*   .singlestage-alert-dialog-overlay { */ */
-/*   /*     opacity: 0; */ */
-/*   /*     transform: var(--transform-scale); */ */
-/*   /*     transition-timing-function: var(--transition-timing-function); */ */
-/*   /*     transition: all 100ms allow-discrete; */ */
-/*   /**/ */
-/*   /*     &:has([open], :popover-open) { */ */
-/*   /*       opacity: 1; */ */
-/*   /*       transform: none; */ */
-/*   /*       transform: scale3d(1, 1, 1); */ */
-/*   /*     } */ */
-/*   /**/ */
-/*   /*     @starting-style { */ */
-/*   /*       &:has([open], :popover-open) { */ */
-/*   /*         opacity: 0; */ */
-/*   /*         transform: var(--transform-scale); */ */
-/*   /*       } */ */
-/*   /*     } */ */
-/*   /*   } */ */
-/*   /* } */ */
-/*   /**/ */
-/*   /* .singlestage-dialog-overlay, */ */
-/*   /* .singlestage-alert-dialog-overlay { */ */
-/*   /*   display: none; */ */
-/*   /**/ */
-/*   /*   &:has([open], :popover-open) { */ */
-/*   /*     display: block; */ */
-/*   /*   } */ */
-/*   /* } */ */
-/**/
-/*   /* Disable scrolling while popover is open */ */
-/*   html:has(.singlestage-dialog-content[open]), */
-/*   html:has(.singlestage-alert-dialog-content[open]) { */
-/*     overflow: hidden; */
-/*   } */
-/* } */
-/**/
-/* @layer components { */
-/*   .singlestage-dialog-overlay { */
-/*     @apply fixed */
-/*     inset-0 */
-/*     isolate */
-/*     z-50; */
-/**/
-/*     /* @apply bg-black/10 */ */
-/*     /* duration-100 */ */
-/*     /* supports-backdrop-filter:backdrop-blur-xs */ */
-/*     /* transition-all */ */
-/*     /* transition-discrete; */ */
-/*   } */
-/**/
-/*   .singlestage-dialog-content { */
-/*     @apply -translate-x-1/2 */
-/*     -translate-y-1/2 */
-/*     fixed */
-/*     left-1/2 */
-/*     outline-none */
-/*     top-1/2 */
-/*     w-full */
-/*     z-50; */
-/**/
-/*     ::backdrop { */
-/*       @apply fixed */
-/*       inset-0 */
-/*       isolate */
-/*       z-50; */
-/*     } */
-/**/
-/*     /* @apply bg-background */ */
-/*     /* duration-100 */ */
-/*     /* grid */ */
-/*     /* ring-foreground/10; */ */
-/**/
-/*     /* &:not(.singlestage-dialog-size-sm) { */ */
-/*     /*   @apply max-w-xs */ */
-/*     /*   sm:max-w-lg; */ */
-/*     /* } */ */
-/*   } */
-/**/
-/*   .singlestage-dialog-header { */
-/*     @apply flex */
-/*     flex-col; */
-/*   } */
-/**/
-/*   .singlestage-dialog-footer { */
-/*     @apply flex */
-/*     flex-col-reverse */
-/*     gap-2 */
-/*     sm:flex-row */
-/*     sm:justify-end; */
-/*   } */
-/**/
-/*   /* .singlestage-dialog-title { */ */
-/*   /*   @apply font-heading; */ */
-/*   /* } */ */
-/**/
-/*   /* .singlestage-dialog-description { */ */
-/*   /*   @apply text-muted-foreground; */ */
-/*   /**/ */
-/*   /*   a:hover { */ */
-/*   /*     @apply text-foreground; */ */
-/*   /*   } */ */
-/*   /* } */ */
-/*   /**/ */
-/*   /* .singlestage-dialog-close { */ */
-/*   /*   @apply absolute; */ */
-/*   /* } */ */
-/*   /**/ */
-/*   /* .singlestage-alert-dialog-media { */ */
-/*   /*   @apply bg-muted; */ */
-/*   /* } */ */
-/*   /**/ */
-/*   /* .singlestage-alert-dialog-media-destructive { */ */
-/*   /*   @apply bg-destructive/10 */ */
-/*   /*   text-destructive; */ */
-/*   /* } */ */
-/* } */
+@layer components {
+  /* Animation */
+  .singlestage-dialog-overlay,
+  .singlestage-alert-dialog-overlay {
+    transition:
+      opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1),
+      scale 0.1s cubic-bezier(0.4, 0, 0.2, 1),
+      overlay 0.1s allow-discrete,
+      display 0.1s allow-discrete;
+
+    opacity: 0;
+    scale: 0.95;
+
+    ::webkit-scrollbar {
+      display: none;
+    }
+
+    &::backdrop {
+      transition:
+        display 0.1s allow-discrete,
+        overlay 0.1s allow-discrete,
+        background-color 0.1s;
+      background-color: hsl(0 0 0 / 0);
+    }
+
+    &[open] {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @starting-style {
+    .singlestage-dialog-overlay[open],
+    .singlestage-alert-dialog-overlay[open] {
+      opacity: 0;
+      scale: 0.95;
+
+      &::backdrop {
+        background-color: hsl(0 0 0 / 0);
+      }
+    }
+  }
+
+  /* Disable scrolling while popover is open */
+  html:has(.singlestage-dialog-overlay[open]),
+  html:has(.singlestage-alert-dialog-overlay[open]) {
+    overflow: hidden;
+  }
+  /* End Animation */
+
+  .singlestage-dialog-overlay {
+    @apply -translate-x-1/2
+    -translate-y-1/2
+    fixed
+    outline-none
+    w-full
+    z-50;
+
+    left: calc(1 / 2 * 100vw);
+    top: calc(1 / 2 * 100%);
+
+    ::backdrop {
+      @apply fixed
+      inset-0
+      isolate
+      z-50;
+    }
+
+    &[open] {
+      @apply -translate-x-1/2
+      -translate-y-1/2
+      fixed
+      outline-none
+      w-full
+      z-50;
+
+      left: calc(1 / 2 * 100vw);
+      top: calc(1 / 2 * 100%);
+    }
+  }
+
+  .singlestage-dialog-size-sm {
+    .singlestage-dialog-footer {
+      @apply grid
+      grid-cols-2;
+    }
+  }
+
+  .singlestage-dialog-header {
+    @apply flex
+    flex-col;
+  }
+
+  .singlestage-dialog-footer {
+    @apply flex
+    flex-col-reverse
+    gap-2
+    sm:flex-row
+    sm:justify-end;
+  }
+
+  /* .singlestage-dialog-title { */
+  /*   @apply font-heading; */
+  /* } */
+}

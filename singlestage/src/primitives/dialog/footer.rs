@@ -156,10 +156,10 @@ pub fn DialogFooterPrimitive(
         <footer
             class=move || {
                 format!(
-                    "singlestage-dialog-footer{} {}",
+                    "{} {}",
                     match dialog.alert {
                         true => " singlestage-alert-dialog-footer",
-                        false => "",
+                        false => "singlestage-dialog-footer",
                     },
                     class.get().unwrap_or_default(),
                 )

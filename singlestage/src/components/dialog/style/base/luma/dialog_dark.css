@@ -1,0 +1,5 @@
+@layer base {
+  .singlestage-dialog-content {
+    @apply ring-foreground/10;
+  }
+}

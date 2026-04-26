@@ -1,11 +1,9 @@
 @layer base {
   .singlestage-dialog-overlay {
     @apply bg-popover
-    max-w-[calc(100%-2rem)]
     ring-1
     ring-foreground/10
-    rounded-xl
-    sm:max-w-md;
+    rounded-xl;
 
     &::backdrop {
       @apply supports-backdrop-filter:backdrop-blur-xs;
@@ -18,20 +16,22 @@
 
   .singlestage-dialog-content {
     @apply bg-popover
-    gap-6
+    gap-4
     grid
-    p-6
+    max-w-[calc(100%-2rem)]
+    p-4
     ring-1
     ring-foreground/10
     rounded-xl
+    sm:max-w-sm
     text-popover-foreground
     text-sm;
   }
 
   .singlestage-dialog-close {
     @apply absolute
-    right-4
-    top-4;
+    right-2
+    top-2;
   }
 
   .singlestage-dialog-header {
@@ -39,12 +39,18 @@
   }
 
   .singlestage-dialog-footer {
-    @apply gap-2;
+    @apply -mb-4
+    -mx-4
+    bg-muted/50
+    border-t
+    p-4
+    rounded-b-xl;
   }
 
   .singlestage-dialog-title {
     @apply font-medium
-    leading-none;
+    leading-none
+    text-base;
   }
 
   .singlestage-dialog-description {

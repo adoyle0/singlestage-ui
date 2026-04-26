@@ -1,54 +1,4 @@
 @layer components {
-  /* Animation */
-  .singlestage-alert-dialog-overlay {
-    transition:
-      opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1),
-      scale 0.1s cubic-bezier(0.4, 0, 0.2, 1),
-      overlay 0.1s allow-discrete,
-      display 0.1s allow-discrete;
-
-    opacity: 0;
-    scale: 0.95;
-
-    ::webkit-scrollbar {
-      display: none;
-    }
-
-    &::backdrop {
-      transition:
-        display 0.1s allow-discrete,
-        overlay 0.1s allow-discrete,
-        background-color 0.1s;
-      background-color: hsl(0 0 0 / 0);
-    }
-
-    &[open] {
-      opacity: 1;
-      scale: 1;
-    }
-
-    &[open]::backdrop {
-      background-color: hsl(0 0 0 / 10%);
-    }
-  }
-
-  @starting-style {
-    .singlestage-alert-dialog-overlay[open] {
-      opacity: 0;
-      scale: 0.95;
-
-      &::backdrop {
-        background-color: hsl(0 0 0 / 0);
-      }
-    }
-  }
-
-  /* Disable scrolling while popover is open */
-  html:has(.singlestage-alert-dialog-overlay[open]) {
-    overflow: hidden;
-  }
-  /* End Animation */
-
   .singlestage-alert-dialog-overlay {
     @apply -translate-x-1/2
     -translate-y-1/2
@@ -60,6 +10,13 @@
     left: calc(1 / 2 * 100vw);
     top: calc(1 / 2 * 100%);
 
+    ::backdrop {
+      @apply fixed
+      inset-0
+      isolate
+      z-50;
+    }
+
     &[open] {
       @apply -translate-x-1/2
       -translate-y-1/2
@@ -70,13 +27,6 @@
 
       left: calc(1 / 2 * 100vw);
       top: calc(1 / 2 * 100%);
-    }
-
-    ::backdeop {
-      @apply fixed
-      inset-0
-      isolate
-      z-50;
     }
   }
   .singlestage-alert-dialog-size-sm {
@@ -96,6 +46,11 @@
     gap-2
     sm:flex-row
     sm:justify-end;
+  }
+
+  .singlestage-alert-dialog-media-variant-destructive {
+    @apply bg-destructive/10
+    text-destructive;
   }
 
   /* .singlestage-alert-dialog-title { */

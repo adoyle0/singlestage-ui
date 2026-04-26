@@ -156,10 +156,10 @@ pub fn DialogDescriptionPrimitive(
         <p
             class=move || {
                 format!(
-                    "singlestage-dialog-description{} {}",
+                    "{} {}",
                     match dialog.alert {
                         true => " singlestage-alert-dialog-description",
-                        false => "",
+                        false => "singlestage-dialog-description",
                     },
                     class.get().unwrap_or_default(),
                 )
