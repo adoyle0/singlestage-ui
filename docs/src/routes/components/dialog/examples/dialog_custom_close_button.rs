@@ -4,11 +4,11 @@ use singlestage::*;
 #[component]
 pub fn DialogCustomCloseButtonExample() -> impl IntoView {
     view! {
-        <Dialog>
+        <Dialog class="sm:max-w-md">
             <DialogTrigger>
                 <Button variant="outline">"Share"</Button>
             </DialogTrigger>
-            <DialogContent class="sm:max-w-md">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>"Share link"</DialogTitle>
                     <DialogDescription>
@@ -28,9 +28,9 @@ pub fn DialogCustomCloseButtonExample() -> impl IntoView {
                     </div>
                 </div>
                 <DialogFooter class="sm:justify-start">
-                    <DialogCancel>
+                    <DialogClose>
                         <Button button_type="button">"Close"</Button>
-                    </DialogCancel>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -11,11 +11,6 @@ pub fn DialogContent(
     /// Defaults to `true` for `Dialog` and `false` for `AlertDialog`
     #[prop(optional, into)]
     close_button: MaybeProp<bool>,
-    /// Set the size of dialog to render.
-    ///
-    /// Accepted values are "sm"
-    #[prop(optional, into)]
-    size: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -165,7 +160,6 @@ pub fn DialogContent(
         <DialogContentPrimitive
             class
             close_button
-            size
 
             {..global_attrs_1}
             {..global_attrs_2}

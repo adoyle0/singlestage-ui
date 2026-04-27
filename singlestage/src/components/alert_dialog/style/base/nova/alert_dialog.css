@@ -19,8 +19,6 @@
     @apply bg-popover
     gap-4
     p-4
-    ring-1
-    ring-foreground/10
     rounded-xl
     text-popover-foreground;
   }

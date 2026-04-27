@@ -3,6 +3,6 @@ use leptos::prelude::*;
 
 /// Wraps Button that the user presses to dismiss the dialog.
 #[component]
-pub fn DialogCancel(children: Children) -> impl IntoView {
+pub fn DialogClose(children: Children) -> impl IntoView {
     view! { <DialogCancelPrimitive>{children()}</DialogCancelPrimitive> }
 }

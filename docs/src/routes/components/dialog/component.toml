@@ -63,8 +63,6 @@ attributes."""
 attrs = [
   { attr = "close_button", attr_type = "bool", default = "true", description = """Toggles \
     whether or not a close button should appear in the top right corner of the dialog.""" },
-  { attr = "size", attr_type = "String", default = """""""", description = """Set the size of \
-    dialog to render.""" },
 ]
 
 [[references]]

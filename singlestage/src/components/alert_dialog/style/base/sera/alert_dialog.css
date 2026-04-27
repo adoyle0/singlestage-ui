@@ -19,10 +19,7 @@
     @apply bg-popover
     gap-6
     p-6
-    ring-1
-    ring-foreground/10
     rounded-none
-    shadow-md
     text-popover-foreground;
   }
 

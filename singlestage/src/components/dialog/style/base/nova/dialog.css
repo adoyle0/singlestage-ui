@@ -1,9 +1,11 @@
 @layer base {
   .singlestage-dialog-overlay {
     @apply bg-popover
+    max-w-[calc(100%-2rem)]
     ring-1
     ring-foreground/10
-    rounded-xl;
+    rounded-xl
+    sm:max-w-sm;
 
     &::backdrop {
       @apply supports-backdrop-filter:backdrop-blur-xs;
@@ -18,12 +20,8 @@
     @apply bg-popover
     gap-4
     grid
-    max-w-[calc(100%-2rem)]
     p-4
-    ring-1
-    ring-foreground/10
     rounded-xl
-    sm:max-w-sm
     text-popover-foreground
     text-sm;
   }

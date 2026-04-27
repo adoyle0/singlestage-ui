@@ -4,8 +4,7 @@
     ring-1
     ring-foreground/5
     rounded-4xl
-    shadow-xl
-    text-popover-foreground;
+    shadow-xl;
 
     &::backdrop {
       @apply supports-backdrop-filter:backdrop-blur-sm;
@@ -20,10 +19,7 @@
     @apply bg-popover
     gap-6
     p-6
-    ring-1
-    ring-foreground/5
     rounded-4xl
-    shadow-xl
     text-popover-foreground;
   }
 

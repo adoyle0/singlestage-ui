@@ -29,9 +29,9 @@ pub fn DialogStickyFooterExample() -> impl IntoView {
                     </For>
                 </div>
                 <DialogFooter>
-                    <DialogCancel>
+                    <DialogClose>
                         <Button variant="outline">"Close"</Button>
-                    </DialogCancel>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
