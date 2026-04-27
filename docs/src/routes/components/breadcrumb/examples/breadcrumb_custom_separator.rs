@@ -7,11 +7,15 @@ pub fn BreadcrumbCustomSeparatorExample() -> impl IntoView {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <Link href="/">"Home"</Link>
+                    <BreadcrumbLink>
+                        <Link href="/">"Home"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>
-                    <Link href="/components">"Components"</Link>
+                    <BreadcrumbLink>
+                        <Link href="/components">"Components"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>

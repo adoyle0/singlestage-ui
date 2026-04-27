@@ -1,13 +1,12 @@
 @layer base {
   .singlestage-breadcrumb-list {
-    @apply text-muted-foreground
-    gap-1.5
-    text-sm
-    sm:gap-2.5;
+    @apply gap-1.5
+        text-muted-foreground
+        text-xs/relaxed;
   }
 
   .singlestage-breadcrumb-item {
-    @apply gap-1.5;
+    @apply gap-1;
   }
 
   .singlestage-breadcrumb-link {
@@ -28,10 +27,10 @@
   }
 
   .singlestage-breadcrumb-ellipsis {
-    @apply size-5;
+    @apply size-4;
 
     & > svg {
-      @apply size-4;
+      @apply size-3.5;
     }
   }
 }

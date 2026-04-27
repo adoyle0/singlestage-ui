@@ -1,4 +1,4 @@
-use crate::{InputGroupContext, SheetContext, SidebarMenuButtonContext};
+use crate::{BreadcrumbLinkContext, InputGroupContext, SheetContext, SidebarMenuButtonContext};
 use leptos::prelude::*;
 
 /// Creates a styled hyperlink.
@@ -210,6 +210,7 @@ pub fn Link(
     };
 
     let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+    let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
 
     view! {
         <a
@@ -286,6 +287,8 @@ pub fn Link(
                             if in_sidebar_menu_button {
                                 "singlestage-sidebar-menu-button singlestage-sidebar-menu-button-size-default singlestage-sidebar-menu-button-variant-default"
                                     .to_string()
+                            } else if in_breadcrumb_link {
+                                "singlestage-breadcrumb-link".to_string()
                             } else {
                                 "singlestage-link".to_string()
                             }

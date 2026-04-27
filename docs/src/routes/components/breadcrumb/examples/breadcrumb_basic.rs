@@ -7,11 +7,15 @@ pub fn BreadcrumbBasicExample() -> impl IntoView {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <Link href="#">"Home"</Link>
+                    <BreadcrumbLink>
+                        <Link href="#">"Home"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <Link href="#">"Components"</Link>
+                    <BreadcrumbLink>
+                        <Link href="#">"Components"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>

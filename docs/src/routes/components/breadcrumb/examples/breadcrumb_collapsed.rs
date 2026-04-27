@@ -7,7 +7,9 @@ pub fn BreadcrumbCollapsedExample() -> impl IntoView {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <Link href="/">"Home"</Link>
+                    <BreadcrumbLink>
+                        <Link href="/">"Home"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
@@ -15,7 +17,9 @@ pub fn BreadcrumbCollapsedExample() -> impl IntoView {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <Link href="/docs/components">"Components"</Link>
+                    <BreadcrumbLink>
+                        <Link href="/docs/components">"Components"</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>

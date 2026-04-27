@@ -7,7 +7,9 @@ pub fn BreadcrumbDropdownExample() -> impl IntoView {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <Link href="/">Home</Link>
+                    <BreadcrumbLink>
+                        <Link href="/">Home</Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>{icon!(icondata::LuDot)}</BreadcrumbSeparator>
                 <BreadcrumbItem>

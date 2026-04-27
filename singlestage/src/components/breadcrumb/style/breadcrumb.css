@@ -1,27 +1,14 @@
 @layer components {
   .singlestage-breadcrumb-list {
-    @apply break-words
-    flex
+    @apply flex
     flex-wrap
     items-center
-    text-muted-foreground;
+    wrap-break-word;
   }
 
   .singlestage-breadcrumb-item {
     @apply inline-flex
     items-center;
-
-    /* unset/reset singlestage-link */
-    .singlestage-link {
-      text-decoration-line: unset;
-      font-weight: unset;
-
-      @apply transition-colors;
-
-      &:hover {
-        @apply text-foreground!;
-      }
-    }
   }
 
   .singlestage-breadcrumb-page {
@@ -33,9 +20,5 @@
     @apply flex
     items-center
     justify-center;
-
-    & > .sr-only {
-      @apply sr-only;
-    }
   }
 }

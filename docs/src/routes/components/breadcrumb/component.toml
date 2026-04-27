@@ -24,11 +24,6 @@ name = "Breadcrumb collapsed"
 title = "Collapsed"
 description = "Use BreadcrumbEllipsis to show a collapsed state when the breadcrumb is too long."
 
-[[examples]]
-name = "Breadcrumb link"
-title = "Link"
-description = "Breadcrumb items can also contain links."
-
 [[references]]
 name = "Breadcrumb"
 description = "Contains all the items of the breadcrumb component."
