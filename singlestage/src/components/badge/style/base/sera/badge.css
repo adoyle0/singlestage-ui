@@ -1,0 +1,80 @@
+@layer base {
+  .singlestage-badge {
+    @apply bg-transparent
+    border-0
+    font-semibold
+    gap-1.5
+    px-0
+    py-0
+    rounded-none
+    text-[0.625rem]
+    tracking-widest
+    transition-colors
+    uppercase;
+
+    & > svg {
+      @apply size-3!;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-0;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-0;
+    }
+  }
+
+  .singlestage-badge-variant-default {
+    @apply text-foreground;
+
+    a:hover {
+      @apply text-foreground/70;
+    }
+  }
+
+  .singlestage-badge-variant-secondary {
+    @apply text-muted-foreground;
+
+    a:hover {
+      @apply text-foreground;
+    }
+  }
+
+  .singlestage-badge-variant-outline {
+    @apply text-foreground;
+
+    a:hover {
+      @apply text-foreground/70;
+    }
+  }
+
+  .singlestage-badge-variant-destructive {
+    @apply text-destructive;
+
+    &:focus-visible {
+      @apply ring-destructive/20;
+    }
+
+    a:hover {
+      @apply text-destructive/70;
+    }
+  }
+
+  .singlestage-badge-variant-ghost {
+    @apply text-muted-foreground;
+
+    &:hover {
+      @apply text-foreground;
+    }
+  }
+
+  .singlestage-badge-variant-link {
+    @apply text-foreground
+    underline-offset-4;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+}

@@ -1,18 +1,6 @@
 @layer components {
-  .singlestage-badge:invalid {
-    @apply border-destructive
-        ring-destructive/40;
-  }
-
-  .singlestage-badge-variant-destructive {
-    @apply bg-destructive/20;
-
-    &:focus-visible {
-      @apply ring-destructive/40;
-    }
-  }
-
-  .singlestage-badge-variant-ghost:hover {
-    @apply bg-muted/50;
+  .singlestage-badge:invalid,
+  .singlestage-badge[aria-invalid="true"] {
+    @apply ring-destructive/40;
   }
 }

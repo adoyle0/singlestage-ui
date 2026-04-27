@@ -7,7 +7,7 @@
     h-5
     px-2
     py-0.5
-    rounded-4xl
+    rounded-none
     text-xs
     transition-all;
 
@@ -26,11 +26,8 @@
 
   .singlestage-badge-variant-default {
     @apply bg-primary
-    text-primary-foreground;
-
-    a:hover {
-      @apply bg-primary/80;
-    }
+    text-primary-foreground
+    [a]:hover:bg-primary/80;
   }
 
   .singlestage-badge-variant-secondary {
@@ -38,7 +35,7 @@
     text-secondary-foreground;
 
     a:hover {
-      @apply bg-secondary/80;
+      @apply bg-primary/80;
     }
   }
 

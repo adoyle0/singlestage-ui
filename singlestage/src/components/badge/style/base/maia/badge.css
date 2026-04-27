@@ -43,12 +43,13 @@
   }
 
   .singlestage-badge-variant-outline {
-    @apply border-border
+    @apply bg-input/30
+    border-border
     text-foreground;
 
     a:hover {
       @apply bg-muted
-      text-muted-foreground;
+    text-muted-foreground;
     }
   }
 

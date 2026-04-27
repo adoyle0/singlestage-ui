@@ -1,82 +1,27 @@
 @layer components {
   .singlestage-badge {
-    @apply border
-    border-transparent
-    inline-flex
+    @apply inline-flex
     items-center
     justify-center
     overflow-hidden
     shrink-0
-    transition-all
     w-fit
     whitespace-nowrap;
 
-    &:invalid {
+    &::focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
       @apply border-destructive
       ring-destructive/20;
     }
 
-    &:focus-visible {
-      @apply border-ring
-      ring-ring/50;
-    }
-
-    svg {
+    & > svg {
       @apply pointer-events-none;
-    }
-  }
-
-  .singlestage-badge-variant-default {
-    @apply bg-primary
-    text-primary-foreground;
-
-    a:hover {
-      @apply bg-primary/80;
-    }
-  }
-
-  .singlestage-badge-variant-secondary {
-    @apply bg-secondary
-    text-secondary-foreground;
-
-    a:hover {
-      @apply bg-secondary/80;
-    }
-  }
-
-  .singlestage-badge-variant-destructive {
-    @apply bg-destructive/10
-    text-destructive;
-
-    &:focus-visible {
-      @apply ring-destructive/20;
-    }
-
-    a:hover {
-      @apply bg-destructive/20;
-    }
-  }
-
-  .singlestage-badge-variant-outline {
-    @apply border-border
-    text-foreground;
-
-    a:hover {
-      @apply bg-muted
-        text-muted-foreground;
-    }
-  }
-
-  .singlestage-badge-variant-ghost:hover {
-    @apply bg-muted
-    text-muted-foreground;
-  }
-
-  .singlestage-badge-variant-link {
-    @apply text-primary;
-
-    &:hover {
-      @apply underline;
     }
   }
 }
