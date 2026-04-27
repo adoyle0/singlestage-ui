@@ -26,9 +26,9 @@
 
   .singlestage-avatar-group-count {
     @apply bg-muted
-    rounded-full
-    size-8
     text-muted-foreground
+    size-8
+    rounded-full
     text-sm;
 
     & > svg {

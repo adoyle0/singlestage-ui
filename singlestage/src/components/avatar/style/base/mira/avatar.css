@@ -29,7 +29,7 @@
     rounded-full
     size-8
     text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
 
     & > svg {
       @apply size-4;

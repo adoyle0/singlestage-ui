@@ -8,47 +8,89 @@
     &::after {
       @apply absolute
       border-border
+      inset-0
       mix-blend-darken;
     }
   }
 
+  .singlestage-avatar-image {
+    @apply aspect-square
+    object-cover
+    size-full;
+  }
+
   .singlestage-avatar-fallback {
-    @apply bg-muted
-    flex
+    @apply flex
     items-center
     justify-center
-    text-muted-foreground;
+    size-full
+    text-sm;
   }
 
   .singlestage-avatar-badge {
     @apply absolute
     bg-blend-color
-    bg-primary
+    bottom-0
     inline-flex
     items-center
     justify-center
-    ring-background
+    right-0
+    ring-2
+    rounded-full
     select-none
-    text-primary-foreground
     z-10;
   }
 
   .singlestage-avatar-group {
-    @apply flex;
+    @apply -space-x-2
+    flex;
 
     .singlestage-avatar {
-      @apply ring-background;
+      @apply ring-2 ring-background;
     }
   }
 
   .singlestage-avatar-group-count {
-    @apply bg-muted
-    flex
+    @apply flex
     items-center
     justify-center
     relative
+    ring-2
     ring-background
-    shrink-0
-    text-muted-foreground;
+    shrink-0;
+  }
+
+  .singlestage-avatar-size-sm {
+    .singlestage-avatar-fallback {
+      @apply text-xs;
+    }
+
+    .singlestage-avatar-badge {
+      @apply size-2;
+
+      & > svg {
+        @apply hidden;
+      }
+    }
+  }
+
+  .singlestage-avatar-size-default {
+    .singlestage-avatar-badge {
+      @apply size-2.5;
+
+      & > svg {
+        @apply size-2;
+      }
+    }
+  }
+
+  .singlestage-avatar-size-lg {
+    .singlestage-avatar-badge {
+      @apply size-3;
+
+      & > svg {
+        @apply size-2;
+      }
+    }
   }
 }
