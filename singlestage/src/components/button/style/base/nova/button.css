@@ -4,7 +4,7 @@
     border
     border-transparent
     font-medium
-    rounded-md
+    rounded-lg
     text-sm;
 
     &:active:not(&:has(+ .singlestage-popover)) {
@@ -33,15 +33,14 @@
     @apply bg-primary
     text-primary-foreground;
 
-    &:hover {
+    a:hover {
       @apply bg-primary/80;
     }
   }
 
   .singlestage-button-variant-outline {
-    @apply border-border
-    bg-background
-    shadow-xs;
+    @apply bg-background
+    border-border;
 
     &:hover {
       @apply bg-muted
@@ -110,7 +109,7 @@
     @apply gap-1
     h-6
     px-2
-    rounded-[min(var(--radius-md),8px)]
+    rounded-[min(var(--radius-md),10px)]
     text-xs;
 
     &:has(svg:first-child:not(svg:last-child)) {
@@ -128,9 +127,10 @@
 
   .singlestage-button-size-sm {
     @apply gap-1
-    h-8
+    h-7
     px-2.5
-    rounded-[min(var(--radius-md),10px)];
+    rounded-[min(var(--radius-md),12px)]
+    text-[0.8rem];
 
     &:has(svg:first-child:not(svg:last-child)) {
       @apply pl-1.5;
@@ -139,11 +139,15 @@
     &:has(svg:last-child:not(svg:first-child)) {
       @apply pr-1.5;
     }
+
+    svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
   }
 
   .singlestage-button-size-default {
     @apply gap-1.5
-    h-9
+    h-8
     px-2.5;
 
     &:has(svg:first-child:not(svg:last-child)) {
@@ -157,7 +161,7 @@
 
   .singlestage-button-size-lg {
     @apply gap-1.5
-    h-10
+    h-9
     px-2.5;
 
     &:has(svg:first-child:not(svg:last-child)) {
@@ -170,7 +174,7 @@
   }
 
   .singlestage-button-size-icon-xs {
-    @apply rounded-[min(var(--radius-md),8px)]
+    @apply rounded-[min(var(--radius-md),10px)]
     size-6;
 
     svg:not([class*="size-"]) {
@@ -179,25 +183,24 @@
   }
 
   .singlestage-button-size-icon-sm {
-    @apply rounded-[min(var(--radius-md),10px)]
-    size-8;
+    @apply rounded-[min(var(--radius-md),12px)]
+    size-7;
   }
 
   .singlestage-button-size-icon {
-    @apply size-9;
+    @apply size-8;
   }
 
   .singlestage-button-size-icon-lg {
-    @apply size-10;
+    @apply size-9;
   }
 
   .singlestage-button-group {
-    .singlestage-button-size-default,
-    .singlestage-button-size-icon-sm,
-    .singlestage-button-size-icon-xs,
     .singlestage-button-size-sm,
-    .singlestage-button-size-xs {
-      @apply rounded-md;
+    .singlestage-button-size-xs,
+    .singlestage-button-size-icon-sm,
+    .singlestage-button-size-icon-xs {
+      @apply rounded-lg;
     }
   }
 }

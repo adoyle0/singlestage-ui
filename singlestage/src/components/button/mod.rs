@@ -20,8 +20,8 @@ pub fn Button(
     /// Sizes: small | large | icon | sm-icon | lg-icon
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// The display variant of the button. Defaults to `primary`
-    /// Variants: primary | secondary | outline | ghost | link | destructive | none
+    /// The display variant of the button. Defaults to `default`
+    /// Variants: default | secondary | outline | ghost | link | destructive | none
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -331,7 +331,7 @@ pub fn Button(
                     )
                 } else {
                     format!(
-                        "singlestage-btn{}{}{} {} {} {}",
+                        "singlestage-button{}{}{} {} {} {}",
                         if in_input_group { " singlestage-input-group-button" } else { "" },
                         if is_trigger { " singlestage-trigger" } else { "" },
                         if is_dialog_action {
@@ -342,39 +342,38 @@ pub fn Button(
                             ""
                         },
                         match variant.get().unwrap_or_default().as_str() {
-                            "primary" => "singlestage-btn-primary",
-                            "secondary" => "singlestage-btn-secondary",
-                            "outline" => "singlestage-btn-outline",
-                            "ghost" => "singlestage-btn-ghost",
-                            "link" => "singlestage-btn-link",
-                            "destructive" => "singlestage-btn-destructive",
+                            "secondary" => "singlestage-button-variant-secondary",
+                            "outline" => "singlestage-button-variant-outline",
+                            "ghost" => "singlestage-button-variant-ghost",
+                            "link" => "singlestage-button-variant-link",
+                            "destructive" => "singlestage-button-variant-destructive",
                             _ => {
                                 if is_dialog_cancel {
-                                    "singlestage-btn-outline"
+                                    "singlestage-button-variant-outline"
                                 } else if in_input_group && variant.get().is_none() {
-                                    "singlestage-btn-ghost"
+                                    "singlestage-button-variant-ghost"
                                 } else {
-                                    "singlestage-btn-primary"
+                                    "singlestage-button-variant-default"
                                 }
                             }
                         },
                         format!(
                             "{}{}",
                             match size.get().unwrap_or_default().as_str() {
-                                "xs" | "extra small" => "singlestage-btn-size-xs",
-                                "sm" | "small" => "singlestage-btn-size-sm",
-                                "lg" | "large" => "singlestage-btn-size-lg",
-                                "icon" => "singlestage-btn-size-icon",
+                                "xs" | "extra small" => "singlestage-button-size-xs",
+                                "sm" | "small" => "singlestage-button-size-sm",
+                                "lg" | "large" => "singlestage-button-size-lg",
+                                "icon" => "singlestage-button-size-icon",
                                 "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                                    "singlestage-btn-size-icon-xs"
+                                    "singlestage-button-size-icon-xs"
                                 }
                                 "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                                    "singlestage-btn-size-icon-sm"
+                                    "singlestage-button-size-icon-sm"
                                 }
                                 "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                                    "singlestage-btn-size-icon-lg"
+                                    "singlestage-button-size-icon-lg"
                                 }
-                                _ => "singlestage-btn-size-default",
+                                _ => "singlestage-button-size-default",
                             },
                             if in_input_group {
                                 match size.get().unwrap_or_default().as_str() {

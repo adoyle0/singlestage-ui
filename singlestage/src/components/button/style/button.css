@@ -1,128 +1,22 @@
 @layer components {
-  .singlestage-btn {
-    @apply bg-clip-padding
-    border
-    border-transparent
-    inline-flex
+  .singlestage-button {
+    @apply inline-flex
     items-center
     justify-center
     outline-none
+    select-none
     shrink-0
     transition-all
     whitespace-nowrap;
 
-    &:disabled,
-    &[aria-disabled="true"] {
+    &:disabled {
       @apply opacity-50
       pointer-events-none;
     }
 
-    &:focus-visible {
-      @apply border-ring
-      ring-3
-      ring-ring/50;
-    }
-
-    &:invalid,
-    &[aria-invalid="true"] {
-      @apply border-destructive
-      ring-destructive/20;
-    }
-
-    &svg {
+    svg {
       @apply pointer-events-none
       shrink-0;
-    }
-  }
-
-  .singlestage-btn-primary {
-    @apply bg-primary
-    shadow-xs
-    text-primary-foreground;
-
-    &:hover {
-      @apply bg-primary/80;
-    }
-  }
-
-  .singlestage-btn-outline {
-    @apply bg-background
-    border-border
-    shadow-xs;
-
-    &:hover {
-      @apply bg-muted
-      text-foreground;
-    }
-  }
-
-  .singlestage-btn-secondary {
-    @apply bg-secondary
-    shadow-xs
-    text-secondary-foreground;
-
-    &:hover {
-      @apply bg-secondary/80;
-    }
-  }
-
-  .singlestage-btn-ghost {
-    &:hover {
-      @apply bg-muted
-      text-foreground;
-    }
-  }
-
-  .singlestage-btn-destructive {
-    @apply bg-destructive/10
-    shadow-xs
-    text-destructive;
-
-    &:focus-visible {
-      @apply border-destructive/40
-      ring-destructive/20;
-    }
-
-    &:hover {
-      @apply bg-destructive/20;
-    }
-  }
-
-  .singlestage-btn-link {
-    @apply text-primary
-    underline-offset-4;
-
-    &:hover {
-      @apply underline;
-    }
-  }
-
-  .singlestage-btn-size-sm {
-    @apply gap-1.5
-    h-8
-    px-3
-    rounded-md;
-
-    :has(> svg) {
-      @apply px-2.5;
-    }
-  }
-
-  /* Highlight some buttons when they expand something
-     or are manually told they expanded something */
-  .singlestage-btn {
-    &:has(+ .singlestage-popover:popover-open),
-    &[aria-expanded="true"] {
-      &.singlestage-btn-ghost,
-      &.singlestage-btn-outline {
-        @apply bg-muted
-        text-foreground;
-      }
-
-      &.singlestage-btn-secondary {
-        @apply bg-secondary
-        text-secondary-foreground;
-      }
     }
   }
 }

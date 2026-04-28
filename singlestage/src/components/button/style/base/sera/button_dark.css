@@ -1,0 +1,29 @@
+@layer base {
+  .singlestage-button {
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+
+  .singlestage-button-variant-outline:hover {
+    @apply bg-input/30;
+  }
+
+  .singlestage-button-variant-ghost:hover {
+    @apply bg-muted/50;
+  }
+
+  .singlestage-button-variant-destructive {
+    @apply bg-destructive/20;
+
+    &:focus-visible {
+      @apply ring-destructive/40;
+    }
+
+    &:hover {
+      @apply bg-destructive/30;
+    }
+  }
+}
