@@ -9,7 +9,7 @@
     rounded-4xl
     shadow-md
     text-card-foreground
-    text-sm
+    text-sm;
 
     &:has(> img:first-child) {
       @apply pt-0;
