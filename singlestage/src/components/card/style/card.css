@@ -3,26 +3,107 @@
     @apply bg-card
     flex
     flex-col
+    gap-8
     overflow-hidden
-    ring-foreground/10
-    text-card-foreground;
+    py-8
+    ring-1
+    ring-foreground/5
+    shadow-sm
+    text-card-foreground
+    text-sm;
+
+    img:first-child,
+    img:last-child {
+      @apply rounded-none;
+    }
+
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+  }
+
+  .singlestage-card-header {
+    @apply auto-rows-min
+    gap-1.5
+    grid
+    items-start
+    px-8
+    rounded-none;
+
+    &.border-b {
+      @apply pb-8;
+    }
+
+    &:has(.singletage-card-action) {
+      @apply grid-cols-[1fr_auto];
+    }
+
+    &:has(.singletage-card-description) {
+      @apply grid-rows-[auto_auto];
+    }
   }
 
   .singlestage-card-title {
-    @apply text-base;
+    @apply /* font-heading */
+    font-semibold
+    text-lg
+    tracking-wider
+    uppercase;
   }
 
   .singlestage-card-description {
-    @apply text-muted-foreground;
+    @apply leading-relaxed
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-card-action {
+    @apply col-start-2
+    justify-self-end
+    row-span-2
+    row-start-1
+    self-start;
+  }
+
+  .singlestage-card-content {
+    @apply px-8;
   }
 
   .singlestage-card-footer {
     @apply flex
     items-center;
+
+    @apply flex
+    items-center
+    px-8;
+
+    &.border-t {
+      @apply pt-8;
+    }
   }
 
-  .singlestage-card-header {
-    @apply grid
-    items-start;
+  .singlestage-card-size-sm {
+    @apply gap-5
+    py-5;
+
+    .singlestage-card-header {
+      @apply px-5;
+
+      &.border-b {
+        @apply pb-5;
+      }
+    }
+
+    .singlestage-card-content {
+      @apply px-5;
+    }
+
+    .singlestage-card-footer {
+      @apply px-5;
+
+      &.border-t {
+        @apply pt-5;
+      }
+    }
   }
 }

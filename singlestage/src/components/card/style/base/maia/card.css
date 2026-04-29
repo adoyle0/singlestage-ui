@@ -6,8 +6,7 @@
     py-6
     ring-1
     ring-foreground/10
-    rounded-xl
-    shadow-xs
+    rounded-2xl
     text-card-foreground
     text-sm;
 
@@ -25,18 +24,17 @@
   }
 
   .singlestage-card-header {
-    @apply gap-1
+    @apply gap-2
     px-6
     rounded-t-xl;
 
-    &.border-b {
+    &.border-t {
       @apply pb-6;
     }
   }
 
   .singlestage-card-title {
     @apply font-medium
-    leading-normal
     text-base;
   }
 
@@ -70,10 +68,6 @@
       &.border-b {
         @apply pb-4;
       }
-    }
-
-    .singlestage-card-title {
-      @apply text-sm;
     }
 
     .singlestage-card-content {

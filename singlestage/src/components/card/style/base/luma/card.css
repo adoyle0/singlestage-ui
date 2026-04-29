@@ -5,29 +5,29 @@
     overflow-hidden
     py-6
     ring-1
-    ring-foreground/10
-    rounded-xl
-    shadow-xs
+    ring-foreground/5
+    rounded-4xl
+    shadow-md
     text-card-foreground
-    text-sm;
+    text-sm
 
     &:has(> img:first-child) {
       @apply pt-0;
     }
 
     img:first-child {
-      @apply rounded-t-xl;
+      @apply rounded-t-4xl;
     }
 
     img:last-child {
-      @apply rounded-b-xl;
+      @apply rounded-b-4xl;
     }
   }
 
   .singlestage-card-header {
-    @apply gap-1
+    @apply gap-1.5
     px-6
-    rounded-t-xl;
+    rounded-t-4xl;
 
     &.border-b {
       @apply pb-6;
@@ -36,7 +36,6 @@
 
   .singlestage-card-title {
     @apply font-medium
-    leading-normal
     text-base;
   }
 
@@ -51,9 +50,9 @@
 
   .singlestage-card-footer {
     @apply px-6
-    rounded-b-xl;
+    rounded-b-4xl;
 
-    &.border-t {
+    &.border-t] {
       @apply pt-6;
     }
   }
@@ -71,21 +70,17 @@
         @apply pb-4;
       }
     }
+  }
 
-    .singlestage-card-title {
-      @apply text-sm;
-    }
+  .singlestage-card-content {
+    @apply px-4;
+  }
 
-    .singlestage-card-content {
-      @apply px-4;
-    }
+  .singlestage-card-footer {
+    @apply px-4;
 
-    .singlestage-card-footer {
-      @apply px-4;
-
-      &.border-t {
-        @apply pt-4;
-      }
+    &.border-t {
+      @apply pt-4;
     }
   }
 }
