@@ -1,0 +1,71 @@
+@layer base {
+  .singlestage-button-group {
+    /* TODO: revisit selects */
+    /* has-[>[data-variant=outline]]:*:data-[slot=select-trigger]:border-border */
+    /* has-[>[data-variant=outline]]:[&>[data-slot=select-trigger]:focus-visible]:border-ring */
+    /* has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-none */
+
+    /* TODO: revisit combobox */
+    /* has-[>[data-variant=outline]]:*:[[role=combobox]]:px-2.5 */
+
+    .singlestage-input {
+      @apply px-4;
+    }
+
+    &:has(> .singlestage-button-variant-outline) {
+      & > .singlestage-input {
+        @apply border-border;
+
+        &:focus-visible {
+          @apply border-ring;
+        }
+      }
+
+      & > .singlestage-input-group:has(:focus-visible) {
+        @apply border-ring;
+      }
+
+      .singlestage-input-group {
+        @apply border-border
+        px-2.5;
+      }
+
+      .singlestage-input-group-text {
+        @apply border-border;
+      }
+    }
+
+    &:has(> .singlestage-button-group) {
+      @apply gap-2;
+    }
+  }
+
+  /* Potentially useless */
+  /* .singlestage-button-group-orientation-horizontal { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-none!; */
+  /* } */
+  /**/
+  /* .singlestage-button-group-orientation-vertical { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-none!; */
+  /* } */
+
+  .singlestage-button-group-text {
+    @apply bg-transparent
+    border
+    border-b-input
+    border-transparent
+    font-semibold
+    gap-2
+    px-2.5
+    text-xs
+    uppercase;
+
+    svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input;
+  }
+}

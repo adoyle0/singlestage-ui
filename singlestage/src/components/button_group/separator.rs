@@ -120,7 +120,6 @@ pub fn ButtonGroupSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -158,6 +157,10 @@ pub fn ButtonGroupSeparator(
     if let Some(children) = children {
         view! {
             <Separator
+                class=format!(
+                    "singlestage-button-group-separator {}",
+                    class.get().unwrap_or_default(),
+                )
                 vertical
 
                 {..global_attrs_1}
@@ -170,6 +173,10 @@ pub fn ButtonGroupSeparator(
     } else {
         view! {
             <Separator
+                class=format!(
+                    "singlestage-button-group-separator {}",
+                    class.get().unwrap_or_default(),
+                )
                 vertical
 
                 {..global_attrs_1}

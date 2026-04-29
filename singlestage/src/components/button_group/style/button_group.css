@@ -4,76 +4,76 @@
     items-stretch
     w-fit;
 
-    & > * {
-      @apply focus-visible:relative
-      focus-visible:z-10;
-    }
-
-    & > input {
+    > .singlestage-input {
       @apply flex-1;
     }
 
-    .singlestage-separator {
-      @apply !bg-input;
+    > .singlestage-trigger:not([class*="w-"]) {
+      @apply w-fit;
+    }
+
+    *:focus-visible {
+      @apply relative
+      z-10;
     }
   }
 
-  .singlestage-button-group-horizontal {
-    > *:not(:first-child),
-    > *:not(:first-child) > .singlestage-trigger {
-      @apply !rounded-l-none;
-    }
+  .singlestage-button-group-orientation-horizontal {
+    /* @apply *:data-slot:rounded-r-none */
+    /* [&>[data-slot]~[data-slot]]:rounded-l-none */
+    /* [&>[data-slot]~[data-slot]]:border-l-0; */
 
     > *:not(:last-child),
     > *:not(:last-child) > .singlestage-trigger {
-      @apply !border-r-0
-      !rounded-r-none;
+      @apply rounded-r-none;
     }
 
-    > .singlestage-separator ~ * {
-      @apply !border-l-0;
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger {
+      @apply border-l-0
+      rounded-l-none;
     }
 
-    .singlestage-separator {
-      @apply !h-auto
-      !my-px
-      !w-px;
+    .singlestage-button-group-separator {
+      @apply mx-px
+      w-auto;
     }
   }
 
-  .singlestage-button-group-vertical {
+  .singlestage-button-group-orientation-vertical {
     @apply flex-col;
-
-    > *:not(:first-child),
-    > *:not(:first-child) > .singlestage-trigger {
-      @apply !rounded-t-none;
-    }
+    /* *:data-slot:rounded-b-none */
+    /* [&>[data-slot]~[data-slot]]:rounded-t-none */
+    /* [&>[data-slot]~[data-slot]]:border-t-0; */
 
     > *:not(:last-child),
     > *:not(:last-child) > .singlestage-trigger {
-      @apply !border-b-0
-      !rounded-b-none;
+      @apply rounded-b-none;
     }
 
-    > .singlestage-separator ~ * {
-      @apply !border-t-0;
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger {
+      @apply border-t-0
+      rounded-t-none;
     }
 
-    .singlestage-separator {
-      @apply !h-px
-      !mx-px
-      !w-auto;
+    .singlestage-button-group-separator {
+      @apply h-auto
+      my-px;
     }
   }
 
   .singlestage-button-group-text {
-    @apply bg-muted
-    border
-    flex
+    @apply flex
     items-center;
 
     svg {
       @apply pointer-events-none;
     }
+  }
+
+  .singlestage-button-group-separator {
+    @apply relative
+    self-stretch;
   }
 }

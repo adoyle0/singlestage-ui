@@ -1,0 +1,30 @@
+@layer base {
+  .singlestage-button-group {
+    @apply rounded-none;
+
+    /* TODO: revisit selects */
+    /* has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-none; */
+
+    &:has(> .singlestage-button-group) {
+      @apply gap-2;
+    }
+  }
+
+  .singlestage-button-group-text {
+    @apply bg-muted
+    border
+    font-medium
+    gap-2
+    px-2.5
+    rounded-none
+    text-xs;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input;
+  }
+}
