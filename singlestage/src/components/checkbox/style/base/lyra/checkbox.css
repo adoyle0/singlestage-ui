@@ -5,10 +5,9 @@
     flex
     items-center
     justify-center
-    rounded-[4px]
-    shadow-xs
+    rounded-none
     size-4
-    transition-shadow;
+    transition-colors;
 
     &:checked {
       @apply bg-primary
@@ -22,14 +21,14 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-1
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-1
       ring-destructive/20;
 
       &:checked {

@@ -5,8 +5,7 @@
     flex
     items-center
     justify-center
-    rounded-[4px]
-    shadow-xs
+    rounded-[6px]
     size-4
     transition-shadow;
 
@@ -22,14 +21,14 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-[3px]
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-[3px]
       ring-destructive/20;
 
       &:checked {

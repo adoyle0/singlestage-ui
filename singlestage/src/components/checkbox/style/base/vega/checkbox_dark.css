@@ -1,5 +1,7 @@
-@layer component {
+@layer base {
   .singlestage-checkbox {
+    @apply bg-input/30;
+
     &:checked {
       @apply bg-primary;
     }

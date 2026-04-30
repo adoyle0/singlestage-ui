@@ -6,9 +6,8 @@
     items-center
     justify-center
     rounded-[4px]
-    shadow-xs
     size-4
-    transition-shadow;
+    transition-colors;
 
     &:checked {
       @apply bg-primary

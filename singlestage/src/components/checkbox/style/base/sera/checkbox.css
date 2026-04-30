@@ -1,13 +1,13 @@
 @layer base {
   .singlestage-checkbox {
-    @apply border
+    @apply bg-transparent
+    border
     border-input
     flex
     items-center
     justify-center
-    rounded-[4px]
-    shadow-xs
-    size-4
+    rounded-none
+    size-4.5
     transition-shadow;
 
     &:checked {
@@ -22,14 +22,14 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
-      ring-ring/50;
+      ring-2
+      ring-ring/30;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-2
       ring-destructive/20;
 
       &:checked {

@@ -6,7 +6,6 @@
     items-center
     justify-center
     rounded-[4px]
-    shadow-xs
     size-4
     transition-shadow;
 
@@ -22,14 +21,14 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
-      ring-ring/50;
+      ring-2
+      ring-ring/30;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-2
       ring-destructive/20;
 
       &:checked {
