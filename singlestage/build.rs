@@ -60,7 +60,7 @@ fn run_tailwind(
 
     let output = Command::new(&tailwind_path)
         .arg("-i")
-        .arg(bundle_path)
+        .arg(&bundle_path)
         .arg("-o")
         .arg(output_path)
         .arg("-m")
@@ -70,7 +70,7 @@ fn run_tailwind(
         && !output.status.success()
     {
         let error = String::from_utf8(output.stderr).unwrap();
-        panic!("{}", error);
+        panic!("\nError in {:#?}\n\n{}", bundle_path, error);
     }
 }
 
