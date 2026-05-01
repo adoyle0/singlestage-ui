@@ -183,7 +183,12 @@ pub fn MenuContentPrimitive(
         <menu
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-content singlestage-popover {} {}",
+                    "singlestage-dropdown-menu-content{} singlestage-popover {} {}",
+                    if is_sub.get_value() {
+                        " singlestage-dropdown-menu-sub-content".to_owned()
+                    } else {
+                        "".to_owned()
+                    },
                     if is_context_menu && !is_sub.get_value() {
                         "".to_owned()
                     } else {

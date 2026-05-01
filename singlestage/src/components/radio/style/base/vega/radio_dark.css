@@ -1,5 +1,5 @@
 @layer base {
-  .singlestage-radio:not(.singlestage-radio-item) {
+  .singlestage-radio:not(.singlestage-dropdown-menu-radio-item) {
     @apply bg-input/30;
 
     &:invalid,

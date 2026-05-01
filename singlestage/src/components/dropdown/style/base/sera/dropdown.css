@@ -1,11 +1,11 @@
 @layer base {
   .singlestage-dropdown-menu-content {
     @apply bg-popover
-    min-w-32
-    p-1
+    min-w-48
+    p-1.5
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-none
     shadow-md
     text-popover-foreground;
   }
@@ -13,11 +13,14 @@
   .singlestage-dropdown-menu-item {
     > button,
     > label {
-      @apply gap-2
-      px-2
-      py-1.5
-      rounded-sm
-      text-sm;
+      @apply font-medium
+      gap-2.5
+      px-3
+      py-2
+      rounded-none
+      text-xs
+      tracking-wider
+      uppercase;
 
       &:focus,
       &:hover {
@@ -26,11 +29,11 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-9.5;
       }
 
       svg:not([class*="size-"]) {
-        @apply size-4;
+        @apply size-3.5;
       }
     }
   }
@@ -53,22 +56,24 @@
   }
 
   .singlestage-dropdown-menu-label {
-    @apply font-medium
-    px-2
-    py-1.5
+    @apply font-semibold
+    px-3
+    py-2
     text-muted-foreground
-    text-xs;
+    text-xs
+    tracking-wider
+    uppercase;
 
     &.singlestage-dropdown-menu-inset {
-      @apply pl-8;
+      @apply pl-9.5;
     }
   }
 
   .singlestage-dropdown-menu-separator {
-    @apply -mx-1
-    bg-border
+    @apply -mx-1.5
+    bg-border/50
     h-px
-    my-1;
+    my-1.5;
   }
 
   .singlestage-dropdown-menu-shortcut {
@@ -81,11 +86,14 @@
   .singlestage-dropdown-menu-sub-trigger {
     > button,
     > label {
-      @apply gap-2
-      px-2
-      py-1.5
-      rounded-sm
-      text-sm;
+      @apply font-medium
+      gap-2
+      px-3
+      py-2
+      rounded-none
+      text-xs
+      tracking-wider
+      uppercase;
 
       &:focus,
       &:hover {
@@ -94,11 +102,11 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-9.5;
       }
 
       svg:not([class*="size-"]) {
-        @apply size-4;
+        @apply size-3.5;
       }
     }
 
@@ -113,12 +121,12 @@
 
   .singlestage-dropdown-menu-sub-content {
     @apply bg-popover
-    min-w-[96px]
-    p-1
+    min-w-36
+    p-1.5
     ring-1
     ring-foreground/10
-    rounded-md
-    shadow-lg
+    rounded-none
+    shadow-md
     text-popover-foreground;
   }
 }

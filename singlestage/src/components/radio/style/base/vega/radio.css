@@ -1,10 +1,10 @@
 @layer base {
-  .singlestage-radio-group:not(:has(.singlestage-radio-item)) {
+  .singlestage-radio-group:not(:has(.singlestage-dropdown-menu-radio-item)) {
     @apply gap-3
     grid;
   }
 
-  .singlestage-radio:not(.singlestage-radio-item) {
+  .singlestage-radio:not(.singlestage-dropdown-menu-radio-item) {
     @apply border-input
     flex
     rounded-full

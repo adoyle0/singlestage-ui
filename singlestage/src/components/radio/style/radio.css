@@ -1,5 +1,5 @@
 @layer components {
-  .singlestage-radio-group:not(:has(.singlestage-radio-item)) {
+  .singlestage-radio-group:not(:has(.singlestage-dropdown-menu-radio-item)) {
     @apply w-full;
 
     > legend {
@@ -9,7 +9,7 @@
     }
   }
 
-  .singlestage-radio:not(.singlestage-radio-item) {
+  .singlestage-radio:not(.singlestage-dropdown-menu-radio-item) {
     @apply appearance-none
     aspect-square
     border

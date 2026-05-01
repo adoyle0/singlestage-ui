@@ -2,6 +2,7 @@ use super::{MenuSubContext, PopoverMenuContext};
 use crate::{Button, Checkbox, Radio, Reactive};
 use leptos::{context::Provider, prelude::*};
 
+#[derive(Clone, Copy)]
 pub enum MenuItemPrimitiveType {
     Item,
     Checkbox,
@@ -187,15 +188,23 @@ pub fn MenuItemPrimitive(
         <li
             class=move || {
                 format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
+                    "{}{}{}{} {}",
+                    match primitive_type {
+                        MenuItemPrimitiveType::SubTrigger => "singlestage-dropdown-menu-sub-trigger",
+                        _ => "singlestage-dropdown-menu-item",
+                    },
+                    if disabled.get() {
+                        " singlestage-dropdown-menu-item-variant-disabled"
+                    } else {
+                        ""
+                    },
                     if inset.get().unwrap_or_default() {
                         " singlestage-dropdown-menu-inset"
                     } else {
                         ""
                     },
                     match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-dropdown-menu-item-destructive",
+                        "destructive" => " singlestage-dropdown-menu-item-variant-destructive",
                         _ => "",
                     },
                     class.get().unwrap_or_default(),
@@ -254,7 +263,7 @@ pub fn MenuItemPrimitive(
                                 MenuItemPrimitiveType::Checkbox => {
                                     view! {
                                         <Checkbox
-                                            class="singlestage-checkbox-item"
+                                            class="singlestage-dropdown-menu-checkbox-item"
                                             checked
                                             disabled
                                             id
@@ -265,7 +274,7 @@ pub fn MenuItemPrimitive(
                                 MenuItemPrimitiveType::Radio => {
                                     view! {
                                         <Radio
-                                            class="singlestage-radio-item"
+                                            class="singlestage-dropdown-menu-radio-item"
                                             checked
                                             disabled
                                             id

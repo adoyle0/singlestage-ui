@@ -1,0 +1,15 @@
+@layer base {
+  .singlestage-dropdown-menu-content {
+    @apply ring-foreground/10;
+  }
+
+  .singlestage-dropdown-menu-item-variant-destructive {
+    > button,
+    > label {
+      &:focus,
+      &:hover {
+        @apply bg-destructive/20;
+      }
+    }
+  }
+}

@@ -2,10 +2,9 @@
   .singlestage-dropdown-menu-content {
     @apply bg-popover
     min-w-32
-    p-1
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-none
     shadow-md
     text-popover-foreground;
   }
@@ -15,9 +14,9 @@
     > label {
       @apply gap-2
       px-2
-      py-1.5
-      rounded-sm
-      text-sm;
+      py-2
+      rounded-none
+      text-xs;
 
       &:focus,
       &:hover {
@@ -26,7 +25,7 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-7;
       }
 
       svg:not([class*="size-"]) {
@@ -53,22 +52,20 @@
   }
 
   .singlestage-dropdown-menu-label {
-    @apply font-medium
-    px-2
-    py-1.5
+    @apply px-2
+    py-2
     text-muted-foreground
     text-xs;
 
     &.singlestage-dropdown-menu-inset {
-      @apply pl-8;
+      @apply pl-7;
     }
   }
 
   .singlestage-dropdown-menu-separator {
     @apply -mx-1
     bg-border
-    h-px
-    my-1;
+    h-px;
   }
 
   .singlestage-dropdown-menu-shortcut {
@@ -83,9 +80,9 @@
     > label {
       @apply gap-2
       px-2
-      py-1.5
-      rounded-sm
-      text-sm;
+      py-2
+      rounded-none
+      text-xs;
 
       &:focus,
       &:hover {
@@ -94,7 +91,7 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-7;
       }
 
       svg:not([class*="size-"]) {
@@ -114,10 +111,9 @@
   .singlestage-dropdown-menu-sub-content {
     @apply bg-popover
     min-w-[96px]
-    p-1
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-none
     shadow-lg
     text-popover-foreground;
   }

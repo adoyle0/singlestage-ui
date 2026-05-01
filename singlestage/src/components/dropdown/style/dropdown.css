@@ -1,17 +1,21 @@
 @layer components {
+  .singlestage-dropdown-menu {
+    @apply isolate
+    outline-none
+    z-50;
+  }
+
   .singlestage-dropdown-menu-content {
-    @apply bg-popover
+    @apply /* data-closed:overflow-hidden */
     flex
     flex-col
-    min-w-fit
-    overflow-hidden
-    text-popover-foreground
+    /* max-h-(--available-height) */
+    /* origin-(--transform-origin) */
+    outline-none
+    overflow-x-hidden
+    overflow-y-auto
+    /* w-(--anchor-width) */
     z-50;
-
-    svg {
-      @apply pointer-events-none
-      shrink-0;
-    }
   }
 
   .singlestage-dropdown-menu-item {
@@ -29,33 +33,40 @@
       w-full;
 
       &:disabled,
-      &:has(*:disabled) {
+      &[aria-disabled="true"] {
         @apply opacity-50
         pointer-events-none;
-      }
-
-      &:focus {
-        @apply bg-accent
-        text-accent-foreground;
-      }
-
-      &:hover {
-        @apply bg-accent
-        text-accent-foreground;
       }
 
       svg {
         @apply pointer-events-none
         shrink-0;
-
-        &:not([class*="size-"]) {
-          @apply size-4;
-        }
       }
 
-      .singlestage-checkbox-item,
-      .singlestage-radio-item {
+      .singlestage-dropdown-menu-checkbox-item,
+      .singlestage-dropdown-menu-radio-item {
         @apply ml-auto;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-sub-trigger {
+    > button,
+    > label {
+      @apply content-center
+      cursor-default
+      flex
+      h-full
+      items-center
+      outline-hidden
+      relative
+      select-none
+      text-nowrap
+      w-full;
+
+      svg {
+        @apply pointer-events-none
+        shrink-0;
       }
     }
 
@@ -68,13 +79,28 @@
     }
   }
 
-  .singlestage-checkbox-item,
-  .singlestage-radio-item {
+  .singlestage-dropdown-menu-sub-content {
+    @apply w-auto;
+  }
+
+  .singlestage-dropdown-menu-checkbox-item,
+  .singlestage-dropdown-menu-radio-item {
     @apply appearance-none
-    outline-none
+    cursor-default
+    /* flex */
+    /* items-center */
+    outline-hidden
+    /* relative */
+    select-none
     shrink-0
     size-4
     transition-shadow;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
 
     &:checked:after {
       @apply bg-accent-foreground
@@ -84,41 +110,9 @@
       mask-center
       mask-no-repeat
       mask-size-[calc(4*var(--spacing))]
+      pointer-events-none
+      shrink-0
       size-4;
     }
-  }
-
-  .singlestage-dropdown-menu-item-destructive {
-    > button,
-    > label {
-      @apply text-destructive;
-
-      &:focus {
-        @apply bg-destructive/10
-        text-destructive;
-      }
-
-      &:hover {
-        @apply bg-destructive/10
-        text-destructive;
-      }
-
-      svg {
-        @apply text-destructive;
-      }
-    }
-  }
-
-  .singlestage-dropdown-menu-inset {
-    @apply pl-8;
-  }
-
-  .singlestage-dropdown-menu-label,
-  .singlestage-dropdown-menu-shortcut {
-    @apply text-muted-foreground;
-  }
-
-  .singlestage-dropdown-menu-separator {
-    @apply bg-border;
   }
 }

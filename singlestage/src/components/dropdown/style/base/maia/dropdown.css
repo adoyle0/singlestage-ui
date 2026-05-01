@@ -1,22 +1,22 @@
 @layer base {
   .singlestage-dropdown-menu-content {
     @apply bg-popover
-    min-w-32
+    min-w-48
     p-1
     ring-1
-    ring-foreground/10
-    rounded-md
-    shadow-md
+    ring-foreground/5
+    rounded-2xl
+    shadow-2xl
     text-popover-foreground;
   }
 
   .singlestage-dropdown-menu-item {
     > button,
     > label {
-      @apply gap-2
-      px-2
-      py-1.5
-      rounded-sm
+      @apply gap-2.5
+      rounded-xl
+      px-3
+      py-2
       text-sm;
 
       &:focus,
@@ -26,7 +26,7 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-9.5;
       }
 
       svg:not([class*="size-"]) {
@@ -53,20 +53,19 @@
   }
 
   .singlestage-dropdown-menu-label {
-    @apply font-medium
-    px-2
-    py-1.5
+    @apply px-3
+    py-2.5
     text-muted-foreground
     text-xs;
 
     &.singlestage-dropdown-menu-inset {
-      @apply pl-8;
+      @apply pl-9.5;
     }
   }
 
   .singlestage-dropdown-menu-separator {
     @apply -mx-1
-    bg-border
+    bg-border/50
     h-px
     my-1;
   }
@@ -82,9 +81,9 @@
     > button,
     > label {
       @apply gap-2
-      px-2
-      py-1.5
-      rounded-sm
+      px-3
+      py-2
+      rounded-xl
       text-sm;
 
       &:focus,
@@ -94,7 +93,7 @@
       }
 
       &.singlestage-dropdown-menu-inset {
-        @apply pl-8;
+        @apply pl-9.5;
       }
 
       svg:not([class*="size-"]) {
@@ -113,12 +112,12 @@
 
   .singlestage-dropdown-menu-sub-content {
     @apply bg-popover
-    min-w-[96px]
+    min-w-36
     p-1
     ring-1
-    ring-foreground/10
-    rounded-md
-    shadow-lg
+    ring-foreground/5
+    rounded-2xl
+    shadow-2xl
     text-popover-foreground;
   }
 }

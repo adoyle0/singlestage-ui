@@ -1,5 +1,5 @@
 @layer component {
-  .singlestage-checkbox {
+  .singlestage-checkbox:not(.singlestage-dropdown-menu-checkbox-item) {
     @apply appearance-none
     outline-none
     shrink-0;
