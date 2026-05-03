@@ -1,9 +1,8 @@
-@layer base {
+@layer baes {
   .singlestage-label {
-    @apply font-medium
-    gap-2
+    @apply gap-2
     leading-none
-    text-sm;
+    text-xs;
 
     &:is(:where(*):disabled ~ *),
     &:is(:where(*)[aria-disabled="true"] *) {

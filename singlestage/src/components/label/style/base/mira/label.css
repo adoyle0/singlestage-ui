@@ -3,7 +3,7 @@
     @apply font-medium
     gap-2
     leading-none
-    text-sm;
+    text-xs/relaxed;
 
     &:is(:where(*):disabled ~ *),
     &:is(:where(*)[aria-disabled="true"] *) {
