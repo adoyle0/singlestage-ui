@@ -326,7 +326,17 @@ pub fn CheckboxPrimitive(
                 format!(
                     "{} {}",
                     match primitive_type {
-                        CheckboxPrimitiveType::Checkbox => "singlestage-checkbox".to_owned(),
+                        CheckboxPrimitiveType::Checkbox => {
+                            if class
+                                .get()
+                                .unwrap_or_default()
+                                .contains("singlestage-dropdown-menu-checkbox-item")
+                            {
+                                "".to_owned()
+                            } else {
+                                "singlestage-checkbox".to_owned()
+                            }
+                        }
                         CheckboxPrimitiveType::Switch => {
                             format!(
                                 "singlestage-switch {}",
@@ -336,7 +346,17 @@ pub fn CheckboxPrimitive(
                                 },
                             )
                         }
-                        CheckboxPrimitiveType::Radio => "singlestage-radio".to_owned(),
+                        CheckboxPrimitiveType::Radio => {
+                            if class
+                                .get()
+                                .unwrap_or_default()
+                                .contains("singlestage-dropdown-menu-radio-item")
+                            {
+                                "".to_owned()
+                            } else {
+                                "singlestage-radio".to_owned()
+                            }
+                        }
                     },
                     class.get().unwrap_or_default(),
                 )

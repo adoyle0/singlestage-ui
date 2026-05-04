@@ -120,7 +120,6 @@ pub fn FieldSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -155,27 +154,41 @@ pub fn FieldSeparator(
         />
     };
 
-    if let Some(children) = children {
-        view! {
-            <Separator
-                vertical
+    view! {
+        <div class="singlestage-field-separator">
+            {if let Some(children) = children {
+                view! {
+                    <Separator
+                        class="singlestage-field-separator-inner"
+                        vertical
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {children()}
-            </Separator>
-        }
-        .into_any()
-    } else {
-        view! {
-            <Separator
-                vertical
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    >
+                        <span class=format!(
+                            "singlestage-field-separator-content {}",
+                            class.get().unwrap_or_default(),
+                        )>{children()}</span>
+                    </Separator>
+                }
+                    .into_any()
+            } else {
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-            />
-        }
-        .into_any()
+                view! {
+                    <Separator
+                        class=format!(
+                            "singlestage-field-separator-inner {}",
+                            class.get().unwrap_or_default(),
+                        )
+
+                        vertical
+
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                }
+                    .into_any()
+            }}
+        </div>
     }
 }

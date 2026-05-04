@@ -1,5 +1,5 @@
 @layer component {
-  .singlestage-checkbox:not(.singlestage-dropdown-menu-checkbox-item) {
+  .singlestage-checkbox {
     &:checked {
       @apply bg-primary;
     }

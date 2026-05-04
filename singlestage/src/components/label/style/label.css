@@ -1,9 +1,19 @@
 @layer components {
   .singlestage-label {
     @apply flex
-    group-data-[disabled=true]:pointer-events-none
     items-center
-    peer-disabled:cursor-not-allowed
     select-none;
+
+    /* Peer */
+    &:is(:where(*):disabled ~ *),
+    &:is(:where(*)[aria-disabled="true"] ~ *) {
+      @apply cursor-not-allowed;
+    }
+
+    /* Group */
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *) {
+      @apply pointer-events-none;
+    }
   }
 }

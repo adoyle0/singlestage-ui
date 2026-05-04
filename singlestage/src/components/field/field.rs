@@ -178,15 +178,11 @@ pub fn Field(
             aria_invalid=move || if invalid.get() { Some("true".to_string()) } else { None }
             class=move || {
                 format!(
-                    "singlestage-field{}{}{}",
+                    "singlestage-field{} {}",
                     match orientation.get().unwrap_or_default().as_str() {
-                        "horizontal" => " singlestage-field-horizontal",
-                        "responsive" => " singlestage-field-responsive",
-                        _ => " singlestage-field-vertical",
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "button" => " singlestage-field-button",
-                        _ => "",
+                        "horizontal" => " singlestage-field-orientation-horizontal",
+                        "responsive" => " singlestage-field-orientation-responsive",
+                        _ => " singlestage-field-orientation-vertical",
                     },
                     class.get().unwrap_or_default(),
                 )

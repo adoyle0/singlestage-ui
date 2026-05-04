@@ -4,8 +4,10 @@
     leading-none
     text-xs;
 
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *),
     &:is(:where(*):disabled ~ *),
-    &:is(:where(*)[aria-disabled="true"] *) {
+    &:is(:where(*)[aria-disabled="true"] ~ *) {
       @apply opacity-50;
     }
   }

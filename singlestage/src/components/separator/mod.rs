@@ -1,4 +1,4 @@
-use crate::{FieldSetContext, ItemContext, primitives::*};
+use crate::{ItemContext, primitives::*};
 use leptos::prelude::*;
 
 /// The separator.
@@ -155,7 +155,6 @@ pub fn Separator(
     };
 
     let in_popover: bool = use_context::<PopoverMenuContext>().is_some();
-    let in_fieldset: bool = use_context::<FieldSetContext>().is_some();
     let in_item: bool = use_context::<ItemContext>().is_some();
 
     if in_popover {
@@ -172,22 +171,6 @@ pub fn Separator(
                 {..global_attrs_1}
                 {..global_attrs_2}
             />
-        }
-        .into_any()
-    } else if in_fieldset {
-        view! {
-            <div class=move || {
-                format!("singlestage-field-separator {}", class.get().unwrap_or_default())
-            }>
-                <div class="singlestage-separator singlestage-separator-horizontal singlestage-field-separator-separator" />
-                {if let Some(children) = children {
-                    view! { <span class="singlestage-field-separator-content">{children()}</span> }
-                        .into_any()
-                } else {
-                    "".into_any()
-                }}
-
-            </div>
         }
         .into_any()
     } else {

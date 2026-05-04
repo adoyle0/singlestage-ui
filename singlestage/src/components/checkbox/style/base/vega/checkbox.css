@@ -1,5 +1,5 @@
 @layer base {
-  .singlestage-checkbox:not(.singlestage-dropdown-menu-checkbox-item) {
+  .singlestage-checkbox {
     @apply border
     border-input
     flex
@@ -40,7 +40,7 @@
 
   .singlestage-field:has(*:disabled),
   .singlestage-field:has(*[aria-disabled="true"]) {
-    .singlestage-checkbox:not(.singlestage-dropdown-menu-checkbox-item) {
+    .singlestage-checkbox {
       @apply opacity-50;
     }
   }

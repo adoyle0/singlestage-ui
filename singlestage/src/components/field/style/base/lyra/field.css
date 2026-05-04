@@ -1,0 +1,113 @@
+@layer base {
+  .singlestage-field-set {
+    @apply gap-4;
+
+    &:has(> .singlestage-checkbox-group, > .singlestage-radio-group) {
+      @apply gap-3;
+    }
+  }
+
+  .singlestage-field-legend {
+    @apply font-medium
+    mb-2.5;
+  }
+
+  .singlestage-field-group {
+    @apply gap-5;
+
+    &:has(.singlestage-checkbox-group) {
+      @apply gap-3;
+    }
+
+    .singlestage-field-group {
+      @apply gap-4;
+    }
+  }
+
+  .singlestage-field-content {
+    @apply gap-0.5;
+  }
+
+  .singlestage-field-label {
+    @apply gap-2
+    leading-snug;
+
+    &:has(> .singlestage-field) {
+      @apply border
+      rounded-none;
+    }
+
+    &:has(*:checked) {
+      @apply bg-primary/5
+      border-primary/30;
+    }
+
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *) {
+      @apply opacity-50;
+    }
+
+    .singlestage-field {
+      @apply p-2;
+    }
+  }
+
+  .singlestage-field {
+    @apply gap-2;
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply text-destructive;
+    }
+  }
+
+  .singlestage-field-title {
+    @apply gap-2
+    text-xs/relaxed;
+
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *) {
+      @apply opacity-50;
+    }
+  }
+
+  .singlestage-field-description {
+    @apply text-left
+    text-muted-foreground
+    text-xs/relaxed;
+
+    .singlestage-field-legend-variant-legend + & {
+      @apply -mt-1.5;
+    }
+  }
+
+  .singlestage-field-separator {
+    @apply -my-2
+    h-5
+    text-xs;
+  }
+
+  .singlestage-field-separator-content {
+    @apply text-muted-foreground
+    px-2;
+  }
+
+  .singlestage-field-error {
+    @apply text-destructive
+    text-xs;
+  }
+
+  .singlestage-field-legend-variant-label {
+    @apply text-xs;
+  }
+
+  .singlestage-field-legend-variant-legend {
+    @apply text-sm;
+  }
+
+  .singlestage-field-group-variant-outline {
+    .singlestage-field-separator {
+      @apply -mb-2;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@layer base {
+  .singlestage-field-label:has(*:checked) {
+    @apply bg-primary/10
+    border-primary/20;
+  }
+}

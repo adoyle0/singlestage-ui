@@ -17,9 +17,10 @@
   }
 
   .singlestage-field-title {
-    @apply font-medium
-    gap-2
-    text-sm;
+    @apply gap-2
+    leading-snug
+    text-sm
+    font-medium;
   }
 
   .singlestage-field-description {
@@ -34,49 +35,26 @@
     text-sm;
   }
 
-  .singlestage-field-separator-separator {
-    @apply absolute
-    inset-0
-    top-1/2;
-  }
-
   .singlestage-field-separator-content {
     @apply px-2
     text-muted-foreground;
   }
 
-  .singlestage-field-error {
-    @apply text-destructive
-    text-sm;
-  }
-
   .singlestage-field-group {
     @apply gap-7;
+
+    &:has(.singlestage-checkbox-group) {
+      @apply gap-3;
+    }
 
     .singlestage-field-group {
       @apply gap-4;
     }
-
-    > .singlestage-checkbox-group {
-      @apply gap-3;
-    }
   }
 
-  .singlestage-field {
-    @apply gap-3;
-
-    &:disabled,
-    &[aria-disabled="true"] {
-      .singlestage-label,
-      .singlestage-field-title {
-        @apply opacity-50;
-      }
-    }
-
-    &:invalid,
-    &[aria-invalid="true"] {
-      @apply text-destructive;
-    }
+  .singlestage-field-error {
+    @apply text-destructive
+    text-sm;
   }
 
   .singlestage-field-legend-variant-label {
@@ -88,6 +66,39 @@
 
     & + .singlestage-field-description {
       @apply -mt-1.5;
+    }
+  }
+
+  .singlestage-field-label {
+    @apply gap-2
+    leading-snug;
+
+    &:has(> .singlestage-field) {
+      @apply border
+      rounded-2xl;
+    }
+
+    &:has(*:checked) {
+      @apply bg-input/30;
+    }
+
+    .singlestage-field {
+      @apply p-4;
+    }
+  }
+
+  .singlestage-field {
+    @apply gap-3;
+
+    &:disabled {
+      .singlestage-label,
+      .singlestage-field-title {
+        @apply opacity-50;
+      }
+    }
+
+    &:invalid {
+      @apply text-destructive;
     }
   }
 
