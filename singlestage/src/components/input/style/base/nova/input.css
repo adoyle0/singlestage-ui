@@ -3,19 +3,23 @@
     @apply bg-transparent
     border
     border-input
-    h-9
+    h-8
     md:text-sm
     px-2.5
     py-1
-    rounded-md
-    shadow-xs
+    rounded-lg
     text-base
-    transition-[color,box-shadow];
+    transition-colors;
 
     &[type="file"] {
       @apply font-medium
-      h-7
+      h-6
       text-sm;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/50;
     }
 
     &:focus-visible {
@@ -31,21 +35,4 @@
       ring-destructive/20;
     }
   }
-
-  /* .singlestage-input-group-input { */
-  /*   @apply bg-transparent */
-  /*   border-0 */
-  /*   ring-0 */
-  /*   rounded-none */
-  /*   shadow-none; */
-  /**/
-  /*   &:focus-visible { */
-  /*     @apply ring-0; */
-  /*   } */
-  /**/
-  /*   &:invalid, */
-  /*   &[aria-invalid="true"] { */
-  /*     @apply ring-0; */
-  /*   } */
-  /* } */
 }

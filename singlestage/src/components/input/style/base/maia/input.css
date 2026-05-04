@@ -1,0 +1,33 @@
+@layer base {
+  .singlestage-input {
+    @apply bg-input/30
+    border
+    border-input
+    h-9
+    md:text-sm
+    px-3
+    py-1
+    rounded-4xl
+    text-base
+    transition-colors;
+
+    &[type="file"] {
+      @apply font-medium
+      h-7
+      text-sm;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-[3px]
+      ring-destructive/20;
+    }
+  }
+}

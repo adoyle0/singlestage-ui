@@ -2,14 +2,15 @@
   .singlestage-input {
     @apply bg-input/30;
 
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/80;
+    }
+
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive/50
       ring-destructive/40;
     }
   }
-  /**/
-  /* .singlestage-input-group-input { */
-  /*   @apply bg-transparent; */
-  /* } */
 }

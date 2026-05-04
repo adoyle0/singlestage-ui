@@ -1,0 +1,8 @@
+@layer base {
+  .singlestage-input {
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-b-destructive/50;
+    }
+  }
+}

@@ -1,15 +1,9 @@
 @layer base {
   .singlestage-input {
-    @apply bg-input/30;
-
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive/50
       ring-destructive/40;
     }
   }
-  /**/
-  /* .singlestage-input-group-input { */
-  /*   @apply bg-transparent; */
-  /* } */
 }
