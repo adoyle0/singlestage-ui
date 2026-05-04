@@ -22,9 +22,4 @@
       @apply text-muted-foreground;
     }
   }
-
-  /* TODO: put this in input group and have it cascade properly */
-  /* .singlestage-input-group-input { */
-  /*   @apply flex-1; */
-  /* } */
 }

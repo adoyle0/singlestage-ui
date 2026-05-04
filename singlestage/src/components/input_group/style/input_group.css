@@ -1,17 +1,4 @@
 @layer components {
-  .singlestage-input-group {
-    @apply flex
-    items-center
-    min-w-0
-    outline-none
-    relative
-    w-full;
-
-    &:has(textarea) {
-      @apply h-auto;
-    }
-  }
-
   .singlestage-input-group-addon {
     @apply cursor-text
     flex
@@ -52,6 +39,28 @@
 
     svg {
       @apply pointer-events-none;
+    }
+  }
+
+  .singlestage-input-group-input {
+    @apply flex-1;
+  }
+
+  .singlesage-input-group-textarea {
+    @apply flex-1
+    resize-none;
+  }
+
+  .singlestage-input-group {
+    @apply flex
+    items-center
+    min-w-0
+    outline-none
+    relative
+    w-full;
+
+    &:has(> .singlestage-textarea) {
+      @apply h-auto;
     }
   }
 }

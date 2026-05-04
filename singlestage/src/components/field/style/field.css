@@ -87,7 +87,7 @@
   .singlestage-field-orientation-vertical {
     @apply flex-col;
 
-    * {
+    > * {
       @apply w-full;
     }
 
@@ -122,7 +122,7 @@
   .singlestage-field-orientation-responsive {
     @apply flex-col;
 
-    * {
+    > * {
       @apply w-full;
     }
 

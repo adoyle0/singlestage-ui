@@ -3,7 +3,7 @@
     @apply font-medium
     gap-2
     h-auto
-    py-1.5
+    py-2
     text-muted-foreground
     text-sm;
 
@@ -13,7 +13,9 @@
     }
 
     > kbd {
-      @apply rounded-[calc(var(--radius)-5px)];
+      @apply bg-muted-foreground/10
+      px-1.5
+      rounded-4xl;
     }
 
     > svg:not([class*="size-"]) {
@@ -22,7 +24,7 @@
   }
 
   .singlestage-input-group-addon-align-inline-start {
-    @apply pl-2;
+    @apply pl-3;
 
     &:has(> button) {
       @apply -ml-1;
@@ -34,7 +36,7 @@
   }
 
   .singlestage-input-group-addon-align-inline-end {
-    @apply pr-2;
+    @apply pr-3;
 
     &:has(> button) {
       @apply -mr-1;
@@ -46,42 +48,41 @@
   }
 
   .singlestage-input-group-addon-align-block-start {
-    @apply pt-2
-    px-2.5;
+    @apply pt-3
+    px-3;
 
     &.border-b {
-      @apply pb-2;
+      @apply pb-3;
     }
   }
 
   .singlestage-input-group-addon-align-block-end {
-    @apply pb-2
-    px-2.5;
+    @apply pb-3
+    px-3;
 
     &.border-t {
-      @apply pt-2;
+      @apply pt-3;
     }
   }
 
   .singlestage-input-group-button {
     @apply gap-2
+    rounded-4xl
     text-sm;
   }
 
   .singlestage-input-group-button-size-xs {
     @apply gap-1
     h-6
-    px-1.5
-    rounded-[calc(var(--radius)-5px)];
+    px-1.5;
 
-    svg:not([class*="size-"]) {
+    > svg:not([class*="size-"]) {
       @apply size-3.5;
     }
   }
 
   .singlestage-input-group-button-size-icon-xs {
     @apply p-0
-    rounded-[calc(var(--radius)-5px)]
     size-6;
 
     &:has(> svg) {
@@ -130,23 +131,20 @@
     rounded-none
     shadow-none;
 
+    &:focus-visible,
     &:invalid,
     & [aria-invalid="true"] {
-      @apply ring-0;
-    }
-
-    &:focus-visible {
       @apply ring-0;
     }
   }
 
   .singlestage-input-group {
-    @apply border
+    @apply bg-input/30
+    border
     border-input
     h-9
-    rounded-md
-    shadow-xs
-    transition-[color,box-shadow];
+    rounded-4xl
+    transition-colors;
 
     &:has(> .singlestage-input-group-addon-align-block-end) {
       @apply flex-col
@@ -180,23 +178,34 @@
 
     &:has(.singlestage-input-group-control:focus-visible) {
       @apply border-ring
-      ring-3
+      ring-[3px]
       ring-ring/50;
     }
 
     &:has(*:invalid, *[aria-invalid="true"]) {
       @apply border-destructive
-      ring-3
+      ring-[3px]
       ring-destructive/20;
+    }
+
+    &:has(textarea) {
+      @apply rounded-xl;
+    }
+
+    &:has(
+      .singlestage-input-group-addon-align-block-end,
+      .singlestage-input-group-addon-align-block-start
+    ) {
+      @apply rounded-2xl;
     }
 
     &:has(> input) {
       .singlestage-input-group-addon-align-block-start {
-        @apply pt-2;
+        @apply pt-3;
       }
 
       .singlestage-input-group-addon-align-block-end {
-        @apply pb-2;
+        @apply pb-3;
       }
     }
   }

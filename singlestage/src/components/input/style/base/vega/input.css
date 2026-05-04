@@ -31,21 +31,4 @@
       ring-destructive/20;
     }
   }
-
-  /* .singlestage-input-group-input { */
-  /*   @apply bg-transparent */
-  /*   border-0 */
-  /*   ring-0 */
-  /*   rounded-none */
-  /*   shadow-none; */
-  /**/
-  /*   &:focus-visible { */
-  /*     @apply ring-0; */
-  /*   } */
-  /**/
-  /*   &:invalid, */
-  /*   &[aria-invalid="true"] { */
-  /*     @apply ring-0; */
-  /*   } */
-  /* } */
 }

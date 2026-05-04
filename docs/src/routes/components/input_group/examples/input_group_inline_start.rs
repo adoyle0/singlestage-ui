@@ -5,7 +5,7 @@ use singlestage::*;
 pub fn InputGroupInlineStartExample() -> impl IntoView {
     view! {
         <Field class="max-w-sm">
-            <Label label_for="inline-start-input">"Input"</Label>
+            <FieldLabel label_for="inline-start-input">"Input"</FieldLabel>
             <InputGroup>
                 <Input id="inline-start-input" placeholder="Search..." />
                 <InputGroupAddon align="inline-start">
