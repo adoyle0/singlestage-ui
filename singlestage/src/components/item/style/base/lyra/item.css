@@ -13,9 +13,9 @@
   }
 
   .singlestage-item-size-default {
-    @apply gap-3.5
-    px-4
-    py-3.5;
+    @apply gap-2.5
+    px-3
+    py-2.5;
   }
 
   .singlestage-item-size-sm {
@@ -52,7 +52,7 @@
 
   .singlestage-item-media-variant-image {
     @apply overflow-hidden
-    rounded-sm
+    rounded-none
     size-10;
 
     img {
@@ -68,16 +68,14 @@
   .singlestage-item-title {
     @apply font-medium
     gap-2
-    leading-snug
-    text-sm
+    text-xs
     underline-offset-4;
   }
 
   .singlestage-item-description {
-    @apply leading-normal
-    text-left
+    @apply text-left
     text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
   }
 
   .singlestage-item-actions {
@@ -110,8 +108,8 @@
 
   .singlestage-item {
     @apply border
-    rounded-md
-    text-sm;
+    rounded-none
+    text-xs;
 
     &:has(.singlestage-item-description) {
       .singlestage-item-media {
@@ -136,17 +134,17 @@
       }
 
       .singlestage-item-description {
-        @apply text-xs;
+        @apply text-xs/relaxed;
       }
     }
   }
 
   a:has(> .singlestage-item) {
-    @apply rounded-md;
+    @apply rounded-none;
 
     &:hover {
       @apply bg-muted
-      rounded-md;
+      rounded-none;
     }
   }
 }

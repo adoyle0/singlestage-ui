@@ -13,9 +13,9 @@
   }
 
   .singlestage-item-size-default {
-    @apply gap-3.5
-    px-4
-    py-3.5;
+    @apply gap-2.5
+    px-3
+    py-2.5;
   }
 
   .singlestage-item-size-sm {
@@ -110,7 +110,7 @@
 
   .singlestage-item {
     @apply border
-    rounded-md
+    rounded-lg
     text-sm;
 
     &:has(.singlestage-item-description) {
@@ -142,11 +142,11 @@
   }
 
   a:has(> .singlestage-item) {
-    @apply rounded-md;
+    @apply rounded-lg;
 
     &:hover {
       @apply bg-muted
-      rounded-md;
+      rounded-lg;
     }
   }
 }

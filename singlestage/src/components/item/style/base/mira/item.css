@@ -13,9 +13,9 @@
   }
 
   .singlestage-item-size-default {
-    @apply gap-3.5
-    px-4
-    py-3.5;
+    @apply gap-2.5
+    px-3
+    py-2.5;
   }
 
   .singlestage-item-size-sm {
@@ -25,14 +25,14 @@
   }
 
   .singlestage-item-size-xs {
-    @apply gap-2
+    @apply gap-2.5
     px-2.5
     py-2;
-  }
 
-  .singlestage-dropdown-menu-content {
-    .singlestage-item-size-xs {
-      @apply p-0;
+    .singlestage-dropdown-menu-content {
+      .singlestage-item-size-xs {
+        @apply p-0;
+      }
     }
   }
 
@@ -53,7 +53,7 @@
   .singlestage-item-media-variant-image {
     @apply overflow-hidden
     rounded-sm
-    size-10;
+    size-8;
 
     img {
       @apply object-cover
@@ -69,15 +69,14 @@
     @apply font-medium
     gap-2
     leading-snug
-    text-sm
+    text-xs/relaxed
     underline-offset-4;
   }
 
   .singlestage-item-description {
-    @apply leading-normal
-    text-left
+    @apply text-left
     text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
   }
 
   .singlestage-item-actions {
@@ -111,7 +110,7 @@
   .singlestage-item {
     @apply border
     rounded-md
-    text-sm;
+    text-xs/relaxed;
 
     &:has(.singlestage-item-description) {
       .singlestage-item-media {
@@ -132,11 +131,7 @@
       }
 
       .singlestage-item-content {
-        @apply gap-0;
-      }
-
-      .singlestage-item-description {
-        @apply text-xs;
+        @apply gap-0.5;
       }
     }
   }

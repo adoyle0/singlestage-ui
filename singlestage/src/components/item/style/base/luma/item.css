@@ -19,15 +19,15 @@
   }
 
   .singlestage-item-size-sm {
-    @apply gap-2.5
-    px-3
-    py-2.5;
+    @apply gap-3.5
+    px-3.5
+    py-3;
   }
 
   .singlestage-item-size-xs {
-    @apply gap-2
-    px-2.5
-    py-2;
+    @apply gap-2.5
+    px-3
+    py-2.5;
   }
 
   .singlestage-dropdown-menu-content {
@@ -52,7 +52,7 @@
 
   .singlestage-item-media-variant-image {
     @apply overflow-hidden
-    rounded-sm
+    rounded-xl
     size-10;
 
     img {
@@ -74,8 +74,7 @@
   }
 
   .singlestage-item-description {
-    @apply leading-normal
-    text-left
+    @apply text-left
     text-muted-foreground
     text-sm;
   }
@@ -110,7 +109,7 @@
 
   .singlestage-item {
     @apply border
-    rounded-md
+    rounded-2xl
     text-sm;
 
     &:has(.singlestage-item-description) {
@@ -128,25 +127,22 @@
 
     &.singlestage-item-size-xs {
       .singlestage-item-media-variant-image {
-        @apply size-6;
+        @apply rounded-lg
+        size-6;
       }
 
       .singlestage-item-content {
-        @apply gap-0;
-      }
-
-      .singlestage-item-description {
-        @apply text-xs;
+        @apply gap-0.5;
       }
     }
   }
 
   a:has(> .singlestage-item) {
-    @apply rounded-md;
+    @apply rounded-2xl;
 
     &:hover {
       @apply bg-muted
-      rounded-md;
+      rounded-2xl;
     }
   }
 }
