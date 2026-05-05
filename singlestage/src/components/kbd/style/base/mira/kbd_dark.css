@@ -1,0 +1,7 @@
+@layer base {
+  .singlestage-tooltip-content {
+    .singlestage-kbd {
+      @apply bg-background/10;
+    }
+  }
+}

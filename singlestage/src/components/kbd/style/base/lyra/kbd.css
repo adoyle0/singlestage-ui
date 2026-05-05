@@ -1,0 +1,30 @@
+@layer base {
+  .singlestage-kbd {
+    @apply bg-muted
+    font-medium
+    font-sans
+    gap-1
+    h-5
+    min-w-5
+    px-1
+    rounded-none
+    text-muted-foreground
+    text-xs
+    w-fit;
+
+    svg:not([class*="size-"]) {
+      @apply size-3;
+    }
+  }
+
+  .singlestage-tooltip-content {
+    .singlestage-kbd {
+      @apply bg-background/20
+      text-background;
+    }
+  }
+
+  .singlestage-kbd-group {
+    @apply gap-1;
+  }
+}
