@@ -4,24 +4,25 @@
     flex
     flex-col
     gap-4
-    p-4
+    p-2.5
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-lg
     shadow-md
     text-popover-foreground
-    text-sm;
+    text-xs;
   }
 
   .singlestage-popover-header {
     @apply flex
     flex-col
     gap-1
-    text-sm;
+    text-xs;
   }
 
   .singlestage-popover-title {
-    @apply font-medium;
+    @apply font-medium
+    text-sm;
   }
 
   .singlestage-popover-description {

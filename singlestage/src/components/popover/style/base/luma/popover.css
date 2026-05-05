@@ -6,9 +6,9 @@
     gap-4
     p-4
     ring-1
-    ring-foreground/10
-    rounded-md
-    shadow-md
+    ring-foreground/5
+    rounded-3xl
+    shadow-lg
     text-popover-foreground
     text-sm;
   }
@@ -21,7 +21,8 @@
   }
 
   .singlestage-popover-title {
-    @apply font-medium;
+    @apply font-medium
+    text-base;
   }
 
   .singlestage-popover-description {

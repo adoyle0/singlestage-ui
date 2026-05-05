@@ -7,7 +7,7 @@
     p-4
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-none
     shadow-md
     text-popover-foreground
     text-sm;
@@ -21,10 +21,15 @@
   }
 
   .singlestage-popover-title {
-    @apply font-medium;
+    @apply font-semibold
+    text-xs
+    uppercase;
   }
 
   .singlestage-popover-description {
-    @apply text-muted-foreground;
+    @apply leading-relaxed
+    mt-0.5
+    text-muted-foreground
+    text-sm;
   }
 }

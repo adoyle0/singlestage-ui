@@ -1,0 +1,5 @@
+@layer base {
+  .singlestage-popover-content {
+    @apply ring-foreground/10;
+  }
+}

@@ -3,11 +3,11 @@
     @apply bg-popover
     flex
     flex-col
-    gap-4
-    p-4
+    gap-2.5
+    p-2.5
     ring-1
     ring-foreground/10
-    rounded-md
+    rounded-lg
     shadow-md
     text-popover-foreground
     text-sm;
@@ -16,7 +16,7 @@
   .singlestage-popover-header {
     @apply flex
     flex-col
-    gap-1
+    gap-0.5
     text-sm;
   }
 
