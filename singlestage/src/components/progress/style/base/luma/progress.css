@@ -1,0 +1,31 @@
+@layer base {
+  .singlestage-progress {
+    /* Track */
+    &,
+    &::-webkit-progress-bar {
+      @apply bg-muted
+      h-3
+      rounded-full;
+    }
+
+    /* Indicator */
+    &::-moz-progress-bar,
+    &::-webkit-progress-value {
+      @apply bg-primary
+      h-3
+      rounded-full;
+    }
+  }
+
+  .singlestage-progress-label {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-progress-value {
+    @apply ml-auto
+    tabular-nums
+    text-muted-foreground
+    text-sm;
+  }
+}
