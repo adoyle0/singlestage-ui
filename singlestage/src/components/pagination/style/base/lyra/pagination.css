@@ -1,0 +1,23 @@
+@layer base {
+  .singlestage-pagination-content {
+    @apply gap-0.5;
+  }
+
+  .singlestage-pagination-ellipsis {
+    @apply items-center
+    justify-center
+    size-8;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-pagination-previous {
+    @apply pl-1.5!;
+  }
+
+  .singlestage-pagination-next {
+    @apply pr-1.5!;
+  }
+}
