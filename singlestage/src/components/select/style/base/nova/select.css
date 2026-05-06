@@ -4,16 +4,15 @@
     bg-transparent
     border
     border-input
-    h-9
+    h-8
     min-w-0
     pl-2.5
     pr-8
     py-1
-    rounded-md
+    rounded-lg
     select-none
-    shadow-xs
     text-sm
-    transition-[color,box-shadow]
+    transition-colors
     w-full;
 
     &:focus-visible {
@@ -40,7 +39,9 @@
   }
 
   .singlestage-select-size-sm {
-    @apply h-8;
+    @apply h-7
+    py-0.5
+    rounded-[min(var(--radius-md),10px)];
   }
 
   .singlestage-select-icon {

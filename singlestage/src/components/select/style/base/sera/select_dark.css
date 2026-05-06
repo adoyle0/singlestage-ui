@@ -1,0 +1,8 @@
+@layer base {
+  .singlestage-select {
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-b-destructive/50;
+    }
+  }
+}

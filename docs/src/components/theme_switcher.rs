@@ -117,7 +117,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
         <span class="flex space-x-2">
             <Tooltip>
                 <TooltipTrigger>
-                    <Select value=selected_base class="h-8">
+                    <Select value=selected_base todo_name_me_size="sm">
                         <SelectOption value="luma">"Luma"</SelectOption>
                         <SelectOption value="lyra">"Lyra"</SelectOption>
                         <SelectOption value="maia">"Maia"</SelectOption>
@@ -133,7 +133,7 @@ pub fn ThemeSwitcher() -> impl IntoView {
             </Tooltip>
             <Tooltip>
                 <TooltipTrigger>
-                    <Select value=selected_theme class="h-8">
+                    <Select value=selected_theme todo_name_me_size="sm">
                         <SelectOptGroup label="Colors">
                             <SelectOption value="neutral">"Neutral"</SelectOption>
                             <SelectOption value="amber">"Amber"</SelectOption>

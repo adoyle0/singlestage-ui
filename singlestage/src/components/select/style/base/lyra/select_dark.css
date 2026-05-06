@@ -1,4 +1,4 @@
-@layer components {
+@layer base {
   .singlestage-select {
     @apply bg-input/30;
 
@@ -6,7 +6,8 @@
       @apply bg-input/50;
     }
 
-    &:invalid {
+    &:invalid,
+    &[aria-invalid="true"] {
       @apply border-destructive/50
       ring-destructive/40;
     }

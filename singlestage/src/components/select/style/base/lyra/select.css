@@ -4,28 +4,27 @@
     bg-transparent
     border
     border-input
-    h-9
+    h-8
     min-w-0
     pl-2.5
     pr-8
     py-1
-    rounded-md
+    rounded-none
     select-none
-    shadow-xs
-    text-sm
-    transition-[color,box-shadow]
+    text-xs
+    transition-colors
     w-full;
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-1
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-1
       ring-destructive/20;
     }
 
@@ -40,7 +39,9 @@
   }
 
   .singlestage-select-size-sm {
-    @apply h-8;
+    @apply h-7
+    py-0.5
+    rounded-none;
   }
 
   .singlestage-select-icon {

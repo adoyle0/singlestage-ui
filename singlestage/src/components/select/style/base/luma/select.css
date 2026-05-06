@@ -1,25 +1,24 @@
 @layer base {
   .singlestage-select {
     @apply appearance-none
-    bg-transparent
+    bg-input/50
     border
-    border-input
+    border-transparent
     h-9
     min-w-0
-    pl-2.5
+    pl-3
     pr-8
     py-1
-    rounded-md
+    rounded-3xl
     select-none
-    shadow-xs
     text-sm
-    transition-[color,box-shadow]
+    transition-[color,box-shadow,background-color]
     w-full;
 
     &:focus-visible {
       @apply border-ring
       ring-3
-      ring-ring/50;
+      ring-ring/30;
     }
 
     &:invalid,

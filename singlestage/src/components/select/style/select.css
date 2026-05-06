@@ -1,8 +1,7 @@
 @layer components {
   .singlestage-select-wrapper {
-    @apply max-w-48
-    relative
-    w-full;
+    @apply relative
+    w-fit;
 
     &:has(.singlestage-select:disabled) {
       @apply opacity-50;
@@ -10,84 +9,18 @@
   }
 
   .singlestage-select {
-    @apply appearance-none
-    bg-transparent
-    border
-    border-input
-    data-[size=sm]:h-7
-    data-[size=sm]:py-0.5
-    data-[size=sm]:rounded-[min(var(--radius-md),10px)]
-    min-w-0
-    outline-none
-    pl-2.5
-    pr-8
-    py-1
-    rounded-lg
-    select-none
-    text-sm
-    transition-colors
-    w-full;
+    @apply outline-none;
 
-    &:not(.singlestage-select-multi) {
-      @apply h-8;
-    }
-
-    &:disabled {
+    &:disabled,
+    &[aria-disabled="true"] {
       @apply cursor-not-allowed
       pointer-events-none;
-    }
-
-    &:focus-visible {
-      @apply border-ring
-      ring-3
-      ring-ring/50;
-    }
-
-    &:invalid {
-      @apply border-destructive
-      ring-3
-      ring-destructive/20;
-    }
-
-    &::selection {
-      @apply bg-primary
-      text-primary-foreground;
-    }
-
-    option,
-    optgroup {
-      @apply bg-popover
-      text-popover-foreground;
-    }
-
-    option::checked {
-      @apply bg-accent
-      text-accent-foreground;
-    }
-  }
-
-  .singlestage-select-multi {
-    @apply px-2.5;
-
-    option,
-    optgroup {
-      @apply bg-transparent
-      text-popover-foreground;
     }
   }
 
   .singlestage-select-icon {
-    @apply -translate-y-1/2
-    absolute
+    @apply absolute
     pointer-events-none
-    right-2.5
-    select-none
-    size-4
-    text-muted-foreground
-    top-1/2;
-  }
-
-  .singlestage-select-placeholder {
-    @apply text-muted-foreground;
+    select-none;
   }
 }

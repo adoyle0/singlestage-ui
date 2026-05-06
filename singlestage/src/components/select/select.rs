@@ -13,6 +13,9 @@ pub fn Select(
     /// Toggle invalid appearance.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
+    /// Set the size to render the element.
+    #[prop(optional, into)]
+    todo_name_me_size: MaybeProp<String>,
     /// The placeholder value for the select.
     #[prop(optional, into)]
     placeholder: MaybeProp<String>,
@@ -282,9 +285,13 @@ pub fn Select(
                     }
                     class=move || {
                         format!(
-                            "singlestage-select{}{}",
+                            "singlestage-select{}{}{}",
                             match multiple.get() {
                                 Some(true) => " singlestage-select-multi",
+                                _ => "",
+                            },
+                            match todo_name_me_size.get().unwrap_or_default().as_str() {
+                                "sm" | "small" => " singlestage-select-size-sm",
                                 _ => "",
                             },
                             match value.get().as_str() {
