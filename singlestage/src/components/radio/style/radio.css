@@ -1,15 +1,8 @@
-@layer components {
-  .singlestage-radio-group:not(:has(.singlestage-dropdown-menu-radio-item)) {
+@layer component {
+  .singlestage-radio-group {
     @apply w-full;
-
-    > legend {
-      @apply font-medium
-      mb-3
-      text-base;
-    }
   }
-
-  .singlestage-radio:not(.singlestage-dropdown-menu-radio-item) {
+  .singlestage-radio-group-item {
     @apply appearance-none
     aspect-square
     border
@@ -17,35 +10,20 @@
     relative
     shrink-0;
 
-    &:after {
-      @apply -inset-x-3
-      -inset-y-2
-      absolute;
-    }
-
-    &:checked:before {
-      @apply -translate-x-1/2
-      -translate-y-1/2
-      absolute
-      bg-primary
-      content-['']
-      left-1/2
-      rounded-full
-      size-2
-      top-1/2;
-    }
-
     &:disabled,
     &[aria-disabled="true"] {
       @apply cursor-not-allowed
       opacity-50;
     }
 
-    &:invalid,
-    &[aria-invalid="true"] {
-      &:checked:before {
-        @apply bg-destructive;
-      }
+    &::after {
+      @apply -inset-x-3
+      -inset-y-2
+      absolute;
+    }
+
+    &:checked::before {
+      @apply content-[''];
     }
   }
 }

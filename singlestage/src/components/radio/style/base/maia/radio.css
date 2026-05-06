@@ -16,7 +16,6 @@
       border-primary
       text-primary-foreground;
     }
-
     &:focus-visible {
       @apply border-ring
       ring-3

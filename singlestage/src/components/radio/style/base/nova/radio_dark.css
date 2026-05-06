@@ -2,7 +2,8 @@
   .singlestage-radio-group-item {
     @apply bg-input/30;
 
-    &:checked {
+    &:checked,
+    &[aria-checked="true"] {
       @apply bg-primary;
     }
 

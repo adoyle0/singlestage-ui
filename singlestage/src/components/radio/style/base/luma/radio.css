@@ -5,7 +5,9 @@
   }
 
   .singlestage-radio-group-item {
-    @apply border-input
+    @apply bg-input/90
+    border
+    border-transparent
     flex
     rounded-full
     size-4;
@@ -13,7 +15,6 @@
     &:checked,
     &[aria-checked="true"] {
       @apply bg-primary
-      border-primary
       text-primary-foreground;
     }
 
@@ -28,11 +29,6 @@
       @apply border-destructive
       ring-3
       ring-destructive/20;
-
-      &:checked,
-      &[aria-checked="true"] {
-        @apply border-primary;
-      }
     }
 
     &::after {

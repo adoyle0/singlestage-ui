@@ -1,6 +1,6 @@
 @layer base {
   .singlestage-radio-group {
-    @apply gap-3
+    @apply gap-2
     grid;
   }
 

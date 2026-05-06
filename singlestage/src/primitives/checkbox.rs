@@ -354,7 +354,7 @@ pub fn CheckboxPrimitive(
                             {
                                 "".to_owned()
                             } else {
-                                "singlestage-radio".to_owned()
+                                "singlestage-radio-group-item".to_owned()
                             }
                         }
                     },

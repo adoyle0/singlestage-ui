@@ -1,8 +1,7 @@
 @layer base {
   .singlestage-radio-group-item {
-    @apply bg-input/30;
-
-    &:checked {
+    &:checked,
+    &[aria-checked="true"] {
       @apply bg-primary;
     }
 
@@ -10,6 +9,10 @@
     &[aria-invalid="true"] {
       @apply border-destructive/50
       ring-destructive/40;
+    }
+
+    &:checked::before {
+      @apply size-2.5;
     }
   }
 }
