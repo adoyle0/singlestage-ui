@@ -54,12 +54,12 @@
 
   .singlestage-sheet-close {
     @apply absolute
-    right-4
-    top-4;
+    right-3
+    top-3;
   }
 
   .singlestage-sheet-header {
-    @apply gap-1.5
+    @apply gap-0.5
     p-4;
   }
 
@@ -69,8 +69,9 @@
   }
 
   .singlestage-sheet-title {
-    @apply text-foreground
-    font-medium;
+    @apply font-medium
+    text-base
+    text-foreground;
   }
 
   .singlestage-sheet-description {

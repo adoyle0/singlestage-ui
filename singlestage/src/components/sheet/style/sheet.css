@@ -1,9 +1,75 @@
 @layer components {
-  .singlestage-sheet-overlay::backdrop {
-    @apply fixed
-    inset-0
-    z-50;
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-sheet-overlay {
+      transition:
+        opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        overlay 0.15s allow-discrete,
+        display 0.15s allow-discrete;
+
+      opacity: 0;
+
+      ::webkit-scrollbar {
+        display: none;
+      }
+
+      &::backdrop {
+        transition:
+          display 0.1s allow-discrete,
+          overlay 0.1s allow-discrete,
+          background-color 0.1s;
+        background-color: hsl(0 0 0 / 0);
+      }
+
+      &[open] {
+        opacity: 1;
+      }
+    }
+
+    @starting-style {
+      .singlestage-sheet-overlay[open] {
+        opacity: 0;
+
+        &::backdrop {
+          background-color: hsl(0 0 0 / 0);
+        }
+      }
+    }
+
+    /* Disable scrolling while popover is open */
+    html:has(.singlestage-sheet-overlay[open]) {
+      overflow: hidden;
+    }
   }
+
+  .singlestage-sheet-overlay {
+    ::backdrop {
+      @apply fixed
+      inset-0
+      /* transition-opacity */
+      z-50;
+    }
+  }
+
+  /* TODO: */
+  /* .singlestage-sheet-side-top { */
+  /*   @apply data-ending-style:translate-y-[-2.5rem] */
+  /*   data-starting-style:translate-y-[-2.5rem]; */
+  /* } */
+  /**/
+  /* .singlestage-sheet-side-right { */
+  /*   @apply data-ending-style:translate-x-[2.5rem] */
+  /*   data-starting-style:translate-x-[2.5rem]; */
+  /* } */
+  /**/
+  /* .singlestage-sheet-side-bottom { */
+  /*   @apply data-ending-style:translate-y-[2.5rem] */
+  /*   data-starting-style:translate-y-[2.5rem]; */
+  /* } */
+  /**/
+  /* .singlestage-sheet-side-left { */
+  /*   @apply data-ending-style:translate-x-[-2.5rem] */
+  /*   data-starting-style:translate-x-[-2.5rem]; */
+  /* } */
 
   .singlestage-sheet-header {
     @apply flex

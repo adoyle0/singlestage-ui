@@ -1,6 +1,6 @@
 @layer base {
   .singlestage-sheet-overlay::backdrop {
-    @apply bg-black/10
+    @apply bg-black/80
     supports-backdrop-filter:backdrop-blur-xs;
   }
 
@@ -12,10 +12,9 @@
     fixed
     flex
     flex-col
-    gap-4
     shadow-lg
     text-popover-foreground
-    text-sm
+    text-xs/relaxed
     /* transition */
     z-50;
   }
@@ -60,21 +59,22 @@
 
   .singlestage-sheet-header {
     @apply gap-1.5
-    p-4;
+    p-6;
   }
 
   .singlestage-sheet-footer {
     @apply gap-2
-    p-4;
+    p-6;
   }
 
   .singlestage-sheet-title {
-    @apply text-foreground
-    font-medium;
+    @apply font-medium
+    text-foreground
+    text-sm;
   }
 
   .singlestage-sheet-description {
     @apply text-muted-foreground
-    text-sm;
+    text-xs/relaxed;
   }
 }

@@ -438,16 +438,14 @@ pub fn Button(
                     } else if let Some(sheet) = use_context::<SheetContext>()
                         && !in_sidebar_menu_button
                     {
-                        sheet.open.set(!sheet.open.get_untracked());
+                        sheet.open.set(true);
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
                     if is_dialog_action || is_dialog_cancel || is_dialog_close {
                         dialog.open.set(false);
                     }
                 } else if let Some(sheet) = use_context::<SheetContext>() {
-                    if is_sheet_close {
-                        sheet.open.set(false);
-                    } else if in_sidebar_menu_button {
+                    if is_sheet_close || in_sidebar_menu_button {
                         sheet.open.set(false);
                     }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>() {

@@ -1,7 +1,7 @@
 @layer base {
   .singlestage-sheet-overlay::backdrop {
-    @apply bg-black/10
-    supports-backdrop-filter:backdrop-blur-xs;
+    @apply bg-black/30
+    supports-backdrop-filter:backdrop-blur-sm;
   }
 
   .singlestage-sheet-content {
@@ -12,8 +12,7 @@
     fixed
     flex
     flex-col
-    gap-4
-    shadow-lg
+    shadow-xl
     text-popover-foreground
     text-sm
     /* transition */
@@ -54,23 +53,25 @@
 
   .singlestage-sheet-close {
     @apply absolute
+    bg-secondary
     right-4
     top-4;
   }
 
   .singlestage-sheet-header {
     @apply gap-1.5
-    p-4;
+    p-6;
   }
 
   .singlestage-sheet-footer {
     @apply gap-2
-    p-4;
+    p-6;
   }
 
   .singlestage-sheet-title {
-    @apply text-foreground
-    font-medium;
+    @apply font-medium
+    text-base
+    text-foreground;
   }
 
   .singlestage-sheet-description {

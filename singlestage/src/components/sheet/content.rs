@@ -114,7 +114,6 @@ pub fn SheetContent(
 ) -> impl IntoView {
     let sheet_context = expect_context::<SheetContext>();
     let overlay_ref = NodeRef::<leptos::html::Dialog>::new();
-    let sheet_ref = NodeRef::<leptos::html::Aside>::new();
 
     Effect::new(move || {
         if let Some(overlay) = overlay_ref.get() {
@@ -177,19 +176,7 @@ pub fn SheetContent(
                 content_id
             }
             node_ref=overlay_ref
-            on:click=move |ev| {
-                if let Some(sheet_ref) = sheet_ref.get_untracked() {
-                    let x = ev.x() as f64;
-                    let y = ev.y() as f64;
-                    let r = sheet_ref.get_bounding_client_rect();
-                    let r_clicked = r.top() <= y && y <= (r.top() + r.height()) && r.left() <= x
-                        && x <= (r.left() + r.width());
-                    if !r_clicked {
-                        sheet_context.open.set(false)
-                    }
-                }
-            }
-            popover="auto"
+            closedby="any"
         >
             <aside
                 class=move || {
@@ -207,7 +194,6 @@ pub fn SheetContent(
 
                 {..global_attrs_1}
                 {..global_attrs_2}
-                node_ref=sheet_ref
             >
                 {children()}
                 <Show when=move || show_close_button.get().unwrap_or_default()>
