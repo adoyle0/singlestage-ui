@@ -1,0 +1,6 @@
+@layer base {
+  .singlestage-skeleton {
+    @apply bg-muted
+    rounded-2xl;
+  }
+}

@@ -1,0 +1,5 @@
+@layer base {
+  .singlestage-skeleton {
+    @apply bg-muted;
+  }
+}
