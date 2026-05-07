@@ -25,12 +25,14 @@
   }
 
   .singlestage-sidebar-header {
-    @apply gap-2
+    @apply [--radius:var(--radius-xl)]
+    gap-2
     p-2;
   }
 
   .singlestage-sidebar-content {
-    @apply gap-2
+    @apply [--radius:var(--radius-xl)]
+    gap-2
     /* no-scrollbar */;
   }
 
@@ -61,7 +63,7 @@
     ease-linear
     font-medium
     h-8
-    px-2
+    px-3
     ring-sidebar-ring
     rounded-md
     text-sidebar-foreground/70
@@ -103,9 +105,10 @@
 
   .singlestage-sidebar-menu-button {
     @apply gap-2
-    p-2
+    px-3
+    py-2
     ring-sidebar-ring
-    rounded-md
+    rounded-lg
     text-left
     text-sm
     transition-[width,height,padding];
@@ -144,17 +147,18 @@
   }
 
   .singlestage-sidebar-menu-button-size-default {
-    @apply h-8
+    @apply h-9
     text-sm;
   }
 
   .singlestage-sidebar-menu-button-size-sm {
-    @apply h-7
+    @apply h-8
     text-xs;
   }
 
   .singlestage-sidebar-menu-button-size-lg {
-    @apply h-12
+    @apply h-14
+    px-3
     text-sm;
   }
 
@@ -163,7 +167,7 @@
     aspect-square
     p-0
     /* TODO: test/finish this */
-    peer-data-[size=default]/menu-button:top-1.5
+    peer-data-[size=default]/menu-button:top-2
     peer-data-[size=lg]/menu-button:top-2.5
     peer-data-[size=sm]/menu-button:top-1
     peer-hover/menu-button:text-sidebar-accent-foreground

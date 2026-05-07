@@ -18,19 +18,21 @@
   }
 
   .singlestage-sidebar-input {
-    @apply bg-background
+    @apply bg-input/50
     h-8
     shadow-none
     w-full;
   }
 
   .singlestage-sidebar-header {
-    @apply gap-2
+    @apply [--radius:var(--radius-xl)]
+    gap-2
     p-2;
   }
 
   .singlestage-sidebar-content {
-    @apply gap-2
+    @apply [--radius:var(--radius-xl)]
+    gap-2
     /* no-scrollbar */;
   }
 
@@ -49,7 +51,7 @@
   }
 
   .singlestage-sidebar-menu {
-    @apply gap-1;
+    @apply gap-0.5;
   }
 
   .singlestage-sidebar-group-content {
@@ -61,9 +63,9 @@
     ease-linear
     font-medium
     h-8
-    px-2
+    px-3
     ring-sidebar-ring
-    rounded-md
+    rounded-xl
     text-sidebar-foreground/70
     text-xs
     transition-[margin,opacity];
@@ -82,7 +84,7 @@
     p-0
     right-3
     ring-sidebar-ring
-    rounded-md
+    rounded-xl
     text-sidebar-foreground
     top-3.5
     w-5;
@@ -103,9 +105,10 @@
 
   .singlestage-sidebar-menu-button {
     @apply gap-2
-    p-2
+    px-3
+    py-2
     ring-sidebar-ring
-    rounded-md
+    rounded-xl
     text-left
     text-sm
     transition-[width,height,padding];
@@ -144,17 +147,18 @@
   }
 
   .singlestage-sidebar-menu-button-size-default {
-    @apply h-8
+    @apply h-9
     text-sm;
   }
 
   .singlestage-sidebar-menu-button-size-sm {
-    @apply h-7
+    @apply h-8
     text-xs;
   }
 
   .singlestage-sidebar-menu-button-size-lg {
-    @apply h-12
+    @apply h-14
+    px-3
     text-sm;
   }
 
@@ -163,13 +167,13 @@
     aspect-square
     p-0
     /* TODO: test/finish this */
-    peer-data-[size=default]/menu-button:top-1.5
+    peer-data-[size=default]/menu-button:top-2
     peer-data-[size=lg]/menu-button:top-2.5
     peer-data-[size=sm]/menu-button:top-1
     peer-hover/menu-button:text-sidebar-accent-foreground
     right-1
     ring-sidebar-ring
-    rounded-md
+    rounded-xl
     text-sidebar-foreground
     top-1.5
     w-5;
@@ -203,7 +207,7 @@
     pointer-events-none
     px-1
     right-1
-    rounded-md
+    rounded-xl
     text-sidebar-foreground
     text-xs;
   }
@@ -212,11 +216,11 @@
     @apply gap-2
     h-8
     px-2
-    rounded-md;
+    rounded-xl;
   }
 
   .singlestage-sidebar-menu-skeleton-icon {
-    @apply rounded-md
+    @apply rounded-xl
     size-4;
   }
 
@@ -240,9 +244,9 @@
     data-[size=sm]:text-xs
     gap-2
     h-7
-    px-2
+    px-3
     ring-sidebar-ring
-    rounded-md
+    rounded-xl
     text-sidebar-foreground;
 
     &:active {
@@ -269,7 +273,7 @@
     .singlestage-sidebar-inner {
       @apply ring-1
       ring-sidebar-border
-      rounded-lg
+      rounded-2xl
       shadow-sm;
     }
   }
@@ -278,7 +282,7 @@
     .singlestage-sidebar-inset {
       @apply md:m-2
       md:ml-0
-      md:rounded-xl
+      md:rounded-2xl
       md:shadow-sm;
     }
 

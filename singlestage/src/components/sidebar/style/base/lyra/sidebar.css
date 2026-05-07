@@ -30,7 +30,7 @@
   }
 
   .singlestage-sidebar-content {
-    @apply gap-2
+    @apply gap-0
     /* no-scrollbar */;
   }
 
@@ -49,21 +49,20 @@
   }
 
   .singlestage-sidebar-menu {
-    @apply gap-1;
+    @apply gap-0;
   }
 
   .singlestage-sidebar-group-content {
-    @apply text-sm;
+    @apply text-xs;
   }
 
   .singlestage-sidebar-group-label {
     @apply duration-200
     ease-linear
-    font-medium
     h-8
     px-2
     ring-sidebar-ring
-    rounded-md
+    rounded-none
     text-sidebar-foreground/70
     text-xs
     transition-[margin,opacity];
@@ -82,7 +81,7 @@
     p-0
     right-3
     ring-sidebar-ring
-    rounded-md
+    rounded-none
     text-sidebar-foreground
     top-3.5
     w-5;
@@ -105,9 +104,9 @@
     @apply gap-2
     p-2
     ring-sidebar-ring
-    rounded-md
+    rounded-none
     text-left
-    text-sm
+    text-xs
     transition-[width,height,padding];
 
     &:active {
@@ -145,7 +144,7 @@
 
   .singlestage-sidebar-menu-button-size-default {
     @apply h-8
-    text-sm;
+    text-xs;
   }
 
   .singlestage-sidebar-menu-button-size-sm {
@@ -155,7 +154,7 @@
 
   .singlestage-sidebar-menu-button-size-lg {
     @apply h-12
-    text-sm;
+    text-xs;
   }
 
   .singlestage-sidebar-menu-action {
@@ -169,7 +168,7 @@
     peer-hover/menu-button:text-sidebar-accent-foreground
     right-1
     ring-sidebar-ring
-    rounded-md
+    rounded-none
     text-sidebar-foreground
     top-1.5
     w-5;
@@ -203,7 +202,7 @@
     pointer-events-none
     px-1
     right-1
-    rounded-md
+    rounded-none
     text-sidebar-foreground
     text-xs;
   }
@@ -212,11 +211,11 @@
     @apply gap-2
     h-8
     px-2
-    rounded-md;
+    rounded-none;
   }
 
   .singlestage-sidebar-menu-skeleton-icon {
-    @apply rounded-md
+    @apply rounded-none
     size-4;
   }
 
@@ -236,13 +235,13 @@
 
   .singlestage-sidebar-menu-sub-button {
     @apply /* TODO: test/finish this */
-    data-[size=md]:text-sm
+    data-[size=md]:text-xs
     data-[size=sm]:text-xs
     gap-2
     h-7
     px-2
     ring-sidebar-ring
-    rounded-md
+    rounded-none
     text-sidebar-foreground;
 
     &:active {
@@ -269,7 +268,7 @@
     .singlestage-sidebar-inner {
       @apply ring-1
       ring-sidebar-border
-      rounded-lg
+      rounded-none
       shadow-sm;
     }
   }
@@ -278,7 +277,7 @@
     .singlestage-sidebar-inset {
       @apply md:m-2
       md:ml-0
-      md:rounded-xl
+      md:rounded-none
       md:shadow-sm;
     }
 
@@ -307,12 +306,12 @@
     .singlestage-sidebar-menu-sub {
       @apply hidden;
     }
-  }
 
-  .singlestage-sidebar-menu-item {
-    &:has(.singlestage-sidebar-menu-action) {
-      .singlestage-sidebar-menu-button {
-        @apply pr-8;
+    .singlestage-sidebar-menu-item {
+      &:has(.singlestage-sidebar-menu-action) {
+        .singlestage-sidebar-menu-button {
+          @apply pr-8;
+        }
       }
     }
   }
