@@ -3,24 +3,28 @@
     @apply bg-transparent
     border
     border-input
-    md:text-sm
+    md:text-xs
     px-2.5
     py-2
-    rounded-md
-    shadow-xs
-    text-base
-    transition-[color,box-shadow];
+    rounded-none
+    text-xs
+    transition-colors;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/50;
+    }
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-1
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-1
       ring-destructive/20;
     }
   }

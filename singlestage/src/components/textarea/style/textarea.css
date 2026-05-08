@@ -4,23 +4,15 @@
     flex
     min-h-16
     outline-none
-    rounded-lg
-    transition-colors
     w-full;
 
     &:disabled {
-      @apply bg-input/50
-      cursor-not-allowed
+      @apply cursor-not-allowed
       opacity-50;
     }
 
     ::placeholder {
       @apply text-muted-foreground;
     }
-  }
-
-  .singlestage-input-group-textarea {
-    @apply flex-1
-    resize-none;
   }
 }

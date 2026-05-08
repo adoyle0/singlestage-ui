@@ -1,0 +1,24 @@
+@layer base {
+  .singlestage-textarea {
+    @apply bg-transparent
+    border
+    border-b-input
+    border-transparent
+    md:text-sm
+    px-0
+    py-3
+    resize-none
+    rounded-none
+    text-base
+    transition-[color,border-color];
+
+    &:focus-visible {
+      @apply border-b-ring;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-b-destructive;
+    }
+  }
+}

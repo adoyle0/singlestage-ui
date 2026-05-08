@@ -1,26 +1,26 @@
 @layer base {
   .singlestage-textarea {
-    @apply bg-transparent
+    @apply bg-input/30
     border
     border-input
     md:text-sm
-    px-2.5
-    py-2
-    rounded-md
-    shadow-xs
+    px-3
+    py-3
+    resize-none
+    rounded-xl
     text-base
-    transition-[color,box-shadow];
+    transition-colors;
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-[3px]
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-[3px]
       ring-destructive/20;
     }
   }

@@ -1,7 +1,5 @@
 @layer base {
   .singlestage-textarea {
-    @apply bg-input/30;
-
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive/50

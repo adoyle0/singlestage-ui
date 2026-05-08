@@ -6,10 +6,14 @@
     md:text-sm
     px-2.5
     py-2
-    rounded-md
-    shadow-xs
+    rounded-lg
     text-base
-    transition-[color,box-shadow];
+    transition-colors;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/50;
+    }
 
     &:focus-visible {
       @apply border-ring
