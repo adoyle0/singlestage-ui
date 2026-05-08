@@ -3,7 +3,6 @@
     @apply border
     border-transparent
     rounded-full
-    shadow-xs
     shrink-0;
 
     &:checked {
@@ -16,14 +15,14 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
+      ring-[3px]
       ring-ring/50;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
+      ring-[3px]
       ring-destructive/20;
     }
 

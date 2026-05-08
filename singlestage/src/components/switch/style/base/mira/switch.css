@@ -3,7 +3,6 @@
     @apply border
     border-transparent
     rounded-full
-    shadow-xs
     shrink-0;
 
     &:checked {
@@ -16,15 +15,15 @@
 
     &:focus-visible {
       @apply border-ring
-      ring-3
-      ring-ring/50;
+    ring-2
+    ring-ring/30;
     }
 
     &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
-      ring-3
-      ring-destructive/20;
+    ring-2
+    ring-destructive/20;
     }
 
     &::after {
@@ -34,11 +33,11 @@
   }
 
   .singlestage-switch-size-default {
-    @apply h-[18.4px]
-    w-[32px];
+    @apply h-[16.6px]
+    w-[28px];
 
     &::after {
-      @apply size-4;
+      @apply size-3.5;
     }
 
     &:checked::after {

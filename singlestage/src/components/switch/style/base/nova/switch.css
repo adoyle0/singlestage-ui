@@ -3,7 +3,6 @@
     @apply border
     border-transparent
     rounded-full
-    shadow-xs
     shrink-0;
 
     &:checked {

@@ -1,4 +1,14 @@
 @layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-switch {
+      @apply transition-all;
+
+      &::after {
+        @apply transition-transform;
+      }
+    }
+  }
+
   .singlestage-switch {
     @apply appearance-none
     inline-flex
@@ -6,30 +16,21 @@
     outline-none
     relative;
 
+    /* &::after { */
+    /*   @apply -inset-x-3 -inset-y-2 absolute; */
+    /* } */
+
     &:disabled,
     &[aria-disabled="true"] {
       @apply cursor-not-allowed
       opacity-50;
     }
 
-    &:checked:after,
-    &:not(&:checked):before {
+    &::after {
       @apply block
       content-['']
       pointer-events-none
       ring-0;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .singlestage-switch {
-      @apply duration-150
-      transition-all;
-
-      &:checked:after,
-      &:not(&:checked):before {
-        @apply transition-transform;
-      }
     }
   }
 }
