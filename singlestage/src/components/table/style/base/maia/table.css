@@ -10,34 +10,25 @@
     text-sm
     w-full;
 
-    caption {
-      @apply mt-4
-      text-muted-foreground
-      text-sm;
-    }
-
     thead {
-      @apply [&_tr]:border-b;
-    }
-
-    th {
-      @apply align-middle
-      border-b
-      font-medium
-      h-10
-      px-2
-      text-foreground
-      text-left
-      whitespace-nowrap;
-
-      &:has(.singlestage-checkbox) {
-        @apply pr-0;
+      tr {
+        @apply border-b;
       }
     }
 
     tbody {
       tr:last-child {
         @apply border-0;
+      }
+    }
+
+    tfoot {
+      @apply bg-muted/50
+      border-t
+      font-medium;
+
+      > tr:last-child {
+        @apply border-b-0;
       }
     }
 
@@ -51,9 +42,13 @@
       }
     }
 
-    td {
+    th {
       @apply align-middle
-      p-2
+      font-medium
+      h-12
+      px-3
+      text-foreground
+      text-left
       whitespace-nowrap;
 
       &:has(.singlestage-checkbox) {
@@ -61,14 +56,20 @@
       }
     }
 
-    tfoot {
-      @apply bg-muted/50
-      border-t
-      font-medium;
+    td {
+      @apply align-middle
+      p-3
+      whitespace-nowrap;
 
-      > tr:last-child {
-        @apply border-b-0;
+      &:has(.singlestage-checkbox) {
+        @apply pr-0;
       }
+    }
+
+    caption {
+      @apply mt-4
+      text-muted-foreground
+      text-sm;
     }
   }
 }
