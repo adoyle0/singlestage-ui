@@ -1,5 +1,5 @@
 @layer base {
-  .singlestage-toggle {
+  .singletage-toggle {
     &:invalid,
     &[aria-invalid="true"] {
       @apply ring-destructive/40;

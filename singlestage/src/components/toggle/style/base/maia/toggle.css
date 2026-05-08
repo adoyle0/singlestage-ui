@@ -2,9 +2,9 @@
   .singlestage-toggle {
     @apply font-medium
     gap-1
-    rounded-md
+    rounded-4xl
     text-sm
-    transition-[color,box-shadow];
+    transition-colors;
 
     &:focus-visible {
       @apply border-ring
@@ -30,11 +30,14 @@
     }
   }
 
+  .singlestage-toggle-variant-default {
+    @apply bg-transparent;
+  }
+
   .singlestage-toggle-variant-outline {
     @apply bg-transparent
     border
-    border-input
-    shadow-xs;
+    border-input;
 
     &:hover {
       @apply bg-muted;
@@ -44,35 +47,21 @@
   .singlestage-toggle-size-default {
     @apply h-9
     min-w-9
-    px-2.5;
+    px-3;
 
     &:has(svg:last-child:not(svg:first-child)) {
-      @apply pr-2;
+      @apply pr-2.5;
     }
 
     &:has(svg:first-child:not(svg:last-child)) {
-      @apply pl-2;
+      @apply pl-2.5;
     }
   }
 
   .singlestage-toggle-size-sm {
     @apply h-8
     min-w-8
-    px-2.5;
-
-    &:has(svg:last-child:not(svg:first-child)) {
-      @apply pr-1.5;
-    }
-
-    &:has(svg:first-child:not(svg:last-child)) {
-      @apply pl-1.5;
-    }
-  }
-
-  .singlestage-toggle-size-lg {
-    @apply h-10
-    min-w-10
-    px-2.5;
+    px-3;
 
     &:has(svg:last-child:not(svg:first-child)) {
       @apply pr-2;
@@ -80,6 +69,20 @@
 
     &:has(svg:first-child:not(svg:last-child)) {
       @apply pl-2;
+    }
+  }
+
+  .singlestage-toggle-size-lg {
+    @apply h-10
+    min-w-10
+    px-4;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-3;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-3;
     }
   }
 }

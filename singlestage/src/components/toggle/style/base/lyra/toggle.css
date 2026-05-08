@@ -1,10 +1,10 @@
 @layer base {
-  .singlestage-toggle {
+  .singletage-toggle {
     @apply font-medium
     gap-1
-    rounded-md
-    text-sm
-    transition-[color,box-shadow];
+    rounded-none
+    text-xs
+    transition-all;
 
     &:focus-visible {
       @apply border-ring
@@ -30,20 +30,23 @@
     }
   }
 
-  .singlestage-toggle-variant-outline {
+  .singletage-toggle-variant-default {
+    @apply bg-transparent;
+  }
+
+  .singletage-toggle-variant-outline {
     @apply bg-transparent
     border
-    border-input
-    shadow-xs;
+    border-input;
 
     &:hover {
       @apply bg-muted;
     }
   }
 
-  .singlestage-toggle-size-default {
-    @apply h-9
-    min-w-9
+  .singletage-toggle-size-default {
+    @apply h-8
+    min-w-8
     px-2.5;
 
     &:has(svg:last-child:not(svg:first-child)) {
@@ -55,10 +58,11 @@
     }
   }
 
-  .singlestage-toggle-size-sm {
-    @apply h-8
-    min-w-8
-    px-2.5;
+  .singletage-toggle-size-sm {
+    @apply h-7
+    min-w-7
+    px-2.5
+    rounded-none;
 
     &:has(svg:last-child:not(svg:first-child)) {
       @apply pr-1.5;
@@ -69,9 +73,9 @@
     }
   }
 
-  .singlestage-toggle-size-lg {
-    @apply h-10
-    min-w-10
+  .singletage-toggle-size-lg {
+    @apply h-9
+    min-w-9
     px-2.5;
 
     &:has(svg:last-child:not(svg:first-child)) {
