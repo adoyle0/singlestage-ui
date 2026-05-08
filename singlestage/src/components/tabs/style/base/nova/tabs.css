@@ -13,17 +13,17 @@
     border-transparent
     font-medium
     gap-1.5
-    px-2
-    py-1
+    px-1.5
+    py-0.5
     rounded-md
     text-sm;
 
     &:has(svg:last-child:not(svg:first-child)) {
-      @apply pr-1.5;
+      @apply pr-1;
     }
 
     &:has(svg:first-child:not(svg:last-child)) {
-      @apply pl-1.5;
+      @apply pl-1;
     }
 
     svg:not([class*="size-"]) {
@@ -53,7 +53,7 @@
 
   .singlestage-tabs-orientation-horizontal {
     .singlestage-tabs-list {
-      @apply h-9;
+      @apply h-8;
     }
   }
 

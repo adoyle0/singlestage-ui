@@ -22,11 +22,11 @@
     transition-all
     whitespace-nowrap;
 
-    /* Underline */
-    @apply after:absolute
-    after:bg-foreground
-    after:opacity-0
-    after:transition-opacity;
+    &:active,
+    &[aria-selected="true"] {
+      @apply bg-background
+      text-foreground;
+    }
 
     &:disabled,
     &[aria-disabled="true"] {
@@ -46,9 +46,11 @@
       @apply text-foreground;
     }
 
-    &[aria-selected="true"] {
-      @apply bg-background
-      text-foreground;
+    &::after {
+      @apply absolute
+      bg-foreground
+      opacity-0
+      transition-opacity;
     }
 
     svg {
@@ -73,11 +75,13 @@
     .singlestage-tabs-trigger {
       @apply bg-transparent;
 
+      &:active,
       &[aria-selected="true"] {
         @apply bg-transparent;
 
-        /* Underline */
-        @apply after:opacity-100;
+        &::after {
+          @apply opacity-100;
+        }
       }
     }
   }
@@ -85,11 +89,10 @@
   .singlestage-tabs-orientation-horizontal {
     @apply flex-col;
 
-    .singlestage-tabs-trigger {
-      /* Underline */
-      @apply after:bottom-[-5px]
-      after:h-0.5
-      after:inset-x-0;
+    .singlestage-tabs-trigger::after {
+      @apply bottom-[-5px]
+      h-0.5
+      inset-x-0;
     }
   }
 
@@ -98,15 +101,15 @@
       @apply flex-col
       h-fit;
     }
-
     .singlestage-tabs-trigger {
       @apply justify-start
       w-full;
 
-      /* Underline */
-      @apply after:-right-1
-      after:inset-y-0
-      after:w-0.5;
+      &::after {
+        @apply -right-1
+        inset-y-0
+        w-0.5;
+      }
     }
   }
 }

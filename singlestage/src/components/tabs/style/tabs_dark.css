@@ -2,21 +2,25 @@
   .singlestage-tabs-trigger {
     @apply text-muted-foreground;
 
-    &:hover {
-      @apply text-foreground;
-    }
-
+    &:active,
     &[aria-selected="true"] {
       @apply bg-input/30
       border-input
       text-foreground;
     }
+
+    &:hover {
+      @apply text-foreground;
+    }
   }
 
   .singlestage-tabs-list-variant-line {
-    .singlestage-tabs-trigger[aria-selected="true"] {
-      @apply bg-transparent
-      border-transparent;
+    .singlestage-tabs-trigger {
+      &:active,
+      &[aria-selected="true"] {
+        @apply bg-transparent
+        border-transparent;
+      }
     }
   }
 }

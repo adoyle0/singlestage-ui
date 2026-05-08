@@ -4,26 +4,26 @@
   }
 
   .singlestage-tabs-list {
-    @apply p-[3px]
-    rounded-lg;
+    @apply p-1
+    rounded-full;
   }
 
   .singlestage-tabs-trigger {
     @apply border
-    border-transparent
+    border-transparent!
     font-medium
-    gap-1.5
-    px-2
+    gap-2
+    px-3
     py-1
-    rounded-md
+    rounded-full
     text-sm;
 
     &:has(svg:last-child:not(svg:first-child)) {
-      @apply pr-1.5;
+      @apply pr-2;
     }
 
     &:has(svg:first-child:not(svg:last-child)) {
-      @apply pl-1.5;
+      @apply pl-2;
     }
 
     svg:not([class*="size-"]) {
@@ -31,29 +31,25 @@
     }
   }
 
-  .singlestage-tabs-list-variant-default {
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-sm;
-      }
-    }
-  }
-
   .singlestage-tabs-list-variant-line {
     @apply rounded-none;
-
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-none;
-      }
-    }
   }
 
   .singlestage-tabs-orientation-horizontal {
     .singlestage-tabs-list {
       @apply h-9;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-list {
+      @apply rounded-2xl;
+    }
+
+    .singlestage-tabs-trigger {
+      @apply px-3
+      py-1.5
+      rounded-2xl;
     }
   }
 

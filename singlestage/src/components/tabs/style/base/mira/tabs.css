@@ -13,51 +13,41 @@
     border-transparent
     font-medium
     gap-1.5
-    px-2
-    py-1
+    px-1.5
+    py-0.5
     rounded-md
-    text-sm;
+    text-xs;
 
     &:has(svg:last-child:not(svg:first-child)) {
-      @apply pr-1.5;
+      @apply pr-1;
     }
 
     &:has(svg:first-child:not(svg:last-child)) {
-      @apply pl-1.5;
+      @apply pl-1;
     }
 
     svg:not([class*="size-"]) {
-      @apply size-4;
-    }
-  }
-
-  .singlestage-tabs-list-variant-default {
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-sm;
-      }
+      @apply size-3.5;
     }
   }
 
   .singlestage-tabs-list-variant-line {
     @apply rounded-none;
-
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-none;
-      }
-    }
   }
 
   .singlestage-tabs-orientation-horizontal {
     .singlestage-tabs-list {
-      @apply h-9;
+      @apply h-8;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-trigger {
+      @apply py-[calc(--spacing(1.25))];
     }
   }
 
   .singlestage-tabs-content {
-    @apply text-sm;
+    @apply text-xs/relaxed;
   }
 }

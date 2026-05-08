@@ -5,7 +5,7 @@
 
   .singlestage-tabs-list {
     @apply p-[3px]
-    rounded-lg;
+    rounded-4xl;
   }
 
   .singlestage-tabs-trigger {
@@ -15,7 +15,7 @@
     gap-1.5
     px-2
     py-1
-    rounded-md
+    rounded-xl
     text-sm;
 
     &:has(svg:last-child:not(svg:first-child)) {
@@ -31,29 +31,24 @@
     }
   }
 
-  .singlestage-tabs-list-variant-default {
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-sm;
-      }
-    }
-  }
-
   .singlestage-tabs-list-variant-line {
     @apply rounded-none;
-
-    .singlestage-tabs-trigger {
-      &:active,
-      &[aria-selected="true"] {
-        @apply shadow-none;
-      }
-    }
   }
 
   .singlestage-tabs-orientation-horizontal {
     .singlestage-tabs-list {
       @apply h-9;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-list {
+      @apply rounded-2xl;
+    }
+
+    .singlestage-tabs-trigger {
+      @apply px-2.5
+      py-1.5;
     }
   }
 
