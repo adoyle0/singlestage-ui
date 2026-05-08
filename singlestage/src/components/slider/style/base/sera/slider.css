@@ -3,30 +3,27 @@
     &::-webkit-slider-thumb,
     &::-moz-range-thumb,
     &::-ms-thumb {
-      @apply bg-white
-      border
-      border-primary
-      ring-ring/50
-      rounded-full
-      shadow-sm
-      size-4
-      transition-[color,box-shadow];
+      @apply bg-primary
+      border-none
+      size-3
+      transition-colors;
 
       &:focus-visible {
         @apply outline-hidden
-        ring-4;
+        ring-2
+        ring-ring/30;
       }
 
       &:hover {
-        @apply ring-4;
+        @apply ring-2
+        ring-ring/30;
       }
     }
 
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply bg-muted
-      rounded-full;
+      @apply bg-input/50;
     }
 
     &::-ms-fill-lower {
@@ -35,7 +32,7 @@
     }
 
     &::-ms-fill-upper {
-      @apply bg-muted
+      @apply bg-input/50
       rounded-full;
     }
   }
@@ -44,7 +41,7 @@
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply h-1.5
+      @apply h-0.5
       w-full;
     }
 
@@ -53,7 +50,7 @@
       background: linear-gradient(
         to right,
         var(--primary) var(--slider-value),
-        var(--muted) var(--slider-value)
+        color-mix(in oklab, var(--input) 50%, transparent) var(--slider-value)
       );
     }
   }
@@ -65,7 +62,7 @@
     &::-webkit-slider-runnable-track,
     &::-ms-track {
       @apply h-full
-      w-1.5;
+      w-0.5;
     }
 
     &::-moz-range-track,
@@ -73,7 +70,7 @@
       background: linear-gradient(
         to top,
         var(--primary) var(--slider-value),
-        var(--muted) var(--slider-value)
+        color-mix(in oklab, var(--input) 50%, transparent) var(--slider-value)
       );
     }
   }

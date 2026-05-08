@@ -5,20 +5,29 @@
     &::-ms-thumb {
       @apply bg-white
       border
-      border-primary
-      ring-ring/50
-      rounded-full
-      shadow-sm
-      size-4
+      border-ring
+      relative
+      ring-ring/30
+      rounded-md
+      size-3
       transition-[color,box-shadow];
+
+      &:active {
+        @apply ring-2;
+      }
 
       &:focus-visible {
         @apply outline-hidden
-        ring-4;
+        ring-2;
       }
 
       &:hover {
-        @apply ring-4;
+        @apply ring-2;
+      }
+
+      ::after {
+        @apply -inset-2
+        absolute;
       }
     }
 
@@ -26,7 +35,7 @@
     &::-webkit-slider-runnable-track,
     &::-ms-track {
       @apply bg-muted
-      rounded-full;
+      rounded-md;
     }
 
     &::-ms-fill-lower {
@@ -44,7 +53,7 @@
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply h-1.5
+      @apply h-1
       w-full;
     }
 
@@ -65,7 +74,7 @@
     &::-webkit-slider-runnable-track,
     &::-ms-track {
       @apply h-full
-      w-1.5;
+      w-1;
     }
 
     &::-moz-range-track,

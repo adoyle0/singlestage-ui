@@ -1,68 +1,49 @@
 @layer components {
   .singlestage-slider {
+    /* @apply flex */
+    /* items-center */
+    /* relative */
+    /* select-none */
+    /* touch-none */
+    /* w-full; */
+
     &:disabled,
     &[aria-disabled="true"] {
       @apply opacity-50;
     }
 
-    &:hover,
-    &:focus-visible {
-      &::-webkit-slider-thumb,
-      &::-moz-range-thumb,
-      &::-ms-thumb {
-        @apply ring-4;
-      }
-    }
-
     &::-webkit-slider-thumb,
     &::-moz-range-thumb,
     &::-ms-thumb {
-      @apply -mt-1.25
-      appearance-none
-      bg-background
+      @apply appearance-none
       block
-      border
-      border-primary
-      ring-ring/50
-      rounded-full
-      shadow-sm
-      shrink-0
-      size-4;
+      select-none
+      shrink-0;
+
+      &:disabled {
+        @apply opacity-50
+        pointer-events-none;
+      }
     }
 
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply appearance-none
-      rounded-full;
-    }
-
-    &::-ms-fill-lower {
-      @apply bg-primary
-      rounded-full;
-    }
-
-    &::-ms-fill-upper {
-      @apply bg-muted
-      rounded-full;
+      @apply appearance-none;
+      /* grow */
+      /* overflow-hidden */
+      /* relative */
+      /* select-none; */
     }
   }
 
   .singlestage-slider-horizontal {
+    @apply w-full;
+
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply h-1.5
-      w-full;
-    }
-
-    &::-moz-range-track,
-    &::-webkit-slider-runnable-track {
-      background: linear-gradient(
-        to right,
-        var(--primary) var(--slider-value),
-        var(--muted) var(--slider-value)
-      );
+      @apply w-full;
     }
   }
 
@@ -71,20 +52,14 @@
     direction: rtl;
     writing-mode: vertical-lr;
 
+    @apply /* flex-col */
+    h-full;
+    /* w-auto; */
+
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply h-full
-      w-1.5;
-    }
-
-    &::-moz-range-track,
-    &::-webkit-slider-runnable-track {
-      background: linear-gradient(
-        to top,
-        var(--primary) var(--slider-value),
-        var(--muted) var(--slider-value)
-      );
+      @apply h-full;
     }
   }
 }

@@ -7,10 +7,10 @@
       border
       border-primary
       ring-ring/50
-      rounded-full
+      rounded-4xl
       shadow-sm
       size-4
-      transition-[color,box-shadow];
+      transition-colors;
 
       &:focus-visible {
         @apply outline-hidden
@@ -26,7 +26,7 @@
     &::-webkit-slider-runnable-track,
     &::-ms-track {
       @apply bg-muted
-      rounded-full;
+      rounded-4xl;
     }
 
     &::-ms-fill-lower {
@@ -44,7 +44,7 @@
     &::-moz-range-track,
     &::-webkit-slider-runnable-track,
     &::-ms-track {
-      @apply h-1.5
+      @apply h-3
       w-full;
     }
 
@@ -65,7 +65,7 @@
     &::-webkit-slider-runnable-track,
     &::-ms-track {
       @apply h-full
-      w-1.5;
+      w-3;
     }
 
     &::-moz-range-track,
