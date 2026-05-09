@@ -212,16 +212,13 @@ fn main() {
         "badge",
         "breadcrumb",
         "button",
-        "button_group",
         "card",
         "carousel",
         "checkbox",
         "dialog",
         "dropdown",
         "empty",
-        "field",
         "input",
-        "input_group",
         "item",
         "kbd",
         "label",
@@ -244,6 +241,10 @@ fn main() {
         "tabs",
         "textarea",
         "tooltip",
+        // Components that override
+        "input_group",
+        "button_group",
+        "field",
     ];
 
     let base_styles = ["luma", "lyra", "maia", "mira", "nova", "sera", "vega"];
