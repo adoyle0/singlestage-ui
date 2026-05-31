@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-alert {
     @apply relative
     w-full;

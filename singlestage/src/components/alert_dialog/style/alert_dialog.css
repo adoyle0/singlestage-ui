@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-alert-dialog-overlay {
     @apply -translate-x-1/2
     -translate-y-1/2

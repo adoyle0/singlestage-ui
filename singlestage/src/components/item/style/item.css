@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-item-group {
     @apply flex
     flex-col

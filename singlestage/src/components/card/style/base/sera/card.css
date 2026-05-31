@@ -14,8 +14,8 @@
       @apply pt-0;
     }
 
-    img:first-child,
-    img:last-child {
+    > img:first-child,
+    > img:last-child {
       @apply rounded-none;
     }
   }

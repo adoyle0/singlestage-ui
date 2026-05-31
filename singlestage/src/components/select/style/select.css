@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-select-wrapper {
     @apply relative
     w-fit;
@@ -15,6 +15,12 @@
     &[aria-disabled="true"] {
       @apply cursor-not-allowed
       pointer-events-none;
+    }
+
+    option,
+    optgroup {
+      @apply bg-popover
+      text-popover-foreground;
     }
   }
 

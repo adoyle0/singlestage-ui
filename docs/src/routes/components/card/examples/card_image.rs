@@ -8,9 +8,9 @@ pub fn CardImageExample() -> impl IntoView {
             <img
                 src="https://avatar.vercel.sh/shadcn1"
                 alt="Event cover"
-                class="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                class="relative aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
             />
-            <div class="absolute inset-0 z-30 aspect-video bg-black/35" />
+            <div class="absolute inset-0 aspect-video bg-black/35" />
             <CardHeader>
                 <CardAction>
                     <Badge variant="secondary">"Featured"</Badge>

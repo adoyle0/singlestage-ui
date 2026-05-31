@@ -1,4 +1,4 @@
-@layer component {
+@layer theme {
   .singlestage-card {
     @apply bg-card
     flex
@@ -12,8 +12,8 @@
     text-card-foreground
     text-sm;
 
-    img:first-child,
-    img:last-child {
+    > img:first-child,
+    > img:last-child {
       @apply rounded-none;
     }
 

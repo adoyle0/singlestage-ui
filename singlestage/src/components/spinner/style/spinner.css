@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-spinner {
     @apply animate-spin
     size-4;

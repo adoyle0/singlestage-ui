@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-kbd {
     @apply inline-flex
     items-center

@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-progress {
     @apply w-full;
   }

@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   @media (prefers-reduced-motion: no-preference) {
     .singlestage-switch {
       @apply transition-all;

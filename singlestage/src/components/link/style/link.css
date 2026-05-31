@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-link {
     @apply font-medium
     underline

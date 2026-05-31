@@ -60,7 +60,7 @@
     text-secondary-foreground;
 
     &:hover {
-      @apply bg-secondary/80;
+      @apply bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)];
     }
 
     &:has(+ .singlestage-popover:popover-open),

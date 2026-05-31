@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-alert-dialog-media-variant-destructive {
     @apply bg-destructive/20
     text-destructive;

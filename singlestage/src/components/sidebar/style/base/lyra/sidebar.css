@@ -133,11 +133,11 @@
 
   .singlestage-sidebar-menu-button-variant-outline {
     @apply bg-background
-    shadow-[0_0_0_1px(var(--sidebar-border))];
+    shadow-[0_0_0_1px_var(--sidebar-border)];
 
     &:hover {
       @apply bg-sidebar-accent
-      shadow-[0_0_0_1px(var(--sidebar-accent))]
+      shadow-[0_0_0_1px_var(--sidebar-accent)]
       text-sidebar-accent-foreground;
     }
   }

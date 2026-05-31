@@ -15,11 +15,11 @@
       @apply pt-0;
     }
 
-    img:first-child {
+    > img:first-child {
       @apply rounded-t-xl;
     }
 
-    img:last-child {
+    > img:last-child {
       @apply rounded-b-xl;
     }
   }

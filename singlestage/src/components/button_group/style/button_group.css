@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-button-group {
     @apply flex
     items-stretch

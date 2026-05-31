@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-sidebar-wrapper {
     @apply flex
     min-h-svh

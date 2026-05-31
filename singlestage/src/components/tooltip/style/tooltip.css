@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-tooltip-content {
     @apply bg-foreground
     max-w-xs

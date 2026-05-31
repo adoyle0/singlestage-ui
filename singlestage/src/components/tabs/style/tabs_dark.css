@@ -1,4 +1,4 @@
-@layer components {
+@layer theme {
   .singlestage-tabs-trigger {
     @apply text-muted-foreground;
 
