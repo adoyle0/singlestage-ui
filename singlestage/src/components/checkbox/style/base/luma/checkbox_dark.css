@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-checkbox {
     &:checked {
       @apply bg-primary;

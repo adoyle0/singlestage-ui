@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-alert-dialog-overlay {
     @apply bg-popover
     ring-1

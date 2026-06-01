@@ -46,8 +46,8 @@
   --color-selection-foreground: var(--selection-foreground);
 }
 
-@layer base {
-  /* Base stuff */
+@layer components {
+  /* components stuff */
   :root {
     --sidebar-width: 16rem;
     --sidebar-mobile-width: 18rem;
@@ -145,7 +145,7 @@
 
 /* /* Animation */
 
-@layer base {
+@layer components {
   :root {
     --transform-origin: 0% 339px;
     --transform-scale: scale3d(0.95, 0.95, 0.95);

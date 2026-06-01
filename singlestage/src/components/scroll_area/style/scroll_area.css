@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-scroll-area {
     @apply focus-visible:outline-1
     focus-visible:ring-3

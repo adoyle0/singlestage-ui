@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   &:invalid,
   &[aria-invalid="true"] {
     @apply border-destructive/50

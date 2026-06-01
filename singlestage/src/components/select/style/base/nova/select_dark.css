@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-select {
     @apply bg-input/30;
 

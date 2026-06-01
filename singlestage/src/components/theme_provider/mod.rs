@@ -51,24 +51,6 @@ pub fn ThemeProviderInner(
     view! {
         <Style id="singlestage">{CSS}</Style>
         <style
-            id="theme-base"
-            inner_html=move || {
-                match mode.get() {
-                    Mode::Dark => {
-                        format!("{}{}", base.get().light.to_string(), base.get().dark.to_string())
-                    }
-                    Mode::Light => base.get().light.to_string(),
-                    Mode::Auto => {
-                        format!(
-                            "{}\n\n@media (prefers-color-scheme: dark) {{{}}}",
-                            base.get().light.to_string(),
-                            base.get().dark.to_string(),
-                        )
-                    }
-                }
-            }
-        ></style>
-        <style
             id="theme"
             inner_html=move || {
                 let theme = theme.get();
@@ -84,6 +66,24 @@ pub fn ThemeProviderInner(
                             theme.light,
                             CSS_DARK,
                             theme.dark,
+                        )
+                    }
+                }
+            }
+        ></style>
+        <style
+            id="theme-base"
+            inner_html=move || {
+                match mode.get() {
+                    Mode::Dark => {
+                        format!("{}{}", base.get().light.to_string(), base.get().dark.to_string())
+                    }
+                    Mode::Light => base.get().light.to_string(),
+                    Mode::Auto => {
+                        format!(
+                            "{}\n\n@media (prefers-color-scheme: dark) {{{}}}",
+                            base.get().light.to_string(),
+                            base.get().dark.to_string(),
                         )
                     }
                 }

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-switch {
     &:checked::after {
       @apply bg-primary-foreground;

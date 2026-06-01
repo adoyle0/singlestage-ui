@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlesage-label {
     @apply font-semibold
     gap-2

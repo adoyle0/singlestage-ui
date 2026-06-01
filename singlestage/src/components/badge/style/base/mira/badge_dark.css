@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-badge-variant-outline {
     @apply bg-input/30;
   }

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-switch {
     @apply border-2
     rounded-full

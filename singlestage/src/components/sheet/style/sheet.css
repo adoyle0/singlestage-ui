@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   @media (prefers-reduced-motion: no-preference) {
     .singlestage-sheet-overlay {
       transition:

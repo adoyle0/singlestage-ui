@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-accordion-item {
     &:not(&:last-child) {
       @apply border-b;

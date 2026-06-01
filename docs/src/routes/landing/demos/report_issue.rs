@@ -49,10 +49,10 @@ pub fn ReportIssue() -> impl IntoView {
                         ></Textarea>
                     </div>
                     <CardFooter class="flex items-center gap-4 justify-between">
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost">
                             "Cancel"
                         </Button>
-                        <Button size="sm">"Continue"</Button>
+                        <Button>"Continue"</Button>
                     </CardFooter>
                 </form>
             </CardContent>

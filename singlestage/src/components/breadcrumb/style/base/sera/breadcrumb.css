@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-breadcrumb-list {
     @apply gap-1.5
     sm:gap-2.5

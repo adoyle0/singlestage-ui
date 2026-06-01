@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-card {
     @apply bg-card
     gap-8

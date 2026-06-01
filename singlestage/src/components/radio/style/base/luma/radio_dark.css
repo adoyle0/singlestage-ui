@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-radio-group-item {
     &:checked,
     &[aria-checked="true"] {

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-toggle {
     @apply font-semibold
     gap-1.5

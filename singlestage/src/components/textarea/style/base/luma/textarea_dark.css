@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-textarea {
     &:invalid,
     &[aria-invalid="true"] {

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-input-group-input {
     @apply bg-transparent;
 

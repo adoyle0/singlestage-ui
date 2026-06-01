@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-badge:invalid,
   .singlestage-badge[aria-invalid="true"] {
     @apply ring-destructive/40;

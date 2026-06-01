@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-card {
     @apply ring-foreground/10;
   }

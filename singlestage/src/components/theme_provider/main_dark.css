@@ -1,5 +1,5 @@
-@layer base {
-  /* Base stuff dark overrides */
+@layer components {
+  /* components stuff dark overrides */
   :root {
     --scrollbar-thumb: rgba(255, 255, 255, 0.3);
     color-scheme: dark;

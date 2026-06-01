@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-checkbox {
     @apply bg-input/90
     border

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-select {
     &:invalid,
     &[aria-invalid="true"] {

@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-sheet-overlay::backdrop {
     @apply bg-black/20
     supports-backdrop-filter:backdrop-blur-sm;

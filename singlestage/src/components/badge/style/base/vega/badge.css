@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-badge {
     @apply border
     border-transparent

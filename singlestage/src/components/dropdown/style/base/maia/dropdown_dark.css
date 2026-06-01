@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-dropdown-menu-content {
     @apply ring-foreground/10;
   }

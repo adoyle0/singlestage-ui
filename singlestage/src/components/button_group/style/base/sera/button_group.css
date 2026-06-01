@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-button-group {
     /* TODO: revisit selects */
     /* has-[>[data-variant=outline]]:*:data-[slot=select-trigger]:border-border */

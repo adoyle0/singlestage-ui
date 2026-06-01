@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-sidebar-gap {
     @apply duration-200
     ease-linear

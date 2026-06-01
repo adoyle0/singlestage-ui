@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-tooltip-content {
     @apply gap-1.5
     inline-flex

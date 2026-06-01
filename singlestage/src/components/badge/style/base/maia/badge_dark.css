@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-badge-variant-destructive {
     @apply bg-destructive/20;
 

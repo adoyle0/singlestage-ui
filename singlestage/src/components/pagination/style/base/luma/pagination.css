@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .cn-pagination-content {
     @apply gap-1;
   }

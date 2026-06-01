@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-alert {
     @apply border
     gap-0.5

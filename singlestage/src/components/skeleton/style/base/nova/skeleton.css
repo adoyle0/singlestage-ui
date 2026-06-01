@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-skeleton {
     @apply bg-muted
     rounded-md;

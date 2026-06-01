@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-dropdown-menu-item-variant-destructive {
     > button,
     > label {

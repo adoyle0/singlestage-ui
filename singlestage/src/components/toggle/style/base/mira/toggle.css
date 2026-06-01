@@ -1,4 +1,4 @@
-@layer base {
+@layer components {
   .singlestage-toggle {
     @apply font-medium
     gap-1
