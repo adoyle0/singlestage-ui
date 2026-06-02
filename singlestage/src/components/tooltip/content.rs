@@ -185,8 +185,15 @@ pub fn TooltipContent(
                 )
             }
             node_ref=content_ref
-            popover="manual"
+            popover="hint"
             style:position-anchor=move || format!("--{}", tooltip.trigger_id.get())
+            // TODO: This should probably be done with css
+            style:display=move || {
+                match tooltip.open.get() {
+                    true => "contents",
+                    false => "none"
+                }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
