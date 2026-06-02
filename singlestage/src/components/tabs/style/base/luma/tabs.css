@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-tabs {
     @apply gap-2;
   }

@@ -23,7 +23,6 @@ pub fn CardExample() -> impl IntoView {
                                 id="email"
                                 input_type="email"
                                 placeholder="m@example.com"
-                                required=true
                             />
                         </div>
                         <div class="grid gap-2">
@@ -36,7 +35,7 @@ pub fn CardExample() -> impl IntoView {
                                     "Forgot your password?"
                                 </a>
                             </div>
-                            <Input id="password" input_type="password" required=true />
+                            <Input id="password" input_type="password" />
                         </div>
                     </div>
                 </form>

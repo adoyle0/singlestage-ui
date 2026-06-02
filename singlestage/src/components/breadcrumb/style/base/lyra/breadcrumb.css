@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-breadcrumb-list {
     @apply gap-1.5
     text-muted-foreground

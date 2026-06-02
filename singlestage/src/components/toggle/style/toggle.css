@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-toggle {
     @apply inline-flex
     items-center

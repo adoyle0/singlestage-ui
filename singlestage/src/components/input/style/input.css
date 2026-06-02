@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-input {
     @apply min-w-0
     outline-none

@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-empty {
     @apply flex
     flex-1

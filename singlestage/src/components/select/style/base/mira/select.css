@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-select {
     @apply appearance-none
     bg-input/20

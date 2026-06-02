@@ -1,4 +1,4 @@
-@layer base {
+@layer components2 {
   .singlestage-field-label:has(*:checked) {
     @apply has-data-checked:bg-primary/10;
   }

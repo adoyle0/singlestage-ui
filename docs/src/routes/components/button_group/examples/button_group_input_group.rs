@@ -10,12 +10,13 @@ pub fn ButtonGroupInputGroupExample() -> impl IntoView {
 
     Effect::new(move || {
         class.set(format!(
-            "rounded-full{}",
+            "rounded-full {}",
             if voice_enabled.get() {
+                // TODO: make a reactive signal for the current preferred mode
                 match theme.mode.get() {
-                    Mode::Dark => " bg-orange-800 text-orange-100",
-                    Mode::Light => " bg-orange-100 text-orange-700",
-                    _ => " bg-orange-100 text-orange-700 dark:bg-orange-800 dark:text-orange-100",
+                    Mode::Dark => "bg-orange-800 text-orange-100",
+                    Mode::Light => "bg-orange-100 text-orange-700",
+                    _ => "bg-orange-100 text-orange-700 dark:bg-orange-800 dark:text-orange-100",
                 }
             } else {
                 ""
@@ -48,7 +49,7 @@ pub fn ButtonGroupInputGroupExample() -> impl IntoView {
                         <Tooltip>
                             <TooltipTrigger>
                                 <Button
-                                    on:click=move |_| voice_enabled.set(!voice_enabled.get())
+                                    on:click=move |_| voice_enabled.set(!voice_enabled.get_untracked())
                                     size="icon-xs"
                                     class
                                 >

@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-input {
     @apply bg-input/30
     border

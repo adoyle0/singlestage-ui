@@ -1,4 +1,4 @@
-@layer base {
+@layer components2 {
   .singlestage-button-group {
     /* TODO: revisit selects */
     /* @apply has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-4xl; */

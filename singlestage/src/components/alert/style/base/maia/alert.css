@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-alert {
     @apply *:[svg:not([class*='size-'])]:size-4
     *:[svg]:row-span-2

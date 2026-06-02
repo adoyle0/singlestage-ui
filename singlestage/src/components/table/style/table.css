@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-table {
     tr {
       &:has(*:[aria-expanded="true"]) {

@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-popover-content {
     @apply outline-hidden
     w-72

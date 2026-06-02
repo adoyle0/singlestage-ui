@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-badge {
     @apply inline-flex
     items-center

@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-switch {
     &:not(&:checked) {
       @apply bg-input/80;

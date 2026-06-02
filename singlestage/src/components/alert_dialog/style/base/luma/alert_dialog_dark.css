@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-alert-dialog-content {
     @apply ring-foreground/10;
   }

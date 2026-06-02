@@ -1,4 +1,4 @@
-@layer base {
+@layer components2 {
   .singlestage-button-group {
     /* TODO: revisit selects */
     /* has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-4xl */
@@ -47,6 +47,11 @@
 
     svg:not([class*="size-"]) {
       @apply size-4;
+    }
+
+    &:has(~ .singlestage-input-group),
+    .singlestage-input-group ~ & {
+      @apply border-muted;
     }
   }
 

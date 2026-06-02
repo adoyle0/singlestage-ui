@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-dropdown-menu {
     @apply isolate
     outline-none

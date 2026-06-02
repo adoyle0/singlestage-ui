@@ -1,4 +1,4 @@
-@layer theme {
+@layer components {
   .singlestage-avatar {
     @apply flex
     relative

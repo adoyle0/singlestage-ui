@@ -1,4 +1,4 @@
-@layer base {
+@layer components1 {
   .singlestage-dialog-overlay {
     @apply bg-popover
     max-w-[calc(100%-2rem)]
