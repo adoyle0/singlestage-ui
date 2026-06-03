@@ -64,8 +64,8 @@ pub fn App() -> impl IntoView {
 
     view! {
         <Title text="Singlestage UI" />
-        <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
         <ThemeProvider>
+            <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
             <Router>
                 <Routes fallback=NotFound>
                     <ParentRoute path=StaticSegment("") view=SidebarContainer>
