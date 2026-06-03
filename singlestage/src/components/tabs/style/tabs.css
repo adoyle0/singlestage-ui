@@ -1,4 +1,4 @@
-@layer components {
+@layer components2 {
   .singlestage-tabs {
     @apply flex;
   }
@@ -46,13 +46,6 @@
       @apply text-foreground;
     }
 
-    &::after {
-      @apply absolute
-      bg-foreground
-      opacity-0
-      transition-opacity;
-    }
-
     svg {
       @apply pointer-events-none
       shrink-0;
@@ -74,6 +67,14 @@
 
     .singlestage-tabs-trigger {
       @apply bg-transparent;
+
+      &::after {
+        @apply absolute
+        bg-foreground
+        content-['']
+        opacity-0
+        transition-opacity;
+      }
 
       &:active,
       &[aria-selected="true"] {
