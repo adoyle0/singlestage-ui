@@ -184,16 +184,16 @@ pub fn ThemeSwitcher() -> impl IntoView {
                     <p>"Toggle dark mode"</p>
                 </TooltipContent>
             </Tooltip>
-        // <Tooltip>
-        // <TooltipTrigger>
-        // <a href="https://github.com/adoyle0/singlestage-ui">
-        // <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
-        // </a>
-        // </TooltipTrigger>
-        // <TooltipContent side="bottom" align="end">
-        // <p>"GitHub repository"</p>
-        // </TooltipContent>
-        // </Tooltip>
+            <Tooltip>
+                <TooltipTrigger>
+                    <a href="https://github.com/adoyle0/singlestage-ui">
+                        <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
+                    </a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"GitHub repository"</p>
+                </TooltipContent>
+            </Tooltip>
         </span>
     }
 }

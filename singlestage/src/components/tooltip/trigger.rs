@@ -151,7 +151,7 @@ pub fn TooltipTrigger(
     };
 
     view! {
-        <span
+        <div
             class=move || format!("singlestage-tooltip-trigger {}", class.get().unwrap_or_default())
             id={
                 let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
@@ -166,6 +166,6 @@ pub fn TooltipTrigger(
             {..global_attrs_2}
         >
             {children()}
-        </span>
+        </div>
     }
 }
