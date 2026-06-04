@@ -5,7 +5,7 @@ use singlestage::*;
 pub fn RadioChoiceCardExample() -> impl IntoView {
     view! {
         <RadioGroup default="plus" class="max-w-sm">
-            <Label label_for="plus-plan">
+            <FieldLabel label_for="plus-plan">
                 <Field orientation="horizontal">
                     <FieldContent>
                         <FieldTitle>"Plus"</FieldTitle>
@@ -13,8 +13,8 @@ pub fn RadioChoiceCardExample() -> impl IntoView {
                     </FieldContent>
                     <Radio value="plus" id="plus-plan" />
                 </Field>
-            </Label>
-            <Label label_for="pro-plan">
+            </FieldLabel>
+            <FieldLabel label_for="pro-plan">
                 <Field orientation="horizontal">
                     <FieldContent>
                         <FieldTitle>"Pro"</FieldTitle>
@@ -22,8 +22,8 @@ pub fn RadioChoiceCardExample() -> impl IntoView {
                     </FieldContent>
                     <Radio value="pro" id="pro-plan" />
                 </Field>
-            </Label>
-            <Label label_for="enterprise-plan">
+            </FieldLabel>
+            <FieldLabel label_for="enterprise-plan">
                 <Field orientation="horizontal">
                     <FieldContent>
                         <FieldTitle>"Enterprise"</FieldTitle>
@@ -31,7 +31,7 @@ pub fn RadioChoiceCardExample() -> impl IntoView {
                     </FieldContent>
                     <Radio value="enterprise" id="enterprise-plan" />
                 </Field>
-            </Label>
+            </FieldLabel>
         </RadioGroup>
     }
 }

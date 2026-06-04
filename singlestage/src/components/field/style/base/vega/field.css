@@ -62,12 +62,31 @@
     }
   }
 
+  .singlestage-field-label {
+    @apply gap-2
+    leading-snug;
+
+    &:has(> .singlestage-field) {
+      @apply border
+      rounded-md;
+    }
+
+    &:has(*:checked) {
+      @apply bg-primary/5
+      border-primary/30;
+    }
+
+    .singlestage-field {
+      @apply p-3;
+    }
+  }
+
   .singlestage-field {
     @apply gap-3;
 
     &:disabled,
     &[aria-disabled="true"] {
-      .singlestage-label,
+      .singlestage-field-label,
       .singlestage-field-title {
         @apply opacity-50;
       }

@@ -165,6 +165,7 @@ pub fn Label(
 
     view! {
         <LabelPrimitive
+            primitive_type=LabelPrimitiveType::Label
             class
             disabled
             id

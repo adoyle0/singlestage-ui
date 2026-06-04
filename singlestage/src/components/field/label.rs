@@ -165,6 +165,7 @@ pub fn FieldLabel(
 
     view! {
         <LabelPrimitive
+            primitive_type=LabelPrimitiveType::FieldLabel
             class
             disabled
             id

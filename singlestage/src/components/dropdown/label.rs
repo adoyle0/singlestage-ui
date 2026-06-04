@@ -164,6 +164,7 @@ pub fn DropdownMenuLabel(
 
     view! {
         <LabelPrimitive
+            primitive_type=LabelPrimitiveType::MenuLabel
             class
             disabled
             id

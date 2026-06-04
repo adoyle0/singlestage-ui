@@ -1,12 +1,18 @@
-// TODO: Use primitive_type enum instead of contexts?
-// and if it works then do it everywhere
-
 use crate::primitives::*;
 use crate::{FieldContext, RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
+#[derive(Clone, Copy)]
+pub enum LabelPrimitiveType {
+    Label,
+    FieldLabel,
+    MenuLabel,
+}
+
 #[component]
 pub fn LabelPrimitive(
+    primitive_type: LabelPrimitiveType,
+
     children: Children,
 
     /// Whether the element renders as disabled
@@ -166,9 +172,6 @@ pub fn LabelPrimitive(
         />
     };
 
-    let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-    let in_popover_menu: bool = use_context::<PopoverMenuContext>().is_some();
-
     view! {
         <label
             aria_disabled=move || {
@@ -202,41 +205,56 @@ pub fn LabelPrimitive(
             class=move || {
                 format!(
                     "{} {}",
-                    if in_popover_menu {
-                        format!(
-                            "singlestage-dropdown-menu-label{}",
-                            if inset.get().unwrap_or_default() {
-                                " singlestage-dropdown-menu-inset"
-                            } else {
-                                ""
-                            },
-                        )
-                    } else {
-                        "singlestage-label".to_string()
+                    match primitive_type {
+                        LabelPrimitiveType::MenuLabel => {
+                            format!(
+                                "singlestage-dropdown-menu-label{}",
+                                if inset.get().unwrap_or_default() {
+                                    " singlestage-dropdown-menu-inset"
+                                } else {
+                                    ""
+                                },
+                            )
+                        }
+                        LabelPrimitiveType::Label | LabelPrimitiveType::MenuLabel => {
+                            "singlestage-label".to_string()
+                        }
+                        LabelPrimitiveType::FieldLabel => "singlestage-field-label".to_string(),
                     },
                     class.get().unwrap_or_default(),
                 )
             }
 
             for=move || {
-                if let Some(label_for) = label_for.get() {
-                    Some(label_for)
-                } else if let Some(field_context) = use_context::<FieldContext>() {
-                    Some(field_context.input_id.get())
-                } else {
-                    None
+                match primitive_type {
+                    LabelPrimitiveType::FieldLabel => {
+                        if let Some(field_context) = use_context::<FieldContext>() {
+                            Some(field_context.input_id.get())
+                        } else {
+                            label_for.get()
+                        }
+                    }
+                    _ => label_for.get(),
                 }
             }
 
-            id={if in_popover_menu {
-                let group = expect_context::<PopoverMenuGroupContext>();
-                group.heading_id.set(label_id.clone());
-                Some(label_id.to_owned())
-            } else if let Some(field_context) = use_context::<FieldContext>() {
-                field_context.label_id.set(label_id.clone());
-                Some(label_id.to_owned())
-            } else {
-                id.get()
+            id={match primitive_type {
+                LabelPrimitiveType::MenuLabel => {
+                    let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                    let group = expect_context::<PopoverMenuGroupContext>();
+                    group.heading_id.set(label_id.clone());
+                    Some(label_id.to_owned())
+                }
+                LabelPrimitiveType::FieldLabel => {
+                    if let Some(field_context) = use_context::<FieldContext>() {
+                        let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                        field_context.label_id.set(label_id.clone());
+                        Some(label_id.to_owned())
+                    } else {
+                        id.get()
+                    }
+                }
+                LabelPrimitiveType::Label => id.get(),
             }}
 
             {..global_attrs_1}
