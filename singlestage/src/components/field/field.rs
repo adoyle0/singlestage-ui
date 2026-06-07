@@ -18,11 +18,6 @@ pub fn Field(
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
-    /// Sets the display variant of the `Field`.
-    ///
-    /// Accepted values: "button".
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //

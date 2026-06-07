@@ -206,6 +206,8 @@ pub fn LabelPrimitive(
                 format!(
                     "{} {}",
                     match primitive_type {
+                        LabelPrimitiveType::Label => "singlestage-label".to_string(),
+                        LabelPrimitiveType::FieldLabel => "singlestage-field-label".to_string(),
                         LabelPrimitiveType::MenuLabel => {
                             format!(
                                 "singlestage-dropdown-menu-label{}",
@@ -216,10 +218,6 @@ pub fn LabelPrimitive(
                                 },
                             )
                         }
-                        LabelPrimitiveType::Label | LabelPrimitiveType::MenuLabel => {
-                            "singlestage-label".to_string()
-                        }
-                        LabelPrimitiveType::FieldLabel => "singlestage-field-label".to_string(),
                     },
                     class.get().unwrap_or_default(),
                 )

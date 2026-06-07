@@ -171,6 +171,7 @@ pub fn Separator(
                 {..global_attrs_1}
                 {..global_attrs_2}
             />
+            {children.map(|c| c())}
         }
         .into_any()
     } else {
@@ -191,6 +192,7 @@ pub fn Separator(
                 {..global_attrs_1}
                 {..global_attrs_2}
             ></div>
+            {children.map(|c| c())}
         }
         .into_any()
     }
