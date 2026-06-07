@@ -1,4 +1,5 @@
-use crate::{CheckboxGroupContext, FieldContext, Label, RadioGroupContext, Reactive};
+use super::{LabelPrimitive, LabelPrimitiveType};
+use crate::{CheckboxGroupContext, FieldContext, RadioGroupContext, Reactive};
 use leptos::prelude::*;
 
 #[derive(Clone, Copy)]
@@ -190,39 +191,27 @@ pub fn CheckboxPrimitive(
         }
     };
 
-    let update_disabled = move || {
+    let disabled: Reactive<bool> = {
         if let Some(field) = use_context::<FieldContext>() {
-            let is_disabled = field.disabled.get();
-            disabled.set(is_disabled);
-            is_disabled
+            field.disabled
+        } else if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.disabled
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.disabled
         } else {
-            disabled.get()
+            disabled
         }
     };
 
-    let update_invalid = move || {
+    let invalid: Reactive<bool> = {
         if let Some(field) = use_context::<FieldContext>() {
-            let is_invalid = field.invalid.get() || invalid.get();
-            is_invalid
+            field.invalid
+        } else if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.invalid
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.invalid
         } else {
-            match primitive_type {
-                CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
-                    if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-                        let is_invalid = checkbox_group.invalid.get() || invalid.get();
-                        is_invalid
-                    } else {
-                        invalid.get()
-                    }
-                }
-                CheckboxPrimitiveType::Radio => {
-                    if let Some(radio_group) = use_context::<RadioGroupContext>() {
-                        let is_invalid = radio_group.invalid.get() || invalid.get();
-                        is_invalid
-                    } else {
-                        invalid.get()
-                    }
-                }
-            }
+            invalid
         }
     };
 
@@ -309,8 +298,8 @@ pub fn CheckboxPrimitive(
                     None
                 }
             }
-            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
-            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
+            aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
@@ -361,8 +350,8 @@ pub fn CheckboxPrimitive(
                     class.get().unwrap_or_default(),
                 )
             }
-            disabled=update_disabled
-            prop:disabled=update_disabled
+            disabled=move || disabled.get()
+            prop:disabled=move || disabled.get()
             form=move || form.get()
             id={if let Some(field) = use_context::<FieldContext>() {
                 if let Some(id) = id.get_untracked() {
@@ -418,7 +407,11 @@ pub fn CheckboxPrimitive(
 
     if let Some(children) = children {
         view! {
-            <Label
+            <LabelPrimitive
+                // Don't use FieldLabel here until it's a problem
+                // Otherwise the checkbox will try to render as a choice card
+                primitive_type=LabelPrimitiveType::Label
+
                 class
                 disabled
                 id=label_id.to_string()
@@ -432,7 +425,7 @@ pub fn CheckboxPrimitive(
                     {..input_attrs}
                 />
                 {children()}
-            </Label>
+            </LabelPrimitive>
         }
         .into_any()
     } else {

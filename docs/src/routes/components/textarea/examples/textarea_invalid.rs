@@ -5,8 +5,7 @@ use singlestage::*;
 pub fn TextareaInvalidExample() -> impl IntoView {
     view! {
         <Field class="max-w-xs" invalid=true>
-            <Label label_for="textarea-invalid">"Message"</Label>
-            <Textarea id="textarea-invalid" placeholder="Type your message here." invalid=true />
+            <Textarea placeholder="Type your message here.">"Message"</Textarea>
             <FieldDescription>"Please enter a valid message."</FieldDescription>
         </Field>
     }

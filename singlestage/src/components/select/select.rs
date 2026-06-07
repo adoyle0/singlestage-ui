@@ -189,11 +189,21 @@ pub fn Select(
 
     let context = SelectContext { multiple, value };
 
-    Effect::new(move || {
-        if let Some(select) = select_ref.get() {
-            select.set_disabled(disabled.get());
+    let disabled: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.disabled
+        } else {
+            disabled
         }
-    });
+    };
+
+    let invalid: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.invalid
+        } else {
+            invalid
+        }
+    };
 
     // Update value reactively
     Effect::new(move || {

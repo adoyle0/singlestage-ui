@@ -5,8 +5,7 @@ use singlestage::*;
 pub fn TextareaDisabledExample() -> impl IntoView {
     view! {
         <Field class="max-w-xs" disabled=true>
-            <Label label_for="textarea-disabled">"Message"</Label>
-            <Textarea id="textarea-disabled" placeholder="Type your message here." disabled=true />
+            <Textarea placeholder="Type your message here.">"Message"</Textarea>
         </Field>
     }
 }

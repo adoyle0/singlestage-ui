@@ -20,7 +20,7 @@ pub fn LabelPrimitive(
     disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     /// (For use in popover menus)
-    #[prop(into)]
+    #[prop(optional, into)]
     inset: MaybeProp<bool>,
     /// Whether the element renders as invalid
     #[prop(into)]

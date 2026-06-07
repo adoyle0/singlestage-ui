@@ -90,14 +90,16 @@
   .singlestage-field {
     @apply gap-3;
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled="true"] {
       .singlestage-label,
       .singlestage-field-title {
         @apply opacity-50;
       }
     }
 
-    &:invalid {
+    &:invalid,
+    &[aria-invalid="true"] {
       @apply text-destructive;
     }
   }

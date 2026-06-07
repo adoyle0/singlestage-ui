@@ -281,23 +281,19 @@ pub fn Input(
         default.get()
     };
 
-    let update_disabled = move || {
+    let disabled: Reactive<bool> = {
         if let Some(field) = use_context::<FieldContext>() {
-            let is_disabled = field.disabled.get();
-            disabled.set(is_disabled);
-            is_disabled
+            field.disabled
         } else {
-            disabled.get()
+            disabled
         }
     };
 
-    let update_invalid = move || {
+    let invalid: Reactive<bool> = {
         if let Some(field) = use_context::<FieldContext>() {
-            let is_invalid = field.invalid.get();
-            invalid.set(is_invalid);
-            is_invalid
+            field.invalid
         } else {
-            invalid.get()
+            invalid
         }
     };
 
@@ -397,8 +393,8 @@ pub fn Input(
                     None
                 }
             }
-            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
-            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
+            aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -422,8 +418,8 @@ pub fn Input(
             }
             default=update_default
             prop:default=update_default
-            disabled=update_disabled
-            prop:disabled=update_disabled
+            disabled=move || disabled.get()
+            prop:disabled=move || disabled.get()
             id={if let Some(field) = use_context::<FieldContext>() {
                 if let Some(id) = id.get_untracked() {
                     field.input_id.set(id.clone());

@@ -1,4 +1,4 @@
-use crate::{FieldContext, Reactive};
+use crate::{CheckboxGroupContext, FieldContext, RadioGroupContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 /// The core wrapper for a single field. Provides orientation control, invalid state styling, and
@@ -126,14 +126,6 @@ pub fn Field(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = FieldContext {
-        description_id: RwSignal::new(String::default()),
-        disabled,
-        input_id: RwSignal::new(String::default()),
-        invalid,
-        label_id: RwSignal::new(String::default()),
-    };
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -170,6 +162,34 @@ pub fn Field(
             title=move || title.get()
             translate=move || translate.get()
         />
+    };
+
+    let disabled: Reactive<bool> = {
+        if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.disabled
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.disabled
+        } else {
+            disabled
+        }
+    };
+
+    let invalid: Reactive<bool> = {
+        if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.invalid
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.invalid
+        } else {
+            invalid
+        }
+    };
+
+    let context = FieldContext {
+        description_id: RwSignal::new(String::default()),
+        disabled,
+        input_id: RwSignal::new(String::default()),
+        invalid,
+        label_id: RwSignal::new(String::default()),
     };
 
     view! {

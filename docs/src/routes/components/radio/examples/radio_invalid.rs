@@ -9,22 +9,15 @@ pub fn RadioInvalidExample() -> impl IntoView {
             <FieldDescription>"Choose how you want to receive notifications."</FieldDescription>
             <RadioGroup default="email" invalid=true>
                 <Field orientation="horizontal" invalid=true>
-                    <Radio value="email" id="invalid-email" />
-                    <Label label_for="invalid-email" class="font-normal">
-                        "Email only"
-                    </Label>
+                    <Radio value="email">"Email only"</Radio>
                 </Field>
                 <Field orientation="horizontal">
-                    <Radio value="sms" id="invalid-sms" invalid=true />
-                    <Label label_for="invalid-sms" class="font-normal">
+                    <Radio value="sms" invalid=true>
                         "SMS only"
-                    </Label>
+                    </Radio>
                 </Field>
                 <Field orientation="horizontal">
-                    <Radio value="both" id="invalid-both" />
-                    <Label label_for="invalid-both" class="font-normal">
-                        "Both Email & SMS"
-                    </Label>
+                    <Radio value="both">"Both Email & SMS"</Radio>
                 </Field>
             </RadioGroup>
         </FieldSet>
