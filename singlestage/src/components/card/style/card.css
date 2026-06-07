@@ -47,8 +47,7 @@
     @apply /* font-heading */
     font-semibold
     text-lg
-    tracking-wider
-    uppercase;
+    tracking-wider;
   }
 
   .singlestage-card-description {
