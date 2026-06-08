@@ -4,8 +4,7 @@
   }
 
   .singlestage-dropdown-menu-item-variant-destructive {
-    > button,
-    > label {
+    > * {
       &:focus,
       &:hover {
         @apply focus:bg-destructive/20;
