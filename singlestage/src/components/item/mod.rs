@@ -19,3 +19,6 @@ pub use item::*;
 pub use media::*;
 pub use separator::*;
 pub use title::*;
+
+#[derive(Clone)]
+pub(crate) struct ItemContext {}

@@ -1,0 +1,32 @@
+@layer components {
+  .singlestage-select-wrapper {
+    @apply relative
+    w-fit;
+
+    &:has(.singlestage-select:disabled) {
+      @apply opacity-50;
+    }
+  }
+
+  .singlestage-select {
+    @apply outline-none;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply cursor-not-allowed
+      pointer-events-none;
+    }
+
+    option,
+    optgroup {
+      @apply bg-popover
+      text-popover-foreground;
+    }
+  }
+
+  .singlestage-select-icon {
+    @apply absolute
+    pointer-events-none
+    select-none;
+  }
+}

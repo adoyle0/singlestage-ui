@@ -1,4 +1,4 @@
-use crate::DropdownMenuContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// The component that pops out when the dropdown menu is open.
@@ -118,15 +118,6 @@ pub fn DropdownMenuContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<DropdownMenuContext>();
-    let menu_ref = NodeRef::<leptos::html::Menu>::new();
-
-    Effect::new(move || {
-        if let Some(popover) = menu_ref.get_untracked() {
-            let _ = popover.toggle_popover_with_force(menu.open.get());
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -156,7 +147,6 @@ pub fn DropdownMenuContent(
             part=move || part.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
-            style=move || style.get()
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
@@ -164,38 +154,19 @@ pub fn DropdownMenuContent(
     };
 
     view! {
-        <menu
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-animations {} {} {}",
-                    match side.get().unwrap_or_default().as_str() {
-                        "top" => "singlestage-popover-top",
-                        "right" => "singlestage-popover-right",
-                        "left" => "singlestage-popover-left",
-                        _ => "singlestage-popover-bottom",
-                    },
-                    match align.get().unwrap_or_default().as_str() {
-                        "center" => "singlestage-popover-center",
-                        "end" => "singlestage-popover-end",
-                        _ => "singlestage-popover-start",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            node_ref=menu_ref
-            id={
-                let menu_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                menu.menu_id.set(menu_id.clone());
-                menu_id
-            }
-            popover=move || if menu.dismissable.get() { "auto" } else { "manual" }
-            style:position-anchor=move || { format!("--{}", menu.trigger_id.get()) }
-            role="menu"
+        <MenuContentPrimitive
+            primitive_type=MenuContentPrimitiveType::Main
+
+            align
+            class
+            id
+            side
+            style
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </menu>
+        </MenuContentPrimitive>
     }
 }

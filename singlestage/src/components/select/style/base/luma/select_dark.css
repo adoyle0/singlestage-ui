@@ -1,0 +1,9 @@
+@layer components1 {
+  .singlestage-select {
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+}

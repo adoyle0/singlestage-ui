@@ -1,10 +1,23 @@
-use crate::ContextMenuSubContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// The component that pops out when the sub trigger is triggered.
 #[component]
 pub fn ContextMenuSubContent(
     children: Children,
+
+    /// Set how to align the popover
+    ///
+    /// Accepted values: "start" | "center" | "end"
+    /// Default is "start"
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side the popover opens relative to the trigger
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left"
+    /// Default is "bottom"
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -47,6 +60,9 @@ pub fn ContextMenuSubContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -102,18 +118,6 @@ pub fn ContextMenuSubContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sub = expect_context::<ContextMenuSubContext>();
-    let menu_ref = NodeRef::<leptos::html::Menu>::new();
-
-    let uuid = uuid::Uuid::new_v4();
-    sub.menu_id.set(uuid.to_string());
-
-    Effect::new(move || {
-        if let Some(popover) = menu_ref.get_untracked() {
-            let _ = popover.toggle_popover_with_force(sub.open.get());
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -143,7 +147,6 @@ pub fn ContextMenuSubContent(
             part=move || part.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
-            style=move || style.get()
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
@@ -151,23 +154,19 @@ pub fn ContextMenuSubContent(
     };
 
     view! {
-        <menu
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-content singlestage-popover singlestage-popover-right singlestage-popover-animations {}",
-                    class.get().unwrap_or_default(),
-                )
-            }
-            id=move || uuid.to_string()
-            node_ref=menu_ref
-            popover="auto"
-            role="menu"
-            style:position-anchor=move || { format!("--{}", sub.trigger_id.get()) }
+        <MenuContentPrimitive
+            primitive_type=MenuContentPrimitiveType::Sub
+
+            align
+            class
+            id
+            side
+            style
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </menu>
+        </MenuContentPrimitive>
     }
 }

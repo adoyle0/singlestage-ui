@@ -22,11 +22,11 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"m@example.com"</p>
                         </div>
 
-                        <Select default="owner">
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                        <Select class="w-fit" default="owner">
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 
@@ -41,12 +41,12 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"p@example.com"</p>
                         </div>
 
-                        <Select>
-                            <SelectItem value="empty">"Empty"</SelectItem>
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                        <Select class="w-fit">
+                            <SelectOption value="empty">"Empty"</SelectOption>
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 
@@ -61,11 +61,11 @@ pub fn TeamMembers() -> impl IntoView {
                             <p class="text-sm text-(--muted-foreground)">"i@example.com"</p>
                         </div>
 
-                        <Select default="viewer">
-                            <SelectItem value="viewer">"Viewer"</SelectItem>
-                            <SelectItem value="developer">"Developer"</SelectItem>
-                            <SelectItem value="billing">"Billing"</SelectItem>
-                            <SelectItem value="owner">"Owner"</SelectItem>
+                        <Select class="w-fit" default="viewer">
+                            <SelectOption value="viewer">"Viewer"</SelectOption>
+                            <SelectOption value="developer">"Developer"</SelectOption>
+                            <SelectOption value="billing">"Billing"</SelectOption>
+                            <SelectOption value="owner">"Owner"</SelectOption>
                         </Select>
                     </li>
 

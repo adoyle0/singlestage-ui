@@ -1,0 +1,24 @@
+@layer components {
+  .singlestage-breadcrumb-list {
+    @apply flex
+    flex-wrap
+    items-center
+    wrap-break-word;
+  }
+
+  .singlestage-breadcrumb-item {
+    @apply inline-flex
+    items-center;
+  }
+
+  .singlestage-breadcrumb-page {
+    @apply font-normal
+    text-foreground;
+  }
+
+  .singlestage-breadcrumb-ellipsis {
+    @apply flex
+    items-center
+    justify-center;
+  }
+}

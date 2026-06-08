@@ -1,0 +1,16 @@
+@layer components {
+  .singlestage-separator {
+    @apply bg-border
+    shrink-0;
+  }
+
+  .singlestage-separator-horizontal {
+    @apply h-px
+    w-full;
+  }
+
+  .singlestage-separator-vertical {
+    @apply self-stretch
+    w-px;
+  }
+}

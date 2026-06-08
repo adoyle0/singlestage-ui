@@ -4,29 +4,19 @@ use singlestage::*;
 #[component]
 pub fn FieldSelectExample() -> impl IntoView {
     view! {
-        <div class="w-full max-w-md">
-            <FieldSet>
-                <FieldGroup>
-                    <Field>
-                        <FieldLabel>"Department"</FieldLabel>
-                        <Select placeholder="Choose department">
-                            <SelectContent>
-                                <SelectItem value="engineering">"Engineering"</SelectItem>
-                                <SelectItem value="design">"Design"</SelectItem>
-                                <SelectItem value="marketing">"Marketing"</SelectItem>
-                                <SelectItem value="sales">"Sales"</SelectItem>
-                                <SelectItem value="support">"Customer Support"</SelectItem>
-                                <SelectItem value="hr">"Human Resources"</SelectItem>
-                                <SelectItem value="finance">"Finance"</SelectItem>
-                                <SelectItem value="operations">"Operations"</SelectItem>
-                            </SelectContent>
-                        </Select>
-                        <FieldDescription>
-                            "Select your department or area of work."
-                        </FieldDescription>
-                    </Field>
-                </FieldGroup>
-            </FieldSet>
-        </div>
+        <Field class="w-full max-w-xs">
+            <FieldLabel>"Department"</FieldLabel>
+            <Select placeholder="Choose department">
+                <SelectOption value="engineering">"Engineering"</SelectOption>
+                <SelectOption value="design">"Design"</SelectOption>
+                <SelectOption value="marketing">"Marketing"</SelectOption>
+                <SelectOption value="sales">"Sales"</SelectOption>
+                <SelectOption value="support">"Customer Support"</SelectOption>
+                <SelectOption value="hr">"Human Resources"</SelectOption>
+                <SelectOption value="finance">"Finance"</SelectOption>
+                <SelectOption value="operations">"Operations"</SelectOption>
+            </Select>
+            <FieldDescription>"Select your department or area of work."</FieldDescription>
+        </Field>
     }
 }

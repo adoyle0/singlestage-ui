@@ -1,0 +1,81 @@
+@layer components {
+  .singlestage-accordion {
+    @apply flex
+    flex-col
+    w-full;
+  }
+
+  .singlestage-accordion-item {
+    &::details-content {
+      block-size: 0;
+      @apply block
+      opacity-0
+      transition-all
+      transition-discrete;
+    }
+
+    &[open]::details-content {
+      block-size: auto;
+      block-size: calc-size(auto, size);
+      @apply opacity-100;
+    }
+
+    &[open] {
+      svg {
+        @apply rotate-180;
+      }
+    }
+  }
+
+  .singlestage-accordion-trigger {
+    @apply border
+    border-transparent
+    items-start
+    list-none
+    outline-none
+    relative
+    transition-all
+    transition-discrete;
+
+    &:disabled {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    /* Safari */
+    &::-webkit-details-marker {
+      @apply hidden;
+    }
+
+    > h3 {
+      @apply flex
+      flex-1
+      justify-between
+      pointer-events-none;
+
+      > svg {
+        @apply duration-150
+        transition-transform;
+      }
+    }
+  }
+
+  .singlestage-accordion-content {
+    @apply overflow-hidden;
+  }
+
+  .singlestage-accordion-content-inner {
+    a {
+      @apply underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+
+    p:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+}

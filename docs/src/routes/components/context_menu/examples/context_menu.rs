@@ -41,16 +41,16 @@ pub fn ContextMenuExample() -> impl IntoView {
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
-                    <CheckboxItem checked=true>"Show Bookmarks"</CheckboxItem>
-                    <CheckboxItem>"Show Full URLs"</CheckboxItem>
+                    <ContextMenuCheckboxItem checked=true>"Show Bookmarks"</ContextMenuCheckboxItem>
+                    <ContextMenuCheckboxItem>"Show Full URLs"</ContextMenuCheckboxItem>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
-                    <RadioGroup value="pedro">
+                    <ContextMenuRadioGroup value="pedro">
                         <ContextMenuLabel>"People"</ContextMenuLabel>
-                        <RadioItem value="pedro">"Pedro Duarte"</RadioItem>
-                        <RadioItem value="colm">"Colm Tuite"</RadioItem>
-                    </RadioGroup>
+                        <ContextMenuRadioItem value="pedro">"Pedro Duarte"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="colm">"Colm Tuite"</ContextMenuRadioItem>
+                    </ContextMenuRadioGroup>
                 </ContextMenuGroup>
             </ContextMenuContent>
         </ContextMenu>

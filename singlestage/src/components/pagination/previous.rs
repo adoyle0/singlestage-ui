@@ -1,9 +1,10 @@
+use crate::PaginationLink;
 use leptos::prelude::*;
 
 /// A pagination previous button
 #[component]
 pub fn PaginationPrevious(
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
 
     // A ATTRIBUTES
     //
@@ -138,12 +139,25 @@ pub fn PaginationPrevious(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let a_attrs = view! {
+        <{..}
+            download=move || download.get()
+            href=move || href.get()
+            hreflang=move || hreflang.get()
+            type=move || mimetype.get()
+            ping=move || ping.get()
+            referrerpolicy=move || referrerpolicy.get()
+            rel=move || rel.get()
+            target=move || target.get()
+        />
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -178,44 +192,36 @@ pub fn PaginationPrevious(
         />
     };
 
-    let a_attrs = view! {
-        <{..}
-            download=move || download.get()
-            href=move || href.get()
-            hreflang=move || hreflang.get()
-            type=move || mimetype.get()
-            ping=move || ping.get()
-            referrerpolicy=move || referrerpolicy.get()
-            rel=move || rel.get()
-            target=move || target.get()
-        />
-    };
-
     view! {
-        <a {..a_attrs}>
-            <button
-                class=move || {
-                    format!("singlestage-btn-ghost {}", class.get().unwrap_or_default())
-                }
+        <PaginationLink
+            aria_label="Go to previous page"
+            size="default"
 
-                {..global_attrs_1}
-                {..global_attrs_2}
+            {..a_attrs}
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-left-icon lucide-chevron-left"
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="m15 18-6-6 6-6" />
-                </svg>
-                {children()}
-            </button>
-        </a>
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span class="singlestage-pagination-previous-text">
+                {if let Some(children) = children {
+                    children().into_any()
+                } else {
+                    "Previous".into_any()
+                }}
+            </span>
+        </PaginationLink>
     }
 }

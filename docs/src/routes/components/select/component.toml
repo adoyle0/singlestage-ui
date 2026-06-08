@@ -14,6 +14,26 @@ name = "select default"
 title = "Default"
 description = "Set a default value to be pre-selected."
 
+[[examples]]
+name = "select groups"
+title = "Groups"
+description = "Use SelectOptGroup to organize options into categories."
+
+[[examples]]
+name = "select disabled"
+title = "Disabled"
+description = "Set the disabled prop on the Select component to disable the select."
+
+[[examples]]
+name = "select invalid"
+title = "Invalid"
+description = "Set the invalid prop on the Select component to toggle invalid styling."
+
+[[examples]]
+name = "select multiple"
+title = "Multiple"
+description = "Multiple select is supported."
+
 [[references]]
 name = "Select"
 description = "Contains all the parts of the Select."
@@ -29,12 +49,12 @@ attrs = [
     appearance and behavior.""" },
   { attr = "placeholder", attr_type = "String", default = """""""", description = """Sets a \
     placeholder value displayed on initial load. Setting default will override this value.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
-    reactive value coupled to the currently selected item's value.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive value \
+    coupled to the currently selected item's value.""" },
 ]
 
 [[references]]
-name = "SelectContent"
+name = "SelectOptGroup"
 description = "Contains a group of items for the Select."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -44,7 +64,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "SelectItem"
+name = "SelectOption"
 description = "Contains an item with a value to be selected."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

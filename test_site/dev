@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case $1 in
+    csr)
+        trunk serve --features csr
+        ;;
+    ssr)
+        LEPTOS_SITE_ADDR="0.0.0.0:3000" cargo leptos watch
+        ;;
+    native)
+        # Hacks for nvidia on wayland
+        # https://github.com/tauri-apps/tauri/issues/10702#issuecomment-2935208923
+        if [ "$(lsmod | grep nvidia)" != "" ]; then
+            __NV_DISABLE_EXPLICIT_SYNC=1 cargo tauri dev
+        else
+            cargo tauri dev
+        fi
+        ;;
+    android)
+        cargo tauri android dev
+        ;;
+    *)
+        echo "Invalid command"
+        ;;
+esac

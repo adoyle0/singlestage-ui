@@ -152,8 +152,12 @@ pub fn SidebarContent(
 
     view! {
         <section
-            id="sidebar-content"
-            class=move || { format!("singlestage-scrollbar {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-sidebar-content singlestage-scrollbar {}",
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

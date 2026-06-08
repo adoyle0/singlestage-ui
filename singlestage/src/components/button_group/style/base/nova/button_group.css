@@ -1,0 +1,37 @@
+@layer components2 {
+  .singlestage-button-group {
+    /* TODO: revisit selects */
+    /* @apply has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg; */
+
+    &:has(> .singlestage-button-group) {
+      @apply gap-2;
+    }
+  }
+
+  /* Potentially useless */
+  /* .singlestage-button-group-orientation-horizontal { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-lg!; */
+  /* } */
+  /**/
+  /* .singlestage-button-group-orientation-vertical { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg!; */
+  /* } */
+
+  .singlestage-button-group-text {
+    @apply bg-muted
+    border
+    font-medium
+    gap-2
+    px-2.5
+    rounded-lg
+    text-sm;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input;
+  }
+}

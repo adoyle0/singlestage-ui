@@ -1,0 +1,55 @@
+@layer components {
+  .singlestage-empty {
+    @apply flex
+    flex-1
+    flex-col
+    items-center
+    justify-center
+    min-w-0
+    text-balance
+    text-center
+    w-full;
+  }
+
+  .singlestage-empty-header {
+    @apply flex
+    flex-col
+    items-center
+    max-w-sm;
+  }
+
+  .singlestage-empty-media {
+    @apply flex
+    items-center
+    justify-center
+    shrink-0;
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
+  }
+
+  .singlestage-empty-description {
+    @apply text-muted-foreground;
+
+    > a {
+      @apply underline
+      underline-offset-4;
+
+      &:hover {
+        @apply text-primary;
+      }
+    }
+  }
+
+  .singlestage-empty-content {
+    @apply flex
+    flex-col
+    items-center
+    max-w-sm
+    min-w-0
+    text-balance
+    w-full;
+  }
+}

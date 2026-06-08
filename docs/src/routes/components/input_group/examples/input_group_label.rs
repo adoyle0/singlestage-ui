@@ -17,15 +17,20 @@ pub fn InputGroupLabelExample() -> impl IntoView {
                     <Label label_for="email-2" class="text-(--foreground)">
                         "Email"
                     </Label>
-                    <Tooltip class="ml-auto" value="We'll use this to send you notifications">
-                        <Button
-                            variant="ghost"
-                            aria_label="Help"
-                            class="rounded-full"
-                            size="icon-xs"
-                        >
-                            {icon!(icondata::LuInfo)}
-                        </Button>
+                    <Tooltip class="ml-auto">
+                        <TooltipTrigger>
+                            <Button
+                                variant="ghost"
+                                aria_label="Help"
+                                class="rounded-full"
+                                size="icon-xs"
+                            >
+                                {icon!(icondata::LuInfo)}
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>"We'll use this to send you notifications"</p>
+                        </TooltipContent>
                     </Tooltip>
                 </InputGroupAddon>
             </InputGroup>

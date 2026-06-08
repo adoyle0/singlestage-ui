@@ -1,3 +1,5 @@
+// TODO: This should probably just be a context provider for a Button
+
 use crate::sidebar::*;
 use leptos::prelude::*;
 
@@ -155,7 +157,7 @@ pub fn SidebarTrigger(
 
     view! {
         <div
-            on:click=move |_| { sidebar.hidden.set(!sidebar.hidden.get_untracked()) }
+            on:click=move |_| { sidebar.open.set(!sidebar.open.get_untracked()) }
 
             {..global_attrs_1}
             {..global_attrs_2}

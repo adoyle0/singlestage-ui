@@ -1,0 +1,47 @@
+@layer components1 {
+  .singlestage-checkbox {
+    @apply bg-transparent
+    border
+    border-input
+    flex
+    items-center
+    justify-center
+    rounded-none
+    size-4.5
+    transition-shadow;
+
+    &:checked {
+      @apply bg-primary
+      border-primary;
+
+      &:after {
+        @apply bg-primary-foreground
+        size-3.5;
+      }
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-2
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-2
+      ring-destructive/20;
+
+      &:checked {
+        @apply border-primary;
+      }
+    }
+  }
+
+  .singlestage-field:has(*:disabled),
+  .singlestage-field:has(*[aria-disabled="true"]) {
+    .singlestage-checkbox {
+      @apply opacity-50;
+    }
+  }
+}

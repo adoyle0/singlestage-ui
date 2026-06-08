@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer components {
+  .singlestage-ulist {
+    @apply list-disc
+    ml-6
+    my-6;
+  }
+
+  .singlestage-olist {
+    @apply list-decimal
+    ml-6
+    my-6;
+  }
+}

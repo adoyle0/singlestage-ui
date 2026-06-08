@@ -1,11 +1,11 @@
 use leptos::prelude::*;
-use singlestage::aspect_ratio::*;
+use singlestage::*;
 
 #[component]
 pub fn AspectRatioExample() -> impl IntoView {
     view! {
-        <div class="w-[300px]">
-            <AspectRatio ratio=16. / 9.>
+        <div class="w-full max-w-sm">
+            <AspectRatio ratio="16 / 9">
                 <img
                     src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
                     alt="Photo by Drew Beamer"

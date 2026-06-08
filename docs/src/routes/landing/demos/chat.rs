@@ -5,23 +5,31 @@ use singlestage::*;
 pub fn ChatDemo() -> impl IntoView {
     view! {
         <Card>
-            <CardHeader class="flex items-center gap-4">
-                <Avatar class="size-10">
-                    <AvatarImage src="/avatar-1.png" />
-                </Avatar>
+            <CardHeader>
+                <div class="flex items-center gap-4">
+                    <Avatar class="size-10">
+                        <AvatarImage src="/avatar-1.png" />
+                        <AvatarFallback>"SD"</AvatarFallback>
+                    </Avatar>
 
-                <div class="flex flex-col gap-1 mr-auto">
-                    <p class="text-sm font-semibold leading-none text-(--card-foreground)">
-                        "Sofia Davis"
-                    </p>
-                    <p class="text-sm">"m@example.com"</p>
+                    <div class="flex flex-col gap-1 mr-auto">
+                        <p class="text-sm font-semibold leading-none text-(--card-foreground)">
+                            "Sofia Davis"
+                        </p>
+                        <p class="text-sm">"m@example.com"</p>
+                    </div>
+
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Button class="rounded-full" size="icon" variant="outline">
+                                {icon!(icondata::LuPlus)}
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>"New message"</p>
+                        </TooltipContent>
+                    </Tooltip>
                 </div>
-
-                <Tooltip value="New message">
-                    <Button class="rounded-full" size="icon" variant="outline">
-                        {icon!(icondata::LuPlus)}
-                    </Button>
-                </Tooltip>
             </CardHeader>
 
             <CardContent>

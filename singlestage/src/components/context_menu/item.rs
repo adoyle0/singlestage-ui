@@ -1,11 +1,12 @@
-use crate::{ContextMenuContext, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Contains a menu item.
+/// Contains a context menu item.
 #[component]
 pub fn ContextMenuItem(
     children: Children,
 
+    #[prop(optional, into)] as_child: MaybeProp<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,
@@ -129,13 +130,12 @@ pub fn ContextMenuItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<ContextMenuContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -170,38 +170,22 @@ pub fn ContextMenuItem(
     };
 
     view! {
-        <li
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-dropdown-menu-item-destructive",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            role="menuitem"
-            value=move || value.get()
+        <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::Item
+
+            as_child
+            class
+            disabled
+            dismiss
+            id
+            inset
+            variant
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <button
-                aria_controls=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
-                aria_haspopup=move || if dismiss.get() { Some("menu") } else { None }
-                popovertarget=move || if dismiss.get() { Some(menu.menu_id.get()) } else { None }
-                popovertargetaction=move || if dismiss.get() { Some("toggle") } else { None }
-                type="button"
-            >
-                {children()}
-            </button>
-        </li>
+            {children()}
+        </MenuItemPrimitive>
     }
 }

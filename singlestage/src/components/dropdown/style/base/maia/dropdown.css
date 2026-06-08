@@ -1,0 +1,123 @@
+@layer components1 {
+  .singlestage-dropdown-menu-content {
+    @apply bg-popover
+    min-w-48
+    p-1
+    ring-1
+    ring-foreground/5
+    rounded-2xl
+    shadow-2xl
+    text-popover-foreground;
+  }
+
+  .singlestage-dropdown-menu-item {
+    > button,
+    > label {
+      @apply gap-2.5
+      rounded-xl
+      px-3
+      py-2
+      text-sm;
+
+      &:focus,
+      &:hover {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+
+      &.singlestage-dropdown-menu-inset {
+        @apply pl-9.5;
+      }
+
+      svg:not([class*="size-"]) {
+        @apply size-4;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-item-variant-destructive {
+    > button,
+    > label {
+      @apply text-destructive;
+
+      &:focus,
+      &:hover {
+        @apply bg-destructive/10
+        text-destructive;
+      }
+
+      svg {
+        @apply text-destructive;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-label {
+    @apply px-3
+    py-2.5
+    text-muted-foreground
+    text-xs;
+
+    &.singlestage-dropdown-menu-inset {
+      @apply pl-9.5;
+    }
+  }
+
+  .singlestage-dropdown-menu-separator {
+    @apply -mx-1
+    bg-border/50
+    h-px
+    my-1;
+  }
+
+  .singlestage-dropdown-menu-shortcut {
+    @apply ml-auto
+    text-muted-foreground
+    text-xs
+    tracking-widest;
+  }
+
+  .singlestage-dropdown-menu-sub-trigger {
+    > button,
+    > label {
+      @apply gap-2
+      px-3
+      py-2
+      rounded-xl
+      text-sm;
+
+      &:focus,
+      &:hover {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+
+      &.singlestage-dropdown-menu-inset {
+        @apply pl-9.5;
+      }
+
+      svg:not([class*="size-"]) {
+        @apply size-4;
+      }
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      > button {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-sub-content {
+    @apply bg-popover
+    min-w-36
+    p-1
+    ring-1
+    ring-foreground/5
+    rounded-2xl
+    shadow-2xl
+    text-popover-foreground;
+  }
+}

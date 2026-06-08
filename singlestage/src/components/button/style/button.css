@@ -1,0 +1,22 @@
+@layer components {
+  .singlestage-button {
+    @apply inline-flex
+    items-center
+    justify-center
+    outline-none
+    select-none
+    shrink-0
+    transition-all
+    whitespace-nowrap;
+
+    &:disabled {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
+  }
+}

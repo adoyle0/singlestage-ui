@@ -1,7 +1,7 @@
-use crate::DialogContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
-/// The title of the dialog.
+/// A title describing dialog content.
 #[component]
 pub fn DialogTitle(
     children: Children,
@@ -111,17 +111,11 @@ pub fn DialogTitle(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog = expect_context::<DialogContext>();
-
-    let uuid: String = uuid::Uuid::new_v4().to_string();
-    dialog.labeled_by.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -157,8 +151,13 @@ pub fn DialogTitle(
     };
 
     view! {
-        <h2 {..global_attrs_1} {..global_attrs_2} id=uuid>
+        <DialogTitlePrimitive
+            class
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
-        </h2>
+        </DialogTitlePrimitive>
     }
 }

@@ -1,0 +1,49 @@
+@layer components1 {
+  .singlestage-select {
+    @apply appearance-none
+    bg-transparent
+    border
+    border-b-input
+    border-transparent
+    h-10
+    min-w-0
+    pl-0
+    pr-8
+    py-2
+    rounded-none
+    select-none
+    text-sm
+    transition-[color,border-color]
+    w-full;
+
+    &:focus-visible {
+      @apply border-b-ring;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-b-destructive;
+    }
+
+    &::selection {
+      @apply bg-primary
+      text-primary-foreground;
+    }
+  }
+
+  .singlestage-select-placeholder {
+    @apply text-muted-foreground;
+  }
+
+  .singlestage-select-size-sm {
+    @apply h-9;
+  }
+
+  .singlestage-select-icon {
+    @apply -translate-y-1/2
+    right-0
+    size-3.5
+    text-muted-foreground
+    top-1/2;
+  }
+}

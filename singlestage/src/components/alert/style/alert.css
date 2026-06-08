@@ -1,0 +1,32 @@
+@layer components {
+  .singlestage-alert {
+    @apply relative
+    w-full;
+  }
+
+  .singlestage-alert-title {
+    a {
+      @apply underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+  }
+
+  .singlestage-alert-description {
+    @apply md:text-pretty
+    text-balance
+    text-muted-foreground;
+
+    a {
+      @apply underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+  }
+}

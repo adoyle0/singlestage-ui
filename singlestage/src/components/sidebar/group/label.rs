@@ -1,3 +1,5 @@
+// TODO: Make generic with label primitive
+
 use crate::sidebar::*;
 use leptos::prelude::*;
 
@@ -113,15 +115,15 @@ pub fn SidebarGroupLabel(
 ) -> impl IntoView {
     let group = expect_context::<SidebarGroupContext>();
 
-    let uuid: String = uuid::Uuid::new_v4().to_string();
-    group.label_id.set(uuid.clone());
+    let uuid = uuid::Uuid::new_v4();
+    group.label_id.set(uuid.to_string());
 
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -157,7 +159,15 @@ pub fn SidebarGroupLabel(
     };
 
     view! {
-        <h3 {..global_attrs_1} {..global_attrs_2} id=uuid>
+        <h3
+            class=move || {
+                format!("singlestage-sidebar-group-label {}", class.get().unwrap_or_default())
+            }
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+            id=uuid.to_string()
+        >
             {children()}
         </h3>
     }

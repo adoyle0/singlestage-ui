@@ -4,6 +4,14 @@ description = "Displays content within a desired ratio."
 [[examples]]
 name = "Aspect Ratio"
 
+[[examples]]
+name = "Aspect Ratio square"
+title = "Square"
+
+[[examples]]
+name = "Aspect Ratio portrait"
+title = "Portrait"
+
 [[references]]
 name = "AspectRatio"
 description = "Contains the contents of an aspect ratio component."

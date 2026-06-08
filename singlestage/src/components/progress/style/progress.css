@@ -1,0 +1,16 @@
+@layer components {
+  .singlestage-progress {
+    @apply w-full;
+  }
+
+  /* Animate, but it only works for webkit for now */
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-progress {
+      /* Indicator */
+      &::-moz-progress-bar,
+      &::-webkit-progress-value {
+        @apply transition-all;
+      }
+    }
+  }
+}

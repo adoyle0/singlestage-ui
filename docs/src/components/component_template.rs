@@ -66,12 +66,14 @@ pub fn Example(
             } else {
                 "".into_any()
             }} <Tabs class="my-4">
-                <TabsList>
-                    <TabsTrigger value="preview">"Preview"</TabsTrigger>
-                    <TabsTrigger value="code">"Code"</TabsTrigger>
+                <TabsList variant="line">
+                    <TabsTrigger value="preview">
+                        {icon!(icondata::LuAppWindow)} "Preview"
+                    </TabsTrigger>
+                    <TabsTrigger value="code">{icon!(icondata::LuCode)} "Code"</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="preview">
+                <TabsContent class="pt-2" value="preview">
                     {if empty_backround {
                         view! {
                             <div class="h-[450px] border border-(--muted) rounded-md">{view}</div>
@@ -87,7 +89,7 @@ pub fn Example(
                     }}
                 </TabsContent>
 
-                <TabsContent value="code">
+                <TabsContent class="pt-2" value="code">
                     <CodeBlock code=code />
                 </TabsContent>
             </Tabs>

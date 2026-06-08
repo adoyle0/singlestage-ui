@@ -1,0 +1,225 @@
+@layer components2 {
+  .singlestage-input-group-addon {
+    @apply font-medium
+    gap-2
+    h-auto
+    py-1.5
+    text-muted-foreground
+    text-xs;
+
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *) {
+      @apply opacity-50;
+    }
+
+    > kbd {
+      @apply rounded-none;
+    }
+
+    > svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-input-group-addon-align-inline-start {
+    @apply pl-2;
+
+    &:has(> button) {
+      @apply ml-[-0.3rem];
+    }
+
+    &:has(> kbd) {
+      @apply ml-[-0.15rem];
+    }
+  }
+
+  .singlestage-input-group-addon-align-inline-end {
+    @apply pr-2;
+
+    &:has(> button) {
+      @apply mr-[-0.3rem];
+    }
+
+    &:has(> kbd) {
+      @apply mr-[-0.15rem];
+    }
+  }
+
+  .singlestage-input-group-addon-align-block-start {
+    @apply pt-2
+    px-2.5;
+
+    &.border-b {
+      @apply pb-2;
+    }
+  }
+
+  .singlestage-input-group-addon-align-block-end {
+    @apply pb-2
+    px-2.5;
+
+    &.border-t {
+      @apply pt-2;
+    }
+  }
+
+  .singlestage-input-group-button {
+    @apply gap-2
+    text-xs;
+  }
+
+  .singlestage-input-group-button-size-xs {
+    @apply gap-1
+    h-6
+    px-1.5
+    rounded-none;
+
+    > svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-input-group-button-size-icon-xs {
+    @apply p-0
+    rounded-none
+    size-6;
+
+    &:has(> svg) {
+      @apply p-0;
+    }
+  }
+
+  .singlestage-input-group-button-size-sm {
+    @apply gap-1;
+  }
+
+  .singlestage-input-group-button-size-icon-sm {
+    @apply p-0
+    size-7;
+
+    &:has(> svg) {
+      @apply p-0;
+    }
+  }
+
+  .singlestage-input-group-text {
+    @apply gap-2
+    text-muted-foreground
+    text-xs;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-input-group-input {
+    @apply bg-transparent
+    border-0
+    ring-0
+    rounded-none
+    shadow-none;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-transparent;
+    }
+
+    &:focus-visible,
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply ring-0;
+    }
+  }
+
+  .singlestage-input-group-textarea {
+    @apply bg-transparent
+    border-0
+    py-2
+    ring-0
+    rounded-none
+    shadow-none;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-transparent;
+    }
+
+    &:focus-visible,
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply ring-0;
+    }
+  }
+
+  .singlestage-input-group {
+    @apply border
+    border-input
+    h-8
+    rounded-none
+    transition-colors;
+
+    &:has(> .singlestage-input-group-addon-align-block-end) {
+      @apply flex-col
+      h-auto;
+
+      & > input {
+        @apply pt-3;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-block-start) {
+      @apply flex-col
+      h-auto;
+
+      & > input {
+        @apply pb-3;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-inline-end) {
+      & > input {
+        @apply pr-1.5;
+      }
+    }
+
+    &:has(> .singlestage-input-group-addon-align-inline-start) {
+      & > input {
+        @apply pl-1.5;
+      }
+    }
+
+    &:has(.singlestage-input-group-control:focus-visible) {
+      @apply border-ring
+      ring-1
+      ring-ring/50;
+    }
+
+    &:has(*:invalid, *[aria-invalid="true"]) {
+      @apply border-destructive
+      ring-1
+      ring-destructive/20;
+    }
+
+    &:has(*:disabled, *[aria-disabled="true"]) {
+      @apply bg-input/50
+      opacity-50;
+    }
+
+    &:has(> input) {
+      .singlestage-input-group-addon-align-block-start {
+        @apply pt-2;
+      }
+
+      .singlestage-input-group-addon-align-block-end {
+        @apply pb-2;
+      }
+    }
+  }
+
+  .singlestage-combobox-content {
+    .singlestage-input-group:focus-within {
+      @apply border-inherit
+      ring-0;
+    }
+  }
+}

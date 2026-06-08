@@ -83,7 +83,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "PopoverTrigger"
+name = "Trigger"
 description = "Provides context to a `Button` that triggers a popover.."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

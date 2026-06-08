@@ -1,7 +1,7 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
-/// Used to wrap other elements and trigger the dialog on click.
-#[slot]
-pub struct DialogTrigger {
-    children: ChildrenFn,
+#[component]
+pub fn DialogTrigger(children: Children) -> impl IntoView {
+    view! { <TriggerPrimitive>{children()}</TriggerPrimitive> }
 }

@@ -1,0 +1,38 @@
+@layer components1 {
+  .singlestage-input {
+    @apply bg-transparent
+    border
+    border-input
+    h-8
+    md:text-xs
+    px-2.5
+    py-1
+    rounded-none
+    text-xs
+    transition-colors;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/50;
+    }
+
+    &[type="file"] {
+      @apply font-medium
+      h-6
+      text-xs;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-1
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-1
+      ring-destructive/20;
+    }
+  }
+}

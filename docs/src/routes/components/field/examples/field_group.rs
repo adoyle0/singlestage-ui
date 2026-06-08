@@ -4,39 +4,48 @@ use singlestage::*;
 #[component]
 pub fn FieldGroupExample() -> impl IntoView {
     view! {
-        <div class="w-full max-w-md">
-            <FieldGroup>
-                <FieldSet class="gap-3">
-                    <FieldLegend variant="label">"Responses"</FieldLegend>
-                    <FieldDescription>
-                        "Get notified when ChatGPT responds to requests that take time, like
-                        research or image generation."
-                    </FieldDescription>
-                    <Field orientation="horizontal">
-                        <Checkbox checked=true class="font-normal" disabled=true>
-                            "Push notifications"
-                        </Checkbox>
-                    </Field>
-                </FieldSet>
-                <FieldSeparator />
-                <FieldSet>
-                    <FieldLegend variant="label">"Tasks"</FieldLegend>
-                    <FieldDescription>
-                        "Get notified when tasks you've created have updates. "
-                        <a href="#">"Manage tasks"</a>
-                    </FieldDescription>
-                    <FieldGroup>
-                        <CheckboxGroup>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Push notifications"</Checkbox>
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Email notifications"</Checkbox>
-                            </Field>
-                        </CheckboxGroup>
-                    </FieldGroup>
-                </FieldSet>
-            </FieldGroup>
-        </div>
+        <FieldGroup class="w-full max-w-xs">
+            <FieldSet>
+                <FieldLabel>"Responses"</FieldLabel>
+                <FieldDescription>
+                    "Get notified when ChatGPT responds to requests that take time, like
+                    research or image generation."
+                </FieldDescription>
+                <FieldGroup>
+                    <CheckboxGroup>
+                        <Field orientation="horizontal">
+                            <Checkbox id="push" checked=true disabled=true />
+                            <FieldLabel label_for="push" class="font-normal">
+                                "Push notifications"
+                            </FieldLabel>
+                        </Field>
+                    </CheckboxGroup>
+                </FieldGroup>
+            </FieldSet>
+            <FieldSeparator />
+            <FieldSet>
+                <FieldLabel>"Tasks"</FieldLabel>
+                <FieldDescription>
+                    "Get notified when tasks you've created have updates. "
+                    <a href="#">"Manage tasks"</a>
+                </FieldDescription>
+                <FieldGroup>
+                    <CheckboxGroup>
+                        <Field orientation="horizontal">
+                            <Checkbox id="push-tasks" />
+                            <FieldLabel label_for="push-tasks" class="font-normal">
+                                "Push notifications"
+                            </FieldLabel>
+                        </Field>
+                        <Field orientation="horizontal">
+                            <Checkbox id="email-tasks" />
+                            <FieldLabel label_for="email-tasks" class="font-normal">
+                                "Email notifications"
+                            </FieldLabel>
+                        </Field>
+                    </CheckboxGroup>
+                </FieldGroup>
+            </FieldSet>
+        </FieldGroup>
     }
 }

@@ -8,18 +8,16 @@ title = "Toggle"
 [[examples]]
 name = "Toggle Outline"
 title = "Outline"
+description = "Use the outline variant for an outline style."
 
 [[examples]]
 name = "Toggle With Text"
 title = "With Text"
 
 [[examples]]
-name = "Toggle Small"
-title = "Small"
-
-[[examples]]
-name = "Toggle Large"
-title = "Large"
+name = "toggle size"
+title = "Size"
+description = "Use the size prop to change the size of the toggle."
 
 [[examples]]
 name = "Toggle Disabled"
@@ -34,10 +32,10 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
 attributes."""
 attrs = [
+  { attr = "pressed", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the toggle's pressed state.""" },
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
     render the toggle.""" },
-  { attr = "pressed", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal coupled to the toggle's pressed state.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Specify \
     the style of toggle to render.""" },
 ]

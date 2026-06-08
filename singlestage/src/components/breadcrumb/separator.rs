@@ -92,9 +92,6 @@ pub fn BreadcrumbSeparator(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    /// Define the semantic meaning of content.
-    #[prop(optional, into)]
-    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -121,7 +118,6 @@ pub fn BreadcrumbSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -146,7 +142,6 @@ pub fn BreadcrumbSeparator(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -155,43 +150,39 @@ pub fn BreadcrumbSeparator(
             translate=move || translate.get()
         />
     };
+    view! {
+        <li
+            aria_hidden="true"
+            class=move || {
+                format!("singlestage-breadcrumb-separator {}", class.get().unwrap_or_default())
+            }
+            role="presentation"
+            value=move || value.get()
 
-    if let Some(children) = children {
-        view! {
-            <li
-                value=move || value.get()
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                {children()}
-            </li>
-        }
-        .into_any()
-    } else {
-        view! {
-            <li
-                value=move || value.get()
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="size-3.5"
-                >
-                    <path d="m9 18 6-6-6-6" />
-                </svg>
-            </li>
-        }
-        .into_any()
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {if let Some(children) = children {
+                children()
+            } else {
+                view! {
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-chevron-right-icon lucide-chevron-right"
+                    >
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                }
+                    .into_any()
+            }}
+        </li>
     }
 }

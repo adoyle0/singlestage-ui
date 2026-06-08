@@ -1,9 +1,14 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Visual divider to separate sections inside a FieldGroup. Accepts optional inline content.
+/// The separator.
 #[component]
 pub fn FieldSeparator(
     #[prop(optional)] children: Option<Children>,
+
+    /// Toggle whether or not the separator should display vertically.
+    #[prop(optional, into)]
+    vertical: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -150,27 +155,39 @@ pub fn FieldSeparator(
     };
 
     view! {
-        <div class="singlestage-field-separator-outer">
-            <div class="singlestage-field-separator"></div>
+        <div class="singlestage-field-separator">
             {if let Some(children) = children {
                 view! {
-                    <span
-                        class=move || {
-                            format!(
-                                "singlestage-field-separator-content {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
+                    <Separator
+                        class="singlestage-field-separator-inner"
+                        vertical
 
                         {..global_attrs_1}
                         {..global_attrs_2}
                     >
-                        {children()}
-                    </span>
+                        <span class=format!(
+                            "singlestage-field-separator-content {}",
+                            class.get().unwrap_or_default(),
+                        )>{children()}</span>
+                    </Separator>
                 }
                     .into_any()
             } else {
-                "".into_any()
+
+                view! {
+                    <Separator
+                        class=format!(
+                            "singlestage-field-separator-inner {}",
+                            class.get().unwrap_or_default(),
+                        )
+
+                        vertical
+
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                }
+                    .into_any()
             }}
         </div>
     }

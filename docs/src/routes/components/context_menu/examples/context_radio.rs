@@ -15,19 +15,19 @@ pub fn ContextRadioExample() -> impl IntoView {
             <ContextMenuContent>
                 <ContextMenuGroup>
                     <ContextMenuLabel>"People"</ContextMenuLabel>
-                    <RadioGroup value=user>
-                        <RadioItem value="pedro">"Pedro Duarte"</RadioItem>
-                        <RadioItem value="colm">"Colm Tuite"</RadioItem>
-                    </RadioGroup>
+                    <ContextMenuRadioGroup value=user>
+                        <ContextMenuRadioItem value="pedro">"Pedro Duarte"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="colm">"Colm Tuite"</ContextMenuRadioItem>
+                    </ContextMenuRadioGroup>
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
                     <ContextMenuLabel>"Theme"</ContextMenuLabel>
-                    <RadioGroup value=theme>
-                        <RadioItem value="light">"Light"</RadioItem>
-                        <RadioItem value="dark">"Dark"</RadioItem>
-                        <RadioItem value="system">"System"</RadioItem>
-                    </RadioGroup>
+                    <ContextMenuRadioGroup value=theme>
+                        <ContextMenuRadioItem value="light">"Light"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="dark">"Dark"</ContextMenuRadioItem>
+                        <ContextMenuRadioItem value="system">"System"</ContextMenuRadioItem>
+                    </ContextMenuRadioGroup>
                 </ContextMenuGroup>
             </ContextMenuContent>
         </ContextMenu>

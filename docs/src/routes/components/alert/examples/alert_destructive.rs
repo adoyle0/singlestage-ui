@@ -1,12 +1,16 @@
 use leptos::prelude::*;
-use singlestage::{alert::*, icon};
+use singlestage::*;
 
 #[component]
 pub fn AlertDestructiveExample() -> impl IntoView {
     view! {
-        <Alert variant="destructive">
-            {icon!(icondata::FiAlertCircle)} <AlertTitle>"Something went wrong!"</AlertTitle>
-            <AlertDescription>"Your session has expired. Please log in again."</AlertDescription>
+        <Alert variant="destructive" class="max-w-md">
+            {icon!(icondata::FiAlertCircle)}
+            <AlertTitle>"Payment failed"</AlertTitle>
+            <AlertDescription>
+                "Your payment could not be processed. Please check your payment method
+                and try again."
+            </AlertDescription>
         </Alert>
     }
 }

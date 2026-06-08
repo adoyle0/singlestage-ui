@@ -1,9 +1,16 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Contains content to be rendered in the main body of the dialog.
 #[component]
 pub fn DialogContent(
     children: Children,
+
+    /// Toggles whether or not a close button should appear in the top right corner of the dialog.
+    ///
+    /// Defaults to `true` for `Dialog` and `false` for `AlertDialog`
+    #[prop(optional, into)]
+    close_button: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -115,7 +122,6 @@ pub fn DialogContent(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,8 +157,14 @@ pub fn DialogContent(
     };
 
     view! {
-        <section {..global_attrs_1} {..global_attrs_2}>
+        <DialogContentPrimitive
+            class
+            close_button
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
-        </section>
+        </DialogContentPrimitive>
     }
 }

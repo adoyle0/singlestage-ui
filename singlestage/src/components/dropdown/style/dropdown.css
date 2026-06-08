@@ -1,0 +1,118 @@
+@layer components {
+  .singlestage-dropdown-menu {
+    @apply isolate
+    outline-none
+    z-50;
+  }
+
+  .singlestage-dropdown-menu-content {
+    @apply /* data-closed:overflow-hidden */
+    flex
+    flex-col
+    /* max-h-(--available-height) */
+    /* origin-(--transform-origin) */
+    outline-none
+    overflow-x-hidden
+    overflow-y-auto
+    /* w-(--anchor-width) */
+    z-50;
+  }
+
+  .singlestage-dropdown-menu-item {
+    > button,
+    > label {
+      @apply content-center
+      cursor-default
+      flex
+      h-full
+      items-center
+      outline-hidden
+      relative
+      select-none
+      text-nowrap
+      w-full;
+
+      &:disabled,
+      &[aria-disabled="true"] {
+        @apply opacity-50
+        pointer-events-none;
+      }
+
+      svg {
+        @apply pointer-events-none
+        shrink-0;
+      }
+
+      .singlestage-dropdown-menu-checkbox-item,
+      .singlestage-dropdown-menu-radio-item {
+        @apply ml-auto;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-sub-trigger {
+    > button,
+    > label {
+      @apply content-center
+      cursor-default
+      flex
+      h-full
+      items-center
+      outline-hidden
+      relative
+      select-none
+      text-nowrap
+      w-full;
+
+      svg {
+        @apply pointer-events-none
+        shrink-0;
+      }
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      > button {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-sub-content {
+    @apply w-auto;
+  }
+
+  .singlestage-dropdown-menu-checkbox-item,
+  .singlestage-dropdown-menu-radio-item {
+    @apply appearance-none
+    cursor-default
+    /* flex */
+    /* items-center */
+    outline-hidden
+    /* relative */
+    select-none
+    shrink-0
+    size-4
+    transition-shadow;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    &:checked:after {
+      @apply bg-accent-foreground
+      block
+      content-['']
+      mask-[image:var(--check-icon)]
+      mask-center
+      mask-no-repeat
+      mask-size-[calc(4*var(--spacing))]
+      pointer-events-none
+      shrink-0
+      size-4;
+    }
+  }
+}

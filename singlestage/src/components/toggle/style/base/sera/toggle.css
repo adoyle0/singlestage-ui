@@ -1,0 +1,90 @@
+@layer components1 {
+  .singlestage-toggle {
+    @apply font-semibold
+    gap-1.5
+    rounded-none
+    text-xs
+    tracking-widest
+    transition-colors
+    uppercase;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-ring/30;
+    }
+
+    &:hover {
+      @apply text-foreground;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-destructive/20;
+    }
+
+    &[aria-pressed="true"] {
+      @apply bg-muted;
+    }
+
+    svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-toggle-variant-default {
+    @apply bg-transparent;
+  }
+
+  .singlestage-toggle-variant-outline {
+    @apply bg-transparent
+    border
+    border-input;
+
+    &:hover {
+      @apply bg-muted;
+    }
+  }
+
+  .singlestage-toggle-size-default {
+    @apply h-10
+    min-w-10
+    px-6;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-4;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-4;
+    }
+  }
+
+  .singlestage-toggle-size-sm {
+    @apply h-9
+    min-w-9
+    px-4;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-3;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-3;
+    }
+  }
+
+  .singlestage-toggle-size-lg {
+    @apply h-11
+    min-w-11
+    px-8;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-5;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-5;
+    }
+  }
+}

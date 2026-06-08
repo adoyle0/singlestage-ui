@@ -1,0 +1,132 @@
+@layer components1 {
+  .singlestage-dropdown-menu-content {
+    @apply bg-popover
+    min-w-48
+    p-1.5
+    ring-1
+    ring-foreground/10
+    rounded-none
+    shadow-md
+    text-popover-foreground;
+  }
+
+  .singlestage-dropdown-menu-item {
+    > button,
+    > label {
+      @apply font-medium
+      gap-2.5
+      px-3
+      py-2
+      rounded-none
+      text-xs
+      tracking-wider
+      uppercase;
+
+      &:focus,
+      &:hover {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+
+      &.singlestage-dropdown-menu-inset {
+        @apply pl-9.5;
+      }
+
+      svg:not([class*="size-"]) {
+        @apply size-3.5;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-item-variant-destructive {
+    > button,
+    > label {
+      @apply text-destructive;
+
+      &:focus,
+      &:hover {
+        @apply bg-destructive/10
+        text-destructive;
+      }
+
+      svg {
+        @apply text-destructive;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-label {
+    @apply font-semibold
+    px-3
+    py-2
+    text-muted-foreground
+    text-xs
+    tracking-wider
+    uppercase;
+
+    &.singlestage-dropdown-menu-inset {
+      @apply pl-9.5;
+    }
+  }
+
+  .singlestage-dropdown-menu-separator {
+    @apply -mx-1.5
+    bg-border/50
+    h-px
+    my-1.5;
+  }
+
+  .singlestage-dropdown-menu-shortcut {
+    @apply ml-auto
+    text-muted-foreground
+    text-xs
+    tracking-widest;
+  }
+
+  .singlestage-dropdown-menu-sub-trigger {
+    > button,
+    > label {
+      @apply font-medium
+      gap-2
+      px-3
+      py-2
+      rounded-none
+      text-xs
+      tracking-wider
+      uppercase;
+
+      &:focus,
+      &:hover {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+
+      &.singlestage-dropdown-menu-inset {
+        @apply pl-9.5;
+      }
+
+      svg:not([class*="size-"]) {
+        @apply size-3.5;
+      }
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      > button {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+    }
+  }
+
+  .singlestage-dropdown-menu-sub-content {
+    @apply bg-popover
+    min-w-36
+    p-1.5
+    ring-1
+    ring-foreground/10
+    rounded-none
+    shadow-md
+    text-popover-foreground;
+  }
+}

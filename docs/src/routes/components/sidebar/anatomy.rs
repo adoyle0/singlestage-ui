@@ -17,7 +17,7 @@ pub fn SidebarAnatomy() -> impl IntoView {
                                 </SidebarMenuItem>
                                 <SidebarMenuItem>
                                     <Collapsible>
-                                        <CollapsibleTrigger slot>
+                                        <CollapsibleTrigger>
                                             <SidebarMenuButton />
                                         </CollapsibleTrigger>
                                         <CollapsibleContent>

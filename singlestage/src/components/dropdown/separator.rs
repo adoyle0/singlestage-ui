@@ -1,8 +1,15 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Visually separates groups of menu items.
+/// The separator.
 #[component]
 pub fn DropdownMenuSeparator(
+    #[prop(optional)] children: Option<Children>,
+
+    /// Toggle whether or not the separator should display vertically.
+    #[prop(optional, into)]
+    vertical: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -84,6 +91,9 @@ pub fn DropdownMenuSeparator(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -110,6 +120,7 @@ pub fn DropdownMenuSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -134,6 +145,7 @@ pub fn DropdownMenuSeparator(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -143,15 +155,27 @@ pub fn DropdownMenuSeparator(
         />
     };
 
-    view! {
-        <hr
-            class=move || {
-                format!("singlestage-dropdown-menu-separator {}", class.get().unwrap_or_default())
-            }
-            role="separator"
+    if let Some(children) = children {
+        view! {
+            <Separator
+                vertical
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        />
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </Separator>
+        }
+        .into_any()
+    } else {
+        view! {
+            <Separator
+                vertical
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+        }
+        .into_any()
     }
 }

@@ -152,7 +152,7 @@ pub fn Pagination(
 
     view! {
         <nav
-            aria-label="pagination"
+            aria_label="pagination"
             role="navigation"
             class=move || format!("singlestage-pagination {}", class.get().unwrap_or_default())
 

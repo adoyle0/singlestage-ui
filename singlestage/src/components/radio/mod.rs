@@ -7,8 +7,9 @@ pub use group::*;
 pub use radio::*;
 
 #[derive(Clone)]
-pub struct RadioGroupContext {
-    name: String,
-    invalid: Reactive<bool>,
-    value: Reactive<String>,
+pub(crate) struct RadioGroupContext {
+    pub name: String,
+    pub disabled: Reactive<bool>,
+    pub invalid: Reactive<bool>,
+    pub value: Reactive<String>,
 }

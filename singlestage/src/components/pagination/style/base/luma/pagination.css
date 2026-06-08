@@ -1,0 +1,23 @@
+@layer components1 {
+  .cn-pagination-content {
+    @apply gap-1;
+  }
+
+  .cn-pagination-ellipsis {
+    @apply items-center
+    justify-center
+    size-9;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .cn-pagination-previous {
+    @apply pl-2!;
+  }
+
+  .cn-pagination-next {
+    @apply pr-2!;
+  }
+}

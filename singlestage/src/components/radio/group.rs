@@ -173,7 +173,14 @@ pub fn RadioGroup(
         />
     };
 
-    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
+    let fieldset_attrs = view! {
+        <{..}
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
+            disabled=move || disabled.get()
+            form=move || form.get()
+            name=move || name.get()
+        />
+    };
 
     if let Some(default) = default.get_untracked() {
         value.set(default)
@@ -183,6 +190,7 @@ pub fn RadioGroup(
         name: name
             .get_untracked()
             .unwrap_or(uuid::Uuid::new_v4().to_string()),
+        disabled,
         invalid,
         value,
     };
