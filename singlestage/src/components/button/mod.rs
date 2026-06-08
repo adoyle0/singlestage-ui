@@ -412,7 +412,6 @@ pub fn Button(
                 }
             }
             // TODO: refactor trigger context
-            // TODO: finish dialog in dropdown
             on:click=move |ev| {
                 if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
@@ -450,7 +449,7 @@ pub fn Button(
                     }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>() {
                     if let Some(menu) = use_context::<PopoverMenuContext>() {
-                        if !menu.dismissable.get() && menu_item.dismiss.get() {
+                        if menu.dismissable.get() && menu_item.dismiss.get() {
                             ev.prevent_default();
                             menu.open.set(false);
                         }
