@@ -8,7 +8,9 @@ pub fn CheckboxDescriptionExample() -> impl IntoView {
             <Field orientation="horizontal">
                 <Checkbox id="terms-checkbox-desc" name="terms-checkbox-desc" checked=true />
                 <FieldContent>
-                    <Label label_for="terms-checkbox-desc">"Accept terms and conditions"</Label>
+                    <FieldLabel label_for="terms-checkbox-desc">
+                        "Accept terms and conditions"
+                    </FieldLabel>
                     <FieldDescription>
                         "By clicking this checkbox, you agree to the terms and conditions."
                     </FieldDescription>

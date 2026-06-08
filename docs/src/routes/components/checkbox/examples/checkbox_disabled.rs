@@ -6,13 +6,10 @@ pub fn CheckboxDisabledExample() -> impl IntoView {
     view! {
         <FieldGroup class="mx-auto w-56">
             <Field orientation="horizontal" disabled=true>
-                <Checkbox
-                    id="toggle-checkbox-disabled"
-                    name="toggle-checkbox-disabled"
-                    disabled=true
-                />
-                <Label label_for="toggle-checkbox-disabled">"Enable notifications"</Label>
+                <Checkbox>"Enable notifications"</Checkbox>
             </Field>
+
+            <Checkbox disabled=true>"Enable notifications"</Checkbox>
         </FieldGroup>
     }
 }

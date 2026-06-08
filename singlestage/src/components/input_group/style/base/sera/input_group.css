@@ -145,13 +145,13 @@
       @apply rounded-none;
     }
 
-    &:has(> .singletage-input-group-addon-align-inline-end) {
+    &:has(> .singlestage-input-group-addon-align-inline-end) {
       .singlestage-input-group-input {
         @apply pr-2;
       }
     }
 
-    &:has(> .singletage-input-group-addon-align-inline-start) {
+    &:has(> .singlestage-input-group-addon-align-inline-start) {
       .singlestage-input-group-input {
         @apply pl-2;
       }

@@ -33,7 +33,7 @@ pub fn ItemDropdownExample() -> impl IntoView {
             <DropdownMenuTrigger>
                 <Button variant="outline">"Select" {icon!(icondata::LuChevronDown)}</Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent class="w-48" align="center">
+            <DropdownMenuContent align="center">
                 <For each=move || people.get() key=|person| person.username.clone() let(person)>
                     {
                         let username = person.username.clone();

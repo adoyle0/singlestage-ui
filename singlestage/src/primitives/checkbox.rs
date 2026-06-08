@@ -405,29 +405,51 @@ pub fn CheckboxPrimitive(
         />
     };
 
+    let in_field = use_context::<FieldContext>().is_some();
     if let Some(children) = children {
-        view! {
-            <LabelPrimitive
-                // Don't use FieldLabel here until it's a problem
-                // Otherwise the checkbox will try to render as a choice card
-                primitive_type=LabelPrimitiveType::Label
-
-                class
-                disabled
-                id=label_id.to_string()
-                invalid
-                label_for=id.get_untracked().unwrap_or(input_id.to_string())
-            >
+        if in_field {
+            view! {
                 <input
 
                     {..global_attrs_1}
                     {..global_attrs_2}
                     {..input_attrs}
                 />
-                {children()}
-            </LabelPrimitive>
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::FieldLabel
+
+                    class
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </LabelPrimitive>
+            }
+            .into_any()
+        } else {
+            view! {
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::Label
+
+                    class
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    <input
+
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                        {..input_attrs}
+                    />
+                    {children()}
+                </LabelPrimitive>
+            }
+            .into_any()
         }
-        .into_any()
     } else {
         view! {
             <input

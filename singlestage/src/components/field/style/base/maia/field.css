@@ -2,7 +2,7 @@
   .singlestage-field-set {
     @apply gap-6;
 
-    &:has (> .singlestage-checkbox-group, > .singletage-radio-group) {
+    &:has (> .singlestage-checkbox-group, > .singlestage-radio-group) {
       @apply gap-3;
     }
   }

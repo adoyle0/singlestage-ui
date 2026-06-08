@@ -1,5 +1,5 @@
 @layer components1 {
-  .singlesage-label {
+  .singlestage-label {
     @apply font-semibold
     gap-2
     leading-relaxed

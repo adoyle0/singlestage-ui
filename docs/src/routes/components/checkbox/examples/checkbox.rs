@@ -6,23 +6,27 @@ pub fn CheckboxExample() -> impl IntoView {
     view! {
         <FieldGroup class="max-w-sm">
             <Field orientation="horizontal">
-                <Checkbox id="terms-checkbox" name="terms-checkbox" />
-                <Label label_for="terms-checkbox">"Accept terms and conditions"</Label>
+                <Checkbox>"Accept terms and conditions"</Checkbox>
             </Field>
+
             <Field orientation="horizontal">
-                <Checkbox id="terms-checkbox-2" name="terms-checkbox-2" checked=true />
+                <Checkbox id="terms-checkbox" name="terms-checkbox" checked=true />
                 <FieldContent>
-                    <Label label_for="terms-checkbox-2">"Accept terms and conditions"</Label>
+                    <FieldLabel label_for="terms-checkbox">
+                        "Accept terms and conditions"
+                    </FieldLabel>
                     <FieldDescription>
                         "By clicking this checkbox, you agree to the terms."
                     </FieldDescription>
                 </FieldContent>
             </Field>
+
             <Field orientation="horizontal" disabled=true>
-                <Checkbox id="toggle-checkbox" name="toggle-checkbox" disabled=true />
-                <Label label_for="toggle-checkbox">"Enable notifications"</Label>
+                <Checkbox id="toggle-checkbox" name="toggle-checkbox" />
+                <FieldLabel label_for="toggle-checkbox">"Enable notifications"</FieldLabel>
             </Field>
-            <Label>
+
+            <FieldLabel>
                 <Field orientation="horizontal">
                     <Checkbox id="toggle-checkbox-2" name="toggle-checkbox-2" />
                     <FieldContent>
@@ -32,7 +36,7 @@ pub fn CheckboxExample() -> impl IntoView {
                         </FieldDescription>
                     </FieldContent>
                 </Field>
-            </Label>
+            </FieldLabel>
         </FieldGroup>
     }
 }

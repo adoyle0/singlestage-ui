@@ -5,15 +5,37 @@
     select-none;
 
     /* Peer */
+    &:disabled,
+    &[aria-disabled="true"],
     &:is(:where(*):disabled ~ *),
     &:is(:where(*)[aria-disabled="true"] ~ *) {
       @apply cursor-not-allowed;
     }
 
     /* Group */
+    &:disabled,
+    &[aria-disabled="true"],
     &:is(:where(*):disabled *),
     &:is(:where(*)[aria-disabled="true"] *) {
       @apply pointer-events-none;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"],
+    &:is(:where(*):invalid *),
+    &:is(:where(*):invalid ~ *),
+    &:is(:where(*)[aria-invalid="true"] *),
+    &:is(:where(*)[aria-invalid="true"] ~ *) {
+      @apply text-destructive;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"],
+    &:is(:where(*):disabled *),
+    &:is(:where(*):disabled ~ *),
+    &:is(:where(*)[aria-disabled="true"] *),
+    &:is(:where(*)[aria-disabled="true"] ~ *) {
+      @apply opacity-50;
     }
   }
 }

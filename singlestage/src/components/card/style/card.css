@@ -34,11 +34,11 @@
       @apply pb-8;
     }
 
-    &:has(.singletage-card-action) {
+    &:has(.singlestage-card-action) {
       @apply grid-cols-[1fr_auto];
     }
 
-    &:has(.singletage-card-description) {
+    &:has(.singlestage-card-description) {
       @apply grid-rows-[auto_auto];
     }
   }

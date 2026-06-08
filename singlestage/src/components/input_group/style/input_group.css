@@ -46,7 +46,7 @@
     @apply flex-1;
   }
 
-  .singlesage-input-group-textarea {
+  .singlestage-input-group-textarea {
     @apply flex-1
     resize-none;
   }

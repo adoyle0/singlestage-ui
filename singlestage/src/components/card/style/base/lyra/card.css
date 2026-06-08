@@ -14,7 +14,7 @@
       @apply pt-0;
     }
 
-    &:has(.singletage-card-footer) {
+    &:has(.singlestage-card-footer) {
       @apply pb-0;
     }
 

@@ -1,5 +1,5 @@
 @layer components1 {
-  .singletage-toggle {
+  .singlestage-toggle {
     @apply font-medium
     gap-1
     rounded-none
@@ -30,11 +30,11 @@
     }
   }
 
-  .singletage-toggle-variant-default {
+  .singlestage-toggle-variant-default {
     @apply bg-transparent;
   }
 
-  .singletage-toggle-variant-outline {
+  .singlestage-toggle-variant-outline {
     @apply bg-transparent
     border
     border-input;
@@ -44,7 +44,7 @@
     }
   }
 
-  .singletage-toggle-size-default {
+  .singlestage-toggle-size-default {
     @apply h-8
     min-w-8
     px-2.5;
@@ -58,7 +58,7 @@
     }
   }
 
-  .singletage-toggle-size-sm {
+  .singlestage-toggle-size-sm {
     @apply h-7
     min-w-7
     px-2.5
@@ -73,7 +73,7 @@
     }
   }
 
-  .singletage-toggle-size-lg {
+  .singlestage-toggle-size-lg {
     @apply h-9
     min-w-9
     px-2.5;

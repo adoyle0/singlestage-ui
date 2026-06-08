@@ -6,7 +6,7 @@ pub fn InputGroupBlockEndExample() -> impl IntoView {
     view! {
         <FieldGroup class="max-w-sm">
             <Field>
-                <Label label_for="block-end-input">"Input"</Label>
+                <FieldLabel label_for="block-end-input">"Input"</FieldLabel>
                 <InputGroup class="h-auto">
                     <Input id="block-end-input" placeholder="Enter amount" />
                     <InputGroupAddon align="block-end">
@@ -16,7 +16,7 @@ pub fn InputGroupBlockEndExample() -> impl IntoView {
                 <FieldDescription>"Footer positioned below the input."</FieldDescription>
             </Field>
             <Field>
-                <Label label_for="block-end-textarea">"Textarea"</Label>
+                <FieldLabel label_for="block-end-textarea">"Textarea"</FieldLabel>
                 <InputGroup>
                     <Textarea id="block-end-textarea" placeholder="Write a comment..." />
                     <InputGroupAddon align="block-end">

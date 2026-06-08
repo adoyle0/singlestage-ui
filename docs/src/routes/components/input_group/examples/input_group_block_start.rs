@@ -6,7 +6,7 @@ pub fn InputGroupBlockStartExample() -> impl IntoView {
     view! {
         <FieldGroup class="max-w-sm">
             <Field>
-                <Label label_for="block-start-input">"Input"</Label>
+                <FieldLabel label_for="block-start-input">"Input"</FieldLabel>
                 <InputGroup class="h-auto">
                     <Input id="block-start-input" placeholder="Enter your name" />
                     <InputGroupAddon align="block-start">
@@ -16,7 +16,7 @@ pub fn InputGroupBlockStartExample() -> impl IntoView {
                 <FieldDescription>"Header positioned above the input."</FieldDescription>
             </Field>
             <Field>
-                <Label label_for="block-start-textarea">"Textarea"</Label>
+                <FieldLabel label_for="block-start-textarea">"Textarea"</FieldLabel>
                 <InputGroup>
                     <Textarea
                         id="block-start-textarea"

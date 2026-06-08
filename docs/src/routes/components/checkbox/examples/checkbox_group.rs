@@ -7,20 +7,27 @@ pub fn CheckboxGroupExample() -> impl IntoView {
         <FieldSet>
             <FieldLegend variant="label">"Show these items on the desktop:"</FieldLegend>
             <FieldDescription>"Select the items you want to show on the desktop."</FieldDescription>
-            <FieldGroup class="gap-3">
+            <CheckboxGroup class="gap-3">
                 <Field orientation="horizontal">
-                    <Checkbox checked=true>"Hard disks"</Checkbox>
+                    <Checkbox value="hard_disks" checked=true>
+                        "Hard disks"
+                    </Checkbox>
                 </Field>
+
                 <Field orientation="horizontal">
-                    <Checkbox checked=true>"External disks"</Checkbox>
+                    <Checkbox value="external_disks" checked=true>
+                        "External disks"
+                    </Checkbox>
                 </Field>
+
                 <Field orientation="horizontal">
-                    <Checkbox>"CDs, DVDs, and iPods"</Checkbox>
+                    <Checkbox value="cds">"CDs, DVDs, and iPods"</Checkbox>
                 </Field>
+
                 <Field orientation="horizontal">
-                    <Checkbox>"Connected servers"</Checkbox>
+                    <Checkbox value="servers">"Connected servers"</Checkbox>
                 </Field>
-            </FieldGroup>
+            </CheckboxGroup>
         </FieldSet>
     }
 }
