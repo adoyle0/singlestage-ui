@@ -11,8 +11,7 @@
   }
 
   .singlestage-dropdown-menu-item {
-    > button,
-    > label {
+    > * {
       @apply gap-2
       min-h-7
       px-2
@@ -37,8 +36,7 @@
   }
 
   .singlestage-dropdown-menu-item-variant-destructive {
-    > button,
-    > label {
+    > * {
       @apply text-destructive;
 
       &:focus,
@@ -79,8 +77,7 @@
   }
 
   .singlestage-dropdown-menu-sub-trigger {
-    > button,
-    > label {
+    > * {
       @apply gap-2
       min-h-7
       px-2
@@ -105,7 +102,7 @@
 
     &:has(+ .singlestage-popover:popover-open),
     &[aria-expanded="true"] {
-      > button {
+      > * {
         @apply bg-accent
         text-accent-foreground;
       }

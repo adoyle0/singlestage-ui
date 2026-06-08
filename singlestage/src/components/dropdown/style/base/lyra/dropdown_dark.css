@@ -1,7 +1,6 @@
 @layer components1 {
   .singlestage-dropdown-menu-item-variant-destructive {
-    > button,
-    > label {
+    > * {
       &:focus,
       &:hover {
         @apply bg-destructive/20;
