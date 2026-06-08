@@ -162,8 +162,8 @@ pub fn ButtonGroup(
                 format!(
                     "singlestage-button-group {} {}",
                     match vertical.get().unwrap_or_default() {
-                        true => "singlestage-button-group-vertical",
-                        false => "singlestage-button-group-horizontal",
+                        true => "singlestage-button-group-orientation-vertical",
+                        false => "singlestage-button-group-orientation-horizontal",
                     },
                     class.get().unwrap_or_default(),
                 )

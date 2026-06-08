@@ -6,7 +6,8 @@ use singlestage::*;
 pub fn ThemeSwitcher() -> impl IntoView {
     let theme_context = expect_context::<ThemeProviderContext>();
     let prefers_dark = RwSignal::new(false);
-    let selected_theme = RwSignal::new("default".to_string());
+    let selected_theme = RwSignal::new("neutral".to_string());
+    let selected_base = RwSignal::new("vega".to_string());
 
     // TODO: Make reactive
     Effect::new(move || {
@@ -81,9 +82,9 @@ pub fn ThemeSwitcher() -> impl IntoView {
             .set(match selected_theme.get().as_str() {
                 "amber" => Theme::Amber,
                 "blue" => Theme::Blue,
-                "default" => Theme::Default,
                 "lime" => Theme::Lime,
                 "mono" => Theme::Mono,
+                "neutral" => Theme::Neutral,
                 "orange" => Theme::Orange,
                 "purple" => Theme::Purple,
                 "red" => Theme::Red,
@@ -92,52 +93,106 @@ pub fn ThemeSwitcher() -> impl IntoView {
                 "teal" => Theme::Teal,
                 "violet" => Theme::Violet,
                 "yellow" => Theme::Yellow,
-                _ => Theme::Default,
+                _ => Theme::Neutral,
             })
+    });
+
+    Effect::new(move || {
+        // let _ = document()
+        //     .unchecked_ref::<web_sys::HtmlDocument>()
+        //     .set_cookie(format!("theme={}; Path=/", selected_theme.get()).as_str());
+
+        theme_context.base.set(match selected_base.get().as_str() {
+            "luma" => ThemeBase::Luma,
+            "lyra" => ThemeBase::Lyra,
+            "maia" => ThemeBase::Maia,
+            "mira" => ThemeBase::Mira,
+            "nova" => ThemeBase::Nova,
+            "sera" => ThemeBase::Sera,
+            _ => ThemeBase::Vega,
+        })
     });
 
     view! {
         <span class="flex space-x-2">
-            <Tooltip side="bottom" value="Select theme">
-                <Select value=selected_theme class="h-8">
-                    <SelectContent label="Colors">
-                        <SelectItem value="default">"Default"</SelectItem>
-                        <SelectItem value="amber">"Amber"</SelectItem>
-                        <SelectItem value="blue">"Blue"</SelectItem>
-                        <SelectItem value="lime">"Lime"</SelectItem>
-                        <SelectItem value="orange">"Orange"</SelectItem>
-                        <SelectItem value="purple">"Purple"</SelectItem>
-                        <SelectItem value="red">"Red"</SelectItem>
-                        <SelectItem value="rose">"Rose"</SelectItem>
-                        <SelectItem value="teal">"Teal"</SelectItem>
-                        <SelectItem value="violet">"Violet"</SelectItem>
-                        <SelectItem value="yellow">"Yellow"</SelectItem>
-                    </SelectContent>
-                    <SelectContent label="Layout">
-                        <SelectItem value="mono">"Mono"</SelectItem>
-                        <SelectItem value="scaled">"Scaled"</SelectItem>
-                    </SelectContent>
-                </Select>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Select value=selected_base todo_name_me_size="sm">
+                        <SelectOption value="luma">"Luma"</SelectOption>
+                        <SelectOption value="lyra">"Lyra"</SelectOption>
+                        <SelectOption value="maia">"Maia"</SelectOption>
+                        <SelectOption value="mira">"Mira"</SelectOption>
+                        <SelectOption value="nova">"Nova"</SelectOption>
+                        <SelectOption value="sera">"Sera"</SelectOption>
+                        <SelectOption value="vega">"Vega"</SelectOption>
+                    </Select>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Select base theme"</p>
+                </TooltipContent>
             </Tooltip>
-            <Tooltip side="bottom" value="Toggle dark mode">
-                <Button variant="outline" size="sm-icon" on:click=swap_theme>
-                    {move || match theme_context.mode.get() {
-                        Mode::Light => view! { <span>{icon!(icondata::LuSun)}</span> }.into_any(),
-                        Mode::Dark => view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any(),
-                        _ => {
-                            view! {
-                                <span class="block dark:hidden">{icon!(icondata::LuSun)}</span>
-                                <span class="hidden dark:block">{icon!(icondata::LuMoon)}</span>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Select value=selected_theme todo_name_me_size="sm">
+                        <SelectOptGroup label="Colors">
+                            <SelectOption value="neutral">"Neutral"</SelectOption>
+                            <SelectOption value="amber">"Amber"</SelectOption>
+                            <SelectOption value="blue">"Blue"</SelectOption>
+                            <SelectOption value="lime">"Lime"</SelectOption>
+                            <SelectOption value="orange">"Orange"</SelectOption>
+                            <SelectOption value="purple">"Purple"</SelectOption>
+                            <SelectOption value="red">"Red"</SelectOption>
+                            <SelectOption value="rose">"Rose"</SelectOption>
+                            <SelectOption value="teal">"Teal"</SelectOption>
+                            <SelectOption value="violet">"Violet"</SelectOption>
+                            <SelectOption value="yellow">"Yellow"</SelectOption>
+                        </SelectOptGroup>
+                        <SelectOptGroup label="Layout">
+                            <SelectOption value="mono">"Mono"</SelectOption>
+                            <SelectOption value="scaled">"Scaled"</SelectOption>
+                        </SelectOptGroup>
+                    </Select>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Select color scheme"</p>
+                </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Button variant="outline" size="sm-icon" on:click=swap_theme>
+                        {move || match theme_context.mode.get() {
+                            Mode::Light => {
+                                view! { <span>{icon!(icondata::LuSun)}</span> }.into_any()
                             }
-                                .into_any()
-                        }
-                    }}
-                </Button>
+                            Mode::Dark => {
+                                view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any()
+                            }
+                            _ => {
+                                match prefers_dark.get() {
+                                    false => {
+                                        view! { <span>{icon!(icondata::LuSun)}</span> }.into_any()
+                                    }
+                                    true => {
+                                        view! { <span>{icon!(icondata::LuMoon)}</span> }.into_any()
+                                    }
+                                }
+                            }
+                        }}
+                    </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"Toggle dark mode"</p>
+                </TooltipContent>
             </Tooltip>
-            <Tooltip side="bottom" align="end" value="GitHub repository">
-                <a href="https://github.com/adoyle0/singlestage-ui">
-                    <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
-                </a>
+            <Tooltip>
+                <TooltipTrigger>
+                    <a href="https://github.com/adoyle0/singlestage-ui">
+                        <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
+                    </a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                    <p>"GitHub repository"</p>
+                </TooltipContent>
             </Tooltip>
         </span>
     }

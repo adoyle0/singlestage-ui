@@ -122,7 +122,7 @@ pub fn PopoverContent(
     let menu_ref = NodeRef::<leptos::html::Menu>::new();
 
     Effect::new(move || {
-        if let Some(popover) = menu_ref.get_untracked() {
+        if let Some(popover) = menu_ref.get() {
             let _ = popover.toggle_popover_with_force(menu.open.get());
         }
     });

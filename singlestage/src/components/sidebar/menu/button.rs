@@ -1,7 +1,11 @@
-use leptos::prelude::*;
+// TODO: make generic over button primitive with as_child
 
-/// Wraps content displayed in the click area of a SidebarMenuItem.
+use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone)]
+pub(crate) struct SidebarMenuButtonContext {}
+
 #[component]
 pub fn SidebarMenuButton(children: Children) -> impl IntoView {
-    view! { {children()} }
+    view! { <Provider value=SidebarMenuButtonContext {}>{children()}</Provider> }
 }

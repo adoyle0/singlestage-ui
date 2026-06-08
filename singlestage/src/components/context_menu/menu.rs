@@ -1,15 +1,16 @@
-use crate::{ContextMenuContext, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone, Default)]
+pub(crate) struct ContextMenuContext {
+    pub x: RwSignal<i32>,
+    pub y: RwSignal<i32>,
+}
 
 /// Contains all the parts of a context menu.
 #[component]
 pub fn ContextMenu(
     children: Children,
-
-    /// Reactive signal that can remotely control the open state of the popover **but is not
-    /// coupled to the actual open state of the popover**
-    #[prop(optional, into)]
-    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -116,13 +117,12 @@ pub fn ContextMenu(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu_id = RwSignal::new(String::new());
-
-    let context = ContextMenuContext {
-        menu_id,
-        open,
-        x: RwSignal::new(i32::default()),
-        y: RwSignal::new(i32::default()),
+    let popover_context = PopoverMenuContext {
+        dismissable: Reactive::new(true),
+        ..Default::default()
+    };
+    let menu_context = ContextMenuContext {
+        ..Default::default()
     };
 
     let global_attrs_1 = view! {
@@ -171,7 +171,9 @@ pub fn ContextMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
+            <Provider value=menu_context>
+                <Provider value=popover_context>{children()}</Provider>
+            </Provider>
         </div>
     }
 }

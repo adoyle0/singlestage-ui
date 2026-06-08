@@ -1,3 +1,4 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Displays next to the item content and indicates keyboard shortcuts.
@@ -150,15 +151,13 @@ pub fn ContextMenuShortcut(
     };
 
     view! {
-        <span
-            class=move || {
-                format!("singlestage-dropdown-menu-shortcut {}", class.get().unwrap_or_default())
-            }
+        <MenuShortcutPrimitive
+            class
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </span>
+        </MenuShortcutPrimitive>
     }
 }

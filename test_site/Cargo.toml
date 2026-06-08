@@ -1,0 +1,93 @@
+[workspace]
+members = ["app", "hydrate", "src-tauri"]
+resolver = "2"
+
+[workspace.dependencies]
+axum = "*"
+cfg-if = "*"
+console_error_panic_hook = "*"
+console_log = "*"
+http = "*"
+icondata = "*"
+leptos = { version = "*", features = ["nightly"] }
+leptos_axum = { version = "*" }
+leptos_meta = { version = "*" }
+leptos_router = { version = "*", features = ["nightly"] }
+log = "*"
+serde = { version = "*", features = ["derive"] }
+serde_json = "*"
+simple_logger = "*"
+# singlestage = { version = "0.4", features = ["nightly"] }
+singlestage = { path = "../singlestage", features = ["nightly"] }
+tauri = "*"
+tauri-build = "*"
+tauri-plugin-log = "*"
+tauri-plugin-opener = "*"
+thiserror = "*"
+tokio = "*"
+tower = "*"
+tower-http = "*"
+wasm-bindgen = "*"
+wasm-bindgen-test = "*"
+web-sys = "*"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+
+# Cargo Leptos Stuff
+
+[[workspace.metadata.leptos]]
+# Compilation Parameters
+always-erase-components = false
+# bin-cargo-args = ["--timings"]
+# bin-cargo-command = "cross"
+bin-default-features = false
+bin-package = "app"
+bin-features = ["ssr"]
+# bin-profile-dev = "debug"
+# bin-profile-release = "release"
+bin-target = "app"
+# bin-target-triple = "x86_64-unknown-linux-gnu" # Env: LEPTOS_BIN_TARGET_TRIPLE
+disable-erase-components = false
+features = []
+hash-file-name = "hash.txt"
+hash-files = false
+# lib-cargo-args = ["--timings"]
+lib-default-features = false
+lib-package = "hydrate"
+lib-features = ["hydrate"]
+# lib-profile-dev = "debug"
+# lib-release-profile = "release"
+wasm-opt-features = [
+  "-Oz",
+  "--enable-bulk-memory",
+  "--enable-nontrapping-float-to-int",
+]
+
+# Site Parameters
+assets-dir = "public"
+browserquery = "defaults"
+disable-server-fn-hash = true
+end2end-cmd = "npx playwright test"
+end2end-dir = "end2end"
+js-dir = "src"
+js-minify = true
+name = "test_site"
+output-name = "test_site"
+reload-port = 3001
+server-fn-mod-path = false
+server-fn-prefix = "/api"
+site-addr = "127.0.0.1:3000"
+site-pkg-dir = "pkg"
+site-root = "target/site"
+# style-file = "style/main.css"
+# tailwind-config-file = "tailwind.config.js"
+tailwind-input-file = "style/tailwind.css"
+watch-additional-files = [
+  "../singlestage",
+  "../singlestage_macro",
+  "app",
+  "hydrate",
+]

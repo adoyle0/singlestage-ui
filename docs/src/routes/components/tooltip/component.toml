@@ -2,17 +2,44 @@ name = "tooltip"
 description = """A popup that displays information related to an element when the element \
 receives keyboard focus or the mouse hovers over it."""
 
+[info]
+title = "This component uses newly available browser features"
+description = """"<p>"This component uses CSS Anchor Positioning which has only been widely \
+supported since January 2026. If you're targeting older or less mainstream browsers then maybe \
+this component isn't for you, yet. "</p><p>" Alternatively you can use Singlestage 0.4 which \
+positions the component correctly but with limited flexibility for alignment, or roll your own \
+using Singlestage CSS classes for consistent styling. "</p><singlestage::Link style="color: \
+var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info" \
+</singlestage::Link>""""
+
 [[examples]]
 name = "tooltip"
 
 [[examples]]
-name = "tooltip position"
-title = "Positioning"
-description = "Tooltips can be positioned."
+name = "tooltip side"
+title = "Side"
+description = "Use the side prop to change the position of the tooltip."
+
+[[examples]]
+name = "tooltip with keyboard shortcut"
+title = "With Keyboard Shortcut"
+
+[[examples]]
+name = "tooltip disabled button"
+title = "Disabled Button"
 
 [[references]]
-name = "tooltip"
-description = "The tooltip."
+name = "Tooltip"
+description = """A popup that displays information related to an element when the element \
+receives keyboard focus or the mouse hovers over it. """
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "TooltipContent"
+description = "."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -22,3 +49,11 @@ attrs = [
   { attr = "side", attr_type = "String", default = """"top"""", description = """Set which side of the \
     triggering element that the tooltip will spawn from.""" },
 ]
+
+[[references]]
+name = "TooltipTrigger"
+description = "Contains all the parts of a Tooltip component."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []

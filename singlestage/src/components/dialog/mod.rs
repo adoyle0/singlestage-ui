@@ -15,11 +15,3 @@ pub use footer::*;
 pub use header::*;
 pub use title::*;
 pub use trigger::*;
-
-use leptos::prelude::*;
-
-#[derive(Clone)]
-pub struct DialogContext {
-    pub labeled_by: RwSignal<String>,
-    pub described_by: RwSignal<String>,
-}

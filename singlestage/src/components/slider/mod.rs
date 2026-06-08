@@ -1,16 +1,46 @@
-use crate::{FieldContext, FieldLabel, Reactive};
+use crate::{FieldContext, Label, Reactive};
 use leptos::prelude::*;
+
+// TODO: figure this out
+//
+// HTML5 doesn't support multiple thumb sliders without some trickery.
+//
+// The options are:
+// 1. Wait for support
+// 2. Do trickery in the `Slider` component, but that means the slider can't be a regular HTML
+//    input and may break accessibility and cause other problems
+// 3. Have two slider components, like `Slider` and `RangeSlider`. That way the non-standard
+//    behavior is opt-in
+// 4. Do something like `<Slider multiple=true />` and conditionally render the output which is
+//    basically the same as #3 but handling props might get interesting
+//
+// `Reactive` is already set up to handle the different value type conversions but for now I'm just
+// going to skip multiple thumb support and comment out the `Reactive` code for now
+//
+// Another issue to be solved is in the case of a single thumb `Slider` sharing a `value` signal with
+// some other component, say a `Progress`, which "should work":
+// ```rs
+// let value = RwSignal::new(1);
+//
+// view!{
+//     <Progress value />
+//     <Slider value />
+// }
+// ```
+// This won't compile. #3 is probably the right solution, or something else
 
 /// A simple component containing all parts of a slider.
 #[component]
 pub fn Slider(
     #[prop(optional)] children: Option<Children>,
 
+    #[prop(optional, into)] orientation: MaybeProp<String>,
+
     /// Sets the default value of the element. Setting `value` sets this once at page load.
     /// Use this for subsequent updates.
     #[prop(optional, into)]
     default: MaybeProp<f64>,
-    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
+    /// The reactive value signal of this input. Also sets the initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
     value: Reactive<f64>,
@@ -38,17 +68,17 @@ pub fn Slider(
     #[prop(optional, into)]
     list: MaybeProp<String>,
     /// The greatest value in the range of permitted values.
-    #[prop(optional, into)]
-    max: MaybeProp<f64>,
+    #[prop(optional, into, default = Reactive::new(100.))]
+    max: Reactive<f64>,
     /// The lowest value in the range of permitted values.
     #[prop(optional, into)]
-    min: MaybeProp<f64>,
+    min: Reactive<f64>,
     /// Name of this element. Submitted with the form as part of a name/value pair.
     #[prop(optional, into)]
     name: MaybeProp<String>,
     /// Define the granularity of expected input value.
-    #[prop(optional, into)]
-    step: MaybeProp<f64>,
+    #[prop(optional, into, default = Reactive::new(1.))]
+    step: Reactive<f64>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -163,25 +193,22 @@ pub fn Slider(
         }
     };
 
-    let max_default = 100.;
-    let min_default = 0.;
-    let step_default = 1.;
-
-    let init_value = {
-        if let Some(default_value) = default.get_untracked() {
-            default_value
-        } else {
-            value.get_untracked()
-        }
-    };
-
-    if let Some(slider) = slider_ref.get_untracked() {
-        slider.set_value_as_number(init_value);
-    };
-
     let slider_value = RwSignal::new({
-        let max = max.get_untracked().unwrap_or(max_default);
-        let min = min.get_untracked().unwrap_or(min_default);
+        let init_value = {
+            if let Some(default_value) = default.get_untracked() {
+                value.set(default_value.clone());
+                default_value
+            } else {
+                value.get_untracked()
+            }
+        };
+
+        if let Some(slider) = slider_ref.get_untracked() {
+            slider.set_value_as_number(init_value);
+        };
+
+        let max = max.get_untracked();
+        let min = min.get_untracked();
 
         let percent = if max == min {
             0.
@@ -194,35 +221,35 @@ pub fn Slider(
 
     // On default
     Effect::new(move || {
-        if let Some(default) = default.get()
-            && let Some(slider) = slider_ref.get_untracked()
-        {
-            slider.set_default_value(&default.to_string());
+        if let Some(slider) = slider_ref.get() {
+            if let Some(default_value) = default.get() {
+                slider.set_default_value(&default_value.to_string());
+            }
         }
     });
 
     // On disabled
     Effect::new(move || {
-        if let Some(slider) = slider_ref.get_untracked() {
+        if let Some(slider) = slider_ref.get() {
             slider.set_disabled(disabled.get());
         }
     });
 
-    let update_slider = move |min: f64, max: f64, current_value: f64| {
-        // Update slider
-        let percent: f64 = if max == min {
+    // Update slider track
+    Effect::new(move || {
+        let percent: f64 = if max.get() == min.get() {
             0.
         } else {
-            ((current_value - min) / (max - min)) * 100.
+            ((value.get() - min.get()) / (max.get() - min.get())) * 100.
         };
         slider_value.set(format!("{}%", &percent.to_string()));
-    };
+    });
 
     let on_input = move |ev| {
         let target_value = event_target_value(&ev);
         if let Ok(mut current_value) = target_value.parse::<f64>() {
-            let min = min.get_untracked().unwrap_or(min_default);
-            let max = max.get_untracked().unwrap_or(max_default);
+            let min = min.get_untracked();
+            let max = max.get_untracked();
 
             if current_value < min {
                 current_value = min
@@ -233,8 +260,6 @@ pub fn Slider(
             };
 
             value.set(current_value);
-
-            update_slider(min, max, current_value);
         }
     };
 
@@ -276,73 +301,11 @@ pub fn Slider(
         />
     };
 
-    let range_attrs = view! {
-        <{..}
-            autocomplete=move || autocomplete.get()
-            form=move || form.get()
-            list=move || list.get()
-            name=move || name.get()
-        />
-    };
-
-    let update_max = move || {
-        let current_value = value.get_untracked();
-        let max = max.get().unwrap_or(max_default);
-        let min = min.get_untracked().unwrap_or(min_default);
-
-        if current_value > max {
-            value.set(max)
-        }
-
-        update_slider(min, max, current_value);
-        max
-    };
-
-    let update_min = move || {
-        let current_value = value.get_untracked();
-        let max = max.get_untracked().unwrap_or(max_default);
-        let min = min.get().unwrap_or(min_default);
-
-        if current_value < min {
-            value.set(min)
-        }
-
-        update_slider(min, max, current_value);
-        min
-    };
-
-    let update_prop_value = move || {
-        let mut new_value = value.get();
-        let max = max.get_untracked().unwrap_or(max_default);
-        let min = min.get_untracked().unwrap_or(min_default);
-
-        // Make sure value is in range
-        if new_value > max {
-            new_value = max;
-            value.set(max);
-        } else if new_value < min {
-            new_value = min;
-            value.set(min);
-        }
-
-        update_slider(min, max, new_value);
-        new_value.to_string()
-    };
-
-    let update_step = move || {
-        let current_value = value.get();
-        let max = max.get_untracked().unwrap_or(max_default);
-        let min = min.get_untracked().unwrap_or(min_default);
-        let step = step.get().unwrap_or(step_default);
-        update_slider(min, max, current_value);
-        step
-    };
-
     let input_id = uuid::Uuid::new_v4();
     let label_id = uuid::Uuid::new_v4();
     let has_children = children.is_some();
 
-    let slider_attrs = view! {
+    let custom_attrs = view! {
         <{..}
             aria_describedby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -352,83 +315,92 @@ pub fn Slider(
                     None
                 }
             }
+            aria_disabled=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    Some("true".to_string())
+                } else if disabled.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
+            aria_invalid=move || {
+                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                    Some("true".to_string())
+                } else {
+                    None
+                }
+            }
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
                     Some(field.label_id.get())
-                } else if has_children { Some(label_id.to_string()) } else { None }
+                } else if has_children {
+                    Some(label_id.to_string())
+                } else {
+                    None
+                }
             }
-            class=move || format!("singlestage-input {}", class.get().unwrap_or_default())
+            autocomplete=move || autocomplete.get()
+            class=move || format!("singlestage-slider{} {}",
+                match orientation.get().unwrap_or_default().as_str() {
+                    "vertical" => " singlestage-slider-vertical",
+                    _ => " singlestage-slider-horizontal",
+                },
+                class.get().unwrap_or_default())
             disabled=disabled.get_untracked()
-            max=update_max
-            min=update_min
+            form=move || form.get()
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
+                } else {
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
+                }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
+            list=move || list.get()
+            name=move || name.get()
+            max=move || max.get()
+            min=move || min.get()
             node_ref=slider_ref
             on:input=on_input
-            prop:value=update_prop_value
-            step=update_step
+            prop:value=move || value.get()
+            step=move || step.get()
             style:--slider-value=move || slider_value.get()
             type="range"
-            value=init_value.to_string()
+            value=default.get_untracked().unwrap_or(value.get_untracked())
         />
     };
 
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <FieldLabel
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </FieldLabel>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!(
-                                "singlestage-label singlestage-slider-label {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+            <Label
+                class
+                disabled
+                id=label_id.to_string()
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                {children()}
+            </Label>
             <input
-                id=move || id.get().unwrap_or(input_id.to_string())
 
                 {..global_attrs_1}
                 {..global_attrs_2}
-                {..range_attrs}
-                {..slider_attrs}
+                {..custom_attrs}
             />
         }
         .into_any()
     } else {
         view! {
             <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
 
                 {..global_attrs_1}
                 {..global_attrs_2}
-                {..range_attrs}
-                {..slider_attrs}
+                {..custom_attrs}
             />
         }
         .into_any()

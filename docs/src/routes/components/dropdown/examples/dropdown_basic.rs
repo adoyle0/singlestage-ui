@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{Button, dropdown::*};
+use singlestage::*;
 
 #[component]
 pub fn DropdownBasicExample() -> impl IntoView {

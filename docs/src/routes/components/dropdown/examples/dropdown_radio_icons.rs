@@ -12,15 +12,17 @@ pub fn DropdownRadioIconsExample() -> impl IntoView {
             <DropdownMenuContent class="min-w-56">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Select Payment Method"</DropdownMenuLabel>
-                    <RadioGroup value=payment_method>
-                        <RadioItem value="card">
+                    <DropdownMenuRadioGroup value=payment_method>
+                        <DropdownMenuRadioItem value="card">
                             {icon!(icondata::LuCreditCard)} "Credit Card"
-                        </RadioItem>
-                        <RadioItem value="paypal">{icon!(icondata::LuWallet)} "PayPal"</RadioItem>
-                        <RadioItem value="bank">
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="paypal">
+                            {icon!(icondata::LuWallet)} "PayPal"
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bank">
                             {icon!(icondata::LuBuilding2)} "Bank Transfer"
-                        </RadioItem>
-                    </RadioGroup>
+                        </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -1,21 +1,21 @@
 use leptos::prelude::*;
-use singlestage::avatar::*;
+use singlestage::*;
 
 #[component]
 pub fn AvatarGroupExample() -> impl IntoView {
     view! {
-        <AvatarGroup>
-            <Avatar class="size-12 grayscale">
-                <AvatarImage src="/avatar-1.png" alt="Sofia Davis's Avatar" />
-                <AvatarFallback>"SD"</AvatarFallback>
+        <AvatarGroup class="grayscale">
+            <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>"CN"</AvatarFallback>
             </Avatar>
-            <Avatar class="size-12 grayscale">
-                <AvatarImage src="/avatar-2.png" alt="Jackson Lee's Avatar" />
-                <AvatarFallback>"JL"</AvatarFallback>
+            <Avatar>
+                <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+                <AvatarFallback>"LR"</AvatarFallback>
             </Avatar>
-            <Avatar class="size-12 grayscale">
-                <AvatarImage src="/avatar-3.png" alt="Isabella Nguyen's Avatar" />
-                <AvatarFallback>"IN"</AvatarFallback>
+            <Avatar>
+                <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+                <AvatarFallback>"ER"</AvatarFallback>
             </Avatar>
         </AvatarGroup>
     }

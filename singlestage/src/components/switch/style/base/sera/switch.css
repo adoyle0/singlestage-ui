@@ -1,0 +1,60 @@
+@layer components1 {
+  .singlestage-switch {
+    @apply border
+    rounded-none
+    shrink-0;
+
+    &:checked {
+      @apply bg-primary
+      border-primary;
+    }
+
+    &:not(&:checked) {
+      @apply bg-input
+      border-input/50;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-2
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-2
+      ring-destructive/20;
+    }
+
+    &::after {
+      @apply bg-background;
+    }
+
+    &:checked::after {
+      @apply translate-x-[calc(100%+2px)];
+    }
+
+    &::not(&:checked)::after {
+      @apply translate-x-0.25;
+    }
+  }
+
+  .singlestage-switch-size-default {
+    @apply h-4.5
+    w-8.25;
+
+    &::after {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-switch-size-sm {
+    @apply h-3.5
+    w-6.25;
+
+    &::after {
+      @apply size-2.5;
+    }
+  }
+}

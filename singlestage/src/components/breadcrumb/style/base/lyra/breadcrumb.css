@@ -1,0 +1,35 @@
+@layer components1 {
+  .singlestage-breadcrumb-list {
+    @apply gap-1.5
+    text-muted-foreground
+    text-xs;
+  }
+
+  .singlestage-breadcrumb-item {
+    @apply gap-1;
+  }
+
+  .singlestage-breadcrumb-link {
+    @apply transition-colors;
+
+    &:hover {
+      @apply text-foreground;
+    }
+  }
+
+  .singlestage-breadcrumb-page {
+    @apply text-foreground font-normal;
+  }
+
+  .singlestage-breadcrumb-separator > svg {
+    @apply size-3.5;
+  }
+
+  .singlestage-breadcrumb-ellipsis {
+    @apply size-5;
+
+    & > svg {
+      @apply size-4;
+    }
+  }
+}

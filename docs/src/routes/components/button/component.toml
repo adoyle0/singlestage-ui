@@ -5,16 +5,57 @@ description = "Displays a button."
 name = "Button"
 
 [[examples]]
-name = "Button Sizes"
-title = "Button Sizes"
+name = "Button Size"
+title = "Button Size"
+description = "Use the size prop to change the size of the button."
+
+[[examples]]
+name = "Button default"
+title = "Default"
+
+[[examples]]
+name = "Button outline"
+title = "Outline"
+
+[[examples]]
+name = "Button secondary"
+title = "Secondary"
+
+[[examples]]
+name = "Button ghost"
+title = "Ghost"
+
+[[examples]]
+name = "Button destructive"
+title = "Destructive"
+
+[[examples]]
+name = "Button link"
+title = "Link"
 
 [[examples]]
 name = "Button Icon"
-title = "Button Icon"
+title = "Icon"
 
 [[examples]]
-name = "Button With Icon"
+name = "Button with icon"
 title = "With Icon"
+
+[[examples]]
+name = "button rounded"
+title = "Rounded"
+
+[[examples]]
+name = "button spinner"
+title = "Spinner"
+
+[[examples]]
+name = "button button group"
+title = "Button Group"
+
+[[examples]]
+name = "button link as button"
+title = "Link"
 
 [[references]]
 name = "Button"
@@ -27,6 +68,8 @@ attributes."""
 attrs = [
   { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed <button> \
     `type` attribute to avoid name collisions.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
+    the input is disabled.""" },
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
     render the button.""" },
   { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specify \

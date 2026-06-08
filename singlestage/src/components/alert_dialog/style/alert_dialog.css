@@ -1,0 +1,59 @@
+@layer components {
+  .singlestage-alert-dialog-overlay {
+    @apply -translate-x-1/2
+    -translate-y-1/2
+    fixed
+    outline-none
+    w-full
+    z-50;
+
+    left: calc(1 / 2 * 100vw);
+    top: calc(1 / 2 * 100%);
+
+    ::backdrop {
+      @apply fixed
+      inset-0
+      isolate
+      z-50;
+    }
+
+    &[open] {
+      @apply -translate-x-1/2
+      -translate-y-1/2
+      fixed
+      outline-none
+      w-full
+      z-50;
+
+      left: calc(1 / 2 * 100vw);
+      top: calc(1 / 2 * 100%);
+    }
+  }
+  .singlestage-alert-dialog-size-sm {
+    .singlestage-alert-dialog-footer {
+      @apply grid
+      grid-cols-2;
+    }
+  }
+
+  .singlestage-alert-dialog-content {
+    @apply grid;
+  }
+
+  .singlestage-alert-dialog-footer {
+    @apply flex
+    flex-col-reverse
+    gap-2
+    sm:flex-row
+    sm:justify-end;
+  }
+
+  .singlestage-alert-dialog-media-variant-destructive {
+    @apply bg-destructive/10
+    text-destructive;
+  }
+
+  /* .singlestage-alert-dialog-title { */
+  /*   @apply font-heading; */
+  /* } */
+}

@@ -1,8 +1,11 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Separates Item content.
+/// The separator.
 #[component]
 pub fn ItemSeparator(
+    #[prop(optional)] children: Option<Children>,
+
     /// Toggle whether or not the separator should display vertically.
     #[prop(optional, into)]
     vertical: MaybeProp<bool>,
@@ -117,7 +120,7 @@ pub fn ItemSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,17 +155,27 @@ pub fn ItemSeparator(
         />
     };
 
-    view! {
-        <div
-            class=move || format!("singlestage-item-separator {}", class.get().unwrap_or_default())
-            data-orientation=match vertical.get().unwrap_or_default() {
-                false => "horizontal",
-                true => "vertical",
-            }
-                .to_string()
+    if let Some(children) = children {
+        view! {
+            <Separator
+                vertical
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        ></div>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </Separator>
+        }
+        .into_any()
+    } else {
+        view! {
+            <Separator
+                vertical
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+        }
+        .into_any()
     }
 }

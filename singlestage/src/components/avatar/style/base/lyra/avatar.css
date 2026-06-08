@@ -1,0 +1,62 @@
+@layer components1 {
+  .singlestage-avatar {
+    @apply rounded-full
+    size-8;
+
+    &::after {
+      @apply rounded-full;
+    }
+  }
+
+  .singlestage-avatar-fallback {
+    @apply bg-muted
+    rounded-full
+    text-muted-foreground;
+  }
+
+  .singlestage-avatar-image {
+    @apply rounded-full;
+  }
+
+  .singlestage-avatar-badge {
+    @apply bg-primary
+    ring-background
+    text-primary-foreground;
+  }
+
+  .singlestage-avatar-group-count {
+    @apply bg-muted
+    rounded-full
+    size-8
+    text-muted-foreground
+    text-xs;
+
+    & > svg {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-avatar-size-sm {
+    @apply size-6;
+
+    .singlestage-avatar-group-count {
+      @apply size-6;
+
+      & > svg {
+        @apply size-3;
+      }
+    }
+  }
+
+  .singlestage-avatar-size-lg {
+    @apply size-10;
+
+    .singlestage-avatar-group-count {
+      @apply size-10;
+
+      & > svg {
+        @apply size-5;
+      }
+    }
+  }
+}

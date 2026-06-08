@@ -1,32 +1,75 @@
 use leptos::prelude::*;
-use singlestage::input::*;
+use singlestage::*;
 
 #[component]
 pub fn InputExample() -> impl IntoView {
     view! {
-        <div>
-            <Input input_type="color" default="#F00">
-                "Color:"
-            </Input>
-            <Input input_type="date">"Date:"</Input>
-            <Input input_type="datetime-local">"Datetime:"</Input>
-            <Input input_type="email">"Email:"</Input>
-            <Input input_type="file">"File:"</Input>
-            <Input input_type="hidden" name="John Cena" />
-            <Input input_type="month">"Month:"</Input>
-            <Input input_type="number">"Number:"</Input>
-            <Input input_type="password">"Password:"</Input>
-            <Input input_type="search">"Search:"</Input>
-            <Input input_type="tel">"Phone Number:"</Input>
-            <Input input_type="text" disabled=true>
-                "Disabled:"
-            </Input>
-            <Input input_type="text" invalid=true>
-                "Invalid:"
-            </Input>
-            <Input input_type="time">"Time:"</Input>
-            <Input input_type="url">"URL:"</Input>
-            <Input input_type="week">"Week:"</Input>
-        </div>
+        <FieldSet>
+            <Field>
+                <Input input_type="color" default="#F00">
+                    "Color:"
+                </Input>
+            </Field>
+
+            <Field>
+                <Input input_type="date">"Date:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="datetime-local">"Datetime:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="email">"Email:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="file">"File:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="hidden" name="John Cena" />
+            </Field>
+
+            <Field>
+                <Input input_type="month">"Month:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="number">"Number:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="password">"Password:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="search">"Search:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="tel">"Phone Number:"</Input>
+            </Field>
+
+            <Field disabled=true>
+                <Input input_type="text">"Disabled:"</Input>
+            </Field>
+
+            <Field invalid=true>
+                <Input input_type="text">"Invalid:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="time">"Time:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="url">"URL:"</Input>
+            </Field>
+
+            <Field>
+                <Input input_type="week">"Week:"</Input>
+            </Field>
+        </FieldSet>
     }
 }

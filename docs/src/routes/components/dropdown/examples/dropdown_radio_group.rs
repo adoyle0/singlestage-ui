@@ -13,11 +13,11 @@ pub fn DropdownRadioGroupExample() -> impl IntoView {
             <DropdownMenuContent class="w-32">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Panel Position"</DropdownMenuLabel>
-                    <RadioGroup value=position>
-                        <RadioItem value="top">"Top"</RadioItem>
-                        <RadioItem value="bottom">"Bottom"</RadioItem>
-                        <RadioItem value="right">"Right"</RadioItem>
-                    </RadioGroup>
+                    <DropdownMenuRadioGroup value=position>
+                        <DropdownMenuRadioItem value="top">"Top"</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bottom">"Bottom"</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="right">"Right"</DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

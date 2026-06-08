@@ -14,9 +14,9 @@ pub fn FormExample() -> impl IntoView {
             <div class="grid gap-2">
                 <Label label_for="demo-form-select">"Email"</Label>
                 <Select id="demo-form-select">
-                    <SelectItem value="bob@example.com">"bob@example.com"</SelectItem>
-                    <SelectItem value="alice@example.com">"alice@example.com"</SelectItem>
-                    <SelectItem value="john@example.com">"john@example.com"</SelectItem>
+                    <SelectOption value="bob@example.com">"bob@example.com"</SelectOption>
+                    <SelectOption value="alice@example.com">"alice@example.com"</SelectOption>
+                    <SelectOption value="john@example.com">"john@example.com"</SelectOption>
                 </Select>
                 <p class="text-muted-foreground text-sm">
                     "You can manage email addresses in your email settings."

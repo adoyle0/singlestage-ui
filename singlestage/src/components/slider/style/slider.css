@@ -1,0 +1,65 @@
+@layer components {
+  .singlestage-slider {
+    /* @apply flex */
+    /* items-center */
+    /* relative */
+    /* select-none */
+    /* touch-none */
+    /* w-full; */
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50;
+    }
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb {
+      @apply appearance-none
+      block
+      select-none
+      shrink-0;
+
+      &:disabled {
+        @apply opacity-50
+        pointer-events-none;
+      }
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply appearance-none;
+      /* grow */
+      /* overflow-hidden */
+      /* relative */
+      /* select-none; */
+    }
+  }
+
+  .singlestage-slider-horizontal {
+    @apply w-full;
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply w-full;
+    }
+  }
+
+  .singlestage-slider-vertical {
+    appearance: slider-vertical;
+    direction: rtl;
+    writing-mode: vertical-lr;
+
+    @apply /* flex-col */
+    h-full;
+    /* w-auto; */
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply h-full;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-use crate::{FieldContext, FieldLabel, Reactive};
+use crate::{FieldContext, InputGroupContext, Label, Reactive};
 use leptos::prelude::*;
 
 /// A form input field.
@@ -269,36 +269,33 @@ pub fn Input(
         }
     };
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(default) = default.get()
-        {
-            input.set_default_value(&default);
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked() {
-            input.set_disabled(disabled.get());
-        }
-    });
-
-    Effect::new(
-        move || match input_type.get_untracked().unwrap_or_default().as_str() {
-            "file" => {
-                if value.get().is_empty()
-                    && let Some(input) = input_ref.get_untracked()
-                {
-                    input.set_value("");
-                }
+    let update_default = move || {
+        if let Some(val) = default.get() {
+            if let Some(input) = input_ref.get() {
+                let _ = input.set_default_value(&val);
             }
-            _ => {
-                if let Some(input) = input_ref.get_untracked() {
-                    input.set_value(&value.get());
-                }
-            }
-        },
-    );
+
+            value.set(val);
+        }
+
+        default.get()
+    };
+
+    let disabled: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.disabled
+        } else {
+            disabled
+        }
+    };
+
+    let invalid: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.invalid
+        } else {
+            invalid
+        }
+    };
 
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
@@ -381,7 +378,10 @@ pub fn Input(
 
     let input_id = uuid::Uuid::new_v4();
     let label_id = uuid::Uuid::new_v4();
-    let has_children = children.is_some();
+
+    let has_children: bool = children.is_some();
+    let in_field: bool = use_context::<FieldContext>().is_some();
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
 
     let custom_attrs = view! {
         <{..}
@@ -393,12 +393,8 @@ pub fn Input(
                     None
                 }
             }
-            aria_invalid=move || {
-                match invalid.get() {
-                    true => Some("true"),
-                    _ => None,
-                }
-            }
+            aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             aria_labelledby=move || {
                 if let Some(field) = use_context::<FieldContext>() {
@@ -409,8 +405,34 @@ pub fn Input(
                     None
                 }
             }
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-input{} {}",
+                    if in_input_group {
+                        " singlestage-input-group-input singlestage-input-group-control"
+                    } else {
+                        ""
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
+            default=update_default
+            prop:default=update_default
             disabled=move || disabled.get()
+            prop:disabled=move || disabled.get()
+            id={if let Some(field) = use_context::<FieldContext>() {
+                if let Some(id) = id.get_untracked() {
+                    field.input_id.set(id.clone());
+                    Some(id)
+                } else {
+                    field.input_id.set(input_id.to_string());
+                    Some(input_id.to_string())
+                }
+            } else if let Some(id) = id.get_untracked() {
+                Some(id)
+            } else {
+                if has_children { Some(input_id.to_string()) } else { None }
+            }}
             node_ref=input_ref
             on:input=on_input
             type=move || {
@@ -421,45 +443,27 @@ pub fn Input(
                     "text".to_string()
                 }
             }
-            value={
-                let value = value.get_untracked();
-                if value.is_empty() { None } else { Some(value) }
-            }
+            value=default.get_untracked().unwrap_or(value.get_untracked())
+            prop:value=move || value.get()
         />
     };
 
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <FieldLabel
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </FieldLabel>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!(
-                                "singlestage-label singlestage-input-label {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+            <Label
+                class=format!(
+                    "{}{}",
+                    if in_field { "" } else { "singlestage-input-label " },
+                    class.get_untracked().unwrap_or_default(),
+                )
+                disabled
+                id=label_id.to_string()
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                {children()}
+            </Label>
             <input
-                id=move || id.get().unwrap_or(input_id.to_string())
-
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..input_attrs_1}
@@ -471,18 +475,6 @@ pub fn Input(
     } else {
         view! {
             <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..input_attrs_1}

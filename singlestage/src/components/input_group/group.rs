@@ -154,8 +154,8 @@ pub fn InputGroup(
 
     view! {
         <div
+            aria_disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
             class=move || { format!("singlestage-input-group {}", class.get().unwrap_or_default()) }
-            data-disabled=move || { if disabled.get() { Some("true".to_string()) } else { None } }
             role="group"
 
             {..global_attrs_1}

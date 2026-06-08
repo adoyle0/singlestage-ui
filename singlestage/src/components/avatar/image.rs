@@ -1,3 +1,4 @@
+use super::AvatarContext;
 use leptos::prelude::*;
 
 /// Renders an image inside the avatar.
@@ -161,6 +162,8 @@ pub fn AvatarImage(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let avatar = expect_context::<AvatarContext>();
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -203,7 +206,9 @@ pub fn AvatarImage(
     view! {
         <img
             alt=move || alt.get()
-            class=move || format!("singlestage-avatar-image {}", class.get().unwrap_or_default())
+            class=move || {
+                format!("singlestage-avatar-image {}", class.get().unwrap_or_default())
+            }
             crossorigin=move || crossorigin.get()
             decoding=move || decoding.get()
             elementtiming=move || elementtiming.get()
@@ -211,10 +216,18 @@ pub fn AvatarImage(
             height=move || height.get()
             ismap=move || ismap.get()
             loading=move || loading.get()
+            on:load=move |_| avatar.img_loaded.set(true)
             referrerpolicy=move || referrerpolicy.get()
             sizes=move || sizes.get()
             src=move || src.get()
             srcset=move || srcset.get()
+            style:display=move || {
+                match avatar.img_loaded.get() {
+                    true => "block",
+                    false => "none",
+                }
+                    .to_string()
+            }
             usemap=move || usemap.get()
             width=move || width.get()
 

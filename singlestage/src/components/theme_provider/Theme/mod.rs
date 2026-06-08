@@ -1,8 +1,8 @@
 mod amber;
 mod blue;
-mod default;
 mod lime;
 mod mono;
+mod neutral;
 mod orange;
 mod purple;
 mod red;
@@ -14,9 +14,9 @@ mod yellow;
 
 pub use amber::*;
 pub use blue::*;
-pub use default::*;
 pub use lime::*;
 pub use mono::*;
+pub use neutral::*;
 pub use orange::*;
 pub use purple::*;
 pub use red::*;

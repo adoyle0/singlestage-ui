@@ -1,0 +1,61 @@
+@layer components2 {
+  .singlestage-button-group {
+    /* TODO: revisit selects */
+    /* has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-4xl */
+    /* *:data-[slot=select-trigger]:border-border */
+    /* [&>[data-slot=select-trigger]:focus-visible]:border-ring; */
+
+    &:has(.singlestage-button-variant-outline) {
+      & > .singlestage-input {
+        @apply border-border;
+        &:focus-visible {
+          @apply border-ring;
+        }
+      }
+
+      .singlestage-input-group {
+        @apply border-border;
+      }
+
+      & > .singlestage-input-group:has(:focus-visible) {
+        @apply border-ring;
+      }
+    }
+
+    &:has(> .singlestage-button-group) {
+      @apply gap-2;
+    }
+  }
+
+  /* Potentially useless */
+  /* .singlestage-button-group-orientation-horizontal { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-4xl!; */
+  /* } */
+  /**/
+  /* .singlestage-button-group-orientation-vertical { */
+  /*   @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-4xl!; */
+  /* } */
+
+  .singlestage-button-group-text {
+    @apply bg-muted
+    border
+    font-medium
+    gap-2
+    px-2.5
+    rounded-4xl
+    text-sm;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+
+    &:has(~ .singlestage-input-group),
+    .singlestage-input-group ~ & {
+      @apply border-muted;
+    }
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input;
+  }
+}

@@ -4,6 +4,22 @@ description = "Displays a form textarea."
 [[examples]]
 name = "textarea"
 
+[[examples]]
+name = "textarea field"
+title = "Field"
+
+[[examples]]
+name = "textarea disabled"
+title = "Disabled"
+
+[[examples]]
+name = "textarea invalid"
+title = "Invalid"
+
+[[examples]]
+name = "textarea button"
+title = "Button"
+
 [[references]]
 name = "Textarea"
 description = "Creates a textarea that takes children as a default value."
@@ -19,6 +35,6 @@ attrs = [
     not the textarea is disabled.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggles invalid \
     appearance.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """Reactive \
-    signal coupled to the value of the textarea.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """Reactive signal \
+    coupled to the value of the textarea.""" },
 ]

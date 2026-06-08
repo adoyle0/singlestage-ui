@@ -1,0 +1,18 @@
+@layer components1 {
+  .singlestage-radio-group-item {
+    &:checked,
+    &[aria-checked="true"] {
+      @apply bg-primary;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+
+    &:checked::before {
+      @apply size-2.5;
+    }
+  }
+}

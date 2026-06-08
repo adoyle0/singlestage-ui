@@ -3,11 +3,13 @@ use singlestage::*;
 
 #[component]
 pub fn ButtonGroupExample() -> impl IntoView {
+    let label = RwSignal::new("personal".to_string());
+
     view! {
         <ButtonGroup>
             <ButtonGroup class="flex">
                 <Button variant="outline" size="icon" aria_label="Go Back">
-                    {icon!(icondata::LuArrowLeft, width=24, height=24)}
+                    {icon!(icondata::LuArrowLeft)}
                 </Button>
             </ButtonGroup>
             <ButtonGroup>
@@ -22,7 +24,7 @@ pub fn ButtonGroupExample() -> impl IntoView {
                             {icon!(icondata::FiMoreHorizontal)}
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" class="w-52">
+                    <DropdownMenuContent align="end">
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 {icon!(icondata::LuMailCheck)} "Mark as Read"
@@ -40,6 +42,24 @@ pub fn ButtonGroupExample() -> impl IntoView {
                             <DropdownMenuItem>
                                 {icon!(icondata::LuListPlus)} "Add to List"
                             </DropdownMenuItem>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>
+                                    {icon!(icondata::LuTag)} "Label As..."
+                                </DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuRadioGroup value=label>
+                                        <DropdownMenuRadioItem value="personal">
+                                            "Personal"
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="work">
+                                            "Work"
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="other">
+                                            "Other"
+                                        </DropdownMenuRadioItem>
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>

@@ -1,0 +1,69 @@
+@layer components1 {
+  .singlestage-switch {
+    @apply border
+    border-transparent
+    rounded-full
+    shadow-xs
+    shrink-0;
+
+    &:checked {
+      @apply bg-primary;
+    }
+
+    &:not(&:checked) {
+      @apply bg-input;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+
+    &::after {
+      @apply bg-background
+      rounded-full;
+    }
+  }
+
+  .singlestage-switch-size-default {
+    @apply h-[18.4px]
+    w-[32px];
+
+    &::after {
+      @apply size-4;
+    }
+
+    &:checked::after {
+      @apply translate-x-[calc(100%-2px)];
+    }
+
+    &:not(&:checked)::after {
+      @apply translate-x-0;
+    }
+  }
+
+  .singlestage-switch-size-sm {
+    @apply h-[14px]
+    w-[24px];
+
+    &::after {
+      @apply size-3;
+    }
+
+    &:checked::after {
+      @apply translate-x-[calc(100%-2px)];
+    }
+
+    &:not(&:checked)::after {
+      @apply translate-x-0;
+    }
+  }
+}

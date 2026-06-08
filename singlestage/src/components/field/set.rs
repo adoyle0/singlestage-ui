@@ -1,5 +1,5 @@
-use crate::Reactive;
-use leptos::prelude::*;
+use crate::{FieldSetContext, Reactive};
+use leptos::{context::Provider, prelude::*};
 
 /// Container that renders a semantic fieldset with spacing presets.
 #[component]
@@ -172,7 +172,7 @@ pub fn FieldSet(
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            {children()}
+            <Provider value=FieldSetContext {}>{children()}</Provider>
         </fieldset>
     }
 }

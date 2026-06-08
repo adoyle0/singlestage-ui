@@ -20,16 +20,16 @@ pub fn DropdownMenuAnatomy() -> impl IntoView {
                     <DropdownMenuSubTrigger />
                     <DropdownMenuSubContent>
                         <DropdownMenuGroup>
-                            <CheckboxItem />
-                            <CheckboxItem />
+                            <DropdownMenuCheckboxItem />
+                            <DropdownMenuCheckboxItem />
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                            <RadioGroup>
-                                <RadioItem />
-                                <RadioItem />
-                                <RadioItem />
-                            </RadioGroup>
+                            <DropdownMenuRadioGroup>
+                                <DropdownMenuRadioItem />
+                                <DropdownMenuRadioItem />
+                                <DropdownMenuRadioItem />
+                            </DropdownMenuRadioGroup>
                         </DropdownMenuGroup>
                     </DropdownMenuSubContent>
                 </DropdownMenuSub>

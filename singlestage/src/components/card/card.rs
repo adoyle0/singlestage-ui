@@ -5,6 +5,10 @@ use leptos::prelude::*;
 pub fn Card(
     children: Children,
 
+    /// Set the size of the card.
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -151,7 +155,16 @@ pub fn Card(
     };
     view! {
         <div
-            class=move || { format!("singlestage-card {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-card{} {}",
+                    match size.get().unwrap_or_default().as_str() {
+                        "sm" | "small" => " singlestage-card-size-sm",
+                        _ => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

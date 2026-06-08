@@ -15,20 +15,20 @@ pub fn ReportIssue() -> impl IntoView {
                         <div class="grid gap-2 flex-1">
                             <Label label_for="report-issue-area">"Area"</Label>
                             <Select id="report-issue-area" class="w-full">
-                                <SelectItem value="team">"Team"</SelectItem>
-                                <SelectItem value="billing">"Billing"</SelectItem>
-                                <SelectItem value="account">"Account"</SelectItem>
-                                <SelectItem value="deployments">"Deployments"</SelectItem>
-                                <SelectItem value="support">"Support"</SelectItem>
+                                <SelectOption value="team">"Team"</SelectOption>
+                                <SelectOption value="billing">"Billing"</SelectOption>
+                                <SelectOption value="account">"Account"</SelectOption>
+                                <SelectOption value="deployments">"Deployments"</SelectOption>
+                                <SelectOption value="support">"Support"</SelectOption>
                             </Select>
                         </div>
                         <div class="grid gap-2 flex-1">
                             <Label label_for="report-issue-security-level">"Security Level"</Label>
                             <Select id="report-issue-security-level" class="w-full">
-                                <SelectItem value="1">"Severity 1 (Highest)"</SelectItem>
-                                <SelectItem value="2">"Severity 2"</SelectItem>
-                                <SelectItem value="3">"Severity 3"</SelectItem>
-                                <SelectItem value="4">"Severity 4 (Lowest)"</SelectItem>
+                                <SelectOption value="1">"Severity 1 (Highest)"</SelectOption>
+                                <SelectOption value="2">"Severity 2"</SelectOption>
+                                <SelectOption value="3">"Severity 3"</SelectOption>
+                                <SelectOption value="4">"Severity 4 (Lowest)"</SelectOption>
                             </Select>
                         </div>
                     </div>

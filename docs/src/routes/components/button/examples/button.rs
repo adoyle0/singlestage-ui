@@ -1,16 +1,14 @@
 use leptos::prelude::*;
-use singlestage::button::*;
+use singlestage::*;
 
 #[component]
 pub fn ButtonExample() -> impl IntoView {
     view! {
-        <div class="space-x-2">
-            <Button>"Primary"</Button>
-            <Button variant="secondary">"Secondary"</Button>
-            <Button variant="outline">"Outline"</Button>
-            <Button variant="ghost">"Ghost"</Button>
-            <Button variant="link">"Link"</Button>
-            <Button variant="destructive">"Destructive"</Button>
+        <div class="flex flex-wrap items-center gap-2 md:flex-row">
+            <Button variant="outline">Button</Button>
+            <Button variant="outline" size="icon" aria_label="Submit">
+                {icon!(icondata::LuArrowUp)}
+            </Button>
         </div>
     }
 }

@@ -1,0 +1,122 @@
+@layer components2 {
+  .singlestage-button-group {
+    @apply flex
+    items-stretch
+    w-fit;
+
+    > .singlestage-input {
+      @apply flex-1;
+    }
+
+    > .singlestage-trigger:not([class*="w-"]) {
+      @apply w-fit;
+    }
+
+    *:focus-visible {
+      @apply relative
+      z-10;
+    }
+  }
+
+  .singlestage-button-group-text {
+    @apply flex
+    items-center;
+
+    svg {
+      @apply pointer-events-none;
+    }
+  }
+
+  .singlestage-button-group-separator {
+    @apply bg-input
+    relative
+    self-stretch;
+  }
+
+  .singlestage-button-group-orientation-horizontal {
+    /* @apply *:data-slot:rounded-r-none */
+    /* [&>[data-slot]~[data-slot]]:rounded-l-none */
+    /* [&>[data-slot]~[data-slot]]:border-l-0; */
+
+    > *:not(:last-child),
+    > *:not(:last-child) > .singlestage-trigger,
+    > *:not(:last-child) > .singlestage-select,
+    > *:not(:last-child) > .singlestage-input-group-input,
+    > *:not(:last-child) > .singlestage-input-group-addon {
+      @apply rounded-r-none;
+    }
+
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger,
+    > *:not(:first-child) > .singlestage-select,
+    > *:not(:first-child) > .singlestage-input-group-input,
+    > *:not(:first-child) > .singlestage-input-group-addon {
+      @apply border-l-0
+      rounded-l-none;
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-auto
+      my-px
+      w-px;
+    }
+
+    .singlestage-button:has(+ .singlestage-button-group-separator) {
+      @apply border-r-0;
+    }
+
+    .singlestage-button-group-text {
+      &:has(+ .singlestage-input-group) {
+        @apply border-r-0;
+
+        + .singlestage-input-group {
+          @apply border-l-1;
+        }
+      }
+    }
+  }
+
+  .singlestage-button-group-orientation-vertical {
+    @apply flex-col;
+    /* *:data-slot:rounded-b-none */
+    /* [&>[data-slot]~[data-slot]]:rounded-t-none */
+    /* [&>[data-slot]~[data-slot]]:border-t-0; */
+
+    > *:not(:last-child),
+    > *:not(:last-child) > .singlestage-trigger,
+    > *:not(:last-child) > .singlestage-select,
+    > *:not(:last-child) > .singlestage-input-group-input,
+    > *:not(:last-child) > .singlestage-input-group-addon {
+      @apply rounded-b-none;
+    }
+
+    > *:not(:first-child),
+    > *:not(:first-child) > .singlestage-trigger,
+    > *:not(:first-child) > .singlestage-select,
+    > *:not(:first-child) > .singlestage-input-group-input,
+    > *:not(:first-child) > .singlestage-input-group-addon {
+      @apply border-t-0
+      rounded-t-none;
+    }
+
+    .singlestage-button-group-separator {
+      @apply h-px
+      mx-px
+      w-auto;
+    }
+
+    .singlestage-button:has(+ .singlestage-button-group-separator) {
+      @apply border-b-0;
+    }
+
+    .singlestage-button-group-text {
+      &:has(+ .singlestage-input-group) {
+        @apply border-b-0;
+
+        + .singlestage-input-group {
+          @apply border-t-1;
+        }
+      }
+    }
+  }
+}

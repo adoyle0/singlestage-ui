@@ -1,0 +1,29 @@
+@layer components1 {
+  .singlestage-textarea {
+    @apply bg-input/50
+    border
+    border-transparent
+    dark:aria-invalid:border-destructive/50
+    dark:aria-invalid:ring-destructive/40
+    md:text-sm
+    px-3
+    py-3
+    resize-none
+    rounded-2xl
+    text-base
+    transition-[color,box-shadow,background-color];
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+  }
+}

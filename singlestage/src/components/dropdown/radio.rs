@@ -1,9 +1,9 @@
-use crate::{ContextMenuContext, DropdownMenuContext, Radio, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Contains a menu item.
+/// Contains a radio menu item.
 #[component]
-pub fn RadioItem(
+pub fn DropdownMenuRadioItem(
     children: Children,
 
     #[prop(optional, into)] checked: Reactive<bool>,
@@ -136,6 +136,7 @@ pub fn RadioItem(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -170,43 +171,22 @@ pub fn RadioItem(
     };
 
     view! {
-        <li
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-item{}{}{} {}",
-                    if disabled.get() { " singlestage-dropdown-menu-item-disabled" } else { "" },
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => " singlestage-dropdown-menu-item-destructive",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            on:click=move |_| {
-                if dismiss.get() {
-                    if let Some(menu) = use_context::<DropdownMenuContext>() {
-                        if menu.dismissable.get() {
-                            menu.open.set(false);
-                        }
-                    } else if let Some(menu) = use_context::<ContextMenuContext>() {
-                        menu.open.set(false);
-                    }
-                }
-            }
-            role="menuitem"
-            value=move || value.get()
+        <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::Radio
+
+            checked
+            class
+            disabled
+            dismiss
+            id
+            inset
+            variant
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <label>
-                {children()} <Radio class="singlestage-radio-item" checked disabled value />
-            </label>
-        </li>
+            {children()}
+        </MenuItemPrimitive>
     }
 }

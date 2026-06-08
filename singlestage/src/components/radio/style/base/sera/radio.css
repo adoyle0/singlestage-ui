@@ -1,0 +1,56 @@
+@layer components1 {
+  .singlestage-radio-group {
+    @apply gap-3
+    grid;
+  }
+
+  .singlestage-radio-group-item {
+    @apply bg-transparent
+    border
+    border-input
+    flex
+    rounded-full
+    size-4.5;
+
+    &:checked,
+    &[aria-checked="true"] {
+      @apply border-foreground;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-2
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-2
+      ring-destructive/20;
+    }
+
+    &:checked,
+    &[aria-checked="true"] {
+      @apply border-foreground;
+    }
+
+    &::after {
+      @apply flex
+      items-center
+      justify-center
+      size-4.5;
+    }
+
+    &:checked::before {
+      @apply -translate-x-1/2
+      -translate-y-1/2
+      absolute
+      bg-foreground
+      left-1/2
+      rounded-full
+      size-2
+      top-1/2;
+    }
+  }
+}

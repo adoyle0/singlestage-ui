@@ -7,7 +7,9 @@ pub use group::*;
 use crate::Reactive;
 
 #[derive(Clone)]
-pub struct CheckboxGroupContext {
+pub(crate) struct CheckboxGroupContext {
+    pub name: String,
+    pub disabled: Reactive<bool>,
     pub invalid: Reactive<bool>,
     pub value: Reactive<Vec<String>>,
 }

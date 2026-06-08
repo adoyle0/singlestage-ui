@@ -11,9 +11,13 @@ pub fn ContextCheckboxesExample() -> impl IntoView {
             </ContextMenuTrigger>
             <ContextMenuContent>
                 <ContextMenuGroup>
-                    <CheckboxItem checked=true>"Show Bookmarks Bar"</CheckboxItem>
-                    <CheckboxItem>"Show Full URLs"</CheckboxItem>
-                    <CheckboxItem checked=true>"Show Developer Tools"</CheckboxItem>
+                    <ContextMenuCheckboxItem checked=true>
+                        "Show Bookmarks Bar"
+                    </ContextMenuCheckboxItem>
+                    <ContextMenuCheckboxItem>"Show Full URLs"</ContextMenuCheckboxItem>
+                    <ContextMenuCheckboxItem checked=true>
+                        "Show Developer Tools"
+                    </ContextMenuCheckboxItem>
                 </ContextMenuGroup>
             </ContextMenuContent>
         </ContextMenu>

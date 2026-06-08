@@ -4,6 +4,16 @@ description = "Renders an accessible label associated with controls."
 [[examples]]
 name = "label"
 
+[[examples]]
+name = "labels implicit"
+title = "Implicit Labeling"
+description = "Input components use child text as their label and automatically handle association."
+
+[[examples]]
+name = "labels in fields"
+title = "Labels in Fields"
+description = "Labels used in Fields automatically associate with Field inputs."
+
 [[references]]
 name = "Label"
 description = "Renders an accessible label associated with controls."
@@ -11,6 +21,10 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display as disabled.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display as invalid.""" },
   { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \
     <label> `for` attribute to avoid name collisions.""" },
 ]

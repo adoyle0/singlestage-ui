@@ -9,6 +9,31 @@ name = "switch_group"
 title = "Checkbox Group"
 description = "Since a Switch is a Checkbox underneath, it can also be used in a CheckboxGroup."
 
+[[examples]]
+name = "switch_description"
+title = "Description"
+
+[[examples]]
+name = "switch_choice_card"
+title = "Choice Card"
+description = """Card-style selection where FieldLabel wraps the entire Field for a clickable \
+card pattern."""
+
+[[examples]]
+name = "switch_disabled"
+title = "Disabled"
+description = "Set the disabled prop on either the Switch or the Field to render it disabled."
+
+[[examples]]
+name = "switch_invalid"
+title = "Invalid"
+description = "Set the invalid prop on either the Switch or the Field to render it invalid."
+
+[[examples]]
+name = "switch_size"
+title = "Size"
+description = "Set the size prop to change the size of the switch."
+
 [[references]]
 name = "switch"
 description = "A control that allows the user to toggle between checked and not checked."
@@ -20,6 +45,10 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#additional_attributes">checkbox</a> \
 attributes."""
 attrs = [
-  { attr = "checked", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal coupled to the switch's checked value.""" },
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the Switch's checked value.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether to \
+    render the Switch as invalid.""" },
+  { attr = "size", attr_type = "String", default = """"default"""", description = """ Set the \
+    size to render the Switch.""" },
 ]

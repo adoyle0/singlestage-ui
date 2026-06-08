@@ -19,7 +19,7 @@ pub fn SpinnerItemExample() -> impl IntoView {
                     </Button>
                 </ItemActions>
                 <ItemFooter>
-                    <Progress max=1000 value=129 />
+                    <Progress max=1000. value=129. />
                 </ItemFooter>
             </Item>
         </div>

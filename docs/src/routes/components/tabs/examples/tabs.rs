@@ -4,71 +4,67 @@ use singlestage::*;
 #[component]
 pub fn TabsExample() -> impl IntoView {
     view! {
-        <Tabs id="demo-tabs-with-panels">
+        <Tabs value="overview" class="w-[400px]">
             <TabsList>
-                <TabsTrigger value="account">"Account"</TabsTrigger>
-                <TabsTrigger value="password">"Password"</TabsTrigger>
+                <TabsTrigger value="overview">"Overview"</TabsTrigger>
+                <TabsTrigger value="analytics">"Analytics"</TabsTrigger>
+                <TabsTrigger value="reports">"Reports"</TabsTrigger>
+                <TabsTrigger value="settings">"Settings"</TabsTrigger>
             </TabsList>
-
-            <TabsContent value="account">
+            <TabsContent value="overview">
                 <Card>
                     <CardHeader>
-                        <CardTitle>"Account"</CardTitle>
+                        <CardTitle>"Overview"</CardTitle>
                         <CardDescription>
-                            "Make changes to your account here. Click save when you're done."
+                            "View your key metrics and recent project activity. Track progress
+                            across all your active projects."
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <form class="form grid gap-6">
-                            <div class="grid gap-3">
-                                <Label label_for="demo-tabs-account-name">"Name"</Label>
-                                <Input
-                                    input_type="text"
-                                    id="demo-tabs-account-name"
-                                    value="Pedro Duarte"
-                                />
-                            </div>
-                            <div class="grid gap-3">
-                                <Label label_for="demo-tabs-account-username">"Username"</Label>
-                                <Input
-                                    input_type="text"
-                                    id="demo-tabs-account-username"
-                                    value="@peduarte"
-                                />
-                            </div>
-                        </form>
+                    <CardContent class="text-sm text-(--muted-foreground)">
+                        "You have 12 active projects and 3 pending tasks."
                     </CardContent>
-                    <CardFooter>
-                        <Button button_type="button">"Save changes"</Button>
-                    </CardFooter>
                 </Card>
             </TabsContent>
-
-            <TabsContent value="password">
+            <TabsContent value="analytics">
                 <Card>
                     <CardHeader>
-                        <CardTitle>"Password"</CardTitle>
+                        <CardTitle>"Analytics"</CardTitle>
                         <CardDescription>
-                            "Change your password here. After saving, you'll be logged out."
+                            "Track performance and user engagement metrics. Monitor trends and
+                            identify growth opportunities."
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <form class="form grid gap-6">
-                            <div class="grid gap-3">
-                                <Label label_for="demo-tabs-password-current">
-                                    "Current password"
-                                </Label>
-                                <Input input_type="password" id="demo-tabs-password-current" />
-                            </div>
-                            <div class="grid gap-3">
-                                <Label label_for="demo-tabs-password-new">"New password"</Label>
-                                <Input input_type="password" id="demo-tabs-password-new" />
-                            </div>
-                        </form>
+                    <CardContent class="text-sm text-(--muted-foreground)">
+                        "Page views are up 25% compared to last month."
                     </CardContent>
-                    <CardFooter>
-                        <Button button_type="button">"Save Password"</Button>
-                    </CardFooter>
+                </Card>
+            </TabsContent>
+            <TabsContent value="reports">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>"Reports"</CardTitle>
+                        <CardDescription>
+                            "Generate and download your detailed reports. Export data in
+                            multiple formats for analysis."
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent class="text-sm text-(--muted-foreground)">
+                        "You have 5 reports ready and available to export."
+                    </CardContent>
+                </Card>
+            </TabsContent>
+            <TabsContent value="settings">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>"Settings"</CardTitle>
+                        <CardDescription>
+                            "Manage your account preferences and options. Customize your
+                            experience to fit your needs."
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent class="text-sm text-(--muted-foreground)">
+                        "Configure notifications, security, and themes."
+                    </CardContent>
                 </Card>
             </TabsContent>
         </Tabs>

@@ -23,12 +23,18 @@ pub fn DropdownCheckboxIconsExample() -> impl IntoView {
             <DropdownMenuContent class="w-48">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Notification Preferences"</DropdownMenuLabel>
-                    <CheckboxItem checked=notifications
-                        .email>{icon!(icondata::LuMail)} "Email notifications"</CheckboxItem>
-                    <CheckboxItem checked=notifications
-                        .sms>{icon!(icondata::LuMessageSquare)} "SMS notifications"</CheckboxItem>
-                    <CheckboxItem checked=notifications
-                        .push>{icon!(icondata::LuBell)} "Push notifications"</CheckboxItem>
+                    <DropdownMenuCheckboxItem checked=notifications
+                        .email>
+                        {icon!(icondata::LuMail)} "Email notifications"
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem checked=notifications
+                        .sms>
+                        {icon!(icondata::LuMessageSquare)} "SMS notifications"
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem checked=notifications
+                        .push>
+                        {icon!(icondata::LuBell)} "Push notifications"
+                    </DropdownMenuCheckboxItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

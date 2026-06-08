@@ -1,11 +1,21 @@
-use crate::FieldContext;
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// A styled label associated with the input for a Field.
+/// Renders an accessible label associated with controls
 #[component]
 pub fn FieldLabel(
     children: Children,
 
+    /// Whether the element renders as disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    /// (For use in popover menus)
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
+    /// Whether the element renders as invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The id of the labeled element if it's not a child
     #[prop(optional, into)]
     label_for: MaybeProp<String>,
@@ -153,35 +163,20 @@ pub fn FieldLabel(
         />
     };
 
-    let uuid = uuid::Uuid::new_v4();
-
     view! {
-        <label
-            class=move || format!("singlestage-field-label {}", class.get().unwrap_or_default())
-            for=move || {
-                if let Some(label_for) = label_for.get() {
-                    Some(label_for)
-                } else {
-                    use_context::<FieldContext>().map(|field| field.input_id.get())
-                }
-            }
-            id={if let Some(field) = use_context::<FieldContext>() {
-                let label_id;
-                if let Some(id) = id.get_untracked() {
-                    label_id = id;
-                } else {
-                    label_id = uuid.to_string()
-                };
-                field.label_id.set(label_id.clone());
-                Some(label_id)
-            } else {
-                id.get_untracked()
-            }}
+        <LabelPrimitive
+            primitive_type=LabelPrimitiveType::FieldLabel
+            class
+            disabled
+            id
+            inset
+            invalid
+            label_for
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </label>
+        </LabelPrimitive>
     }
 }

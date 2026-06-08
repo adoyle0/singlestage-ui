@@ -164,13 +164,14 @@ pub fn Badge(
             aria_invalid=move || if invalid.get() { Some("true") } else { None }
             class=move || {
                 format!(
-                    "{} {}",
+                    "singlestage-badge {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-badge-primary",
-                        "secondary" => "singlestage-badge-secondary",
-                        "destructive" => "singlestage-badge-destructive",
-                        "outline" => "singlestage-badge-outline",
-                        _ => "singlestage-badge-primary",
+                        "secondary" => "singlestage-badge-variant-secondary",
+                        "destructive" => "singlestage-badge-variant-destructive",
+                        "outline" => "singlestage-badge-variant-outline",
+                        "ghost" => "singlestage-badge-variant-ghost",
+                        "link" => "singlestage-badge-variant-link",
+                        _ => "singlestage-badge-variant-default",
                     },
                     class.get().unwrap_or_default(),
                 )

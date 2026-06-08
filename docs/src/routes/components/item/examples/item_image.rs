@@ -53,7 +53,7 @@ pub fn ItemImageExample() -> impl IntoView {
                                     <ItemContent>
                                         <ItemTitle class="line-clamp-1">
                                             {song_title} " - "
-                                            <span class="text-(--muted-foreground)">{song.album}</span>
+                                            <span class="text-muted-foreground">{song.album}</span>
                                         </ItemTitle>
                                         <ItemDescription>{song.artist}</ItemDescription>
                                     </ItemContent>

@@ -64,8 +64,8 @@ pub fn App() -> impl IntoView {
 
     view! {
         <Title text="Singlestage UI" />
-        <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
         <ThemeProvider>
+            <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
             <Router>
                 <Routes fallback=NotFound>
                     <ParentRoute path=StaticSegment("") view=SidebarContainer>
@@ -74,18 +74,6 @@ pub fn App() -> impl IntoView {
                         <Route path=StaticSegment("/install") view=Installation />
                         <Route path=StaticSegment("/theme-provider") view=ThemeProviderRoute />
                         <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
-                        <Route
-                            path=StaticSegment("/reactive-debug")
-                            view=|| {
-                                view! {
-                                    {if cfg!(debug_assertions) {
-                                        ReactiveDebug.into_any()
-                                    } else {
-                                        NotFound.into_any()
-                                    }}
-                                }
-                            }
-                        />
                         <ComponentRoutes />
                     </ParentRoute>
                 </Routes>

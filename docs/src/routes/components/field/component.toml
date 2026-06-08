@@ -46,7 +46,7 @@ Radio, Checkbox and Switch components."""
 [[examples]]
 name = "field group"
 title = "Field Group"
-description = "Stack Field components with FieldGroup. Add FieldSeparator to divide them."
+description = "Stack Field components with FieldGroup. Add Separator to divide them."
 
 [[examples]]
 name = "field responsive layout"
@@ -94,8 +94,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "errors", attr_type = "Reactive<Vec<String>>", default = "[]", description = """A \
-    reactive list of errors to display.""" },
+  { attr = "errors", attr_type = "Vec<String>", default = "[]", description = """A reactive list \
+    of errors to display.""" },
 
 ]
 
@@ -132,7 +132,7 @@ attrs = [
 
 [[references]]
 name = "FieldSeparator"
-description = """Visual divider to separate sections inside a FieldGroup. Accepts optional inline \
+description = """Visual divider to separate sections inside a FieldSet. Accepts optional inline \
 content."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

@@ -15,11 +15,13 @@ pub fn DropdownCheckboxesExample() -> impl IntoView {
             <DropdownMenuContent class="w-40">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Appearance"</DropdownMenuLabel>
-                    <CheckboxItem checked=show_status_bar>"Status Bar"</CheckboxItem>
-                    <CheckboxItem checked=show_activity_bar disabled=true>
+                    <DropdownMenuCheckboxItem checked=show_status_bar>
+                        "Status Bar"
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem checked=show_activity_bar disabled=true>
                         "Activity Bar"
-                    </CheckboxItem>
-                    <CheckboxItem checked=show_panel>"Panel"</CheckboxItem>
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem checked=show_panel>"Panel"</DropdownMenuCheckboxItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

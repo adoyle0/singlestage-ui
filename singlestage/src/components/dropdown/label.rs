@@ -1,14 +1,23 @@
-use crate::DropdownMenuGroupContext;
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Labels groups.
 #[component]
 pub fn DropdownMenuLabel(
     children: Children,
 
+    /// Whether the element renders as disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
+    /// (For use in popover menus)
     #[prop(optional, into)]
     inset: MaybeProp<bool>,
+    /// Whether the element renders as invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+    /// The id of the labeled element if it's not a child
+    #[prop(optional, into)]
+    label_for: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -51,6 +60,9 @@ pub fn DropdownMenuLabel(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -88,6 +100,9 @@ pub fn DropdownMenuLabel(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -109,11 +124,6 @@ pub fn DropdownMenuLabel(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let group = expect_context::<DropdownMenuGroupContext>();
-
-    let uuid = uuid::Uuid::new_v4().to_string();
-    group.heading_id.set(uuid.clone());
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -142,6 +152,7 @@ pub fn DropdownMenuLabel(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -152,24 +163,19 @@ pub fn DropdownMenuLabel(
     };
 
     view! {
-        <h6
-            id=uuid
-            class=move || {
-                format!(
-                    "singlestage-dropdown-menu-label{} {}",
-                    if inset.get().unwrap_or_default() {
-                        " singlestage-dropdown-menu-inset"
-                    } else {
-                        ""
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <LabelPrimitive
+            primitive_type=LabelPrimitiveType::MenuLabel
+            class
+            disabled
+            id
+            inset
+            invalid
+            label_for
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </h6>
+        </LabelPrimitive>
     }
 }
