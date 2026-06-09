@@ -5,6 +5,8 @@ use leptos::prelude::*;
 pub fn ItemDescription(
     children: Children,
 
+    #[prop(optional, into)] as_child: MaybeProp<bool>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -150,16 +152,33 @@ pub fn ItemDescription(
         />
     };
 
-    view! {
-        <p
-            class=move || {
-                format!("singlestage-item-description {}", class.get().unwrap_or_default())
-            }
+    if as_child.get().unwrap_or_default() {
+        view! {
+            <div
+                class=move || {
+                    format!("singlestage-item-description {}", class.get().unwrap_or_default())
+                }
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        >
-            {children()}
-        </p>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </div>
+        }
+        .into_any()
+    } else {
+        view! {
+            <p
+                class=move || {
+                    format!("singlestage-item-description {}", class.get().unwrap_or_default())
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </p>
+        }
+        .into_any()
     }
 }
