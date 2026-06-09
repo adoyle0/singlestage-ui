@@ -21,7 +21,7 @@ pub fn Select(
     placeholder: MaybeProp<String>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
-    value: Reactive<String>,
+    value: Option<Reactive<String>>,
 
     // LEPTOS ATTRIBUTES
     /// A reactive reference to a DOM node that can be used with the node_ref attribute.
@@ -39,9 +39,9 @@ pub fn Select(
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
+    // /// Toggle accepting multiple input values for certain input types.
+    // #[prop(optional, into)]
+    // multiple: MaybeProp<bool>,
     /// Name of this element. Submitted with the form as part of a name/value pair.
     #[prop(optional, into)]
     name: MaybeProp<String>,
@@ -165,29 +165,13 @@ pub fn Select(
         }
     };
 
-    let on_change = move |ev| {
-        if !multiple.get_untracked().unwrap_or_default() {
-            value.set(event_target_value(&ev))
-        }
-    };
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default);
+    let value: Reactive<String> = value.unwrap_or(if let Some(default) = default.get_untracked() {
+        Reactive::new(default)
     } else if placeholder.get_untracked().is_some() {
-        value.set("singlestage-select-placeholder".to_string());
-    }
-
-    if let Some(select) = select_ref.get_untracked() {
-        if let Some(default) = default.get_untracked() {
-            select.set_value(&default);
-        } else if placeholder.get_untracked().is_some() {
-            select.set_value("singlestage-select-placeholder");
-        } else {
-            select.set_value(&value.get_untracked());
-        }
-    }
-
-    let context = SelectContext { multiple, value };
+        Reactive::new("singlestage-select-placeholder".to_string())
+    } else {
+        Reactive::new("singlestage-select-value-not-set".to_string())
+    });
 
     let disabled: Reactive<bool> = {
         if let Some(field) = use_context::<FieldContext>() {
@@ -205,15 +189,9 @@ pub fn Select(
         }
     };
 
-    // Update value reactively
-    Effect::new(move || {
-        if let Some(select) = select_ref.get() {
-            let value = value.get();
-            if !value.is_empty() {
-                select.set_value(&value);
-            }
-        }
-    });
+    let context = SelectContext { value };
+
+    let on_change = move |ev| value.set(event_target_value(&ev));
 
     let global_attrs_1 = view! {
         <{..}
@@ -258,7 +236,6 @@ pub fn Select(
             autocomplete=move || autocomplete.get()
             disabled=move || disabled.get()
             form=move || form.get()
-            multiple=move || multiple.get()
             name=move || name.get()
             required=move || required.get()
             size=move || size.get()
@@ -295,11 +272,7 @@ pub fn Select(
                     }
                     class=move || {
                         format!(
-                            "singlestage-select{}{}{}",
-                            match multiple.get() {
-                                Some(true) => " singlestage-select-multi",
-                                _ => "",
-                            },
+                            "singlestage-select{}{}",
                             match todo_name_me_size.get().unwrap_or_default().as_str() {
                                 "sm" | "small" => " singlestage-select-size-sm",
                                 _ => "",
@@ -312,6 +285,8 @@ pub fn Select(
                             },
                         )
                     }
+                    disabled=move || disabled.get()
+                    prop:disabled=move || disabled.get()
                     node_ref=select_ref
                     on:change=on_change
                     id=move || {
@@ -327,6 +302,13 @@ pub fn Select(
                             id.get_untracked()
                         }
                     }
+                    prop:value=move || {
+                        if value.get().as_str() == "singlestage-select-value-not-set" {
+                            None
+                        } else {
+                            Some(value.get())
+                        }
+                    }
 
                     {..select_attrs}
                 >
@@ -337,22 +319,20 @@ pub fn Select(
                     </Show>
                     {children()}
                 </select>
-                <Show when=move || !multiple.get().is_some()>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="singlestage-select-icon"
-                    >
-                        <path d="m6 9 6 6 6-6" />
-                    </svg>
-                </Show>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="singlestage-select-icon"
+                >
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
             </Provider>
         </div>
     }
