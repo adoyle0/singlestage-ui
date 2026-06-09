@@ -128,16 +128,12 @@ pub fn SelectOption(
     let select_context = expect_context::<SelectContext>();
 
     if let Some(value) = value.get_untracked() {
-        if !select_context.multiple.get_untracked().unwrap_or_default() {
-            selected.set(value == select_context.value.get_untracked())
-        }
+        selected.set(value == select_context.value.get_untracked())
     };
 
     Effect::new(move || {
-        if !select_context.multiple.get_untracked().unwrap_or_default() {
-            if let Some(value) = value.get() {
-                selected.set(value == select_context.value.get())
-            }
+        if let Some(value) = value.get() {
+            selected.set(value == select_context.value.get())
         }
     });
 
