@@ -57,7 +57,7 @@
     @apply line-clamp-2
     font-normal;
 
-    a {
+    a:not(.singlestage-button) {
       @apply underline
       underline-offset-4;
 

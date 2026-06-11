@@ -5,7 +5,7 @@
   }
 
   .singlestage-alert-title {
-    a {
+    a:not(.singlestage-button) {
       @apply underline
       underline-offset-3;
 
@@ -20,7 +20,7 @@
     text-balance
     text-muted-foreground;
 
-    a {
+    a:not(.singlestage-button) {
       @apply underline
       underline-offset-3;
 
