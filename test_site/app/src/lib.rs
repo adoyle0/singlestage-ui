@@ -149,16 +149,14 @@ pub fn App() -> impl IntoView {
     leptos::server_fn::client::set_server_url("http://localhost:3000");
 
     view! {
-        {
-            #[cfg(not(feature = "csr"))]
-            // In csr mode the css file is sourced in index.html
-            view! { <leptos_meta::Stylesheet id="leptos" href="/pkg/test_site.css" /> }
-        }
-
         <Title text="test_site" />
 
         <ThemeProvider>
-            <Router>
+            {
+                #[cfg(not(feature = "csr"))]
+                // In csr mode the css file is sourced in index.html
+                view! { <leptos_meta::Stylesheet id="leptos" href="/pkg/test_site.css" /> }
+            } <Router>
                 <Routes fallback=NotFound>
                     <ParentRoute path=StaticSegment("") view=SidebarComponent>
                         <Route path=StaticSegment("/") view=Home />

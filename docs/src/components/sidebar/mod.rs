@@ -113,8 +113,10 @@ pub fn AppSidebar() -> impl IntoView {
             </SidebarContent>
             <SidebarSeparator />
             <SidebarFooter>
-                <a
-                    class="kofi-btn"
+                <Link
+                    render_as="button"
+                    variant="secondary"
+                    class="kofi-btn w-full"
                     href="https://ko-fi.com/K3K41INGJM"
                     on:click=move |_| {
                         if let Some(sheet) = use_context::<SheetContext>() {
@@ -123,11 +125,9 @@ pub fn AppSidebar() -> impl IntoView {
                     }
                     target="_blank"
                 >
-                    <Button class="w-full" variant="secondary">
-                        <img src="/kofi_symbol.svg" />
-                        "Buy me a coffee"
-                    </Button>
-                </a>
+                    <img src="/kofi_symbol.svg" />
+                    "Buy me a coffee"
+                </Link>
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>
