@@ -44,7 +44,7 @@
     leading-normal
     nth-last-2:-mt-1;
 
-    > a {
+    > a:not(.singlestage-button) {
       @apply underline
       underline-offset-4;
 
