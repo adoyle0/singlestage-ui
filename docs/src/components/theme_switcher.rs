@@ -186,9 +186,13 @@ pub fn ThemeSwitcher() -> impl IntoView {
             </Tooltip>
             <Tooltip>
                 <TooltipTrigger>
-                    <a href="https://github.com/adoyle0/singlestage-ui">
-                        <Button size="sm-icon">{icon!(icondata::SiGithub)}</Button>
-                    </a>
+                    <Link
+                        href="https://github.com/adoyle0/singlestage-ui"
+                        render_as="button"
+                        size="sm-icon"
+                    >
+                        {icon!(icondata::SiGithub)}
+                    </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
                     <p>"GitHub repository"</p>
