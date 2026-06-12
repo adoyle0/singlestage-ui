@@ -53,8 +53,6 @@
 
   .singlestage-sidebar-rail {
     @apply absolute
-  /* [[data-side=left][data-state=collapsed]_&]:cursor-e-resize */
-  /* [[data-side=right][data-state=collapsed]_&]:cursor-w-resize */
     ease-linear
     hidden
     inset-y-0
@@ -65,7 +63,7 @@
     w-4
     z-20;
 
-    &:after {
+    &::after {
       @apply absolute
       inset-y-0
       start-1/2
@@ -131,7 +129,7 @@
     outline-hidden
     transition-transform;
 
-    &:after {
+    &::after {
       @apply -inset-2
       absolute;
     }
@@ -200,7 +198,7 @@
     outline-hidden
     transition-transform;
 
-    &:after {
+    &::after {
       @apply -inset-2
       absolute;
     }
@@ -270,30 +268,35 @@
     }
   }
 
-  .singlestage-sidebar-side-left {
-    .singlestage-sidebar-container {
-      @apply left-0;
+  .singlestage-sidebar-collapsible-icon {
+    .singlestage-sidebar-content {
+      @apply overflow-hidden;
     }
 
-    .singlestage-sidebar-rail {
-      @apply -right-4
-      cursor-w-resize;
+    .singlestage-sidebar-group-action {
+      @apply hidden;
+    }
+
+    .singlestage-sidebar-menu-action {
+      @apply hidden;
+    }
+
+    .singlestage-sideabar-menu-badge {
+      @apply hidden;
+    }
+
+    .singlestage-sidebar-menu-sub-button {
+      @apply hidden;
     }
   }
 
-  .singlestage-sidebar-side-right {
-    .singlestage-sidebar-container {
-      @apply right-0;
-    }
-
-    .singlestage-sidebar-gap {
-      @apply rotate-180;
-    }
-
-    .singlestage-sidebar-rail {
-      @apply cursor-e-resize
-      left-0;
-    }
+  .singlestage-sidebar-collapsible-none {
+    @apply bg-sidebar
+    flex
+    flex-col
+    h-full
+    text-sidebar-foreground
+    w-(--sidebar-width) flex-col;
   }
 
   .singlestage-sidebar-variant-floating,
@@ -315,11 +318,11 @@
 
   .singlestage-sidebar-variant-sidebar {
     &.singlestage-sidebar-collapsible-icon {
-      .singlestage-sidebar-gap {
+      .singlestage-sidebar-container {
         @apply w-(--sidebar-width-icon);
       }
 
-      .singlestage-sidebar-container {
+      .singlestage-sidebar-gap {
         @apply w-(--sidebar-width-icon);
       }
     }
@@ -337,6 +340,44 @@
     }
   }
 
+  .singlestage-sidebar-side-left {
+    .singlestage-sidebar-container {
+      @apply left-0;
+    }
+
+    .singlestage-sidebar-rail {
+      @apply -right-4
+      cursor-w-resize;
+    }
+
+    &:not([aria-expanded="true"]) {
+      .singlestage-sidebar-rail {
+        @apply cursor-e-resize;
+      }
+    }
+  }
+
+  .singlestage-sidebar-side-right {
+    .singlestage-sidebar-container {
+      @apply right-0;
+    }
+
+    .singlestage-sidebar-gap {
+      @apply rotate-180;
+    }
+
+    .singlestage-sidebar-rail {
+      @apply cursor-e-resize
+      left-0;
+    }
+
+    &:not([aria-expanded="true"]) {
+      .singlestage-sidebar-rail {
+        @apply cursor-w-resize;
+      }
+    }
+  }
+
   .singlestage-sidebar-collapsible-offcanvas {
     .singlestage-sidebar-gap {
       @apply w-0;
@@ -345,7 +386,7 @@
     .singlestage-sidebar-rail {
       @apply translate-x-0;
 
-      &:after {
+      &::after {
         @apply left-full;
       }
 
@@ -373,35 +414,5 @@
         @apply -left-2;
       }
     }
-  }
-
-  .singlestage-sidebar-collapsible-icon {
-    .singlestage-sidebar-content {
-      @apply overflow-hidden;
-    }
-
-    .singlestage-sidebar-group-action {
-      @apply hidden;
-    }
-
-    .singlestage-sidebar-menu-action {
-      @apply hidden;
-    }
-
-    .singlestage-sideabar-menu-badge {
-      @apply hidden;
-    }
-
-    .singlestage-sidebar-menu-sub-button {
-      @apply hidden;
-    }
-  }
-
-  .singlestage-sidebar-collapsible-none {
-    @apply bg-sidebar
-    flex
-    h-full
-    text-sidebar-foreground
-    w-(--sidebar-width) flex-col;
   }
 }

@@ -1,8 +1,8 @@
 name = "Sidebar"
 description = "A composable, themeable, and customizable sidebar component."
 
-# [[examples]]
-# name = "sidebar"
+[[examples]]
+name = "sidebar"
 
 [[references]]
 name = "Sidebar"

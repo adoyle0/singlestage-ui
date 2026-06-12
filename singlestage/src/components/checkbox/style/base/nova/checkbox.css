@@ -13,7 +13,7 @@
       @apply bg-primary
       border-primary;
 
-      &:after {
+      &::after {
         @apply bg-primary-foreground
         size-3.5;
       }
