@@ -15,7 +15,7 @@
       ring-1
       ring-ring/50;
 
-      &:after {
+      &::after {
         @appy border-ring;
       }
     }

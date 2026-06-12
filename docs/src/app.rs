@@ -76,6 +76,9 @@ pub fn App() -> impl IntoView {
                         <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
                         <ComponentRoutes />
                     </ParentRoute>
+                    <ParentRoute path=StaticSegment("sidebar_examples") view=Outlet>
+                        <Route path=StaticSegment("/test") view=SidebarExampleTest />
+                    </ParentRoute>
                 </Routes>
             </Router>
         </ThemeProvider>

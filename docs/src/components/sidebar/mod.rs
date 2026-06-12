@@ -11,9 +11,9 @@ use button::*;
 use debug::*;
 
 #[component]
-pub fn AppSidebar() -> impl IntoView {
+pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoView {
     view! {
-        <Sidebar class="inset-shadow-sm">
+        <Sidebar class="inset-shadow-sm" side>
             <SidebarHeader>
                 <a
                     href="/"

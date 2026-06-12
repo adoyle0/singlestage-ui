@@ -169,10 +169,17 @@ pub fn Sidebar(
     let sidebar = expect_context::<SidebarContext>();
     let is_mobile = RwSignal::new(false);
 
+    let open: Reactive<bool> = sidebar.open;
+
+    if let Some(side) = side.get() {
+        sidebar.side.set(side);
+    };
+    let side: Reactive<String> = sidebar.side;
+
     // client init
     Effect::new(move || {
         is_mobile.set(screen_is_small());
-        sidebar.open.set(!is_mobile.get_untracked());
+        open.set(!is_mobile.get_untracked());
     });
 
     window_event_listener(leptos::ev::resize, move |_| {
@@ -182,106 +189,233 @@ pub fn Sidebar(
         // this should only run when breakpoint is hit
         if is_mobile.get_untracked() != screen_is_small {
             if screen_is_small {
-                sidebar.open.set(false);
+                open.set(false);
             }
 
             is_mobile.set(screen_is_small);
         }
     });
 
-    // TODO: Hook this up
-    let _global_attrs_1 = view! {
-        <{..}
-            accesskey=move || accesskey.get()
-            autocapitalize=move || autocapitalize.get()
-            autofocus=move || autofocus.get()
-            contenteditable=move || contenteditable.get()
-            dir=move || dir.get()
-            draggable=move || draggable.get()
-            enterkeyhint=move || enterkeyhint.get()
-            exportparts=move || exportparts.get()
-            hidden=move || hidden.get()
-            id=move || id.get()
-            inert=move || inert.get()
-            inputmode=move || inputmode.get()
-            is=move || is.get()
-            itemid=move || itemid.get()
-        />
-    };
-
-    // TODO: Hook this up
-    let _global_attrs_2 = view! {
-        <{..}
-            itemprop=move || itemprop.get()
-            itemref=move || itemref.get()
-            itemscope=move || itemscope.get()
-            itemtype=move || itemtype.get()
-            lang=move || lang.get()
-            nonce=move || nonce.get()
-            part=move || part.get()
-            popover=move || popover.get()
-            role=move || role.get()
-            slot=move || slot.get()
-            spellcheck=move || spellcheck.get()
-            style=move || style.get()
-            tabindex=move || tabindex.get()
-            title=move || title.get()
-            translate=move || translate.get()
-        />
-    };
-
-    // TODO: revisit swapping between mobile and non because it takes too long and feels like shit
     let children = StoredValue::new(children);
 
     view! {
         <Show
-            when=move || is_mobile.get()
+            when=move || collapsible.get().unwrap_or_default().as_str() != "none"
             fallback=move || {
+                let global_attrs_1 = view! {
+                    <{..}
+                        accesskey=move || accesskey.get()
+                        autocapitalize=move || autocapitalize.get()
+                        autofocus=move || autofocus.get()
+                        contenteditable=move || contenteditable.get()
+                        dir=move || dir.get()
+                        draggable=move || draggable.get()
+                        enterkeyhint=move || enterkeyhint.get()
+                        exportparts=move || exportparts.get()
+                        hidden=move || hidden.get()
+                        id=move || id.get()
+                        inert=move || inert.get()
+                        inputmode=move || inputmode.get()
+                        is=move || is.get()
+                        itemid=move || itemid.get()
+                    />
+                };
+                let global_attrs_2 = view! {
+                    <{..}
+                        itemprop=move || itemprop.get()
+                        itemref=move || itemref.get()
+                        itemscope=move || itemscope.get()
+                        itemtype=move || itemtype.get()
+                        lang=move || lang.get()
+                        nonce=move || nonce.get()
+                        part=move || part.get()
+                        popover=move || popover.get()
+                        role=move || role.get()
+                        slot=move || slot.get()
+                        spellcheck=move || spellcheck.get()
+                        style=move || style.get()
+                        tabindex=move || tabindex.get()
+                        title=move || title.get()
+                        translate=move || translate.get()
+                    />
+                };
+
                 view! {
-                    <aside class=move || {
-                        format!(
-                            "singlestage-sidebar{} {} {}",
-                            if !sidebar.open.get() {
-                                match collapsible.get().unwrap_or_default().as_str() {
-                                    "icon" => " singlestage-sidebar-collapsible-icon",
-                                    _ => " singlestage-sidebar-collapsible-offcanvas",
-                                }
-                            } else {
-                                ""
-                            },
-                            match side.get().unwrap_or_default().as_str() {
-                                "right" => "singlestage-sidebar-side-right",
-                                _ => "singlestage-sidebar-side-left",
-                            },
-                            match variant.get().unwrap_or_default().as_str() {
-                                "floating" => "singlestage-sidebar-variant-floating",
-                                "inset" => "singlestage-sidebar-variant-inset",
-                                _ => "singlestage-sidebar-variant-sidebar",
-                            },
-                        )
-                    }>
-                        <div class="singlestage-sidebar-gap" />
-                        <div class="singlestage-sidebar-container">
-                            <div class=move || {
-                                format!(
-                                    "singlestage-sidebar-inner {}",
-                                    class.get().unwrap_or_default(),
-                                )
-                            }>{children.read_value()()}</div>
-                        </div>
-                    </aside>
+                    <div
+                        class=move || {
+                            format!(
+                                "singlestage-sidebar-collapsible-none {}",
+                                class.get().unwrap_or_default(),
+                            )
+                        }
+
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    >
+                        {children.read_value()()}
+                    </div>
                 }
             }
         >
-            <Sheet open=sidebar.open>
-                <SheetContent class="singlestage-sidebar-mobile" side=sidebar.side>
-                    <SheetHeader class="sr-only">
-                        <SheetTitle>"Sidebar"</SheetTitle>
-                        <SheetDescription>"Displays the mobile sidebar."</SheetDescription>
-                    </SheetHeader>
-                    <div class="flex h-full w-full flex-col">{children.read_value()()}</div>
-                </SheetContent>
-            </Sheet>
+            <Show
+                when=move || !is_mobile.get()
+                fallback=move || {
+                    let global_attrs_1 = view! {
+                        <{..}
+                            accesskey=move || accesskey.get()
+                            autocapitalize=move || autocapitalize.get()
+                            autofocus=move || autofocus.get()
+                            contenteditable=move || contenteditable.get()
+                            dir=move || dir.get()
+                            draggable=move || draggable.get()
+                            enterkeyhint=move || enterkeyhint.get()
+                            exportparts=move || exportparts.get()
+                            hidden=move || hidden.get()
+                            id=move || id.get()
+                            inert=move || inert.get()
+                            inputmode=move || inputmode.get()
+                            is=move || is.get()
+                            itemid=move || itemid.get()
+                        />
+                    };
+                    let global_attrs_2 = view! {
+                        <{..}
+                            itemprop=move || itemprop.get()
+                            itemref=move || itemref.get()
+                            itemscope=move || itemscope.get()
+                            itemtype=move || itemtype.get()
+                            lang=move || lang.get()
+                            nonce=move || nonce.get()
+                            part=move || part.get()
+                            popover=move || popover.get()
+                            role=move || role.get()
+                            slot=move || slot.get()
+                            spellcheck=move || spellcheck.get()
+                            style=move || style.get()
+                            tabindex=move || tabindex.get()
+                            title=move || title.get()
+                            translate=move || translate.get()
+                        />
+                    };
+
+                    view! {
+                        <Sheet open>
+                            <SheetContent class="singlestage-sidebar-mobile" side>
+                                <SheetHeader class="sr-only">
+                                    <SheetTitle>"Sidebar"</SheetTitle>
+                                    <SheetDescription>
+                                        "Displays the mobile sidebar."
+                                    </SheetDescription>
+                                </SheetHeader>
+                                <div
+                                    class=move || {
+                                        format!(
+                                            "singlestage-sidebar-inner {}",
+                                            class.get().unwrap_or_default(),
+                                        )
+                                    }
+
+                                    {..global_attrs_1}
+                                    {..global_attrs_2}
+                                >
+                                    {children.read_value()()}
+                                </div>
+                            </SheetContent>
+                        </Sheet>
+                    }
+                }
+            >
+                {
+                    let global_attrs_1 = view! {
+                        <{..}
+                            accesskey=move || accesskey.get()
+                            autocapitalize=move || autocapitalize.get()
+                            autofocus=move || autofocus.get()
+                            contenteditable=move || contenteditable.get()
+                            dir=move || dir.get()
+                            draggable=move || draggable.get()
+                            enterkeyhint=move || enterkeyhint.get()
+                            exportparts=move || exportparts.get()
+                            hidden=move || hidden.get()
+                            id=move || id.get()
+                            inert=move || inert.get()
+                            inputmode=move || inputmode.get()
+                            is=move || is.get()
+                            itemid=move || itemid.get()
+                        />
+                    };
+                    let global_attrs_2 = view! {
+                        <{..}
+                            itemprop=move || itemprop.get()
+                            itemref=move || itemref.get()
+                            itemscope=move || itemscope.get()
+                            itemtype=move || itemtype.get()
+                            lang=move || lang.get()
+                            nonce=move || nonce.get()
+                            part=move || part.get()
+                            popover=move || popover.get()
+                            role=move || role.get()
+                            slot=move || slot.get()
+                            spellcheck=move || spellcheck.get()
+                            style=move || style.get()
+                            tabindex=move || tabindex.get()
+                            title=move || title.get()
+                            translate=move || translate.get()
+                        />
+                    };
+
+                    view! {
+                        <div
+                            aria_expanded=move || {
+                                match open.get() {
+                                    true => Some("true"),
+                                    false => None,
+                                }
+                            }
+                            class=move || {
+                                format!(
+                                    "singlestage-sidebar{} {} {}",
+                                    match open.get() {
+                                        true => "",
+                                        false => {
+                                            match collapsible.get().unwrap_or_default().as_str() {
+                                                "icon" => " singlestage-sidebar-collapsible-icon",
+                                                _ => " singlestage-sidebar-collapsible-offcanvas",
+                                            }
+                                        }
+                                    },
+                                    match side.get().as_str() {
+                                        "right" => "singlestage-sidebar-side-right",
+                                        _ => "singlestage-sidebar-side-left",
+                                    },
+                                    match variant.get().unwrap_or_default().as_str() {
+                                        "floating" => "singlestage-sidebar-variant-floating",
+                                        "inset" => "singlestage-sidebar-variant-inset",
+                                        _ => "singlestage-sidebar-variant-sidebar",
+                                    },
+                                )
+                            }
+                        >
+                            <div class="singlestage-sidebar-gap" />
+                            <div class="singlestage-sidebar-container">
+                                <div
+                                    class=move || {
+                                        format!(
+                                            "singlestage-sidebar-inner {}",
+                                            class.get().unwrap_or_default(),
+                                        )
+                                    }
+
+                                    {..global_attrs_1}
+                                    {..global_attrs_2}
+                                >
+                                    {children.read_value()()}
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </Show>
         </Show>
     }
 }
