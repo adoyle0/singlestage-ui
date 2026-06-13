@@ -22,16 +22,18 @@ leptos_axum = "0.8"
 
 # Singlestage
 icondata_core = "0.1"
+reactive_stores = "0.4"
+singlestage_macro = "0"
 web-sys = "0.3"
 
 # Singlestage build
-reqwest = "0.12"
+reqwest = "0.13"
 sha256 = "1.6"
 
 # Docs
 axum = "0.8"
 console_error_panic_hook = "0.1"
-icondata = "0.6"
+icondata = "0.7"
 tokio = "1"
 tower = "0.5"
 tower-http = "0.6"
