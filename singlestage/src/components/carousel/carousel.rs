@@ -139,7 +139,7 @@ pub fn Carousel(
             let width = ul_ref.scroll_width();
             let scroll_step = width / num_items;
 
-            ul_ref.set_scroll_left(scroll_step * (cur - 1));
+            ul_ref.set_scroll_left((scroll_step * (cur - 1)).into());
         }
     });
 
