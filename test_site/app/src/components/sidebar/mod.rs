@@ -1,9 +1,11 @@
 use leptos::prelude::*;
 use singlestage::*;
 
+mod button;
 mod test_buttons;
 mod test_menu;
 
+pub use button::*;
 use test_buttons::*;
 use test_menu::*;
 
