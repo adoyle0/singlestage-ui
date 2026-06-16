@@ -110,7 +110,8 @@
     text-sm
     transition-[width,height,padding];
 
-    &:active {
+    &:active,
+    &[aria-current="page"] {
       @apply bg-sidebar-accent
       font-medium
       text-sidebar-accent-foreground;

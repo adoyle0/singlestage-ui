@@ -85,6 +85,7 @@ pub fn Button(
 
     // ARIA ATTRIBUTES
     //
+    #[prop(optional, into)] aria_current: MaybeProp<String>,
     /// Provide a custom accessible name for this element.
     #[prop(optional, into)]
     aria_label: MaybeProp<String>,
@@ -302,6 +303,7 @@ pub fn Button(
                     None
                 }
             }
+            aria_current=move || aria_current.get()
             aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
             aria_expanded=move || {
                 if is_trigger {
@@ -326,7 +328,16 @@ pub fn Button(
                     class.get().unwrap_or_default()
                 } else if in_sidebar_menu_button {
                     format!(
-                        "singlestage-sidebar-menu-button singlestage-sidebar-menu-button-size-default singlestage-sidebar-menu-button-variant-default {}",
+                        "singlestage-sidebar-menu-button {} {} {}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" | "small" => "singlestage-sidebar-menu-button-size-sm",
+                            "lg" | "large" => "singlestage-sidebar-menu-button-size-lg",
+                            _ => "singlestage-sidebar-menu-button-size-default",
+                        },
+                        match variant.get().unwrap_or_default().as_str() {
+                            "outline" => "singlestage-sidebar-menu-button-variant-outline",
+                            _ => "singlestage-sidebar-menu-button-variant-default",
+                        },
                         class.get().unwrap_or_default(),
                     )
                 } else {

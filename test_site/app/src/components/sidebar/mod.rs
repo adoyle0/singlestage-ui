@@ -1,18 +1,38 @@
-use super::theme_switcher::*;
-use docs_macro::*;
 use leptos::prelude::*;
-use leptos_router::nested_router::Outlet;
 use singlestage::*;
 
 mod button;
-use button::*;
+mod test_buttons;
+mod test_menu;
+
+pub use button::*;
+use test_buttons::*;
+use test_menu::*;
 
 #[component]
-pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoView {
+pub fn AppSidebar() -> impl IntoView {
+    let routes = StoredValue::new([
+        // "All",
+        "Button",
+        "Checkbox",
+        "Context Menu",
+        "Dropdown",
+        "Form Reset",
+        "Input",
+        "Label",
+        "Radio",
+        "Select",
+        "Slider",
+        "Textarea",
+        "Toggle",
+        "Tooltip",
+    ]);
+
     view! {
-        <Sidebar class="inset-shadow-sm" side>
+        <Sidebar>
             <SidebarHeader>
-                <a
+                <Link
+                    as_child=true
                     href="/"
                     on:click=move |_| {
                         if let Some(sheet) = use_context::<SheetContext>() {
@@ -39,113 +59,47 @@ pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoV
                                 </g>
                             </svg>
                         </div>
-                        <div class="content-center ml-2">
+                        <div class="content-center m-auto">
                             <p class="font-semibold text-center">"Singlestage UI"</p>
-                            <p class="text-sm text-center">"v"{env!("CARGO_PKG_VERSION")}</p>
+                            <p class="text-sm text-center">
+                                "Test Site "
+                                {if cfg!(feature = "csr") {
+                                    "CSR"
+                                } else if cfg!(feature = "ssr") {
+                                    "SSR"
+                                } else {
+                                    "ERR"
+                                }}
+                            </p>
                         </div>
                     </div>
-                </a>
+                </Link>
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>"Getting Started"</SidebarGroupLabel>
+                    <SidebarGroupLabel>"Components"</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="/introduction">
-                                        {icon!(icondata::LuInfo)} <span>"Introduction"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="/install">
-                                        {icon!(icondata::LuComputer)} <span>"Install"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="/theme-provider">
-                                        {icon!(icondata::LuPaintBucket)}
-                                        <span>"Theme Provider"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="/icon-macro">
-                                        {icon!(icondata::LuImage)} <span>"Icon Macro"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="https://github.com/adoyle0/singlestage-ui">
-                                        {icon!(icondata::LuGithub)} <span>"GitHub"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton>
-                                    <Link href="https://docs.rs/singlestage/latest/singlestage/index.html">
-                                        {icon!(icondata::SiDocsdotrs, stroke_width=0)}
-                                        <span>"Docs.rs"</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
+                            <For
+                                each=move || routes.get_value()
+                                key=|route| route.to_owned()
+                                let(route)
+                            >
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton>
+                                        <Link href=format!(
+                                            "/{}",
+                                            &route.to_lowercase().replace(" ", "_"),
+                                        )>{route}</Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            </For>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-                <SidebarGroup>
-                    <SidebarGroupLabel>"Components"</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>{generate_component_links!()}</SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                <TestMenu />
+                <TestButtons />
             </SidebarContent>
-            <SidebarSeparator />
-            <SidebarFooter>
-                <Link
-                    render_as="button"
-                    variant="secondary"
-                    class="kofi-btn w-full"
-                    href="https://ko-fi.com/K3K41INGJM"
-                    on:click=move |_| {
-                        if let Some(sheet) = use_context::<SheetContext>() {
-                            sheet.open.set(false)
-                        }
-                    }
-                    target="_blank"
-                >
-                    <img src="/kofi_symbol.svg" />
-                    "Buy me a coffee"
-                </Link>
-            </SidebarFooter>
-            <SidebarRail />
         </Sidebar>
-    }
-}
-
-#[component]
-pub fn SidebarContainer() -> impl IntoView {
-    view! {
-        <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-                <header class="flex sticky inset-x-0 top-0 z-10 gap-2 items-center border-b bg-(--background) isolate shrink-0">
-                    <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
-                        <SidebarTrigger>
-                            <SidebarButton />
-                        </SidebarTrigger>
-                        <ThemeSwitcher />
-                    </div>
-                </header>
-                <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
-                    <Outlet />
-                </div>
-            </SidebarInset>
-        </SidebarProvider>
     }
 }

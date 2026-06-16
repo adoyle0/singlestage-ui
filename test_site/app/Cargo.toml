@@ -33,10 +33,11 @@ console_error_panic_hook = { workspace = true, optional = true }
 console_log = { workspace = true, optional = true }
 log = { workspace = true, optional = true }
 
+web-sys = { workspace = true }
+
 [dev-dependencies]
 wasm-bindgen = { workspace = true }
 wasm-bindgen-test = { workspace = true }
-web-sys = { workspace = true, features = ["Document", "Window"] }
 
 
 [features]
