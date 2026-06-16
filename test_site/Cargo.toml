@@ -29,7 +29,12 @@ tower = "*"
 tower-http = "*"
 wasm-bindgen = "*"
 wasm-bindgen-test = "*"
-web-sys = "*"
+web-sys = { version = "*", features = [
+  "MediaQueryList",
+  "HtmlDocument",
+  "Document",
+  "Window",
+] }
 
 [profile.release]
 codegen-units = 1
