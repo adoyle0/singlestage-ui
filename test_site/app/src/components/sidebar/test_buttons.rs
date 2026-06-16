@@ -210,7 +210,7 @@ pub fn TestButtons() -> impl IntoView {
                     >
                         <SidebarMenuItem>
                             <SidebarMenuButton>
-                                <Link class="w-full" href="/link-button" render_as="button" variant>
+                                <Link href="/link-button" render_as="button" variant>
                                     {icon!(icondata::LuInfo)}
                                     <span>"Link Button"</span>
                                 </Link>

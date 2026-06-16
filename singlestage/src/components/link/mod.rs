@@ -225,7 +225,7 @@ pub fn Link(
                     match render_as.get().unwrap_or_default().as_str() {
                         "button" => {
                             format!(
-                                "singlestage-button {} {} {}",
+                                "singlestage-button {} {} {}{}",
                                 match variant.get().unwrap_or_default().as_str() {
                                     "secondary" => "singlestage-button-variant-secondary",
                                     "outline" => "singlestage-button-variant-outline",
@@ -270,6 +270,7 @@ pub fn Link(
                                 } else {
                                     "".to_string()
                                 },
+                                if in_sidebar_menu_button { " w-full" } else { "" },
                             )
                         }
                         "badge" => {
