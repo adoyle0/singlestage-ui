@@ -168,7 +168,8 @@
     overflow-hidden
     w-full;
 
-    &:active {
+    &:active,
+    &[aria-current="page"] {
       .singlestage-sidebar-menu-action-show-on-hover {
         @apply text-sidebar-accent-foreground;
       }

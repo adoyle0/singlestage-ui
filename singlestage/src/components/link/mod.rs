@@ -1,10 +1,13 @@
 use crate::{BreadcrumbLinkContext, InputGroupContext, SheetContext, SidebarMenuButtonContext};
 use leptos::prelude::*;
+use leptos_router::components::A;
 
 /// Creates a styled hyperlink.
 #[component]
 pub fn Link(
     children: Children,
+
+    #[prop(optional, into)] as_child: MaybeProp<bool>,
 
     /// Set whether or not this `Link` should appear as something else. This is similar to
     /// `asChild`.
@@ -213,10 +216,10 @@ pub fn Link(
     let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
 
     view! {
-        <a
-            aria_current=move || aria_current.get()
-            aria_label=move || aria_label.get()
-            class=move || {
+        <A
+            attr:aria_current=move || aria_current.get()
+            attr:aria_label=move || aria_label.get()
+            attr:class=move || {
                 format!(
                     "{} {}",
                     match render_as.get().unwrap_or_default().as_str() {
@@ -283,9 +286,23 @@ pub fn Link(
                             )
                         }
                         _ => {
-                            if in_sidebar_menu_button {
-                                "singlestage-sidebar-menu-button singlestage-sidebar-menu-button-size-default singlestage-sidebar-menu-button-variant-default"
-                                    .to_string()
+                            if as_child.get().unwrap_or_default() {
+                                "".to_string()
+                            } else if in_sidebar_menu_button {
+                                format!(
+                                    "singlestage-sidebar-menu-button {} {}",
+                                    match size.get().unwrap_or_default().as_str() {
+                                        "sm" | "small" => "singlestage-sidebar-menu-button-size-sm",
+                                        "lg" | "large" => "singlestage-sidebar-menu-button-size-lg",
+                                        _ => "singlestage-sidebar-menu-button-size-default",
+                                    },
+                                    match variant.get().unwrap_or_default().as_str() {
+                                        "outline" => {
+                                            "singlestage-sidebar-menu-button-variant-outline"
+                                        }
+                                        _ => "singlestage-sidebar-menu-button-variant-default",
+                                    },
+                                )
                             } else if in_breadcrumb_link {
                                 "singlestage-breadcrumb-link".to_string()
                             } else {
@@ -296,6 +313,7 @@ pub fn Link(
                     class.get().unwrap_or_default(),
                 )
             }
+            href=move || href.get().unwrap_or_default()
             on:click=move |_| {
                 if let Some(sheet) = use_context::<SheetContext>() && in_sidebar_menu_button {
                     sheet.open.set(false)
@@ -307,6 +325,6 @@ pub fn Link(
             {..a_attrs}
         >
             {children()}
-        </a>
+        </A>
     }
 }
