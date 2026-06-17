@@ -6,7 +6,9 @@ use leptos::prelude::*;
 pub fn DropdownMenuItem(
     children: Children,
 
-    #[prop(optional, into)] as_child: MaybeProp<bool>,
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,

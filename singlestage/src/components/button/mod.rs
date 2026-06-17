@@ -9,6 +9,9 @@ use leptos::prelude::*;
 pub fn Button(
     children: Children,
 
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
     /// The type of the button. Defaults to `submit`:
     /// Button types: submit | button | reset
     #[prop(optional, into)]
@@ -21,7 +24,7 @@ pub fn Button(
     #[prop(optional, into)]
     size: MaybeProp<String>,
     /// The display variant of the button. Defaults to `default`
-    /// Variants: default | secondary | outline | ghost | link | destructive | none
+    /// Variants: default | secondary | outline | ghost | link | destructive
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -324,7 +327,7 @@ pub fn Button(
             aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
-                if variant.get().unwrap_or_default().as_str() == "none" || in_popover_menu_item {
+                if as_child.get().unwrap_or_default() || in_popover_menu_item {
                     class.get().unwrap_or_default()
                 } else if in_sidebar_menu_button {
                     format!(
