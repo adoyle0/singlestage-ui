@@ -7,7 +7,9 @@ use leptos_router::components::A;
 pub fn Link(
     children: Children,
 
-    #[prop(optional, into)] as_child: MaybeProp<bool>,
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
 
     /// Set whether or not this `Link` should appear as something else. This is similar to
     /// `asChild`.

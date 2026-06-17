@@ -5,7 +5,9 @@ use leptos::prelude::*;
 pub fn ItemDescription(
     children: Children,
 
-    #[prop(optional, into)] as_child: MaybeProp<bool>,
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
 
     // GLOBAL ATTRIBUTES
     //
