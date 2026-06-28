@@ -67,19 +67,35 @@ pub fn App() -> impl IntoView {
         <ThemeProvider>
             <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
             <Router>
-                <Routes fallback=NotFound>
-                    <ParentRoute path=StaticSegment("") view=SidebarContainer>
-                        <Route path=StaticSegment("/") view=LandingPage />
-                        <Route path=StaticSegment("/introduction") view=Introduction />
-                        <Route path=StaticSegment("/install") view=Installation />
-                        <Route path=StaticSegment("/theme-provider") view=ThemeProviderRoute />
-                        <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
-                        <ComponentRoutes />
-                    </ParentRoute>
-                    <ParentRoute path=StaticSegment("sidebar_examples") view=Outlet>
-                        <Route path=StaticSegment("/test") view=SidebarExampleTest />
-                    </ParentRoute>
-                </Routes>
+                <SidebarProvider>
+                    <AppSidebar />
+                    <SidebarInset>
+                        <header class="flex sticky inset-x-0 top-0 z-10 gap-2 items-center border-b bg-(--background) isolate shrink-0">
+                            <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
+                                <SidebarTrigger>
+                                    <SidebarButton />
+                                </SidebarTrigger>
+                                <ThemeSwitcher />
+                            </div>
+                        </header>
+                        <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
+                            <Routes fallback=NotFound>
+                                <Route path=StaticSegment("/") view=LandingPage />
+                                <Route path=StaticSegment("/introduction") view=Introduction />
+                                <Route path=StaticSegment("/install") view=Installation />
+                                <Route
+                                    path=StaticSegment("/theme-provider")
+                                    view=ThemeProviderRoute
+                                />
+                                <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
+                                <ComponentRoutes />
+                                <ParentRoute path=StaticSegment("sidebar_examples") view=Outlet>
+                                    <Route path=StaticSegment("/test") view=SidebarExampleTest />
+                                </ParentRoute>
+                            </Routes>
+                        </div>
+                    </SidebarInset>
+                </SidebarProvider>
             </Router>
         </ThemeProvider>
     }

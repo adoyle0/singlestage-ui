@@ -1,11 +1,10 @@
-use super::theme_switcher::*;
 use docs_macro::*;
 use leptos::prelude::*;
 use leptos_router::nested_router::Outlet;
 use singlestage::*;
 
 mod button;
-use button::*;
+pub use button::*;
 
 #[component]
 pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoView {
@@ -123,29 +122,6 @@ pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoV
                     "Buy me a coffee"
                 </Link>
             </SidebarFooter>
-            <SidebarRail />
         </Sidebar>
-    }
-}
-
-#[component]
-pub fn SidebarContainer() -> impl IntoView {
-    view! {
-        <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-                <header class="flex sticky inset-x-0 top-0 z-10 gap-2 items-center border-b bg-(--background) isolate shrink-0">
-                    <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
-                        <SidebarTrigger>
-                            <SidebarButton />
-                        </SidebarTrigger>
-                        <ThemeSwitcher />
-                    </div>
-                </header>
-                <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
-                    <Outlet />
-                </div>
-            </SidebarInset>
-        </SidebarProvider>
     }
 }
