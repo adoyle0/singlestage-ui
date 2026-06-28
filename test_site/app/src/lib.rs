@@ -2,8 +2,7 @@ use leptos::prelude::*;
 use leptos_meta::{MetaTags, Title, provide_meta_context};
 use leptos_router::{
     StaticSegment,
-    components::{ParentRoute, Route, Router, Routes},
-    nested_router::Outlet,
+    components::{Route, Router, Routes},
 };
 
 mod components;
@@ -68,27 +67,22 @@ pub fn App() -> impl IntoView {
                                     />
                                 }
                             } <Routes fallback=NotFound>
-                                <ParentRoute path=StaticSegment("") view=Outlet>
-                                    <Route path=StaticSegment("/") view=Home />
-                                    // TODO: Figure out why Trunk won't compile this
-                                    // <Route path=StaticSegment("/all") view=DebugAll />
-                                    <Route path=StaticSegment("/button") view=DebugButton />
-                                    <Route path=StaticSegment("/checkbox") view=DebugCheckbox />
-                                    <Route
-                                        path=StaticSegment("/context_menu")
-                                        view=DebugContextMenu
-                                    />
-                                    <Route path=StaticSegment("/dropdown") view=DebugDropdown />
-                                    <Route path=StaticSegment("/form_reset") view=DebugFormReset />
-                                    <Route path=StaticSegment("/input") view=DebugInput />
-                                    <Route path=StaticSegment("/label") view=DebugLabel />
-                                    <Route path=StaticSegment("/radio") view=DebugRadio />
-                                    <Route path=StaticSegment("/select") view=DebugSelect />
-                                    <Route path=StaticSegment("/slider") view=DebugSlider />
-                                    <Route path=StaticSegment("/textarea") view=DebugTextarea />
-                                    <Route path=StaticSegment("/toggle") view=DebugToggle />
-                                    <Route path=StaticSegment("/tooltip") view=DebugTooltip />
-                                </ParentRoute>
+                                <Route path=StaticSegment("/") view=Home />
+                                // TODO: Figure out why Trunk won't compile this
+                                // <Route path=StaticSegment("/all") view=DebugAll />
+                                <Route path=StaticSegment("/button") view=DebugButton />
+                                <Route path=StaticSegment("/checkbox") view=DebugCheckbox />
+                                <Route path=StaticSegment("/context_menu") view=DebugContextMenu />
+                                <Route path=StaticSegment("/dropdown") view=DebugDropdown />
+                                <Route path=StaticSegment("/form_reset") view=DebugFormReset />
+                                <Route path=StaticSegment("/input") view=DebugInput />
+                                <Route path=StaticSegment("/label") view=DebugLabel />
+                                <Route path=StaticSegment("/radio") view=DebugRadio />
+                                <Route path=StaticSegment("/select") view=DebugSelect />
+                                <Route path=StaticSegment("/slider") view=DebugSlider />
+                                <Route path=StaticSegment("/textarea") view=DebugTextarea />
+                                <Route path=StaticSegment("/toggle") view=DebugToggle />
+                                <Route path=StaticSegment("/tooltip") view=DebugTooltip />
                             </Routes>
                         </main>
                     </Router>

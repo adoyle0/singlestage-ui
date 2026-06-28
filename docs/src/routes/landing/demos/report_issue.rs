@@ -46,7 +46,7 @@ pub fn ReportIssue() -> impl IntoView {
                             id="report-issue-description"
                             placeholder="Please include all information relevant to your issue."
                             class="w-full"
-                        ></Textarea>
+                        />
                     </div>
                     <CardFooter class="flex items-center gap-4 justify-between">
                         <Button variant="ghost" size="sm">
