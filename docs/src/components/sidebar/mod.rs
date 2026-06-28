@@ -1,6 +1,5 @@
 use docs_macro::*;
 use leptos::prelude::*;
-use leptos_router::nested_router::Outlet;
 use singlestage::*;
 
 mod button;
