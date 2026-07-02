@@ -6,9 +6,10 @@ use leptos::prelude::*;
 pub fn FieldSeparator(
     #[prop(optional)] children: Option<Children>,
 
-    /// Toggle whether or not the separator should display vertically.
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -160,7 +161,7 @@ pub fn FieldSeparator(
                 view! {
                     <Separator
                         class="singlestage-field-separator-inner"
-                        vertical
+                        orientation
 
                         {..global_attrs_1}
                         {..global_attrs_2}
@@ -181,7 +182,7 @@ pub fn FieldSeparator(
                             class.get().unwrap_or_default(),
                         )
 
-                        vertical
+                        orientation
 
                         {..global_attrs_1}
                         {..global_attrs_2}

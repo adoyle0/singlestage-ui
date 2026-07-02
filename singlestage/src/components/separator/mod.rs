@@ -6,9 +6,10 @@ use leptos::prelude::*;
 pub fn Separator(
     #[prop(optional)] children: Option<Children>,
 
-    /// Toggle whether or not the separator should display vertically.
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -181,8 +182,8 @@ pub fn Separator(
                     format!(
                         "singlestage-separator{} {} {}",
                         if in_item { " singlestage-item-separator" } else { "" },
-                        match vertical.get().unwrap_or_default() {
-                            true => "singlestage-separator-vertical",
+                        match orientation.get().unwrap_or_default().as_str() {
+                            "vertical" => "singlestage-separator-vertical",
                             _ => "singlestage-separator-horizontal",
                         },
                         class.get().unwrap_or_default(),
