@@ -6,11 +6,13 @@
 
   .singlestage-separator-horizontal {
     @apply h-px
+    mx-auto
     w-full;
   }
 
   .singlestage-separator-vertical {
     @apply self-stretch
+    my-auto
     w-px;
   }
 }
