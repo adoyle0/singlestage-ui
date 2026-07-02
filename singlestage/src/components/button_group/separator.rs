@@ -6,9 +6,10 @@ use leptos::prelude::*;
 pub fn ButtonGroupSeparator(
     #[prop(optional)] children: Option<Children>,
 
-    /// Toggle whether or not the separator should display vertically.
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -161,7 +162,7 @@ pub fn ButtonGroupSeparator(
                     "singlestage-button-group-separator {}",
                     class.get().unwrap_or_default(),
                 )
-                vertical
+                orientation
 
                 {..global_attrs_1}
                 {..global_attrs_2}
@@ -177,7 +178,7 @@ pub fn ButtonGroupSeparator(
                     "singlestage-button-group-separator {}",
                     class.get().unwrap_or_default(),
                 )
-                vertical
+                orientation
 
                 {..global_attrs_1}
                 {..global_attrs_2}

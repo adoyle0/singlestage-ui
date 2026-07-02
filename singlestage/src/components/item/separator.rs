@@ -6,9 +6,10 @@ use leptos::prelude::*;
 pub fn ItemSeparator(
     #[prop(optional)] children: Option<Children>,
 
-    /// Toggle whether or not the separator should display vertically.
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -158,7 +159,7 @@ pub fn ItemSeparator(
     if let Some(children) = children {
         view! {
             <Separator
-                vertical
+                orientation
 
                 {..global_attrs_1}
                 {..global_attrs_2}
@@ -170,7 +171,7 @@ pub fn ItemSeparator(
     } else {
         view! {
             <Separator
-                vertical
+                orientation
 
                 {..global_attrs_1}
                 {..global_attrs_2}
