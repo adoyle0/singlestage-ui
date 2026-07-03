@@ -16,6 +16,9 @@ pub fn Button(
     /// Button types: submit | button | reset
     #[prop(optional, into)]
     button_type: MaybeProp<String>,
+    /// Toggle whether clicking this button dismisses its parent popover
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismiss: Reactive<bool>,
     /// Whether the input is invalid
     #[prop(optional, into)]
     invalid: Reactive<bool>,
@@ -455,15 +458,19 @@ pub fn Button(
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
                     if is_dialog_action || is_dialog_cancel || is_dialog_close {
-                        dialog.open.set(false);
+                        if dismiss.get() {
+                            dialog.open.set(false);
+                        }
                     }
                 } else if let Some(sheet) = use_context::<SheetContext>() {
                     if is_sheet_close || in_sidebar_menu_button {
-                        sheet.open.set(false);
+                        if dismiss.get() {
+                            sheet.open.set(false);
+                        }
                     }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>() {
                     if let Some(menu) = use_context::<PopoverMenuContext>() {
-                        if menu.dismissable.get() && menu_item.dismiss.get() {
+                        if menu.dismissable.get() && menu_item.dismiss.get() && dismiss.get() {
                             ev.prevent_default();
                             menu.open.set(false);
                         }
