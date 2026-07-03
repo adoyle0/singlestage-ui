@@ -239,8 +239,9 @@ pub fn LabelPrimitive(
             id={match primitive_type {
                 LabelPrimitiveType::MenuLabel => {
                     let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                    let group = expect_context::<PopoverMenuGroupContext>();
-                    group.heading_id.set(label_id.clone());
+                    if let Some(group) = use_context::<PopoverMenuGroupContext>() {
+                        group.heading_id.set(label_id.clone());
+                    }
                     Some(label_id.to_owned())
                 }
                 LabelPrimitiveType::FieldLabel => {
