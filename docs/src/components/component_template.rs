@@ -161,7 +161,7 @@ pub fn ComponentTemplate(
     #[prop(into)] description: String,
 ) -> impl IntoView {
     view! {
-        <div class="max-w-3xl m-auto">
+        <div class="max-w-4xl m-auto">
             <h1 class="text-4xl font-semibold">{name}</h1>
             <p class="my-5 text-(--muted-foreground)">{description}</p>
 

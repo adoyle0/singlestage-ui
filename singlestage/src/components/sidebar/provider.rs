@@ -119,7 +119,12 @@ pub fn SidebarProvider(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = SidebarContext { open, side };
+    let is_mobile = Reactive::new(false);
+    let context = SidebarContext {
+        open,
+        side,
+        is_mobile,
+    };
 
     let global_attrs_1 = view! {
         <{..}

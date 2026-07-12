@@ -122,8 +122,8 @@
       @apply ring-2;
     }
 
-    &:hover,
-    &[aria-expanded="true"] {
+    /* &[aria-expanded="true"], */
+    &:hover {
       @apply bg-sidebar-accent
       text-sidebar-accent-foreground;
     }

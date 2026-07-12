@@ -196,8 +196,10 @@ pub fn MenuContentPrimitive(
                             "singlestage-popover-animations {} {}",
                             match side.get().unwrap_or_default().as_str() {
                                 "top" => "singlestage-popover-top",
-                                "right" => "singlestage-popover-right",
-                                "left" => "singlestage-popover-left",
+                                "right" | "right-bottom" => "singlestage-popover-right",
+                                "right-top" => "singlestage-popover-right-top",
+                                "left" | "left-bottom" => "singlestage-popover-left",
+                                "left-top" => "singlestage-popover-left-top",
                                 _ => {
                                     if is_sub.get_value() {
                                         "singlestage-popover-right"

@@ -1,12 +1,10 @@
-// TODO: This should probably just be a context provider for a Button
-
-use crate::sidebar::*;
+use crate::{Button, sidebar::*};
 use leptos::prelude::*;
 
 /// Wrapper that toggles showing/hiding of the sidebar.
 #[component]
 pub fn SidebarTrigger(
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -155,15 +153,64 @@ pub fn SidebarTrigger(
         />
     };
 
-    view! {
-        <div
-            on:click=move |_| { sidebar.open.set(!sidebar.open.get_untracked()) }
+    if let Some(children) = children {
+        return view! {
+            <div
+                on:click=move |_| { sidebar.open.set(!sidebar.open.get_untracked()) }
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        >
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
 
-            {children()}
-        </div>
+                {children()}
+            </div>
+        }
+        .into_any();
     }
+
+    view! {
+        <Button
+            on:click=move |_| sidebar.open.set(!sidebar.open.get_untracked())
+            size="sm-icon"
+            variant="ghost"
+        >
+            <Show
+                when=move || sidebar.side.get().as_str() == "right"
+                fallback=|| {
+                    view! {
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect width="18" height="18" x="3" y="3" rx="2" />
+                            <path d="M9 3v18" />
+                        </svg>
+                    }
+                }
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <path d="M15 3v18" />
+                </svg>
+            </Show>
+        </Button>
+    }
+    .into_any()
 }

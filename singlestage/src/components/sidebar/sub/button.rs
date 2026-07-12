@@ -1,9 +1,8 @@
 use leptos::{context::Provider, prelude::*};
 
-#[derive(Clone)]
-pub(crate) struct SidebarMenuButtonContext {}
+use crate::SidebarMenuButtonContext;
 
 #[component]
-pub fn SidebarMenuButton(children: Children) -> impl IntoView {
+pub fn SidebarMenuSubButton(children: Children) -> impl IntoView {
     view! { <Provider value=SidebarMenuButtonContext {}>{children()}</Provider> }
 }
