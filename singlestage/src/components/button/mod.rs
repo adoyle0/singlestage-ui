@@ -313,7 +313,11 @@ pub fn Button(
             aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
             aria_expanded=move || {
                 if is_trigger {
-                    if let Some(collapsible) = use_context::<CollapsibleContext>()
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>()
+                        && dropdown.open.get()
+                    {
+                        Some("true")
+                    } else if let Some(collapsible) = use_context::<CollapsibleContext>()
                         && collapsible.open.get()
                     {
                         Some("true")
@@ -428,7 +432,6 @@ pub fn Button(
                     id.get()
                 }
             }
-            // TODO: refactor trigger context
             on:click=move |ev| {
                 if is_trigger {
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {

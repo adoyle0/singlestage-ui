@@ -15,10 +15,14 @@ keywords = ["leptos", "ui", "components", "basecoat", "shadcn"]
 categories = ["web-programming", "gui", "wasm"]
 
 [workspace.dependencies]
-leptos = "0.8"
-leptos_meta = "0.8"
-leptos_router = "0.8"
-leptos_axum = "0.8"
+# leptos = "0.8"
+# leptos_axum = "0.8"
+# leptos_meta = "0.8"
+# leptos_router = "0.8"
+leptos = { path = "../leptos/leptos" }
+leptos_axum = { path = "../leptos/integrations/axum" }
+leptos_meta = { path = "../leptos/meta" }
+leptos_router = { path = "../leptos/router" }
 
 # Singlestage
 icondata_core = "0.1"

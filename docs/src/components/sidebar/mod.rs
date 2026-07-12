@@ -2,9 +2,6 @@ use docs_macro::*;
 use leptos::prelude::*;
 use singlestage::*;
 
-mod button;
-pub use button::*;
-
 #[component]
 pub fn AppSidebar(#[prop(optional, into)] side: MaybeProp<String>) -> impl IntoView {
     view! {

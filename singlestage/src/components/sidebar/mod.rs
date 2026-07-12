@@ -30,4 +30,5 @@ use crate::Reactive;
 pub struct SidebarContext {
     pub open: Reactive<bool>,
     pub side: Reactive<String>,
+    pub is_mobile: Reactive<bool>,
 }

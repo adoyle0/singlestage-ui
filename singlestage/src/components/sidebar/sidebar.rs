@@ -167,7 +167,6 @@ pub fn Sidebar(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();
-    let is_mobile = RwSignal::new(false);
 
     let open: Reactive<bool> = sidebar.open;
 
@@ -178,8 +177,8 @@ pub fn Sidebar(
 
     // client init
     Effect::new(move || {
-        is_mobile.set(screen_is_small());
-        open.set(!is_mobile.get_untracked());
+        sidebar.is_mobile.set(screen_is_small());
+        open.set(!sidebar.is_mobile.get_untracked());
     });
 
     window_event_listener(leptos::ev::resize, move |_| {
@@ -187,12 +186,12 @@ pub fn Sidebar(
         let screen_is_small = screen_is_small();
 
         // this should only run when breakpoint is hit
-        if is_mobile.get_untracked() != screen_is_small {
+        if sidebar.is_mobile.get_untracked() != screen_is_small {
             if screen_is_small {
                 open.set(false);
             }
 
-            is_mobile.set(screen_is_small);
+            sidebar.is_mobile.set(screen_is_small);
         }
     });
 
@@ -258,7 +257,7 @@ pub fn Sidebar(
             }
         >
             <Show
-                when=move || !is_mobile.get()
+                when=move || !sidebar.is_mobile.get()
                 fallback=move || {
                     let global_attrs_1 = view! {
                         <{..}

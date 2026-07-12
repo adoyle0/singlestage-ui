@@ -35,7 +35,7 @@
   .singlestage-sidebar-container {
     @apply duration-200
     ease-linear
-    fixed
+    sticky /* fixed */
     h-svh
     hidden
     inset-y-0
@@ -278,6 +278,10 @@
       @apply hidden;
     }
 
+    .singlestage-sidebar-group-label {
+      @apply hidden;
+    }
+
     .singlestage-sidebar-menu-action {
       @apply hidden;
     }
@@ -398,7 +402,8 @@
 
     &.singlestage-sidebar-side-left {
       .singlestage-sidebar-container {
-        @apply left-[calc(var(--sidebar-width)*-1)];
+        @apply fixed /**/
+        left-[calc(var(--sidebar-width)*-1)];
       }
 
       .singlestage-sidebar-rail {
