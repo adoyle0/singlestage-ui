@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use singlestage::*;
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 struct Team {
     name: String,
     logo: icondata::Icon,
@@ -10,9 +10,7 @@ struct Team {
 
 #[component]
 fn TeamSwitcher(teams: StoredValue<Vec<Team>>) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
-    let active_team = RwSignal::new(teams.get_value()[0].clone());
+    let active_team = RwSignal::new(0);
 
     view! {
         <SidebarMenu>
@@ -24,38 +22,48 @@ fn TeamSwitcher(teams: StoredValue<Vec<Team>>) -> impl IntoView {
                                 size="lg"
                                 class="aria-expanded:bg-(--sidebar-accent) aria-expanded:text-(--sidebar-accent-foreground)"
                             >
-                                <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-(--sidebar-primary) text-(--sidebar-primary-foreground)">
-                                    {move || {
-                                        let logo = active_team.get().logo;
-                                        icon!(logo, class="size-4")
-                                    }}
-                                </div>
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-medium">
-                                        {move || active_team.get().name}
-                                    </span>
-                                    <span class="truncate text-xs">
-                                        {move || active_team.get().plan}
-                                    </span>
-                                </div>
+                                {move || {
+                                    let active_team = &teams.get_value()[active_team.get()];
+
+                                    view! {
+                                        <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-(--sidebar-primary) text-(--sidebar-primary-foreground)">
+                                            {
+                                                let logo = active_team.logo;
+                                                icon!(logo, class="size-4")
+                                            }
+                                        </div>
+                                        <div class="grid flex-1 text-left text-sm leading-tight">
+                                            <span class="truncate font-medium">
+                                                {active_team.name.to_owned()}
+                                            </span>
+                                            <span class="truncate text-xs">
+                                                {active_team.plan.to_owned()}
+                                            </span>
+                                        </div>
+                                    }
+                                }}
                                 {icon!(icondata::LuChevronsUpDown, class="ml-auto")}
                             </Button>
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                        class="w-(--sidebar-width) min-w-56 rounded-lg"
-                        side="bottom"
-                    >
+                    <DropdownMenuContent class="min-w-58 rounded-lg" side="bottom" align="center">
                         <DropdownMenuLabel class="text-xs text-muted-foreground">
                             "Teams"
                         </DropdownMenuLabel>
-                        <For each=move || teams.get_value() key=|team| team.name.clone() let(team)>
-                            {
-                                let team_clone = team.clone();
+                        <For
+                            each=move || teams.get_value()
+                            key=|team| team.name.clone()
+                            children=move |team: Team| {
+                                let index = teams
+                                    .get_value()
+                                    .iter()
+                                    .position(|t| t == &team)
+                                    .unwrap_or_default();
+
                                 view! {
                                     <DropdownMenuItem
                                         class="gap-2 p-2"
-                                        on:click=move |_| active_team.set(team_clone.to_owned())
+                                        on:click={move |_| { active_team.set(index) }}
                                     >
 
                                         <div class="flex size-6 items-center justify-center rounded-md border">
@@ -68,7 +76,7 @@ fn TeamSwitcher(teams: StoredValue<Vec<Team>>) -> impl IntoView {
                                     </DropdownMenuItem>
                                 }
                             }
-                        </For>
+                        />
                         <DropdownMenuSeparator />
                         <DropdownMenuItem class="gap-2 p-2">
                             <div class="flex size-6 items-center justify-center rounded-md border bg-transparent">
@@ -178,22 +186,14 @@ fn NavProjects(projects: StoredValue<Vec<Project>>) -> impl IntoView {
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
                                     <SidebarMenuAction show_on_hover=true>
-                                        // <Button size="sm" variant="ghost">
                                         {icon!(icondata::FiMoreHorizontal)}
                                         <span class="sr-only">"More"</span>
-                                    // </Button>
                                     </SidebarMenuAction>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
-                                    class="w-48 rounded-lg"
-                                    align=match sidebar.is_mobile.get_untracked() {
-                                        true => "end",
-                                        false => "start",
-                                    }
-                                    side=match sidebar.is_mobile.get_untracked() {
-                                        true => "bottom",
-                                        false => "right",
-                                    }
+                                    class="min-w-58 rounded-lg"
+                                    align="end"
+                                    side="bottom"
                                 >
                                     <DropdownMenuItem>
                                         {icon!(icondata::LuFolder, class="text-muted-foreground")}
@@ -234,8 +234,6 @@ struct User {
 
 #[component]
 fn NavUser(user: StoredValue<User>) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
     view! {
         <SidebarMenu>
             <SidebarMenuItem>
@@ -263,14 +261,7 @@ fn NavUser(user: StoredValue<User>) -> impl IntoView {
                             </Button>
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                        class="min-w-56 rounded-lg"
-                        align="end"
-                        side=match sidebar.is_mobile.get_untracked() {
-                            true => "top",
-                            false => "right-top",
-                        }
-                    >
+                    <DropdownMenuContent class="min-w-58 rounded-lg" align="center" side="top">
                         <DropdownMenuLabel class="p-0 font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar class="h-8 w-8 rounded-lg">
