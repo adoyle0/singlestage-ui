@@ -5,7 +5,6 @@ use leptos::prelude::*;
 pub fn SidebarMenuAction(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
-    #[prop(optional, into)] as_child: MaybeProp<bool>,
     #[prop(optional, into)] show_on_hover: MaybeProp<bool>,
 ) -> impl IntoView {
     view! {
