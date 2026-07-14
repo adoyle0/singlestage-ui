@@ -92,62 +92,71 @@ fn TeamSwitcher(teams: StoredValue<Vec<Team>>) -> impl IntoView {
 }
 
 #[derive(Clone)]
-struct SubItem {
+struct NavSubItem {
     title: String,
     url: String,
 }
 
 #[derive(Clone)]
-struct Item {
+struct NavItem {
     title: String,
     icon: icondata::Icon,
     is_active: bool,
-    items: Vec<SubItem>,
+    items: Vec<NavSubItem>,
 }
 
 #[component]
-fn NavMain(items: StoredValue<Vec<Item>>) -> impl IntoView {
+fn NavMain(items: StoredValue<Vec<NavItem>>) -> impl IntoView {
     view! {
         <SidebarGroup>
             <SidebarGroupLabel>"Platform"</SidebarGroupLabel>
-            <SidebarMenu>
-                <For each=move || items.get_value() key=|item| item.title.clone() let(item)>
-                    <Collapsible open={item.is_active}>
-                        <SidebarMenuItem>
-                            <CollapsibleTrigger>
-                                <SidebarMenuButton>
-                                    <Button class="aria-expanded:[&_svg]:rotate-90">
-                                        {
-                                            let icon = item.icon;
-                                            icon!(icon)
-                                        } <span>{item.title}</span>
-                                        {icon!(
-                                            icondata::LuChevronRight, class="ml-auto transition-transform duration-200"
-                                        )}
-                                    </Button>
-                                </SidebarMenuButton>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent>
-                                <SidebarMenuSub>
-                                    <For
-                                        each=move || item.items.to_owned()
-                                        key=|item| item.title.clone()
-                                        let(sub_item)
-                                    >
-                                        <SidebarMenuSubItem>
-                                            <SidebarMenuSubButton>
-                                                <Link href={sub_item.url}>
-                                                    <span>{sub_item.title}</span>
-                                                </Link>
-                                            </SidebarMenuSubButton>
-                                        </SidebarMenuSubItem>
-                                    </For>
-                                </SidebarMenuSub>
-                            </CollapsibleContent>
-                        </SidebarMenuItem>
-                    </Collapsible>
-                </For>
-            </SidebarMenu>
+            <SidebarGroupContent>
+                <SidebarMenu>
+                    <For
+                        each=move || items.get_value()
+                        key=|item| item.title.clone()
+                        children=|item: NavItem| {
+                            let tooltip = item.title.clone();
+                            view! {
+                                <Collapsible open={item.is_active}>
+                                    <SidebarMenuItem>
+                                        <CollapsibleTrigger>
+                                            <SidebarMenuButton tooltip>
+                                                <Button class="aria-expanded:[&>svg:last-child]:rotate-90">
+                                                    {
+                                                        let icon = item.icon;
+                                                        icon!(icon)
+                                                    } <span>{item.title}</span>
+                                                    {icon!(
+                                                        icondata::LuChevronRight, class="ml-auto transition-transform duration-200"
+                                                    )}
+                                                </Button>
+                                            </SidebarMenuButton>
+                                        </CollapsibleTrigger>
+                                        <CollapsibleContent>
+                                            <SidebarMenuSub>
+                                                <For
+                                                    each=move || item.items.to_owned()
+                                                    key=|item| item.title.clone()
+                                                    let(sub_item)
+                                                >
+                                                    <SidebarMenuSubItem>
+                                                        <SidebarMenuSubButton>
+                                                            <Link href={sub_item.url}>
+                                                                <span>{sub_item.title}</span>
+                                                            </Link>
+                                                        </SidebarMenuSubButton>
+                                                    </SidebarMenuSubItem>
+                                                </For>
+                                            </SidebarMenuSub>
+                                        </CollapsibleContent>
+                                    </SidebarMenuItem>
+                                </Collapsible>
+                            }
+                        }
+                    />
+                </SidebarMenu>
+            </SidebarGroupContent>
         </SidebarGroup>
     }
 }
@@ -333,85 +342,85 @@ fn AppSidebar() -> impl IntoView {
     ]);
 
     let items = StoredValue::new(vec![
-        Item {
+        NavItem {
             title: "Playground".to_string(),
             icon: icondata::LuSquareTerminal,
             is_active: true,
             items: vec![
-                SubItem {
+                NavSubItem {
                     title: "History".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Starred".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Settings".to_string(),
                     url: "url".to_string(),
                 },
             ],
         },
-        Item {
+        NavItem {
             title: "Models".to_string(),
             icon: icondata::LuBot,
             is_active: false,
             items: vec![
-                SubItem {
+                NavSubItem {
                     title: "Genesis".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Explorer".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Quantum".to_string(),
                     url: "url".to_string(),
                 },
             ],
         },
-        Item {
+        NavItem {
             title: "Documentation".to_string(),
             icon: icondata::LuBookOpen,
             is_active: false,
             items: vec![
-                SubItem {
+                NavSubItem {
                     title: "Introduction".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Get Started".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Tutorials".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Changelog".to_string(),
                     url: "url".to_string(),
                 },
             ],
         },
-        Item {
+        NavItem {
             title: "Settings".to_string(),
             icon: icondata::LuSettings2,
             is_active: false,
             items: vec![
-                SubItem {
+                NavSubItem {
                     title: "General".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Team".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Billing".to_string(),
                     url: "url".to_string(),
                 },
-                SubItem {
+                NavSubItem {
                     title: "Limits".to_string(),
                     url: "url".to_string(),
                 },
@@ -455,9 +464,11 @@ fn AppSidebar() -> impl IntoView {
 }
 
 #[component]
-pub fn SidebarExample() -> impl IntoView {
+pub fn SidebarIconExample() -> impl IntoView {
+    let is_mobile = RwSignal::new(false);
+
     view! {
-        <SidebarProvider>
+        <SidebarProvider is_mobile>
             <AppSidebar />
             <SidebarInset>
                 <header class="flex h-16 shrink-0 items-center gap-2 border-b px-2">
@@ -465,12 +476,14 @@ pub fn SidebarExample() -> impl IntoView {
                     <Separator orientation="vertical" class="mr-2 h-4" />
                     <Breadcrumb>
                         <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink>
-                                    <Link href="#">"Build Your Application"</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <Show when=move || !is_mobile.get()>
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink>
+                                        <Link href="#">"Build Your Application"</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
+                            </Show>
                             <BreadcrumbItem>
                                 <BreadcrumbPage>"Data Fetching"</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -483,7 +496,7 @@ pub fn SidebarExample() -> impl IntoView {
                         <Skeleton class="aspect-video" />
                         <Skeleton class="aspect-video" />
                     </div>
-                    <Skeleton class="min-h-[100vh] flex-1 md:min-h-min" />
+                    <Skeleton class="flex-1 md:min-h-min" />
                 </div>
             </SidebarInset>
         </SidebarProvider>

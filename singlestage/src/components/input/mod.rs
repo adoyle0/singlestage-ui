@@ -1,4 +1,4 @@
-use crate::{FieldContext, InputGroupContext, Label, Reactive};
+use crate::{FieldContext, InputGroupContext, Label, Reactive, SidebarGroupContext};
 use leptos::prelude::*;
 
 /// A form input field.
@@ -382,6 +382,7 @@ pub fn Input(
     let has_children: bool = children.is_some();
     let in_field: bool = use_context::<FieldContext>().is_some();
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    let in_sidebar_group: bool = use_context::<SidebarGroupContext>().is_some();
 
     let custom_attrs = view! {
         <{..}
@@ -407,12 +408,13 @@ pub fn Input(
             }
             class=move || {
                 format!(
-                    "singlestage-input{} {}",
+                    "singlestage-input{}{} {}",
                     if in_input_group {
                         " singlestage-input-group-input singlestage-input-group-control"
                     } else {
                         ""
                     },
+                    if in_sidebar_group { " singlestage-sidebar-input" } else { "" },
                     class.get().unwrap_or_default(),
                 )
             }

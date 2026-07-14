@@ -18,38 +18,38 @@ pub fn TestMenu() -> impl IntoView {
                             <CollapsibleContent>
                                 <SidebarMenuSub>
                                     <SidebarMenuSubItem>
-                                        <SidebarMenuButton>
+                                        <SidebarMenuSubButton>
                                             <Link href="/1">
                                                 <span>"One"</span>
                                             </Link>
-                                        </SidebarMenuButton>
+                                        </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 </SidebarMenuSub>
                                 <SidebarMenuSub>
                                     <SidebarMenuSubItem>
-                                        <SidebarMenuButton>
+                                        <SidebarMenuSubButton>
                                             <Link href="/2">
                                                 <span>"Two"</span>
                                             </Link>
-                                        </SidebarMenuButton>
+                                        </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 </SidebarMenuSub>
                                 <SidebarMenuSub>
                                     <SidebarMenuSubItem>
-                                        <SidebarMenuButton>
+                                        <SidebarMenuSubButton>
                                             <Link href="/3">
                                                 <span>"Three"</span>
                                             </Link>
-                                        </SidebarMenuButton>
+                                        </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 </SidebarMenuSub>
                                 <SidebarMenuSub>
                                     <SidebarMenuSubItem>
-                                        <SidebarMenuButton>
+                                        <SidebarMenuSubButton>
                                             <Link href="/4">
                                                 <span>"Four"</span>
                                             </Link>
-                                        </SidebarMenuButton>
+                                        </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 </SidebarMenuSub>
                             </CollapsibleContent>

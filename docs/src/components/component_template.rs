@@ -49,10 +49,8 @@ pub fn Example(
     #[prop(optional, into)] description: String,
     #[prop(into)] code: String,
     #[prop(into)] view: AnyView,
+    #[prop(into)] full_size: bool,
 ) -> impl IntoView {
-    // Special case for Empty Background example to make it display full-size
-    let empty_backround = name == "Background";
-
     view! {
         <div class="my-12">
             {if !name.is_empty() {
@@ -74,9 +72,17 @@ pub fn Example(
                 </TabsList>
 
                 <TabsContent class="pt-2" value="preview">
-                    {if empty_backround {
+                    {if full_size {
                         view! {
-                            <div class="h-[450px] border border-(--muted) rounded-md">{view}</div>
+                            <div class=r#"border border-(--muted) rounded-md
+                            [&_*.singlestage-sidebar-inset]:rounded-md
+                            [&_*.singlestage-sidebar-wrapper]:max-h-[450px] 
+                            [&_*.singlestage-sidebar-wrapper]:min-h-[450px] 
+                            [&_*.singlestage-sidebar-container]:max-h-[450px] 
+                            [&_*.singlestage-sidebar-container]:min-h-[450px] 
+                            [&_*.singlestage-sidebar-side-left]:[&_*.singlestage-sidebar-inner]:rounded-l-md 
+                            [&_*.singlestage-sidebar-side-right]:[&_*.singlestage-sidebar-inner]:rounded-r-md 
+                            "#>{view}</div>
                         }
                             .into_any()
                     } else {

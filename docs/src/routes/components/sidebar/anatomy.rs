@@ -22,7 +22,9 @@ pub fn SidebarAnatomy() -> impl IntoView {
                                         </CollapsibleTrigger>
                                         <CollapsibleContent>
                                             <SidebarMenuSub>
-                                                <SidebarMenuSubItem />
+                                                <SidebarMenuSubItem>
+                                                    <SidebarMenuSubButton />
+                                                </SidebarMenuSubItem>
                                             </SidebarMenuSub>
                                         </CollapsibleContent>
                                     </Collapsible>

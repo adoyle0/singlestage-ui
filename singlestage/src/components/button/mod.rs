@@ -1,6 +1,6 @@
 use crate::{
     CollapsibleContext, FieldContext, InputGroupContext, PopoverContext, Reactive,
-    SheetCloseContext, SheetContext, SidebarMenuButtonContext, primitives::*,
+    SheetCloseContext, SheetContext, SidebarContext, SidebarMenuButtonContext, primitives::*,
 };
 use leptos::prelude::*;
 
@@ -453,7 +453,13 @@ pub fn Button(
                         ev.prevent_default();
                         popover.open.set(!popover.open.get_untracked());
                     } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
-                        collapsible.open.set(!collapsible.open.get_untracked())
+                        if let Some(sidebar) = use_context::<SidebarContext>()
+                            && !sidebar.open.get()
+                        {
+                            return
+                        } else {
+                            collapsible.open.set(!collapsible.open.get_untracked())
+                        }
                     } else if let Some(sheet) = use_context::<SheetContext>()
                         && !in_sidebar_menu_button
                     {
