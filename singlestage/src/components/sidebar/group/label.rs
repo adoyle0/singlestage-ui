@@ -1,5 +1,3 @@
-// TODO: Make generic with label primitive
-
 use crate::sidebar::*;
 use leptos::prelude::*;
 

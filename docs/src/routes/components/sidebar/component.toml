@@ -2,7 +2,32 @@ name = "Sidebar"
 description = "A composable, themeable, and customizable sidebar component."
 
 [[examples]]
-name = "sidebar"
+name = "sidebar_icon"
+
+[[examples]]
+name = "sidebar_sections"
+title = "Sections"
+description = "A simple sidebar with navigation grouped by section"
+
+[[examples]]
+name = "sidebar_collapsible_sections"
+title = "Collapsible Sections"
+description = "A sidebar with collapsible sections"
+
+[[examples]]
+name = "sidebar_submenus"
+title = "Submenus"
+description = "A sidebar with submenus"
+
+[[examples]]
+name = "sidebar_floating_submenus"
+title = "Floating Submenus"
+description = "A floating sidebar with submenus"
+
+[[examples]]
+name = "sidebar_collapsible_submenus"
+title = "Collapsible Submenus"
+description = "A floating sidebar with collapsible submenus"
 
 [[references]]
 name = "Sidebar"

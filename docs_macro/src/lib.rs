@@ -322,12 +322,14 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
                             );
 
                             format!(
-                                r##"<Example {}{}view={}Example.into_any() code=r#"{}"# />
+                                r##"<Example {}{}view={}Example.into_any() code=r#"{}"# full_size={} />
             "##,
                                 title.unwrap_or_default(),
                                 description.unwrap_or_default(),
                                 string_to_pascal(&example.name),
-                                example_code
+                                example_code,
+                                example.name.starts_with("sidebar")
+                                || example.name.contains("background")
                             )
                         })
                         .collect::<String>(),
