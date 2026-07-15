@@ -75,13 +75,14 @@ pub fn Example(
                     {if full_size {
                         view! {
                             <div class=r#"border border-(--muted) rounded-md
-                            [&_*.singlestage-sidebar-inset]:rounded-md
-                            [&_*.singlestage-sidebar-wrapper]:max-h-[450px] 
-                            [&_*.singlestage-sidebar-wrapper]:min-h-[450px] 
-                            [&_*.singlestage-sidebar-container]:max-h-[450px] 
-                            [&_*.singlestage-sidebar-container]:min-h-[450px] 
+                            [&_*.singlestage-sidebar-wrapper]:max-h-[930px] 
+                            [&_*.singlestage-sidebar-wrapper]:min-h-[930px] 
+                            [&_*.singlestage-sidebar-container]:max-h-[930px] 
+                            [&_*.singlestage-sidebar-container]:min-h-[930px] 
                             [&_*.singlestage-sidebar-side-left]:[&_*.singlestage-sidebar-inner]:rounded-l-md 
                             [&_*.singlestage-sidebar-side-right]:[&_*.singlestage-sidebar-inner]:rounded-r-md 
+                            has-[&_*.singlestage-sidebar-variant-inset]:[&_*.singlestage-sidebar-wrapper]:rounded-md
+                            not-has-[&_*.singlestage-sidebar-variant-inset]:[&_*.singlestage-sidebar-inset]:rounded-md
                             "#>{view}</div>
                         }
                             .into_any()

@@ -1,4 +1,6 @@
-use crate::{BreadcrumbLinkContext, InputGroupContext, SheetContext, SidebarMenuButtonContext};
+use crate::{
+    BreadcrumbLinkContext, InputGroupContext, SheetContext, SidebarMenuButtonContext, primitives::*,
+};
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -215,6 +217,7 @@ pub fn Link(
     };
 
     let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+    let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
     let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
 
     view! {
@@ -289,7 +292,7 @@ pub fn Link(
                             )
                         }
                         _ => {
-                            if as_child.get().unwrap_or_default() {
+                            if as_child.get().unwrap_or_default() || in_popover_menu_item {
                                 "".to_string()
                             } else if in_sidebar_menu_button {
                                 format!(
