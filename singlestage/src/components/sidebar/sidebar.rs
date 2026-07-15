@@ -58,6 +58,7 @@ pub fn Sidebar(
     children: ChildrenFn,
 
     #[prop(optional, into)] collapsible: MaybeProp<String>,
+    #[prop(optional, into)] default_open: MaybeProp<bool>,
     #[prop(optional, into)] side: MaybeProp<String>,
     #[prop(optional, into)] variant: MaybeProp<String>,
 
@@ -167,8 +168,7 @@ pub fn Sidebar(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();
-
-    let open: Reactive<bool> = sidebar.open;
+    sidebar.open.set(default_open.get().unwrap_or(true));
 
     if let Some(side) = side.get() {
         sidebar.side.set(side);
@@ -177,8 +177,12 @@ pub fn Sidebar(
 
     // client init
     Effect::new(move || {
+        if default_open.get_untracked().is_some() {
+            return;
+        }
+
         sidebar.is_mobile.set(screen_is_small());
-        open.set(!sidebar.is_mobile.get_untracked());
+        sidebar.open.set(!sidebar.is_mobile.get_untracked());
     });
 
     window_event_listener(leptos::ev::resize, move |_| {
@@ -188,7 +192,7 @@ pub fn Sidebar(
         // this should only run when breakpoint is hit
         if sidebar.is_mobile.get_untracked() != screen_is_small {
             if screen_is_small {
-                open.set(false);
+                sidebar.open.set(false);
             }
 
             sidebar.is_mobile.set(screen_is_small);
@@ -298,7 +302,7 @@ pub fn Sidebar(
                     };
 
                     view! {
-                        <Sheet open>
+                        <Sheet open=sidebar.open>
                             <SheetContent class="singlestage-sidebar-mobile" side>
                                 <SheetHeader class="sr-only">
                                     <SheetTitle>"Sidebar"</SheetTitle>
@@ -366,7 +370,7 @@ pub fn Sidebar(
                     view! {
                         <div
                             aria_expanded=move || {
-                                match open.get() {
+                                match sidebar.open.get() {
                                     true => Some("true"),
                                     false => None,
                                 }
@@ -374,7 +378,7 @@ pub fn Sidebar(
                             class=move || {
                                 format!(
                                     "singlestage-sidebar{} {} {}",
-                                    match open.get() {
+                                    match sidebar.open.get() {
                                         true => "",
                                         false => {
                                             match collapsible.get().unwrap_or_default().as_str() {
