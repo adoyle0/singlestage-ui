@@ -8,7 +8,7 @@ pub fn SidebarProvider(
     children: Children,
 
     /// Reactive signal coupled to the sidebar's mobile state.
-    #[prop(optional, into, default = Reactive::new(true))]
+    #[prop(optional, into)]
     is_mobile: Reactive<bool>,
     /// Reactive signal coupled to the sidebar's open state.
     #[prop(optional, into, default = Reactive::new(true))]

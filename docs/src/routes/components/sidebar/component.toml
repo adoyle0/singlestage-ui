@@ -44,6 +44,11 @@ name = "sidebar_secondary"
 title = "Secondary Navigation"
 description = "An inset sidebar with secondary navigation"
 
+[[examples]]
+name = "sidebar_nested"
+title = "Nested"
+description = "Collapsible nested sidebars"
+
 [[references]]
 name = "Sidebar"
 description = "The sidebar container."
