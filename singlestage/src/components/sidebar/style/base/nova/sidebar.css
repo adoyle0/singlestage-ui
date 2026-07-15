@@ -275,17 +275,19 @@
     }
   }
 
-  .singlestage-sidebar-variant-inset {
-    .singlestage-sidebar-inset {
-      @apply md:m-2
-      md:ml-0
-      md:rounded-xl
-      md:shadow-sm;
-    }
-
-    &.singlestage-sidebar-collapsible-offcanvas {
+  .singlestage-sidebar-wrapper {
+    &:has(> .singlestage-sidebar-variant-inset) {
       .singlestage-sidebar-inset {
-        @apply md:ml-2;
+        @apply md:m-2
+        md:ml-0
+        md:rounded-xl
+        md:shadow-sm;
+      }
+
+      &:has(> .singlestage-sidebar-collapsible-offcanvas) {
+        .singlestage-sidebar-inset {
+          @apply md:ml-2;
+        }
       }
     }
   }

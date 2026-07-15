@@ -29,6 +29,21 @@ name = "sidebar_collapsible_submenus"
 title = "Collapsible Submenus"
 description = "A floating sidebar with collapsible submenus"
 
+[[examples]]
+name = "sidebar_submenu_dropdown"
+title = "Submenu Dropdown"
+description = "A sidebar with submenus as dropdowns"
+
+[[examples]]
+name = "sidebar_icon"
+title = "Icons"
+description = "A sidebar that collapses to icons"
+
+[[examples]]
+name = "sidebar_secondary"
+title = "Secondary Navigation"
+description = "An inset sidebar with secondary navigation"
+
 [[references]]
 name = "Sidebar"
 description = "The sidebar container."
