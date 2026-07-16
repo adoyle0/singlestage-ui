@@ -277,7 +277,7 @@
 
   .singlestage-sidebar-wrapper {
     &:has(> .singlestage-sidebar-variant-inset) {
-      .singlestage-sidebar-inset {
+      > .singlestage-sidebar-inset {
         @apply md:m-2
         md:ml-0
         md:rounded-xl
@@ -285,8 +285,10 @@
       }
     }
 
-    &:has(> .singlestage-sidebar-collapsible-offcanvas) {
-      .singlestage-sidebar-inset {
+    &:has(> .singlestage-sidebar-collapsible-offcanvas):has(
+        > .singlestage-sidebar .singlestage-sidebar-rail
+      ) {
+      > .singlestage-sidebar-inset {
         @apply md:ml-2;
       }
     }

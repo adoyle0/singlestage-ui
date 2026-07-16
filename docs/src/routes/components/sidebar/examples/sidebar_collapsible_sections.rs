@@ -308,9 +308,12 @@ pub fn SidebarCollapsibleSectionsExample() -> impl IntoView {
                     </Breadcrumb>
                 </header>
                 <div class="flex flex-1 flex-col gap-4 p-4">
-                    <For each=move || 0..6 key=|_| 0 let(_)>
-                        <Skeleton class="h-12 w-full rounded-lg" />
-                    </For>
+                    <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+                        <Skeleton class="aspect-video" />
+                        <Skeleton class="aspect-video" />
+                        <Skeleton class="aspect-video" />
+                    </div>
+                    <Skeleton class="flex-1 md:min-h-min" />
                 </div>
             </SidebarInset>
         </SidebarProvider>
