@@ -34,6 +34,7 @@ pub fn SidebarAnatomy() -> impl IntoView {
                     </SidebarGroup>
                 </SidebarContent>
                 <SidebarFooter />
+                <SidebarRail />
             </Sidebar>
             <main>
                 <SidebarTrigger />
