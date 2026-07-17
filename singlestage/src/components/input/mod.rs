@@ -297,8 +297,41 @@ pub fn Input(
         }
     };
 
-    let on_input = move |ev| {
-        value.set(event_target_value(&ev));
+    let on_input = move |ev: web_sys::Event| {
+        let input_value = event_target_value(&ev);
+
+        let val = match input_type.get_untracked().unwrap_or_default().as_str() {
+            "number" => {
+                let decimal = '.';
+
+                if step.get_untracked().unwrap_or_default().contains(decimal)
+                    && let Some(input_precision) = input_value.split(decimal).last()
+                    && let Some(step_precision) = step
+                        .get_untracked()
+                        .unwrap_or_default()
+                        .split(decimal)
+                        .last()
+                {
+                    if input_precision.len() < step_precision.len()
+                        || !input_value.contains(decimal)
+                    {
+                        // User is not done typing
+                        return;
+                    }
+
+                    format!(
+                        "{:.*}",
+                        step_precision.len(),
+                        input_value.parse::<f64>().unwrap()
+                    )
+                } else {
+                    input_value
+                }
+            }
+            _ => input_value,
+        };
+
+        value.set(val);
     };
 
     let global_attrs_1 = view! {
