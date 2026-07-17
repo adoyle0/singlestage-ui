@@ -354,11 +354,6 @@ pub fn SidebarNestedExample() -> impl IntoView {
                         <Skeleton class="h-24" />
                         <Skeleton class="flex-1 md:min-h-min" />
                     </div>
-                // <div class="flex flex-1 flex-col gap-4 p-4 overflow-y-scroll">
-                // <For each=move || 0..24 key=|k| k.clone() let(_)>
-                // <Skeleton class="min-h-12 w-full rounded-lg" />
-                // </For>
-                // </div>
                 </SidebarInset>
             </SidebarProvider>
         </SidebarProvider>
