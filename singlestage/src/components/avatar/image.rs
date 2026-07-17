@@ -163,6 +163,14 @@ pub fn AvatarImage(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let avatar = expect_context::<AvatarContext>();
+    let img_ref = NodeRef::<leptos::html::Img>::new();
+
+    // Check loaded state on wasm load
+    Effect::new(move || {
+        if let Some(img) = img_ref.get() {
+            avatar.img_loaded.set(img.complete());
+        }
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -216,6 +224,7 @@ pub fn AvatarImage(
             height=move || height.get()
             ismap=move || ismap.get()
             loading=move || loading.get()
+            node_ref=img_ref
             on:load=move |_| avatar.img_loaded.set(true)
             referrerpolicy=move || referrerpolicy.get()
             sizes=move || sizes.get()
