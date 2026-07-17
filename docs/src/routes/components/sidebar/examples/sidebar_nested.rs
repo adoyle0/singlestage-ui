@@ -180,20 +180,37 @@ fn InnerSidebar(active: RwSignal<String>, mails: StoredValue<Vec<Mail>>) -> impl
                         <For
                             each=move || mails.get_value()
                             key=|mail| mail.subject.clone()
-                            let(mail)
-                        >
-                            <a class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-(--sidebar-accent) hover:text-(--sidebar-accent-foreground)">
-                                <div class="flex w-full items-center gap-2">
-                                    <span class="">{mail.name}</span>
-                                    " "
-                                    <span class="ml-auto text-xs">{mail.date}</span>
-                                </div>
-                                <span class="font-medium">{mail.subject}</span>
-                                <span class="line-clamp-2 w-[260px] text-xs whitespace-break-spaces">
-                                    {mail.teaser}
-                                </span>
-                            </a>
-                        </For>
+                            children=move |mail: Mail| {
+                                let initials = format!(
+                                    "{}{}",
+                                    &mail.name[0..1],
+                                    &mail.name.split(' ').last().unwrap_or_default()[0..1],
+                                );
+
+                                view! {
+                                    <Item variant="default" size="xs">
+                                        <ItemMedia class="mb-auto">
+                                            <Avatar size="xs">
+                                                <AvatarFallback>{initials}</AvatarFallback>
+                                            </Avatar>
+                                        </ItemMedia>
+                                        <ItemContent>
+                                            <ItemTitle class="w-full">
+                                                <span class="text-xs">{mail.name}</span>
+                                                <span class="ml-auto text-xs text-(--muted-foreground)">
+                                                    {mail.date}
+                                                </span>
+                                            </ItemTitle>
+                                            <div class="font-medium text-xs">{mail.subject}</div>
+                                            <div class="line-clamp-2 text-xs whitespace-break-spaces pt-1">
+                                                {mail.teaser}
+                                            </div>
+                                        </ItemContent>
+                                    </Item>
+                                    <Separator />
+                                }
+                            }
+                        />
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
