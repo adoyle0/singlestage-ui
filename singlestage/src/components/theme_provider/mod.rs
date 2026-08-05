@@ -506,6 +506,19 @@ static DARK_OVERRIDES: &str = r#"@layer components {
   }
 }"#;
 
+/// Provides nonce support for inline styles. Returns `None` if the `nonce`
+/// feature is not enabled or no nonce is in context.
+fn request_nonce() -> Option<String> {
+    #[cfg(feature = "nonce")]
+    {
+        leptos::nonce::use_nonce().map(|n| n.to_string())
+    }
+    #[cfg(not(feature = "nonce"))]
+    {
+        None
+    }
+}
+
 /// Provides theme support to children. Note: Setting `mode` and `theme` here are only used for
 /// initial values. Updates should be done via `ThemeProviderContext`.
 #[component]
@@ -530,6 +543,7 @@ pub fn ThemeProviderInner(
         <Style id="singlestage">{CSS}</Style>
         <style
             id="theme"
+            nonce=request_nonce()
             inner_html=move || {
                 let theme = theme.get();
                 match mode.get() {
