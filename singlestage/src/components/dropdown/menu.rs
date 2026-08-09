@@ -9,12 +9,12 @@ pub(crate) struct DropdownMenuContext {}
 pub fn DropdownMenu(
     children: Children,
 
-    /// Set whether or not this popover can be light dismissed. Use this with the `open` signal for
-    /// a manually managed popover
-    #[prop(optional, into, default = Reactive::new(true))]
-    dismissable: Reactive<bool>,
+    /// Set whether or not this popover should be modal meaning it can't be light dismissed
+    /// Use this along with the `open` signal for a manually managed popover
+    #[prop(optional, into, default = Reactive::new(false))]
+    modal: Reactive<bool>,
     /// Reactive signal that can remotely control the open state of the popover **but is not
-    /// coupled to the actual open state of the popover**
+    /// coupled to the actual open state of the popover** unless `modal` is set to `true`
     #[prop(optional, into)]
     open: Reactive<bool>,
 
@@ -127,7 +127,7 @@ pub fn DropdownMenu(
     let trigger_id = RwSignal::new(String::new());
 
     let context = PopoverMenuContext {
-        dismissable,
+        modal,
         menu_id,
         open,
         trigger_id,

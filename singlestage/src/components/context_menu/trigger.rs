@@ -175,13 +175,13 @@ pub fn ContextMenuTrigger(
 
             // Allow closing the menu if the trigger area is touched/clicked again
             on:mousedown=move |_ev| {
-                if menu.open.get_untracked() && menu.dismissable.get_untracked() {
+                if menu.open.get_untracked() && !menu.modal.get_untracked() {
                     menu.open.set(false);
                     triggered.set(false);
                 }
             }
             on:touchstart=move |_ev| {
-                if menu.open.get_untracked() && menu.dismissable.get_untracked() {
+                if menu.open.get_untracked() && !menu.modal.get_untracked() {
                     menu.open.set(false);
                     triggered.set(false);
                 }

@@ -3,22 +3,29 @@ members = ["app", "hydrate", "src-tauri"]
 resolver = "2"
 
 [workspace.dependencies]
+# leptos = { version = "*", features = ["nightly"] }
+# leptos_axum = { version = "*" }
+# leptos_meta = { version = "*" }
+# leptos_router = { version = "*", features = ["nightly"] }
+leptos = { git = "https://github.com/leptos-rs/leptos", features = ["nightly"] }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos" }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
+leptos_router = { git = "https://github.com/leptos-rs/leptos", features = [
+  "nightly",
+] }
+# singlestage = { version = "0.4", features = ["nightly"] }
+singlestage = { path = "../singlestage", features = ["nightly"] }
+
 axum = "*"
 cfg-if = "*"
 console_error_panic_hook = "*"
 console_log = "*"
 http = "*"
 icondata = "*"
-leptos = { version = "*", features = ["nightly"] }
-leptos_axum = { version = "*" }
-leptos_meta = { version = "*" }
-leptos_router = { version = "*", features = ["nightly"] }
 log = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 simple_logger = "*"
-# singlestage = { version = "0.4", features = ["nightly"] }
-singlestage = { path = "../singlestage", features = ["nightly"] }
 tauri = "*"
 tauri-build = "*"
 tauri-plugin-log = "*"

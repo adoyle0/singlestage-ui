@@ -71,7 +71,7 @@ pub fn DropdownSignal() -> impl IntoView {
     view! {
         <Switch checked=open />
 
-        <DropdownMenu open dismissable=false>
+        <DropdownMenu open modal=true>
             <DropdownMenuTrigger>
                 <Button>"Signal"</Button>
             </DropdownMenuTrigger>

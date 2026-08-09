@@ -15,7 +15,7 @@ use leptos::prelude::*;
 
 #[derive(Clone, Default)]
 pub(crate) struct PopoverMenuContext {
-    pub dismissable: Reactive<bool>,
+    pub modal: Reactive<bool>,
     pub menu_id: RwSignal<String>,
     pub open: Reactive<bool>,
     pub trigger_id: RwSignal<String>,

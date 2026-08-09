@@ -217,7 +217,7 @@ pub fn MenuItemPrimitive(
                     MenuItemPrimitiveType::Checkbox | MenuItemPrimitiveType::Radio => {
                         if dismiss.get() {
                             if let Some(menu) = use_context::<PopoverMenuContext>()
-                                && menu.dismissable.get()
+                                && !menu.modal.get()
                             {
                                 menu.open.set(false);
                             } else if let Some(menu) = use_context::<PopoverMenuContext>() {
@@ -228,7 +228,7 @@ pub fn MenuItemPrimitive(
                     MenuItemPrimitiveType::Item => {
                         if as_child.get().unwrap_or_default() && dismiss.get() {
                             if let Some(menu) = use_context::<PopoverMenuContext>()
-                                && menu.dismissable.get()
+                                && !menu.modal.get()
                             {
                                 menu.open.set(false);
                             }

@@ -234,7 +234,7 @@ pub fn MenuContentPrimitive(
                 }
             }
             popover=move || {
-                if menu.dismissable.get() || is_sub.get_value() { "auto" } else { "manual" }
+                if !menu.modal.get() || is_sub.get_value() { "auto" } else { "manual" }
             }
             role="menu"
             style=move || {
