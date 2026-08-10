@@ -187,11 +187,9 @@ pub fn TooltipContent(
             node_ref=content_ref
             popover="hint"
             style:position-anchor=move || format!("--{}", tooltip.trigger_id.get())
-            // TODO: This should probably be done with css
-            style:display=move || {
-                match tooltip.open.get() {
-                    true => "contents",
-                    false => "none"
+            on:toggle=move |_| {
+                if let Some(content) = content_ref.get_untracked() {
+                    tooltip.open.set(content.matches(":popover-open").unwrap_or(false));
                 }
             }
 
