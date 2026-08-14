@@ -3,13 +3,24 @@ use singlestage::*;
 
 #[component]
 pub fn AspectRatioExample() -> impl IntoView {
+    let theme_provider = expect_context::<ThemeProviderContext>();
+
     view! {
-        <div class="w-full max-w-sm">
+        <div class="max-w-sm">
             <AspectRatio ratio="16 / 9">
                 <img
-                    src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
                     alt="Photo by Drew Beamer"
-                    class="w-full h-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+                    class=move || {
+                        format!(
+                            "w-full h-full rounded-lg object-cover{}",
+                            match theme_provider.mode.get() {
+                                Mode::Auto => " dark:brightness-[0.2] dark:grayscale",
+                                Mode::Dark => " brightness-[0.2] grayscale",
+                                _ => "",
+                            },
+                        )
+                    }
+                    src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
                 />
             </AspectRatio>
         </div>

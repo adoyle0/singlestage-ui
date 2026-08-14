@@ -1,7 +1,7 @@
 use crate::Separator;
 use leptos::prelude::*;
 
-/// The separator.
+/// Visually separates button group buttons.
 #[component]
 pub fn ButtonGroupSeparator(
     #[prop(optional)] children: Option<Children>,

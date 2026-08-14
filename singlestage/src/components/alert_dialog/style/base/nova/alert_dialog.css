@@ -62,7 +62,8 @@
     text-sm;
 
     a:not(.singlestage-button) {
-      @apply underline
+      @apply font-normal
+      underline
       underline-offset-3;
 
       &:hover {

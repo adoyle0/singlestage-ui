@@ -62,8 +62,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "vertical", attr_type = "bool", default = "false", description = """Sets the display \
-    direction of the ButtonGroup.""" },
+  { attr = "orientation", attr_type = "String", default = """""""", description = """Sets the \
+    display direction of the ButtonGroup.""" },
 ]
 
 [[references]]
@@ -73,8 +73,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "vertical", attr_type = "bool", default = "false", description = """Toggle whether or \
-    not the separator should display vertically.""" },
+  { attr = "orientation", attr_type = "String", default = """""""", description = """Sets the \
+    display direction of the separator.""" },
 ]
 
 [[references]]

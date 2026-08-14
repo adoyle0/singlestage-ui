@@ -66,12 +66,17 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
 attributes."""
 attrs = [
-  { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed <button> \
+  { attr = "as_child", attr_type = "bool", default = """false""", description = """This component will \
+    render without styling.""" },
+  { attr = "button_type", attr_type = "String", default = """"submit"""", description = """Renamed button \
     `type` attribute to avoid name collisions.""" },
+  { attr = "dismiss", attr_type = "bool", default = """false""", description = """Toggle whether clicking \
+    this button dismisses its parent popover.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
     the input is disabled.""" },
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
-    render the button.""" },
+    render the button. Accepted values: "small" | "large" | "icon" | "sm-icon" | "lg-icon"""" },
   { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specify \
-    the style of button to render.""" },
+    the style of button to render. Accepted values: "primary" | "secondary" | "outline" | "ghost" \
+    | "link" | "destructive"""" },
 ]

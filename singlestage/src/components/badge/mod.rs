@@ -10,7 +10,7 @@ pub fn Badge(
     #[prop(optional, into)]
     invalid: Reactive<bool>,
     /// Define the badge variant. Defaults to `"primary"`.
-    /// Variants: "primary" | "secondary" | "destructive" | "outline"
+    /// Accepted values: "primary" | "secondary" | "destructive" | "outline"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 

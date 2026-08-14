@@ -7,7 +7,7 @@ pub fn AccordionAnatomy() -> impl IntoView {
         <Accordion>
             <AccordionItem>
                 <AccordionTrigger
-                    <AccordionIcon />
+                    <AccordionIcon slot />
                 <AccordionTrigger/>
                 <AccordionContent />
             </AccordionItem>

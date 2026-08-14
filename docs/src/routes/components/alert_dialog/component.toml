@@ -73,7 +73,7 @@ attrs = [
   { attr = "close_button", attr_type = "bool", default = "false", description = """Toggles \
     whether or not a close button should appear in the top right corner of the dialog.""" },
   { attr = "size", attr_type = "String", default = """""""", description = """Set the size of \
-    dialog to render.""" },
+    dialog to render. Accepted values: "sm"""" },
 ]
 
 [[references]]
@@ -109,7 +109,7 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 attributes."""
 attrs = [
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the style \
-    variant of the media element. Accepted values: \"destructive\".""" },
+    variant of the media element. Accepted values: "destructive"""" },
 ]
 
 [[references]]
@@ -123,5 +123,4 @@ attrs = []
 [[references]]
 name = "AlertDialogTrigger"
 description = "Used to wrap other elements and trigger the dialog on click."
-extra = "Note: the slot attribute is required."
 attrs = []

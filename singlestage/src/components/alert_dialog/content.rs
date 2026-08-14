@@ -7,8 +7,6 @@ pub fn AlertDialogContent(
     children: Children,
 
     /// Toggles whether or not a close button should appear in the top right corner of the dialog.
-    ///
-    /// Defaults to `true` for `Dialog` and `false` for `AlertDialog`
     #[prop(optional, into)]
     close_button: MaybeProp<bool>,
     /// Set the size of dialog to render.

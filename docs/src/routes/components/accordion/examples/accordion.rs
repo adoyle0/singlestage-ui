@@ -4,8 +4,8 @@ use singlestage::accordion::*;
 #[component]
 pub fn AccordionExample() -> impl IntoView {
     view! {
-        <Accordion class="w-full sm:w-sm md:w-md">
-            <AccordionItem name="demo" open=false>
+        <Accordion class="w-xs sm:w-sm md:w-md">
+            <AccordionItem name="demo">
                 <AccordionTrigger>"Is it accessible?"</AccordionTrigger>
                 <AccordionContent>
                     <p>"Yes. It adheres to the WAI-ARIA design pattern."</p>

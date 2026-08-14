@@ -183,9 +183,6 @@ pub fn DialogContentPrimitive(
 
     view! {
         <dialog
-            // aria_describedby=move || dialog_context.described_by.get()
-            // aria_labelledby=move || dialog_context.labelled_by.get()
-            // aria_modal="true"
             class=move || {
                 format!(
                     "{}{} {}",

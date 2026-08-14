@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn AlertDestructiveExample() -> impl IntoView {
     view! {
-        <Alert variant="destructive" class="max-w-md">
+        <Alert class="max-w-md" variant="destructive">
             {icon!(icondata::FiAlertCircle)}
             <AlertTitle>"Payment failed"</AlertTitle>
             <AlertDescription>

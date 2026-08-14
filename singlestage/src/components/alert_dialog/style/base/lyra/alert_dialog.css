@@ -61,8 +61,9 @@
       text-xs/relaxed;
 
     a:not(.singlestage-button) {
-      @apply underline
-        underline-offset-3;
+      @apply font-normal
+      underline
+      underline-offset-3;
 
       &:hover {
         @apply text-foreground;

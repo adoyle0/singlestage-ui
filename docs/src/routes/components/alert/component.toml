@@ -26,8 +26,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "variant", attr_type = "String", default = """"alert"""", description = """Specifies \
-    the style of alert to display.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Specifies \
+    the style of alert to display. Accepted values: "destructive"""" },
 ]
 
 [[references]]

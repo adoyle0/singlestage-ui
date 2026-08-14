@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn AlertExample() -> impl IntoView {
     view! {
-        <div class="grid w-full max-w-md items-start gap-4">
+        <div class="max-w-md space-y-4">
             <Alert>
                 {icon!(icondata::LuCircleCheck)} <AlertTitle>"Payment successful"</AlertTitle>
                 <AlertDescription>

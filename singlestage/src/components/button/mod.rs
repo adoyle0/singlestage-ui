@@ -1,6 +1,7 @@
 use crate::{
-    CollapsibleContext, FieldContext, InputGroupContext, PopoverContext, Reactive,
-    SheetCloseContext, SheetContext, SidebarContext, SidebarMenuButtonContext, primitives::*,
+    BreadcrumbLinkContext, CollapsibleContext, FieldContext, InputGroupContext, PopoverContext,
+    Reactive, SheetCloseContext, SheetContext, SidebarContext, SidebarMenuButtonContext,
+    primitives::*,
 };
 use leptos::prelude::*;
 
@@ -12,8 +13,7 @@ pub fn Button(
     /// This component will render without styling
     #[prop(optional, into)]
     as_child: MaybeProp<bool>,
-    /// The type of the button. Defaults to `submit`:
-    /// Button types: submit | button | reset
+    /// Renamed `button` `type` attribute to avoid name collisions
     #[prop(optional, into)]
     button_type: MaybeProp<String>,
     /// Toggle whether clicking this button dismisses its parent popover
@@ -26,8 +26,8 @@ pub fn Button(
     /// Sizes: small | large | icon | sm-icon | lg-icon
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// The display variant of the button. Defaults to `default`
-    /// Variants: default | secondary | outline | ghost | link | destructive
+    /// The display variant of the button. Defaults to `primary`
+    /// Variants: "primary" | "secondary" | "outline" | "ghost" | "link" | "destructive"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -273,6 +273,7 @@ pub fn Button(
         />
     };
 
+    let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
     let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
     let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
@@ -334,7 +335,13 @@ pub fn Button(
             aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
-                if as_child.get().unwrap_or_default() || in_popover_menu_item {
+                if as_child.get().unwrap_or_default() {
+                    if in_breadcrumb_link {
+                        format!("singlestage-breadcrumb-link {}", class.get().unwrap_or_default())
+                    } else {
+                        class.get().unwrap_or_default()
+                    }
+                } else if in_popover_menu_item {
                     class.get().unwrap_or_default()
                 } else if in_sidebar_menu_button {
                     format!(

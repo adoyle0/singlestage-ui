@@ -1,11 +1,13 @@
 use leptos::prelude::*;
 
-/// Contains the contents of an aspect ratio component.
+/// Displays content within a desired aspect ratio.
 #[component]
 pub fn AspectRatio(
     children: Children,
 
-    /// The aspect ratio to use to display the child element.
+    /// The aspect ratio to use to display the child element. Can be a decimal or a formula.
+    ///
+    /// See https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio
     #[prop(optional, into)]
     ratio: MaybeProp<String>,
 

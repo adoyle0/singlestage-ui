@@ -16,7 +16,7 @@ pub fn AlertDialogDestructiveExample() -> impl IntoView {
                     <AlertDialogTitle>"Delete chat?"</AlertDialogTitle>
                     <AlertDialogDescription>
                         "This will permanently delete this chat conversation. View "
-                        <a href="#">"Settings"</a>
+                        <Link>"Settings"</Link>
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

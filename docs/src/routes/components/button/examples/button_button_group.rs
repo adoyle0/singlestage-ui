@@ -7,7 +7,7 @@ pub fn ButtonButtonGroupExample() -> impl IntoView {
 
     view! {
         <ButtonGroup>
-            <ButtonGroup class="hidden sm:flex">
+            <ButtonGroup>
                 <Button variant="outline" size="icon" aria_label="Go Back">
                     {icon!(icondata::LuArrowLeft)}
                 </Button>

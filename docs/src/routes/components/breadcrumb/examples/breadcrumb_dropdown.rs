@@ -15,13 +15,12 @@ pub fn BreadcrumbDropdownExample() -> impl IntoView {
                 <BreadcrumbItem>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Button
-                                class="flex items-center gap-1 singlestage-breadcrumb-link"
-                                as_child=true
-                            >
-                                "Components"
-                                {icon!(icondata::LuChevronDown, class="size-3.5")}
-                            </Button>
+                            <BreadcrumbLink>
+                                <Button class="flex items-center gap-1" as_child=true>
+                                    <span>"Components"</span>
+                                    {icon!(icondata::LuChevronDown, class="size-3.5")}
+                                </Button>
+                            </BreadcrumbLink>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start">
                             <DropdownMenuGroup>

@@ -6,7 +6,9 @@ use leptos::prelude::*;
 pub fn AlertDialogMedia(
     children: Children,
 
-    /// The display variant of the media element such as "destructive".
+    /// Set the style variant of the media element.
+    ///
+    /// Accepted values: "destructive"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 

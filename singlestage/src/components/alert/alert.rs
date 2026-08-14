@@ -5,8 +5,9 @@ use leptos::prelude::*;
 pub fn Alert(
     children: Children,
 
-    /// Set the variant of the alert. Leave empty for default.
-    /// Other variants: "destructive"
+    /// Set the variant of the alert.
+    ///
+    /// Accepted values: "destructive"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
