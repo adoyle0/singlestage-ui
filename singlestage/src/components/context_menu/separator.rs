@@ -1,7 +1,7 @@
 use crate::Separator;
 use leptos::prelude::*;
 
-/// The separator.
+/// Visually separates groups of menu items.
 #[component]
 pub fn ContextMenuSeparator(
     #[prop(optional)] children: Option<Children>,

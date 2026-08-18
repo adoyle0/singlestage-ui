@@ -3,12 +3,23 @@ use singlestage::*;
 
 #[component]
 pub fn CardImageExample() -> impl IntoView {
+    let theme_provider = expect_context::<ThemeProviderContext>();
+
     view! {
-        <Card class="relative mx-auto w-full max-w-sm">
+        <Card class="relative max-w-sm">
             <img
                 src="https://avatar.vercel.sh/shadcn1"
                 alt="Event cover"
-                class="relative aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                class=move || {
+                    format!(
+                        "aspect-video w-full object-cover grayscale {}",
+                        match theme_provider.mode.get() {
+                            Mode::Auto => "brightness-60 dark:brightness-40",
+                            Mode::Dark => "brightness-40",
+                            _ => "brightness-60",
+                        },
+                    )
+                }
             />
             <div class="absolute inset-0 aspect-video bg-black/35" />
             <CardHeader>

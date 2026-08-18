@@ -6,7 +6,7 @@ pub fn CollapsibleSettingsPanelExample() -> impl IntoView {
     let open = RwSignal::new(false);
 
     view! {
-        <Card class="mx-auto w-full max-w-xs" size="sm">
+        <Card class="w-full max-w-xs" size="sm">
             <CardHeader>
                 <CardTitle>"Radius"</CardTitle>
                 <CardDescription>"Set the corner radius of the element."</CardDescription>

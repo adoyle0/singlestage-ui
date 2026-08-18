@@ -19,13 +19,10 @@ pub fn ContextMenuAnatomy() -> impl IntoView {
                     <ContextMenuSubContent>
                         <ContextMenuGroup>
                             <ContextMenuCheckboxItem />
-                            <ContextMenuCheckboxItem />
                         </ContextMenuGroup>
                         <ContextMenuSeparator />
                         <ContextMenuGroup>
                             <ContextMenuRadioGroup>
-                                <ContextMenuRadioItem />
-                                <ContextMenuRadioItem />
                                 <ContextMenuRadioItem />
                             </ContextMenuRadioGroup>
                         </ContextMenuGroup>

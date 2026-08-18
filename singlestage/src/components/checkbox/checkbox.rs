@@ -7,13 +7,13 @@ use leptos::prelude::*;
 pub fn Checkbox(
     #[prop(optional)] children: Option<Children>,
 
-    /// Whether the input is invalid
+    /// Reactive signal coupled to the checkbox's invalid state.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
 
     // CHECKBOX ATTRIBUTES
     //
-    /// Reactive signal coupled to the checkbox's checked value.
+    /// Reactive signal coupled to the checkbox's checked state.
     #[prop(optional, into)]
     checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::card::*;
+use singlestage::*;
 
 #[component]
 pub fn CardAnatomy() -> impl IntoView {
@@ -8,6 +8,7 @@ pub fn CardAnatomy() -> impl IntoView {
             <CardHeader>
                 <CardTitle />
                 <CardDescription />
+                <CardAction />
             </CardHeader>
             <CardContent />
             <CardFooter />

@@ -6,29 +6,41 @@ pub fn CollapsibleExample() -> impl IntoView {
     let open = RwSignal::new(false);
 
     view! {
-        <Collapsible open class="flex w-[350px] flex-col gap-2">
-            <div class="flex items-center justify-between gap-4 px-4">
-                <h4 class="text-sm font-semibold">"Order #4189"</h4>
-                <CollapsibleTrigger>
-                    <Button variant="ghost" size="icon" class="size-8">
-                        {icon!(icondata::LuChevronsUpDown)}
-                        <span class="sr-only">"Toggle details"</span>
-                    </Button>
-                </CollapsibleTrigger>
-            </div>
-            <div class="flex items-center justify-between rounded-md border px-4 py-2 text-sm">
-                <span class="text-(--muted-foreground)">"Status"</span>
-                <span class="font-medium">"Shipped"</span>
-            </div>
+        <Collapsible open class="flex flex-col w-full max-w-xs gap-2">
+            <Item size="sm">
+                <ItemContent>
+                    <ItemTitle>"Order #4189"</ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                    <CollapsibleTrigger>
+                        <Button variant="ghost" size="icon" class="size-8">
+                            {icon!(icondata::LuChevronsUpDown)}
+                            <span class="sr-only">"Toggle details"</span>
+                        </Button>
+                    </CollapsibleTrigger>
+                </ItemActions>
+            </Item>
+            <Item size="sm" variant="outline">
+                <ItemContent>
+                    <ItemDescription>"Status"</ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                    <span class="font-medium">"Shipped"</span>
+                </ItemActions>
+            </Item>
             <CollapsibleContent class="flex flex-col gap-2">
-                <div class="rounded-md border px-4 py-2 text-sm">
-                    <p class="font-medium">"Shipping address"</p>
-                    <p class="text-(--muted-foreground)">"100 Market St, San Francisco"</p>
-                </div>
-                <div class="rounded-md border px-4 py-2 text-sm">
-                    <p class="font-medium">"Items"</p>
-                    <p class="text-(--muted-foreground)">"2x Studio Headphones"</p>
-                </div>
+                <Item size="sm" variant="outline">
+                    <ItemContent>
+                        <ItemTitle>"Shipping Address"</ItemTitle>
+                        <ItemDescription>"100 Market St, San Francisco"</ItemDescription>
+                    </ItemContent>
+                </Item>
+                <Item size="sm" variant="outline">
+                    <ItemContent>
+                        <ItemTitle>"Items"</ItemTitle>
+                        <ItemDescription>"2x Studio Headphones"</ItemDescription>
+                    </ItemContent>
+                </Item>
             </CollapsibleContent>
         </Collapsible>
     }

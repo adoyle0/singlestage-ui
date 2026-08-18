@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn CardSizeExample() -> impl IntoView {
     view! {
-        <Card size="sm" class="mx-auto w-full max-w-sm">
+        <Card size="sm" class="max-w-sm">
             <CardHeader>
                 <CardTitle>"Small Card"</CardTitle>
                 <CardDescription>"This card uses the small size variant."</CardDescription>

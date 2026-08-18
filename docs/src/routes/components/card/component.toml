@@ -23,8 +23,16 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 attributes."""
 attrs = [
   { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
-    render the card.""" },
+    render the card. Accepted values: "sm"""" },
 ]
+
+[[references]]
+name = "CardAction"
+description = "Renders content like a button or a badge in the top-right of the header."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
 
 [[references]]
 name = "CardContent"

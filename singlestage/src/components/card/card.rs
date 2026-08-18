@@ -6,6 +6,8 @@ pub fn Card(
     children: Children,
 
     /// Set the size of the card.
+    ///
+    /// Accepted values: "sm"
     #[prop(optional, into)]
     size: MaybeProp<String>,
 

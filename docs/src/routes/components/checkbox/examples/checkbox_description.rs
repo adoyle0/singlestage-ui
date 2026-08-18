@@ -4,9 +4,9 @@ use singlestage::*;
 #[component]
 pub fn CheckboxDescriptionExample() -> impl IntoView {
     view! {
-        <FieldGroup class="mx-auto w-72">
+        <FieldGroup class="w-72">
             <Field orientation="horizontal">
-                <Checkbox id="terms-checkbox-desc" name="terms-checkbox-desc" checked=true />
+                <Checkbox id="terms-checkbox-desc" checked=true />
                 <FieldContent>
                     <FieldLabel label_for="terms-checkbox-desc">
                         "Accept terms and conditions"

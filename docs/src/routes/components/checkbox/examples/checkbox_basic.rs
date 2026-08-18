@@ -4,12 +4,9 @@ use singlestage::*;
 #[component]
 pub fn CheckboxBasicExample() -> impl IntoView {
     view! {
-        <FieldGroup class="mx-auto w-56">
+        <FieldGroup class="w-56">
             <Field orientation="horizontal">
-                <Checkbox id="terms-checkbox-basic" />
-                <FieldLabel label_for="terms-checkbox-basic">
-                    "Accept terms and conditions"
-                </FieldLabel>
+                <Checkbox>"Accept terms and conditions"</Checkbox>
             </Field>
 
             <Field orientation="horizontal">
@@ -18,7 +15,10 @@ pub fn CheckboxBasicExample() -> impl IntoView {
             </Field>
 
             <Field orientation="horizontal">
-                <Checkbox>"Accept terms and conditions"</Checkbox>
+                <Checkbox id="terms-checkbox-basic" />
+                <FieldLabel label_for="terms-checkbox-basic">
+                    "Accept terms and conditions"
+                </FieldLabel>
             </Field>
         </FieldGroup>
     }

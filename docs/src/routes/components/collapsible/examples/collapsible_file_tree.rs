@@ -18,7 +18,7 @@ pub fn RenderItem(file_item: FileTreeItem) -> impl IntoView {
                     <Button
                         variant="ghost"
                         size="sm"
-                        class="group w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"
+                        class="w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"
                     >
                         <span class=move || {
                             format!(

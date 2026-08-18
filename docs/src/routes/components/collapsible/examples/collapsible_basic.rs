@@ -6,10 +6,12 @@ pub fn CollapsibleBasicExample() -> impl IntoView {
     let open = RwSignal::new(false);
 
     view! {
-        <Card class="mx-auto w-full max-w-sm">
+        <Card class="w-full max-w-sm">
             <CardContent>
                 <Collapsible
                     open
+                    // attr:class is used here instead of class because class doesn't support
+                    // closures yet in singlestage
                     attr:class=move || {
                         format!(
                             "rounded-md{}",
@@ -35,10 +37,10 @@ pub fn CollapsibleBasicExample() -> impl IntoView {
                         </Button>
                     </CollapsibleTrigger>
                     <CollapsibleContent class="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
-                        <div>
+                        <p>
                             "This panel can be expanded or collapsed to reveal additional
                             content."
-                        </div>
+                        </p>
                         <Button size="xs">"Learn More"</Button>
                     </CollapsibleContent>
                 </Collapsible>

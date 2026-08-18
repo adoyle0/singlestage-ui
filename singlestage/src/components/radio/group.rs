@@ -1,4 +1,4 @@
-use crate::{RadioGroupContext, Reactive};
+use crate::{RadioGroupContext, Reactive, primitives::PopoverMenuContext};
 use leptos::{context::Provider, prelude::*};
 
 /// Contains all the parts of a radio group
@@ -195,9 +195,17 @@ pub fn RadioGroup(
         value,
     };
 
+    let in_popover_menu = use_context::<PopoverMenuContext>().is_some();
+
     view! {
         <fieldset
-            class=move || format!("singlestage-radio-group {}", class.get().unwrap_or_default())
+            class=move || {
+                format!(
+                    "{}{}",
+                    if in_popover_menu { "" } else { "singlestage-radio-group " },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

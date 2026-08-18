@@ -10,11 +10,9 @@ pub fn CheckboxExample() -> impl IntoView {
             </Field>
 
             <Field orientation="horizontal">
-                <Checkbox id="terms-checkbox" name="terms-checkbox" checked=true />
+                <Checkbox checked=true />
                 <FieldContent>
-                    <FieldLabel label_for="terms-checkbox">
-                        "Accept terms and conditions"
-                    </FieldLabel>
+                    <FieldLabel>"Accept terms and conditions"</FieldLabel>
                     <FieldDescription>
                         "By clicking this checkbox, you agree to the terms."
                     </FieldDescription>
@@ -22,13 +20,12 @@ pub fn CheckboxExample() -> impl IntoView {
             </Field>
 
             <Field orientation="horizontal" disabled=true>
-                <Checkbox id="toggle-checkbox" name="toggle-checkbox" />
-                <FieldLabel label_for="toggle-checkbox">"Enable notifications"</FieldLabel>
+                <Checkbox>"Enable notifications"</Checkbox>
             </Field>
 
             <FieldLabel>
                 <Field orientation="horizontal">
-                    <Checkbox id="toggle-checkbox-2" name="toggle-checkbox-2" />
+                    <Checkbox />
                     <FieldContent>
                         <FieldTitle>"Enable notifications"</FieldTitle>
                         <FieldDescription>

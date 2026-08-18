@@ -31,7 +31,7 @@ is directly coupled to the open state of the collapsible.""" },
 
 [[references]]
 name = "CollapsibleContent"
-description = "Contains the collapsible content."
+description = "Contains the content of a collapsible menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -39,5 +39,5 @@ attrs = []
 
 [[references]]
 name = "CollapsibleTrigger"
-description = "A context provider that wraps a button that opens the collapsible menu."
+description = "A context provider that wraps a Button component that triggers the collapsible menu."
 attrs = []

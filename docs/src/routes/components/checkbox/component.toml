@@ -26,22 +26,12 @@ description = "Use the disabled prop to prevent interaction."
 
 [[examples]]
 name = "checkbox group"
-title = "Group"
+title = "Checkbox Group"
 description = "Use multiple fields to create a checkbox list."
 
 [[examples]]
 name = "checkbox table"
 title = "Table"
-
-[[examples]]
-name = "subtext"
-
-[[examples]]
-name = "form"
-
-[[examples]]
-name = "group"
-title = "Checkbox Group"
 
 [[references]]
 name = "Checkbox"
@@ -55,7 +45,9 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
 attributes."""
 attrs = [
   { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
-    coupled to the checkbox's checked value.""" },
+    coupled to the checkbox's checked state.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the checkbox's invalid state.""" },
 ]
 
 [[references]]

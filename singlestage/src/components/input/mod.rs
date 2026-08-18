@@ -1,4 +1,4 @@
-use crate::{FieldContext, InputGroupContext, Label, Reactive, SidebarGroupContext};
+use crate::{FieldContext, FieldLabel, InputGroupContext, Label, Reactive, SidebarGroupContext};
 use leptos::prelude::*;
 
 /// A form input field.
@@ -484,29 +484,50 @@ pub fn Input(
     };
 
     if let Some(children) = children {
-        view! {
-            <Label
-                class=format!(
-                    "{}{}",
-                    if in_field { "" } else { "singlestage-input-label " },
-                    class.get_untracked().unwrap_or_default(),
-                )
-                disabled
-                id=label_id.to_string()
-                invalid
-                label_for=id.get_untracked().unwrap_or(input_id.to_string())
-            >
-                {children()}
-            </Label>
-            <input
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..input_attrs_1}
-                {..input_attrs_2}
-                {..custom_attrs}
-            />
+        if in_field {
+            view! {
+                <FieldLabel
+                    class=format!("{}", class.get_untracked().unwrap_or_default())
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </FieldLabel>
+                <input
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..input_attrs_1}
+                    {..input_attrs_2}
+                    {..custom_attrs}
+                />
+            }
+            .into_any()
+        } else {
+            view! {
+                <Label
+                    class=format!(
+                        "singlestage-input-label {}",
+                        class.get_untracked().unwrap_or_default(),
+                    )
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </Label>
+                <input
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..input_attrs_1}
+                    {..input_attrs_2}
+                    {..custom_attrs}
+                />
+            }
+            .into_any()
         }
-        .into_any()
     } else {
         view! {
             <input

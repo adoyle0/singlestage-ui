@@ -1,7 +1,7 @@
 use crate::{RadioGroup, Reactive};
 use leptos::prelude::*;
 
-/// Contains all the parts of a radio group
+/// A radio group component for context menus.
 #[component]
 pub fn ContextMenuRadioGroup(
     children: Children,
@@ -9,7 +9,7 @@ pub fn ContextMenuRadioGroup(
     /// Set or update the default value.
     #[prop(optional, into)]
     default: MaybeProp<String>,
-    /// Set or update the invalid state of the radio group.
+    /// Renders the group with invalid styling.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
     /// Reactive signal coupled to the current selected value of the radio group.

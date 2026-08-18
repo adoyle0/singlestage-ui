@@ -12,7 +12,7 @@ pub fn ContextMenuContent(
     /// Default is "start"
     #[prop(optional, into)]
     align: MaybeProp<String>,
-    /// Set which side the popover opens relative to the trigger
+    /// Set which side the popover opens relative to the trigger point
     ///
     /// Accepted values: "top" | "right" | "bottom" | "left"
     /// Default is "bottom"

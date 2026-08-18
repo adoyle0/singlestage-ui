@@ -45,11 +45,7 @@ pub fn CheckboxTableExample() -> impl IntoView {
             <TableHeader>
                 <TableRow>
                     <TableHead class="w-8">
-                        <Checkbox
-                            id="select-all-checkbox"
-                            name="select-all-checkbox"
-                            checked=select_all
-                        />
+                        <Checkbox checked=select_all />
                     </TableHead>
                     <TableHead>"Name"</TableHead>
                     <TableHead>"Email"</TableHead>
