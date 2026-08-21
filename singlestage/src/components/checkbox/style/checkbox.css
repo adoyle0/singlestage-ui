@@ -1,4 +1,8 @@
 @layer components {
+  .singlestage-checkbox-group {
+    @apply w-full;
+  }
+
   .singlestage-checkbox {
     @apply appearance-none
     outline-none

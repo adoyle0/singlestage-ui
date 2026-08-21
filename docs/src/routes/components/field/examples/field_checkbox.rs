@@ -3,59 +3,40 @@ use singlestage::*;
 
 #[component]
 pub fn FieldCheckboxExample() -> impl IntoView {
+    let items_to_show = RwSignal::new(vec!["hard_disks".to_string()]);
+    let sync_folders = RwSignal::new(true);
+
     view! {
-        <FieldGroup class="w-full max-w-xs">
-            <FieldSet>
-                <FieldLegend variant="label">"Show these items on the desktop"</FieldLegend>
-                <FieldDescription>
-                    "Select the items you want to show on the desktop."
-                </FieldDescription>
-                <FieldGroup class="gap-3">
+        <FieldSet class="max-w-xs">
+            <FieldLegend variant="label">"Show these items on the desktop"</FieldLegend>
+            <FieldDescription>"Select the items you want to show on the desktop."</FieldDescription>
+            <FieldGroup>
+                <FieldCheckboxGroup value=items_to_show>
                     <Field orientation="horizontal">
-                        <Checkbox id="finder-pref-9k2-hard-disks-ljj" checked=true />
-                        <FieldLabel label_for="finder-pref-9k2-hard-disks-ljj" class="font-normal">
-                            "Hard disks"
-                        </FieldLabel>
+                        <Checkbox value="hard_disks">"Hard disks"</Checkbox>
                     </Field>
                     <Field orientation="horizontal">
-                        <Checkbox id="finder-pref-9k2-external-disks-1yg" />
-                        <FieldLabel
-                            label_for="finder-pref-9k2-external-disks-1yg"
-                            class="font-normal"
-                        >
-                            "External disks"
-                        </FieldLabel>
+                        <Checkbox value="external_disks">"External disks"</Checkbox>
                     </Field>
                     <Field orientation="horizontal">
-                        <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
-                        <FieldLabel label_for="finder-pref-9k2-cds-dvds-fzt" class="font-normal">
-                            "CDs, DVDs, and iPods"
-                        </FieldLabel>
+                        <Checkbox value="cd_dvd_ipod">"CDs, DVDs, and iPods"</Checkbox>
                     </Field>
                     <Field orientation="horizontal">
-                        <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
-                        <FieldLabel
-                            label_for="finder-pref-9k2-connected-servers-6l2"
-                            class="font-normal"
-                        >
-                            "Connected servers"
-                        </FieldLabel>
+                        <Checkbox value="connected_servers">"Connected servers"</Checkbox>
                     </Field>
-                </FieldGroup>
-            </FieldSet>
+                </FieldCheckboxGroup>
+            </FieldGroup>
             <FieldSeparator />
             <Field orientation="horizontal">
-                <Checkbox id="finder-pref-9k2-sync-folders-nep" checked=true />
+                <Checkbox checked=sync_folders />
                 <FieldContent>
-                    <FieldLabel label_for="finder-pref-9k2-sync-folders-nep">
-                        "Sync Desktop & Documents folders"
-                    </FieldLabel>
+                    <FieldLabel>"Sync Desktop & Documents folders"</FieldLabel>
                     <FieldDescription>
                         "Your Desktop & Documents folders are being synced with iCloud Drive.
                         You can access them from other devices."
                     </FieldDescription>
                 </FieldContent>
             </Field>
-        </FieldGroup>
+        </FieldSet>
     }
 }

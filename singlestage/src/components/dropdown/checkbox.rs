@@ -1,13 +1,14 @@
 use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Renders a checkbox menu item.
+/// A checkbox item for dropdown menus.
 #[component]
 pub fn DropdownMenuCheckboxItem(
     children: Children,
 
-    #[prop(optional, into)] checked: Reactive<bool>,
-
+    /// A reactive signal coupled to the checkbox's checked value.
+    #[prop(optional, into)]
+    checked: Reactive<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,

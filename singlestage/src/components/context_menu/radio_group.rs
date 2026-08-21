@@ -1,4 +1,4 @@
-use crate::{RadioGroup, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// A radio group component for context menus.
@@ -173,10 +173,20 @@ pub fn ContextMenuRadioGroup(
         />
     };
 
-    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
+    let fieldset_attrs = view! {
+        <{..}
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
+            disabled=move || disabled.get()
+            form=move || form.get()
+            name=move || name.get()
+        />
+    };
 
     view! {
-        <RadioGroup
+        <RadioGroupPrimitive
+            primitive_type=RadioGroupPrimitiveType::Menu
+
+            class
             default
             invalid
             value
@@ -186,6 +196,6 @@ pub fn ContextMenuRadioGroup(
             {..fieldset_attrs}
         >
             {children()}
-        </RadioGroup>
+        </RadioGroupPrimitive>
     }
 }

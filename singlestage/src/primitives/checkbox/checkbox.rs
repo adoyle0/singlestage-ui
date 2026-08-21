@@ -1,5 +1,7 @@
-use super::{LabelPrimitive, LabelPrimitiveType};
-use crate::{CheckboxGroupContext, FieldContext, RadioGroupContext, Reactive};
+use crate::{
+    FieldContext, Reactive,
+    primitives::{CheckboxGroupContext, LabelPrimitive, LabelPrimitiveType, RadioGroupContext},
+};
 use leptos::prelude::*;
 
 #[derive(Clone, Copy)]

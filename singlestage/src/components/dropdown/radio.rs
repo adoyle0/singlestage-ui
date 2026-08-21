@@ -1,13 +1,14 @@
 use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Contains a radio menu item.
+/// A radio item for dropdown menus.
 #[component]
 pub fn DropdownMenuRadioItem(
     children: Children,
 
-    #[prop(optional, into)] checked: Reactive<bool>,
-
+    /// A reactive signal coupled to the radio's checked value.
+    #[prop(optional, into)]
+    checked: Reactive<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
     disabled: Reactive<bool>,

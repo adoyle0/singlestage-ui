@@ -278,6 +278,7 @@ pub fn MenuItemPrimitive(
                                             checked
                                             disabled
                                             id
+                                            value
                                         />
                                     }
                                         .into_any()

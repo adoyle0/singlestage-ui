@@ -4,24 +4,21 @@ use singlestage::*;
 #[component]
 pub fn FieldSetExample() -> impl IntoView {
     view! {
-        <FieldSet class="w-full max-w-sm">
+        <FieldSet class="max-w-sm">
             <FieldLegend>"Address Information"</FieldLegend>
             <FieldDescription>"We need your address to deliver your order."</FieldDescription>
             <FieldGroup>
                 <Field>
-                    <FieldLabel label_for="street">"Street Address"</FieldLabel>
-                    <Input id="street" input_type="text" placeholder="123 Main St" />
+                    <Input placeholder="123 Main St">"Street Address"</Input>
                 </Field>
-                <div class="grid grid-cols-2 gap-4">
+                <FieldGroup class="grid grid-cols-2">
                     <Field>
-                        <FieldLabel label_for="city">City</FieldLabel>
-                        <Input id="city" input_type="text" placeholder="New York" />
+                        <Input placeholder="New York">"City"</Input>
                     </Field>
                     <Field>
-                        <FieldLabel label_for="zip">Postal Code</FieldLabel>
-                        <Input id="zip" input_type="text" placeholder="90502" />
+                        <Input placeholder="90502">"Postal Code"</Input>
                     </Field>
-                </div>
+                </FieldGroup>
             </FieldGroup>
         </FieldSet>
     }

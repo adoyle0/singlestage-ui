@@ -1,4 +1,4 @@
-use crate::{FieldContext, FieldLabel, InputGroupContext, Label, Reactive, SidebarGroupContext};
+use crate::{FieldContext, InputGroupContext, Reactive, SidebarGroupContext, primitives::*};
 use leptos::prelude::*;
 
 /// A form input field.
@@ -486,15 +486,17 @@ pub fn Input(
     if let Some(children) = children {
         if in_field {
             view! {
-                <FieldLabel
-                    class=format!("{}", class.get_untracked().unwrap_or_default())
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::FieldLabel
+
+                    class
                     disabled
                     id=label_id.to_string()
                     invalid
                     label_for=id.get_untracked().unwrap_or(input_id.to_string())
                 >
                     {children()}
-                </FieldLabel>
+                </LabelPrimitive>
                 <input
                     {..global_attrs_1}
                     {..global_attrs_2}
@@ -506,18 +508,17 @@ pub fn Input(
             .into_any()
         } else {
             view! {
-                <Label
-                    class=format!(
-                        "singlestage-input-label {}",
-                        class.get_untracked().unwrap_or_default(),
-                    )
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::InputLabel
+
+                    class
                     disabled
                     id=label_id.to_string()
                     invalid
                     label_for=id.get_untracked().unwrap_or(input_id.to_string())
                 >
                     {children()}
-                </Label>
+                </LabelPrimitive>
                 <input
                     {..global_attrs_1}
                     {..global_attrs_2}

@@ -6,7 +6,7 @@ pub fn FieldSliderExample() -> impl IntoView {
     let value = RwSignal::new(0.);
 
     view! {
-        <Field class="w-full max-w-xs">
+        <Field class="max-w-xs">
             <FieldTitle>"Price Range"</FieldTitle>
             <FieldDescription>
                 "Set your budget range ($" <span class="font-medium tabular-nums">"0"</span> " - $"

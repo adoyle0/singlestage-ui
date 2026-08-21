@@ -1,4 +1,4 @@
-use crate::{FieldContext, InputGroupContext, Label, Reactive};
+use crate::{FieldContext, InputGroupContext, Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// Creates a textarea that takes children as a default value.
@@ -326,23 +326,46 @@ pub fn Textarea(
     };
 
     if let Some(children) = children {
-        view! {
-            <Label
-                class=format!(
-                    "{}{}",
-                    if in_field { "" } else { "singlestage-textarea-label " },
-                    class.get_untracked().unwrap_or_default(),
-                )
-                id=label_id.to_string()
-                label_for=id.get_untracked().unwrap_or(input_id.to_string())
-            >
-                {children()}
-            </Label>
-            <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
-                {default.get_untracked().unwrap_or(value.get_untracked())}
-            </textarea>
+        if in_field {
+            view! {
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::FieldLabel
+
+                    class
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </LabelPrimitive>
+                <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
+                    {default.get_untracked().unwrap_or(value.get_untracked())}
+                </textarea>
+            }
+            .into_any()
+        } else {
+            view! {
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::Label
+
+                    class=format!(
+                        "singlestage-textarea-label {}",
+                        class.get_untracked().unwrap_or_default(),
+                    )
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </LabelPrimitive>
+                <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
+                    {default.get_untracked().unwrap_or(value.get_untracked())}
+                </textarea>
+            }
+            .into_any()
         }
-        .into_any()
     } else {
         view! {
             <textarea

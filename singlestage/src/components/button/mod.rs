@@ -546,7 +546,7 @@ pub fn Button(
             type=move || {
                 if let Some(button_type) = button_type.get() {
                     Some(button_type)
-                } else if is_trigger || in_popover_menu_item {
+                } else if is_trigger || in_popover_menu_item || is_dialog_close || is_sheet_close {
                     Some("button".to_string())
                 } else {
                     None

@@ -19,21 +19,17 @@ pub fn DialogExample() -> impl IntoView {
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Input name="name" value="Pedro Duarte">
-                                "Name"
-                            </Input>
+                            <Input value="Pedro Duarte">"Name"</Input>
                         </Field>
                         <Field>
-                            <Input name="username" value="@peduarte">
-                                "Username"
-                            </Input>
+                            <Input value="@peduarte">"Username"</Input>
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
                             <Button>"Cancel"</Button>
                         </DialogClose>
-                        <Button button_type="submit">"Save changes"</Button>
+                        <Button>"Save changes"</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

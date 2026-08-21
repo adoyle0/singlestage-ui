@@ -201,8 +201,9 @@ fn InnerSidebar(active: RwSignal<String>, mails: StoredValue<Vec<Mail>>) -> impl
                                                     {mail.date}
                                                 </span>
                                             </ItemTitle>
-                                            <div class="font-medium text-xs">{mail.subject}</div>
-                                            <div class="line-clamp-2 text-xs whitespace-break-spaces pt-1">
+                                            <ItemDescription>{mail.email}</ItemDescription>
+                                            <div class="font-semibold text-xs mt-2">{mail.subject}</div>
+                                            <div class="line-clamp-2 text-xs whitespace-break-spaces pt-1.5">
                                                 {mail.teaser}
                                             </div>
                                         </ItemContent>

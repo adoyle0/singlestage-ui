@@ -1,11 +1,12 @@
 use crate::primitives::*;
-use crate::{FieldContext, RadioGroupContext, Reactive};
+use crate::{FieldContext, Reactive};
 use leptos::prelude::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub enum LabelPrimitiveType {
     Label,
     FieldLabel,
+    InputLabel,
     MenuLabel,
 }
 
@@ -201,13 +202,13 @@ pub fn LabelPrimitive(
                 }
             }
 
-            // TODO: Do this with CSS.
             class=move || {
                 format!(
                     "{} {}",
                     match primitive_type {
                         LabelPrimitiveType::Label => "singlestage-label".to_string(),
                         LabelPrimitiveType::FieldLabel => "singlestage-field-label".to_string(),
+                        LabelPrimitiveType::InputLabel => "singlestage-input-label".to_string(),
                         LabelPrimitiveType::MenuLabel => {
                             format!(
                                 "singlestage-dropdown-menu-label{}",
@@ -253,13 +254,26 @@ pub fn LabelPrimitive(
                         id.get()
                     }
                 }
-                LabelPrimitiveType::Label => id.get(),
+                _ => id.get(),
             }}
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
+            <Show when=move || {
+                invalid.get() && primitive_type == LabelPrimitiveType::FieldLabel
+                    && {
+                        if let Some(field) = use_context::<FieldContext>() && field.has_error.get()
+                        {
+                            true
+                        } else {
+                            false
+                        }
+                    }
+            }>
+                <span class="text-(--destructive)">" *"</span>
+            </Show>
         </label>
     }
 }

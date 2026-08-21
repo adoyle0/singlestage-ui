@@ -1,15 +1,15 @@
-use crate::{CheckboxGroupContext, Reactive};
-use leptos::{context::Provider, prelude::*};
+use crate::{Reactive, primitives::*};
+use leptos::prelude::*;
 
-/// Contains all the parts of a radio group
+/// Contains all the parts of a checkbox group
 #[component]
 pub fn CheckboxGroup(
     children: Children,
 
-    /// Set or update the invalid state of the radio group.
+    /// Set or update the invalid state of the checkbox group.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
-    /// Reactive signal coupled to the current selected value of the radio group.
+    /// Reactive signal coupled to the current selected value of the checkbox group.
     #[prop(optional, into)]
     value: Reactive<Vec<String>>,
 
@@ -178,24 +178,19 @@ pub fn CheckboxGroup(
         />
     };
 
-    let context = CheckboxGroupContext {
-        name: name
-            .get_untracked()
-            .unwrap_or(uuid::Uuid::new_v4().to_string()),
-        disabled,
-        invalid,
-        value,
-    };
-
     view! {
-        <fieldset
-            class=move || format!("singlestage-checkbox-group {}", class.get().unwrap_or_default())
+        <CheckboxGroupPrimitive
+            primitive_type=CheckboxGroupPrimitiveType::Normal
+
+            class
+            invalid
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            <Provider value=context>{children()}</Provider>
-        </fieldset>
+            {children()}
+        </CheckboxGroupPrimitive>
     }
 }

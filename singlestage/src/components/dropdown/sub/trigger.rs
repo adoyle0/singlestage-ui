@@ -1,6 +1,7 @@
 use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
+/// A dropdown menu item that triggers a sub menu.
 #[component]
 pub fn DropdownMenuSubTrigger(
     children: Children,

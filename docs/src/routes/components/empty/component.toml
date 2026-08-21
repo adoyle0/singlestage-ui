@@ -73,7 +73,7 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 attributes."""
 attrs = [
   { attr = "variant", attr_type = "String", default = """""""", description = """Select which \
-    variant to render. Accepted values: \"icon\".""" },
+    variant to render. Accepted values: "icon".""" },
 ]
 
 [[references]]

@@ -1,21 +1,21 @@
 use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
+/// Labels groups of menu items.
 #[component]
 pub fn DropdownMenuLabel(
     children: Children,
 
-    /// Whether the element renders as disabled
+    /// Renders the label with disabled styling.
     #[prop(optional, into)]
     disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
-    /// (For use in popover menus)
     #[prop(optional, into)]
     inset: MaybeProp<bool>,
-    /// Whether the element renders as invalid
+    /// Renders the label with invalid styling.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
-    /// The id of the labeled element if it's not a child
+    /// Use this to explicitly set the id of the labeled element.
     #[prop(optional, into)]
     label_for: MaybeProp<String>,
 

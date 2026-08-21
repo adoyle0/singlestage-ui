@@ -5,7 +5,9 @@ use singlestage::*;
 pub fn ContextMenuAnatomy() -> impl IntoView {
     view! {
         <ContextMenu>
-            <ContextMenuTrigger />
+            <ContextMenuTrigger>
+                <Button />
+            </ContextMenuTrigger>
             <ContextMenuContent>
                 <ContextMenuGroup>
                     <ContextMenuLabel />
@@ -18,7 +20,9 @@ pub fn ContextMenuAnatomy() -> impl IntoView {
                     <ContextMenuSubTrigger />
                     <ContextMenuSubContent>
                         <ContextMenuGroup>
-                            <ContextMenuCheckboxItem />
+                            <ContextMenuCheckboxGroup>
+                                <ContextMenuCheckboxItem />
+                            </ContextMenuCheckboxGroup>
                         </ContextMenuGroup>
                         <ContextMenuSeparator />
                         <ContextMenuGroup>

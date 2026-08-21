@@ -3,9 +3,7 @@ use singlestage::*;
 
 #[component]
 pub fn DropdownCheckboxesExample() -> impl IntoView {
-    let show_status_bar = RwSignal::new(false);
-    let show_activity_bar = RwSignal::new(false);
-    let show_panel = RwSignal::new(false);
+    let value: RwSignal<Vec<String>> = RwSignal::new(vec![]);
 
     view! {
         <DropdownMenu>
@@ -15,13 +13,15 @@ pub fn DropdownCheckboxesExample() -> impl IntoView {
             <DropdownMenuContent class="w-40">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"Appearance"</DropdownMenuLabel>
-                    <DropdownMenuCheckboxItem checked=show_status_bar>
-                        "Status Bar"
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem checked=show_activity_bar disabled=true>
-                        "Activity Bar"
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem checked=show_panel>"Panel"</DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxGroup value>
+                        <DropdownMenuCheckboxItem value="status_bar">
+                            "Status Bar"
+                        </DropdownMenuCheckboxItem>
+                        <DropdownMenuCheckboxItem disabled=true value="activity_bar">
+                            "Activity Bar"
+                        </DropdownMenuCheckboxItem>
+                        <DropdownMenuCheckboxItem value="panel">"Panel"</DropdownMenuCheckboxItem>
+                    </DropdownMenuCheckboxGroup>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

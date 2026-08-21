@@ -1,7 +1,7 @@
 use crate::primitives::*;
 use leptos::prelude::*;
 
-/// Contains multiple items.
+/// Visually groups multiple menu items.
 #[component]
 pub fn DropdownMenuGroup(
     children: Children,

@@ -16,6 +16,7 @@ pub fn DialogAnatomy -> impl IntoView {
                 <DialogFooter>
                     <DialogCancel />
                     <DialogAction />
+                    <DialogClose />
                 </DialogFooter>
             </DialogContent>
         </Dialog>

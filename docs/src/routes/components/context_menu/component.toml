@@ -64,6 +64,21 @@ attributes."""
 attrs = []
 
 [[references]]
+name = "ContextMenuCheckboxGroup"
+description = "A checkbox group component for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "Vec<String>", default = "[]", description = """A dynamic list of \
+    all the values of checked children Checkboxes.""" },
+]
+
+[[references]]
 name = "ContextMenuCheckboxItem"
 description = "A checkbox item for context menus."
 extra = """Implements <a class="singlestage-link" \
@@ -85,6 +100,21 @@ attrs = [
 ]
 
 [[references]]
+name = "ContextMenuCheckboxGroup"
+description = "A checkbox group component for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the group \
+    with invalid styling.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the current selected value of the group.""" },
+]
+
+[[references]]
 name = "ContextMenuContent"
 description = "The component that pops out when the context menu is open."
 extra = """Implements <a class="singlestage-link" \
@@ -100,7 +130,7 @@ attrs = [
 
 [[references]]
 name = "ContextMenuGroup"
-description = "Contains multiple menu items."
+description = "Visually groups multiple menu items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -210,7 +240,7 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "ContextSubMenu"
+name = "ContextMenuSub"
 description = "Contains all the parts of a sub menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \

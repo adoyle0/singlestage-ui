@@ -71,14 +71,46 @@ title = "Complex"
 description = "A richer example combining groups, icons, and submenus."
 
 [[references]]
-name = "CheckboxItem"
-description = "A checkbox item for popover menus."
+name = "DropdownMenu"
+description = "Contains all the parts of a dropdown menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "modal", attr_type = "bool", default = "false", description = """Set whether or not \
+    this popover should be modal meaning it can't be light dismissed Use this along with the open \
+    signal for a manually managed popover""" },
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover **but is not coupled to the actual open \
+    state of the popover** unless modal is set to true""" },
+]
+
+[[references]]
+name = "DropdownMenuCheckboxGroup"
+description = "A checkbox group component for dropdown menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "Vec<String>", default = "[]", description = """A dynamic list of \
+    all the values of checked children Checkboxes.""" },
+]
+
+[[references]]
+name = "DropdownMenuCheckboxItem"
+description = "A checkbox item for dropdown menus."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
 attributes."""
 attrs = [
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the checkbox's checked value.""" },
   { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
     whether the item appears disabled or not.""" },
   { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
@@ -90,62 +122,76 @@ attrs = [
 ]
 
 [[references]]
-name = "DropdownMenu"
-description = "Contains all the parts of a dropdown menu."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = [
-  { attr = "modal", attr_type = "bool", default = "false", description = """ Set whether or not \
-    this popover should be modal meaning it can't be light dismissed Use this along with the \
-    `open` signal for a manually managed popover""" },
-  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
-    can remotely control the open state of the popover **but is not coupled to the actual open \
-    state of the popover** unless `modal` is set to `true`""" },
-]
-
-[[references]]
-name = "Label"
-description = "Labels groups."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = [
-  { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether or not \
-    this element should display as invalid.""" },
-]
-
-[[references]]
-name = "MenuContent"
+name = "DropdownMenuContent"
 description = "The component that pops out when the dropdown menu is open."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
   { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
-    align the popover. Accepted values are "start" | "center" | "end"""" },
+    align the popover. Accepted values: "start" | "center" | "end"""" },
   { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
-    side the popover opens relative to the trigger. Accepted values are "top" | "right" | \
-    "bottom" | "left". """ },
+    side the popover opens relative to the trigger point. Accepted values: "top" | "right" | \ 
+    "bottom" | "left""""" },
 ]
 
 [[references]]
-name = "MenuGroup"
-description = "Contains multiple items."
+name = "DropdownMenuGroup"
+description = "Visually groups multiple menu items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
 
 [[references]]
-name = "MenuItem"
-description = "Contains a menu item."
+name = "DropdownMenuItem"
+description = "Contains a dropdown menu item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
 attributes."""
 attrs = [
+  { attr = "as_child", attr_type = "bool", default = "false", description = """This component will \
+    render without styling.""" },
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls whether \
+    the item appears disabled and is clickable.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
+
+[[references]]
+name = "DropdownMenuLabel"
+description = "Labels groups of menu items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Renders the label \
+    with disabled styling.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the label \
+    with invalid styling.""" },
+  { attr = "label_for", attr_type = "String", default = """""""", description = """Use this to \
+    explicitly set the id of the labeled element.""" },
+]
+
+[[references]]
+name = "DropdownMenuRadioItem"
+description = "A radio item for dropdown menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the radio's checked value.""" },
   { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
     whether the item appears disabled or not.""" },
   { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
@@ -153,11 +199,39 @@ attrs = [
   { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
     this element should display inset from its normal position.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
-    variant of the item. Accepted values are "destructive"""" },
+    variant of the item. Accepted values: \"destructive\".""" },
 ]
 
 [[references]]
-name = "MenuShortcut"
+name = "DropdownMenuRadioGroup"
+description = "A radio group component for dropdown menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Set or update \
+    the default value.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the group \
+    with invalid styling.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the current selected value of the radio group.""" },
+]
+
+[[references]]
+name = "DropdownMenuSeparator"
+description = "Visually separates groups of menu items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Specify \
+  the orientation of the separator. Accepted values: "horizontal" | "vertical".""" },
+]
+
+[[references]]
+name = "DropdownMenuShortcut"
 description = "Displays next to the item content and indicates keyboard shortcuts."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
@@ -165,24 +239,42 @@ attributes."""
 attrs = []
 
 [[references]]
-name = "MenuSub"
+name = "DropdownMenuTrigger"
+description = "A context provider that wraps a button that triggers the dropdown menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "DropdownMenuSub"
 description = "Contains all the parts of a sub menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
 
 [[references]]
-name = "MenuSubContent"
+name = "DropdownMenuSubContent"
 description = "The component that pops out when the sub trigger is triggered."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
+    align the popover. Accepted values: "start" | "center" | "end"""" },
+  { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
+    side the popover opens relative to the trigger point. Accepted values: "top" | "right" | \ 
+    "bottom" | "left""""" },
+]
 
 [[references]]
-name = "MenuSubTrigger"
-description = "Defines the area where a sub menu can be triggered."
+name = "DropdownMenuSubTrigger"
+description = "A dropdown menu item that triggers a sub menu."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
@@ -196,38 +288,3 @@ attrs = [
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
     variant of the item. Accepted values: \"destructive\".""" },
 ]
-
-[[references]]
-name = "Trigger"
-description = "Provides context to a Button that triggers a DropdownMenu."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = []
-
-[[references]]
-name = "RadioItem"
-description = "A radio item for popover menus."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
-attributes."""
-attrs = [
-  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
-    whether the item appears disabled or not.""" },
-  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
-    clicking this item dismisses the parent menu.""" },
-  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
-    this element should display inset from its normal position.""" },
-  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
-    variant of the item. Accepted values: \"destructive\".""" },
-]
-
-[[references]]
-name = "Separator"
-description = "Visually separates groups of menu items."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = []

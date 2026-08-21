@@ -40,7 +40,7 @@ attrs = [
 
 [[references]]
 name = "DialogAction"
-description = "Wraps a button that the user presses to acknowledge the dialog."
+description = "A context provider that wraps a button that the user presses to acknowledge the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -48,7 +48,7 @@ attrs = []
 
 [[references]]
 name = "DialogCancel"
-description = "Wraps a button that the user presses to dismiss the dialog."
+description = "A context provider that wraps a button that the user presses to dismiss the dialog."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -99,6 +99,5 @@ attrs = []
 
 [[references]]
 name = "DialogTrigger"
-description = "Used to wrap other elements and trigger the dialog on click."
-extra = "Note: the slot attribute is required."
+description = "A context provider that wraps a button that triggers the dialog."
 attrs = []

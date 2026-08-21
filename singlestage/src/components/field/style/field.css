@@ -4,12 +4,6 @@
     flex-col;
   }
 
-  .singlestage-field-group {
-    @apply flex
-    flex-col
-    w-full;
-  }
-
   .singlestage-field {
     @apply flex
     w-full;
@@ -54,24 +48,6 @@
     }
   }
 
-  .singlestage-field-separator {
-    @apply relative;
-  }
-
-  .singlestage-field-separator-inner {
-    @apply absolute
-    inset-0
-    top-1/2;
-  }
-
-  .singlestage-field-separator-content {
-    @apply bg-background
-    block
-    mx-auto
-    relative
-    w-fit;
-  }
-
   .singlestage-field-error-list {
     @apply flex
     flex-col
@@ -91,7 +67,7 @@
       @apply w-full;
     }
 
-    > .sr-only {
+    & > .sr-only {
       @apply w-auto;
     }
   }
@@ -113,44 +89,61 @@
     .singlestage-field-title {
       @apply flex-auto;
     }
-
-    .singlestage-field-description {
-      @apply text-balance;
-    }
   }
 
   .singlestage-field-orientation-responsive {
-    @apply flex-col;
+    @apply flex-col
+    md:flex-row
+    w-full;
 
-    > * {
-      @apply w-full;
-    }
-
-    > .sr-only {
+    * {
       @apply w-auto;
     }
 
-    .singlestage-field-group {
-      @apply md:flex-row
-      md:items-center;
+    .singlestage-field-description {
+      @apply md:text-balance;
+    }
+  }
 
-      > * {
-        @apply md:w-auto;
-      }
+  .singlestage-field-group {
+    @apply flex
+    flex-col
+    w-full;
 
-      > .singlestage-field-label,
-      > .singlestage-field-title {
-        @apply md:flex-auto;
-      }
+    &:has(> .singlestage-field-orientation-responsive) {
+      @apply md:items-center;
 
       &:has(> .singlestage-field-content) {
         @apply md:items-start;
 
-        & > .singlestage-checkbox,
-        .singlestage-radio {
+        &:has(.singlestage-checkbox),
+        &:has(.singlestage-radio) {
           @apply md:mt-px;
         }
       }
+
+      > .singlestage-field-label {
+        @apply md:flex-auto;
+      }
     }
+  }
+
+  .singlestage-field-separator {
+    @apply relative
+    w-full;
+  }
+
+  .singlestage-field-separator-inner {
+    @apply absolute
+    inset-0
+    top-1/2;
+  }
+
+  .singlestage-field-separator-content {
+    @apply bg-background
+    block
+    mx-auto
+    relative
+    w-fit;
   }
 }

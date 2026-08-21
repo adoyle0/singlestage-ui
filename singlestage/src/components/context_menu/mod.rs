@@ -1,4 +1,5 @@
 mod checkbox;
+mod checkbox_group;
 mod content;
 mod group;
 mod item;
@@ -12,6 +13,7 @@ mod sub;
 mod trigger;
 
 pub use checkbox::*;
+pub use checkbox_group::*;
 pub use content::*;
 pub use group::*;
 pub use item::*;

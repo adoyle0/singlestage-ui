@@ -1,8 +1,8 @@
-use crate::{CheckboxGroupContext, FieldContext, RadioGroupContext, Reactive};
+use crate::{FieldContext, Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
 
-/// The core wrapper for a single field. Provides orientation control, invalid state styling, and
-/// spacing.
+/// The core wrapper for a single field.
+/// Provides orientation control, invalid state styling, and spacing.
 #[component]
 pub fn Field(
     children: Children,
@@ -182,6 +182,7 @@ pub fn Field(
     let context = FieldContext {
         description_id: RwSignal::new(String::default()),
         disabled,
+        has_error: RwSignal::new(false),
         input_id: RwSignal::new(String::default()),
         invalid,
         label_id: RwSignal::new(String::default()),

@@ -2,6 +2,7 @@
   .singlestage-radio-group {
     @apply w-full;
   }
+
   .singlestage-radio-group-item {
     @apply appearance-none
     aspect-square

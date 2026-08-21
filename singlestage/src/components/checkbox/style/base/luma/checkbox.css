@@ -1,4 +1,9 @@
 @layer components1 {
+  .singlestage-checkbox-group {
+    @apply gap-3
+    grid;
+  }
+
   .singlestage-checkbox {
     @apply bg-input/90
     border

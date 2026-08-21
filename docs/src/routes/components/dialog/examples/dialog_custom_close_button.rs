@@ -15,21 +15,13 @@ pub fn DialogCustomCloseButtonExample() -> impl IntoView {
                         "Anyone who has this link will be able to view this."
                     </DialogDescription>
                 </DialogHeader>
-                <div class="flex items-center gap-2">
-                    <div class="grid flex-1 gap-2">
-                        <Label label_for="link" class="sr-only">
-                            "Link"
-                        </Label>
-                        <Input
-                            id="link"
-                            value="https://singlestage.doordesk.net/install"
-                            readonly=true
-                        />
-                    </div>
-                </div>
+                <Label label_for="link" class="sr-only">
+                    "Link"
+                </Label>
+                <Input id="link" value="https://singlestage.doordesk.net/install" readonly=true />
                 <DialogFooter class="sm:justify-start">
                     <DialogClose>
-                        <Button button_type="button">"Close"</Button>
+                        <Button>"Close"</Button>
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>

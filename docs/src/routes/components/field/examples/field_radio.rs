@@ -3,32 +3,27 @@ use singlestage::*;
 
 #[component]
 pub fn FieldRadioExample() -> impl IntoView {
+    let selected_plan = RwSignal::new("monthly".to_string());
+
     view! {
-        <FieldSet class="w-full max-w-xs">
+        <FieldSet class="max-w-xs">
             <FieldLegend variant="label">"Subscription Plan"</FieldLegend>
             <FieldDescription>
                 "Yearly and lifetime plans offer significant savings."
             </FieldDescription>
-            <RadioGroup value="monthly">
-                <Field orientation="horizontal">
-                    <Radio value="monthly" id="plan-monthly" />
-                    <FieldLabel label_for="plan-monthly" class="font-normal">
-                        "Monthly ($9.99/month)"
-                    </FieldLabel>
-                </Field>
-                <Field orientation="horizontal">
-                    <Radio value="yearly" id="plan-yearly" />
-                    <FieldLabel label_for="plan-yearly" class="font-normal">
-                        "Yearly ($99.99/year)"
-                    </FieldLabel>
-                </Field>
-                <Field orientation="horizontal">
-                    <Radio value="lifetime" id="plan-lifetime" />
-                    <FieldLabel label_for="plan-lifetime" class="font-normal">
-                        "Lifetime ($299.99)"
-                    </FieldLabel>
-                </Field>
-            </RadioGroup>
+            <FieldGroup>
+                <FieldRadioGroup value=selected_plan>
+                    <Field orientation="horizontal">
+                        <Radio value="monthly">"Monthly ($9.99/month)"</Radio>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Radio value="yearly">"Yearly ($99.99/year)"</Radio>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Radio value="lifetime">"Lifetime ($299.99)"</Radio>
+                    </Field>
+                </FieldRadioGroup>
+            </FieldGroup>
         </FieldSet>
     }
 }

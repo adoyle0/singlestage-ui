@@ -1,5 +1,5 @@
-use crate::{RadioGroupContext, Reactive, primitives::PopoverMenuContext};
-use leptos::{context::Provider, prelude::*};
+use crate::{Reactive, primitives::*};
+use leptos::prelude::*;
 
 /// Contains all the parts of a radio group
 #[component]
@@ -138,7 +138,6 @@ pub fn RadioGroup(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -182,36 +181,20 @@ pub fn RadioGroup(
         />
     };
 
-    if let Some(default) = default.get_untracked() {
-        value.set(default)
-    };
-
-    let context = RadioGroupContext {
-        name: name
-            .get_untracked()
-            .unwrap_or(uuid::Uuid::new_v4().to_string()),
-        disabled,
-        invalid,
-        value,
-    };
-
-    let in_popover_menu = use_context::<PopoverMenuContext>().is_some();
-
     view! {
-        <fieldset
-            class=move || {
-                format!(
-                    "{}{}",
-                    if in_popover_menu { "" } else { "singlestage-radio-group " },
-                    class.get().unwrap_or_default(),
-                )
-            }
+        <RadioGroupPrimitive
+            primitive_type=RadioGroupPrimitiveType::Normal
+
+            class
+            default
+            invalid
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            <Provider value=context>{children()}</Provider>
-        </fieldset>
+            {children()}
+        </RadioGroupPrimitive>
     }
 }

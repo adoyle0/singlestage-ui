@@ -15,9 +15,9 @@ pub fn DialogScrollableContentExample() -> impl IntoView {
                         "This is a dialog with scrollable content."
                     </DialogDescription>
                 </DialogHeader>
-                <div class="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
+                <ScrollArea class="h-full max-h-[50vh] rounded-none border-none">
                     <For each=move || 0..10 key=|i| i.to_string() let(_)>
-                        <p class="mb-4 leading-normal">
+                        <p class="mb-4">
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                             enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -27,7 +27,7 @@ pub fn DialogScrollableContentExample() -> impl IntoView {
                             sunt in culpa qui officia deserunt mollit anim id est laborum."
                         </p>
                     </For>
-                </div>
+                </ScrollArea>
             </DialogContent>
         </Dialog>
     }

@@ -9,10 +9,6 @@ pub fn FieldLabel(
     /// Whether the element renders as disabled
     #[prop(optional, into)]
     disabled: Reactive<bool>,
-    /// Set whether or not this element should display inset from its normal position.
-    /// (For use in popover menus)
-    #[prop(optional, into)]
-    inset: MaybeProp<bool>,
     /// Whether the element renders as invalid
     #[prop(optional, into)]
     invalid: Reactive<bool>,
@@ -169,7 +165,6 @@ pub fn FieldLabel(
             class
             disabled
             id
-            inset
             invalid
             label_for
 

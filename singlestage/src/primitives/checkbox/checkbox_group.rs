@@ -1,14 +1,45 @@
-use crate::{FieldContext, Reactive};
-use leptos::prelude::*;
+use crate::Reactive;
+use leptos::{context::Provider, prelude::*};
 
-/// Accessible error container that accepts children or a reactive list of errors.
+#[derive(Clone)]
+pub(crate) struct CheckboxGroupContext {
+    pub name: String,
+    pub disabled: Reactive<bool>,
+    pub invalid: Reactive<bool>,
+    pub value: Reactive<Vec<String>>,
+}
+
+#[derive(Clone, Copy)]
+pub enum CheckboxGroupPrimitiveType {
+    Field,
+    Normal,
+    Menu,
+}
+
 #[component]
-pub fn FieldError(
-    #[prop(optional)] children: Option<Children>,
+pub fn CheckboxGroupPrimitive(
+    primitive_type: CheckboxGroupPrimitiveType,
 
-    /// A reactive list of errors to display.
+    children: Children,
+
+    /// Set or update the invalid state of the checkbox group.
     #[prop(optional, into)]
-    errors: Reactive<Vec<String>>,
+    invalid: Reactive<bool>,
+    /// Reactive signal coupled to the current selected value of the checkbox group.
+    #[prop(optional, into)]
+    value: Reactive<Vec<String>>,
+
+    // FIELDSET ATTRIBUTES
+    //
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -91,6 +122,9 @@ pub fn FieldError(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -112,9 +146,14 @@ pub fn FieldError(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let field = expect_context::<FieldContext>();
-
-    field.has_error.set(true);
+    let context = CheckboxGroupContext {
+        disabled,
+        invalid,
+        name: name
+            .get_untracked()
+            .unwrap_or(uuid::Uuid::new_v4().to_string()),
+        value,
+    };
 
     let global_attrs_1 = view! {
         <{..}
@@ -145,6 +184,7 @@ pub fn FieldError(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -154,22 +194,34 @@ pub fn FieldError(
         />
     };
 
+    let fieldset_attrs = view! {
+        <{..}
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
+            disabled=move || disabled.get()
+            form=move || form.get()
+            name=move || name.get()
+        />
+    };
+
     view! {
-        <div
-            class=move || format!("singlestage-field-error {}", class.get().unwrap_or_default())
-            role="alert"
-            style:display=move || if field.invalid.get() { None } else { Some("none") }
+        <fieldset
+            class=move || {
+                format!(
+                    "{}{}",
+                    match primitive_type {
+                        CheckboxGroupPrimitiveType::Field => "singlestage-field-group ",
+                        CheckboxGroupPrimitiveType::Normal => "singlestage-checkbox-group ",
+                        CheckboxGroupPrimitiveType::Menu => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
+            {..fieldset_attrs}
         >
-            {if let Some(children) = children { children() } else { "".into_any() }}
-
-            <ul class="singlestage-field-error-list">
-                <For each=move || errors.get() key=|error| error.clone() let(error)>
-                    <li>{error}</li>
-                </For>
-            </ul>
-        </div>
+            <Provider value=context>{children()}</Provider>
+        </fieldset>
     }
 }

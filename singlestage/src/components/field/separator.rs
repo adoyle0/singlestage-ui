@@ -1,7 +1,7 @@
 use crate::Separator;
 use leptos::prelude::*;
 
-/// The separator.
+/// Visual divider to separate sections inside a FieldSet. Accepts optional inline content.
 #[component]
 pub fn FieldSeparator(
     #[prop(optional)] children: Option<Children>,

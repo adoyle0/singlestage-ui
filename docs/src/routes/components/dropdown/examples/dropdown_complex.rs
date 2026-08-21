@@ -3,17 +3,9 @@ use singlestage::*;
 
 #[component]
 pub fn DropdownComplexExample() -> impl IntoView {
+    let view = RwSignal::new(vec!["sidebar".to_string()]);
     let theme = RwSignal::new("light".to_string());
-
-    struct Notifications {
-        email: RwSignal<bool>,
-        push: RwSignal<bool>,
-    }
-
-    let notifications = Notifications {
-        email: RwSignal::new(true),
-        push: RwSignal::new(true),
-    };
+    let notifications = RwSignal::new(vec!["email".to_string(), "push".to_string()]);
 
     view! {
         <DropdownMenu>
@@ -79,12 +71,14 @@ pub fn DropdownComplexExample() -> impl IntoView {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>"View"</DropdownMenuLabel>
-                    <DropdownMenuCheckboxItem checked=true>
-                        {icon!(icondata::LuEye)} "Show Sidebar"
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem>
-                        {icon!(icondata::FiLayout)} "Show Status Bar"
-                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxGroup value=view>
+                        <DropdownMenuCheckboxItem value="sidebar">
+                            {icon!(icondata::LuEye)} "Show Sidebar"
+                        </DropdownMenuCheckboxItem>
+                        <DropdownMenuCheckboxItem value="status_bar">
+                            {icon!(icondata::FiLayout)} "Show Status Bar"
+                        </DropdownMenuCheckboxItem>
+                    </DropdownMenuCheckboxGroup>
                     <DropdownMenuSub>
                         <DropdownMenuSubTrigger>
                             {icon!(icondata::LuPalette)} "Theme"
@@ -135,14 +129,14 @@ pub fn DropdownComplexExample() -> impl IntoView {
                                     <DropdownMenuSubContent>
                                         <DropdownMenuGroup>
                                             <DropdownMenuLabel>"Notification Types"</DropdownMenuLabel>
-                                            <DropdownMenuCheckboxItem checked=notifications
-                                                .push>
-                                                {icon!(icondata::LuBell)} "Push Notifications"
-                                            </DropdownMenuCheckboxItem>
-                                            <DropdownMenuCheckboxItem checked=notifications
-                                                .email>
-                                                {icon!(icondata::LuMail)} "Email Notifications"
-                                            </DropdownMenuCheckboxItem>
+                                            <DropdownMenuCheckboxGroup value=notifications>
+                                                <DropdownMenuCheckboxItem value="push">
+                                                    {icon!(icondata::LuBell)} "Push Notifications"
+                                                </DropdownMenuCheckboxItem>
+                                                <DropdownMenuCheckboxItem value="email">
+                                                    {icon!(icondata::LuMail)} "Email Notifications"
+                                                </DropdownMenuCheckboxItem>
+                                            </DropdownMenuCheckboxGroup>
                                         </DropdownMenuGroup>
                                     </DropdownMenuSubContent>
                                 </DropdownMenuSub>

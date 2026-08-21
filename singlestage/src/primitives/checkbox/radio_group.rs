@@ -1,14 +1,48 @@
-use crate::{FieldContext, Reactive};
-use leptos::prelude::*;
+use crate::Reactive;
+use leptos::{context::Provider, prelude::*};
 
-/// Accessible error container that accepts children or a reactive list of errors.
+#[derive(Clone)]
+pub(crate) struct RadioGroupContext {
+    pub name: String,
+    pub disabled: Reactive<bool>,
+    pub invalid: Reactive<bool>,
+    pub value: Reactive<String>,
+}
+
+#[derive(Clone, Copy)]
+pub enum RadioGroupPrimitiveType {
+    Field,
+    Normal,
+    Menu,
+}
+
 #[component]
-pub fn FieldError(
-    #[prop(optional)] children: Option<Children>,
+pub fn RadioGroupPrimitive(
+    primitive_type: RadioGroupPrimitiveType,
 
-    /// A reactive list of errors to display.
+    children: Children,
+
+    /// Set or update the default value.
     #[prop(optional, into)]
-    errors: Reactive<Vec<String>>,
+    default: MaybeProp<String>,
+    /// Set or update the invalid state of the radio group.
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+    /// Reactive signal coupled to the current selected value of the radio group.
+    #[prop(optional, into)]
+    value: Reactive<String>,
+
+    // FIELDSET ATTRIBUTES
+    //
+    /// Toggle whether or not the input is disabled.
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Associate this element with a form element that may not be its parent by its `id`.
+    #[prop(optional, into)]
+    form: MaybeProp<String>,
+    /// Name of this element. Submitted with the form as part of a name/value pair.
+    #[prop(optional, into)]
+    name: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -91,6 +125,9 @@ pub fn FieldError(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
+    /// Define the semantic meaning of content.
+    #[prop(optional, into)]
+    role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -112,15 +149,25 @@ pub fn FieldError(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let field = expect_context::<FieldContext>();
+    if let Some(default) = default.get_untracked() {
+        value.set(default)
+    };
 
-    field.has_error.set(true);
+    let context = RadioGroupContext {
+        name: name
+            .get_untracked()
+            .unwrap_or(uuid::Uuid::new_v4().to_string()),
+        disabled,
+        invalid,
+        value,
+    };
 
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -145,6 +192,7 @@ pub fn FieldError(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
+            role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -154,22 +202,34 @@ pub fn FieldError(
         />
     };
 
+    let fieldset_attrs = view! {
+        <{..}
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
+            disabled=move || disabled.get()
+            form=move || form.get()
+            name=move || name.get()
+        />
+    };
+
     view! {
-        <div
-            class=move || format!("singlestage-field-error {}", class.get().unwrap_or_default())
-            role="alert"
-            style:display=move || if field.invalid.get() { None } else { Some("none") }
+        <fieldset
+            class=move || {
+                format!(
+                    "{}{}",
+                    match primitive_type {
+                        RadioGroupPrimitiveType::Field => "singlestage-field-group ",
+                        RadioGroupPrimitiveType::Normal => "singlestage-radio-group ",
+                        RadioGroupPrimitiveType::Menu => "",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
+            {..fieldset_attrs}
         >
-            {if let Some(children) = children { children() } else { "".into_any() }}
-
-            <ul class="singlestage-field-error-list">
-                <For each=move || errors.get() key=|error| error.clone() let(error)>
-                    <li>{error}</li>
-                </For>
-            </ul>
-        </div>
+            <Provider value=context>{children()}</Provider>
+        </fieldset>
     }
 }
