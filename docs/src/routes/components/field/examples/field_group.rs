@@ -4,39 +4,33 @@ use singlestage::*;
 #[component]
 pub fn FieldGroupExample() -> impl IntoView {
     view! {
-        <div class="w-full max-w-md">
+        <FieldGroup class="max-w-xs">
             <FieldGroup>
-                <FieldSet class="gap-3">
-                    <FieldLegend variant="label">"Responses"</FieldLegend>
-                    <FieldDescription>
-                        "Get notified when ChatGPT responds to requests that take time, like
-                        research or image generation."
-                    </FieldDescription>
-                    <Field orientation="horizontal">
-                        <Checkbox checked=true class="font-normal" disabled=true>
-                            "Push notifications"
-                        </Checkbox>
-                    </Field>
-                </FieldSet>
-                <FieldSeparator />
-                <FieldSet>
-                    <FieldLegend variant="label">"Tasks"</FieldLegend>
-                    <FieldDescription>
-                        "Get notified when tasks you've created have updates. "
-                        <a href="#">"Manage tasks"</a>
-                    </FieldDescription>
-                    <FieldGroup>
-                        <CheckboxGroup>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Push notifications"</Checkbox>
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Email notifications"</Checkbox>
-                            </Field>
-                        </CheckboxGroup>
-                    </FieldGroup>
-                </FieldSet>
+                <FieldLabel>"Responses"</FieldLabel>
+                <FieldDescription>
+                    "Get notified when ChatGPT responds to requests that take time, like
+                    research or image generation."
+                </FieldDescription>
+                <Field disabled=true orientation="horizontal">
+                    <Checkbox checked=true>"Push notifications"</Checkbox>
+                </Field>
             </FieldGroup>
-        </div>
+            <FieldSeparator />
+            <FieldGroup>
+                <FieldLabel>"Tasks"</FieldLabel>
+                <FieldDescription>
+                    "Get notified when tasks you've created have updates. "
+                    <Link href="#">"Manage tasks"</Link>
+                </FieldDescription>
+                <CheckboxGroup>
+                    <Field orientation="horizontal">
+                        <Checkbox>"Push notifications"</Checkbox>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Checkbox>"Email notifications"</Checkbox>
+                    </Field>
+                </CheckboxGroup>
+            </FieldGroup>
+        </FieldGroup>
     }
 }

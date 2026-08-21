@@ -1,0 +1,27 @@
+@layer components {
+  .singlestage-badge {
+    @apply inline-flex
+    items-center
+    justify-center
+    overflow-hidden
+    shrink-0
+    w-fit
+    whitespace-nowrap;
+
+    &::focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-destructive/20;
+    }
+
+    & > svg {
+      @apply pointer-events-none;
+    }
+  }
+}

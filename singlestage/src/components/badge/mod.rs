@@ -1,3 +1,4 @@
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// Contains arbitrary badge content.
@@ -7,9 +8,9 @@ pub fn Badge(
 
     /// Toggle whether or not this badge appears invalid.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    invalid: Reactive<bool>,
     /// Define the badge variant. Defaults to `"primary"`.
-    /// Variants: "primary" | "secondary" | "destructive" | "outline"
+    /// Accepted values: "primary" | "secondary" | "destructive" | "outline"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -160,16 +161,17 @@ pub fn Badge(
 
     view! {
         <span
-            aria_invalid=move || if invalid.get().unwrap_or_default() { Some("true") } else { None }
+            aria_invalid=move || if invalid.get() { Some("true") } else { None }
             class=move || {
                 format!(
-                    "{} {}",
+                    "singlestage-badge {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-badge-primary",
-                        "secondary" => "singlestage-badge-secondary",
-                        "destructive" => "singlestage-badge-destructive",
-                        "outline" => "singlestage-badge-outline",
-                        _ => "singlestage-badge-primary",
+                        "secondary" => "singlestage-badge-variant-secondary",
+                        "destructive" => "singlestage-badge-variant-destructive",
+                        "outline" => "singlestage-badge-variant-outline",
+                        "ghost" => "singlestage-badge-variant-ghost",
+                        "link" => "singlestage-badge-variant-link",
+                        _ => "singlestage-badge-variant-default",
                     },
                     class.get().unwrap_or_default(),
                 )

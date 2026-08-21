@@ -3,45 +3,40 @@ use singlestage::*;
 
 #[component]
 pub fn FieldCheckboxExample() -> impl IntoView {
+    let items_to_show = RwSignal::new(vec!["hard_disks".to_string()]);
+    let sync_folders = RwSignal::new(true);
+
     view! {
-        <div class="w-full max-w-md">
+        <FieldSet class="max-w-xs">
+            <FieldLegend variant="label">"Show these items on the desktop"</FieldLegend>
+            <FieldDescription>"Select the items you want to show on the desktop."</FieldDescription>
             <FieldGroup>
-                <FieldSet>
-                    <FieldLegend variant="label">"Show these items on the desktop"</FieldLegend>
-                    <FieldDescription>
-                        "Select the items you want to show on the desktop."
-                    </FieldDescription>
-                    <FieldGroup>
-                        <CheckboxGroup>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Hard disks"</Checkbox>
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"External disks"</Checkbox>
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"CDs, DVDs, and iPods"</Checkbox>
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox class="font-normal">"Connected servers"</Checkbox>
-                            </Field>
-                        </CheckboxGroup>
-                    </FieldGroup>
-                </FieldSet>
-                <FieldSeparator />
-                <Field orientation="horizontal">
-                    <Checkbox checked=true />
-                    <FieldLabel>
-                        <FieldContent>
-                            <FieldTitle>"Sync Desktop & Documents folders"</FieldTitle>
-                            <FieldDescription>
-                                "Your Desktop & Documents folders are being synced with iCloud
-                                Drive. You can access them from other devices."
-                            </FieldDescription>
-                        </FieldContent>
-                    </FieldLabel>
-                </Field>
+                <FieldCheckboxGroup value=items_to_show>
+                    <Field orientation="horizontal">
+                        <Checkbox value="hard_disks">"Hard disks"</Checkbox>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Checkbox value="external_disks">"External disks"</Checkbox>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Checkbox value="cd_dvd_ipod">"CDs, DVDs, and iPods"</Checkbox>
+                    </Field>
+                    <Field orientation="horizontal">
+                        <Checkbox value="connected_servers">"Connected servers"</Checkbox>
+                    </Field>
+                </FieldCheckboxGroup>
             </FieldGroup>
-        </div>
+            <FieldSeparator />
+            <Field orientation="horizontal">
+                <Checkbox checked=sync_folders />
+                <FieldContent>
+                    <FieldLabel>"Sync Desktop & Documents folders"</FieldLabel>
+                    <FieldDescription>
+                        "Your Desktop & Documents folders are being synced with iCloud Drive.
+                        You can access them from other devices."
+                    </FieldDescription>
+                </FieldContent>
+            </Field>
+        </FieldSet>
     }
 }

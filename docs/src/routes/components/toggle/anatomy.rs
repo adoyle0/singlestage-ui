@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::toggle::Toggle;
+use singlestage::*;
 
 #[component]
 pub fn ToggleAnatomy() -> impl IntoView {

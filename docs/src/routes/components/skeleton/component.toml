@@ -5,8 +5,24 @@ description = "Use to show a placeholder while content is loading."
 name = "skeleton"
 
 [[examples]]
+name = "skeleton avatar"
+title = "Avatar"
+
+[[examples]]
 name = "skeleton card"
 title = "Card"
+
+[[examples]]
+name = "skeleton text"
+title = "Text"
+
+[[examples]]
+name = "skeleton form"
+title = "Form"
+
+[[examples]]
+name = "skeleton table"
+title = "Table"
 
 [[references]]
 name = "Skeleton"

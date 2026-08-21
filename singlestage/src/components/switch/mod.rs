@@ -1,4 +1,4 @@
-use crate::{CheckboxGroupContext, FieldContext, FieldLabel, Reactive};
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// A control that allows the user to toggle between checked and not checked.
@@ -6,9 +6,16 @@ use leptos::prelude::*;
 pub fn Switch(
     #[prop(optional)] children: Option<Children>,
 
+    /// Whether the input is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
+    /// Set the size to render the Switch
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
+
     // CHECKBOX ATTRIBUTES
     //
-    /// Whether the command or control is checked
+    /// Reactive signal coupled to the checkbox's checked value.
     #[prop(optional, into)]
     checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
@@ -25,7 +32,7 @@ pub fn Switch(
     required: MaybeProp<bool>,
     /// Whether the form control is disabled
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
     value: MaybeProp<String>,
@@ -140,69 +147,6 @@ pub fn Switch(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let switch_ref = {
-        if let Some(node_ref) = node_ref.get_untracked() {
-            node_ref
-        } else {
-            NodeRef::<leptos::html::Input>::new()
-        }
-    };
-
-    let on_change = move |ev| {
-        let switch_checked = event_target_checked(&ev);
-
-        checked.set(switch_checked);
-
-        if let Some(checkbox_value) = value.get_untracked()
-            && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-        {
-            match switch_checked {
-                true => checkbox_group.value.update(|group_value| {
-                    group_value.push(checkbox_value);
-                }),
-                false => checkbox_group.value.update(|group_value| {
-                    if let Some(index) = group_value.iter().position(|el| *el == checkbox_value) {
-                        group_value.swap_remove(index);
-                    }
-                }),
-            }
-        }
-    };
-
-    if let Some(value) = value.get_untracked()
-        && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-        && checkbox_group.value.get_untracked().contains(&value)
-        && let Some(switch) = switch_ref.get_untracked()
-    {
-        switch.set_checked(true)
-    }
-
-    Effect::new(move || {
-        if let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
-            && let Some(value) = value.get_untracked()
-        {
-            if checkbox_group.value.get().contains(&value) {
-                checked.set(true);
-            } else {
-                checked.set(false);
-            }
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(switch) = switch_ref.get_untracked() {
-            switch.set_checked(checked.get());
-        }
-    });
-
-    Effect::new(move || {
-        if let Some(switch) = switch_ref.get_untracked()
-            && let Some(disabled) = disabled.get()
-        {
-            switch.set_disabled(disabled);
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -214,14 +158,12 @@ pub fn Switch(
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
             itemid=move || itemid.get()
         />
     };
-
     let global_attrs_2 = view! {
         <{..}
             itemprop=move || itemprop.get()
@@ -241,111 +183,51 @@ pub fn Switch(
         />
     };
 
-    let input_id = uuid::Uuid::new_v4();
-    let label_id = uuid::Uuid::new_v4();
-    let has_children = children.is_some();
-
-    let custom_attrs = view! {
-        <{..}
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-                    checkbox_group.invalid.get().to_string()
-                } else {
-                    false.to_string()
-                }
-            }
-            aria_labelledby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
-                } else {
-                    None
-                }
-            }
-            checked=checked.get_untracked()
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
-            disabled=disabled.get_untracked()
-            form=move || form.get()
-            name=move || name.get()
-            node_ref=switch_ref
-            on:change=on_change
-            readonly=move || readonly.get()
-            required=move || required.get()
-            role="switch"
-            type="checkbox"
-            value=move || value.get()
-        />
-    };
-
     if let Some(children) = children {
         view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <input
-                        id=move || id.get().unwrap_or(input_id.to_string())
+            <CheckboxPrimitive
+                primitive_type=CheckboxPrimitiveType::Switch
 
-                        {..global_attrs_1}
-                        {..global_attrs_2}
-                        {..custom_attrs}
-                    />
-                    <FieldLabel
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </FieldLabel>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!("singlestage-label {}", class.get().unwrap_or_default())
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        <input
-                            id=move || id.get().unwrap_or(input_id.to_string())
+                checked
+                class
+                disabled
+                form
+                id
+                invalid
+                name
+                node_ref
+                readonly
+                required
+                size
+                value
 
-                            {..global_attrs_1}
-                            {..global_attrs_2}
-                            {..custom_attrs}
-                        />
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </CheckboxPrimitive>
         }
         .into_any()
     } else {
         view! {
-            <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
+            <CheckboxPrimitive
+                primitive_type=CheckboxPrimitiveType::Switch
+
+                checked
+                class
+                disabled
+                form
+                id
+                invalid
+                name
+                node_ref
+                readonly
+                required
+                size
+                value
 
                 {..global_attrs_1}
                 {..global_attrs_2}
-                {..custom_attrs}
             />
         }
         .into_any()

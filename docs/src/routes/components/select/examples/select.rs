@@ -5,13 +5,11 @@ use singlestage::*;
 pub fn SelectExample() -> impl IntoView {
     view! {
         <Select>
-            <SelectContent label="Fruits">
-                <SelectItem value="apple">"Apple"</SelectItem>
-                <SelectItem value="banana">"Banana"</SelectItem>
-                <SelectItem value="blueberry">"Blueberry"</SelectItem>
-                <SelectItem value="grapes">"Grapes"</SelectItem>
-                <SelectItem value="pineapple">"Pineapple"</SelectItem>
-            </SelectContent>
+            <SelectOption value="">"Select status"</SelectOption>
+            <SelectOption value="todo">"Todo"</SelectOption>
+            <SelectOption value="in-progress">"In Progress"</SelectOption>
+            <SelectOption value="done">"Done"</SelectOption>
+            <SelectOption value="cancelled">"Cancelled"</SelectOption>
         </Select>
     }
 }

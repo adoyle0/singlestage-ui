@@ -1,0 +1,188 @@
+@layer components1 {
+  .singlestage-button {
+    @apply bg-clip-padding
+    border
+    border-transparent
+    font-medium
+    rounded-4xl
+    text-sm;
+
+    &:active:not(&:has(+ .singlestage-popover)) {
+      @apply translate-y-px;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-3
+      ring-destructive/20;
+    }
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-button-variant-default {
+    @apply bg-primary
+    text-primary-foreground;
+
+    &:hover {
+      @apply bg-primary/80;
+    }
+  }
+
+  .singlestage-button-variant-outline {
+    @apply bg-background
+    border-border;
+
+    &:hover {
+      @apply bg-muted
+      text-foreground;
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      @apply bg-muted
+      text-foreground;
+    }
+  }
+
+  .singlestage-button-variant-secondary {
+    @apply bg-secondary
+    text-secondary-foreground;
+
+    &:hover {
+      @apply bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)];
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      @apply bg-secondary
+      text-secondary-foreground;
+    }
+  }
+
+  .singlestage-button-variant-ghost {
+    &:hover {
+      @apply bg-muted
+      text-foreground;
+    }
+
+    &:has(+ .singlestage-popover:popover-open),
+    &[aria-expanded="true"] {
+      @apply bg-muted
+      text-foreground;
+    }
+  }
+
+  .singlestage-button-variant-destructive {
+    @apply bg-destructive/10
+    text-destructive;
+
+    &:focus-visible {
+      @apply border-destructive/40
+      ring-destructive/20;
+    }
+
+    &:hover {
+      @apply bg-destructive/20;
+    }
+  }
+
+  .singlestage-button-variant-link {
+    @apply text-primary
+    underline-offset-4;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
+  .singlestage-button-size-xs {
+    @apply gap-1
+    h-6
+    px-2.5
+    text-xs;
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-2;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-2;
+    }
+
+    svg:not([class*="size-"]) {
+      @apply size-3;
+    }
+  }
+
+  .singlestage-button-size-sm {
+    @apply gap-1
+    h-8
+    px-3;
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-2;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-2;
+    }
+  }
+
+  .singlestage-button-size-default {
+    @apply gap-1.5
+    h-9
+    px-3;
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-2.5;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-2.5;
+    }
+  }
+
+  .singlestage-button-size-lg {
+    @apply gap-1.5
+    h-10
+    px-4;
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-3;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-3;
+    }
+  }
+
+  .singlestage-button-size-icon-xs {
+    @apply size-6;
+
+    svg:not([class*="size-"]) {
+      @apply size-3;
+    }
+  }
+
+  .singlestage-button-size-icon-sm {
+    @apply size-8;
+  }
+
+  .singlestage-button-size-icon {
+    @apply size-9;
+  }
+
+  .singlestage-button-size-icon-lg {
+    @apply size-10;
+  }
+}

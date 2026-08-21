@@ -1,32 +1,53 @@
 name = "Sidebar"
 description = "A composable, themeable, and customizable sidebar component."
 
-# [[examples]]
-# name = "sidebar"
+[[examples]]
+name = "sidebar_icon"
 
-[[references]]
-name = "Collapsible"
-description = "Creates a collapsible menu."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details#attributes">details</a> \
-attributes."""
-attrs = []
+[[examples]]
+name = "sidebar_sections"
+title = "Sections"
+description = "A simple sidebar with navigation grouped by section"
 
-[[references]]
-name = "CollapsibleContent"
-description = "Contains the content of a collapsible menu."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-attributes."""
-attrs = []
+[[examples]]
+name = "sidebar_collapsible_sections"
+title = "Collapsible Sections"
+description = "A sidebar with collapsible sections"
 
-[[references]]
-name = "CollapsibleTrigger"
-description = "A button that opens the collapsible menu."
-extra = """Note: Slot is required."""
-attrs = []
+[[examples]]
+name = "sidebar_submenus"
+title = "Submenus"
+description = "A sidebar with submenus"
+
+[[examples]]
+name = "sidebar_floating_submenus"
+title = "Floating Submenus"
+description = "A floating sidebar with submenus"
+
+[[examples]]
+name = "sidebar_collapsible_submenus"
+title = "Collapsible Submenus"
+description = "A floating sidebar with collapsible submenus"
+
+[[examples]]
+name = "sidebar_submenu_dropdown"
+title = "Submenu Dropdown"
+description = "A sidebar with submenus as dropdowns"
+
+[[examples]]
+name = "sidebar_icon"
+title = "Icons"
+description = "A sidebar that collapses to icons"
+
+[[examples]]
+name = "sidebar_secondary"
+title = "Secondary Navigation"
+description = "An inset sidebar with secondary navigation"
+
+[[examples]]
+name = "sidebar_nested"
+title = "Nested"
+description = "Collapsible nested sidebars"
 
 [[references]]
 name = "Sidebar"
@@ -123,10 +144,10 @@ attrs = []
 name = "SidebarProvider"
 description = "Takes in initial state and provides SidebarContext to its children."
 attrs = [
-  { attr = "hidden", attr_type = "Reactive<bool>", default = "false", description = """Reactive \
-    signal coupled to the sidebar's hidden state.""" },
-  { attr = "side", attr_type = "Reactive<String>", default = """"left"""", description = """\
-    Reactive signal coupled to which side of its container the sidebar renders on.""" },
+  { attr = "hidden", attr_type = "bool", default = "false", description = """Reactive signal \
+    coupled to the sidebar's hidden state.""" },
+  { attr = "side", attr_type = "String", default = """"left"""", description = """Reactive signal \
+    coupled to which side of its container the sidebar renders on.""" },
 ]
 
 [[references]]

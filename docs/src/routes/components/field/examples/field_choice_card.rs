@@ -3,40 +3,38 @@ use singlestage::*;
 
 #[component]
 pub fn FieldChoiceCardExample() -> impl IntoView {
+    let selected_environment = RwSignal::new("kubernetes".to_string());
+
     view! {
-        <div class="w-full max-w-md">
-            <FieldSet>
-                <FieldLegend variant="label">"Compute Environment"</FieldLegend>
-                <FieldDescription>
-                    "Select the compute environment for your cluster."
-                </FieldDescription>
-                <FieldGroup>
-                    <RadioGroup default="kubernetes">
-                        <Field orientation="horizontal" variant="button">
-                            <FieldLabel>
-                                <FieldContent>
-                                    <FieldTitle>"Kubernetes"</FieldTitle>
-                                    <FieldDescription>
-                                        "Run GPU workloads on a K8s configured cluster."
-                                    </FieldDescription>
-                                </FieldContent>
-                            </FieldLabel>
+        <FieldSet class="max-w-xs">
+            <FieldLegend variant="label">"Compute Environment"</FieldLegend>
+            <FieldDescription>"Select the compute environment for your cluster."</FieldDescription>
+            <FieldGroup>
+                <FieldRadioGroup value=selected_environment>
+                    <FieldLabel>
+                        <Field orientation="horizontal">
+                            <FieldContent>
+                                <FieldTitle>"Kubernetes"</FieldTitle>
+                                <FieldDescription>
+                                    "Run GPU workloads on a K8s cluster."
+                                </FieldDescription>
+                            </FieldContent>
                             <Radio value="kubernetes" />
                         </Field>
-                        <Field orientation="horizontal" variant="button">
-                            <FieldLabel>
-                                <FieldContent>
-                                    <FieldTitle>"Virtual Machine"</FieldTitle>
-                                    <FieldDescription>
-                                        "Access a VM configured cluster to run GPU workloads."
-                                    </FieldDescription>
-                                </FieldContent>
-                            </FieldLabel>
+                    </FieldLabel>
+                    <FieldLabel>
+                        <Field orientation="horizontal">
+                            <FieldContent>
+                                <FieldTitle>"Virtual Machine"</FieldTitle>
+                                <FieldDescription>
+                                    "Access a cluster to run GPU workloads."
+                                </FieldDescription>
+                            </FieldContent>
                             <Radio value="vm" />
                         </Field>
-                    </RadioGroup>
-                </FieldGroup>
-            </FieldSet>
-        </div>
+                    </FieldLabel>
+                </FieldRadioGroup>
+            </FieldGroup>
+        </FieldSet>
     }
 }

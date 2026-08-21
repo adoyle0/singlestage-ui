@@ -46,7 +46,7 @@ Radio, Checkbox and Switch components."""
 [[examples]]
 name = "field group"
 title = "Field Group"
-description = "Stack Field components with FieldGroup. Add FieldSeparator to divide them."
+description = "Stack Field components with FieldGroup. Add Separator to divide them."
 
 [[examples]]
 name = "field responsive layout"
@@ -64,10 +64,27 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Sets whether this \
+    Field is disabled.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Sets whether this \
+    Field is invalid.""" },
   { attr = "orientation", attr_type = "String", default = "\"vertical\"", description = """Sets \
-    the display orientation. Accepted values: \"vertical\" | \"horizontal\" | \"responsive\".""" },
-  { attr = "variant", attr_type = "String", default = """""""", description = """Sets the display \
-    variant of the Field. Accepted values: \"button\".""" },
+    the display orientation. Accepted values: "vertical" | "horizontal" | "responsive".""" },
+]
+
+[[references]]
+name = "FieldCheckboxGroup"
+description = "A checkbox group component for use with Field components."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "Vec<String>", default = "[]", description = """A dynamic list of \
+    all the values of checked children Checkboxes.""" },
 ]
 
 [[references]]
@@ -94,8 +111,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "errors", attr_type = "Reactive<Vec<String>>", default = "[]", description = """A \
-    reactive list of errors to display.""" },
+  { attr = "errors", attr_type = "Vec<String>", default = "[]", description = """A reactive list \
+    of errors to display.""" },
 
 ]
 
@@ -115,6 +132,10 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Sets whether the \
+    element renders as disabled.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Sets whether the \
+    element renders as invalid.""" },
   { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \
     <label> `for` attribute to avoid name collisions.""" },
 ]
@@ -127,17 +148,38 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 attributes."""
 attrs = [
   { attr = "variant", attr_type = "String", default = "\"legend\"", description = """Set the \
-    display style of the FieldLegend. Accepted values: \"label\" | \"legend\".""" },
+    display style of the FieldLegend. Accepted values: "label" | "legend".""" },
+]
+
+[[references]]
+name = "FieldRadioGroup"
+description = "A radio group component for use with Field components."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Set or update \
+    the default value.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the group \
+    with invalid styling.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the current selected value of the radio group.""" },
 ]
 
 [[references]]
 name = "FieldSeparator"
-description = """Visual divider to separate sections inside a FieldGroup. Accepts optional inline \
+description = """Visual divider to separate sections inside a FieldSet. Accepts optional inline \
 content."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "orientation", attr_type = "String", default = "\"horizontal\"", description = """A \
+    visual divider to separate sections inside a FieldSet. Accepts optional inline content.""" },
+
+]
 
 [[references]]
 name = "FieldSet"

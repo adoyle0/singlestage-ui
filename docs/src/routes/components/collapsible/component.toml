@@ -1,0 +1,43 @@
+name = "Collapsible"
+description = "An interactive component which expands/collapses a panel."
+
+[[examples]]
+name = "collapsible"
+
+[[examples]]
+name = "collapsible basic"
+title = "Basic"
+
+[[examples]]
+name = "collapsible settings panel"
+title = "Settings Panel"
+description = "Use a trigger button to reveal additional settings."
+
+[[examples]]
+name = "collapsible file tree"
+title = "File Tree"
+description = "Use nested collapsibles to build a file tree."
+
+[[references]]
+name = "Collapsible"
+description = "Contains the collapsible trigger and content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """A reactive signal that \
+is directly coupled to the open state of the collapsible.""" },
+]
+
+[[references]]
+name = "CollapsibleContent"
+description = "Contains the content of a collapsible menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "CollapsibleTrigger"
+description = "A context provider that wraps a Button component that triggers the collapsible menu."
+attrs = []

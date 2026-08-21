@@ -1,11 +1,15 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Separates Item content.
+/// The separator.
 #[component]
 pub fn ItemSeparator(
-    /// Toggle whether or not the separator should display vertically.
+    #[prop(optional)] children: Option<Children>,
+
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -117,7 +121,7 @@ pub fn ItemSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,17 +156,27 @@ pub fn ItemSeparator(
         />
     };
 
-    view! {
-        <div
-            class=move || format!("singlestage-item-separator {}", class.get().unwrap_or_default())
-            data-orientation=match vertical.get().unwrap_or_default() {
-                false => "horizontal",
-                true => "vertical",
-            }
-                .to_string()
+    if let Some(children) = children {
+        view! {
+            <Separator
+                orientation
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        ></div>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </Separator>
+        }
+        .into_any()
+    } else {
+        view! {
+            <Separator
+                orientation
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+        }
+        .into_any()
     }
 }

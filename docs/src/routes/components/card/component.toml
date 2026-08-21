@@ -4,9 +4,31 @@ description = "Displays a card with header, content, and footer."
 [[examples]]
 name = "card"
 
+[[examples]]
+name = "card size"
+title = "Size"
+description = """Use the size prop to change the size of the card. The small size variant uses \
+smaller spacing."""
+
+[[examples]]
+name = "card image"
+title = "Image"
+description = "Add an image before the card header to create a card with an image."
+
 [[references]]
 name = "Card"
 description = "Contains all the parts of a card."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "size", attr_type = "String", default = """""""", description = """Specify the size to \
+    render the card. Accepted values: "sm"""" },
+]
+
+[[references]]
+name = "CardAction"
+description = "Renders content like a button or a badge in the top-right of the header."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

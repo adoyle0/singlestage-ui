@@ -1,14 +1,23 @@
-use crate::DropdownMenuContext;
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Contains a menu item.
+/// Contains a dropdown menu item.
 #[component]
 pub fn DropdownMenuItem(
     children: Children,
 
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
     /// Controls whether the item appears disabled and is clickable.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
+    /// Toggle whether clicking this item dismisses its parent menu
+    #[prop(optional, into, default = Reactive::new(true))]
+    dismiss: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
     /// Set the display variant of the item.
     ///
     /// Accepted values: "destructive"
@@ -123,13 +132,12 @@ pub fn DropdownMenuItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<DropdownMenuContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -164,27 +172,22 @@ pub fn DropdownMenuItem(
     };
 
     view! {
-        <li
-            class=move || {
-                format!("singlestage-dropdown-menu-item {}", class.get().unwrap_or_default())
-            }
-            role="menuitem"
-            value=move || value.get()
+        <MenuItemPrimitive
+            primitive_type=MenuItemPrimitiveType::Item
+
+            as_child
+            class
+            disabled
+            dismiss
+            id
+            inset
+            variant
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <button
-                aria-controls=move || menu.menu_id.get()
-                aria-haspopup="menu"
-                data-disabled=move || disabled.get().unwrap_or_default()
-                data-variant=move || variant.get().unwrap_or_default()
-                popovertarget=move || menu.menu_id.get()
-                popovertargetaction="toggle"
-                type="button"
-            >
-                {children()}
-            </button>
-        </li>
+            {children()}
+        </MenuItemPrimitive>
     }
 }

@@ -1,9 +1,9 @@
 [workspace]
 resolver = "2"
-members = ["singlestage", "docs", "singlestage_macro", "docs_macro"]
+members = ["docs", "docs_macro", "singlestage", "singlestage_macro"]
 
 [workspace.package]
-version = "0.4.0"
+version = "0.5.0"
 authors = ["Adam Doyle <adam@doordesk.net>"]
 edition = "2024"
 rust-version = "1.88"
@@ -15,34 +15,48 @@ keywords = ["leptos", "ui", "components", "basecoat", "shadcn"]
 categories = ["web-programming", "gui", "wasm"]
 
 [workspace.dependencies]
-leptos = "0.8"
-leptos_meta = "0.8"
-leptos_router = "0.8"
-leptos_axum = "0.8"
+# leptos = "0.8"
+# leptos_axum = "0.8"
+# leptos_meta = "0.8"
+# leptos_router = "0.8"
+# leptos = { path = "../leptos/leptos" }
+# leptos_axum = { path = "../leptos/integrations/axum" }
+# leptos_meta = { path = "../leptos/meta" }
+# leptos_router = { path = "../leptos/router" }
+leptos = { git = "https://github.com/leptos-rs/leptos" }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos" }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
+leptos_router = { git = "https://github.com/leptos-rs/leptos" }
 
 # Singlestage
 icondata_core = "0.1"
+reactive_stores = "0.4"
+singlestage_macro = "0"
+web-sys = "0.3"
 
 # Singlestage build
-reqwest = "0.12"
+reqwest = "0.13"
 sha256 = "1.6"
 
 # Docs
 axum = "0.8"
 console_error_panic_hook = "0.1"
-icondata = "0.6"
+icondata = "0.7"
 tokio = "1"
 tower = "0.5"
-tower-http = "0.6"
+tower-http = "0.7"
 uuid = "1.17"
 wasm-bindgen = "0.2"
 
 # Macros
 serde = "1.0"
 syntect = "5"
-toml = "0.9"
+toml = "1.0"
 quote = "1.0"
 syn = "2.0"
+
+# Docs macro
+rayon = "1.11"
 
 [profile.wasm-release]
 inherits = "release"

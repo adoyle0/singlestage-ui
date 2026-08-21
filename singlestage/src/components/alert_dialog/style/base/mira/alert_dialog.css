@@ -1,0 +1,101 @@
+@layer components1 {
+  .singlestage-alert-dialog-overlay {
+    @apply bg-popover
+    ring-1
+    ring-foreground/10
+    rounded-xl;
+
+    &::backdrop {
+      @apply supports-backdrop-filter:backdrop-blur-xs;
+    }
+
+    &[open]::backdrop {
+      @apply bg-black/80;
+    }
+  }
+
+  .singlestage-alert-dialog-content {
+    @apply bg-popover
+    gap-3
+    p-4
+    rounded-xl
+    text-popover-foreground;
+  }
+
+  .singlestage-alert-dialog-header {
+    @apply gap-1
+    grid
+    grid-rows-[auto_1fr]
+    place-items-center
+    text-center;
+
+    &:has(.singlestage-alert-dialog-media) {
+      @apply gap-x-4
+      grid-rows-[auto_auto_1fr];
+    }
+  }
+
+  .singlestage-alert-dialog-media {
+    @apply bg-muted
+    inline-flex
+    items-center
+    justify-center
+    mb-2
+    rounded-md
+    size-8;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-alert-dialog-title {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-alert-dialog-description {
+    @apply md:text-pretty
+    text-balance
+    text-muted-foreground
+    text-xs/relaxed;
+
+    a:not(.singlestage-button) {
+      @apply font-normal
+      underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+  }
+
+  .singlestage-alert-dialog-size-sm {
+    @apply max-w-64;
+  }
+
+  .singlestage-alert-dialog-size-default {
+    @apply max-w-xs
+    sm:max-w-sm;
+
+    &:has(.singlestage-alert-dialog-media) {
+      .singlestage-alert-dialog-title {
+        @apply sm:col-start-2;
+      }
+    }
+
+    .singlestage-alert-dialog-header {
+      @apply sm:place-items-start
+      sm:text-left;
+
+      &:has(.singlestage-alert-dialog-media) {
+        @apply sm:grid-rows-[auto_1fr];
+      }
+    }
+
+    .singlestage-alert-dialog-media {
+      @apply sm:row-span-2;
+    }
+  }
+}

@@ -1,9 +1,15 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Visual divider to separate sections inside a FieldGroup. Accepts optional inline content.
+/// Visual divider to separate sections inside a FieldSet. Accepts optional inline content.
 #[component]
 pub fn FieldSeparator(
     #[prop(optional)] children: Option<Children>,
+
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -150,27 +156,39 @@ pub fn FieldSeparator(
     };
 
     view! {
-        <div class="singlestage-field-separator-outer">
-            <div class="singlestage-field-separator"></div>
+        <div class="singlestage-field-separator">
             {if let Some(children) = children {
                 view! {
-                    <span
-                        class=move || {
-                            format!(
-                                "singlestage-field-separator-content {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
+                    <Separator
+                        class="singlestage-field-separator-inner"
+                        orientation
 
                         {..global_attrs_1}
                         {..global_attrs_2}
                     >
-                        {children()}
-                    </span>
+                        <span class=format!(
+                            "singlestage-field-separator-content {}",
+                            class.get().unwrap_or_default(),
+                        )>{children()}</span>
+                    </Separator>
                 }
                     .into_any()
             } else {
-                "".into_any()
+
+                view! {
+                    <Separator
+                        class=format!(
+                            "singlestage-field-separator-inner {}",
+                            class.get().unwrap_or_default(),
+                        )
+
+                        orientation
+
+                        {..global_attrs_1}
+                        {..global_attrs_2}
+                    />
+                }
+                    .into_any()
             }}
         </div>
     }

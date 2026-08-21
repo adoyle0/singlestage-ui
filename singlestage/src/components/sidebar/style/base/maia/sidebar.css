@@ -1,0 +1,328 @@
+@layer components1 {
+  .singlestage-sidebar-gap {
+    @apply duration-200
+    ease-linear
+    transition-[width];
+  }
+
+  .singlestage-sidebar-inner {
+    @apply bg-sidebar;
+  }
+
+  .singlestage-sidebar-rail:hover::after {
+    @apply bg-sidebar-border;
+  }
+
+  .singlestage-sidebar-inset {
+    @apply bg-background;
+  }
+
+  .singlestage-sidebar-input {
+    @apply bg-background
+    h-8
+    shadow-none
+    w-full;
+  }
+
+  .singlestage-sidebar-header {
+    @apply [--radius:var(--radius-xl)]
+    gap-2
+    p-2;
+  }
+
+  .singlestage-sidebar-content {
+    @apply [--radius:var(--radius-xl)]
+    gap-2
+    /* no-scrollbar */;
+  }
+
+  .singlestage-sidebar-footer {
+    @apply gap-2
+    p-2;
+  }
+
+  .singlestage-sidebar-separator {
+    @apply bg-sidebar-border
+    mx-2;
+  }
+
+  .singlestage-sidebar-group {
+    @apply p-2;
+  }
+
+  .singlestage-sidebar-menu {
+    @apply gap-1;
+  }
+
+  .singlestage-sidebar-group-content {
+    @apply text-sm;
+  }
+
+  .singlestage-sidebar-group-label {
+    @apply duration-200
+    ease-linear
+    font-medium
+    h-8
+    px-3
+    ring-sidebar-ring
+    rounded-md
+    text-sidebar-foreground/70
+    text-xs
+    transition-[margin,opacity];
+
+    &:focus-visible {
+      @apply ring-2;
+    }
+
+    > svg {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-sidebar-group-action {
+    @apply absolute
+    p-0
+    right-3
+    ring-sidebar-ring
+    rounded-md
+    text-sidebar-foreground
+    top-3.5
+    w-5;
+
+    &:focus-visible {
+      @apply ring-2;
+    }
+
+    &:hover {
+      @apply bg-sidebar-accent
+      text-sidebar-accent-foreground;
+    }
+
+    > svg {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-sidebar-menu-button {
+    @apply gap-2
+    px-3
+    py-2
+    ring-sidebar-ring
+    rounded-lg
+    text-left
+    text-sm
+    transition-[width,height,padding];
+
+    &:active,
+    &[aria-current="page"] {
+      @apply bg-sidebar-accent
+      font-medium
+      text-sidebar-accent-foreground;
+    }
+
+    &:focus-visible {
+      @apply ring-2;
+    }
+
+    /* &[aria-expanded="true"], */
+    &:hover {
+      @apply bg-sidebar-accent
+      text-sidebar-accent-foreground;
+    }
+  }
+
+  .singlestage-sidebar-menu-button-variant-default:hover {
+    @apply bg-sidebar-accent
+    text-sidebar-accent-foreground;
+  }
+
+  .singlestage-sidebar-menu-button-variant-outline {
+    @apply bg-background
+    shadow-[0_0_0_1px_var(--sidebar-border)];
+
+    &:hover {
+      @apply bg-sidebar-accent
+      shadow-[0_0_0_1px_var(--sidebar-accent)]
+      text-sidebar-accent-foreground;
+    }
+  }
+
+  .singlestage-sidebar-menu-button-size-default {
+    @apply h-9
+    text-sm;
+  }
+
+  .singlestage-sidebar-menu-button-size-sm {
+    @apply h-8
+    text-xs;
+  }
+
+  .singlestage-sidebar-menu-button-size-lg {
+    @apply h-14
+    px-3
+    text-sm;
+  }
+
+  .singlestage-sidebar-menu-action {
+    @apply absolute
+    aspect-square
+    p-0
+    /* TODO: test/finish this */
+    peer-data-[size=default]/menu-button:top-2
+    peer-data-[size=lg]/menu-button:top-2.5
+    peer-data-[size=sm]/menu-button:top-1
+    peer-hover/menu-button:text-sidebar-accent-foreground
+    right-1
+    ring-sidebar-ring
+    rounded-md
+    text-sidebar-foreground
+    top-1.5
+    w-5;
+
+    &:focus-visible {
+      @apply ring-2;
+    }
+
+    &:hover {
+      @apply bg-sidebar-accent
+      text-sidebar-accent-foreground;
+    }
+
+    > svg {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-sidebar-menu-badge {
+    @apply absolute
+    flex
+    font-medium
+    h-5
+    min-w-5
+    /* TODO: test/finish this */
+    peer-data-[size=default]/menu-button:top-1.5
+    peer-data-[size=lg]/menu-button:top-2.5
+    peer-data-[size=sm]/menu-button:top-1
+    peer-data-active/menu-button:text-sidebar-accent-foreground
+    peer-hover/menu-button:text-sidebar-accent-foreground
+    pointer-events-none
+    px-1
+    right-1
+    rounded-md
+    text-sidebar-foreground
+    text-xs;
+  }
+
+  .singlestage-sidebar-menu-skeleton {
+    @apply gap-2
+    h-8
+    px-2
+    rounded-md;
+  }
+
+  .singlestage-sidebar-menu-skeleton-icon {
+    @apply rounded-md
+    size-4;
+  }
+
+  .singlestage-sidebar-menu-skeleton-text {
+    @apply h-4;
+  }
+
+  .singlestage-sidebar-menu-sub {
+    @apply border-l
+    border-sidebar-border
+    gap-1
+    mx-3.5
+    px-2.5
+    py-0.5
+    translate-x-px;
+  }
+
+  .singlestage-sidebar-menu-sub-button {
+    @apply /* TODO: test/finish this */
+    data-[size=md]:text-sm
+    data-[size=sm]:text-xs
+    gap-2
+    h-7
+    px-2
+    ring-sidebar-ring
+    rounded-md
+    text-sidebar-foreground;
+
+    &:active {
+      @apply bg-sidebar-accent
+      text-sidebar-accent-foreground;
+    }
+
+    &:focus-visible {
+      @apply ring-2;
+    }
+
+    &:hover {
+      @apply bg-sidebar-accent
+      text-sidebar-accent-foreground;
+    }
+
+    > svg {
+      @apply size-4
+      text-sidebar-accent-foreground;
+    }
+  }
+
+  .singlestage-sidebar-variant-floating {
+    .singlestage-sidebar-inner {
+      @apply ring-1
+      ring-sidebar-border
+      rounded-lg
+      shadow-sm;
+    }
+  }
+
+  .singlestage-sidebar-wrapper {
+    &:has(> .singlestage-sidebar-variant-inset) {
+      > .singlestage-sidebar-inset {
+        @apply md:m-2
+        md:ml-0
+        md:rounded-xl
+        md:shadow-sm;
+      }
+    }
+
+    &:has(> .singlestage-sidebar-collapsible-offcanvas):has(
+        > .singlestage-sidebar .singlestage-sidebar-rail
+      ) {
+      > .singlestage-sidebar-inset {
+        @apply md:ml-2;
+      }
+    }
+  }
+
+  .singlestage-sidebar-collapsible-icon {
+    .singlestage-sidebar-group-label {
+      @apply -mt-8
+      opacity-0;
+    }
+
+    .singlestage-sidebar-menu-button {
+      @apply p-2!
+      size-8!;
+    }
+
+    .singlestage-sidebar-menu-button-size-lg {
+      @apply p-0!;
+    }
+
+    .singlestage-sidebar-menu-sub {
+      @apply hidden;
+    }
+  }
+
+  .singlestage-sidebar-menu-item {
+    &:has(.singlestage-sidebar-menu-action) {
+      .singlestage-sidebar-menu-button {
+        @apply pr-8;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@layer components2 {
+  .singlestage-input-group-input {
+    @apply bg-transparent;
+  }
+
+  .singlestage-input-group-textarea {
+    @apply bg-transparent;
+  }
+
+  .singlestage-input-group {
+    &:has(*:invalid, *[aria-invalid="true"]) {
+      @apply ring-destructive/40;
+    }
+  }
+}

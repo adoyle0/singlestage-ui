@@ -1,0 +1,15 @@
+@layer components1 {
+  .singlestage-checkbox {
+    @apply bg-input/30;
+
+    &:checked {
+      @apply bg-primary;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+}

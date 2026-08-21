@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::badge::*;
+use singlestage::*;
 
 #[component]
 pub fn BadgeAnatomy() -> impl IntoView {

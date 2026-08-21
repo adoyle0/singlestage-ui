@@ -1,0 +1,126 @@
+name = "Alert Dialog"
+description = "A modal dialog that interrupts the user with important content and expects a response."
+
+[[examples]]
+name = "Alert Dialog"
+
+[[examples]]
+name = "alert dialog basic"
+title = "Basic"
+description = "A basic alert dialog with a title, description, and cancel and continue buttons."
+
+[[examples]]
+name = "alert dialog small"
+title = "Small"
+description = "Use the size prop to make the alert dialog smaller."
+
+[[examples]]
+name = "alert dialog media"
+title = "Media"
+description = """Use the DialogMedia component to add a media element such as an icon or image to \
+the alert dialog."""
+
+[[examples]]
+name = "alert dialog small with media"
+title = "Small with Media"
+description = """Use the size prop to make the alert dialog smaller and the AlertDialogMedia \
+component to add a media element such as an icon or image to the alert dialog."""
+
+
+[[examples]]
+name = "alert dialog destructive"
+title = "Destructive"
+description = """Use the AlertDialogAction component to add a destructive action button to the \
+alert dialog."""
+
+[[references]]
+name = "AlertDialog"
+description = "Contains all the parts of a Dialog component."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#attributes">dialog</a> \
+attributes."""
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover **but is not coupled to the actual open \
+    state of the popover**""" },
+]
+
+[[references]]
+name = "AlertDialogAction"
+description = "Wraps a button that the user presses to acknowledge the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogCancel"
+description = "Wraps a button that the user presses to dismiss the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogContent"
+description = "Contains content to be rendered in the main body of the dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "close_button", attr_type = "bool", default = "false", description = """Toggles \
+    whether or not a close button should appear in the top right corner of the dialog.""" },
+  { attr = "size", attr_type = "String", default = """""""", description = """Set the size of \
+    dialog to render. Accepted values: "sm"""" },
+]
+
+[[references]]
+name = "AlertDialogDescription"
+description = "A short description/subheading describing dialog content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogFooter"
+description = """Displays at the bottom of the dialog, contains calls to action."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogHeader"
+description = "Contains the dialog title and a description to be rendered in the open dialog."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogMedia"
+description = """Contains a media element such as an icon or image to render in the header of the \
+dialog."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the style \
+    variant of the media element. Accepted values: "destructive"""" },
+]
+
+[[references]]
+name = "AlertDialogTitle"
+description = "A title describing dialog content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "AlertDialogTrigger"
+description = "Used to wrap other elements and trigger the dialog on click."
+attrs = []

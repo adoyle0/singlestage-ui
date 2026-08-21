@@ -1,18 +1,24 @@
 use leptos::prelude::*;
-use singlestage::dialog::*;
+use singlestage::*;
 
 #[component]
 pub fn DialogAnatomy -> impl IntoView {
     view!{
         <Dialog>
-            <DialogTrigger slot />
-            <DialogHeader>
-                <DialogTitle />
-                <DialogDescription />
-            </DialogHeader>
-            <DialogContent/>
-            <DialogFooter />
-            <DialogClose/>
+            <DialogTrigger>
+                <Button />
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle />
+                    <DialogDescription />
+                </DialogHeader>
+                <DialogFooter>
+                    <DialogCancel />
+                    <DialogAction />
+                    <DialogClose />
+                </DialogFooter>
+            </DialogContent>
         </Dialog>
     }
 }

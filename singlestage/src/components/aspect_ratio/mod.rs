@@ -1,13 +1,15 @@
 use leptos::prelude::*;
 
-/// Contains the contents of an aspect ratio component.
+/// Displays content within a desired aspect ratio.
 #[component]
 pub fn AspectRatio(
     children: Children,
 
-    /// The aspect ratio to use to display the child element.
+    /// The aspect ratio to use to display the child element. Can be a decimal or a formula.
+    ///
+    /// See https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio
     #[prop(optional, into)]
-    ratio: MaybeProp<f64>,
+    ratio: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -119,7 +121,7 @@ pub fn AspectRatio(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
+            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -156,15 +158,13 @@ pub fn AspectRatio(
 
     view! {
         <div
-            class=move || {
-                format!("singlestage-aspect-ratio-wrapper {}", class.get().unwrap_or_default())
-            }
-            style:padding-bottom=move || format!("{}%", (100. / ratio.get().unwrap_or(1.)))
+            style:position="relative"
+            style:aspect-ratio=move || ratio.get().unwrap_or("1".to_string())
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <div>{children()}</div>
+            {children()}
         </div>
     }
 }

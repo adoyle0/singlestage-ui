@@ -1,20 +1,30 @@
 name = "Badge"
-description = "Displays a badge or a component that looks like a badge."
+description = "Displays a badge component."
 
 [[examples]]
 name = "Badge"
 
 [[examples]]
-name = "Badge Invalid"
-title = "Invalid"
+name = "Badge variants"
+title = "Variants"
+description = "Use the variant prop to change the variant of the badge."
 
 [[examples]]
 name = "Badge Icon"
 title = "With Icon"
+desscription = """You can render an icon inside the badge. Wrap text in a <span> or another \
+element so the correct padding is applied."""
+
+[[examples]]
+name = "Badge spinner"
+title = "With Spinner"
+desscription = """You can render a spinner inside the badge. Wrap text in a <span> or another \
+element so the correct padding is applied."""
 
 [[examples]]
 name = "Badge Link"
 title = "Link"
+desscription = """Use the render_as prop with Link to render a Link as a Badge."""
 
 [[references]]
 name = "Badge"
@@ -25,6 +35,6 @@ attributes."""
 attrs = [
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or \
     not this badge appears invalid.""" },
-  { attr = "variant", attr_type = "String", default = """"primary"""", description = """Specifies \
-    the style of badge to display.""" },
+  { attr = "variant", attr_type = "String", default = """"primary"""", description = """Define \
+    the badge variant. Accepted values: "primary" | "secondary" | "destructive" | "outline"""" },
 ]

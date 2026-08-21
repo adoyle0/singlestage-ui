@@ -1,9 +1,9 @@
 mod components;
-mod debug;
 mod getting_started;
 mod landing;
+mod not_found;
 
 pub use components::*;
-pub use debug::*;
 pub use getting_started::*;
 pub use landing::*;
+pub use not_found::*;

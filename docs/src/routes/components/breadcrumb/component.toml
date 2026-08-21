@@ -4,9 +4,55 @@ description = "Displays the path to the current resource using a hierarchy of li
 [[examples]]
 name = "Breadcrumb"
 
+[[examples]]
+name = "Breadcrumb basic"
+title = "Basic"
+description = "A basic breadcrumb with a home link and a components link."
+
+[[examples]]
+name = "Breadcrumb custom separator"
+title = "Custom Separator"
+description = "BreadcrumbSeparator can take children to create a custom separator."
+
+[[examples]]
+name = "Breadcrumb dropdown"
+title = "Dropdown"
+description = "BreadcrumbItem and DropdownMenu can be composed."
+
+[[examples]]
+name = "Breadcrumb collapsed"
+title = "Collapsed"
+description = "Use BreadcrumbEllipsis to show a collapsed state when the breadcrumb is too long."
+
 [[references]]
 name = "Breadcrumb"
-description = "Contains the contents of the breadcrumb."
+description = "Contains all the items of the breadcrumb component."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "BreadcrumbEllipsis"
+description = "Displays an ellipsis in place of collapsed breadcrumb items."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "BreadcrumbItem"
+description = "An individual breadcrumb link."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "BreadcrumbList"
+description = "Displays the ordered list of breadcrumb items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
@@ -18,12 +64,10 @@ attrs = [
 ]
 
 [[references]]
-name = "BreadcrumbItem"
-description = "An individual breadcrumb link."
+name = "BreadcrumbPage"
+description = "Displays the current page in the breadcrumb (non-clickable)."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
 attributes."""
 attrs = []
 

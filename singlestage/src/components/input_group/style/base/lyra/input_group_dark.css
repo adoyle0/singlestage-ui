@@ -1,0 +1,31 @@
+@layer components2 {
+  .singlestage-input-group-input {
+    @apply bg-transparent;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-transparent;
+    }
+  }
+
+  .singlestage-input-group-textarea {
+    @apply bg-transparent;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-transparent;
+    }
+  }
+
+  .singlestage-input-group {
+    @apply bg-input/30;
+
+    &:has(*:disabled, *[aria-disabled="true"]) {
+      @apply bg-input/80;
+    }
+
+    &:has(*:invalid, *[aria-invalid="true"]) {
+      @apply ring-destructive/40;
+    }
+  }
+}

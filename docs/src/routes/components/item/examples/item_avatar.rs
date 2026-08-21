@@ -9,6 +9,7 @@ pub fn ItemAvatarExample() -> impl IntoView {
                 <ItemMedia>
                     <Avatar class="size-10">
                         <AvatarImage src="https://github.com/evilrabbit.png" />
+                        <AvatarFallback>"ER"</AvatarFallback>
                     </Avatar>
                 </ItemMedia>
                 <ItemContent>
@@ -29,17 +30,20 @@ pub fn ItemAvatarExample() -> impl IntoView {
             <Item variant="outline">
                 <ItemMedia>
                     <div class="*:ring-(--background) flex -space-x-2 *:ring-2 *:grayscale">
-                        <Avatar class="flex">
+                        <Avatar>
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                            <AvatarFallback>"CN"</AvatarFallback>
                         </Avatar>
-                        <Avatar class="flex">
+                        <Avatar>
                             <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+                            <AvatarFallback>"LR"</AvatarFallback>
                         </Avatar>
                         <Avatar>
                             <AvatarImage
                                 src="https://github.com/evilrabbit.png"
                                 alt="@evilrabbit"
                             />
+                            <AvatarFallback>"ER"</AvatarFallback>
                         </Avatar>
                     </div>
                 </ItemMedia>

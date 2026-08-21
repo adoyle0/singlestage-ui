@@ -1,22 +1,23 @@
-use crate::FieldContext;
+use crate::{FieldContext, Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
 
-/// The core wrapper for a single field. Provides orientation control, invalid state styling, and
-/// spacing.
+/// The core wrapper for a single field.
+/// Provides orientation control, invalid state styling, and spacing.
 #[component]
 pub fn Field(
     children: Children,
 
+    /// Sets whether this Field is disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Sets whether this Field is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// Sets the display orientation.
     ///
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
-    /// Sets the display variant of the `Field`.
-    ///
-    /// Accepted values: "button".
-    #[prop(optional, into)]
-    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -120,12 +121,6 @@ pub fn Field(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = FieldContext {
-        description_id: RwSignal::new(String::default()),
-        input_id: RwSignal::new(String::default()),
-        label_id: RwSignal::new(String::default()),
-    };
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -164,19 +159,46 @@ pub fn Field(
         />
     };
 
+    let disabled: Reactive<bool> = {
+        if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.disabled
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.disabled
+        } else {
+            disabled
+        }
+    };
+
+    let invalid: Reactive<bool> = {
+        if let Some(radio_group) = use_context::<RadioGroupContext>() {
+            radio_group.invalid
+        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+            checkbox_group.invalid
+        } else {
+            invalid
+        }
+    };
+
+    let context = FieldContext {
+        description_id: RwSignal::new(String::default()),
+        disabled,
+        has_error: RwSignal::new(false),
+        input_id: RwSignal::new(String::default()),
+        invalid,
+        label_id: RwSignal::new(String::default()),
+    };
+
     view! {
         <div
+            aria_disabled=move || if disabled.get() { Some("true".to_string()) } else { None }
+            aria_invalid=move || if invalid.get() { Some("true".to_string()) } else { None }
             class=move || {
                 format!(
-                    "singlestage-field{}{}{}",
+                    "singlestage-field{} {}",
                     match orientation.get().unwrap_or_default().as_str() {
-                        "horizontal" => " singlestage-field-horizontal",
-                        "responsive" => " singlestage-field-responsive",
-                        _ => " singlestage-field-vertical",
-                    },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "button" => " singlestage-field-button",
-                        _ => "",
+                        "horizontal" => " singlestage-field-orientation-horizontal",
+                        "responsive" => " singlestage-field-orientation-responsive",
+                        _ => " singlestage-field-orientation-vertical",
                     },
                     class.get().unwrap_or_default(),
                 )

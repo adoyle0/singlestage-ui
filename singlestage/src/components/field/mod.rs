@@ -1,3 +1,4 @@
+mod checkbox_group;
 mod content;
 mod description;
 mod error;
@@ -5,10 +6,12 @@ mod field;
 mod group;
 mod label;
 mod legend;
+mod radio_group;
 mod separator;
 mod set;
 mod title;
 
+pub use checkbox_group::*;
 pub use content::*;
 pub use description::*;
 pub use error::*;
@@ -16,15 +19,23 @@ pub use field::*;
 pub use group::*;
 pub use label::*;
 pub use legend::*;
+pub use radio_group::*;
 pub use separator::*;
 pub use set::*;
 pub use title::*;
 
+use crate::Reactive;
 use leptos::prelude::RwSignal;
 
 #[derive(Clone)]
-pub struct FieldContext {
+pub(crate) struct FieldContext {
     pub description_id: RwSignal<String>,
+    pub disabled: Reactive<bool>,
+    pub has_error: RwSignal<bool>,
     pub input_id: RwSignal<String>,
+    pub invalid: Reactive<bool>,
     pub label_id: RwSignal<String>,
 }
+
+#[derive(Clone)]
+pub(crate) struct FieldSetContext {}

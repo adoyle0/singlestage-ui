@@ -5,14 +5,33 @@ description = "A control that allows the user to toggle between checked and not 
 name = "checkbox"
 
 [[examples]]
-name = "subtext"
+name = "checkbox invalid"
+title = "Invalid State"
+description = "Set invalid on either the Checkbox or a Field wrapper to display an invalid state."
 
 [[examples]]
-name = "form"
+name = "checkbox basic"
+title = "Basic"
+description = "Pair the checkbox with Field and Label for proper layout and labeling."
 
 [[examples]]
-name = "group"
+name = "checkbox description"
+title = "Description"
+description = "Use FieldContent and FieldDescription for helper text."
+
+[[examples]]
+name = "checkbox disabled"
+title = "Disabled"
+description = "Use the disabled prop to prevent interaction."
+
+[[examples]]
+name = "checkbox group"
 title = "Checkbox Group"
+description = "Use multiple fields to create a checkbox list."
+
+[[examples]]
+name = "checkbox table"
+title = "Table"
 
 [[references]]
 name = "Checkbox"
@@ -25,8 +44,10 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#additional_attributes">checkbox</a> \
 attributes."""
 attrs = [
-  { attr = "checked", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal coupled to the checkbox's checked value.""" },
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the checkbox's checked state.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the checkbox's invalid state.""" },
 ]
 
 [[references]]
@@ -38,8 +59,8 @@ and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
 attributes."""
 attrs = [
-  { attr = "invalid", attr_type = "Reactive<bool>", default = "false", description = """A \
-    reactive signal that toggles whether all the children Checkboxes appear invalid or not.""" },
-  { attr = "value", attr_type = "Reactive<Vec<String>>", default = "[]", description = """A \
-    dynamic list of all the values of checked children Checkboxes.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "Vec<String>", default = "[]", description = """A dynamic list of \
+    all the values of checked children Checkboxes.""" },
 ]

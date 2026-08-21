@@ -1,0 +1,27 @@
+@layer components1 {
+  .singlestage-textarea {
+    @apply bg-input/30
+    border
+    border-input
+    md:text-sm
+    px-3
+    py-3
+    resize-none
+    rounded-xl
+    text-base
+    transition-colors;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-[3px]
+      ring-destructive/20;
+    }
+  }
+}

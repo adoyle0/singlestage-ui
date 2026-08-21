@@ -7,7 +7,7 @@ pub fn ButtonGroup(
 
     /// Sets the display direction of the ButtonGroup.
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // ARIA ATTRIBUTES
     //
@@ -161,9 +161,9 @@ pub fn ButtonGroup(
             class=move || {
                 format!(
                     "singlestage-button-group {} {}",
-                    match vertical.get().unwrap_or_default() {
-                        true => "singlestage-button-group-vertical",
-                        false => "singlestage-button-group-horizontal",
+                    match orientation.get().unwrap_or_default().as_str() {
+                        "vertical" => "singlestage-button-group-orientation-vertical",
+                        _ => "singlestage-button-group-orientation-horizontal",
                     },
                     class.get().unwrap_or_default(),
                 )

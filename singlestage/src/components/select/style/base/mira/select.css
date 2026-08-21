@@ -1,0 +1,58 @@
+@layer components1 {
+  .singlestage-select {
+    @apply appearance-none
+    bg-input/20
+    border
+    border-input
+    h-7
+    min-w-0
+    pl-2
+    pr-6
+    py-0.5
+    rounded-md
+    select-none
+    text-xs/relaxed
+    transition-colors
+    w-full;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-2
+      ring-ring/30;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive
+      ring-2
+      ring-destructive/20;
+    }
+
+    &::selection {
+      @apply bg-primary
+      text-primary-foreground;
+    }
+  }
+
+  .singlestage-select-placeholder {
+    @apply text-muted-foreground;
+  }
+
+  .singlestage-select-icon {
+    @apply -translate-y-1/2
+    right-1.5
+    size-3.5
+    text-muted-foreground
+    top-1/2;
+  }
+
+  .singlestage-select-size-sm {
+    @apply h-6
+    text-[0.625rem];
+
+    .singlestage-select-icon {
+      @apply -translate-y-[calc(--spacing(1.25))]
+      size-3;
+    }
+  }
+}

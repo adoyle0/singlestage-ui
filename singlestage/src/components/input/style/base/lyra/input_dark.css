@@ -1,0 +1,16 @@
+@layer components1 {
+  .singlestage-input {
+    @apply bg-input/30;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply bg-input/80;
+    }
+
+    &:invalid,
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+}

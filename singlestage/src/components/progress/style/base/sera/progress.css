@@ -1,0 +1,33 @@
+@layer components1 {
+  .singlestage-progress {
+    /* Track */
+    &,
+    &::-webkit-progress-bar {
+      @apply bg-muted
+      h-0.5
+      rounded-none;
+    }
+
+    /* Indicator */
+    &::-moz-progress-bar,
+    &::-webkit-progress-value {
+      @apply bg-primary
+      h-0.5
+      rounded-none;
+    }
+  }
+
+  .singlestage-progress-label {
+    @apply font-semibold
+    text-xs
+    tracking-wide
+    uppercase;
+  }
+
+  .singlestage-progress-value {
+    @apply ml-auto
+    tabular-nums
+    text-muted-foreground
+    text-sm;
+  }
+}

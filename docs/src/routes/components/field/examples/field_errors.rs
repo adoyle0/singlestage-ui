@@ -14,7 +14,7 @@ pub fn FieldErrorsExample() -> impl IntoView {
         "Password must contain lowercase letters".to_string(),
     ]);
 
-    let username_validate = move |ev| {
+    let validate_username = move |ev| {
         if event_target_value(&ev).is_empty() {
             username_invalid.set(true)
         } else {
@@ -22,7 +22,7 @@ pub fn FieldErrorsExample() -> impl IntoView {
         }
     };
 
-    let password_validate = move |ev| {
+    let validate_password = move |ev| {
         let password = event_target_value(&ev);
         let mut errors = vec![];
 
@@ -51,27 +51,19 @@ pub fn FieldErrorsExample() -> impl IntoView {
     };
 
     view! {
-        <div class="w-full max-w-md">
-            <FieldSet>
-                <FieldGroup>
-                    <Field>
-                        <FieldLabel>"Username *"</FieldLabel>
-                        <Show when=move || username_invalid.get()>
-                            <FieldError>"Username is required"</FieldError>
-                        </Show>
-                        <Input invalid=username_invalid on:input=username_validate />
-                    </Field>
-                    <Field>
-                        <FieldLabel>"Password *"</FieldLabel>
-                        <FieldError errors=password_errors />
-                        <Input
-                            input_type="password"
-                            invalid=password_invalid
-                            on:input=password_validate
-                        />
-                    </Field>
-                </FieldGroup>
-            </FieldSet>
-        </div>
+        <FieldGroup class="max-w-xs">
+            <Field invalid=username_invalid>
+                <Input on:input=validate_username required=true>
+                    "Username"
+                </Input>
+                <FieldError>"Username is required"</FieldError>
+            </Field>
+            <Field invalid=password_invalid>
+                <Input input_type="password" on:input=validate_password required=true>
+                    "Password"
+                </Input>
+                <FieldError errors=password_errors />
+            </Field>
+        </FieldGroup>
     }
 }

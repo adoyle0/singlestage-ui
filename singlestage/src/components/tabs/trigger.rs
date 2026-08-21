@@ -1,4 +1,5 @@
 use super::TabsContext;
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// The button that activates its associated content.
@@ -23,7 +24,7 @@ pub fn TabsTrigger(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -167,12 +168,21 @@ pub fn TabsTrigger(
         tabs.value.set(value.get_untracked().unwrap_or_default())
     }
 
+    let tab_selected = move || {
+        if let Some(value) = value.get()
+            && value == tabs.value.get()
+        {
+            true
+        } else {
+            false
+        }
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -224,14 +234,12 @@ pub fn TabsTrigger(
 
     view! {
         <button
-            aria-controls=move || format!("{}-panel", value.get().unwrap_or_default())
-            aria-selected=move || {
-                if let Some(value) = value.get() {
-                    if value == tabs.value.get() { "true" } else { "false" }
-                } else {
-                    "false"
-                }
-            }
+            aria_controls=move || format!("{}-panel", value.get().unwrap_or_default())
+            aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
+            aria_selected=move || { if tab_selected() { "true" } else { "false" } }
+            class=move || format!("singlestage-tabs-trigger {}", class.get().unwrap_or_default())
+            disabled
+            prop:disabled=move || disabled.get()
             id=move || format!("{}-tab", value.get().unwrap_or_default())
             on:click=move |_| {
                 if let Some(value) = value.get_untracked() {
@@ -239,7 +247,7 @@ pub fn TabsTrigger(
                 }
             }
             role="tab"
-            tabindex="0"
+            tabindex=move || { if tab_selected() { "0" } else { "-1" } }
             type="button"
 
             {..global_attrs_1}

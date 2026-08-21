@@ -1,0 +1,73 @@
+name = "Sheet"
+description = """Extends the Dialog component to display content that complements the main content
+of the screen."""
+
+[[examples]]
+name = "sheet"
+
+[[examples]]
+name = "sheet side"
+title = "Side"
+description = "Use the side prop to set which edge of the screen the sheet will appear from."
+
+[[examples]]
+name = "sheet no close button"
+title = "No Close Button"
+description = "Use the show_close_button prop to control displaying a close button."
+
+[[references]]
+name = "Sheet"
+description = "Contains all the components of a sheet."
+attrs = []
+
+[[references]]
+name = "SheetClose"
+description = "Wraps a button to be used to trigger closing the sheet."
+attrs = []
+
+[[references]]
+name = "SheetContent"
+description = "Contains the main content section of a sheet."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SheetDescription"
+description = "A description of sheet content that renders in the sheet header."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SheetFooter"
+description = """A component that renders at the bottom of the sheet and typically contains calls \
+to action."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SheetHeader"
+description = """A header group that contains a title and description and renders at the top of \
+the sheet."""
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SheetTitle"
+description = "A title that quickly describes sheet content."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
+
+[[references]]
+name = "SheetTrigger"
+description = "Wraps a button to be used to trigger opening the sheet."
+attrs = []

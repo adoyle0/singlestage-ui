@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn ButtonGroupOrientationExample() -> impl IntoView {
     view! {
-        <ButtonGroup vertical=true aria_label="Media controls" class="h-fit">
+        <ButtonGroup orientation="vertical" aria_label="Media controls" class="h-fit">
             <Button variant="outline" size="icon">
                 {icon!(icondata::LuPlus)}
             </Button>
