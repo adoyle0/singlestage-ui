@@ -15,18 +15,10 @@ keywords = ["leptos", "ui", "components", "basecoat", "shadcn"]
 categories = ["web-programming", "gui", "wasm"]
 
 [workspace.dependencies]
-# leptos = "0.8"
-# leptos_axum = "0.8"
-# leptos_meta = "0.8"
-# leptos_router = "0.8"
-# leptos = { path = "../leptos/leptos" }
-# leptos_axum = { path = "../leptos/integrations/axum" }
-# leptos_meta = { path = "../leptos/meta" }
-# leptos_router = { path = "../leptos/router" }
-leptos = { git = "https://github.com/leptos-rs/leptos" }
-leptos_axum = { git = "https://github.com/leptos-rs/leptos" }
-leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
-leptos_router = { git = "https://github.com/leptos-rs/leptos" }
+leptos = "0.8"
+leptos_axum = "0.8"
+leptos_meta = "0.8"
+leptos_router = "0.8"
 
 # Singlestage
 icondata_core = "0.1"
@@ -53,7 +45,7 @@ serde = "1.0"
 syntect = "5"
 toml = "1.0"
 quote = "1.0"
-syn = "2.0"
+syn = "3.0"
 
 # Docs macro
 rayon = "1.11"
