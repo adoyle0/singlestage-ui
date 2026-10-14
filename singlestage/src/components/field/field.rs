@@ -18,6 +18,9 @@ pub fn Field(
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
+    /// Provides a visual indication that this field is required when true
+    #[prop(optional, into)]
+    required: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -186,6 +189,7 @@ pub fn Field(
         input_id: RwSignal::new(String::default()),
         invalid,
         label_id: RwSignal::new(String::default()),
+        required,
     };
 
     view! {

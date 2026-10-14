@@ -35,6 +35,7 @@ pub(crate) struct FieldContext {
     pub input_id: RwSignal<String>,
     pub invalid: Reactive<bool>,
     pub label_id: RwSignal<String>,
+    pub required: Reactive<bool>,
 }
 
 #[derive(Clone)]

@@ -1,7 +1,7 @@
 use crate::{FieldContext, InputGroupContext, Reactive, SidebarGroupContext, primitives::*};
 use leptos::prelude::*;
 
-/// A form input field.
+/// A text input component for forms and user data entry with built-in styling and accessibility features.
 #[component]
 pub fn Input(
     #[prop(optional)] children: Option<Children>,

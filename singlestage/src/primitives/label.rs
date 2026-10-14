@@ -262,15 +262,13 @@ pub fn LabelPrimitive(
         >
             {children()}
             <Show when=move || {
-                invalid.get() && primitive_type == LabelPrimitiveType::FieldLabel
-                    && {
-                        if let Some(field) = use_context::<FieldContext>() && field.has_error.get()
-                        {
-                            true
-                        } else {
-                            false
-                        }
-                    }
+                if let Some(field) = use_context::<FieldContext>()
+                    && primitive_type == LabelPrimitiveType::FieldLabel
+                {
+                    field.has_error.get() || field.required.get()
+                } else {
+                    false
+                }
             }>
                 <span class="text-(--destructive)">" *"</span>
             </Show>

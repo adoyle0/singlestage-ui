@@ -70,6 +70,8 @@ attrs = [
     Field is invalid.""" },
   { attr = "orientation", attr_type = "String", default = "\"vertical\"", description = """Sets \
     the display orientation. Accepted values: "vertical" | "horizontal" | "responsive".""" },
+  { attr = "required", attr_type = "bool", default = "false", description = """Provides a visual \
+    indication that this field is required when true.""" },
 ]
 
 [[references]]
