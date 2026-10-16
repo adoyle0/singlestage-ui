@@ -1,9 +1,24 @@
 @layer components2 {
   .singlestage-button-group {
-    @apply rounded-none;
-
     /* TODO: revisit selects */
     /* has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-none; */
+
+    @apply rounded-none;
+
+    .singlestage-button-group {
+      @apply rounded-none;
+    }
+
+    &:not(&:has(.singlestage-button-group)) {
+      &:has(* [aria-invalid="true"]) {
+        @apply ring-1
+        ring-destructive/20;
+
+        * {
+          @apply ring-0!;
+        }
+      }
+    }
 
     &:has(> .singlestage-button-group) {
       @apply gap-2;

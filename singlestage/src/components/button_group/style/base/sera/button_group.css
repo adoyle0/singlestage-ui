@@ -8,6 +8,17 @@
     /* TODO: revisit combobox */
     /* has-[>[data-variant=outline]]:*:[[role=combobox]]:px-2.5 */
 
+    &:not(&:has(.singlestage-button-group)) {
+      &:has(* [aria-invalid="true"]) {
+        @apply border-b-1 
+        border-b-destructive;
+
+        * {
+          @apply border-b-0!;
+        }
+      }
+    }
+
     .singlestage-input {
       @apply px-4;
     }

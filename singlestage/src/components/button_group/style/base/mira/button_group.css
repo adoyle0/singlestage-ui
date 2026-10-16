@@ -3,6 +3,23 @@
     /* TODO: revisit selects */
     /* @apply has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md; */
 
+    @apply rounded-md;
+
+    .singlestage-button-group {
+      @apply rounded-md;
+    }
+
+    &:not(&:has(.singlestage-button-group)) {
+      &:has(* [aria-invalid="true"]) {
+        @apply ring-2
+        ring-destructive/20;
+
+        * {
+          @apply ring-0!;
+        }
+      }
+    }
+
     &:has(> .singlestage-button-group) {
       @apply gap-2;
     }

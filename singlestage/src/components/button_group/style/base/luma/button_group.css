@@ -5,6 +5,23 @@
     /* *:data-[slot=select-trigger]:border-border */
     /* [&>[data-slot=select-trigger]:focus-visible]:border-ring; */
 
+    @apply rounded-4xl;
+
+    .singlestage-button-group {
+      @apply rounded-4xl;
+    }
+
+    &:not(&:has(.singlestage-button-group)) {
+      &:has(* [aria-invalid="true"]) {
+        @apply ring-3
+        ring-destructive/20;
+
+        * {
+          @apply ring-0!;
+        }
+      }
+    }
+
     &:has(.singlestage-button-variant-outline) {
       & > .singlestage-input {
         @apply border-border;
