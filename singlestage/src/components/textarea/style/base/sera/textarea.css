@@ -16,7 +16,6 @@
       @apply border-b-ring;
     }
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply border-b-destructive;
     }

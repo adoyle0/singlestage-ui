@@ -117,7 +117,6 @@
     shadow-none;
 
     &:focus-visible,
-    &:invalid,
     & [aria-invalid="true"] {
       @apply ring-0;
     }
@@ -132,7 +131,6 @@
     shadow-none;
 
     &:focus-visible,
-    &:invalid,
     & [aria-invalid="true"] {
       @apply ring-0;
     }
@@ -182,7 +180,7 @@
       ring-ring/50;
     }
 
-    &:has(*:invalid, *[aria-invalid="true"]) {
+    &:has(*[aria-invalid="true"]) {
       @apply border-destructive
       ring-[3px]
       ring-destructive/20;

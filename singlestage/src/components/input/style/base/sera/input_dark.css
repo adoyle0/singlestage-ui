@@ -1,6 +1,5 @@
 @layer components1 {
   .singlestage-input {
-    &:invalid,
     &[aria-invalid="true"] {
       @apply border-b-destructive/50;
     }

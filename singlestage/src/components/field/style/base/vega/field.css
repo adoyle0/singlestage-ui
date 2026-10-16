@@ -92,7 +92,6 @@
       }
     }
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply text-destructive;
     }

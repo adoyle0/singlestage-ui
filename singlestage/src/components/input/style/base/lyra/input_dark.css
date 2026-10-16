@@ -7,7 +7,6 @@
       @apply bg-input/80;
     }
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive/50
       ring-destructive/40;

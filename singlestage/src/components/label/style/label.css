@@ -20,10 +20,7 @@
       @apply pointer-events-none;
     }
 
-    &:invalid,
     &[aria-invalid="true"],
-    &:is(:where(*):invalid *),
-    &:is(:where(*):invalid ~ *),
     &:is(:where(*)[aria-invalid="true"] *),
     &:is(:where(*)[aria-invalid="true"] ~ *) {
       @apply text-destructive;

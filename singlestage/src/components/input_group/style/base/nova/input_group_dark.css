@@ -24,7 +24,7 @@
       @apply bg-input/80;
     }
 
-    &:has(*:invalid, *[aria-invalid="true"]) {
+    &:has(*[aria-invalid="true"]) {
       @apply ring-destructive/40;
     }
   }

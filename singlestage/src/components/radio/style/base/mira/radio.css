@@ -23,7 +23,6 @@
       ring-ring/50;
     }
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
       ring-3

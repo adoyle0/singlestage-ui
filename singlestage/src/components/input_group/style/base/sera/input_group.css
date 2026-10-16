@@ -92,7 +92,6 @@
     ring-0;
 
     &:focus-visible,
-    &:invalid,
     &[aria-invalid="true"] {
       @apply ring-0;
     }
@@ -105,7 +104,6 @@
     ring-0;
 
     &:focus-visible,
-    &:invalid,
     &[aria-invalid="true"] {
       @apply ring-0;
     }
@@ -161,7 +159,7 @@
       @apply border-b-ring;
     }
 
-    &:has(*:invalid, *[aria-invalid="true"]) {
+    &:has(*[aria-invalid="true"]) {
       @apply border-b-destructive;
     }
 

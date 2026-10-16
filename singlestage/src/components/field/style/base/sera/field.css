@@ -73,7 +73,6 @@
   .singlestage-field {
     @apply gap-3;
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply text-destructive;
     }

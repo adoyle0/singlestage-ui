@@ -17,7 +17,6 @@
       @apply text-foreground;
     }
 
-    &:invalid,
     &[aria-invalid="true"] {
       @apply border-destructive
       ring-destructive/20;

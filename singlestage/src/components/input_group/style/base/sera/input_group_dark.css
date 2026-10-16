@@ -8,7 +8,7 @@
   }
 
   .singlestage-input-group {
-    &:has(*:invalid, *[aria-invalid="true"]) {
+    &:has(*[aria-invalid="true"]) {
       @apply border-b-destructive/50;
     }
   }
