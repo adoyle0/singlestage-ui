@@ -12,13 +12,16 @@ pub fn Select(
     default: MaybeProp<String>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    invalid: Reactive<bool>,
+    /// Set the size to render the element.
+    #[prop(optional, into)]
+    todo_name_me_size: MaybeProp<String>,
     /// The placeholder value for the select.
     #[prop(optional, into)]
     placeholder: MaybeProp<String>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(optional, into)]
-    value: Reactive<String>,
+    value: Option<Reactive<String>>,
 
     // LEPTOS ATTRIBUTES
     /// A reactive reference to a DOM node that can be used with the node_ref attribute.
@@ -32,13 +35,13 @@ pub fn Select(
     autocomplete: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
-    /// Toggle accepting multiple input values for certain input types.
-    #[prop(optional, into)]
-    multiple: MaybeProp<bool>,
+    // /// Toggle accepting multiple input values for certain input types.
+    // #[prop(optional, into)]
+    // multiple: MaybeProp<bool>,
     /// Name of this element. Submitted with the form as part of a name/value pair.
     #[prop(optional, into)]
     name: MaybeProp<String>,
@@ -162,41 +165,33 @@ pub fn Select(
         }
     };
 
-    let on_change = move |ev| value.set(event_target_value(&ev));
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default);
+    let value: Reactive<String> = value.unwrap_or(if let Some(default) = default.get_untracked() {
+        Reactive::new(default)
     } else if placeholder.get_untracked().is_some() {
-        value.set("singlestage-select-placeholder".to_string());
-    }
+        Reactive::new("singlestage-select-placeholder".to_string())
+    } else {
+        Reactive::new("singlestage-select-value-not-set".to_string())
+    });
 
-    if let Some(select) = select_ref.get_untracked() {
-        if let Some(default) = default.get_untracked() {
-            select.set_value(&default);
-        } else if placeholder.get_untracked().is_some() {
-            select.set_value("singlestage-select-placeholder");
+    let disabled: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.disabled
         } else {
-            select.set_value(&value.get_untracked());
+            disabled
         }
-    }
+    };
 
-    let context = SelectContext { placeholder, value };
-
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            select.set_disabled(disabled.get().unwrap_or_default());
+    let invalid: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.invalid
+        } else {
+            invalid
         }
-    });
+    };
 
-    // Update value reactively
-    Effect::new(move || {
-        if let Some(select) = select_ref.get_untracked() {
-            let value = value.get();
-            if !value.is_empty() {
-                select.set_value(&value);
-            }
-        }
-    });
+    let context = SelectContext { value };
+
+    let on_change = move |ev| value.set(event_target_value(&ev));
 
     let global_attrs_1 = view! {
         <{..}
@@ -241,7 +236,6 @@ pub fn Select(
             autocomplete=move || autocomplete.get()
             disabled=move || disabled.get()
             form=move || form.get()
-            multiple=move || multiple.get()
             name=move || name.get()
             required=move || required.get()
             size=move || size.get()
@@ -251,53 +245,95 @@ pub fn Select(
     let input_id = uuid::Uuid::new_v4();
 
     view! {
-        <select
-            aria_describedby=move || {
-                if let Some(field) = use_context::<FieldContext>() {
-                    let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
-                }
-            }
-            aria-invalid=move || {
-                match invalid.get() {
-                    Some(true) => Some("true"),
-                    _ => None,
-                }
-            }
-            aria_labelledby=move || {
-                use_context::<FieldContext>().map(|field| field.label_id.get())
-            }
-            node_ref=select_ref
-            on:change=on_change
-            class=move || {
-                format!(
-                    "singlestage-select{} {}",
-                    match value.get().as_str() {
-                        "singlestage-select-placeholder" => " singlestage-select-placeholder",
-                        _ => "",
-                    },
-                    class.get().unwrap_or_default(),
-                )
-            }
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
-                }
-            } else {
-                id.get_untracked()
-            }}
+        <div
+            class=move || format!("singlestage-select-wrapper {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}
-            {..select_attrs}
         >
-            <Provider value=context>{children()}</Provider>
-        </select>
+            <Provider value=context>
+                <select
+                    aria_describedby=move || {
+                        if let Some(field) = use_context::<FieldContext>() {
+                            let description_id = field.description_id.get();
+                            if description_id.is_empty() { None } else { Some(description_id) }
+                        } else {
+                            None
+                        }
+                    }
+                    aria_invalid=move || {
+                        match invalid.get() {
+                            true => Some("true"),
+                            _ => None,
+                        }
+                    }
+                    aria_labelledby=move || {
+                        use_context::<FieldContext>().map(|field| field.label_id.get())
+                    }
+                    class=move || {
+                        format!(
+                            "singlestage-select{}{}",
+                            match todo_name_me_size.get().unwrap_or_default().as_str() {
+                                "sm" | "small" => " singlestage-select-size-sm",
+                                _ => "",
+                            },
+                            match value.get().as_str() {
+                                "singlestage-select-placeholder" => {
+                                    " singlestage-select-placeholder"
+                                }
+                                _ => "",
+                            },
+                        )
+                    }
+                    disabled=move || disabled.get()
+                    prop:disabled=move || disabled.get()
+                    node_ref=select_ref
+                    on:change=on_change
+                    id=move || {
+                        if let Some(field) = use_context::<FieldContext>() {
+                            if let Some(id) = id.get_untracked() {
+                                field.input_id.set(id.clone());
+                                Some(id)
+                            } else {
+                                field.input_id.set(input_id.to_string());
+                                Some(input_id.to_string())
+                            }
+                        } else {
+                            id.get_untracked()
+                        }
+                    }
+                    prop:value=move || {
+                        if value.get().as_str() == "singlestage-select-value-not-set" {
+                            None
+                        } else {
+                            Some(value.get())
+                        }
+                    }
+
+                    {..select_attrs}
+                >
+                    <Show when=move || placeholder.get().is_some()>
+                        <option value="singlestage-select-placeholder" disabled hidden selected>
+                            {move || placeholder.get()}
+                        </option>
+                    </Show>
+                    {children()}
+                </select>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="singlestage-select-icon"
+                >
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+            </Provider>
+        </div>
     }
 }

@@ -115,7 +115,6 @@ pub fn CardContent(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,7 +150,12 @@ pub fn CardContent(
     };
 
     view! {
-        <section {..global_attrs_1} {..global_attrs_2}>
+        <section
+            class=move || format!("singlestage-card-content {}", class.get().unwrap_or_default())
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
         </section>
     }

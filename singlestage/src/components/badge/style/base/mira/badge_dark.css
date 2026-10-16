@@ -1,0 +1,17 @@
+@layer components1 {
+  .singlestage-badge-variant-outline {
+    @apply bg-input/30;
+  }
+
+  .singlestage-badge-variant-destructive {
+    @apply bg-destructive/20;
+
+    &:focus-visible {
+      @apply ring-destructive/40;
+    }
+  }
+
+  .singlestage-badge-variant-ghost:hover {
+    @apply bg-muted/50;
+  }
+}

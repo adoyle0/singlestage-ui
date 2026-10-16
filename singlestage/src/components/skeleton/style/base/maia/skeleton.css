@@ -1,0 +1,6 @@
+@layer components1 {
+  .singlestage-skeleton {
+    @apply bg-muted
+    rounded-xl;
+  }
+}

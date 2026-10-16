@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Input;
+use singlestage::*;
 
 #[component]
 pub fn InputAnatomy() -> impl IntoView {

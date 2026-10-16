@@ -155,10 +155,10 @@ pub fn EmptyMedia(
         <div
             class=move || {
                 format!(
-                    "{} {}",
+                    "singlestage-empty-media {} {}",
                     match variant.get().unwrap_or_default().as_str() {
                         "icon" => "singlestage-empty-media-icon",
-                        _ => "singlestage-empty-media",
+                        _ => "singlestage-empty-media-default",
                     },
                     class.get().unwrap_or_default(),
                 )

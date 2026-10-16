@@ -1,9 +1,17 @@
-use leptos::prelude::*;
+use super::AvatarContext;
+use leptos::{context::Provider, prelude::*};
 
 /// Contains the contents of an avatar.
 #[component]
 pub fn Avatar(
     children: Children,
+
+    /// Set which size avatar to display.
+    ///
+    /// Accepted values: "sm" | "default" | "lg"
+    /// Default value is "default"
+    #[prop(optional, into)]
+    size: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -110,6 +118,10 @@ pub fn Avatar(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let context = AvatarContext {
+        img_loaded: RwSignal::new(false),
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -150,13 +162,23 @@ pub fn Avatar(
     };
 
     view! {
-        <div
-            class=move || { format!("singlestage-avatar {}", class.get().unwrap_or_default()) }
+        <span
+            class=move || {
+                format!(
+                    "singlestage-avatar {} {}",
+                    match size.get().unwrap_or_default().as_str() {
+                        "sm" => "singlestage-avatar-size-sm",
+                        "lg" => "singlestage-avatar-size-lg",
+                        _ => "singlestage-avatar-size-default",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            {children()}
-        </div>
+            <Provider value=context>{children()}</Provider>
+        </span>
     }
 }

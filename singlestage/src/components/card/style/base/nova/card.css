@@ -1,0 +1,92 @@
+@layer components1 {
+  .singlestage-card {
+    @apply bg-card
+    gap-4
+    overflow-hidden
+    py-4
+    ring-1
+    ring-foreground/10
+    rounded-xl
+    text-card-foreground
+    text-sm;
+
+    &:has(.singlestage-card-footer) {
+      @apply pb-0;
+    }
+
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+
+    > img:first-child {
+      @apply rounded-t-xl;
+    }
+
+    > img:last-child {
+      @apply rounded-b-xl;
+    }
+  }
+
+  .singlestage-card-header {
+    @apply gap-1
+    px-4
+    rounded-t-xl;
+
+    &.border-b {
+      @apply pb-4;
+    }
+  }
+
+  .singlestage-card-title {
+    @apply font-medium
+    leading-snug
+    text-base;
+  }
+
+  .singlestage-card-description {
+    @apply text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-card-content {
+    @apply px-4;
+  }
+
+  .singlestage-card-footer {
+    @apply bg-muted/50
+    border-t
+    p-4
+    rounded-b-xl;
+  }
+
+  .singlestage-card-size-sm {
+    .singlestage-card {
+      @apply gap-3
+      py-3;
+
+      &:has(.singlestage-card-footer) {
+        @apply pb-0;
+      }
+    }
+
+    .singlestage-card-header {
+      @apply px-3;
+
+      &.border-b {
+        @apply pb-3;
+      }
+    }
+
+    .singlestage-card-title {
+      @apply text-sm;
+    }
+
+    .singlestage-card-content {
+      @apply px-3;
+    }
+
+    .singlestage-card-footer {
+      @apply p-3;
+    }
+  }
+}

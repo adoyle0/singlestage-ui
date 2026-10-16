@@ -11,6 +11,6 @@ pub use tabs::*;
 pub use trigger::*;
 
 #[derive(Clone)]
-pub struct TabsContext {
+pub(crate) struct TabsContext {
     value: Reactive<String>,
 }

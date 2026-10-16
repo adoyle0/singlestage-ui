@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@layer theme, base, components, components1, components2, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -87,6 +91,7 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.97 0.01 17);
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --sidebar: oklch(0.985 0 0);
@@ -97,11 +102,13 @@
   }
 
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border
+    outline-ring/50;
   }
 
   ::selection {
-    @apply bg-selection text-selection-foreground;
+    @apply bg-selection
+    text-selection-foreground;
   }
 
   html {
@@ -109,26 +116,16 @@
   }
 
   body {
-    @apply antialiased bg-background overscroll-none text-foreground;
-  }
-
-  @supports (font: -apple-system-body) and (-webkit-appearance: none) {
-    [data-wrapper] {
-      @apply min-[1800px]:border-t;
-    }
-  }
-
-  .singlestage-ulist {
-    @apply list-disc ml-6 my-6;
-  }
-
-  .singlestage-olist {
-    @apply list-decimal ml-6 my-6;
+    @apply antialiased
+    bg-background
+    overscroll-none
+    text-foreground;
   }
 
   a:active,
   button:active {
-    @apply opacity-60 md:opacity-100;
+    @apply opacity-60
+    md:opacity-100;
   }
 
   .singlestage-scrollbar {
@@ -147,5 +144,17 @@
       background: var(--scrollbar-thumb);
       border-radius: var(--scrollbar-radius);
     }
+  }
+}
+
+/* /* Animation */
+
+@layer base {
+  :root {
+    --transform-origin: 0% 339px;
+    --transform-scale: scale3d(0.95, 0.95, 0.95);
+    --transform-translate-step: 0.25rem;
+    --transition-duration: 0.15s;
+    --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

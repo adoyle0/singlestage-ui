@@ -1,3 +1,4 @@
+use super::AvatarContext;
 use leptos::prelude::*;
 
 /// Renders a text fallback inside the avatar.
@@ -110,6 +111,8 @@ pub fn AvatarFallback(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let avatar = expect_context::<AvatarContext>();
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -151,15 +154,22 @@ pub fn AvatarFallback(
     };
 
     view! {
-        <div
+        <span
             class=move || {
                 format!("singlestage-avatar-fallback {}", class.get().unwrap_or_default())
+            }
+            style:display=move || {
+                match avatar.img_loaded.get() {
+                    true => "none",
+                    false => "flex",
+                }
+                    .to_string()
             }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </div>
+        </span>
     }
 }

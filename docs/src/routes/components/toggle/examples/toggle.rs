@@ -1,8 +1,19 @@
-use icondata::LuBold;
 use leptos::prelude::*;
 use singlestage::*;
 
 #[component]
 pub fn ToggleExample() -> impl IntoView {
-    view! { <Toggle aria_label="Toggle italic">{icon!(LuBold)}</Toggle> }
+    let pressed = RwSignal::new(false);
+
+    view! {
+        <Toggle aria_label="Toggle bookmark" pressed size="sm" variant="outline">
+            <Show
+                when=move || pressed.get()
+                fallback=move || view! { {icon!(icondata::LuBookmark)} }
+            >
+                {icon!(icondata::LuBookmark, class="fill-(--foreground)")}
+            </Show>
+            Bookmark
+        </Toggle>
+    }
 }

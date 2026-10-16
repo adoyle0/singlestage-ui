@@ -4,6 +4,15 @@ use std::fmt::Debug;
 #[cfg(feature = "stores")]
 use reactive_stores::{ArcField, ArcStore, Field, Store, StoreField, Subfield};
 
+// TODO: For experimental multi-thumb `Slider` support - use or remove me
+//
+// fn usize_to_f64(value: usize) -> f64 {
+//     // HACK: a 64 bit usize isn't guaranteed to fit in a 64 bit float, so do some parsing
+//     // shenanigans and return f64 max if the number is large enough, this easy and should
+//     // work 99.999% of the time
+//     value.to_string().parse::<f64>().unwrap_or(f64::MAX)
+// }
+
 // Rust gets upset about trying to use `#[cfg(feature = "stores")]` in a where clause:
 // https://github.com/rust-lang/rust/issues/115590
 // HACK: So we'll just define `Reactive` conditionally for now because it's easy and it works.
@@ -140,12 +149,43 @@ impl From<&str> for Reactive<String> {
     }
 }
 
+// TODO: For experimental multi-thumb `Slider` support - use or remove me
+//
+// impl From<usize> for Reactive<f64> {
+//     fn from(value: usize) -> Self {
+//         Reactive::RwSignal(RwSignal::new(usize_to_f64(value)))
+//     }
+// }
+//
+// impl From<usize> for Reactive<Vec<f64>> {
+//     fn from(value: usize) -> Self {
+//         Reactive::RwSignal(RwSignal::new(vec![usize_to_f64(value)]))
+//     }
+// }
+//
+// impl From<Vec<usize>> for Reactive<Vec<f64>> {
+//     fn from(value: Vec<usize>) -> Self {
+//         Reactive::RwSignal(RwSignal::new(
+//             value.iter().map(|el| usize_to_f64(el.to_owned())).collect(),
+//         ))
+//     }
+// }
+
 impl<T> From<T> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
         Reactive::RwSignal(RwSignal::new(value))
+    }
+}
+
+impl<T> From<T> for Reactive<Vec<T>>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: T) -> Self {
+        Reactive::RwSignal(RwSignal::new(vec![value]))
     }
 }
 

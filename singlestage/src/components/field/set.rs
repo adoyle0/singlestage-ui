@@ -1,4 +1,5 @@
-use leptos::prelude::*;
+use crate::{FieldSetContext, Reactive};
+use leptos::{context::Provider, prelude::*};
 
 /// Container that renders a semantic fieldset with spacing presets.
 #[component]
@@ -9,7 +10,7 @@ pub fn FieldSet(
     //
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -171,7 +172,7 @@ pub fn FieldSet(
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            {children()}
+            <Provider value=FieldSetContext {}>{children()}</Provider>
         </fieldset>
     }
 }

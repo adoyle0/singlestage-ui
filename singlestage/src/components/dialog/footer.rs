@@ -1,7 +1,7 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
-/// Displays at the bottom of the dialog, contains calls to action. Submit events such as button
-/// clicks in this area automatically trigger closing of the dialog.
+/// Displays at the bottom of the dialog, contains calls to action.
 #[component]
 pub fn DialogFooter(
     children: Children,
@@ -116,7 +116,6 @@ pub fn DialogFooter(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,10 +151,13 @@ pub fn DialogFooter(
     };
 
     view! {
-        <footer>
-            <form method="dialog" {..global_attrs_1} {..global_attrs_2}>
-                {children()}
-            </form>
-        </footer>
+        <DialogFooterPrimitive
+            class
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
+            {children()}
+        </DialogFooterPrimitive>
     }
 }

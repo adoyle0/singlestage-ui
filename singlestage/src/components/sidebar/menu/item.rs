@@ -1,4 +1,3 @@
-use crate::SidebarContext;
 use leptos::prelude::*;
 
 /// Contains an element within the SidebarMenu.
@@ -117,14 +116,12 @@ pub fn SidebarMenuItem(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -161,8 +158,10 @@ pub fn SidebarMenuItem(
 
     view! {
         <li
+            class=move || {
+                format!("singlestage-sidebar-menu-item {}", class.get().unwrap_or_default())
+            }
             value=move || value.get()
-            on:click=move |_| sidebar.close_if_small_screen()
 
             {..global_attrs_1}
             {..global_attrs_2}

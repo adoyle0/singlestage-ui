@@ -1,4 +1,3 @@
-use super::SidebarContext;
 use leptos::prelude::*;
 
 /// A sticky footer displayed at the bottom of the sidebar.
@@ -111,14 +110,12 @@ pub fn SidebarFooter(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -155,7 +152,7 @@ pub fn SidebarFooter(
 
     view! {
         <footer
-            on:click=move |_| sidebar.close_if_small_screen()
+            class=move || format!("singlestage-sidebar-footer {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}

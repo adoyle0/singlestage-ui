@@ -42,14 +42,19 @@ pub fn ItemHeaderExample() -> impl IntoView {
                         view! {
                             <Item variant="outline">
                                 <ItemHeader>
-                                    <Tooltip value=model.credit>
-                                        <img
-                                            src=model.image
-                                            alt=model.name
-                                            width=128
-                                            height=128
-                                            class="aspect-square w-full rounded-sm object-cover"
-                                        />
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <img
+                                                src=model.image
+                                                alt=model.name
+                                                width=128
+                                                height=128
+                                                class="aspect-square w-full rounded-sm object-cover"
+                                            />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>{model.credit}</p>
+                                        </TooltipContent>
                                     </Tooltip>
                                 </ItemHeader>
                                 <ItemContent>

@@ -12,9 +12,9 @@ pub fn SeparatorExample() -> impl IntoView {
             <Separator class="my-4" />
             <div class="flex h-5 items-center space-x-4 text-sm">
                 <div>"Blog"</div>
-                <Separator vertical=true />
+                <Separator orientation="vertical" />
                 <div>"Docs"</div>
-                <Separator vertical=true />
+                <Separator orientation="vertical" />
                 <div>"Source"</div>
             </div>
         </div>

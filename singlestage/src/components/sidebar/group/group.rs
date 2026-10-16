@@ -120,7 +120,7 @@ pub fn SidebarGroup(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -157,8 +157,8 @@ pub fn SidebarGroup(
 
     view! {
         <div
-            id="group"
-            aria-labelledby=move || label_id.get()
+            aria_labelledby=move || label_id.get()
+            class=move || format!("singlestage-sidebar-group {}", class.get().unwrap_or_default())
             role="group"
 
             {..global_attrs_1}

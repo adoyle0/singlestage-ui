@@ -1,0 +1,39 @@
+@layer components1 {
+  .singlestage-tooltip-content {
+    @apply gap-1.5
+    inline-flex
+    items-center
+    px-3
+    py-1.5
+    rounded-none
+    text-xs;
+
+    &:has(.singlestage-kbd) {
+      @apply pr-1.5;
+    }
+
+    .singlestage-kbd {
+      @apply isolate
+      relative
+      rounded-none
+      z-50;
+    }
+  }
+
+  /* TODO: Arrows */
+  /* .singlestage-tooltip-arrow { */
+  /*   @apply size-2.5 */
+  /*   translate-y-[calc(-50%-2px)] */
+  /*   rotate-45 */
+  /*   rounded-none; */
+  /* } */
+  /**/
+  /* .singlestage-tooltip-arrow-logical { */
+  /*   @apply data-[side=inline-end]:top-1/2! */
+  /*   data-[side=inline-end]:-left-1 */
+  /*   data-[side=inline-end]:-translate-y-1/2 */
+  /*   data-[side=inline-start]:top-1/2! */
+  /*   data-[side=inline-start]:-right-1 */
+  /*   data-[side=inline-start]:-translate-y-1/2; */
+  /* } */
+}

@@ -6,7 +6,7 @@ pub fn CarouselExample() -> impl IntoView {
     let carousel_items = RwSignal::new((1..6).collect::<Vec<usize>>());
 
     view! {
-        <Carousel class="w-full max-w-xs">
+        <Carousel class="max-w-xs">
             <CarouselContent>
                 <For each=move || carousel_items.get() key=|item| *item let(item)>
                     <CarouselItem>

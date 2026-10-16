@@ -1,0 +1,64 @@
+[package]
+name = "app"
+authors = ["Adam Doyle <adam@doordesk.net>"]
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+leptos.workspace = true
+leptos_axum = { workspace = true, optional = true }
+leptos_meta.workspace = true
+leptos_router.workspace = true
+
+cfg-if.workspace = true
+http.workspace = true
+icondata.workspace = true
+serde = { workspace = true }
+singlestage = { workspace = true, optional = true }
+thiserror.workspace = true
+
+# ssr
+axum = { workspace = true, optional = true }
+simple_logger = { workspace = true, optional = true }
+tokio = { workspace = true, optional = true, features = ["full"] }
+tower = { workspace = true, optional = true, features = ["full"] }
+tower-http = { workspace = true, optional = true, features = [
+  "compression-full",
+  "cors",
+  "decompression-full",
+] }
+
+# csr
+console_error_panic_hook = { workspace = true, optional = true }
+console_log = { workspace = true, optional = true }
+log = { workspace = true, optional = true }
+
+web-sys = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen = { workspace = true }
+wasm-bindgen-test = { workspace = true }
+
+
+[features]
+csr = [
+  "dep:console_error_panic_hook",
+  "dep:console_log",
+  "dep:log",
+  "leptos/csr",
+  "singlestage/csr",
+]
+hydrate = ["leptos/hydrate", "singlestage/hydrate"]
+ssr = [
+  "dep:axum",
+  "dep:leptos_axum",
+  "dep:log",
+  "dep:simple_logger",
+  "dep:tokio",
+  "dep:tower",
+  "dep:tower-http",
+  "leptos/ssr",
+  "leptos_meta/ssr",
+  "leptos_router/ssr",
+  "singlestage/ssr",
+]

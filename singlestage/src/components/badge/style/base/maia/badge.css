@@ -1,0 +1,82 @@
+@layer components1 {
+  .singlestage-badge {
+    @apply border
+    border-transparent
+    font-medium
+    gap-1
+    h-5
+    px-2
+    py-0.5
+    rounded-4xl
+    text-xs
+    transition-all;
+
+    & > svg {
+      @apply size-3!;
+    }
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-1.5;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-1.5;
+    }
+  }
+
+  .singlestage-badge-variant-default {
+    @apply bg-primary
+    text-primary-foreground;
+
+    a:hover {
+      @apply bg-primary/80;
+    }
+  }
+
+  .singlestage-badge-variant-secondary {
+    @apply bg-secondary
+    text-secondary-foreground;
+
+    a:hover {
+      @apply bg-secondary/80;
+    }
+  }
+
+  .singlestage-badge-variant-outline {
+    @apply bg-input/30
+    border-border
+    text-foreground;
+
+    a:hover {
+      @apply bg-muted
+    text-muted-foreground;
+    }
+  }
+
+  .singlestage-badge-variant-destructive {
+    @apply bg-destructive/10
+    text-destructive;
+
+    &:focus-visible {
+      @apply ring-destructive/20;
+    }
+
+    a:hover {
+      @apply bg-destructive/20;
+    }
+  }
+
+  .singlestage-badge-variant-ghost:hover {
+    @apply bg-muted
+    text-muted-foreground;
+  }
+
+  .singlestage-badge-variant-link {
+    @apply text-primary
+    underline-offset-4;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@layer components {
+  .singlestage-tooltip-content {
+    @apply bg-foreground
+    max-w-xs
+    text-background
+    w-fit
+    z-50;
+
+    /* TODO: Arrows */
+    &.singlestage-popover-top {
+      @apply mb-1.5;
+    }
+    &.singlestage-popover-right {
+      @apply ml-1.5;
+    }
+    &.singlestage-popover-bottom {
+      @apply mt-1.5;
+    }
+    &.singlestage-popover-left {
+      @apply mr-1.5;
+    }
+  }
+
+  /* TODO: Arrows */
+  /* .singlestage-tooltip-arrow { */
+  /*   @apply bg-foreground */
+  /*   data-[side=bottom]:top-1 */
+  /*   data-[side=left]:-right-1 */
+  /*   data-[side=left]:-translate-y-1/2 */
+  /*   data-[side=left]:top-1/2! */
+  /*   data-[side=right]:-left-1 */
+  /*   data-[side=right]:-translate-y-1/2 */
+  /*   data-[side=right]:top-1/2! */
+  /*   data-[side=top]:-bottom-2.5 */
+  /*   fill-foreground */
+  /*   z-50; */
+  /* } */
+}

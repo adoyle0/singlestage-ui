@@ -1,0 +1,15 @@
+[build]
+target = "app/index.html"
+minify = "on_release"
+ignore = "src-tauri"
+
+[serve]
+addresses = ["0.0.0.0"]
+port = 3010
+ws_protocol = "ws"
+
+[tools]
+tailwindcss = "4.1.18"
+
+[watch]
+watch = ["../singlestage", "../singlestage_macro"]

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{Button, Kbd};
+use singlestage::*;
 
 #[component]
 pub fn KbdButtonExample() -> impl IntoView {
