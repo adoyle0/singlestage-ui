@@ -29,7 +29,7 @@ pub fn ItemAvatarExample() -> impl IntoView {
             </Item>
             <Item variant="outline">
                 <ItemMedia>
-                    <div class="*:ring-(--background) flex -space-x-2 *:ring-2 *:grayscale">
+                    <AvatarGroup class="*:grayscale">
                         <Avatar>
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                             <AvatarFallback>"CN"</AvatarFallback>
@@ -45,7 +45,7 @@ pub fn ItemAvatarExample() -> impl IntoView {
                             />
                             <AvatarFallback>"ER"</AvatarFallback>
                         </Avatar>
-                    </div>
+                    </AvatarGroup>
                 </ItemMedia>
                 <ItemContent>
                     <ItemTitle>"No Team Members"</ItemTitle>

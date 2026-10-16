@@ -12,7 +12,8 @@ description = "Input components use child text as their label and automatically 
 [[examples]]
 name = "labels in fields"
 title = "Labels in Fields"
-description = "Labels used in Fields automatically associate with Field inputs."
+description = """FieldLabels and implicit labels used in Fields automatically associate with \
+inputs without having to set ids."""
 
 [[references]]
 name = "Label"
@@ -23,6 +24,8 @@ attributes."""
 attrs = [
   { attr = "disabled", attr_type = "bool", default = "false", description = """Set whether or not \
     this element should display as disabled.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position. (For use in popover menus)""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Set whether or not \
     this element should display as invalid.""" },
   { attr = "label_for", attr_type = "String", default = """""""", description = """Renamed \

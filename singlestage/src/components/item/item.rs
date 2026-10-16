@@ -1,7 +1,7 @@
 use crate::ItemContext;
 use leptos::{context::Provider, prelude::*};
 
-/// Contains the contents of an Item.
+/// A versatile component for displaying content with media, title, description, and actions.
 #[component]
 pub fn Item(
     children: Children,
@@ -11,7 +11,7 @@ pub fn Item(
     /// Accepted values: "xs" | "sm" | "default"
     #[prop(optional, into)]
     size: MaybeProp<String>,
-    /// Set the display style of the `Item`.
+    /// Set the display variant of the `Item`.
     ///
     /// Accepted values: "outline" | "muted" | "default"
     #[prop(optional, into)]

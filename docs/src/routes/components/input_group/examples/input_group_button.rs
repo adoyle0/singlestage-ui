@@ -55,7 +55,7 @@ pub fn InputGroupButtonExample() -> impl IntoView {
                     <InputGroupAddon class="text-muted-foreground pl-1.5">
                         "https://"
                     </InputGroupAddon>
-                    <Input id="input-secure-19" />
+                    <Input />
                     <InputGroupAddon align="inline-end">
                         <Button
                             aria_label="Bookmark this page"

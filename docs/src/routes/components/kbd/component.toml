@@ -16,6 +16,12 @@ description = """Use the Kbd component inside a Button component to display a ke
 a button."""
 
 [[examples]]
+name = "Kbd tooltip"
+title = "Tooltip"
+description = """You can use the Kbd component inside a Tooltip component to display a tooltip \
+with a keyboard key."""
+
+[[examples]]
 name = "Kbd input group"
 title = "Input Group"
 description = """You can use the Kbd component inside a InputGroupAddon component to display a \

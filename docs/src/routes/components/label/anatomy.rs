@@ -3,5 +3,10 @@ use singlestage::Label;
 
 #[component]
 pub fn LabelAnatomy() -> impl IntoView {
-    view! { <Label /> }
+    view! {
+        <Label />
+        <Field>
+            <FieldLabel />
+        </Field>
+    }
 }

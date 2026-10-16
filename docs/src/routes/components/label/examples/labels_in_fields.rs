@@ -14,11 +14,10 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                         </FieldDescription>
                         <FieldGroup>
                             <Field>
-                                <Label>"Name on Card"</Label>
-                                <Input placeholder="Evil Rabbit" />
+                                <Input placeholder="Evil Rabbit">"Name on Card"</Input>
                             </Field>
                             <Field>
-                                <Label>"Card Number"</Label>
+                                <FieldLabel>"Card Number"</FieldLabel>
                                 <Input placeholder="1234 5678 9012 3456" />
                                 <FieldDescription>
                                     "Enter your 16-digit card number"
@@ -26,7 +25,7 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                             </Field>
                             <div class="grid grid-cols-3 gap-4">
                                 <Field>
-                                    <Label>"Month"</Label>
+                                    <FieldLabel>"Month"</FieldLabel>
                                     <Select placeholder="MM">
                                         <SelectOption value="01">"01"</SelectOption>
                                         <SelectOption value="02">"02"</SelectOption>
@@ -43,7 +42,7 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <Label>"Year"</Label>
+                                    <FieldLabel>"Year"</FieldLabel>
                                     <Select placeholder="YYYY">
                                         <SelectOption value="2024">"2024"</SelectOption>
                                         <SelectOption value="2025">"2025"</SelectOption>
@@ -54,7 +53,7 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                                     </Select>
                                 </Field>
                                 <Field>
-                                    <Label>"CVV"</Label>
+                                    <FieldLabel>"CVV"</FieldLabel>
                                     <Input placeholder="123" />
                                 </Field>
                             </div>
@@ -69,14 +68,16 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                         <FieldGroup>
                             <Field orientation="horizontal">
                                 <Checkbox checked=true />
-                                <Label class="font-normal">"Same as shipping address"</Label>
+                                <FieldLabel class="font-normal">
+                                    "Same as shipping address"
+                                </FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
                     <FieldSet>
                         <FieldGroup>
                             <Field>
-                                <Label>"Comments"</Label>
+                                <FieldLabel>"Comments"</FieldLabel>
                                 <Textarea
                                     placeholder="Add any additional comments"
                                     class="resize-none"
@@ -85,7 +86,7 @@ pub fn LabelsInFieldsExample() -> impl IntoView {
                         </FieldGroup>
                     </FieldSet>
                     <Field orientation="horizontal">
-                        <Button button_type="submit">"Submit"</Button>
+                        <Button>"Submit"</Button>
                         <Button variant="outline" button_type="button">
                             "Cancel"
                         </Button>

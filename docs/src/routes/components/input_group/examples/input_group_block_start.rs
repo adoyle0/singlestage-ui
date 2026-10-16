@@ -6,9 +6,9 @@ pub fn InputGroupBlockStartExample() -> impl IntoView {
     view! {
         <FieldGroup class="max-w-sm">
             <Field>
-                <FieldLabel label_for="block-start-input">"Input"</FieldLabel>
+                <FieldLabel>"Input"</FieldLabel>
                 <InputGroup class="h-auto">
-                    <Input id="block-start-input" placeholder="Enter your name" />
+                    <Input placeholder="Enter your name" />
                     <InputGroupAddon align="block-start">
                         <InputGroupText>"Full Name"</InputGroupText>
                     </InputGroupAddon>
@@ -16,15 +16,14 @@ pub fn InputGroupBlockStartExample() -> impl IntoView {
                 <FieldDescription>"Header positioned above the input."</FieldDescription>
             </Field>
             <Field>
-                <FieldLabel label_for="block-start-textarea">"Textarea"</FieldLabel>
+                <FieldLabel>"Textarea"</FieldLabel>
                 <InputGroup>
                     <Textarea
-                        id="block-start-textarea"
-                        placeholder="console.log('Hello, world!');"
                         class="font-mono text-sm"
+                        placeholder="console.log('Hello, world!');"
                     />
                     <InputGroupAddon align="block-start">
-                        {icon!(icondata::LuFileCode, class="text-muted-foreground")}
+                        {icon!(icondata::LuFileCode)}
                         <InputGroupText class="font-mono">"script.js"</InputGroupText>
                         <Button size="icon-xs" class="ml-auto">
                             {icon!(icondata::LuCopy)}

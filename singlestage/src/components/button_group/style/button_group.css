@@ -42,7 +42,8 @@
     > *:not(:last-child) > .singlestage-trigger,
     > *:not(:last-child) > .singlestage-select,
     > *:not(:last-child) > .singlestage-input-group-input,
-    > *:not(:last-child) > .singlestage-input-group-addon {
+    > *:not(:last-child) > .singlestage-input-group-addon,
+    > *:not(:last-child) > .singlestage-tooltip-trigger > .singlestage-button {
       @apply rounded-r-none;
     }
 
@@ -50,7 +51,8 @@
     > *:not(:first-child) > .singlestage-trigger,
     > *:not(:first-child) > .singlestage-select,
     > *:not(:first-child) > .singlestage-input-group-input,
-    > *:not(:first-child) > .singlestage-input-group-addon {
+    > *:not(:first-child) > .singlestage-input-group-addon,
+    > *:not(:first-child) > .singlestage-tooltip-trigger > .singlestage-button {
       @apply border-l-0
       rounded-l-none;
     }
@@ -86,7 +88,8 @@
     > *:not(:last-child) > .singlestage-trigger,
     > *:not(:last-child) > .singlestage-select,
     > *:not(:last-child) > .singlestage-input-group-input,
-    > *:not(:last-child) > .singlestage-input-group-addon {
+    > *:not(:last-child) > .singlestage-input-group-addon,
+    > *:not(:last-child) > .singlestage-tooltip-trigger > .singlestage-button {
       @apply rounded-b-none;
     }
 
@@ -94,7 +97,8 @@
     > *:not(:first-child) > .singlestage-trigger,
     > *:not(:first-child) > .singlestage-select,
     > *:not(:first-child) > .singlestage-input-group-input,
-    > *:not(:first-child) > .singlestage-input-group-addon {
+    > *:not(:first-child) > .singlestage-input-group-addon,
+    > *:not(:first-child) > .singlestage-tooltip-trigger > .singlestage-button {
       @apply border-t-0
       rounded-t-none;
     }

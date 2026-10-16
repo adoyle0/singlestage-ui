@@ -1,7 +1,7 @@
 use crate::Separator;
 use leptos::prelude::*;
 
-/// The separator.
+/// Visual divider to separate sections inside an Item. Accepts optional inline content.
 #[component]
 pub fn ItemSeparator(
     #[prop(optional)] children: Option<Children>,

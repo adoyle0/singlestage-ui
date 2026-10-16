@@ -6,11 +6,7 @@ pub fn InputGroupTextareaExample() -> impl IntoView {
     view! {
         <div class="grid w-full max-w-md gap-4">
             <InputGroup>
-                <Textarea
-                    id="textarea-code-32"
-                    placeholder="console.log('Hello, world!');"
-                    class="min-h-[200px]"
-                />
+                <Textarea class="min-h-[200px]" placeholder="console.log('Hello, world!');" />
                 <InputGroupAddon align="block-end" class="border-t">
                     <InputGroupText>"Line 1, Column 1"</InputGroupText>
                     <Button size="sm" class="ml-auto" variant="default">

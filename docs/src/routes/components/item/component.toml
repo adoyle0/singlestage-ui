@@ -24,11 +24,12 @@ description = "Use the ItemMedia icon variant to display an icon."
 [[examples]]
 name = "item avatar"
 title = "Avatar"
+description = "Use the ItemMedia avatar variant to display an avatar."
 
 [[examples]]
 name = "item image"
 title = "Image"
-description = "Use the ItemMedia image variant to display an icon."
+description = "Use the ItemMedia image variant to display an image."
 
 [[examples]]
 name = "item group"
@@ -52,7 +53,8 @@ title = "Dropdown"
 
 [[references]]
 name = "Item"
-description = "Contains the contents of an Item."
+description = """A versatile component for displaying content with media, title, description, and \
+actions."""
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -97,7 +99,7 @@ attrs = []
 
 [[references]]
 name = "ItemGroup"
-description = "Groups content together for display within an Item."
+description = "A container that groups related items together with consistent styling."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -137,4 +139,7 @@ description = "Contains title text for an Item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """\
+    Specify the orientation of the separator. Accepted values: \"vertical\" | \"horizontal\".""" },
+]
