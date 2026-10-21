@@ -46,6 +46,8 @@ where
     Field<T>: Send + Sync + Clone + Copy + 'static,
 {
     RwSignal(RwSignal<T>),
+    ReadSignal(ReadSignal<T>),
+    Memo(Memo<T>),
     Field(Field<T>),
 }
 
@@ -77,6 +79,8 @@ where
     RwSignal<T>: Send + Sync + Clone + Copy + 'static,
 {
     RwSignal(RwSignal<T>),
+    ReadSignal(ReadSignal<T>),
+    Memo(Memo<T>),
 }
 
 impl<T> Reactive<T>
@@ -87,6 +91,8 @@ where
     pub fn get(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get(),
+            Self::ReadSignal(r_signal) => r_signal.get(),
+            Self::Memo(memo) => memo.get(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get(),
         }
@@ -96,6 +102,8 @@ where
     pub fn get_untracked(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get_untracked(),
+            Self::ReadSignal(r_signal) => r_signal.get_untracked(),
+            Self::Memo(memo) => memo.get_untracked(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get_untracked(),
         }
@@ -105,6 +113,8 @@ where
     pub fn set(&self, value: T) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.set(value),
+            Self::ReadSignal(_) => (),
+            Self::Memo(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.set(value),
         }
@@ -114,6 +124,8 @@ where
     pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.with(fun),
+            Self::ReadSignal(r_signal) => r_signal.with(fun),
+            Self::Memo(memo) => memo.with(fun),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.with(fun),
         }
@@ -123,6 +135,8 @@ where
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.update(fun),
+            Self::ReadSignal(_) => (),
+            Self::Memo(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.update(fun),
         }
@@ -145,7 +159,8 @@ impl<T: Default + Send + Clone + Sync + 'static> Reactive<T> {
 
 impl From<&str> for Reactive<String> {
     fn from(value: &str) -> Self {
-        Reactive::RwSignal(RwSignal::new(value.to_string()))
+        let (sig, _) = signal(value.to_string());
+        Reactive::ReadSignal(sig)
     }
 }
 
@@ -176,7 +191,9 @@ where
     T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
-        Reactive::RwSignal(RwSignal::new(value))
+
+        let (sig, _) = signal(value);
+        Reactive::ReadSignal(sig)
     }
 }
 
@@ -185,7 +202,8 @@ where
     T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
-        Reactive::RwSignal(RwSignal::new(vec![value]))
+        let (sig, _) = signal(vec![value]);
+        Reactive::ReadSignal(sig)
     }
 }
 
@@ -197,6 +215,25 @@ where
         Reactive::RwSignal(value)
     }
 }
+
+impl<T> From<ReadSignal<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: ReadSignal<T>) -> Self {
+        Reactive::ReadSignal(value)
+    }
+}
+
+impl<T> From<Memo<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: Memo<T>) -> Self {
+        Reactive::Memo(value)
+    }
+}
+
 
 #[cfg(feature = "stores")]
 impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
