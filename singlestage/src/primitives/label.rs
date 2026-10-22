@@ -263,9 +263,9 @@ pub fn LabelPrimitive(
             {children()}
             <Show when=move || {
                 if let Some(field) = use_context::<FieldContext>()
-                    && primitive_type == LabelPrimitiveType::FieldLabel
+                    && primitive_type == LabelPrimitiveType::FieldLabel && !field.has_title.get()
                 {
-                    field.has_error.get() || field.required.get()
+                    field.required.get()
                 } else {
                     false
                 }

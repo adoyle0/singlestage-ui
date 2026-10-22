@@ -185,7 +185,7 @@ pub fn Field(
     let context = FieldContext {
         description_id: RwSignal::new(String::default()),
         disabled,
-        has_error: RwSignal::new(false),
+        has_title: RwSignal::new(false),
         input_id: RwSignal::new(String::default()),
         invalid,
         label_id: RwSignal::new(String::default()),
