@@ -9,11 +9,11 @@ pub fn ButtonGroupSelectExample() -> impl IntoView {
         <ButtonGroup>
             <ButtonGroup>
                 <Select value=currency>
-                    <SelectContent label="Currency">
-                        <SelectItem value="$">"$"</SelectItem>
-                        <SelectItem value="€">"€"</SelectItem>
-                        <SelectItem value="£">"£"</SelectItem>
-                    </SelectContent>
+                    <SelectOptGroup label="Currency">
+                        <SelectOption value="$">"$"</SelectOption>
+                        <SelectOption value="€">"€"</SelectOption>
+                        <SelectOption value="£">"£"</SelectOption>
+                    </SelectOptGroup>
                 </Select>
                 <Input placeholder="10.00" pattern="[0-9]*" />
             </ButtonGroup>

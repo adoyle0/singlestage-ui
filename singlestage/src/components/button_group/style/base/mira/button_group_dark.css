@@ -1,0 +1,14 @@
+@layer components2 {
+  .singlestage-button-group {
+    &:not(&:has(.singlestage-button-group)) {
+      &:has(* [aria-invalid="true"]) {
+        @apply ring-2
+        ring-destructive/40;
+
+        * {
+          @apply ring-0!;
+        }
+      }
+    }
+  }
+}

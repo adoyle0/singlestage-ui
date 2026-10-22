@@ -11,6 +11,11 @@ pub fn ScrollArea(
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
 
+    // LEPTOS ATTRIBUTES
+    /// A reactive reference to a DOM node that can be used with the node_ref attribute.
+    #[prop(optional, into)]
+    node_ref: MaybeProp<NodeRef<leptos::html::Div>>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -116,6 +121,14 @@ pub fn ScrollArea(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let node_ref = {
+        if let Some(node_ref) = node_ref.get_untracked() {
+            node_ref
+        } else {
+            NodeRef::<leptos::html::Div>::new()
+        }
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -156,6 +169,7 @@ pub fn ScrollArea(
 
     view! {
         <div
+            node_ref=node_ref
             class=move || {
                 format!(
                     "singlestage-scrollbar singlestage-scroll-area {} {}",

@@ -1,5 +1,5 @@
-use crate::{RadioGroupContext, Reactive};
-use leptos::{context::Provider, prelude::*};
+use crate::{Reactive, primitives::*};
+use leptos::prelude::*;
 
 /// Contains all the parts of a radio group
 #[component]
@@ -20,7 +20,7 @@ pub fn RadioGroup(
     //
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -138,7 +138,6 @@ pub fn RadioGroup(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -173,29 +172,29 @@ pub fn RadioGroup(
         />
     };
 
-    let fieldset_attrs = view! { <{..} disabled=move || disabled.get() form=move || form.get() name=move || name.get() /> };
-
-    if let Some(default) = default.get_untracked() {
-        value.set(default)
-    };
-
-    let context = RadioGroupContext {
-        name: name
-            .get_untracked()
-            .unwrap_or(uuid::Uuid::new_v4().to_string()),
-        invalid,
-        value,
+    let fieldset_attrs = view! {
+        <{..}
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
+            disabled=move || disabled.get()
+            form=move || form.get()
+            name=move || name.get()
+        />
     };
 
     view! {
-        <fieldset
-            class=move || format!("singlestage-radio-group {}", class.get().unwrap_or_default())
+        <RadioGroupPrimitive
+            primitive_type=RadioGroupPrimitiveType::Normal
+
+            class
+            default
+            invalid
+            value
 
             {..global_attrs_1}
             {..global_attrs_2}
             {..fieldset_attrs}
         >
-            <Provider value=context>{children()}</Provider>
-        </fieldset>
+            {children()}
+        </RadioGroupPrimitive>
     }
 }

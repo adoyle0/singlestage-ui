@@ -1,0 +1,17 @@
+use leptos::prelude::*;
+use singlestage::*;
+
+#[component]
+pub fn SwitchDescriptionExample() -> impl IntoView {
+    view! {
+        <Field orientation="horizontal" class="max-w-sm">
+            <FieldContent>
+                <FieldLabel label_for="switch-focus-mode">"Share across devices"</FieldLabel>
+                <FieldDescription>
+                    "Focus is shared across devices, and turns off when you leave the app."
+                </FieldDescription>
+            </FieldContent>
+            <Switch id="switch-focus-mode" />
+        </Field>
+    }
+}

@@ -1,3 +1,4 @@
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Contains the dialog title and a description to be rendered in the open dialog.
@@ -115,7 +116,6 @@ pub fn DialogHeader(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -151,8 +151,13 @@ pub fn DialogHeader(
     };
 
     view! {
-        <header {..global_attrs_1} {..global_attrs_2}>
+        <DialogHeaderPrimitive
+            class
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             {children()}
-        </header>
+        </DialogHeaderPrimitive>
     }
 }

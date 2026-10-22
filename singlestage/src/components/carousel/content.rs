@@ -115,12 +115,20 @@ pub fn CarouselContent(
 
     let on_scroll_end = move |_ev| {
         if let Some(ul) = carousel.ul_ref.get_untracked() {
-            let scroll_left = ul.scroll_left();
+            // Apparently this can either output i32 or f64
+            let scroll_left: f64 = ul.scroll_left().into();
             let width = ul.scroll_width();
-            let scroll_step = width / carousel.num_items.get_untracked();
-            let target = (scroll_left / scroll_step) + 1;
+            let scroll_step: f64 = (width / carousel.num_items.get_untracked()).into();
 
-            carousel.current_item.update_untracked(|cur| *cur = target);
+            let target: f64 = (scroll_left / scroll_step) + 1.0;
+
+            carousel.current_item.update_untracked(|cur| {
+                *cur = target
+                    .round_ties_even()
+                    .to_string()
+                    .parse::<i32>()
+                    .unwrap_or(i32::MAX)
+            });
         }
     };
 

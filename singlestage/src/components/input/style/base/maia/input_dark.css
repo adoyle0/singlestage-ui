@@ -1,0 +1,8 @@
+@layer components1 {
+  .singlestage-input {
+    &[aria-invalid="true"] {
+      @apply border-destructive/50
+      ring-destructive/40;
+    }
+  }
+}

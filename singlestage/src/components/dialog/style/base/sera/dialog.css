@@ -1,0 +1,68 @@
+@layer components1 {
+  .singlestage-dialog-overlay {
+    @apply bg-popover
+    max-w-[calc(100%-2rem)]
+    ring-1
+    ring-foreground/10
+    rounded-none
+    shadow-md
+    sm:max-w-md;
+
+    &::backdrop {
+      @apply supports-backdrop-filter:backdrop-blur-sm;
+    }
+
+    &[open]::backdrop {
+      @apply bg-black/20;
+    }
+  }
+
+  .singlestage-dialog-content {
+    @apply bg-popover
+    gap-6
+    grid
+    p-6
+    rounded-none
+    text-popover-foreground
+    text-sm;
+  }
+
+  .singlestage-dialog-close {
+    @apply absolute
+    bg-secondary
+    right-5
+    top-5;
+  }
+
+  .singlestage-dialog-header {
+    @apply gap-2;
+  }
+
+  .singlestage-dialog-footer {
+    @apply gap-2;
+  }
+
+  .singlestage-dialog-title {
+    @apply font-semibold
+    leading-none
+    text-lg
+    tracking-wider
+    uppercase;
+  }
+
+  .singlestage-dialog-description {
+    @apply leading-relaxed
+    mt-0.5
+    text-muted-foreground
+    text-sm;
+
+    a:not(.singlestage-button) {
+      @apply underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+  }
+}

@@ -1,48 +1,45 @@
 use leptos::prelude::*;
-use singlestage::{card::*, Button, Input, Label};
+use singlestage::*;
 
 #[component]
 pub fn CardExample() -> impl IntoView {
     view! {
-        <Card class="w-full sm:w-sm">
+        <Card class="max-w-sm">
             <CardHeader>
                 <CardTitle>"Log in to your account"</CardTitle>
                 <CardDescription>
-                    "Enter your details below to log in to your account"
+                    "Enter your email below to Log in to your account"
                 </CardDescription>
+                <CardAction>
+                    <Button variant="link">"Sign Up"</Button>
+                </CardAction>
             </CardHeader>
             <CardContent>
-                <form class="form grid gap-6">
-                    <div class="grid gap-2">
-                        <Label label_for="demo-card-form-email">"Email"</Label>
-                        <Input input_type="email" id="demo-card-form-email" />
-                    </div>
-                    <div class="grid gap-2">
-                        <div class="flex items-center gap-2">
-                            <Label label_for="demo-card-form-password">"Password"</Label>
-                            <a
+                <FieldSet>
+                    <Field>
+                        <Input input_type="email" placeholder="m@example.com">
+                            "Email"
+                        </Input>
+                    </Field>
+                    <Field>
+                        <div class="flex">
+                            <FieldLabel>"Password"</FieldLabel>
+                            <Link
                                 href="#"
-                                class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                                class="ml-auto text-sm font-normal no-underline hover:underline"
                             >
                                 "Forgot your password?"
-                            </a>
+                            </Link>
                         </div>
-                        <Input input_type="password" id="demo-card-form-password" />
-                    </div>
-                </form>
+                        <Input input_type="password" />
+                    </Field>
+                </FieldSet>
             </CardContent>
-            <CardFooter class="flex flex-col items-center gap-2">
-                <Button button_type="button" class="w-full">
-                    "Log in"
-                </Button>
-                <Button button_type="button" variant="outline" class="w-full">
+            <CardFooter class="flex-col gap-2 border-t">
+                <Button class="w-full">"Log in"</Button>
+                <Button variant="outline" class="w-full">
                     "Log in with Google"
                 </Button>
-                <p class="mt-4 text-center text-sm">
-                    "Don't have an account? "<a href="#" class="underline-offset-4 hover:underline">
-                        "Sign up"
-                    </a>
-                </p>
             </CardFooter>
         </Card>
     }

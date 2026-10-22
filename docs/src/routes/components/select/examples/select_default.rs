@@ -5,13 +5,13 @@ use singlestage::*;
 pub fn SelectDefaultExample() -> impl IntoView {
     view! {
         <Select default="pineapple">
-            <SelectContent label="Fruits">
-                <SelectItem value="apple">"Apple"</SelectItem>
-                <SelectItem value="banana">"Banana"</SelectItem>
-                <SelectItem value="blueberry">"Blueberry"</SelectItem>
-                <SelectItem value="grapes">"Grapes"</SelectItem>
-                <SelectItem value="pineapple">"Pineapple"</SelectItem>
-            </SelectContent>
+            <SelectOptGroup label="Fruits">
+                <SelectOption value="apple">"Apple"</SelectOption>
+                <SelectOption value="banana">"Banana"</SelectOption>
+                <SelectOption value="blueberry">"Blueberry"</SelectOption>
+                <SelectOption value="grapes">"Grapes"</SelectOption>
+                <SelectOption value="pineapple">"Pineapple"</SelectOption>
+            </SelectOptGroup>
         </Select>
     }
 }

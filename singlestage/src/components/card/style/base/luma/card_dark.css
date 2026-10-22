@@ -1,0 +1,5 @@
+@layer components1 {
+  .singlestage-card {
+    @apply ring-foreground/10;
+  }
+}

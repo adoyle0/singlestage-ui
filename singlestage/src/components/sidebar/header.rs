@@ -1,4 +1,4 @@
-use super::SidebarContext;
+// use super::SidebarContext;
 use leptos::prelude::*;
 
 #[component]
@@ -110,14 +110,12 @@ pub fn SidebarHeader(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let sidebar = expect_context::<SidebarContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -154,7 +152,7 @@ pub fn SidebarHeader(
 
     view! {
         <header
-            on:click=move |_| sidebar.close_if_small_screen()
+            class=format!("singlestage-sidebar-header {}", class.get().unwrap_or_default())
 
             {..global_attrs_1}
             {..global_attrs_2}

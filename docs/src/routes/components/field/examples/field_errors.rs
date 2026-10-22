@@ -3,26 +3,15 @@ use singlestage::*;
 
 #[component]
 pub fn FieldErrorsExample() -> impl IntoView {
-    let username_invalid = RwSignal::new(true);
-    let password_invalid = RwSignal::new(true);
+    let username_invalid = RwSignal::new(false);
 
-    let password_errors = RwSignal::new(vec![
-        "Password is required".to_string(),
-        "Password must be at least 8 characters long".to_string(),
-        "Password must contain a number".to_string(),
-        "Password must contain uppercase letters".to_string(),
-        "Password must contain lowercase letters".to_string(),
-    ]);
-
-    let username_validate = move |ev| {
-        if event_target_value(&ev).is_empty() {
-            username_invalid.set(true)
-        } else {
-            username_invalid.set(false)
-        }
+    let validate_username = move |ev| {
+        username_invalid.set(event_target_value(&ev).is_empty());
     };
 
-    let password_validate = move |ev| {
+    let password_errors: RwSignal<Vec<String>> = RwSignal::new(vec![]);
+
+    let validate_password = move |ev| {
         let password = event_target_value(&ev);
         let mut errors = vec![];
 
@@ -46,32 +35,34 @@ pub fn FieldErrorsExample() -> impl IntoView {
             errors.push("Password must contain lowercase letters".to_string());
         };
 
-        password_invalid.set(!errors.is_empty());
         password_errors.set(errors);
     };
 
+    // Set errors for demonstration purposes
+    username_invalid.set(true);
+    password_errors.set(vec![
+        "Password is required".to_string(),
+        "Password must be at least 8 characters long".to_string(),
+        "Password must contain a number".to_string(),
+        "Password must contain uppercase letters".to_string(),
+        "Password must contain lowercase letters".to_string(),
+    ]);
+
     view! {
-        <div class="w-full max-w-md">
-            <FieldSet>
-                <FieldGroup>
-                    <Field>
-                        <FieldLabel>"Username *"</FieldLabel>
-                        <Show when=move || username_invalid.get()>
-                            <FieldError>"Username is required"</FieldError>
-                        </Show>
-                        <Input invalid=username_invalid on:input=username_validate />
-                    </Field>
-                    <Field>
-                        <FieldLabel>"Password *"</FieldLabel>
-                        <FieldError errors=password_errors />
-                        <Input
-                            input_type="password"
-                            invalid=password_invalid
-                            on:input=password_validate
-                        />
-                    </Field>
-                </FieldGroup>
-            </FieldSet>
-        </div>
+        <FieldGroup class="max-w-xs">
+            // Children
+            <Field invalid=username_invalid>
+                <Input on:input=validate_username>"Username"</Input>
+                <FieldError when=username_invalid>"Username is required"</FieldError>
+            </Field>
+
+            // Array
+            <Field>
+                <Input input_type="password" on:input=validate_password>
+                    "Password"
+                </Input>
+                <FieldError errors=password_errors />
+            </Field>
+        </FieldGroup>
     }
 }

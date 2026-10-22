@@ -158,10 +158,10 @@ pub fn InputGroupAddon(
                 format!(
                     "singlestage-input-group-addon {} {}",
                     match align.get().unwrap_or_default().as_str() {
-                        "inline-end" => "singlestage-input-group-addon-inline-end",
-                        "block-start" => "singlestage-input-group-addon-block-start",
-                        "block-end" => "singlestage-input-group-addon-block-end",
-                        _ => "singlestage-input-group-addon-inline-start",
+                        "inline-end" => "singlestage-input-group-addon-align-inline-end",
+                        "block-start" => "singlestage-input-group-addon-align-block-start",
+                        "block-end" => "singlestage-input-group-addon-align-block-end",
+                        _ => "singlestage-input-group-addon-align-inline-start",
                     },
                     class.get().unwrap_or_default(),
                 )

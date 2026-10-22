@@ -5,6 +5,16 @@ displayed as a progress bar."""
 [[examples]]
 name = "progress"
 
+[[examples]]
+name = "progress label"
+title = "Label"
+description = "Use a Field component to add a label to the progress bar."
+
+[[examples]]
+name = "progress controlled"
+title = "Controlled"
+description = "A progress bar controlled by a slider."
+
 [[references]]
 name = "Progress"
 description = "Displays progress."

@@ -13,7 +13,7 @@ pub use previous::*;
 use leptos::prelude::*;
 
 #[derive(Clone)]
-pub struct CarouselContext {
+pub(crate) struct CarouselContext {
     pub current_item: RwSignal<i32>,
     pub num_items: RwSignal<i32>,
     pub ul_ref: NodeRef<leptos::html::Ul>,

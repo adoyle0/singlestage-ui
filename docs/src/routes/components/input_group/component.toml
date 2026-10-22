@@ -5,8 +5,29 @@ description = """Add additional information or actions to an input or textarea."
 name = "input group"
 
 [[examples]]
+name = "input group inline start"
+title = "Inline Start"
+descruotion = "Position the addon at the start of the input. This is the default."
+
+[[examples]]
+name = "input group inline end"
+title = "Inline End"
+descruotion = "Position the addon at the end of the input."
+
+[[examples]]
+name = "input group block start"
+title = "Block Start"
+descruotion = "Position the addon above the input."
+
+[[examples]]
+name = "input group block end"
+title = "Block End"
+descruotion = "Position the addon below the input."
+
+[[examples]]
 name = "input group icon"
 title = "Icon"
+description = "Display icons within input groups."
 
 [[examples]]
 name = "input group text"
@@ -19,9 +40,19 @@ title = "Button"
 description = "Add buttons to perform actions within the input group."
 
 [[examples]]
-name = "input group tooltip"
-title = "Tooltip"
-description = "Add Add tooltips to provide additional context or help."
+name = "input group kbd"
+title = "Kbd"
+description = "Display a keyboard shortcut associated with the input."
+
+[[examples]]
+name = "input group dropdown"
+title = "Dropdown"
+description = "Pair input groups with dropdown menus for complex interactions."
+
+[[examples]]
+name = "input group spinner"
+title = "Spinner"
+description = "Show loading indicators while processing input."
 
 [[examples]]
 name = "input group textarea"
@@ -30,19 +61,14 @@ description = """Input groups also work with textarea components. Use block-star
 for alignment."""
 
 [[examples]]
-name = "input group spinner"
-title = "Spinner"
-description = "Show loading indicators while processing input."
+name = "input group tooltip"
+title = "Tooltip"
+description = "Add Add tooltips to provide additional context or help."
 
 [[examples]]
 name = "input group label"
 title = "Label"
 description = "Add labels within input groups to improve accessibility."
-
-[[examples]]
-name = "input group dropdown"
-title = "Dropdown"
-description = "Pair input groups with dropdown menus for complex interactions."
 
 [[examples]]
 name = "input group button group"
@@ -70,24 +96,6 @@ attrs = [
   { attr = "align", attr_type = "String", default = "\"inline-start\"", description = """Set how \
     child content should be aligned. Accepted values are inline-start | inline-end | block-start \
     | block-end.""" },
-]
-
-[[references]]
-name = "Button"
-description = "InputGroup uses a regular Button with slightly different behavior."
-extra = """Implements <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
-and <a class="singlestage-link" \
-href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#attributes">button</a> \
-attributes."""
-attrs = [
-  { attr = "button_type", attr_type = "String", default = """"button"""", description = """Renamed <button> \
-    `type` attribute to avoid name collisions.""" },
-  { attr = "size", attr_type = "String", default = """"xs"""", description = """Specify the size to \
-    render the button. Sizes: xs | icon-xs | sm | icon-sm.""" },
-  { attr = "variant", attr_type = "String", default = """"ghost"""", description = """Specify \
-    the style of button to render. Variants: primary | secondary | outline | ghost | link | \ 
-    destructive""" },
 ]
 
 [[references]]

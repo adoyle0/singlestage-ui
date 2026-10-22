@@ -7,6 +7,7 @@ pub fn AlertAnatomy() -> impl IntoView {
         <Alert>
             <AlertTitle />
             <AlertDescription />
+            <AlertAction />
         </Alert>
     }
 }

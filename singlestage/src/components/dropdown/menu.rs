@@ -1,10 +1,22 @@
-use crate::DropdownMenuContext;
+use crate::{Reactive, primitives::*};
 use leptos::{context::Provider, prelude::*};
+
+#[derive(Clone)]
+pub(crate) struct DropdownMenuContext {}
 
 /// Contains all the parts of a dropdown menu.
 #[component]
 pub fn DropdownMenu(
     children: Children,
+
+    /// Set whether or not this popover should be modal meaning it can't be light dismissed
+    /// Use this along with the `open` signal for a manually managed popover
+    #[prop(optional, into, default = Reactive::new(false))]
+    modal: Reactive<bool>,
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover** unless `modal` is set to `true`
+    #[prop(optional, into)]
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -114,8 +126,10 @@ pub fn DropdownMenu(
     let menu_id = RwSignal::new(String::new());
     let trigger_id = RwSignal::new(String::new());
 
-    let context = DropdownMenuContext {
+    let context = PopoverMenuContext {
+        modal,
         menu_id,
+        open,
         trigger_id,
     };
 
@@ -165,7 +179,9 @@ pub fn DropdownMenu(
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
+            <Provider value=DropdownMenuContext {}>
+                <Provider value=context>{children()}</Provider>
+            </Provider>
         </div>
     }
 }

@@ -4,6 +4,15 @@ use std::fmt::Debug;
 #[cfg(feature = "stores")]
 use reactive_stores::{ArcField, ArcStore, Field, Store, StoreField, Subfield};
 
+// TODO: For experimental multi-thumb `Slider` support - use or remove me
+//
+// fn usize_to_f64(value: usize) -> f64 {
+//     // HACK: a 64 bit usize isn't guaranteed to fit in a 64 bit float, so do some parsing
+//     // shenanigans and return f64 max if the number is large enough, this easy and should
+//     // work 99.999% of the time
+//     value.to_string().parse::<f64>().unwrap_or(f64::MAX)
+// }
+
 // Rust gets upset about trying to use `#[cfg(feature = "stores")]` in a where clause:
 // https://github.com/rust-lang/rust/issues/115590
 // HACK: So we'll just define `Reactive` conditionally for now because it's easy and it works.
@@ -37,6 +46,8 @@ where
     Field<T>: Send + Sync + Clone + Copy + 'static,
 {
     RwSignal(RwSignal<T>),
+    ReadSignal(ReadSignal<T>),
+    Memo(Memo<T>),
     Field(Field<T>),
 }
 
@@ -68,6 +79,8 @@ where
     RwSignal<T>: Send + Sync + Clone + Copy + 'static,
 {
     RwSignal(RwSignal<T>),
+    ReadSignal(ReadSignal<T>),
+    Memo(Memo<T>),
 }
 
 impl<T> Reactive<T>
@@ -78,6 +91,8 @@ where
     pub fn get(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get(),
+            Self::ReadSignal(r_signal) => r_signal.get(),
+            Self::Memo(memo) => memo.get(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get(),
         }
@@ -87,6 +102,8 @@ where
     pub fn get_untracked(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get_untracked(),
+            Self::ReadSignal(r_signal) => r_signal.get_untracked(),
+            Self::Memo(memo) => memo.get_untracked(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get_untracked(),
         }
@@ -96,6 +113,8 @@ where
     pub fn set(&self, value: T) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.set(value),
+            Self::ReadSignal(_) => (),
+            Self::Memo(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.set(value),
         }
@@ -105,6 +124,8 @@ where
     pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.with(fun),
+            Self::ReadSignal(r_signal) => r_signal.with(fun),
+            Self::Memo(memo) => memo.with(fun),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.with(fun),
         }
@@ -114,6 +135,8 @@ where
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.update(fun),
+            Self::ReadSignal(_) => (),
+            Self::Memo(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.update(fun),
         }
@@ -136,16 +159,51 @@ impl<T: Default + Send + Clone + Sync + 'static> Reactive<T> {
 
 impl From<&str> for Reactive<String> {
     fn from(value: &str) -> Self {
-        Reactive::RwSignal(RwSignal::new(value.to_string()))
+        let (sig, _) = signal(value.to_string());
+        Reactive::ReadSignal(sig)
     }
 }
+
+// TODO: For experimental multi-thumb `Slider` support - use or remove me
+//
+// impl From<usize> for Reactive<f64> {
+//     fn from(value: usize) -> Self {
+//         Reactive::RwSignal(RwSignal::new(usize_to_f64(value)))
+//     }
+// }
+//
+// impl From<usize> for Reactive<Vec<f64>> {
+//     fn from(value: usize) -> Self {
+//         Reactive::RwSignal(RwSignal::new(vec![usize_to_f64(value)]))
+//     }
+// }
+//
+// impl From<Vec<usize>> for Reactive<Vec<f64>> {
+//     fn from(value: Vec<usize>) -> Self {
+//         Reactive::RwSignal(RwSignal::new(
+//             value.iter().map(|el| usize_to_f64(el.to_owned())).collect(),
+//         ))
+//     }
+// }
 
 impl<T> From<T> for Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
-        Reactive::RwSignal(RwSignal::new(value))
+
+        let (sig, _) = signal(value);
+        Reactive::ReadSignal(sig)
+    }
+}
+
+impl<T> From<T> for Reactive<Vec<T>>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: T) -> Self {
+        let (sig, _) = signal(vec![value]);
+        Reactive::ReadSignal(sig)
     }
 }
 
@@ -157,6 +215,25 @@ where
         Reactive::RwSignal(value)
     }
 }
+
+impl<T> From<ReadSignal<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: ReadSignal<T>) -> Self {
+        Reactive::ReadSignal(value)
+    }
+}
+
+impl<T> From<Memo<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: Memo<T>) -> Self {
+        Reactive::Memo(value)
+    }
+}
+
 
 #[cfg(feature = "stores")]
 impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>

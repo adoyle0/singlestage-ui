@@ -1,5 +1,5 @@
 use super::CarouselContext;
-
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// A button that triggers the change to the previous available carousel item.
@@ -23,7 +23,7 @@ pub fn CarouselPrevious(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
