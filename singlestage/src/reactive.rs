@@ -46,8 +46,7 @@ where
     Field<T>: Send + Sync + Clone + Copy + 'static,
 {
     RwSignal(RwSignal<T>),
-    ReadSignal(ReadSignal<T>),
-    Memo(Memo<T>),
+    MaybeProp(MaybeProp<T>),
     Field(Field<T>),
 }
 
@@ -75,24 +74,22 @@ where
 #[derive(Clone, Debug)]
 pub enum Reactive<T>
 where
-    T: Send + Sync + Clone + 'static,
-    RwSignal<T>: Send + Sync + Clone + Copy + 'static,
+    T: Send + Sync + Clone + 'static + Default,
+    RwSignal<T>: Send + Sync + Clone + Copy + 'static + Default,
 {
     RwSignal(RwSignal<T>),
-    ReadSignal(ReadSignal<T>),
-    Memo(Memo<T>),
+    MaybeProp(MaybeProp<T>),
 }
 
 impl<T> Reactive<T>
 where
-    T: Send + Sync + Clone + 'static,
+    T: Send + Sync + Clone + 'static + Default,
 {
     #[inline]
     pub fn get(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get(),
-            Self::ReadSignal(r_signal) => r_signal.get(),
-            Self::Memo(memo) => memo.get(),
+            Self::MaybeProp(r_signal) => r_signal.get().unwrap_or_default(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get(),
         }
@@ -102,8 +99,7 @@ where
     pub fn get_untracked(&self) -> T {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.get_untracked(),
-            Self::ReadSignal(r_signal) => r_signal.get_untracked(),
-            Self::Memo(memo) => memo.get_untracked(),
+            Self::MaybeProp(r_signal) => r_signal.get_untracked().unwrap_or_default(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get_untracked(),
         }
@@ -113,8 +109,7 @@ where
     pub fn set(&self, value: T) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.set(value),
-            Self::ReadSignal(_) => (),
-            Self::Memo(_) => (),
+            Self::MaybeProp(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.set(value),
         }
@@ -124,8 +119,9 @@ where
     pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.with(fun),
-            Self::ReadSignal(r_signal) => r_signal.with(fun),
-            Self::Memo(memo) => memo.with(fun),
+            Self::MaybeProp(r_signal) => r_signal.with(|value|{
+                let default = T::default();
+                 fun(value.as_ref().unwrap_or(&default)) }),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.with(fun),
         }
@@ -135,15 +131,14 @@ where
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
             Self::RwSignal(rw_signal) => rw_signal.update(fun),
-            Self::ReadSignal(_) => (),
-            Self::Memo(_) => (),
+            Self::MaybeProp(_) => (),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.update(fun),
         }
     }
 }
 
-impl<T: Send + Sync + Clone> Copy for Reactive<T> {}
+impl<T: Send + Sync + Clone + Default> Copy for Reactive<T> {}
 
 impl<T: Default + Send + Clone + Sync + 'static> Default for Reactive<T> {
     fn default() -> Self {
@@ -159,8 +154,7 @@ impl<T: Default + Send + Clone + Sync + 'static> Reactive<T> {
 
 impl From<&str> for Reactive<String> {
     fn from(value: &str) -> Self {
-        let (sig, _) = signal(value.to_string());
-        Reactive::ReadSignal(sig)
+        Reactive::MaybeProp(value.to_string().into())
     }
 }
 
@@ -188,51 +182,41 @@ impl From<&str> for Reactive<String> {
 
 impl<T> From<T> for Reactive<T>
 where
-    T: Send + Sync + Clone + 'static,
+    T: Send + Sync + Clone + 'static + Default,
 {
     fn from(value: T) -> Self {
 
-        let (sig, _) = signal(value);
-        Reactive::ReadSignal(sig)
+        Reactive::MaybeProp(value.into())
     }
 }
 
 impl<T> From<T> for Reactive<Vec<T>>
 where
-    T: Send + Sync + Clone + 'static,
+    T: Send + Sync + Clone + 'static + Default,
 {
     fn from(value: T) -> Self {
-        let (sig, _) = signal(vec![value]);
-        Reactive::ReadSignal(sig)
+        Reactive::MaybeProp(vec![value].into())
     }
 }
 
 impl<T> From<RwSignal<T>> for Reactive<T>
 where
-    T: Send + Sync + Clone + 'static,
+    T: Send + Sync + Clone + 'static + Default,
 {
     fn from(value: RwSignal<T>) -> Self {
         Reactive::RwSignal(value)
     }
 }
 
-impl<T> From<ReadSignal<T>> for Reactive<T>
+impl<T> From<MaybeProp<T>> for Reactive<T>
 where
-    T: Send + Sync + Clone + 'static,
+    T: Send + Sync + Clone + 'static + Default,
 {
-    fn from(value: ReadSignal<T>) -> Self {
-        Reactive::ReadSignal(value)
+    fn from(value: MaybeProp<T>) -> Self {
+        Reactive::MaybeProp(value)
     }
 }
 
-impl<T> From<Memo<T>> for Reactive<T>
-where
-    T: Send + Sync + Clone + 'static,
-{
-    fn from(value: Memo<T>) -> Self {
-        Reactive::Memo(value)
-    }
-}
 
 
 #[cfg(feature = "stores")]
