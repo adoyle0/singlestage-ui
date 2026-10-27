@@ -123,7 +123,7 @@ pub fn Input(
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
     #[prop(optional, into)]
-    required: MaybeProp<bool>,
+    required: Reactive<bool>,
     /// Set how many characters wide the field should be. Defaults to `20`.
     #[prop(optional, into)]
     size: MaybeProp<usize>,
@@ -294,6 +294,14 @@ pub fn Input(
             field.invalid
         } else {
             invalid
+        }
+    };
+
+    let required: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.required
+        } else {
+            required
         }
     };
 
@@ -470,6 +478,8 @@ pub fn Input(
             }}
             node_ref=input_ref
             on:input=on_input
+            required=move || required.get()
+            prop:required=move || required.get()
             type=move || {
                 let input_type = input_type.get().unwrap_or_default();
                 if supported_types.contains(&input_type.as_str()) {

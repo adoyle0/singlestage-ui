@@ -26,7 +26,7 @@ pub fn Radio(
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
     #[prop(optional, into)]
-    required: MaybeProp<bool>,
+    required: Reactive<bool>,
     /// Whether the form control is disabled
     #[prop(optional, into)]
     disabled: Reactive<bool>,

@@ -40,7 +40,7 @@ pub fn CheckboxPrimitive(
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
     #[prop(into)]
-    required: MaybeProp<bool>,
+    required: Reactive<bool>,
     /// Whether the form control is disabled
     #[prop(into)]
     disabled: Reactive<bool>,
@@ -214,6 +214,14 @@ pub fn CheckboxPrimitive(
             checkbox_group.invalid
         } else {
             invalid
+        }
+    };
+
+    let required: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.required
+        } else {
+            required
         }
     };
 
@@ -394,6 +402,7 @@ pub fn CheckboxPrimitive(
             on:change=on_change
             readonly=move || readonly.get()
             required=move || required.get()
+            prop:required=move || required.get()
             role=match primitive_type {
                 CheckboxPrimitiveType::Switch => Some("switch"),
                 _ => None,

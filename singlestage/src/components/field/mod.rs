@@ -31,7 +31,7 @@ use leptos::prelude::RwSignal;
 pub(crate) struct FieldContext {
     pub description_id: RwSignal<String>,
     pub disabled: Reactive<bool>,
-    pub has_error: RwSignal<bool>,
+    pub has_title: RwSignal<bool>,
     pub input_id: RwSignal<String>,
     pub invalid: Reactive<bool>,
     pub label_id: RwSignal<String>,

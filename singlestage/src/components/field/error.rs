@@ -9,6 +9,7 @@ pub fn FieldError(
     /// A reactive list of errors to display.
     #[prop(optional, into)]
     errors: Reactive<Vec<String>>,
+    #[prop(optional, into)] when: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -114,7 +115,14 @@ pub fn FieldError(
 ) -> impl IntoView {
     let field = expect_context::<FieldContext>();
 
-    field.has_error.set(true);
+    field
+        .invalid
+        .set(!errors.get_untracked().is_empty() || when.get_untracked());
+    Effect::new(move || {
+        field
+            .invalid
+            .set(!errors.get().is_empty() || when.get_untracked());
+    });
 
     let global_attrs_1 = view! {
         <{..}
@@ -158,7 +166,9 @@ pub fn FieldError(
         <div
             class=move || format!("singlestage-field-error {}", class.get().unwrap_or_default())
             role="alert"
-            style:display=move || if field.invalid.get() { None } else { Some("none") }
+            style:display=move || {
+                if field.invalid.get() || when.get() { None } else { Some("none") }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}

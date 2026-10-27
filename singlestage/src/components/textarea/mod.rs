@@ -62,7 +62,7 @@ pub fn Textarea(
     readonly: MaybeProp<bool>,
     /// Set whether this element requires a value for form submission
     #[prop(optional, into)]
-    required: MaybeProp<bool>,
+    required: Reactive<bool>,
     /// The number of visible text lines. Must be positive. Default is 2.
     #[prop(optional, into)]
     rows: MaybeProp<usize>,
@@ -211,6 +211,14 @@ pub fn Textarea(
         }
     };
 
+    let required: Reactive<bool> = {
+        if let Some(field) = use_context::<FieldContext>() {
+            field.required
+        } else {
+            required
+        }
+    };
+
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
     };
@@ -319,6 +327,7 @@ pub fn Textarea(
             placeholder=move || placeholder.get()
             readonly=move || readonly.get()
             required=move || required.get()
+            prop:required=move || required.get()
             rows=move || rows.get()
             prop:value=move || value.get()
             wrap=move || wrap.get()
