@@ -1,8 +1,74 @@
 name = "Input"
-description = "Displays a form input field."
+description = """A text input component for forms and user data entry with built-in styling and \
+accessibility features."""
 
 [[examples]]
 name = "input"
+
+[[examples]]
+name = "input basic"
+title = "Basic"
+
+[[examples]]
+name = "input field"
+title = "Field"
+description = """Use Field, FieldLabel, and FieldDescription to create an input with a label and \
+description."""
+
+[[examples]]
+name = "input field group"
+title = "Field Group"
+description = "Use FieldGroup to show multiple Field blocks and to build forms."
+
+[[examples]]
+name = "input disabled"
+title = "Disabled"
+description = "Use the disabled prop to disable the input."
+
+[[examples]]
+name = "input invalid"
+title = "Invalid"
+description = "Use the invalid prop to use invalid styling."
+
+[[examples]]
+name = "input file"
+title = "File"
+
+[[examples]]
+name = "input inline"
+title = "Inline"
+description = """Use a horizontal Field to create an inline input. Pair with a Button to create a \
+search input with a button."""
+
+[[examples]]
+name = "input grid"
+title = "Grid"
+description = "Use a grid layout to place multiple inputs side by side."
+
+[[examples]]
+name = "input required"
+title = "Required"
+description = "Use the required prop to indicate required fields."
+
+[[examples]]
+name = "input badge"
+title = "Badge"
+description = "Use a Badge in the label to highlight a recommended field."
+
+[[examples]]
+name = "input input group"
+title = "Input Group"
+description = "To add icons, text, or buttons inside an input, use the InputGroup component."
+
+[[examples]]
+name = "input button group"
+title = "Button Group"
+description = "To add buttons to an input, use the ButtonGroup component."
+
+[[examples]]
+name = "input form"
+title = "Form"
+description = "A full form example with multiple inputs, a select, and a button."
 
 [[references]]
 name = "Input"
@@ -20,6 +86,6 @@ attrs = [
     <input> `type` attribute to avoid name collisions.""" },
   { attr = "invalid", attr_type = "bool", default = "false", description = """Toggle whether or not \
     the input is disabled.""" },
-  { attr = "value", attr_type = "Reactive<String>", default = """""""", description = """A \
-    reactive signal coupled to the input's value.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the input's value.""" },
 ]

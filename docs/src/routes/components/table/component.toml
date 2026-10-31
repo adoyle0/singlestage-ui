@@ -4,6 +4,11 @@ description = "A responsive table component."
 [[examples]]
 name = "table"
 
+[[examples]]
+name = "table actions"
+title = "Actions"
+description = "A table showing actions for each row using a DropdownMenu."
+
 [[references]]
 name = "Table"
 description = "Contains all the part of a table component."

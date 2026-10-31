@@ -1,0 +1,26 @@
+@layer components1 {
+  .singlestage-label {
+    @apply font-semibold
+    gap-2
+    leading-relaxed
+    text-xs
+    tracking-wide
+    uppercase;
+
+    &:is(
+      :where(.singlestage-checkbox, .singlestage-radio, .singlestage-switch) ~ *
+    ) {
+      @apply font-normal
+      normal-case
+      text-sm
+      tracking-normal;
+    }
+
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *),
+    &:is(:where(*):disabled ~ *),
+    &:is(:where(*)[aria-disabled="true"] ~ *) {
+      @apply opacity-50;
+    }
+  }
+}

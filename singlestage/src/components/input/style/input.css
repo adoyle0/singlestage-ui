@@ -1,0 +1,25 @@
+@layer components {
+  .singlestage-input {
+    @apply min-w-0
+    outline-none
+    w-full;
+
+    &[type="file"] {
+      @apply bg-transparent
+      border-0
+      inline-flex
+      text-foreground;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply cursor-not-allowed
+      opacity-50
+      pointer-events-none;
+    }
+
+    &::placeholder {
+      @apply text-muted-foreground;
+    }
+  }
+}

@@ -1,9 +1,59 @@
 name = "Context Menu"
 description = """Displays a menu to the user — such as a set of actions or functions — triggered \
-by a button."""
+by right click or long press."""
+
+[info]
+title = "This component uses newly available browser features"
+description = """"<p>"This component uses CSS Anchor Positioning which has only been widely \
+supported since January 2026. If you're targeting older or less mainstream browsers then maybe \
+this component isn't for you, yet. "</p><p>" Alternatively you can use Singlestage 0.4 which \
+positions the component correctly but with limited flexibility for alignment, or roll your own \
+using Singlestage CSS classes for consistent styling. "</p><singlestage::Link style="color: \
+var(--foreground)" href="https://caniuse.com/css-anchor-positioning"> "More Info" \
+</singlestage::Link>""""
 
 [[examples]]
 name = "Context Menu"
+
+[[examples]]
+name = "Context Basic"
+title = "Basic"
+description = "A simple context menu with a few actions."
+
+[[examples]]
+name = "Context Sub"
+title = "Submenu"
+description = "Use MenuSub to nest secondary actions."
+
+[[examples]]
+name = "Context Shortcuts"
+title = "Shortcuts"
+description = "Add MenuShortcut to show keyboard hints."
+
+[[examples]]
+name = "Context Groups"
+title = "Groups"
+description = "Group related actions and separate them with dividers."
+
+[[examples]]
+name = "Context Icons"
+title = "Icons"
+description = "Combine icons with labels for quick scanning."
+
+[[examples]]
+name = "Context Checkboxes"
+title = "Checkboxes"
+description = "Checkboxes can be used in context menus."
+
+[[examples]]
+name = "Context Radio"
+title = "Radio"
+description = "Radio buttons can be used in context menus."
+
+[[examples]]
+name = "Context Destructive"
+title = "Destructive"
+description = "Use the destructive variant for irreversible actions."
 
 [[references]]
 name = "ContextMenu"
@@ -14,16 +64,73 @@ attributes."""
 attrs = []
 
 [[references]]
+name = "ContextMenuCheckboxGroup"
+description = "A checkbox group component for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """A reactive signal \
+    that toggles whether all the children Checkboxes appear invalid or not.""" },
+  { attr = "value", attr_type = "Vec<String>", default = "[]", description = """A dynamic list of \
+    all the values of checked children Checkboxes.""" },
+]
+
+[[references]]
+name = "ContextMenuCheckboxItem"
+description = "A checkbox item for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the checkbox's checked value.""" },
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
+
+[[references]]
+name = "ContextMenuCheckboxGroup"
+description = "A checkbox group component for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the group \
+    with invalid styling.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the current selected value of the group.""" },
+]
+
+[[references]]
 name = "ContextMenuContent"
 description = "The component that pops out when the context menu is open."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
+    align the popover. Accepted values: "start" | "center" | "end"""" },
+  { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
+    side the popover opens relative to the trigger point. Accepted values: "top" | "right" | \ 
+    "bottom" | "left""""" },
+]
 
 [[references]]
 name = "ContextMenuGroup"
-description = "Contains multiple items."
+description = "Visually groups multiple menu items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -31,26 +138,79 @@ attrs = []
 
 [[references]]
 name = "ContextMenuItem"
-description = "Contains a menu item."
+description = "Contains a context menu item."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
 attributes."""
 attrs = [
-  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
-    whether the item appears disabled or not.""" },
+  { attr = "as_child", attr_type = "bool", default = "false", description = """This component will \
+    render without styling.""" },
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls whether \
+    the item appears disabled and is clickable.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
   { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
     variant of the item. Accepted values: \"destructive\".""" },
 ]
 
 [[references]]
 name = "ContextMenuLabel"
-description = "Labels groups."
+description = "Labels groups of menu items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Renders the label \
+    with disabled styling.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the label \
+    with invalid styling.""" },
+  { attr = "label_for", attr_type = "String", default = """""""", description = """Use this to \
+    explicitly set the id of the labeled element.""" },
+]
+
+[[references]]
+name = "ContextMenuRadioItem"
+description = "A radio item for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "checked", attr_type = "bool", default = "false", description = """A reactive signal \
+    coupled to the radio's checked value.""" },
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "dismiss", attr_type = "bool", default = "true", description = """Toggle whether \
+    clicking this item dismisses the parent menu.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]
+
+[[references]]
+name = "ContextMenuRadioGroup"
+description = "A radio group component for context menus."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset#attributes">fieldset</a> \
+attributes."""
+attrs = [
+  { attr = "default", attr_type = "String", default = """""""", description = """Set or update \
+    the default value.""" },
+  { attr = "invalid", attr_type = "bool", default = "false", description = """Renders the group \
+    with invalid styling.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """A reactive signal \
+    coupled to the current selected value of the radio group.""" },
+]
 
 [[references]]
 name = "ContextMenuSeparator"
@@ -58,7 +218,10 @@ description = "Visually separates groups of menu items."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Specify \
+  the orientation of the separator. Accepted values: "horizontal" | "vertical".""" },
+]
 
 [[references]]
 name = "ContextMenuShortcut"
@@ -75,3 +238,46 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = []
+
+[[references]]
+name = "ContextMenuSub"
+description = "Contains all the parts of a sub menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
+    can remotely control the open state of the popover but is not coupled to the actual state of \
+    the popover.""" },
+]
+
+[[references]]
+name = "ContextMenuSubContent"
+description = "The component that pops out when the sub trigger is triggered."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "align", attr_type = "String", default = """"start"""", description = """Set how to \
+    align the popover. Accepted values: "start" | "center" | "end"""" },
+  { attr = "side", attr_type = "String", default = """"bottom"""", description = """Set which \
+    side the popover opens relative to the trigger point. Accepted values: "top" | "right" | \ 
+    "bottom" | "left""""" },
+]
+
+[[references]]
+name = "ContextMenuSubTrigger"
+description = "A context menu item that triggers a sub menu."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+and <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li#attributes">li</a> \
+attributes."""
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Controls \
+    whether the item appears disabled or not.""" },
+  { attr = "inset", attr_type = "bool", default = "false", description = """Set whether or not \
+    this element should display inset from its normal position.""" },
+  { attr = "variant", attr_type = "String", default = """""""", description = """Set the display \
+    variant of the item. Accepted values: \"destructive\".""" },
+]

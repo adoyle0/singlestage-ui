@@ -17,12 +17,12 @@ pub fn LandingPage() -> impl IntoView {
             </p>
 
             <div class="my-6 space-x-2">
-                <a href="install">
-                    <Button>"Get Started"</Button>
-                </a>
-                <a href="introduction">
-                    <Button variant="outline">"Learn More"</Button>
-                </a>
+                <Link render_as="button" variant="primary" href="install">
+                    "Get Started"
+                </Link>
+                <Link href="introduction" render_as="button" variant="outline">
+                    "Learn More"
+                </Link>
             </div>
         </header>
 

@@ -8,7 +8,12 @@ pub fn PopoverAnatomy() -> impl IntoView {
             <PopoverTrigger>
                 <Button />
             </PopoverTrigger>
-            <PopoverContent />
+            <PopoverContent>
+                <PopoverHeader>
+                    <PopoverTitle />
+                    <PopoverDescription />
+                </PopoverHeader>
+            </PopoverContent>
         </Popover>
     }
 }

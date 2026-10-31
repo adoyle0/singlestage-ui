@@ -1,7 +1,7 @@
-use crate::ContextMenuGroupContext;
-use leptos::{context::Provider, prelude::*};
+use crate::primitives::*;
+use leptos::prelude::*;
 
-/// Contains multiple items.
+/// Visually groups multiple menu items.
 #[component]
 pub fn ContextMenuGroup(
     children: Children,
@@ -108,10 +108,6 @@ pub fn ContextMenuGroup(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let heading_id = RwSignal::new(String::new());
-
-    let context = ContextMenuGroupContext { heading_id };
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -151,17 +147,13 @@ pub fn ContextMenuGroup(
     };
 
     view! {
-        <div
-            aria-labelledby=move || heading_id.get()
-            class=move || {
-                format!("singlestage-context-menu-group {}", class.get().unwrap_or_default())
-            }
-            role="group"
+        <MenuGroupPrimitive
+            class
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
-            <Provider value=context>{children()}</Provider>
-        </div>
+            {children()}
+        </MenuGroupPrimitive>
     }
 }

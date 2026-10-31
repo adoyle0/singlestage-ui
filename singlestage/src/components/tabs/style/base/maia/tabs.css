@@ -1,0 +1,58 @@
+@layer components1 {
+  .singlestage-tabs {
+    @apply gap-2;
+  }
+
+  .singlestage-tabs-list {
+    @apply p-[3px]
+    rounded-4xl;
+  }
+
+  .singlestage-tabs-trigger {
+    @apply border
+    border-transparent
+    font-medium
+    gap-1.5
+    px-2
+    py-1
+    rounded-xl
+    text-sm;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-1.5;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-1.5;
+    }
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-tabs-list-variant-line {
+    @apply rounded-none;
+  }
+
+  .singlestage-tabs-orientation-horizontal {
+    .singlestage-tabs-list {
+      @apply h-9;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-list {
+      @apply rounded-2xl;
+    }
+
+    .singlestage-tabs-trigger {
+      @apply px-2.5
+      py-1.5;
+    }
+  }
+
+  .singlestage-tabs-content {
+    @apply text-sm;
+  }
+}

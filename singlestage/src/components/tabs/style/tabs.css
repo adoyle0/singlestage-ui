@@ -1,0 +1,116 @@
+@layer components2 {
+  .singlestage-tabs {
+    @apply flex;
+  }
+
+  .singlestage-tabs-list {
+    @apply inline-flex
+    items-center
+    justify-center
+    text-muted-foreground
+    w-fit;
+  }
+
+  .singlestage-tabs-trigger {
+    @apply flex-1
+    h-[calc(100%-1px)]
+    inline-flex
+    items-center
+    justify-center
+    relative
+    text-foreground/60
+    transition-all
+    whitespace-nowrap;
+
+    &:active,
+    &[aria-selected="true"] {
+      @apply bg-background
+      text-foreground;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    &:focus-visible {
+      @apply border-ring
+      outline-1
+      outline-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+
+    &:hover {
+      @apply text-foreground;
+    }
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
+  }
+
+  .singlestage-tabs-content {
+    @apply flex-1
+    outline-none;
+  }
+
+  .singlestage-tabs-list-variant-default {
+    @apply bg-muted;
+  }
+
+  .singlestage-tabs-list-variant-line {
+    @apply bg-transparent
+    gap-1;
+
+    .singlestage-tabs-trigger {
+      @apply bg-transparent;
+
+      &::after {
+        @apply absolute
+        bg-foreground
+        content-['']
+        opacity-0
+        transition-opacity;
+      }
+
+      &:active,
+      &[aria-selected="true"] {
+        @apply bg-transparent;
+
+        &::after {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+
+  .singlestage-tabs-orientation-horizontal {
+    @apply flex-col;
+
+    .singlestage-tabs-trigger::after {
+      @apply bottom-[-5px]
+      h-0.5
+      inset-x-0;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-list {
+      @apply flex-col
+      h-fit;
+    }
+    .singlestage-tabs-trigger {
+      @apply justify-start
+      w-full;
+
+      &::after {
+        @apply -right-1
+        inset-y-0
+        w-0.5;
+      }
+    }
+  }
+}

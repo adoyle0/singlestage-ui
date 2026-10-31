@@ -1,0 +1,25 @@
+@layer components {
+  .singlestage-pagination {
+    @apply flex
+    justify-center
+    mx-auto
+    w-full;
+  }
+
+  .singlestage-pagination-content {
+    @apply flex
+    items-center;
+  }
+
+  .singlestage-pagination-next-text,
+  .singlestage-pagination-previous-text {
+    @apply hidden
+    sm:block;
+  }
+
+  .singlestage-pagination-ellipsis {
+    @apply flex
+    items-center
+    justify-center;
+  }
+}

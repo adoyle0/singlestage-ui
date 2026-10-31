@@ -4,13 +4,23 @@ description = "Displays content within a desired ratio."
 [[examples]]
 name = "Aspect Ratio"
 
+[[examples]]
+name = "Aspect Ratio square"
+title = "Square"
+
+[[examples]]
+name = "Aspect Ratio portrait"
+title = "Portrait"
+
 [[references]]
 name = "AspectRatio"
-description = "Contains the contents of an aspect ratio component."
-extra = """Implements <a class="singlestage-link" \
+description = "Displays content within a desired aspect ratio."
+extra = """More aspect-ratio info <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio">here</a>. \
+<br />Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "ratio", attr_type = "f64", default = "1.0", description = """The aspect ratio to use \
-    to display the child element.""" },
+  { attr = "ratio", attr_type = "String", default = """"1"""", description = """The aspect ratio to \
+    use to display the child element. Can be a decimal or a formula.""" },
 ]

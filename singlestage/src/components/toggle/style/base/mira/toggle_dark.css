@@ -1,0 +1,7 @@
+@layer components1 {
+  .singlestage-toggle {
+    &[aria-invalid="true"] {
+      @apply ring-destructive/40;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@layer components1 {
+  .singlestage-dropdown-menu-content {
+    @apply ring-foreground/10;
+  }
+
+  .singlestage-dropdown-menu-item-variant-destructive {
+    > * {
+      &:focus,
+      &:hover {
+        @apply bg-destructive/20;
+      }
+    }
+  }
+}

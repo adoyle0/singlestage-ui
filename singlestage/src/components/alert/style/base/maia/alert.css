@@ -1,0 +1,66 @@
+@layer components1 {
+  .singlestage-alert {
+    @apply *:[svg:not([class*='size-'])]:size-4
+    *:[svg]:row-span-2
+    *:[svg]:text-current
+    *:[svg]:translate-y-0.5
+    border
+    gap-0.5
+    grid
+    has-data-[slot=alert-action]:pr-18
+    has-data-[slot=alert-action]:relative
+    px-4
+    py-3
+    rounded-lg
+    text-left
+    text-sm;
+
+    &:has(> svg) {
+      @apply gap-x-2.5
+      grid-cols-[auto_1fr];
+
+      .singlestage-alert-title {
+        @apply col-start-2;
+      }
+    }
+  }
+
+  .singlestage-alert-variant-default {
+    @apply bg-card
+    text-card-foreground;
+  }
+
+  .singlestage-alert-variant-destructive {
+    @apply bg-card
+    text-destructive;
+
+    .singlestage-alert-description {
+      @apply text-destructive/90;
+    }
+
+    svg {
+      @apply text-current;
+    }
+  }
+
+  .singlestage-alert-title {
+    @apply font-medium;
+  }
+
+  .singlestage-alert-description {
+    @apply md:text-pretty
+    text-balance
+    text-muted-foreground
+    text-sm;
+
+    p:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+
+  .singlestage-alert-action {
+    @apply absolute
+    right-3
+    top-2.5;
+  }
+}

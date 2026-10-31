@@ -1,11 +1,15 @@
+use crate::{ItemContext, primitives::*};
 use leptos::prelude::*;
 
 /// The separator.
 #[component]
 pub fn Separator(
-    /// Toggle whether or not the separator should display vertically.
+    #[prop(optional)] children: Option<Children>,
+
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
     #[prop(optional, into)]
-    vertical: MaybeProp<bool>,
+    orientation: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -117,7 +121,6 @@ pub fn Separator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -152,18 +155,46 @@ pub fn Separator(
         />
     };
 
-    view! {
-        <div
-            class=move || format!("singlestage-separator {}", class.get().unwrap_or_default())
-            data-orientation=match vertical.get().unwrap_or_default() {
-                false => "horizontal",
-                true => "vertical",
-            }
-                .to_string()
-            data-slot="separator"
+    let in_popover: bool = use_context::<PopoverMenuContext>().is_some();
+    let in_item: bool = use_context::<ItemContext>().is_some();
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        ></div>
+    if in_popover {
+        view! {
+            <hr
+                class=move || {
+                    format!(
+                        "singlestage-dropdown-menu-separator {}",
+                        class.get().unwrap_or_default(),
+                    )
+                }
+                role="separator"
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+            {children.map(|c| c())}
+        }
+        .into_any()
+    } else {
+        view! {
+            <div
+                class=move || {
+                    format!(
+                        "singlestage-separator{} {} {}",
+                        if in_item { " singlestage-item-separator" } else { "" },
+                        match orientation.get().unwrap_or_default().as_str() {
+                            "vertical" => "singlestage-separator-vertical",
+                            _ => "singlestage-separator-horizontal",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                }
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            ></div>
+            {children.map(|c| c())}
+        }
+        .into_any()
     }
 }

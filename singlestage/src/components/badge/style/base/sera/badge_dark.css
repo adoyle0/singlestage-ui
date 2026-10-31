@@ -1,0 +1,5 @@
+@layer components1 {
+  .singlestage-badge-variant-destructive:focus-visible {
+    @apply ring-destructive/40;
+  }
+}

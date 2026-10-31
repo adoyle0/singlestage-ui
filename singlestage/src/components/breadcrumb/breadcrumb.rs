@@ -1,27 +1,9 @@
 use leptos::prelude::*;
 
-/// Contains the contents of the breadcrumb.
+/// Contains all the items of the breadcrumb component.
 #[component]
 pub fn Breadcrumb(
     children: Children,
-
-    // OL ATTRIBUTES
-    //
-    /// The numbering type.
-    ///
-    /// * `a` for lowercase letters
-    /// * `A` for uppercase letters
-    /// * `i` for lowercase Roman numerals
-    /// * `I` for uppercase Roman numerals
-    /// * `1` for numbers (default)
-    #[prop(optional, into)]
-    number_type: MaybeProp<usize>,
-    /// Toggle whether or not the list should be reversed.
-    #[prop(optional, into)]
-    reversed: MaybeProp<bool>,
-    /// Set which item to start counting from starting with 1.
-    #[prop(optional, into)]
-    start: MaybeProp<usize>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -169,16 +151,14 @@ pub fn Breadcrumb(
     };
 
     view! {
-        <ol
+        <nav
+            aria_label="breadcrumb"
             class=move || { format!("singlestage-breadcrumb {}", class.get().unwrap_or_default()) }
-            type=move || number_type.get()
-            reversed=move || reversed.get()
-            start=move || start.get()
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </ol>
+        </nav>
     }
 }

@@ -1,0 +1,85 @@
+@layer components1 {
+  .singlestage-card {
+    @apply bg-card
+    gap-4
+    overflow-hidden
+    py-4
+    ring-1
+    ring-foreground/10
+    rounded-lg
+    text-card-foreground
+    text-xs/relaxed;
+
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+
+    > img:first-child {
+      @apply rounded-t-lg;
+    }
+
+    > img:last-child {
+      @apply rounded-b-lg;
+    }
+  }
+
+  .singlestage-card-header {
+    @apply gap-1
+    px-4
+    rounded-t-lg;
+
+    &.border-b {
+      @apply pb-4;
+    }
+  }
+
+  .singlestage-card-title {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-card-description {
+    @apply text-muted-foreground
+    text-xs/relaxed;
+  }
+
+  .singlestage-card-content {
+    @apply px-4;
+  }
+
+  .singlestage-card-footer {
+    @apply px-4
+    rounded-b-lg;
+
+    &.border-t {
+      @apply pt-4;
+    }
+  }
+
+  .singlestage-card-size-sm {
+    .singlestage-card {
+      @apply gap-3
+      py-3;
+    }
+
+    .singlestage-card-header {
+      @apply px-3;
+
+      &.border-b {
+        @apply pb-3;
+      }
+    }
+
+    .singlestage-card-content {
+      @apply px-3;
+    }
+
+    .singlestage-card-footer {
+      @apply px-3;
+
+      &.border-t {
+        @apply pt-3;
+      }
+    }
+  }
+}

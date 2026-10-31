@@ -49,10 +49,8 @@ pub fn Example(
     #[prop(optional, into)] description: String,
     #[prop(into)] code: String,
     #[prop(into)] view: AnyView,
+    #[prop(into)] full_size: bool,
 ) -> impl IntoView {
-    // Special case for Empty Background example to make it display full-size
-    let empty_backround = name == "Background";
-
     view! {
         <div class="my-12">
             {if !name.is_empty() {
@@ -66,15 +64,26 @@ pub fn Example(
             } else {
                 "".into_any()
             }} <Tabs class="my-4">
-                <TabsList>
-                    <TabsTrigger value="preview">"Preview"</TabsTrigger>
-                    <TabsTrigger value="code">"Code"</TabsTrigger>
+                <TabsList variant="line">
+                    <TabsTrigger value="preview">
+                        {icon!(icondata::LuAppWindow)} "Preview"
+                    </TabsTrigger>
+                    <TabsTrigger value="code">{icon!(icondata::LuCode)} "Code"</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="preview">
-                    {if empty_backround {
+                <TabsContent class="pt-2" value="preview">
+                    {if full_size {
                         view! {
-                            <div class="h-[450px] border border-(--muted) rounded-md">{view}</div>
+                            <div class=r#"border border-(--muted) rounded-md
+                            [&_*.singlestage-sidebar-wrapper]:max-h-[930px] 
+                            [&_*.singlestage-sidebar-wrapper]:min-h-[930px] 
+                            [&_*.singlestage-sidebar-container]:max-h-[930px] 
+                            [&_*.singlestage-sidebar-container]:min-h-[930px] 
+                            [&_*.singlestage-sidebar-side-left]:[&_*.singlestage-sidebar-inner]:rounded-l-md 
+                            [&_*.singlestage-sidebar-side-right]:[&_*.singlestage-sidebar-inner]:rounded-r-md 
+                            has-[&_*.singlestage-sidebar-variant-inset]:[&_*.singlestage-sidebar-wrapper]:rounded-md
+                            not-has-[&_*.singlestage-sidebar-variant-inset]:[&_*.singlestage-sidebar-inset]:rounded-md
+                            "#>{view}</div>
                         }
                             .into_any()
                     } else {
@@ -87,7 +96,7 @@ pub fn Example(
                     }}
                 </TabsContent>
 
-                <TabsContent value="code">
+                <TabsContent class="pt-2" value="code">
                     <CodeBlock code=code />
                 </TabsContent>
             </Tabs>
@@ -159,7 +168,7 @@ pub fn ComponentTemplate(
     #[prop(into)] description: String,
 ) -> impl IntoView {
     view! {
-        <div class="max-w-3xl m-auto">
+        <div class="max-w-4xl m-auto">
             <h1 class="text-4xl font-semibold">{name}</h1>
             <p class="my-5 text-(--muted-foreground)">{description}</p>
 

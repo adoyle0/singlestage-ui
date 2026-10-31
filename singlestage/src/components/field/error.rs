@@ -1,4 +1,4 @@
-use crate::Reactive;
+use crate::{FieldContext, Reactive};
 use leptos::prelude::*;
 
 /// Accessible error container that accepts children or a reactive list of errors.
@@ -9,6 +9,7 @@ pub fn FieldError(
     /// A reactive list of errors to display.
     #[prop(optional, into)]
     errors: Reactive<Vec<String>>,
+    #[prop(optional, into)] when: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -112,6 +113,17 @@ pub fn FieldError(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    let field = expect_context::<FieldContext>();
+
+    field
+        .invalid
+        .set(!errors.get_untracked().is_empty() || when.get_untracked());
+    Effect::new(move || {
+        field
+            .invalid
+            .set(!errors.get().is_empty() || when.get_untracked());
+    });
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -154,19 +166,20 @@ pub fn FieldError(
         <div
             class=move || format!("singlestage-field-error {}", class.get().unwrap_or_default())
             role="alert"
+            style:display=move || {
+                if field.invalid.get() || when.get() { None } else { Some("none") }
+            }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {if let Some(children) = children { children() } else { "".into_any() }}
 
-            <Show when=move || !errors.get().is_empty()>
-                <ul class="singlestage-field-error-list">
-                    <For each=move || errors.get() key=|error| error.clone() let(error)>
-                        <li>{error}</li>
-                    </For>
-                </ul>
-            </Show>
+            <ul class="singlestage-field-error-list">
+                <For each=move || errors.get() key=|error| error.clone() let(error)>
+                    <li>{error}</li>
+                </For>
+            </ul>
         </div>
     }
 }

@@ -1,3 +1,4 @@
+use crate::FieldContext;
 use leptos::prelude::*;
 
 /// Renders a title with label styling.
@@ -110,6 +111,10 @@ pub fn FieldTitle(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
+    if let Some(field) = use_context::<FieldContext>() {
+        field.has_title.set(true);
+    }
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -150,13 +155,22 @@ pub fn FieldTitle(
     };
 
     view! {
-        <span
+        <div
             class=move || { format!("singlestage-field-title {}", class.get().unwrap_or_default()) }
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </span>
+            <Show when=move || {
+                if let Some(field) = use_context::<FieldContext>() {
+                    field.required.get()
+                } else {
+                    false
+                }
+            }>
+                <span class="text-(--destructive)">"*"</span>
+            </Show>
+        </div>
     }
 }

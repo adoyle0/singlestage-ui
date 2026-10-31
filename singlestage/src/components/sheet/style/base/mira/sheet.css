@@ -1,0 +1,80 @@
+@layer components1 {
+  .singlestage-sheet-overlay::backdrop {
+    @apply bg-black/80
+    supports-backdrop-filter:backdrop-blur-xs;
+  }
+
+  .singlestage-sheet-content {
+    @apply bg-clip-padding
+    bg-popover
+    /* duration-200 */
+    /* ease-in-out */
+    fixed
+    flex
+    flex-col
+    shadow-lg
+    text-popover-foreground
+    text-xs/relaxed
+    /* transition */
+    z-50;
+  }
+
+  .singlestage-sheet-side-top {
+    @apply border-b
+    h-auto
+    inset-x-0
+    top-0;
+  }
+
+  .singlestage-sheet-side-right {
+    @apply border-l
+    h-full
+    inset-y-0
+    right-0
+    sm:max-w-sm
+    w-3/4;
+  }
+
+  .singlestage-sheet-side-bottom {
+    @apply border-t
+    bottom-0
+    h-auto
+    inset-x-0;
+  }
+
+  .singlestage-sheet-side-left {
+    @apply border-r
+    h-full
+    inset-y-0
+    left-0
+    sm:max-w-sm
+    w-3/4;
+  }
+
+  .singlestage-sheet-close {
+    @apply absolute
+    right-4
+    top-4;
+  }
+
+  .singlestage-sheet-header {
+    @apply gap-1.5
+    p-6;
+  }
+
+  .singlestage-sheet-footer {
+    @apply gap-2
+    p-6;
+  }
+
+  .singlestage-sheet-title {
+    @apply font-medium
+    text-foreground
+    text-sm;
+  }
+
+  .singlestage-sheet-description {
+    @apply text-muted-foreground
+    text-xs/relaxed;
+  }
+}

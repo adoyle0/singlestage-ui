@@ -5,6 +5,11 @@ use leptos::prelude::*;
 pub fn TabsList(
     children: Children,
 
+    /// Set the display variant of the tab buttons.
+    /// Accepted values: "default" | "line"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -86,9 +91,6 @@ pub fn TabsList(
     /// Designate an element as a popover element.
     #[prop(optional, into)]
     popover: MaybeProp<String>,
-    // /// Define the semantic meaning of content.
-    // #[prop(optional, into)]
-    // role: MaybeProp<String>,
     /// Assigns a slot to an element.
     #[prop(optional, into)]
     slot: MaybeProp<String>,
@@ -115,7 +117,6 @@ pub fn TabsList(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -140,7 +141,6 @@ pub fn TabsList(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            // role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
@@ -152,7 +152,16 @@ pub fn TabsList(
 
     view! {
         <nav
-            aria-orientation="horizontal"
+            class=move || {
+                format!(
+                    "singlestage-tabs-list {} {}",
+                    match variant.get().unwrap_or_default().as_str() {
+                        "line" => "singlestage-tabs-list-variant-line",
+                        _ => "singlestage-tabs-list-variant-default",
+                    },
+                    class.get().unwrap_or_default(),
+                )
+            }
             role="tablist"
 
             {..global_attrs_1}

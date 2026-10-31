@@ -5,8 +5,9 @@ use leptos::prelude::*;
 pub fn Alert(
     children: Children,
 
-    /// Set the variant of the alert. Leave empty for default.
-    /// Other variants: "destructive"
+    /// Set the variant of the alert.
+    ///
+    /// Accepted values: "destructive"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -158,15 +159,15 @@ pub fn Alert(
         <div
             class=move || {
                 format!(
-                    "{} {}",
+                    "singlestage-alert {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "destructive" => "singlestage-alert-destructive",
-                        "alert" => "singlestage-alert",
-                        _ => "singlestage-alert",
+                        "destructive" => "singlestage-alert-variant-destructive",
+                        _ => "singlestage-alert-variant-default",
                     },
                     class.get().unwrap_or_default(),
                 )
             }
+
             {..global_attrs_1}
             {..global_attrs_2}
         >
