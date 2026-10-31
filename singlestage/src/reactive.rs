@@ -190,6 +190,14 @@ where
     }
 }
 
+impl<T> From<Option<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static + Default,
+{
+    fn from(value: Option<T>) -> Self {
+        Reactive::MaybeProp(value.into())
+    }
+}
 impl<T> From<T> for Reactive<Vec<T>>
 where
     T: Send + Sync + Clone + 'static + Default,
