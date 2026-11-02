@@ -402,7 +402,7 @@
 
     &.singlestage-sidebar-side-left {
       .singlestage-sidebar-container {
-        @apply fixed /**/
+        @apply fixed
         left-[calc(var(--sidebar-width)*-1)];
       }
 
@@ -413,7 +413,8 @@
 
     &.singlestage-sidebar-side-right {
       .singlestage-sidebar-container {
-        @apply right-[calc(var(--sidebar-width)*-1)];
+        @apply fixed
+        right-[calc(var(--sidebar-width)*-1)];
       }
 
       .singlestage-sidebar-rail {
