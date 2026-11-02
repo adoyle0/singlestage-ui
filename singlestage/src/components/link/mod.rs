@@ -4,7 +4,7 @@ use crate::{
 use leptos::prelude::*;
 use leptos_router::components::A;
 
-/// Creates a styled hyperlink.
+/// A styled hyperlink component with contextual reactivity.
 #[component]
 pub fn Link(
     children: Children,
@@ -12,7 +12,6 @@ pub fn Link(
     /// This component will render without styling
     #[prop(optional, into)]
     as_child: MaybeProp<bool>,
-
     /// Set whether or not this `Link` should appear as something else. This is similar to
     /// `asChild`.
     ///

@@ -5,8 +5,8 @@ use singlestage::*;
 pub fn PaginationIconsOnlyExample() -> impl IntoView {
     view! {
         <div class="flex items-center justify-between gap-4">
-            <Field orientation="horizontal" class="w-fit">
-                <Label>"Rows per page"</Label>
+            <Field orientation="horizontal">
+                <FieldLabel>"Rows per page"</FieldLabel>
                 <Select class="w-20" value="25">
                     <SelectOption value="10">"10"</SelectOption>
                     <SelectOption value="25">"25"</SelectOption>

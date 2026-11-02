@@ -1,5 +1,5 @@
 name = "Link"
-description = "A styled hyperlink component."
+description = "A styled hyperlink component with contextual reactivity."
 
 [[examples]]
 name = "link"

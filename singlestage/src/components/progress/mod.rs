@@ -1,7 +1,7 @@
 use crate::Reactive;
 use leptos::prelude::*;
 
-/// Displays progress.
+/// Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 #[component]
 pub fn Progress(
     /// The value that represents 100%, or full.

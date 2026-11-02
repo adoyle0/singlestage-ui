@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::progress::*;
+use singlestage::*;
 
 #[component]
 pub fn ProgressAnatomy() -> impl IntoView {

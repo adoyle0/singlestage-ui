@@ -36,8 +36,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "modal", attr_type = "bool", default = "false", description = """ Set whether or not \
-    this popover should be modal meaning it can't be light dismissed Use this along with the \
+  { attr = "modal", attr_type = "bool", default = "false", description = """Set whether or not \
+    this popover should be modal, meaning it can't be light dismissed. Use this along with the \
     `open` signal for a manually managed popover""" },
   { attr = "open", attr_type = "bool", default = "false", description = """Reactive signal that \
     can remotely control the open state of the popover **but is not coupled to the actual open \
@@ -84,7 +84,7 @@ attrs = []
 
 [[references]]
 name = "Trigger"
-description = "Provides context to a `Button` that triggers a popover.."
+description = "Provides context to a `Button` that triggers a popover."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

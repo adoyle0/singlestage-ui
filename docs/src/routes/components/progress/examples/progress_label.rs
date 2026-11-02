@@ -5,11 +5,11 @@ use singlestage::*;
 pub fn ProgressLabelExample() -> impl IntoView {
     view! {
         <Field class="w-full max-w-sm">
-            <Label label_for="progress-upload">
-                <span>"Upload progress"</span>
-                <span class="ml-auto">"66%"</span>
-            </Label>
-            <Progress value=66. id="progress-upload" />
+            <FieldLabel>
+                <span class="font-medium">"Upload progress"</span>
+                <span class="ml-auto text-(--muted-foreground)">"66%"</span>
+            </FieldLabel>
+            <Progress value=66. />
         </Field>
     }
 }

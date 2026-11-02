@@ -1,12 +1,12 @@
 use crate::{PopoverContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
-/// Contains all the parts of a popover.
+/// Displays rich content in a portal, triggered by a button.
 #[component]
 pub fn Popover(
     children: Children,
 
-    /// Set whether or not this popover should be modal meaning it can't be light dismissed
+    /// Set whether or not this popover should be modal, meaning it can't be light dismissed
     /// Use this along with the `open` signal for a manually managed popover
     #[prop(optional, into, default = Reactive::new(false))]
     modal: Reactive<bool>,

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Contains all the parts of a pagination component
+/// Pagination with page navigation, next, and previous links.
 #[component]
 pub fn Pagination(
     children: Children,
