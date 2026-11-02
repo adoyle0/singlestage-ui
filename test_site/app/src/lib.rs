@@ -30,6 +30,11 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
     }
 }
 
+#[derive(Clone, Copy)]
+pub struct AppState {
+    render_mode: RwSignal<&'static str>,
+}
+
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
@@ -39,20 +44,79 @@ pub fn App() -> impl IntoView {
     #[cfg(feature = "csr")]
     leptos::server_fn::client::set_server_url("http://localhost:3000");
 
+    let side = RwSignal::new("left".to_string());
+
+    let render_mode = RwSignal::new("ERR");
+    if cfg!(feature = "csr") {
+        render_mode.set("CSR");
+    } else if cfg!(feature = "ssr") {
+        render_mode.set("SSR");
+    } else if cfg!(feature = "hydrate") {
+        render_mode.set("HYDRATE");
+    } else {
+        render_mode.set("ERR");
+    }
+
+    provide_context(AppState { render_mode });
+
     view! {
         <Title text="test_site" />
 
         <ThemeProvider>
-            <SidebarProvider>
-                <AppSidebar />
+            <SidebarProvider side>
+                <Show when=move || side.get().as_str() != "right">
+                    <AppSidebar />
+                </Show>
                 <SidebarInset>
                     <Router>
                         <header class="flex sticky inset-x-0 top-0 z-10 items-center border-b bg-(--background) isolate shrink-0">
                             <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
-                                <SidebarTrigger>
-                                    <SidebarButton />
-                                </SidebarTrigger>
-                                <ThemeSwitcher />
+                                <Show
+                                    when=move || side.get() == "left"
+                                    fallback=move || {
+                                        view! { <ThemeSwitcher /> }
+                                    }
+                                >
+                                    <div>
+                                        <SidebarTrigger />
+                                        <Button
+                                            size="icon"
+                                            variant="ghost"
+                                            on:click=move |_| {
+                                                if side.get_untracked().as_str() == "right" {
+                                                    side.set("left".to_string())
+                                                } else {
+                                                    side.set("right".to_string())
+                                                }
+                                            }
+                                        >
+                                            {icon!(icondata::LuArrowLeftRight)}
+                                        </Button>
+                                    </div>
+                                </Show>
+                                <Show
+                                    when=move || side.get() == "right"
+                                    fallback=move || {
+                                        view! { <ThemeSwitcher /> }
+                                    }
+                                >
+                                    <div>
+                                        <Button
+                                            size="icon"
+                                            variant="ghost"
+                                            on:click=move |_| {
+                                                if side.get_untracked().as_str() == "right" {
+                                                    side.set("left".to_string())
+                                                } else {
+                                                    side.set("right".to_string())
+                                                }
+                                            }
+                                        >
+                                            {icon!(icondata::LuArrowLeftRight)}
+                                        </Button>
+                                        <SidebarTrigger />
+                                    </div>
+                                </Show>
                             </div>
                         </header>
 
@@ -87,6 +151,9 @@ pub fn App() -> impl IntoView {
                         </main>
                     </Router>
                 </SidebarInset>
+                <Show when=move || side.get().as_str() == "right">
+                    <AppSidebar />
+                </Show>
             </SidebarProvider>
         </ThemeProvider>
     }

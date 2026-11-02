@@ -1,11 +1,10 @@
+use crate::AppState;
 use leptos::prelude::*;
 use singlestage::*;
 
-mod button;
 mod test_buttons;
 mod test_menu;
 
-pub use button::*;
 use test_buttons::*;
 use test_menu::*;
 
@@ -62,13 +61,11 @@ pub fn AppSidebar() -> impl IntoView {
                         <div class="content-center m-auto">
                             <p class="font-semibold text-center">"Singlestage UI"</p>
                             <p class="text-sm text-center">
-                                "Test Site "
-                                {if cfg!(feature = "csr") {
-                                    "CSR"
-                                } else if cfg!(feature = "ssr") {
-                                    "SSR"
-                                } else {
-                                    "ERR"
+                                {move || {
+                                    format!(
+                                        "Test Site {}",
+                                        expect_context::<AppState>().render_mode.get(),
+                                    )
                                 }}
                             </p>
                         </div>
