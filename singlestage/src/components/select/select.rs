@@ -2,24 +2,24 @@ use super::SelectContext;
 use crate::{FieldContext, Reactive};
 use leptos::{context::Provider, prelude::*};
 
-/// Contains all the parts of the Select.
+/// Displays a list of options for the user to pick from—triggered by a button.
 #[component]
 pub fn Select(
     children: Children,
 
-    /// Set default value. Setting value overrides this setting.
+    /// Set default selected value. Setting value overrides this setting.
     #[prop(optional, into)]
     default: MaybeProp<String>,
-    /// Toggle invalid appearance.
+    /// Toggle invalid appearance and behavior.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
     /// Set the size to render the element.
     #[prop(optional, into)]
     todo_name_me_size: MaybeProp<String>,
-    /// The placeholder value for the select.
+    /// Sets a placeholder value displayed on initial load. Setting default will override this value.
     #[prop(optional, into)]
     placeholder: MaybeProp<String>,
-    /// The value of the control. When specified in the HTML, corresponds to the initial value
+    /// A reactive value coupled to the currently selected item's value.
     #[prop(optional, into)]
     value: Option<Reactive<String>>,
 

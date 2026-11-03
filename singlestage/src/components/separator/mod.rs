@@ -1,7 +1,7 @@
 use crate::{ItemContext, primitives::*};
 use leptos::prelude::*;
 
-/// The separator.
+/// Visually or semantically separates content.
 #[component]
 pub fn Separator(
     #[prop(optional)] children: Option<Children>,

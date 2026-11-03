@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A component that renders at the bottom of the sheet and typically contains calls to action.
 #[component]
 pub fn SheetFooter(
     children: Children,

@@ -1,6 +1,7 @@
 use crate::{SidebarContext, SidebarMenuButtonContext, Tooltip, TooltipContent, TooltipTrigger};
 use leptos::{context::Provider, prelude::*};
 
+/// Wraps content displayed in the click area of a SidebarMenuSubItem.
 #[component]
 pub fn SidebarMenuSubButton(
     children: Children,

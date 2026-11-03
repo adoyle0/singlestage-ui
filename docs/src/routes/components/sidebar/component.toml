@@ -51,11 +51,21 @@ description = "Collapsible nested sidebars"
 
 [[references]]
 name = "Sidebar"
-description = "The sidebar container."
+description = "The main collapsible sidebar panel."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "collapsible", attr_type = "String", default = """"offcanvas"""", description = """Set \
+    how the sidebar should collapse.""" },
+  { attr = "default_open", attr_type = "bool", default = "depends", description = """Set the \
+    default open state of the sidebar. This defaults to true on large screens and false on small \
+    screens""" },
+  { attr = "side", attr_type = "String", default = """"left"""", description = """Set which side \
+    of the screen the sidebar renders on.""" },
+  { attr = "variant", attr_type = "String", default = """"sidebar"""", description = """Set which \
+    variant of sidebar to render.""" },
+]
 
 [[references]]
 name = "SidebarContent"
@@ -131,6 +141,11 @@ description = "Wraps a submenu within a SidebarMenu."
 attrs = []
 
 [[references]]
+name = "SidebarMenuSubButton"
+description = "Wraps content displayed in the click area of a SidebarMenuSubItem."
+attrs = []
+
+[[references]]
 name = "SidebarMenuSubItem"
 description = "A menu item within the SidebarMenuSub menu."
 extra = """Implements <a class="singlestage-link" \
@@ -144,11 +159,18 @@ attrs = []
 name = "SidebarProvider"
 description = "Takes in initial state and provides SidebarContext to its children."
 attrs = [
-  { attr = "hidden", attr_type = "bool", default = "false", description = """Reactive signal \
-    coupled to the sidebar's hidden state.""" },
+  { attr = "is_mobile", attr_type = "bool", default = "false", description = """Reactive signal \
+    coupled to the sidebar's mobile state.""" },
+  { attr = "open", attr_type = "bool", default = "true", description = """Reactive signal \
+    coupled to the sidebar's open state.""" },
   { attr = "side", attr_type = "String", default = """"left"""", description = """Reactive signal \
     coupled to which side of its container the sidebar renders on.""" },
 ]
+
+[[references]]
+name = "SidebarRail"
+description = "A clickable rail on the inner edge of the sidebar that works as an open button."
+attrs = []
 
 [[references]]
 name = "SidebarSeparator"

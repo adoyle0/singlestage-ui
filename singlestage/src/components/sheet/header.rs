@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A header group that contains a title and description and renders at the top of the sheet.
 #[component]
 pub fn SheetHeader(
     children: Children,

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::select::*;
+use singlestage::*;
 
 #[component]
 pub fn SelectAnatomy() -> impl IntoView {

@@ -1,6 +1,7 @@
 use crate::SidebarContext;
 use leptos::prelude::*;
 
+/// A clickable rail on the inner edge of the sidebar that works as an open button.
 #[component]
 pub fn SidebarRail() -> impl IntoView {
     let sidebar = expect_context::<SidebarContext>();

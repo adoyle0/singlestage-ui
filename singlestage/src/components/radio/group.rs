@@ -6,13 +6,13 @@ use leptos::prelude::*;
 pub fn RadioGroup(
     children: Children,
 
-    /// Set or update the default value.
+    /// Set or update the default value for the RadioGroup.
     #[prop(optional, into)]
     default: MaybeProp<String>,
-    /// Set or update the invalid state of the radio group.
+    /// A reactive signal that toggles whether all the children Radios appear invalid or not.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
-    /// Reactive signal coupled to the current selected value of the radio group.
+    /// A reactive value coupled to the currently selected Radio's value.
     #[prop(optional, into)]
     value: Reactive<String>,
 

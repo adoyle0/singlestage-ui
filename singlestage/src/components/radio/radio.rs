@@ -12,7 +12,7 @@ pub fn Radio(
 
     // CHECKBOX ATTRIBUTES
     //
-    /// Reactive signal coupled to the checkbox's checked value.
+    /// Reactive signal coupled to the radio button's checked value.
     #[prop(optional, into)]
     checked: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.

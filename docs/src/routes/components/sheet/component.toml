@@ -31,7 +31,12 @@ description = "Contains the main content section of a sheet."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "show_close_button", attr_type = "bool", default = "true", description = """Toggle \
+    whether or not a close button is shown in the corner of the sheet.""" },
+  { attr = "side", attr_type = "String", default = """"right"""", description = """Specify which \
+    edge of the screen to dock the sheet to. Accepted values: vertical | horizontal""" },
+]
 
 [[references]]
 name = "SheetDescription"

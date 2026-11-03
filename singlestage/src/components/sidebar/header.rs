@@ -1,6 +1,6 @@
-// use super::SidebarContext;
 use leptos::prelude::*;
 
+/// A sticky header displayed at the top of the sidebar.
 #[component]
 pub fn SidebarHeader(
     children: Children,

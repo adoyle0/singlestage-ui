@@ -1,11 +1,20 @@
 use crate::{Button, Reactive, SheetClose, SheetContext};
 use leptos::prelude::*;
 
+/// Contains the main content section of a sheet.
 #[component]
 pub fn SheetContent(
     children: Children,
-    #[prop(optional, into)] side: Reactive<String>,
-    #[prop(optional, into, default = true.into())] show_close_button: MaybeProp<bool>,
+
+    /// Toggle whether or not a close button is shown in the corner of the sheet.
+    #[prop(optional, into, default = true.into())]
+    show_close_button: MaybeProp<bool>,
+    /// Specify which edge of the screen to dock the sheet to.
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left"
+    /// Default value: "right"
+    #[prop(optional, into)]
+    side: Reactive<String>,
 
     // GLOBAL ATTRIBUTES
     //

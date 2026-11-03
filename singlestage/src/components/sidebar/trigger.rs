@@ -1,7 +1,7 @@
 use crate::{Button, sidebar::*};
 use leptos::prelude::*;
 
-/// Wrapper that toggles showing/hiding of the sidebar.
+/// A Button wrapper that toggles showing/hiding of the sidebar.
 #[component]
 pub fn SidebarTrigger(
     #[prop(optional)] children: Option<Children>,

@@ -8,6 +8,7 @@ pub struct SheetContext {
     pub trigger_id: RwSignal<String>,
 }
 
+/// Extends the Dialog component to display content that complements the main content of the screen.
 #[component]
 pub fn Sheet(children: Children, #[prop(optional, into)] open: Reactive<bool>) -> impl IntoView {
     let content_id = RwSignal::new(String::new());

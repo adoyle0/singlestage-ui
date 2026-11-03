@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A description of sheet content that renders in the sheet header.
 #[component]
 pub fn SheetDescription(
     children: Children,

@@ -56,7 +56,12 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup#attributes">optgroup</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Set whether or not \
+    the items in the group are appear as disabled and can be selected.""" },
+  { attr = "label", attr_type = "String", default = """""""", description = """Label this group of \
+    content.""" },
+]
 
 [[references]]
 name = "SelectOption"
@@ -66,4 +71,13 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 and <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/option#attributes">option</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "disabled", attr_type = "bool", default = "false", description = """Set whether or not \
+    this item appears disabled and is checkable.""" },
+  { attr = "label", attr_type = "String", default = """""""", description = """Set a label \
+    describing the meaning of this item.""" },
+  { attr = "selected", attr_type = "bool", default = "false", description = """Set if this item \
+    is initially selected.""" },
+  { attr = "value", attr_type = "String", default = """""""", description = """Set the value of \
+    this item to be submitted with form data.""" },
+]

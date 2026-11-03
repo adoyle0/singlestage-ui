@@ -4,6 +4,7 @@ use leptos::{context::Provider, prelude::*};
 #[derive(Clone)]
 pub(crate) struct SidebarMenuButtonContext {}
 
+/// Wraps content displayed in the click area of a SidebarMenuItem.
 #[component]
 pub fn SidebarMenuButton(
     children: Children,

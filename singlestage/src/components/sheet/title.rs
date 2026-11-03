@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A title that quickly describes sheet content.
 #[component]
 pub fn SheetTitle(
     children: Children,

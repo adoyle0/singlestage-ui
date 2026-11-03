@@ -15,16 +15,14 @@ pub fn SheetExample() -> impl IntoView {
                         "Make changes to your profile here. Click save when you're done."
                     </SheetDescription>
                 </SheetHeader>
-                <div class="grid flex-1 auto-rows-min gap-6 px-4">
-                    <div class="grid gap-3">
-                        <Label label_for="sheet-demo-name">"Name"</Label>
-                        <Input id="sheet-demo-name" value="Pedro Duarte" />
-                    </div>
-                    <div class="grid gap-3">
-                        <Label label_for="sheet-demo-username">"Username"</Label>
-                        <Input id="sheet-demo-username" value="@peduarte" />
-                    </div>
-                </div>
+                <FieldSet class="px-4">
+                    <Field>
+                        <Input default="Pedro Duarte">"Name"</Input>
+                    </Field>
+                    <Field>
+                        <Input default="@peduarte">"Username"</Input>
+                    </Field>
+                </FieldSet>
                 <SheetFooter>
                     <Button>"Save changes"</Button>
                     <SheetClose>

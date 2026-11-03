@@ -11,22 +11,13 @@ pub fn RadioFieldsetExample() -> impl IntoView {
             </FieldDescription>
             <RadioGroup default="monthly">
                 <Field orientation="horizontal">
-                    <Radio value="monthly" id="plan-monthly" />
-                    <Label label_for="plan-monthly" class="font-normal">
-                        "Monthly ($9.99/month)"
-                    </Label>
+                    <Radio value="monthly">"Monthly ($9.99/month)"</Radio>
                 </Field>
                 <Field orientation="horizontal">
-                    <Radio value="yearly" id="plan-yearly" />
-                    <Label label_for="plan-yearly" class="font-normal">
-                        "Yearly ($99.99/year)"
-                    </Label>
+                    <Radio value="yearly">"Yearly ($99.99/year)"</Radio>
                 </Field>
                 <Field orientation="horizontal">
-                    <Radio value="lifetime" id="plan-lifetime" />
-                    <Label label_for="plan-lifetime" class="font-normal">
-                        "Lifetime ($299.99)"
-                    </Label>
+                    <Radio value="lifetime">"Lifetime ($299.99)"</Radio>
                 </Field>
             </RadioGroup>
         </FieldSet>

@@ -52,15 +52,29 @@ fn screen_is_small() -> bool {
     false
 }
 
-/// The sidebar container.
+/// The main collapsible sidebar panel.
 #[component]
 pub fn Sidebar(
     children: ChildrenFn,
 
-    #[prop(optional, into)] collapsible: MaybeProp<String>,
-    #[prop(optional, into)] default_open: MaybeProp<bool>,
-    #[prop(optional, into)] side: MaybeProp<String>,
-    #[prop(optional, into)] variant: MaybeProp<String>,
+    /// Set how the sidebar should collapse.
+    ///
+    /// Accepted values: "offcanvas" (default) | "icon" | "none"
+    #[prop(optional, into)]
+    collapsible: MaybeProp<String>,
+    /// Set the default open state of the sidebar.
+    #[prop(optional, into)]
+    default_open: MaybeProp<bool>,
+    /// Set which side of the screen the sidebar renders on.
+    ///
+    /// Accepted values: "left" (default) | "right"
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
+    /// Set which variant of sidebar to render.
+    ///
+    /// Accepted values: "sidebar" (default) | "floating" | "inset"
+    #[prop(optional, into)]
+    variant: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
