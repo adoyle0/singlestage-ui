@@ -52,15 +52,15 @@ fn run_tailwind(
         .write(true)
         .create(true)
         .truncate(true)
-        .open(&bundle_path)
+        .open(bundle_path)
         .expect("\nError opening bundle file.\n");
-    let _ = bundle.write_all(css.as_bytes()).unwrap();
+    bundle.write_all(css.as_bytes()).unwrap();
 
-    let _cleanup = remove_file(&output_path);
+    let _cleanup = remove_file(output_path);
 
-    let output = Command::new(&tailwind_path)
+    let output = Command::new(tailwind_path)
         .arg("-i")
-        .arg(&bundle_path)
+        .arg(bundle_path)
         .arg("-o")
         .arg(output_path)
         .arg("-m")
@@ -139,7 +139,7 @@ fn main() {
             if !exists(&tailwind_path).expect("\nError checking for tailwind.\n") {
                 println!("Downloading tailwind...");
 
-                let file_url = format!("{}{}", &TAILWIND_URL, &filename);
+                let file_url = format!("{}{}", TAILWIND_URL, filename);
                 download_file(&file_url, &tailwind_path);
             }
 
@@ -147,7 +147,7 @@ fn main() {
             if !exists(&checksums).expect("\nError checking for checksums.\n") {
                 println!("Downloading checksums...");
 
-                let sums_url = format!("{}sha256sums.txt", &TAILWIND_URL);
+                let sums_url = format!("{}sha256sums.txt", TAILWIND_URL);
                 download_file(&sums_url, &checksums);
             }
 
@@ -169,9 +169,9 @@ fn main() {
             println!("Calculated Checksum: {}", calculated_checksum);
 
             if expected_checksum == calculated_checksum {
-                println! {"Checksums match!"};
+                println!("Checksums match!");
             } else {
-                println! {"Checksum mismatch!"};
+                println!("Checksum mismatch!");
                 let _idc_if_this_fails = remove_file(tailwind_path);
                 panic!("\nChecksum mismatch!\n");
             }
@@ -251,7 +251,7 @@ fn main() {
 
     let mut css_raw = String::new();
     let _ = File::open(
-        &Path::new("src")
+        Path::new("src")
             .join("components")
             .join("theme_provider")
             .join("main.css"),
@@ -261,14 +261,14 @@ fn main() {
 
     let mut buf = String::new();
     let _ = File::open(
-        &Path::new("src")
+        Path::new("src")
             .join("components")
             .join("theme_provider")
             .join("main_dark.css"),
     )
     .unwrap()
     .read_to_string(&mut buf);
-    let css_dark_raw = format!("{}{}", &css_raw, buf);
+    let css_dark_raw = format!("{}{}", css_raw, buf);
 
     ["", "_dark"].par_iter().for_each(|mode| {
         let component_css = format!(
@@ -283,11 +283,11 @@ fn main() {
                     let feature_flag = format!("CARGO_FEATURE_{}", feature.to_uppercase());
                     if env::var(&feature_flag).is_ok()
                         && let Ok(mut file) = File::open(
-                            &Path::new("src")
+                            Path::new("src")
                                 .join("components")
                                 .join(feature)
                                 .join("style")
-                                .join(format!("{}{}.css", &feature, mode)),
+                                .join(format!("{}{}.css", feature, mode)),
                         )
                     {
                         let mut buf = String::new();
@@ -312,7 +312,7 @@ fn main() {
         // TODO: Reduce dark style bloat
 
         base_styles.par_iter().for_each(|base_style| {
-            if env::var(&format!(
+            if env::var(format!(
                 "CARGO_FEATURE_STYLE_{}",
                 base_style.to_uppercase()
             ))
@@ -330,13 +330,13 @@ fn main() {
                             let feature_flag = format!("CARGO_FEATURE_{}", feature.to_uppercase());
                             if env::var(&feature_flag).is_ok()
                                 && let Ok(mut file) = File::open(
-                                    &Path::new("src")
+                                    Path::new("src")
                                         .join("components")
                                         .join(feature)
                                         .join("style")
                                         .join("base")
                                         .join(base_style)
-                                        .join(format!("{}{}.css", &feature, mode)),
+                                        .join(format!("{}{}.css", feature, mode)),
                                 )
                             {
                                 let mut buf = String::new();

@@ -117,19 +117,16 @@ fn OuterSidebar(
                                 each=move || items.get_value()
                                 key=|item| item.title.clone()
                                 children=move |item: NavItem| {
-                                    let is_active = &item.title == &active.get();
+                                    let is_active = item.title == active.get();
 
                                     view! {
                                         <SidebarMenuItem>
                                             <SidebarMenuButton tooltip=item.title>
-                                                <Button class=format!(
-                                                    "{}",
-                                                    if is_active {
+                                                <Button class=(if is_active {
                                                         "bg-(--sidebar-accent) text-(--sidebar-accent-foreground)"
                                                     } else {
                                                         ""
-                                                    },
-                                                )>
+                                                    }).to_string()>
                                                     {
                                                         let icon = item.icon;
                                                         icon!(icon)
@@ -184,7 +181,7 @@ fn InnerSidebar(active: RwSignal<String>, mails: StoredValue<Vec<Mail>>) -> impl
                                 let initials = format!(
                                     "{}{}",
                                     &mail.name[0..1],
-                                    &mail.name.split(' ').last().unwrap_or_default()[0..1],
+                                    &mail.name.split(' ').next_back().unwrap_or_default()[0..1],
                                 );
 
                                 view! {

@@ -293,19 +293,11 @@ pub fn Button(
                         Some(dropdown.menu_id.get())
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         Some(popover.menu_id.get())
-                    } else if let Some(sheet) = use_context::<SheetContext>() {
-                        Some(sheet.content_id.get())
-                    } else {
-                        None
-                    }
+                    } else { use_context::<SheetContext>().map(|sheet| sheet.content_id.get()) }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>()
                     && menu_item.dismiss.get()
                 {
-                    if let Some(menu) = use_context::<PopoverMenuContext>() {
-                        Some(menu.menu_id.get())
-                    } else {
-                        None
-                    }
+                    use_context::<PopoverMenuContext>().map(|menu| menu.menu_id.get())
                 } else {
                     None
                 }
@@ -463,7 +455,6 @@ pub fn Button(
                         if let Some(sidebar) = use_context::<SidebarContext>()
                             && !sidebar.open.get()
                         {
-                            return
                         } else {
                             collapsible.open.set(!collapsible.open.get_untracked())
                         }
@@ -473,25 +464,21 @@ pub fn Button(
                         sheet.open.set(true);
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
-                    if is_dialog_action || is_dialog_cancel || is_dialog_close {
-                        if dismiss.get() {
+                    if (is_dialog_action || is_dialog_cancel || is_dialog_close)
+                        && dismiss.get() {
                             dialog.open.set(false);
                         }
-                    }
                 } else if let Some(sheet) = use_context::<SheetContext>() {
-                    if is_sheet_close || in_sidebar_menu_button {
-                        if dismiss.get() {
+                    if (is_sheet_close || in_sidebar_menu_button)
+                        && dismiss.get() {
                             sheet.open.set(false);
                         }
-                    }
-                } else if let Some(menu_item) = use_context::<MenuItemContext>() {
-                    if let Some(menu) = use_context::<PopoverMenuContext>() {
-                        if !menu.modal.get() && menu_item.dismiss.get() && dismiss.get() {
+                } else if let Some(menu_item) = use_context::<MenuItemContext>()
+                    && let Some(menu) = use_context::<PopoverMenuContext>()
+                        && !menu.modal.get() && menu_item.dismiss.get() && dismiss.get() {
                             ev.prevent_default();
                             menu.open.set(false);
                         }
-                    }
-                }
             }
             popovertarget=move || {
                 if is_trigger {

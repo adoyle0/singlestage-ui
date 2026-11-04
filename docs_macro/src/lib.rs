@@ -161,7 +161,7 @@ fn get_component_paths() -> Vec<PathBuf> {
 
     let mut buf = vec![];
 
-    read_dir(comp_path).unwrap().into_iter().for_each(|dir| {
+    read_dir(comp_path).unwrap().for_each(|dir| {
         let path = dir.unwrap().path();
         if path.is_dir() {
             if exists(path.join("component.toml")).unwrap() {
@@ -205,8 +205,8 @@ pub fn generate_component_links(_input: TokenStream) -> TokenStream {
             </SidebarMenuButton>
         </SidebarMenuItem>
         "#,
-                string_to_kebab(&name),
-                string_to_title(&name)
+                string_to_kebab(name),
+                string_to_title(name)
             )
         })
         .collect::<String>();
@@ -248,7 +248,7 @@ pub fn ComponentRoutes() -> impl MatchNestedRoutes + Clone {{
     }}
     .into_inner()
 }}"#,
-        &routes
+        routes
     )
     .parse()
     .expect("Error parsing output")
@@ -271,8 +271,8 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
     get_component_paths()
         .par_iter()
         .map(|path| {
-            let component = ComponentPage::from_path(&path);
-            let component_module_name = path.iter().last().unwrap().to_str().unwrap();
+            let component = ComponentPage::from_path(path);
+            let component_module_name = path.iter().next_back().unwrap().to_str().unwrap();
 
             // Generate info block
             let info = if let Some(special_info) = component.info {
@@ -290,23 +290,13 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
             };
 
             // Generate examples
-            let examples = if let Some(component_examples) = component.examples {
-                Some(
-                    component_examples
+            let examples = component.examples.map(|component_examples| component_examples
                         .par_iter()
                         .map(|example| {
-                            let title = if let Some(example_title) = example.title.to_owned() {
-                                Some(format!(r#"name="{}" "#, example_title))
-                            } else {
-                                None
-                            };
+                            let title = example.title.to_owned().map(|example_title| format!(r#"name="{}" "#, example_title));
 
                             let description =
-                                if let Some(example_description) = example.description.to_owned() {
-                                    Some(format!(r#"description="{}" "#, example_description))
-                                } else {
-                                    None
-                                };
+                                example.description.to_owned().map(|example_description| format!(r#"description="{}" "#, example_description));
 
                             let path = format!(
                                 "./docs/src/routes/components/{}/examples/{}.rs",
@@ -332,11 +322,7 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
                                 || example.name.contains("background")
                             )
                         })
-                        .collect::<String>(),
-                )
-            } else {
-                None
-            };
+                        .collect::<String>());
 
             // Generate API references
             let references = component

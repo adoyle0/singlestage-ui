@@ -69,14 +69,14 @@ pub fn ThemeProviderInner(
             inner_html=move || {
                 match mode.get() {
                     Mode::Dark => {
-                        format!("{}{}", base.get().light.to_string(), base.get().dark.to_string())
+                        format!("{}{}", base.get().light, base.get().dark)
                     }
                     Mode::Light => base.get().light.to_string(),
                     Mode::Auto => {
                         format!(
                             "{}\n\n@media (prefers-color-scheme: dark) {{{}}}",
-                            base.get().light.to_string(),
-                            base.get().dark.to_string(),
+                            base.get().light,
+                            base.get().dark,
                         )
                     }
                 }

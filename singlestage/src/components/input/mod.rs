@@ -272,7 +272,7 @@ pub fn Input(
     let update_default = move || {
         if let Some(val) = default.get() {
             if let Some(input) = input_ref.get() {
-                let _ = input.set_default_value(&val);
+                input.set_default_value(&val);
             }
 
             value.set(val);
@@ -313,12 +313,12 @@ pub fn Input(
                 let decimal = '.';
 
                 if step.get_untracked().unwrap_or_default().contains(decimal)
-                    && let Some(input_precision) = input_value.split(decimal).last()
+                    && let Some(input_precision) = input_value.split(decimal).next_back()
                     && let Some(step_precision) = step
                         .get_untracked()
                         .unwrap_or_default()
                         .split(decimal)
-                        .last()
+                        .next_back()
                 {
                     if input_precision.len() < step_precision.len()
                         || !input_value.contains(decimal)

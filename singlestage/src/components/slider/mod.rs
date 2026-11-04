@@ -199,7 +199,7 @@ pub fn Slider(
     let slider_value = RwSignal::new({
         let init_value = {
             if let Some(default_value) = default.get_untracked() {
-                value.set(default_value.clone());
+                value.set(default_value);
                 default_value
             } else {
                 value.get_untracked()
@@ -219,16 +219,15 @@ pub fn Slider(
             ((init_value - min) / (max - min)) * 100.
         };
 
-        format!("{}%", &percent.to_string())
+        format!("{}%", percent)
     });
 
     // On default
     Effect::new(move || {
-        if let Some(slider) = slider_ref.get() {
-            if let Some(default_value) = default.get() {
+        if let Some(slider) = slider_ref.get()
+            && let Some(default_value) = default.get() {
                 slider.set_default_value(&default_value.to_string());
             }
-        }
     });
 
     // On disabled
@@ -245,7 +244,7 @@ pub fn Slider(
         } else {
             ((value.get() - min.get()) / (max.get() - min.get())) * 100.
         };
-        slider_value.set(format!("{}%", &percent.to_string()));
+        slider_value.set(format!("{}%", percent));
     });
 
     let on_input = move |ev| {
