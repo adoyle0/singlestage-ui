@@ -35,7 +35,7 @@ title = "Size"
 description = "Set the size prop to change the size of the switch."
 
 [[references]]
-name = "switch"
+name = "Switch"
 description = "A control that allows the user to toggle between checked and not checked."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a>, \

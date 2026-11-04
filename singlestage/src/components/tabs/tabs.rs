@@ -2,13 +2,14 @@ use super::TabsContext;
 use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
-/// Contains all the tabs component parts.
+/// A set of layered sections of content—known as tab panels—that are displayed one at a time.
 #[component]
 pub fn Tabs(
     children: Children,
 
     /// Set which direction the tabs should flow.
-    /// Accepted values: "horizontal" | "vertical"
+    ///
+    /// Accepted values: "horizontal" (default) | "vertical"
     #[prop(optional, into)]
     orientation: MaybeProp<String>,
     /// Reactive signal coupled to the value of the current selected tab

@@ -34,12 +34,15 @@ use leptos::prelude::*;
 pub fn Slider(
     #[prop(optional)] children: Option<Children>,
 
-    #[prop(optional, into)] orientation: MaybeProp<String>,
-
     /// Sets the default value of the element. Setting `value` sets this once at page load.
     /// Use this for subsequent updates.
     #[prop(optional, into)]
     default: MaybeProp<f64>,
+    /// Set the orientation to render the slider.
+    ///
+    /// Accepted values: "horizontal" (default) | "vertical"
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
     /// The reactive value signal of this input. Also sets the initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]

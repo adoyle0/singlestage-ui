@@ -57,11 +57,11 @@ pub fn TableExample() -> impl IntoView {
     ];
 
     view! {
-        <Table class="overflow-x-auto w-full">
+        <Table>
             <TableCaption>"A list of your recent invoices."</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead class="w-[100px]">"Invoice"</TableHead>
+                    <TableHead>"Invoice"</TableHead>
                     <TableHead>"Status"</TableHead>
                     <TableHead>"Method"</TableHead>
                     <TableHead class="text-right">"Amount"</TableHead>

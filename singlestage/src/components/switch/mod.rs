@@ -6,10 +6,12 @@ use leptos::prelude::*;
 pub fn Switch(
     #[prop(optional)] children: Option<Children>,
 
-    /// Whether the input is invalid
+    /// Set whether to render the Switch as invalid.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
-    /// Set the size to render the Switch
+    /// Set the size to render the Switch.
+    ///
+    /// Accepted values: "default" (default) | "small"
     #[prop(optional, into)]
     size: MaybeProp<String>,
 

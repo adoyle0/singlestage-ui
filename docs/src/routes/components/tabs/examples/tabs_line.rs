@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn TabsLineExample() -> impl IntoView {
     view! {
-        <Tabs value="overview">
+        <Tabs>
             <TabsList variant="line">
                 <TabsTrigger value="overview">"Overview"</TabsTrigger>
                 <TabsTrigger value="analytics">"Analytics"</TabsTrigger>

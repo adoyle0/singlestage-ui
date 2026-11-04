@@ -39,20 +39,21 @@ attrs = []
 
 [[references]]
 name = "TooltipContent"
-description = "."
+description = "Contains the content displayed within the tooltip popover."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
   { attr = "align", attr_type = "String", default = """"center"""", description = """Set where the \
-    tooltip is rendered along the chosen side.""" },
+    tooltip is rendered along the chosen side. Accepted values: "start" | "center" | "end".""" },
   { attr = "side", attr_type = "String", default = """"top"""", description = """Set which side of the \
-    triggering element that the tooltip will spawn from.""" },
+    triggering element that the tooltip will spawn from. Accepted values: "top" | "right" | "bottom" \
+    | "left".""" },
 ]
 
 [[references]]
 name = "TooltipTrigger"
-description = "Contains all the parts of a Tooltip component."
+description = "Wraps the triggering element and opens the tooltip when hovered."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

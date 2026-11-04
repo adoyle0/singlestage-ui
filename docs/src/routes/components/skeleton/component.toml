@@ -26,7 +26,7 @@ title = "Table"
 
 [[references]]
 name = "Skeleton"
-description = "Creates a skeleton used to show a placeholder while content is loading."
+description = "Use to show a placeholder while content is loading."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

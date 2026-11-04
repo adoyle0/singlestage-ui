@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::tabs::*;
+use singlestage::*;
 
 #[component]
 pub fn TabsAnatomy() -> impl IntoView {

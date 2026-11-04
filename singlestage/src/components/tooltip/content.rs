@@ -1,18 +1,19 @@
 use crate::TooltipContext;
 use leptos::prelude::*;
 
+/// Contains the content displayed within the tooltip popover.
 #[component]
 pub fn TooltipContent(
     children: Children,
 
     /// Set where the tooltip is rendered along the chosen side.
     ///
-    /// Accepted values: "start" | "center" | "end". Default is "center".
+    /// Accepted values: "center" (default) | "start" | "end".
     #[prop(optional, into)]
     align: MaybeProp<String>,
     /// Set which side of the triggering element that the tooltip will spawn from.
     ///
-    /// Accepted values: "top" | "right" | "bottom" | "left". Default is "top".
+    /// Accepted values: "top" (default) | "right" | "bottom" | "left".
     #[prop(optional, into)]
     side: MaybeProp<String>,
 

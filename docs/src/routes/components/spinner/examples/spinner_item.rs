@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn SpinnerItemExample() -> impl IntoView {
     view! {
-        <div class="flex w-full max-w-md flex-col gap-4 [--radius:1rem]">
+        <div class="flex w-full max-w-md flex-col gap-4">
             <Item variant="outline">
                 <ItemMedia variant="icon">
                     <Spinner />

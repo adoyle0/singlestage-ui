@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn TabsVerticalExample() -> impl IntoView {
     view! {
-        <Tabs value="account" orientation="vertical">
+        <Tabs orientation="vertical">
             <TabsList>
                 <TabsTrigger value="account">"Account"</TabsTrigger>
                 <TabsTrigger value="password">"Password"</TabsTrigger>

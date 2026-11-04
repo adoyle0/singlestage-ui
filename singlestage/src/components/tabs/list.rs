@@ -6,7 +6,8 @@ pub fn TabsList(
     children: Children,
 
     /// Set the display variant of the tab buttons.
-    /// Accepted values: "default" | "line"
+    ///
+    /// Accepted values: "default" (default) | "line"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::spinner::*;
+use singlestage::*;
 
 #[component]
 pub fn SpinnerAnatomy() -> impl IntoView {

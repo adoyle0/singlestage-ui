@@ -13,7 +13,7 @@ pub fn ToggleExample() -> impl IntoView {
             >
                 {icon!(icondata::LuBookmark, class="fill-(--foreground)")}
             </Show>
-            Bookmark
+            <span>"Bookmark"</span>
         </Toggle>
     }
 }

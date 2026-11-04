@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn TabsDisabledExample() -> impl IntoView {
     view! {
-        <Tabs value="home">
+        <Tabs>
             <TabsList>
                 <TabsTrigger value="home">"Home"</TabsTrigger>
                 <TabsTrigger value="settings" disabled=true>

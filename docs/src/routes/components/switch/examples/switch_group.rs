@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{Button, CheckboxGroup, Switch};
+use singlestage::*;
 
 #[component]
 pub fn SwitchGroupExample() -> impl IntoView {
@@ -10,7 +10,7 @@ pub fn SwitchGroupExample() -> impl IntoView {
     ]);
 
     view! {
-        <form class="form flex flex-col gap-4">
+        <form class="flex flex-col gap-4">
             <p>"Value: "{move || format!("{:#?}", value.get())}</p>
 
             <CheckboxGroup value>

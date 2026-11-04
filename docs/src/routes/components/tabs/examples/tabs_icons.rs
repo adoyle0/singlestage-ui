@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn TabsIconsExample() -> impl IntoView {
     view! {
-        <Tabs value="preview">
+        <Tabs>
             <TabsList>
                 <TabsTrigger value="preview">{icon!(icondata::LuAppWindow)} "Preview"</TabsTrigger>
                 <TabsTrigger value="code">{icon!(icondata::LuCode)} "Code"</TabsTrigger>

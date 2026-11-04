@@ -6,8 +6,6 @@ use leptos::prelude::*;
 pub fn Toggle(
     children: Children,
 
-    // TOGGLE ATTRIBUTES
-    //
     /// Reactive signal coupled to the toggle's pressed state.
     #[prop(optional, into)]
     pressed: Reactive<bool>,

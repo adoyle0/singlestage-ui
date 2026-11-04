@@ -1,6 +1,7 @@
 use crate::TooltipContext;
 use leptos::prelude::*;
 
+/// Wraps the triggering element and opens the tooltip when hovered.
 #[component]
 pub fn TooltipTrigger(
     children: Children,

@@ -1,7 +1,7 @@
 use crate::{FieldContext, InputGroupContext, Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// Creates a textarea that takes children as a default value.
+/// Displays a form textarea.
 #[component]
 pub fn Textarea(
     #[prop(optional)] children: Option<Children>,
@@ -16,8 +16,7 @@ pub fn Textarea(
     /// Toggle invalid appearance.
     #[prop(optional, into)]
     invalid: Reactive<bool>,
-    /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
-    /// update it.
+    /// Reactive signal coupled to the value of the textarea.
     #[prop(optional, into)]
     value: Reactive<String>,
 
