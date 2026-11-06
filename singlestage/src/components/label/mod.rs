@@ -1,3 +1,4 @@
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// Renders an accessible label associated with controls
@@ -5,6 +6,16 @@ use leptos::prelude::*;
 pub fn Label(
     children: Children,
 
+    /// Whether the element renders as disabled
+    #[prop(optional, into)]
+    disabled: Reactive<bool>,
+    /// Set whether or not this element should display inset from its normal position.
+    /// (For use in popover menus)
+    #[prop(optional, into)]
+    inset: MaybeProp<bool>,
+    /// Whether the element renders as invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The id of the labeled element if it's not a child
     #[prop(optional, into)]
     label_for: MaybeProp<String>,
@@ -119,14 +130,12 @@ pub fn Label(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
             hidden=move || hidden.get()
-            id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -155,14 +164,19 @@ pub fn Label(
     };
 
     view! {
-        <label
-            for=move || label_for.get()
-            class=move || format!("singlestage-label {}", class.get().unwrap_or_default())
+        <LabelPrimitive
+            primitive_type=LabelPrimitiveType::Label
+            class
+            disabled
+            id
+            inset
+            invalid
+            label_for
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </label>
+        </LabelPrimitive>
     }
 }

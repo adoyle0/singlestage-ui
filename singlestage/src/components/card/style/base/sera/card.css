@@ -1,0 +1,84 @@
+@layer components1 {
+  .singlestage-card {
+    @apply bg-card
+    gap-8
+    overflow-hidden
+    py-8
+    ring-1
+    ring-foreground/5
+    shadow-sm
+    text-card-foreground
+    text-sm;
+
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+
+    > img:first-child,
+    > img:last-child {
+      @apply rounded-none;
+    }
+  }
+
+  .singlestage-card-header {
+    @apply gap-1.5
+    px-8
+    rounded-none;
+
+    &.border-b {
+      @apply pb-8;
+    }
+  }
+
+  .singlestage-card-title {
+    @apply font-semibold
+    text-lg
+    tracking-wider
+    uppercase;
+  }
+
+  .singlestage-card-description {
+    @apply leading-relaxed
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-card-content {
+    @apply px-8;
+  }
+
+  .singlestage-card-footer {
+    @apply px-8;
+
+    &.border-t {
+      @apply pt-8;
+    }
+  }
+
+  .singlestage-card-size-sm {
+    .singlestage-card {
+      @apply gap-5
+      py-5;
+    }
+
+    .singlestage-card-header {
+      @apply px-5;
+
+      &.border-b {
+        @apply pb-5;
+      }
+    }
+
+    .singlestage-card-content {
+      @apply px-5;
+    }
+
+    .singlestage-card-footer {
+      @apply px-5;
+
+      &.border-t {
+        @apply pt-5;
+      }
+    }
+  }
+}

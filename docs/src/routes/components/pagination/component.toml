@@ -4,6 +4,17 @@ description = "Pagination with page navigation, next, and previous links."
 [[examples]]
 name = "pagination"
 
+[[examples]]
+name = "pagination simple"
+title = "Simple"
+description = "A simple pagination with only page numbers."
+
+[[examples]]
+name = "pagination icons only"
+title = "Icons only"
+description = """You can also use just the previous and next buttons without page numbers. This \
+is useful for data tables with a rows per page selector."""
+
 [[references]]
 name = "Pagination"
 description = "Contains all the parts of the pagination component."

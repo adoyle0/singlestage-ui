@@ -1,8 +1,16 @@
+use crate::Separator;
 use leptos::prelude::*;
 
-/// Visually separates elements in the ButtonGroup.
+/// Visually separates button group buttons.
 #[component]
 pub fn ButtonGroupSeparator(
+    #[prop(optional)] children: Option<Children>,
+
+    /// Specify the orientation of the separator
+    /// Accepted values: `"vertical"` | `"horizontal"` (default)
+    #[prop(optional, into)]
+    orientation: MaybeProp<String>,
+
     // GLOBAL ATTRIBUTES
     //
     /// A space separated list of keys to focus this element. The first key available on the user's
@@ -126,6 +134,7 @@ pub fn ButtonGroupSeparator(
             itemid=move || itemid.get()
         />
     };
+
     let global_attrs_2 = view! {
         <{..}
             itemprop=move || itemprop.get()
@@ -146,14 +155,35 @@ pub fn ButtonGroupSeparator(
         />
     };
 
-    view! {
-        <div
-            class=move || {
-                format!("singlestage-button-group-separator {}", class.get().unwrap_or_default())
-            }
+    if let Some(children) = children {
+        view! {
+            <Separator
+                class=format!(
+                    "singlestage-button-group-separator {}",
+                    class.get().unwrap_or_default(),
+                )
+                orientation
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        ></div>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </Separator>
+        }
+        .into_any()
+    } else {
+        view! {
+            <Separator
+                class=format!(
+                    "singlestage-button-group-separator {}",
+                    class.get().unwrap_or_default(),
+                )
+                orientation
+
+                {..global_attrs_1}
+                {..global_attrs_2}
+            />
+        }
+        .into_any()
     }
 }

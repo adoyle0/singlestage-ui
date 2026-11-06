@@ -5,6 +5,16 @@ displayed as a progress bar."""
 [[examples]]
 name = "progress"
 
+[[examples]]
+name = "progress label"
+title = "Label"
+description = "Use a Field component to add a label to the progress bar."
+
+[[examples]]
+name = "progress controlled"
+title = "Controlled"
+description = "A progress bar controlled by a slider."
+
 [[references]]
 name = "Progress"
 description = "Displays progress."
@@ -12,8 +22,8 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "max", attr_type = "usize", default = "100", description = """The value that \
+  { attr = "max", attr_type = "f64", default = "100.", description = """The value that \
     represents 100%, or full.""" },
-  { attr = "value", attr_type = "usize", default = "0", description = """The current progress \
+  { attr = "value", attr_type = "f64", default = "0.", description = """The current progress \
     value to be rendered.""" },
 ]

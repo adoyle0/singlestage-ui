@@ -1,0 +1,88 @@
+@layer components {
+  .singlestage-item-group {
+    @apply flex
+    flex-col
+    w-full;
+  }
+
+  .singlestage-item {
+    @apply duration-100
+    flex
+    flex-wrap
+    items-center
+    outline-none
+    transition-colors
+    w-full;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-[3px]
+      ring-ring/50;
+    }
+  }
+
+  a:has(> .singlestage-item) {
+    @apply transition-colors;
+  }
+
+  .singlestage-item-media {
+    @apply flex
+    items-center
+    justify-center
+    shrink-0;
+
+    svg {
+      @apply pointer-events-none;
+    }
+  }
+
+  .singlestage-item-content {
+    @apply flex
+    flex-1
+    flex-col;
+
+    & + .singlestage-item-content {
+      @apply flex-none;
+    }
+  }
+
+  .singlestage-item-title {
+    @apply flex
+    items-center
+    line-clamp-1
+    w-fit;
+  }
+
+  .singlestage-item-description {
+    @apply line-clamp-2
+    font-normal;
+
+    a:not(.singlestage-button) {
+      @apply underline
+      underline-offset-4;
+
+      &:hover {
+        @apply text-primary;
+      }
+    }
+  }
+
+  .singlestage-item-actions {
+    @apply flex
+    items-center;
+  }
+
+  .singlestage-item-header {
+    @apply basis-full
+    flex
+    items-center
+    justify-between;
+  }
+
+  .singlestage-item-footer {
+    @apply basis-full
+    flex
+    items-center
+    justify-between;
+  }
+}

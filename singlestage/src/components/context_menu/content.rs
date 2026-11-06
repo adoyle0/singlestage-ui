@@ -1,10 +1,23 @@
-use crate::ContextMenuContext;
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// The component that pops out when the context menu is open.
 #[component]
 pub fn ContextMenuContent(
     children: Children,
+
+    /// Set how to align the popover
+    ///
+    /// Accepted values: "start" | "center" | "end"
+    /// Default is "start"
+    #[prop(optional, into)]
+    align: MaybeProp<String>,
+    /// Set which side the popover opens relative to the trigger point
+    ///
+    /// Accepted values: "top" | "right" | "bottom" | "left"
+    /// Default is "bottom"
+    #[prop(optional, into)]
+    side: MaybeProp<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -47,6 +60,9 @@ pub fn ContextMenuContent(
     /// Controls hidden status of the element.
     #[prop(optional, into)]
     hidden: MaybeProp<String>,
+    /// Set the id of this element.
+    #[prop(optional, into)]
+    id: MaybeProp<String>,
     /// Toggle if the browser reacts to input events from this element.
     #[prop(optional, into)]
     inert: MaybeProp<bool>,
@@ -102,13 +118,6 @@ pub fn ContextMenuContent(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<ContextMenuContext>();
-    let menu_ref = NodeRef::<leptos::html::Menu>::new();
-    let uuid = uuid::Uuid::new_v4().to_string();
-
-    menu.menu_id.set(uuid.clone());
-    menu.menu_ref.set(Some(menu_ref));
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -138,7 +147,6 @@ pub fn ContextMenuContent(
             part=move || part.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
-            style=move || style.get()
             tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
@@ -146,23 +154,19 @@ pub fn ContextMenuContent(
     };
 
     view! {
-        <menu
-            class=move || {
-                format!("singlestage-context-menu-content {}", class.get().unwrap_or_default())
-            }
-            id=uuid
-            node_ref=menu_ref
-            on:contextmenu=move |ev| {
-                ev.prevent_default();
-            }
-            popover="auto"
-            role="menu"
-            style=move || { format!("left: {}px; top: {}px", menu.x.get(), menu.y.get()) }
+        <MenuContentPrimitive
+            primitive_type=MenuContentPrimitiveType::Main
+
+            align
+            class
+            id
+            side
+            style
 
             {..global_attrs_1}
             {..global_attrs_2}
         >
             {children()}
-        </menu>
+        </MenuContentPrimitive>
     }
 }

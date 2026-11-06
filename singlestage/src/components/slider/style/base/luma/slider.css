@@ -1,0 +1,93 @@
+@layer components1 {
+  .singlestage-slider {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb {
+      @apply bg-white
+      h-4
+      ring-1
+      ring-black/10
+      rounded-full
+      shadow-md
+      transition-[color,box-shadow,background-color]
+      w-6;
+
+      &:focus-visible {
+        @apply outline-hidden
+        ring-4
+        ring-ring/30;
+      }
+
+      &:hover {
+        @apply ring-4
+        ring-ring/30;
+      }
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply bg-input/90
+      rounded-full;
+    }
+
+    &::-ms-fill-lower {
+      @apply bg-primary
+      rounded-full;
+    }
+
+    &::-ms-fill-upper {
+      @apply bg-input/90
+      rounded-full;
+    }
+  }
+
+  .singlestage-slider-range {
+    @apply bg-primary;
+  }
+
+  .singlestage-slider-horizontal {
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply h-2
+      w-full;
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to right,
+        var(--primary) var(--slider-value),
+        color-mix(in oklab, var(--input) 90%, transparent) var(--slider-value)
+      );
+    }
+  }
+
+  .singlestage-slider-vertical {
+    @apply min-h-40;
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb {
+      @apply h-6
+      w-4;
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply h-full
+      w-2;
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to top,
+        var(--primary) var(--slider-value),
+        color-mix(in oklab, var(--input) 90%, transparent) var(--slider-value)
+      );
+    }
+  }
+}

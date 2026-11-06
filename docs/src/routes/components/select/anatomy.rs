@@ -1,13 +1,13 @@
 use leptos::prelude::*;
-use singlestage::select::*;
+use singlestage::*;
 
 #[component]
 pub fn SelectAnatomy() -> impl IntoView {
     view! {
         <Select>
-            <SelectContent>
-                <SelectItem />
-            </SelectContent>
+            <SelectOptGroup>
+                <SelectOption />
+            </SelectOptGroup>
         </Select>
     }
 }

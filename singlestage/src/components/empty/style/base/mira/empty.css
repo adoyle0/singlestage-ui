@@ -1,0 +1,50 @@
+@layer components1 {
+  .singlestage-empty {
+    @apply border-dashed
+    gap-4
+    p-6
+    rounded-xl;
+  }
+
+  .singlestage-empty-header {
+    @apply gap-1;
+  }
+
+  .singlestage-empty-media {
+    @apply mb-2;
+  }
+
+  .singlestage-empty-media-default {
+    @apply bg-transparent;
+  }
+
+  .singlestage-empty-media-icon {
+    @apply bg-muted
+    flex
+    items-center
+    justify-center
+    rounded-md
+    shrink-0
+    size-8
+    text-foreground;
+
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-empty-title {
+    @apply font-medium
+    text-sm
+    tracking-tight;
+  }
+
+  .singlestage-empty-description {
+    @apply text-xs/relaxed;
+  }
+
+  .singlestage-empty-content {
+    @apply gap-2
+    text-xs/relaxed;
+  }
+}

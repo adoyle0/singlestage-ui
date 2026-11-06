@@ -1,3 +1,5 @@
+mod action;
+mod cancel;
 mod close;
 mod content;
 mod description;
@@ -7,6 +9,8 @@ mod header;
 mod title;
 mod trigger;
 
+pub use action::*;
+pub use cancel::*;
 pub use close::*;
 pub use content::*;
 pub use description::*;
@@ -15,11 +19,3 @@ pub use footer::*;
 pub use header::*;
 pub use title::*;
 pub use trigger::*;
-
-use leptos::prelude::*;
-
-#[derive(Clone)]
-pub struct DialogContext {
-    pub labeled_by: RwSignal<String>,
-    pub described_by: RwSignal<String>,
-}

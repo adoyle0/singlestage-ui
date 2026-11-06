@@ -13,13 +13,17 @@ pub fn EmptyExample() -> impl IntoView {
                     your first project."
                 </EmptyDescription>
             </EmptyHeader>
-            <EmptyContent>
-                <div class="flex gap-2">
-                    <Button>"Create Project"</Button>
-                    <Button variant="outline">"Import Project"</Button>
-                </div>
+            <EmptyContent class="flex-row justify-center gap-2">
+                <Button>"Create Project"</Button>
+                <Button variant="outline">"Import Project"</Button>
             </EmptyContent>
-            <Link as_button=true size="sm" class="text-(--muted-foreground)" href="#">
+            <Link
+                render_as="button"
+                variant="link"
+                size="sm"
+                class="text-(--muted-foreground)"
+                href="#"
+            >
                 "Learn More"
                 {icon!(icondata::LuArrowUpRight)}
             </Link>

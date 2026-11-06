@@ -1,0 +1,105 @@
+@layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    .singlestage-dialog-overlay,
+    .singlestage-alert-dialog-overlay {
+      transition:
+        opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1),
+        scale 0.1s cubic-bezier(0.4, 0, 0.2, 1),
+        overlay 0.1s allow-discrete,
+        display 0.1s allow-discrete;
+
+      opacity: 0;
+      scale: 0.95;
+
+      ::webkit-scrollbar {
+        display: none;
+      }
+
+      &::backdrop {
+        transition:
+          display 0.1s allow-discrete,
+          overlay 0.1s allow-discrete,
+          background-color 0.1s;
+        background-color: hsl(0 0 0 / 0);
+      }
+
+      &[open] {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+
+    @starting-style {
+      .singlestage-dialog-overlay[open],
+      .singlestage-alert-dialog-overlay[open] {
+        opacity: 0;
+        scale: 0.95;
+
+        &::backdrop {
+          background-color: hsl(0 0 0 / 0);
+        }
+      }
+    }
+
+    /* Disable scrolling while popover is open */
+    html:has(.singlestage-dialog-overlay[open]),
+    html:has(.singlestage-alert-dialog-overlay[open]) {
+      overflow: hidden;
+    }
+  }
+
+  .singlestage-dialog-overlay {
+    @apply -translate-x-1/2
+    -translate-y-1/2
+    fixed
+    outline-none
+    w-full
+    z-50;
+
+    left: calc(1 / 2 * 100vw);
+    top: calc(1 / 2 * 100%);
+
+    ::backdrop {
+      @apply fixed
+      inset-0
+      isolate
+      z-50;
+    }
+
+    &[open] {
+      @apply -translate-x-1/2
+      -translate-y-1/2
+      fixed
+      outline-none
+      w-full
+      z-50;
+
+      left: calc(1 / 2 * 100vw);
+      top: calc(1 / 2 * 100%);
+    }
+  }
+
+  .singlestage-dialog-size-sm {
+    .singlestage-dialog-footer {
+      @apply grid
+      grid-cols-2;
+    }
+  }
+
+  .singlestage-dialog-header {
+    @apply flex
+    flex-col;
+  }
+
+  .singlestage-dialog-footer {
+    @apply flex
+    flex-col-reverse
+    gap-2
+    sm:flex-row
+    sm:justify-end;
+  }
+
+  /* .singlestage-dialog-title { */
+  /*   @apply font-heading; */
+  /* } */
+}

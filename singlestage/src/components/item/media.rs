@@ -7,7 +7,7 @@ pub fn ItemMedia(
 
     /// Set the display style of the `ItemMedia`.
     ///
-    /// Accepted values: icon | image
+    /// Accepted values: "icon" | "image"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -162,9 +162,9 @@ pub fn ItemMedia(
                 format!(
                     "singlestage-item-media {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "icon" => "singlestage-item-media-icon",
-                        "image" => "singlestage-item-media-image",
-                        _ => "singlestage-item-media-default",
+                        "icon" => "singlestage-item-media-variant-icon",
+                        "image" => "singlestage-item-media-variant-image",
+                        _ => "singlestage-item-media-variant-default",
                     },
                     class.get().unwrap_or_default(),
                 )

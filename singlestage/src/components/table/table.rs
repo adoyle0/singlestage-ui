@@ -151,13 +151,15 @@ pub fn Table(
     };
 
     view! {
-        <table
-            class=move || { format!("singlestage-table {}", class.get().unwrap_or_default()) }
+        <div class="singlestage-table-container">
+            <table
+                class=move || { format!("singlestage-table {}", class.get().unwrap_or_default()) }
 
-            {..global_attrs_1}
-            {..global_attrs_2}
-        >
-            {children()}
-        </table>
+                {..global_attrs_1}
+                {..global_attrs_2}
+            >
+                {children()}
+            </table>
+        </div>
     }
 }

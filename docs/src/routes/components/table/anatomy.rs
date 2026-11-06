@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::table::*;
+use singlestage::*;
 
 #[component]
 pub fn TableAnatomy() -> impl IntoView {

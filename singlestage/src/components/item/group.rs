@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Groups content together for display within an Item.
+/// A container that groups related items together with consistent styling.
 #[component]
 pub fn ItemGroup(
     children: Children,

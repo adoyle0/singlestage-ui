@@ -1,0 +1,15 @@
+@layer components1 {
+  .singlestage-label {
+    @apply font-medium
+    gap-2
+    leading-none
+    text-sm;
+
+    &:is(:where(*):disabled *),
+    &:is(:where(*)[aria-disabled="true"] *),
+    &:is(:where(*):disabled ~ *),
+    &:is(:where(*)[aria-disabled="true"] ~ *) {
+      @apply opacity-50;
+    }
+  }
+}

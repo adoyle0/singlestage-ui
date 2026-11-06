@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::radio::*;
+use singlestage::*;
 
 #[component]
 pub fn RadioAnatomy() -> impl IntoView {

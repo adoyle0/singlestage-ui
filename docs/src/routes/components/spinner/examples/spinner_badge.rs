@@ -4,7 +4,7 @@ use singlestage::*;
 #[component]
 pub fn SpinnerBadgeExample() -> impl IntoView {
     view! {
-        <div class="flex items-center gap-4 [--radius:1.2rem]">
+        <div class="flex items-center gap-4">
             <Badge>
                 <Spinner />
                 "Syncing"

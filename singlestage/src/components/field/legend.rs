@@ -161,8 +161,8 @@ pub fn FieldLegend(
                 format!(
                     "singlestage-field-legend {} {}",
                     match variant.get().unwrap_or_default().as_str() {
-                        "label" => "singlestage-field-legend-label",
-                        _ => "singlestage-field-legend-legend",
+                        "label" => "singlestage-field-legend-variant-label",
+                        _ => "singlestage-field-legend-variant-legend",
                     },
                     class.get().unwrap_or_default(),
                 )

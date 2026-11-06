@@ -1,6 +1,0 @@
-@layer components {
-  .singlestage-skeleton {
-    @apply animate-pulse
-    bg-accent;
-  }
-}

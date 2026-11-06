@@ -125,7 +125,6 @@ pub fn AccordionItem(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -162,6 +161,7 @@ pub fn AccordionItem(
 
     view! {
         <details
+            class=move || format!("singlestage-accordion-item {}", class.get().unwrap_or_default())
             open=move || open.get()
             name=move || name.get()
 

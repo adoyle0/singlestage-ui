@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::avatar::*;
+use singlestage::*;
 
 #[component]
 pub fn AvatarAnatomy() -> impl IntoView {
@@ -7,6 +7,15 @@ pub fn AvatarAnatomy() -> impl IntoView {
         <Avatar>
             <AvatarImage />
             <AvatarFallback />
+            <AvatarBadge />
         </Avatar>
+
+        // Group
+        <AvatarGroup>
+            <Avatar />
+            <Avatar />
+            <Avatar />
+            <AvatarGroupCount />
+        </AvatarGroup>
     }
 }

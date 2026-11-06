@@ -1,0 +1,14 @@
+@layer components {
+  .singlestage-kbd {
+    @apply inline-flex
+    items-center
+    justify-center
+    pointer-events-none
+    select-none;
+  }
+
+  .singlestage-kbd-group {
+    @apply inline-flex
+    items-center;
+  }
+}

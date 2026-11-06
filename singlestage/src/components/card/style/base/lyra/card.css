@@ -1,0 +1,87 @@
+@layer components1 {
+  .singlestage-card {
+    @apply bg-card
+    gap-4
+    overflow-hidden
+    py-4
+    ring-1
+    ring-foreground/10
+    rounded-none
+    text-card-foreground
+    text-xs/relaxed;
+
+    &:has(> img:first-child) {
+      @apply pt-0;
+    }
+
+    &:has(.singlestage-card-footer) {
+      @apply pb-0;
+    }
+
+    > img:first-child,
+    > img:last-child {
+      @apply rounded-none;
+    }
+  }
+
+  .singlestage-card-header {
+    @apply gap-1
+    px-4
+    rounded-none;
+
+    &.border-b {
+      @apply pb-4;
+    }
+  }
+
+  .singlestage-card-title {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-card-description {
+    @apply text-muted-foreground
+    text-xs/relaxed;
+  }
+
+  .singlestage-card-content {
+    @apply px-4;
+  }
+
+  .singlestage-card-footer {
+    @apply border-t
+    p-4
+    rounded-none;
+  }
+
+  .singlestage-card-size-sm {
+    .singlestage-card {
+      @apply gap-2
+      py-3;
+
+      &:has(.singlestage-card-footer) {
+        @apply pb-0;
+      }
+    }
+
+    .singlestage-card-header {
+      @apply px-3;
+
+      &.border-b {
+        @apply pb-3;
+      }
+    }
+
+    .singlestage-card-title {
+      @apply text-sm;
+    }
+
+    .singlestage-card-content {
+      @apply px-3;
+    }
+
+    .singlestage-card-footer {
+      @apply p-3;
+    }
+  }
+}

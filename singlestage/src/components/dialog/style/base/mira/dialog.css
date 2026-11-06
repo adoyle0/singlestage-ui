@@ -1,0 +1,61 @@
+@layer components1 {
+  .singlestage-dialog-overlay {
+    @apply bg-popover
+    max-w-[calc(100%-2rem)]
+    ring-1
+    ring-foreground/10
+    rounded-xl
+    sm:max-w-sm;
+
+    &::backdrop {
+      @apply supports-backdrop-filter:backdrop-blur-xs;
+    }
+
+    &[open]::backdrop {
+      @apply bg-black/80;
+    }
+  }
+
+  .singlestage-dialog-content {
+    @apply bg-popover
+    gap-4
+    grid
+    p-4
+    rounded-xl
+    text-popover-foreground
+    text-xs/relaxed;
+  }
+
+  .singlestage-dialog-close {
+    @apply absolute
+    right-2
+    top-2;
+  }
+
+  .singlestage-dialog-header {
+    @apply gap-1;
+  }
+
+  .singlestage-dialog-footer {
+    @apply gap-2;
+  }
+
+  .singlestage-dialog-title {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-dialog-description {
+    @apply text-muted-foreground
+    text-xs/relaxed;
+
+    a:not(.singlestage-button) {
+      @apply underline
+      underline-offset-3;
+
+      &:hover {
+        @apply text-foreground;
+      }
+    }
+  }
+}

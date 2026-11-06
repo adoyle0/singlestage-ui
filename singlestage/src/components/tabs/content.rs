@@ -117,19 +117,26 @@ pub fn TabsContent(
 ) -> impl IntoView {
     let tabs = expect_context::<TabsContext>();
 
+    let tab_selected = move || {
+        if let Some(value) = value.get()
+            && value == tabs.value.get()
+        {
+            true
+        } else {
+            false
+        }
+    };
+
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
             enterkeyhint=move || enterkeyhint.get()
             exportparts=move || exportparts.get()
-            // hidden=move || hidden.get()
-            // id=move || id.get()
             inert=move || inert.get()
             inputmode=move || inputmode.get()
             is=move || is.get()
@@ -147,11 +154,9 @@ pub fn TabsContent(
             nonce=move || nonce.get()
             part=move || part.get()
             popover=move || popover.get()
-            // role=move || role.get()
             slot=move || slot.get()
             spellcheck=move || spellcheck.get()
             style=move || style.get()
-            // tabindex=move || tabindex.get()
             title=move || title.get()
             translate=move || translate.get()
         />
@@ -159,14 +164,15 @@ pub fn TabsContent(
 
     view! {
         <div
-            aria-labelledby=move || format!("{}-tab", value.get().unwrap_or_default())
-            aria-selected=move || {
-                if value.get().unwrap_or_default() == tabs.value.get() { "true" } else { "false" }
-            }
-            hidden=move || value.get().unwrap_or_default() != tabs.value.get()
+            aria_expanded=move || { if tab_selected() { "true" } else { "false" } }
+            aria_labelledby=move || format!("{}-tab", value.get().unwrap_or_default())
+            aria_selected=move || { if tab_selected() { "true" } else { "false" } }
+            class=move || format!("singlestage-tabs-content {}", class.get().unwrap_or_default())
+            hidden=move || !tab_selected()
             id=move || format!("{}-panel", value.get().unwrap_or_default())
+            prop:hidden=move || !tab_selected()
             role="tabpanel"
-            tabindex="-1"
+            tabindex="0"
 
             {..global_attrs_1}
             {..global_attrs_2}

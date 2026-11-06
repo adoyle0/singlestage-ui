@@ -1,0 +1,89 @@
+@layer components1 {
+  .singlestage-slider {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb {
+      @apply bg-white
+      border
+      border-ring
+      relative
+      ring-ring/50
+      rounded-none
+      size-3
+      transition-[color,box-shadow];
+
+      &:active {
+        @apply ring-1;
+      }
+
+      &:focus-visible {
+        @apply outline-hidden
+        ring-1;
+      }
+
+      &:hover {
+        @apply ring-1;
+      }
+
+      ::after {
+        @apply -inset-2
+        absolute;
+      }
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply bg-muted
+      rounded-none;
+    }
+
+    &::-ms-fill-lower {
+      @apply bg-primary
+      rounded-none;
+    }
+
+    &::-ms-fill-upper {
+      @apply bg-muted
+      rounded-none;
+    }
+  }
+
+  .singlestage-slider-horizontal {
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply h-1
+      w-full;
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to right,
+        var(--primary) var(--slider-value),
+        var(--muted) var(--slider-value)
+      );
+    }
+  }
+
+  .singlestage-slider-vertical {
+    @apply min-h-40;
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track,
+    &::-ms-track {
+      @apply h-full
+      w-1;
+    }
+
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to top,
+        var(--primary) var(--slider-value),
+        var(--muted) var(--slider-value)
+      );
+    }
+  }
+}

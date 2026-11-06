@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::{Separator, scroll_area::*};
+use singlestage::*;
 
 #[component]
 pub fn ScrollAreaExample() -> impl IntoView {

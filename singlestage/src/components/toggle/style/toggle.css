@@ -1,0 +1,28 @@
+@layer components {
+  .singlestage-toggle {
+    @apply inline-flex
+    items-center
+    justify-center
+    outline-none
+    whitespace-nowrap;
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      @apply opacity-50
+      pointer-events-none;
+    }
+
+    &:focus-visible {
+      @apply ring-[3px];
+    }
+
+    &:hover {
+      @apply bg-muted;
+    }
+
+    svg {
+      @apply pointer-events-none
+      shrink-0;
+    }
+  }
+}

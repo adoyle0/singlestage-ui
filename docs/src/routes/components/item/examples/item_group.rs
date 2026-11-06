@@ -29,41 +29,32 @@ pub fn ItemGroupExample() -> impl IntoView {
     ]);
 
     view! {
-        <div class="flex w-full max-w-md flex-col gap-6">
-            <ItemGroup>
-                <For each=move || people.get() key=|person| person.username.clone() let(person)>
-                    {
-                        let username = person.username.clone();
+        <ItemGroup class="max-w-sm">
+            <For each=move || people.get() key=|person| person.username.clone() let(person)>
+                {
+                    let username = person.username.clone();
 
-                        view! {
-                            <Item>
-                                <ItemMedia>
-                                    <Avatar>
-                                        <AvatarImage src=person.avatar class="grayscale" />
-                                    </Avatar>
-                                </ItemMedia>
-                                <ItemContent class="gap-1">
-                                    <ItemTitle>{person.username}</ItemTitle>
-                                    <ItemDescription>{person.email}</ItemDescription>
-                                </ItemContent>
-                                <ItemActions>
-                                    <Button variant="ghost" size="icon" class="rounded-full">
-                                        {icon!(icondata::LuPlus)}
-                                    </Button>
-                                </ItemActions>
-                            </Item>
-
-                            {if username.as_str() != "evilrabbit" {
-
-                                view! { <ItemSeparator /> }
-                                    .into_any()
-                            } else {
-                                "".into_any()
-                            }}
-                        }
+                    view! {
+                        <Item variant="outline">
+                            <ItemMedia>
+                                <Avatar>
+                                    <AvatarImage src=person.avatar class="grayscale" />
+                                    <AvatarFallback>{username[..2].to_uppercase()}</AvatarFallback>
+                                </Avatar>
+                            </ItemMedia>
+                            <ItemContent class="gap-1">
+                                <ItemTitle>{person.username}</ItemTitle>
+                                <ItemDescription>{person.email}</ItemDescription>
+                            </ItemContent>
+                            <ItemActions>
+                                <Button variant="ghost" size="icon" class="rounded-full">
+                                    {icon!(icondata::LuPlus)}
+                                </Button>
+                            </ItemActions>
+                        </Item>
                     }
-                </For>
-            </ItemGroup>
-        </div>
+                }
+            </For>
+        </ItemGroup>
     }
 }

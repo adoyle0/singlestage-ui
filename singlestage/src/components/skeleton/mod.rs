@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Creates a skeleton used to show a placeholder while content is loading.
+/// Use to show a placeholder while content is loading.
 #[component]
 pub fn Skeleton(
     // GLOBAL ATTRIBUTES

@@ -8,11 +8,11 @@ pub fn ButtonGroupDropdownExample() -> impl IntoView {
             <Button variant="outline">"Follow"</Button>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button variant="outline" class="!pl-2">
+                    <Button variant="outline" class="!px-2">
                         {icon!(icondata::LuChevronDown)}
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent class="[--radius:1rem]">
+                <DropdownMenuContent align="end">
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
                             {icon!(icondata::BiVolumeMuteRegular)} "Mute Conversation"

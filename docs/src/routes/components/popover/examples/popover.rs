@@ -10,23 +10,25 @@ pub fn PopoverExample() -> impl IntoView {
             </PopoverTrigger>
             <PopoverContent class="w-80">
                 <form>
-                    <FieldSet>
-                        <FieldLegend>"Dimensions"</FieldLegend>
+                    <FieldSet class="gap-4">
+                        <FieldLegend variant="label">"Dimensions"</FieldLegend>
                         <FieldDescription>"Set the dimensions for the layer."</FieldDescription>
-                        <FieldGroup class="[&_input]:w-48 gap-2">
+                        <FieldGroup class="gap-2 [&_input]:max-w-48 [&_input]:h-8">
                             <Field orientation="horizontal">
-                                <Input value="100%" autofocus=true>
-                                    "Width"
-                                </Input>
+                                <FieldLabel>"Width"</FieldLabel>
+                                <Input value="100%" autofocus=true />
                             </Field>
                             <Field orientation="horizontal">
-                                <Input value="300px">"Max. width"</Input>
+                                <FieldLabel>"Max. width"</FieldLabel>
+                                <Input value="300px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <Input value="25px">"Height"</Input>
+                                <FieldLabel>"Height"</FieldLabel>
+                                <Input value="25px" />
                             </Field>
                             <Field orientation="horizontal">
-                                <Input value="none">"Max. height"</Input>
+                                <FieldLabel>"Max. height"</FieldLabel>
+                                <Input value="none" />
                             </Field>
                         </FieldGroup>
                     </FieldSet>

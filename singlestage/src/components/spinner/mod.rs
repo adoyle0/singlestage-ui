@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// Displays a loading spinner.
+/// An indicator that can be used to show a loading state.
 #[component]
 pub fn Spinner(
     #[prop(optional)] children: Option<Children>,

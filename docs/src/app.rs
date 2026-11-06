@@ -53,42 +53,39 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 generate_component_routes!();
 
 #[component]
-pub fn NotFound() -> impl IntoView {
-    view! { "Page not found." }
-}
-
-#[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
     view! {
         <Title text="Singlestage UI" />
-        <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
         <ThemeProvider>
+            <Stylesheet id="leptos" href="/pkg/singlestage_docs.css" />
             <Router>
-                <Routes fallback=NotFound>
-                    <ParentRoute path=StaticSegment("") view=SidebarContainer>
-                        <Route path=StaticSegment("/") view=LandingPage />
-                        <Route path=StaticSegment("/introduction") view=Introduction />
-                        <Route path=StaticSegment("/install") view=Installation />
-                        <Route path=StaticSegment("/theme-provider") view=ThemeProviderRoute />
-                        <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
-                        <Route
-                            path=StaticSegment("/reactive-debug")
-                            view=|| {
-                                view! {
-                                    {if cfg!(debug_assertions) {
-                                        ReactiveDebug.into_any()
-                                    } else {
-                                        NotFound.into_any()
-                                    }}
-                                }
-                            }
-                        />
-                        <ComponentRoutes />
-                    </ParentRoute>
-                </Routes>
+                <SidebarProvider>
+                    <AppSidebar />
+                    <SidebarInset>
+                        <header class="flex sticky inset-x-0 top-0 z-99 gap-2 items-center border-b bg-(--background) isolate shrink-0">
+                            <div class="flex gap-2 justify-between items-center px-4 w-full h-14">
+                                <SidebarTrigger />
+                                <ThemeSwitcher />
+                            </div>
+                        </header>
+                        <div class="my-8 mx-2 sm:mx-12 max-w-4xl">
+                            <Routes fallback=NotFound>
+                                <Route path=StaticSegment("/") view=LandingPage />
+                                <Route path=StaticSegment("/introduction") view=Introduction />
+                                <Route path=StaticSegment("/install") view=Installation />
+                                <Route
+                                    path=StaticSegment("/theme-provider")
+                                    view=ThemeProviderRoute
+                                />
+                                <Route path=StaticSegment("/icon-macro") view=IconMacroRoute />
+                                <ComponentRoutes />
+                            </Routes>
+                        </div>
+                    </SidebarInset>
+                </SidebarProvider>
             </Router>
         </ThemeProvider>
     }

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::link::*;
+use singlestage::*;
 
 #[component]
 pub fn LinkExample() -> impl IntoView {
