@@ -11,7 +11,7 @@ use syntect::{
 pub fn highlight_html_from_file<P: AsRef<Path>>(
     path: P,
     ss: Arc<SyntaxSet>,
-    theme: Arc<&Theme>,
+    theme: Arc<Theme>,
     bg: Arc<Color>,
 ) -> String {
     let mut highlighter = HighlightFile::new(&path, &ss, &theme).unwrap();

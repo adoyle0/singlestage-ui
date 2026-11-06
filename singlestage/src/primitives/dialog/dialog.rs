@@ -119,11 +119,7 @@ pub fn DialogPrimitive(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let context = DialogContext {
-        alert,
-        open,
-        ..Default::default()
-    };
+    let context = DialogContext { alert, open };
 
     let global_attrs_1 = view! {
         <{..}

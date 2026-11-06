@@ -51,7 +51,7 @@ struct ComponentPage {
 }
 
 impl ComponentPage {
-    fn from_path(path: &PathBuf) -> Self {
+    fn from_path(path: &Path) -> Self {
         let file = File::open(path.join("component.toml")).unwrap();
         let mut buf_reader = BufReader::new(file);
         let mut contents = String::new();
@@ -264,8 +264,8 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
 
     let ss = Arc::new(SyntaxSet::load_defaults_newlines());
     let ts = ThemeSet::load_defaults();
-    let theme = Arc::new(&ts.themes["Solarized (light)"]);
-    let (_, bg) = start_highlighted_html_snippet(&theme);
+    let theme = Arc::new(ts.themes["Solarized (light)"].to_owned());
+    let (_, bg) = start_highlighted_html_snippet(&theme.clone());
     let bg = Arc::new(bg);
 
     get_component_paths()
@@ -290,39 +290,42 @@ pub fn generate_component_pages(_input: TokenStream) -> TokenStream {
             };
 
             // Generate examples
-            let examples = component.examples.map(|component_examples| component_examples
-                        .par_iter()
-                        .map(|example| {
-                            let title = example.title.to_owned().map(|example_title| format!(r#"name="{}" "#, example_title));
+            let examples = component.examples.map(|component_examples| {
+                component_examples
+                    .par_iter()
+                    .map(|example| {
+                        let title = example
+                            .title
+                            .to_owned()
+                            .map(|example_title| format!(r#"name="{}" "#, example_title));
 
-                            let description =
-                                example.description.to_owned().map(|example_description| format!(r#"description="{}" "#, example_description));
+                        let description =
+                            example.description.to_owned().map(|example_description| {
+                                format!(r#"description="{}" "#, example_description)
+                            });
 
-                            let path = format!(
-                                "./docs/src/routes/components/{}/examples/{}.rs",
-                                component_module_name,
-                                string_to_snake(&example.name)
-                            );
+                        let path = format!(
+                            "./docs/src/routes/components/{}/examples/{}.rs",
+                            component_module_name,
+                            string_to_snake(&example.name)
+                        );
 
-                            let example_code = highlight_html_from_file(
-                                path,
-                                ss.clone(),
-                                theme.clone(),
-                                bg.clone(),
-                            );
+                        let example_code =
+                            highlight_html_from_file(path, ss.clone(), theme.clone(), bg.clone());
 
-                            format!(
-                                r##"<Example {}{}view={}Example.into_any() code=r#"{}"# full_size={} />
+                        format!(
+                            r##"<Example {}{}view={}Example.into_any() code=r#"{}"# full_size={} />
             "##,
-                                title.unwrap_or_default(),
-                                description.unwrap_or_default(),
-                                string_to_pascal(&example.name),
-                                example_code,
-                                example.name.starts_with("sidebar")
+                            title.unwrap_or_default(),
+                            description.unwrap_or_default(),
+                            string_to_pascal(&example.name),
+                            example_code,
+                            example.name.starts_with("sidebar")
                                 || example.name.contains("background")
-                            )
-                        })
-                        .collect::<String>());
+                        )
+                    })
+                    .collect::<String>()
+            });
 
             // Generate API references
             let references = component

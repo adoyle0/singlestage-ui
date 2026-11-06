@@ -228,10 +228,10 @@ pub fn MenuItemPrimitive(
                     MenuItemPrimitiveType::Item => {
                         if as_child.get().unwrap_or_default() && dismiss.get()
                             && let Some(menu) = use_context::<PopoverMenuContext>()
-                                && !menu.modal.get()
-                            {
-                                menu.open.set(false);
-                            }
+                            && !menu.modal.get()
+                        {
+                            menu.open.set(false);
+                        }
                     }
                     _ => {}
                 }
@@ -294,10 +294,7 @@ pub fn MenuItemPrimitive(
                                     }
                                         .into_any()
                                 }
-                                _ => {
-                                    let _: () = view! {};
-                                    ().into_any()
-                                },
+                                _ => ().into_any(),
                             }}
                         </label>
                     }

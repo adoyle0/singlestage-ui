@@ -293,7 +293,9 @@ pub fn Button(
                         Some(dropdown.menu_id.get())
                     } else if let Some(popover) = use_context::<PopoverContext>() {
                         Some(popover.menu_id.get())
-                    } else { use_context::<SheetContext>().map(|sheet| sheet.content_id.get()) }
+                    } else {
+                        use_context::<SheetContext>().map(|sheet| sheet.content_id.get())
+                    }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>()
                     && menu_item.dismiss.get()
                 {
@@ -350,6 +352,35 @@ pub fn Button(
                         class.get().unwrap_or_default(),
                     )
                 } else {
+                    let size = format!(
+                        "{}{}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "xs" | "extra small" => "singlestage-button-size-xs",
+                            "sm" | "small" => "singlestage-button-size-sm",
+                            "lg" | "large" => "singlestage-button-size-lg",
+                            "icon" => "singlestage-button-size-icon",
+                            "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                                "singlestage-button-size-icon-xs"
+                            }
+                            "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                "singlestage-button-size-icon-sm"
+                            }
+                            "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                "singlestage-button-size-icon-lg"
+                            }
+                            _ => "singlestage-button-size-default",
+                        },
+                        if in_input_group {
+                            match size.get().unwrap_or_default().as_str() {
+                                "sm" | "small" => " singlestage-input-group-button-sm",
+                                "icon-xs" | "xs-icon" => " singlestage-input-group-button-icon-xs",
+                                "icon-sm" | "sm-icon" => " singlestage-input-group-button-icon-sm",
+                                _ => " singlestage-input-group-button-xs",
+                            }
+                        } else {
+                            ""
+                        },
+                    );
                     format!(
                         "singlestage-button{}{}{} {} {} {}",
                         if in_input_group { " singlestage-input-group-button" } else { "" },
@@ -377,39 +408,7 @@ pub fn Button(
                                 }
                             }
                         },
-                        format!(
-                            "{}{}",
-                            match size.get().unwrap_or_default().as_str() {
-                                "xs" | "extra small" => "singlestage-button-size-xs",
-                                "sm" | "small" => "singlestage-button-size-sm",
-                                "lg" | "large" => "singlestage-button-size-lg",
-                                "icon" => "singlestage-button-size-icon",
-                                "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
-                                    "singlestage-button-size-icon-xs"
-                                }
-                                "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
-                                    "singlestage-button-size-icon-sm"
-                                }
-                                "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
-                                    "singlestage-button-size-icon-lg"
-                                }
-                                _ => "singlestage-button-size-default",
-                            },
-                            if in_input_group {
-                                match size.get().unwrap_or_default().as_str() {
-                                    "sm" | "small" => " singlestage-input-group-button-sm",
-                                    "icon-xs" | "xs-icon" => {
-                                        " singlestage-input-group-button-icon-xs"
-                                    }
-                                    "icon-sm" | "sm-icon" => {
-                                        " singlestage-input-group-button-icon-sm"
-                                    }
-                                    _ => " singlestage-input-group-button-xs",
-                                }
-                            } else {
-                                ""
-                            },
-                        ),
+                        size,
                         class.get().unwrap_or_default(),
                     )
                 }
@@ -454,8 +453,7 @@ pub fn Button(
                     } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
                         if let Some(sidebar) = use_context::<SidebarContext>()
                             && !sidebar.open.get()
-                        {
-                        } else {
+                        {} else {
                             collapsible.open.set(!collapsible.open.get_untracked())
                         }
                     } else if let Some(sheet) = use_context::<SheetContext>()
@@ -464,21 +462,20 @@ pub fn Button(
                         sheet.open.set(true);
                     }
                 } else if let Some(dialog) = use_context::<DialogContext>() {
-                    if (is_dialog_action || is_dialog_cancel || is_dialog_close)
-                        && dismiss.get() {
-                            dialog.open.set(false);
-                        }
+                    if (is_dialog_action || is_dialog_cancel || is_dialog_close) && dismiss.get() {
+                        dialog.open.set(false);
+                    }
                 } else if let Some(sheet) = use_context::<SheetContext>() {
-                    if (is_sheet_close || in_sidebar_menu_button)
-                        && dismiss.get() {
-                            sheet.open.set(false);
-                        }
+                    if (is_sheet_close || in_sidebar_menu_button) && dismiss.get() {
+                        sheet.open.set(false);
+                    }
                 } else if let Some(menu_item) = use_context::<MenuItemContext>()
-                    && let Some(menu) = use_context::<PopoverMenuContext>()
-                        && !menu.modal.get() && menu_item.dismiss.get() && dismiss.get() {
-                            ev.prevent_default();
-                            menu.open.set(false);
-                        }
+                    && let Some(menu) = use_context::<PopoverMenuContext>() && !menu.modal.get()
+                    && menu_item.dismiss.get() && dismiss.get()
+                {
+                    ev.prevent_default();
+                    menu.open.set(false);
+                }
             }
             popovertarget=move || {
                 if is_trigger {
