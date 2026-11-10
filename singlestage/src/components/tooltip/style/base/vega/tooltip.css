@@ -1,7 +1,6 @@
 @layer components1 {
   .singlestage-tooltip-content {
     @apply gap-1.5
-    inline-flex
     items-center
     px-3
     py-1.5

@@ -1,9 +1,13 @@
 @layer components {
+  .singlestage-tooltip {
+    @apply inline-flex
+    w-fit;
+  }
+
   .singlestage-tooltip-content {
     @apply bg-foreground
     max-w-xs
     text-background
-    w-fit
     z-50;
 
     /* TODO: Arrows */
