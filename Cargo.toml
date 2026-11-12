@@ -15,40 +15,29 @@ keywords = ["leptos", "ui", "components", "basecoat", "shadcn"]
 categories = ["web-programming", "gui", "wasm"]
 
 [workspace.dependencies]
+axum = "0.8"
+console_error_panic_hook = "0.1"
+icondata = "0.7"
 leptos = "0.8"
 leptos_axum = "0.8"
 leptos_meta = "0.8"
 leptos_router = "0.8"
-
-# Singlestage
-icondata_core = "0.1"
+quote = "1.0"
+rayon = "1.11"
 reactive_stores = "0.4"
-singlestage_macro = "0"
-web-sys = "0.3"
-
-# Singlestage build
 reqwest = "0.13"
+serde = "1.0"
 sha256 = "1.6"
-
-# Docs
-axum = "0.8"
-console_error_panic_hook = "0.1"
-icondata = "0.7"
+singlestage_macro = "0"
+syn = "3.0"
+syntect = "5"
 tokio = "1"
+toml = "1.0"
 tower = "0.5"
 tower-http = "0.7"
 uuid = "1.17"
 wasm-bindgen = "0.2"
-
-# Macros
-serde = "1.0"
-syntect = "5"
-toml = "1.0"
-quote = "1.0"
-syn = "3.0"
-
-# Docs macro
-rayon = "1.11"
+web-sys = "0.3"
 
 [profile.wasm-release]
 inherits = "release"

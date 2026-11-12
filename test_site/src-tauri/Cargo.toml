@@ -16,7 +16,7 @@ tauri-build.workspace = true
 
 [dependencies]
 log.workspace = true
-serde = { workspace = true, features = ["derive"] }
+serde.workspace = true
 serde_json.workspace = true
 tauri-plugin-log.workspace = true
 tauri-plugin-opener.workspace = true

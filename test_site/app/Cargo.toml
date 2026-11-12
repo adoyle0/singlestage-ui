@@ -5,21 +5,21 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+axum = { workspace = true, optional = true }
+cfg-if.workspace = true
+console_error_panic_hook = { workspace = true, optional = true }
+console_log = { workspace = true, optional = true }
+http.workspace = true
+icondata.workspace = true
 leptos.workspace = true
 leptos_axum = { workspace = true, optional = true }
 leptos_meta.workspace = true
 leptos_router.workspace = true
-
-cfg-if.workspace = true
-http.workspace = true
-icondata.workspace = true
+log = { workspace = true, optional = true }
 serde = { workspace = true }
+simple_logger = { workspace = true, optional = true }
 singlestage = { workspace = true, optional = true }
 thiserror.workspace = true
-
-# ssr
-axum = { workspace = true, optional = true }
-simple_logger = { workspace = true, optional = true }
 tokio = { workspace = true, optional = true, features = ["full"] }
 tower = { workspace = true, optional = true, features = ["full"] }
 tower-http = { workspace = true, optional = true, features = [
@@ -27,12 +27,6 @@ tower-http = { workspace = true, optional = true, features = [
   "cors",
   "decompression-full",
 ] }
-
-# csr
-console_error_panic_hook = { workspace = true, optional = true }
-console_log = { workspace = true, optional = true }
-log = { workspace = true, optional = true }
-
 web-sys = { workspace = true }
 
 [dev-dependencies]

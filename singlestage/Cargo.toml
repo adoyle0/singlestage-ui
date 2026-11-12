@@ -13,13 +13,12 @@ keywords.workspace = true
 categories.workspace = true
 
 [dependencies]
-singlestage_macro = { workspace = true, optional = true }
-reactive_stores = { workspace = true, optional = true }
-
 leptos = { workspace = true }
 leptos_meta = { workspace = true }
 leptos_router = { workspace = true }
+reactive_stores = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
+singlestage_macro = { workspace = true, optional = true }
 uuid = { workspace = true, features = ["v4", "js"] }
 web-sys = { workspace = true, features = ["DomRect", "Element"] }
 

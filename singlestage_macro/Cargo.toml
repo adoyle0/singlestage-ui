@@ -18,3 +18,8 @@ proc-macro = true
 [dependencies]
 quote = { workspace = true }
 syn = { workspace = true }
+
+[dev-dependencies]
+icondata = { workspace = true }
+leptos = { workspace = true }
+singlestage = { path = "../singlestage" }
