@@ -451,9 +451,8 @@ pub fn Button(
                         ev.prevent_default();
                         popover.open.set(!popover.open.get_untracked());
                     } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
-                        if let Some(sidebar) = use_context::<SidebarContext>()
-                            && !sidebar.open.get()
-                        {} else {
+                        if let Some(sidebar) = use_context::<SidebarContext>() && sidebar.open.get()
+                        {
                             collapsible.open.set(!collapsible.open.get_untracked())
                         }
                     } else if let Some(sheet) = use_context::<SheetContext>()

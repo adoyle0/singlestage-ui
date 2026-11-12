@@ -131,7 +131,6 @@ pub fn Collapsible(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -167,7 +166,11 @@ pub fn Collapsible(
     };
 
     view! {
-        <div {..global_attrs_1} {..global_attrs_2}>
+        <div
+            class=move || format!("singlestage-collapsible {}", class.get().unwrap_or_default())
+            {..global_attrs_1}
+            {..global_attrs_2}
+        >
             <Provider value=CollapsibleContext { open }>{children()}</Provider>
         </div>
     }

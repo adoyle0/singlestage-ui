@@ -155,17 +155,19 @@ pub fn TestButtons() -> impl IntoView {
                             key=|thing| thing.size.to_string()
                             let(thing)
                         >
-                            <SidebarMenuButton>
-                                <Link
-                                    aria_current=thing.aria_current.clone()
-                                    href=thing.href
-                                    size=thing.size.clone()
-                                    variant=thing.variant.clone()
-                                >
-                                    {icon!(icondata::LuLink)}
-                                    <span>{string_to_title(&thing.size)}</span>
-                                </Link>
-                            </SidebarMenuButton>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <Link
+                                        aria_current=thing.aria_current.clone()
+                                        href=thing.href
+                                        size=thing.size.clone()
+                                        variant=thing.variant.clone()
+                                    >
+                                        {icon!(icondata::LuLink)}
+                                        <span>{string_to_title(&thing.size)}</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </For>
                     </SidebarGroupContent>
                 </SidebarGroup>
@@ -179,16 +181,18 @@ pub fn TestButtons() -> impl IntoView {
                             key=|thing| thing.size.to_string()
                             let(thing)
                         >
-                            <SidebarMenuButton>
-                                <Button
-                                    aria_current=thing.aria_current.clone()
-                                    size=thing.size.clone()
-                                    variant=thing.variant.clone()
-                                >
-                                    {icon!(icondata::MdiButtonPointer)}
-                                    <span>{string_to_title(&thing.size)}</span>
-                                </Button>
-                            </SidebarMenuButton>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <Button
+                                        aria_current=thing.aria_current.clone()
+                                        size=thing.size.clone()
+                                        variant=thing.variant.clone()
+                                    >
+                                        {icon!(icondata::MdiButtonPointer)}
+                                        <span>{string_to_title(&thing.size)}</span>
+                                    </Button>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </For>
                     </SidebarGroupContent>
                 </SidebarGroup>

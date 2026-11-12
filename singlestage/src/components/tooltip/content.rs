@@ -1,9 +1,12 @@
-use crate::TooltipContext;
+use crate::{Reactive, TooltipContext};
 use leptos::prelude::*;
 
 /// Contains the content displayed within the tooltip popover.
 #[component]
 pub fn TooltipContent(
+    // TODO: do something less hacky
+    #[prop(optional)] sidebar_button: bool,
+
     children: Children,
 
     /// Set where the tooltip is rendered along the chosen side.
@@ -15,7 +18,7 @@ pub fn TooltipContent(
     ///
     /// Accepted values: "top" (default) | "right" | "bottom" | "left".
     #[prop(optional, into)]
-    side: MaybeProp<String>,
+    side: Reactive<String>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -171,11 +174,18 @@ pub fn TooltipContent(
             class=move || {
                 format!(
                     "singlestage-tooltip-content singlestage-popover singlestage-popover-animations {} {} {}",
-                    match side.get().unwrap_or_default().as_str() {
-                        "right" => "singlestage-popover-right",
-                        "bottom" => "singlestage-popover-bottom",
-                        "left" => "singlestage-popover-left",
-                        _ => "singlestage-popover-top",
+                    if sidebar_button {
+                        match side.get().as_str() {
+                            "right" => "singlestage-popover-left",
+                            _ => "singlestage-popover-right",
+                        }
+                    } else {
+                        match side.get().as_str() {
+                            "right" => "singlestage-popover-right",
+                            "bottom" => "singlestage-popover-bottom",
+                            "left" => "singlestage-popover-left",
+                            _ => "singlestage-popover-top",
+                        }
                     },
                     match align.get().unwrap_or_default().as_str() {
                         "start" => "singlestage-popover-start",

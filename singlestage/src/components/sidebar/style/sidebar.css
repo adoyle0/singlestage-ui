@@ -422,4 +422,13 @@
       }
     }
   }
+
+  .singlestage-sidebar-menu-item,
+  .singlestage-sidebar-menu-sub-item {
+    > .singlestage-tooltip,
+    > .singlestage-collapsible > .singlestage-tooltip {
+      @apply block
+      w-full;
+    }
+  }
 }

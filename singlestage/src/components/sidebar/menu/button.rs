@@ -14,17 +14,28 @@ pub fn SidebarMenuButton(
 
     view! {
         <Provider value=SidebarMenuButtonContext {}>
-            <Tooltip>
-                <TooltipTrigger>{children()}</TooltipTrigger>
-                <Show when=move || !sidebar.open.get() && tooltip.get().is_some()>
-                    <TooltipContent side=match sidebar.side.get().as_str() {
-                        "right" => "left",
-                        _ => "right",
-                    }>
-                        <p>{move || tooltip.get().unwrap_or_default()}</p>
-                    </TooltipContent>
-                </Show>
-            </Tooltip>
+            {if tooltip.get_untracked().is_some() {
+
+                view! {
+                    <Tooltip>
+                        <TooltipTrigger>{children()}</TooltipTrigger>
+                        <TooltipContent
+                            style:display=move || match sidebar.open.get() {
+                                true => Some("none"),
+                                false => None,
+                            }
+                            align="center"
+                            side=sidebar.side
+                            sidebar_button=true
+                        >
+                            <p>{tooltip}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                }
+                    .into_any()
+            } else {
+                children().into_any()
+            }}
         </Provider>
     }
 }
