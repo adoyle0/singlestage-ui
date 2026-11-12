@@ -11,7 +11,7 @@ pub fn DropdownMenu(
 
     /// Set whether or not this popover should be modal meaning it can't be light dismissed
     /// Use this along with the `open` signal for a manually managed popover
-    #[prop(optional, into, default = Reactive::new(false))]
+    #[prop(optional, into, default = Reactive::from(false))]
     modal: Reactive<bool>,
     /// Reactive signal that can remotely control the open state of the popover **but is not
     /// coupled to the actual open state of the popover** unless `modal` is set to `true`

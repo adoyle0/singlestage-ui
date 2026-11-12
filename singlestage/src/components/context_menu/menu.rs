@@ -118,7 +118,7 @@ pub fn ContextMenu(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let popover_context = PopoverMenuContext {
-        modal: Reactive::new(false),
+        modal: Reactive::from(false),
         ..Default::default()
     };
     let menu_context = ContextMenuContext {

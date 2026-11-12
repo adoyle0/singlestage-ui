@@ -4,15 +4,6 @@ use std::fmt::Debug;
 #[cfg(feature = "stores")]
 use reactive_stores::{ArcField, ArcStore, Field, Store, StoreField, Subfield};
 
-// TODO: For experimental multi-thumb `Slider` support - use or remove me
-//
-// fn usize_to_f64(value: usize) -> f64 {
-//     // HACK: a 64 bit usize isn't guaranteed to fit in a 64 bit float, so do some parsing
-//     // shenanigans and return f64 max if the number is large enough, this easy and should
-//     // work 99.999% of the time
-//     value.to_string().parse::<f64>().unwrap_or(f64::MAX)
-// }
-
 // Rust gets upset about trying to use `#[cfg(feature = "stores")]` in a where clause:
 // https://github.com/rust-lang/rust/issues/115590
 // HACK: So we'll just define `Reactive` conditionally for now because it's easy and it works.
@@ -42,12 +33,11 @@ use reactive_stores::{ArcField, ArcStore, Field, Store, StoreField, Subfield};
 pub enum Reactive<T>
 where
     T: Send + Sync + Clone + 'static,
-    RwSignal<T>: Send + Sync + Clone + Copy + 'static,
-    Field<T>: Send + Sync + Clone + Copy + 'static,
+    Field<T>: Send + Sync + Clone + 'static,
+    RwSignal<T>: Send + Sync + Clone + 'static,
 {
-    RwSignal(RwSignal<T>),
-    MaybeProp(MaybeProp<T>),
     Field(Field<T>),
+    RwSignal(RwSignal<T>),
 }
 
 /// A reactive binding wrapper that can take any value and upgrade it to a RwSignal (default)
@@ -74,142 +64,95 @@ where
 #[derive(Clone, Debug)]
 pub enum Reactive<T>
 where
-    T: Send + Sync + Clone + 'static + Default,
-    RwSignal<T>: Send + Sync + Clone + Copy + 'static + Default,
+    T: Send + Sync + Clone + 'static,
+    RwSignal<T>: Send + Sync + Clone + 'static,
 {
     RwSignal(RwSignal<T>),
-    MaybeProp(MaybeProp<T>),
 }
 
 impl<T> Reactive<T>
 where
-    T: Send + Sync + Clone + 'static + Default,
+    T: Send + Sync + Clone + 'static,
 {
-    #[inline]
     pub fn get(&self) -> T {
         match self {
-            Self::RwSignal(rw_signal) => rw_signal.get(),
-            Self::MaybeProp(r_signal) => r_signal.get().unwrap_or_default(),
+            Self::RwSignal(signal) => signal.get(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get(),
         }
     }
 
-    #[inline]
     pub fn get_untracked(&self) -> T {
         match self {
-            Self::RwSignal(rw_signal) => rw_signal.get_untracked(),
-            Self::MaybeProp(r_signal) => r_signal.get_untracked().unwrap_or_default(),
+            Self::RwSignal(signal) => signal.get_untracked(),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.get_untracked(),
         }
     }
 
-    #[inline]
     pub fn set(&self, value: T) {
         match self {
-            Self::RwSignal(rw_signal) => rw_signal.set(value),
-            Self::MaybeProp(_) => (),
+            Self::RwSignal(signal) => signal.set(value),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.set(value),
         }
     }
 
-    #[inline]
     pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
         match self {
-            Self::RwSignal(rw_signal) => rw_signal.with(fun),
-            Self::MaybeProp(r_signal) => r_signal.with(|value|{
-                let default = T::default();
-                 fun(value.as_ref().unwrap_or(&default)) }),
+            Self::RwSignal(signal) => signal.with(fun),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.with(fun),
         }
     }
 
-    #[inline]
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
-            Self::RwSignal(rw_signal) => rw_signal.update(fun),
-            Self::MaybeProp(_) => (),
+            Self::RwSignal(signal) => signal.update(fun),
             #[cfg(feature = "stores")]
             Self::Field(field) => field.update(fun),
         }
     }
 }
 
-impl<T: Send + Sync + Clone + Default> Copy for Reactive<T> {}
+impl<T> Copy for Reactive<T> where T: Send + Clone + Sync {}
 
-impl<T: Default + Send + Clone + Sync + 'static> Default for Reactive<T> {
+impl<T> Default for Reactive<T>
+where
+    T: Default + Send + Clone + Sync + 'static,
+{
     fn default() -> Self {
         Self::RwSignal(RwSignal::<T>::new(Default::default()))
     }
 }
 
-impl<T: Default + Send + Clone + Sync + 'static> Reactive<T> {
-    pub fn new(value: T) -> Self {
-        Self::RwSignal(RwSignal::<T>::new(value))
-    }
-}
-
 impl From<&str> for Reactive<String> {
     fn from(value: &str) -> Self {
-        Reactive::MaybeProp(value.to_string().into())
+        Reactive::RwSignal(RwSignal::new(value.to_string()))
     }
 }
-
-// TODO: For experimental multi-thumb `Slider` support - use or remove me
-//
-// impl From<usize> for Reactive<f64> {
-//     fn from(value: usize) -> Self {
-//         Reactive::RwSignal(RwSignal::new(usize_to_f64(value)))
-//     }
-// }
-//
-// impl From<usize> for Reactive<Vec<f64>> {
-//     fn from(value: usize) -> Self {
-//         Reactive::RwSignal(RwSignal::new(vec![usize_to_f64(value)]))
-//     }
-// }
-//
-// impl From<Vec<usize>> for Reactive<Vec<f64>> {
-//     fn from(value: Vec<usize>) -> Self {
-//         Reactive::RwSignal(RwSignal::new(
-//             value.iter().map(|el| usize_to_f64(el.to_owned())).collect(),
-//         ))
-//     }
-// }
 
 impl<T> From<T> for Reactive<T>
 where
-    T: Send + Sync + Clone + 'static + Default,
+    T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
-
-        Reactive::MaybeProp(value.into())
+        Reactive::RwSignal(RwSignal::new(value))
     }
 }
 
-impl<T> From<Option<T>> for Reactive<T>
-where
-    T: Send + Sync + Clone + 'static + Default,
-{
-    fn from(value: Option<T>) -> Self {
-        Reactive::MaybeProp(value.into())
-    }
-}
 impl<T> From<T> for Reactive<Vec<T>>
 where
-    T: Send + Sync + Clone + 'static + Default,
+    T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
-        Reactive::MaybeProp(vec![value].into())
+        Reactive::RwSignal(RwSignal::new(vec![value]))
     }
 }
 
 impl<T> From<RwSignal<T>> for Reactive<T>
 where
-    T: Send + Sync + Clone + 'static + Default,
+    T: Send + Sync + Clone + 'static,
 {
     fn from(value: RwSignal<T>) -> Self {
         Reactive::RwSignal(value)
@@ -221,11 +164,18 @@ where
     T: Send + Sync + Clone + 'static + Default,
 {
     fn from(value: MaybeProp<T>) -> Self {
-        Reactive::MaybeProp(value)
+        Reactive::RwSignal(RwSignal::new(value.get_untracked().unwrap_or_default()))
     }
 }
 
-
+impl<T> From<ReadSignal<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static,
+{
+    fn from(value: ReadSignal<T>) -> Self {
+        Reactive::RwSignal(RwSignal::new(value.get_untracked()))
+    }
+}
 
 #[cfg(feature = "stores")]
 impl<Inner, Prev, T> From<Subfield<Inner, Prev, T>> for Reactive<T>
@@ -282,4 +232,57 @@ where
     fn from(value: ArcStore<T>) -> Self {
         Reactive::Field(value.into())
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn reactive_from_t() {
+        let reactive: Reactive<usize> = 1.into();
+        assert_eq!(reactive.get_untracked(), 1);
+
+        reactive.set(2);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    #[test]
+    fn reactive_from_rwsignal_t() {
+        let reactive: Reactive<usize> = RwSignal::new(1).into();
+        assert_eq!(reactive.get_untracked(), 1);
+
+        reactive.set(2);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    #[test]
+    fn reactive_from_maybeprop_t() {
+        let maybe_prop: MaybeProp<usize> = 1.into();
+        let reactive: Reactive<usize> = Reactive::from(maybe_prop);
+        assert_eq!(reactive.get_untracked(), 1);
+
+        reactive.set(2);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    #[test]
+    fn reactive_set() {
+        let reactive: Reactive<usize> = Reactive::from(1);
+        assert_eq!(reactive.get_untracked(), 1);
+
+        reactive.set(2);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    #[test]
+    fn reactive_update() {
+        let reactive: Reactive<usize> = Reactive::from(1);
+        assert_eq!(reactive.get_untracked(), 1);
+
+        reactive.update(|val| *val += 1);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    // TODO: Test stores
 }

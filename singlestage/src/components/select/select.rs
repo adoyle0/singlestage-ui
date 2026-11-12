@@ -166,11 +166,11 @@ pub fn Select(
     };
 
     let value: Reactive<String> = value.unwrap_or(if let Some(default) = default.get_untracked() {
-        Reactive::new(default)
+        Reactive::from(default)
     } else if placeholder.get_untracked().is_some() {
-        Reactive::new("singlestage-select-placeholder".to_string())
+        Reactive::from("singlestage-select-placeholder".to_string())
     } else {
-        Reactive::new("singlestage-select-value-not-set".to_string())
+        Reactive::from("singlestage-select-value-not-set".to_string())
     });
 
     let disabled: Reactive<bool> = {

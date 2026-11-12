@@ -5,7 +5,7 @@ use leptos::prelude::*;
 #[component]
 pub fn Progress(
     /// The value that represents 100%, or full.
-    #[prop(optional, into, default = Reactive::new(100.))]
+    #[prop(optional, into, default = Reactive::from(100.))]
     max: Reactive<f64>,
     /// The current progress value to be rendered.
     #[prop(optional, into)]

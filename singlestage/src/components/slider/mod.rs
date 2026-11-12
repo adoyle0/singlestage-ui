@@ -71,7 +71,7 @@ pub fn Slider(
     #[prop(optional, into)]
     list: MaybeProp<String>,
     /// The greatest value in the range of permitted values.
-    #[prop(optional, into, default = Reactive::new(100.))]
+    #[prop(optional, into, default = Reactive::from(100.))]
     max: Reactive<f64>,
     /// The lowest value in the range of permitted values.
     #[prop(optional, into)]
@@ -80,7 +80,7 @@ pub fn Slider(
     #[prop(optional, into)]
     name: MaybeProp<String>,
     /// Define the granularity of expected input value.
-    #[prop(optional, into, default = Reactive::new(1.))]
+    #[prop(optional, into, default = Reactive::from(1.))]
     step: Reactive<f64>,
 
     // GLOBAL ATTRIBUTES
@@ -225,9 +225,10 @@ pub fn Slider(
     // On default
     Effect::new(move || {
         if let Some(slider) = slider_ref.get()
-            && let Some(default_value) = default.get() {
-                slider.set_default_value(&default_value.to_string());
-            }
+            && let Some(default_value) = default.get()
+        {
+            slider.set_default_value(&default_value.to_string());
+        }
     });
 
     // On disabled

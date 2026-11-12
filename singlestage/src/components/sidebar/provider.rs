@@ -11,10 +11,10 @@ pub fn SidebarProvider(
     #[prop(optional, into)]
     is_mobile: Reactive<bool>,
     /// Reactive signal coupled to the sidebar's open state.
-    #[prop(optional, into, default = Reactive::new(true))]
+    #[prop(optional, into, default = Reactive::from(true))]
     open: Reactive<bool>,
     /// Reactive signal coupled to which side of its container the sidebar renders on.
-    #[prop(optional, into, default = Reactive::new("left".to_string()))]
+    #[prop(optional, into, default = Reactive::from("left".to_string()))]
     side: Reactive<String>,
 
     // GLOBAL ATTRIBUTES

@@ -17,7 +17,7 @@ pub fn Button(
     #[prop(optional, into)]
     button_type: MaybeProp<String>,
     /// Toggle whether clicking this button dismisses its parent popover
-    #[prop(optional, into, default = Reactive::new(true))]
+    #[prop(optional, into, default = Reactive::from(true))]
     dismiss: Reactive<bool>,
     /// Whether the input is invalid
     #[prop(optional, into)]

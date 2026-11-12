@@ -13,7 +13,7 @@ pub fn DropdownMenuCheckboxItem(
     #[prop(optional, into)]
     disabled: Reactive<bool>,
     /// Toggle whether clicking this item dismisses its parent menu
-    #[prop(optional, into, default = Reactive::new(true))]
+    #[prop(optional, into, default = Reactive::from(true))]
     dismiss: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     #[prop(optional, into)]
