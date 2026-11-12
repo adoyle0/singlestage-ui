@@ -98,14 +98,6 @@ where
         }
     }
 
-    pub fn with<K>(&self, fun: impl FnOnce(&T) -> K) -> K {
-        match self {
-            Self::RwSignal(signal) => signal.with(fun),
-            #[cfg(feature = "stores")]
-            Self::Field(field) => field.with(fun),
-        }
-    }
-
     pub fn update(&self, fun: impl FnOnce(&mut T)) {
         match self {
             Self::RwSignal(signal) => signal.update(fun),
@@ -256,76 +248,175 @@ where
 mod tests {
     use super::*;
 
+    // T
+
     #[test]
-    fn reactive_from_t() {
+    fn reactive_from_t_get() {
+        let reactive: Reactive<usize> = 1.into();
+        assert_eq!(reactive.get(), 1);
+    }
+
+    #[test]
+    fn reactive_from_t_get_untracked() {
         let reactive: Reactive<usize> = 1.into();
         assert_eq!(reactive.get_untracked(), 1);
+    }
 
+    #[test]
+    fn reactive_from_t_set() {
+        let reactive: Reactive<usize> = 1.into();
         reactive.set(2);
         assert_eq!(reactive.get_untracked(), 2);
     }
 
     #[test]
-    fn reactive_from_option_t() {
+    fn reactive_from_t_update() {
+        let reactive: Reactive<usize> = 1.into();
+        reactive.update(|v| *v += 1);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    // Option<T>
+
+    #[test]
+    fn reactive_from_option_t_get() {
+        let reactive: Reactive<usize> = Some(1).into();
+        assert_eq!(reactive.get(), 1);
+    }
+
+    #[test]
+    fn reactive_from_option_t_get_untracked() {
         let reactive: Reactive<usize> = Some(1).into();
         assert_eq!(reactive.get_untracked(), 1);
+    }
 
+    #[test]
+    fn reactive_from_option_t_set() {
+        let reactive: Reactive<usize> = Some(1).into();
         reactive.set(2);
         assert_eq!(reactive.get_untracked(), 2);
     }
 
     #[test]
-    fn reactive_from_vec_t() {
+    fn reactive_from_option_t_update() {
+        let reactive: Reactive<usize> = Some(1).into();
+        reactive.update(|v| *v += 1);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    // Vec<T>
+
+    #[test]
+    fn reactive_from_vec_t_get() {
+        let reactive: Reactive<Vec<usize>> = 1.into();
+        assert_eq!(reactive.get(), vec![1]);
+    }
+
+    #[test]
+    fn reactive_from_vec_t_get_untracked() {
         let reactive: Reactive<Vec<usize>> = 1.into();
         assert_eq!(reactive.get_untracked(), vec![1]);
+    }
 
+    #[test]
+    fn reactive_from_vec_t_set() {
+        let reactive: Reactive<Vec<usize>> = 1.into();
         reactive.set(vec![2]);
         assert_eq!(reactive.get_untracked(), vec![2]);
     }
 
     #[test]
-    fn reactive_from_option_vec_t() {
+    fn reactive_from_vec_t_update() {
+        let reactive: Reactive<Vec<usize>> = 1.into();
+        reactive.update(|v| v[0] += 1);
+        assert_eq!(reactive.get_untracked(), vec![2]);
+    }
+
+    // Vec<Option<T>>
+
+    #[test]
+    fn reactive_from_vec_option_t_get() {
+        let reactive: Reactive<Vec<usize>> = Some(1).into();
+        assert_eq!(reactive.get(), vec![1]);
+    }
+
+    #[test]
+    fn reactive_from_vec_option_t_get_untracked() {
         let reactive: Reactive<Vec<usize>> = Some(1).into();
         assert_eq!(reactive.get_untracked(), vec![1]);
+    }
 
+    #[test]
+    fn reactive_from_vec_option_t_set() {
+        let reactive: Reactive<Vec<usize>> = Some(1).into();
         reactive.set(vec![2]);
         assert_eq!(reactive.get_untracked(), vec![2]);
     }
 
     #[test]
-    fn reactive_from_rwsignal_t() {
+    fn reactive_from_vec_option_t_update() {
+        let reactive: Reactive<Vec<usize>> = Some(1).into();
+        reactive.update(|v| v[0] += 1);
+        assert_eq!(reactive.get_untracked(), vec![2]);
+    }
+
+    // RwSignal<T>
+
+    #[test]
+    fn reactive_from_rwsignal_t_get() {
+        let reactive: Reactive<usize> = RwSignal::new(1).into();
+        assert_eq!(reactive.get(), 1);
+    }
+
+    #[test]
+    fn reactive_from_rwsignal_t_get_untracked() {
         let reactive: Reactive<usize> = RwSignal::new(1).into();
         assert_eq!(reactive.get_untracked(), 1);
+    }
 
+    #[test]
+    fn reactive_from_rwsignal_t_set() {
+        let reactive: Reactive<usize> = RwSignal::new(1).into();
         reactive.set(2);
         assert_eq!(reactive.get_untracked(), 2);
     }
 
     #[test]
-    fn reactive_from_maybeprop_t() {
+    fn reactive_from_rwsignal_t_update() {
+        let reactive: Reactive<usize> = RwSignal::new(1).into();
+        reactive.update(|v| *v += 1);
+        assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    // MaybeProp<T>
+
+    #[test]
+    fn reactive_from_maybeprop_t_get() {
+        let maybe_prop: MaybeProp<usize> = 1.into();
+        let reactive: Reactive<usize> = Reactive::from(maybe_prop);
+        assert_eq!(reactive.get(), 1);
+    }
+
+    #[test]
+    fn reactive_from_maybeprop_t_get_untracked() {
         let maybe_prop: MaybeProp<usize> = 1.into();
         let reactive: Reactive<usize> = Reactive::from(maybe_prop);
         assert_eq!(reactive.get_untracked(), 1);
+    }
 
+    #[test]
+    fn reactive_from_maybeprop_t_set() {
+        let maybe_prop: MaybeProp<usize> = 1.into();
+        let reactive: Reactive<usize> = Reactive::from(maybe_prop);
         reactive.set(2);
         assert_eq!(reactive.get_untracked(), 2);
     }
 
     #[test]
-    fn reactive_set() {
-        let reactive: Reactive<usize> = Reactive::from(1);
-        assert_eq!(reactive.get_untracked(), 1);
-
-        reactive.set(2);
-        assert_eq!(reactive.get_untracked(), 2);
-    }
-
-    #[test]
-    fn reactive_update() {
-        let reactive: Reactive<usize> = Reactive::from(1);
-        assert_eq!(reactive.get_untracked(), 1);
-
-        reactive.update(|val| *val += 1);
+    fn reactive_from_maybeprop_t_update() {
+        let maybe_prop: MaybeProp<usize> = 1.into();
+        let reactive: Reactive<usize> = Reactive::from(maybe_prop);
+        reactive.update(|v| *v += 1);
         assert_eq!(reactive.get_untracked(), 2);
     }
 
