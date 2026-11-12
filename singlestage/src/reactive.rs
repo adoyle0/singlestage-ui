@@ -141,12 +141,39 @@ where
     }
 }
 
+// impl<T> From<impl FnOnce(&T)> for Reactive<T>
+// where
+//     T: Send + Sync + Clone + 'static,
+// {
+//     fn from(fun: impl FnOnce(&T)) {
+//         Reactive::RwSignal(RwSignal::new(fun))
+//     }
+// }
+
 impl<T> From<T> for Reactive<Vec<T>>
 where
     T: Send + Sync + Clone + 'static,
 {
     fn from(value: T) -> Self {
         Reactive::RwSignal(RwSignal::new(vec![value]))
+    }
+}
+
+impl<T> From<Option<T>> for Reactive<T>
+where
+    T: Send + Sync + Clone + 'static + Default,
+{
+    fn from(value: Option<T>) -> Self {
+        Reactive::RwSignal(RwSignal::new(value.unwrap_or_default()))
+    }
+}
+
+impl<T> From<Option<T>> for Reactive<Vec<T>>
+where
+    T: Send + Sync + Clone + 'static + Default,
+{
+    fn from(value: Option<T>) -> Self {
+        Reactive::RwSignal(RwSignal::new(vec![value.unwrap_or_default()]))
     }
 }
 
@@ -245,6 +272,15 @@ mod tests {
 
         reactive.set(2);
         assert_eq!(reactive.get_untracked(), 2);
+    }
+
+    #[test]
+    fn reactive_from_vec_t() {
+        let reactive: Reactive<Vec<usize>> = 1.into();
+        assert_eq!(reactive.get_untracked(), vec![1]);
+
+        reactive.set(vec![2]);
+        assert_eq!(reactive.get_untracked(), vec![2]);
     }
 
     #[test]
