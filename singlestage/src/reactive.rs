@@ -207,12 +207,13 @@ where
 
 impl<T> From<(ReadSignal<T>, WriteSignal<T>)> for Reactive<T>
 where
-    T: Send + Sync + Clone + Default,
+    T: Send + Sync + Clone,
 {
     fn from(value: (ReadSignal<T>, WriteSignal<T>)) -> Self {
-        Reactive::RwSignal(
-            RwSignal::unite(value.0, value.1).unwrap_or(RwSignal::new(<T>::default())),
-        )
+        Reactive::RwSignal(RwSignal::unite(value.0, value.1).unwrap_or(
+            // If the read and write signals aren't a matched pair then ignore the WriteSignal
+            RwSignal::new(value.0.get_untracked()),
+        ))
     }
 }
 
