@@ -51,8 +51,7 @@
       text-muted-foreground
       text-xs
       tracking-wider
-      uppercase
-      whitespace-nowrap;
+      uppercase;
 
       &:has(.singlestage-checkbox) {
         @apply pr-0;
@@ -61,8 +60,7 @@
 
     td {
       @apply align-middle
-      p-3
-      whitespace-nowrap;
+      p-3;
 
       &:has(.singlestage-checkbox) {
         @apply pr-0;

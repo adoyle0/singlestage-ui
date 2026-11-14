@@ -48,8 +48,7 @@
       h-10
       px-2
       text-foreground
-      text-left
-      whitespace-nowrap;
+      text-left;
 
       &:has(.singlestage-checkbox) {
         @apply pr-0;
@@ -58,8 +57,7 @@
 
     td {
       @apply align-middle
-      p-2
-      whitespace-nowrap;
+      p-2;
 
       &:has(.singlestage-checkbox) {
         @apply pr-0;
