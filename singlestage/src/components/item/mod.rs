@@ -1,3 +1,8 @@
+#[cfg(feature = "separator")]
+mod separator;
+#[cfg(feature = "separator")]
+pub use separator::*;
+
 mod actions;
 mod content;
 mod description;
@@ -6,7 +11,6 @@ mod group;
 mod header;
 mod item;
 mod media;
-mod separator;
 mod title;
 
 pub use actions::*;
@@ -17,7 +21,6 @@ pub use group::*;
 pub use header::*;
 pub use item::*;
 pub use media::*;
-pub use separator::*;
 pub use title::*;
 
 #[derive(Clone)]

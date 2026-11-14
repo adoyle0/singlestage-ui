@@ -11,8 +11,10 @@ pub(crate) struct RadioGroupContext {
 
 #[derive(Clone, Copy)]
 pub enum RadioGroupPrimitiveType {
-    Field,
     Normal,
+    #[cfg(feature = "field")]
+    Field,
+    #[cfg(feature = "popover")]
     Menu,
 }
 
@@ -217,8 +219,10 @@ pub fn RadioGroupPrimitive(
                 format!(
                     "{}{}",
                     match primitive_type {
-                        RadioGroupPrimitiveType::Field => "singlestage-field-group ",
                         RadioGroupPrimitiveType::Normal => "singlestage-radio-group ",
+                        #[cfg(feature = "field")]
+                        RadioGroupPrimitiveType::Field => "singlestage-field-group ",
+                        #[cfg(feature = "popover")]
                         RadioGroupPrimitiveType::Menu => "",
                     },
                     class.get().unwrap_or_default(),

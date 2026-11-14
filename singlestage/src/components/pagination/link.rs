@@ -1,4 +1,5 @@
 use crate::Link;
+
 use leptos::prelude::*;
 
 /// A pagination link

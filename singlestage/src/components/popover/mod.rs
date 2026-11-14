@@ -3,13 +3,16 @@ mod description;
 mod header;
 mod popover;
 mod title;
-mod trigger;
 
 pub use content::*;
 pub use description::*;
 pub use header::*;
 pub use popover::*;
 pub use title::*;
+
+#[cfg(feature = "button")]
+mod trigger;
+#[cfg(feature = "button")]
 pub use trigger::*;
 
 use crate::Reactive;

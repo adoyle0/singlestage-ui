@@ -1,6 +1,16 @@
-use crate::{
-    BreadcrumbLinkContext, InputGroupContext, SheetContext, SidebarMenuButtonContext, primitives::*,
-};
+#[cfg(feature = "breadcrumb")]
+use crate::BreadcrumbLinkContext;
+
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+#[cfg(feature = "sheet")]
+use crate::SheetContext;
+
+#[cfg(feature = "sidebar")]
+use crate::SidebarMenuButtonContext;
+
+use crate::primitives::*;
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -215,9 +225,25 @@ pub fn Link(
         />
     };
 
-    let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
-    let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
+    #[cfg(feature = "breadcrumb")]
     let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
+    #[cfg(not(feature = "breadcrumb"))]
+    let in_breadcrumb_link: bool = false;
+
+    #[cfg(feature = "input_group")]
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
+
+    #[cfg(feature = "popover")]
+    let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
+    #[cfg(not(feature = "popover"))]
+    let in_popover_menu_item: bool = false;
+
+    #[cfg(feature = "sidebar")]
+    let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+    #[cfg(not(feature = "sidebar"))]
+    let in_sidebar_menu_button: bool = false;
 
     view! {
         <A
@@ -237,9 +263,7 @@ pub fn Link(
                                     "link" => "singlestage-button-variant-link",
                                     "destructive" => "singlestage-button-variant-destructive",
                                     _ => {
-                                        if use_context::<InputGroupContext>().is_some()
-                                            && variant.get().is_none()
-                                        {
+                                        if in_input_group && variant.get().is_none() {
                                             "singlestage-button-variant-ghost"
                                         } else {
                                             "singlestage-button-variant-default"
@@ -261,7 +285,7 @@ pub fn Link(
                                     }
                                     _ => "singlestage-button-size-default",
                                 },
-                                if use_context::<InputGroupContext>().is_some() {
+                                if in_input_group {
                                     format!(
                                         "singlestage-input-group-button {}",
                                         match size.get().unwrap_or_default().as_str() {
@@ -320,9 +344,11 @@ pub fn Link(
             }
             href=move || href.get().unwrap_or_default()
             on:click=move |_| {
+                #[cfg(feature = "sheet")]
                 if let Some(sheet) = use_context::<SheetContext>() && in_sidebar_menu_button {
-                    sheet.open.set(false)
+                    sheet.open.set(false);
                 }
+                return;
             }
 
             {..global_attrs_1}

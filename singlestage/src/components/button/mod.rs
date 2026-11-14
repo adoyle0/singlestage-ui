@@ -1,8 +1,25 @@
-use crate::{
-    BreadcrumbLinkContext, CollapsibleContext, FieldContext, InputGroupContext, PopoverContext,
-    Reactive, SheetCloseContext, SheetContext, SidebarContext, SidebarMenuButtonContext,
-    primitives::*,
-};
+#[cfg(feature = "breadcrumb")]
+use crate::BreadcrumbLinkContext;
+
+#[cfg(feature = "collapsible")]
+use crate::CollapsibleContext;
+
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+#[cfg(feature = "popover")]
+use crate::PopoverContext;
+
+#[cfg(feature = "sheet")]
+use crate::{SheetCloseContext, SheetContext};
+
+#[cfg(feature = "sidebar")]
+use crate::{SidebarContext, SidebarMenuButtonContext};
+
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -202,23 +219,23 @@ pub fn Button(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let update_disabled = move || {
+        #[cfg(feature = "field")]
         if let Some(field) = use_context::<FieldContext>() {
             let is_disabled = field.disabled.get();
             disabled.set(is_disabled);
-            is_disabled
-        } else {
-            disabled.get()
+            return is_disabled;
         }
+        return disabled.get();
     };
 
     let update_invalid = move || {
+        #[cfg(feature = "field")]
         if let Some(field) = use_context::<FieldContext>() {
             let is_invalid = field.invalid.get();
             invalid.set(is_invalid);
-            is_invalid
-        } else {
-            invalid.get()
+            return is_invalid;
         }
+        return invalid.get();
     };
 
     let button_attrs = view! {
@@ -273,54 +290,97 @@ pub fn Button(
         />
     };
 
+    #[cfg(feature = "breadcrumb")]
     let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
+    #[cfg(not(feature = "breadcrumb"))]
+    let in_breadcrumb_link: bool = false;
+
+    #[cfg(feature = "input_group")]
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
+
+    #[cfg(feature = "popover")]
     let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
+    #[cfg(not(feature = "popover"))]
+    let in_popover_menu_item: bool = false;
+
+    #[cfg(feature = "sidebar")]
     let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+    #[cfg(not(feature = "sidebar"))]
+    let in_sidebar_menu_button: bool = false;
+
+    #[cfg(feature = "dialog")]
     let is_dialog_action: bool = use_context::<DialogActionContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_action: bool = false;
+
+    #[cfg(feature = "dialog")]
     let is_dialog_cancel: bool = use_context::<DialogCancelContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_cancel: bool = false;
+
+    #[cfg(feature = "dialog")]
     let is_dialog_close: bool = use_context::<DialogCloseContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_close: bool = false;
+
+    #[cfg(feature = "sheet")]
     let is_sheet_close: bool = use_context::<SheetCloseContext>().is_some();
+    #[cfg(not(feature = "sheet"))]
+    let is_sheet_close: bool = false;
+
     let is_trigger: bool = use_context::<TriggerContext>().is_some();
 
     view! {
         <button
             aria_controls=move || {
                 if is_trigger {
+                    #[cfg(feature = "dropdown")]
                     if let Some(dropdown) = use_context::<PopoverMenuContext>()
                         && !in_popover_menu_item
                     {
-                        Some(dropdown.menu_id.get())
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        Some(popover.menu_id.get())
-                    } else {
-                        use_context::<SheetContext>().map(|sheet| sheet.content_id.get())
+                        return Some(dropdown.menu_id.get());
                     }
-                } else if let Some(menu_item) = use_context::<MenuItemContext>()
-                    && menu_item.dismiss.get()
-                {
-                    use_context::<PopoverMenuContext>().map(|menu| menu.menu_id.get())
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
+                        return Some(popover.menu_id.get());
+                    }
+                    #[cfg(feature = "sheet")]
+                    if cfg!(feature = "sheet") && let Some(sheet) = use_context::<SheetContext>() {
+                        return Some(sheet.content_id.get());
+                    }
+                    if false { return Some("".to_string()) } else { return None }
                 } else {
-                    None
+                    #[cfg(feature = "popover")]
+                    if let Some(menu_item) = use_context::<MenuItemContext>()
+                        && menu_item.dismiss.get()
+                        && let Some(menu) = use_context::<PopoverMenuContext>()
+                    {
+                        return Some(menu.menu_id.get());
+                    }
+                    return None;
                 }
             }
             aria_current=move || aria_current.get()
             aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
             aria_expanded=move || {
                 if is_trigger {
+                    #[cfg(feature = "popover")]
                     if let Some(dropdown) = use_context::<PopoverMenuContext>()
                         && dropdown.open.get()
                     {
-                        Some("true")
-                    } else if let Some(collapsible) = use_context::<CollapsibleContext>()
+                        return Some("true".to_owned());
+                    }
+                    #[cfg(feature = "collapsible")]
+                    if let Some(collapsible) = use_context::<CollapsibleContext>()
                         && collapsible.open.get()
                     {
-                        Some("true")
-                    } else {
-                        None
+                        return Some("true".to_owned());
                     }
+                    if false { return Some("".to_string()) } else { return None }
                 } else {
-                    None
+                    return None
                 }
             }
             aria_haspopup=move || {
@@ -418,12 +478,20 @@ pub fn Button(
             id=move || {
                 if is_trigger {
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                    #[cfg(feature = "dropdown")]
                     if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         dropdown.trigger_id.set(trigger_id.clone());
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        return None;
+                    }
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
                         popover.trigger_id.set(trigger_id.clone());
-                    } else if let Some(sheet) = use_context::<SheetContext>() {
+                        return None;
+                    }
+                    #[cfg(feature = "sheet")]
+                    if let Some(sheet) = use_context::<SheetContext>() {
                         sheet.trigger_id.set(trigger_id.clone());
+                        return None;
                     }
                     Some(trigger_id)
                 } else {
@@ -431,79 +499,100 @@ pub fn Button(
                 }
             }
             on:click=move |ev| {
-                if is_trigger {
-                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
-                        if let Some(menu_item) = use_context::<MenuItemContext>() {
-                            if !menu_item.dismiss.get_untracked() {
-                                ev.prevent_default();
-                            }
-                        } else {
-                            if dropdown.modal.get_untracked() {
-                                ev.prevent_default();
-                                dropdown.open.set(!dropdown.open.get_untracked());
-                            }
-                        }
-                    } else if let Some(dialog) = use_context::<DialogContext>() {
+                #[cfg(feature = "dialog")]
+                if let Some(dialog) = use_context::<DialogContext>() {
+                    if is_trigger {
                         dialog.open.set(true);
-                    } else if let Some(popover) = use_context::<PopoverContext>()
-                        && popover.modal.get_untracked()
+                    } else if (is_dialog_action || is_dialog_cancel || is_dialog_close)
+                        && dismiss.get()
                     {
-                        ev.prevent_default();
-                        popover.open.set(!popover.open.get_untracked());
-                    } else if let Some(collapsible) = use_context::<CollapsibleContext>() {
-                        if let Some(sidebar) = use_context::<SidebarContext>() && sidebar.open.get()
-                        {
-                            collapsible.open.set(!collapsible.open.get_untracked())
-                        }
-                    } else if let Some(sheet) = use_context::<SheetContext>()
-                        && !in_sidebar_menu_button
-                    {
-                        sheet.open.set(true);
-                    }
-                } else if let Some(dialog) = use_context::<DialogContext>() {
-                    if (is_dialog_action || is_dialog_cancel || is_dialog_close) && dismiss.get() {
                         dialog.open.set(false);
                     }
-                } else if let Some(sheet) = use_context::<SheetContext>() {
-                    if (is_sheet_close || in_sidebar_menu_button) && dismiss.get() {
+                    return;
+                }
+                #[cfg(feature = "popover")]
+                if let Some(popover) = use_context::<PopoverContext>() && is_trigger {
+                    if let Some(menu_item) = use_context::<MenuItemContext>()
+                        && let Some(menu) = use_context::<PopoverMenuContext>() && !menu.modal.get()
+                        && menu_item.dismiss.get() && dismiss.get()
+                    {
+                        ev.prevent_default();
+                        menu.open.set(false);
+                        return;
+                    }
+                    if popover.modal.get_untracked() {
+                        ev.prevent_default();
+                        popover.open.set(!popover.open.get_untracked());
+                        return;
+                    }
+                    return;
+                }
+                #[cfg(feature = "dropdown")]
+                if let Some(dropdown) = use_context::<PopoverMenuContext>() {
+                    if let Some(menu_item) = use_context::<MenuItemContext>() {
+                        if !menu_item.dismiss.get_untracked() {
+                            ev.prevent_default();
+                        }
+                        return;
+                    } else {
+                        if dropdown.modal.get_untracked() {
+                            ev.prevent_default();
+                            dropdown.open.set(!dropdown.open.get_untracked());
+                        }
+                        return;
+                    }
+                }
+                #[cfg(feature = "collapsible")]
+                if let Some(collapsible) = use_context::<CollapsibleContext>() {
+                    collapsible.open.set(!collapsible.open.get_untracked());
+                    return;
+                }
+                #[cfg(feature = "sheet")]
+                if let Some(sheet) = use_context::<SheetContext>() {
+                    if is_trigger && !in_sidebar_menu_button {
+                        sheet.open.set(true);
+                    } else if (is_sheet_close || in_sidebar_menu_button) && dismiss.get() {
                         sheet.open.set(false);
                     }
-                } else if let Some(menu_item) = use_context::<MenuItemContext>()
-                    && let Some(menu) = use_context::<PopoverMenuContext>() && !menu.modal.get()
-                    && menu_item.dismiss.get() && dismiss.get()
-                {
-                    ev.prevent_default();
-                    menu.open.set(false);
+                    return;
                 }
+                return;
             }
             popovertarget=move || {
+                #[cfg(feature = "popover")]
                 if is_trigger {
-                    let mut target_id = None;
+                    let mut target_id: Option<String> = None;
                     if let Some(popovertarget) = popovertarget.get() {
                         target_id = Some(popovertarget);
-                    } else if let Some(dropdown) = use_context::<PopoverMenuContext>()
+                    }
+                    #[cfg(feature = "dropdown")]
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>()
                         && !in_popover_menu_item
                     {
-                        target_id = Some(dropdown.menu_id.get())
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        target_id = Some(popover.menu_id.get())
-                    } else if let Some(sheet) = use_context::<SheetContext>() {
-                        target_id = Some(sheet.content_id.get())
+                        target_id = Some(dropdown.menu_id.get());
                     }
-                    target_id
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
+                        target_id = Some(popover.menu_id.get());
+                    }
+                    #[cfg(feature = "sheet")]
+                    if let Some(sheet) = use_context::<SheetContext>() {
+                        target_id = Some(sheet.content_id.get());
+                    }
+                    return target_id;
                 } else if let Some(menu_item) = use_context::<MenuItemContext>() {
                     if let Some(menu) = use_context::<PopoverMenuContext>()
                         && menu_item.dismiss.get()
                     {
-                        Some(menu.menu_id.get())
+                        return Some(menu.menu_id.get());
                     } else {
-                        None
+                        return None;
                     }
-                } else {
-                    popovertarget.get()
                 }
+                popovertarget.get()
             }
             popovertargetaction=move || {
+                #[cfg(feature = "popover")]
                 if is_trigger {
                     Some("toggle".to_string())
                 } else if let Some(menu_item) = use_context::<MenuItemContext>()
@@ -513,18 +602,19 @@ pub fn Button(
                 } else {
                     popovertargetaction.get()
                 }
+                #[cfg(not(feature = "popover"))]
+                if is_trigger { Some("toggle".to_string()) } else { popovertargetaction.get() }
             }
             style:anchor-name=move || {
-                if is_trigger {
-                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
-                        Some(format!("--{}", dropdown.trigger_id.get()))
-                    } else {
-                        use_context::<PopoverContext>()
-                            .map(|popover| format!("--{}", popover.trigger_id.get()))
-                    }
-                } else {
-                    None
+                #[cfg(feature = "dropdown")]
+                if is_trigger && let Some(dropdown) = use_context::<PopoverMenuContext>() {
+                    return Some(format!("--{}", dropdown.trigger_id.get()));
                 }
+                #[cfg(feature = "popover")]
+                if let Some(popover) = use_context::<PopoverContext>() {
+                    return Some(format!("--{}", popover.trigger_id.get()));
+                }
+                if false { Some("".to_string()) } else { None }
             }
             type=move || {
                 if let Some(button_type) = button_type.get() {

@@ -1,12 +1,20 @@
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[allow(unused)]
 use crate::primitives::*;
-use crate::{FieldContext, Reactive};
+
+use crate::Reactive;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum LabelPrimitiveType {
     Label,
+    #[cfg(feature = "field")]
     FieldLabel,
+    #[cfg(feature = "input")]
     InputLabel,
+    #[cfg(feature = "popover")]
     MenuLabel,
 }
 
@@ -21,6 +29,7 @@ pub fn LabelPrimitive(
     disabled: Reactive<bool>,
     /// Set whether or not this element should display inset from its normal position.
     /// (For use in popover menus)
+    #[allow(unused)]
     #[prop(optional, into)]
     inset: MaybeProp<bool>,
     /// Whether the element renders as invalid
@@ -177,29 +186,29 @@ pub fn LabelPrimitive(
         <label
             aria_disabled=move || {
                 if disabled.get() {
-                    Some("true".to_string())
-                } else {
-                    if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                        Some("true".to_string())
-                    } else {
-                        None
-                    }
+                    return Some("true".to_string());
                 }
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
+                    return Some("true".to_string());
+                }
+                return None;
             }
             aria_invalid=move || {
                 if invalid.get() {
-                    Some("true".to_string())
-                } else {
-                    if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
-                        Some("true".to_string())
-                    } else if let Some(radio_group) = use_context::<RadioGroupContext>()
-                        && radio_group.invalid.get()
-                    {
-                        Some("true".to_string())
-                    } else {
-                        None
-                    }
+                    return Some("true".to_string());
                 }
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
+                    return Some("true".to_string());
+                }
+                #[cfg(feature = "radio")]
+                if let Some(radio_group) = use_context::<RadioGroupContext>()
+                    && radio_group.invalid.get()
+                {
+                    return Some("true".to_string());
+                }
+                return None;
             }
 
             class=move || {
@@ -207,8 +216,11 @@ pub fn LabelPrimitive(
                     "{} {}",
                     match primitive_type {
                         LabelPrimitiveType::Label => "singlestage-label".to_string(),
+                        #[cfg(feature = "field")]
                         LabelPrimitiveType::FieldLabel => "singlestage-field-label".to_string(),
+                        #[cfg(feature = "input")]
                         LabelPrimitiveType::InputLabel => "singlestage-input-label".to_string(),
+                        #[cfg(feature = "popover")]
                         LabelPrimitiveType::MenuLabel => {
                             format!(
                                 "singlestage-dropdown-menu-label{}",
@@ -226,6 +238,7 @@ pub fn LabelPrimitive(
 
             for=move || {
                 match primitive_type {
+                    #[cfg(feature = "field")]
                     LabelPrimitiveType::FieldLabel => {
                         if let Some(field_context) = use_context::<FieldContext>() {
                             Some(field_context.input_id.get())
@@ -238,13 +251,16 @@ pub fn LabelPrimitive(
             }
 
             id={match primitive_type {
+                #[cfg(feature = "popover")]
                 LabelPrimitiveType::MenuLabel => {
                     let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
+                    #[cfg(feature = "popover")]
                     if let Some(group) = use_context::<PopoverMenuGroupContext>() {
                         group.heading_id.set(label_id.clone());
                     }
                     Some(label_id.to_owned())
                 }
+                #[cfg(feature = "field")]
                 LabelPrimitiveType::FieldLabel => {
                     if let Some(field_context) = use_context::<FieldContext>() {
                         let label_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
@@ -262,13 +278,13 @@ pub fn LabelPrimitive(
         >
             {children()}
             <Show when=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>()
                     && primitive_type == LabelPrimitiveType::FieldLabel && !field.has_title.get()
                 {
-                    field.required.get()
-                } else {
-                    false
+                    return field.required.get();
                 }
+                return false;
             }>
                 <span class="text-(--destructive)">" *"</span>
             </Show>

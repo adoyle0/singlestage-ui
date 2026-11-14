@@ -79,6 +79,7 @@
   .singlestage-dropdown-menu-sub-trigger {
     > * {
       @apply font-medium
+      gap-2
       px-3
       py-2
       rounded-2xl

@@ -1,8 +1,9 @@
 #![allow(clippy::module_inception)]
-
+#[allow(unused)]
 mod components;
 pub mod reactive;
 
+#[allow(unused)]
 pub use components::*;
 pub use reactive::*;
 pub(crate) mod primitives;
@@ -12,6 +13,7 @@ extern crate singlestage_macro;
 #[cfg(feature = "macro")]
 pub use singlestage_macro::*;
 
+#[allow(unused)]
 use std::include_str;
 
 #[cfg(feature = "theme_provider")]

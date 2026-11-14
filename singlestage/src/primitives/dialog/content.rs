@@ -1,5 +1,7 @@
-use super::DialogContext;
+#[cfg(feature = "button")]
 use crate::Button;
+
+use super::DialogContext;
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone)]
@@ -215,28 +217,40 @@ pub fn DialogContentPrimitive(
             } else {
                 "singlestage-dialog-content"
             }}>
-                {children()} <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
-                    <Provider value=DialogCloseContext {}>
-                        <Button class="singlestage-dialog-close" variant="ghost" size="icon-sm">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-x-icon lucide-x"
-                            >
-                                <path d="M18 6 6 18" />
-                                <path d="m6 6 12 12" />
-                            </svg>
-                            <span class="sr-only">"Close"</span>
-                        </Button>
-                    </Provider>
-                </Show>
+                {children()}
+                {move || {
+                    #[cfg(feature = "button")]
+                    return view! {
+                        <Show when=move || close_button.get().unwrap_or(!dialog_context.alert)>
+                            <Provider value=DialogCloseContext {}>
+                                <Button
+                                    class="singlestage-dialog-close"
+                                    variant="ghost"
+                                    size="icon-sm"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-x-icon lucide-x"
+                                    >
+                                        <path d="M18 6 6 18" />
+                                        <path d="m6 6 12 12" />
+                                    </svg>
+                                    <span class="sr-only">"Close"</span>
+                                </Button>
+                            </Provider>
+                        </Show>
+                    }
+                        .into_any();
+                    #[cfg(not(feature = "button"))] return view! {}.into_any();
+                }}
             </div>
         </dialog>
     }

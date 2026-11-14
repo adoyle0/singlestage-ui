@@ -1,4 +1,7 @@
-use crate::{ItemContext, primitives::*};
+#[cfg(feature = "item")]
+use crate::ItemContext;
+
+use crate::primitives::*;
 use leptos::prelude::*;
 
 /// Visually or semantically separates content.
@@ -155,8 +158,15 @@ pub fn Separator(
         />
     };
 
-    let in_popover: bool = use_context::<PopoverMenuContext>().is_some();
+    #[cfg(feature = "item")]
     let in_item: bool = use_context::<ItemContext>().is_some();
+    #[cfg(not(feature = "item"))]
+    let in_item: bool = false;
+
+    #[cfg(feature = "popover")]
+    let in_popover: bool = use_context::<PopoverMenuContext>().is_some();
+    #[cfg(not(feature = "popover"))]
+    let in_popover: bool = false;
 
     if in_popover {
         view! {

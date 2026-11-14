@@ -1,4 +1,9 @@
-use crate::{FieldContext, InputGroupContext, Reactive, primitives::*};
+#[cfg(feature = "field")]
+use crate::FieldContext;
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// Displays a form textarea.
@@ -11,11 +16,13 @@ pub fn Textarea(
     #[prop(optional, into)]
     default: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
+    #[allow(unused)]
     #[prop(optional, into)]
-    disabled: Reactive<bool>,
+    mut disabled: Reactive<bool>,
     /// Toggle invalid appearance.
+    #[allow(unused)]
     #[prop(optional, into)]
-    invalid: Reactive<bool>,
+    mut invalid: Reactive<bool>,
     /// Reactive signal coupled to the value of the textarea.
     #[prop(optional, into)]
     value: Reactive<String>,
@@ -60,8 +67,9 @@ pub fn Textarea(
     #[prop(optional, into)]
     readonly: MaybeProp<bool>,
     /// Set whether this element requires a value for form submission
+    #[allow(unused)]
     #[prop(optional, into)]
-    required: Reactive<bool>,
+    mut required: Reactive<bool>,
     /// The number of visible text lines. Must be positive. Default is 2.
     #[prop(optional, into)]
     rows: MaybeProp<usize>,
@@ -194,29 +202,12 @@ pub fn Textarea(
         }
     });
 
-    let disabled: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.disabled
-        } else {
-            disabled
-        }
-    };
-
-    let invalid: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.invalid
-        } else {
-            invalid
-        }
-    };
-
-    let required: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.required
-        } else {
-            required
-        }
-    };
+    #[cfg(feature = "field")]
+    if let Some(field) = use_context::<FieldContext>() {
+        disabled = field.disabled;
+        invalid = field.invalid;
+        required = field.required;
+    }
 
     let on_input = move |ev| {
         value.set(event_target_value(&ev));
@@ -264,28 +255,40 @@ pub fn Textarea(
     let label_id = uuid::Uuid::new_v4();
 
     let has_children: bool = children.is_some();
+
+    #[cfg(feature = "field")]
     let in_field: bool = use_context::<FieldContext>().is_some();
+    #[cfg(not(feature = "field"))]
+    let in_field: bool = false;
+
+    #[cfg(feature = "input_group")]
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
 
     let textarea_attrs = view! {
         <{..}
             aria_describedby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
+                    if !description_id.is_empty() {
+                        return Some(description_id);
+                    }
                 }
+                if false { return Some("".to_string()) } else { return None }
             }
             aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
             aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_labelledby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
+                    return Some(field.label_id.get());
+                }
+                if has_children {
+                    return Some(label_id.to_string());
                 } else {
-                    None
+                    return None;
                 }
             }
             autocomplete=move || autocomplete.get()
@@ -305,18 +308,21 @@ pub fn Textarea(
             disabled=move || disabled.get()
             prop:disabled=move || disabled.get()
             form=move || form.get()
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
+            id={move || {
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        return Some(id);
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        return Some(input_id.to_string());
+                    }
                 }
-            } else if let Some(id) = id.get_untracked() {
-                Some(id)
-            } else {
-                if has_children { Some(input_id.to_string()) } else { None }
+                if let Some(id) = id.get_untracked() {
+                    return Some(id);
+                }
+                if has_children { return Some(input_id.to_string()) } else { return None }
             }}
             maxlength=move || maxlength.get()
             minlength=move || minlength.get()
@@ -333,9 +339,11 @@ pub fn Textarea(
         />
     };
 
+    #[cfg(feature = "label")]
     if let Some(children) = children {
+        #[cfg(feature = "field")]
         if in_field {
-            view! {
+            return view! {
                 <LabelPrimitive
                     primitive_type=LabelPrimitiveType::FieldLabel
 
@@ -351,40 +359,38 @@ pub fn Textarea(
                     {default.get_untracked().unwrap_or(value.get_untracked())}
                 </textarea>
             }
-            .into_any()
-        } else {
-            view! {
-                <LabelPrimitive
-                    primitive_type=LabelPrimitiveType::Label
-
-                    class=format!(
-                        "singlestage-textarea-label {}",
-                        class.get_untracked().unwrap_or_default(),
-                    )
-                    disabled
-                    id=label_id.to_string()
-                    invalid
-                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                >
-                    {children()}
-                </LabelPrimitive>
-                <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
-                    {default.get_untracked().unwrap_or(value.get_untracked())}
-                </textarea>
-            }
-            .into_any()
+            .into_any();
         }
-    } else {
-        view! {
-            <textarea
+        return view! {
+            <LabelPrimitive
+                primitive_type=LabelPrimitiveType::Label
 
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..textarea_attrs}
+                class=format!(
+                    "singlestage-textarea-label {}",
+                    class.get_untracked().unwrap_or_default(),
+                )
+                disabled
+                id=label_id.to_string()
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
             >
+                {children()}
+            </LabelPrimitive>
+            <textarea {..global_attrs_1} {..global_attrs_2} {..textarea_attrs}>
                 {default.get_untracked().unwrap_or(value.get_untracked())}
             </textarea>
         }
-        .into_any()
+        .into_any();
     }
+    return view! {
+        <textarea
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..textarea_attrs}
+        >
+            {default.get_untracked().unwrap_or(value.get_untracked())}
+        </textarea>
+    }
+    .into_any();
 }

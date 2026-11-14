@@ -9,10 +9,10 @@ pub fn Field(
 
     /// Sets whether this Field is disabled
     #[prop(optional, into)]
-    disabled: Reactive<bool>,
+    mut disabled: Reactive<bool>,
     /// Sets whether this Field is invalid
     #[prop(optional, into)]
-    invalid: Reactive<bool>,
+    mut invalid: Reactive<bool>,
     /// Sets the display orientation.
     ///
     /// Accepted values: "vertical" | "horizontal" | "responsive". Defaults to "vertical".
@@ -162,25 +162,17 @@ pub fn Field(
         />
     };
 
-    let disabled: Reactive<bool> = {
-        if let Some(radio_group) = use_context::<RadioGroupContext>() {
-            radio_group.disabled
-        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            checkbox_group.disabled
-        } else {
-            disabled
-        }
-    };
+    #[cfg(feature = "checkbox")]
+    if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+        disabled = checkbox_group.disabled;
+        invalid = checkbox_group.invalid;
+    }
 
-    let invalid: Reactive<bool> = {
-        if let Some(radio_group) = use_context::<RadioGroupContext>() {
-            radio_group.invalid
-        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            checkbox_group.invalid
-        } else {
-            invalid
-        }
-    };
+    #[cfg(feature = "radio")]
+    if let Some(radio_group) = use_context::<RadioGroupContext>() {
+        disabled = radio_group.disabled;
+        invalid = radio_group.invalid;
+    }
 
     let context = FieldContext {
         description_id: RwSignal::new(String::default()),

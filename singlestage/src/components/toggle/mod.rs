@@ -1,4 +1,7 @@
-use crate::{FieldContext, Reactive};
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+use crate::Reactive;
 use leptos::prelude::*;
 
 /// A two-state button that toggles between on and off.
@@ -188,13 +191,13 @@ pub fn Toggle(
     translate: MaybeProp<String>,
 ) -> impl IntoView {
     let update_disabled = move || {
+        #[cfg(feature = "field")]
         if let Some(field) = use_context::<FieldContext>() {
             let is_disabled = field.disabled.get();
             disabled.set(is_disabled);
-            is_disabled
-        } else {
-            disabled.get()
+            return is_disabled;
         }
+        return disabled.get();
     };
 
     let global_attrs_1 = view! {

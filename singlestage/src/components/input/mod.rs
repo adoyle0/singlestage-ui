@@ -1,4 +1,13 @@
-use crate::{FieldContext, InputGroupContext, Reactive, SidebarGroupContext, primitives::*};
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+#[cfg(feature = "sidebar")]
+use crate::SidebarGroupContext;
+
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// A text input component for forms and user data entry with built-in styling and accessibility features.
@@ -17,7 +26,7 @@ pub fn Input(
     input_type: MaybeProp<String>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: Reactive<bool>,
+    mut invalid: Reactive<bool>,
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
@@ -58,7 +67,7 @@ pub fn Input(
     dirname: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: Reactive<bool>,
+    mut disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -123,7 +132,7 @@ pub fn Input(
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
     #[prop(optional, into)]
-    required: Reactive<bool>,
+    mut required: Reactive<bool>,
     /// Set how many characters wide the field should be. Defaults to `20`.
     #[prop(optional, into)]
     size: MaybeProp<usize>,
@@ -281,30 +290,6 @@ pub fn Input(
         default.get()
     };
 
-    let disabled: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.disabled
-        } else {
-            disabled
-        }
-    };
-
-    let invalid: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.invalid
-        } else {
-            invalid
-        }
-    };
-
-    let required: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.required
-        } else {
-            required
-        }
-    };
-
     let on_input = move |ev: web_sys::Event| {
         let input_value = event_target_value(&ev);
 
@@ -421,31 +406,55 @@ pub fn Input(
     let label_id = uuid::Uuid::new_v4();
 
     let has_children: bool = children.is_some();
+
+    #[cfg(feature = "field")]
+    if let Some(field) = use_context::<FieldContext>() {
+        disabled = field.disabled;
+        invalid = field.invalid;
+        required = field.required;
+    }
+
+    #[cfg(feature = "field")]
     let in_field: bool = use_context::<FieldContext>().is_some();
+    #[cfg(not(feature = "field"))]
+    let in_field: bool = false;
+
+    #[cfg(feature = "input_group")]
     let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
+
+    #[cfg(feature = "sidebar")]
     let in_sidebar_group: bool = use_context::<SidebarGroupContext>().is_some();
+    #[cfg(not(feature = "sidebar"))]
+    let in_sidebar_group: bool = false;
 
     let custom_attrs = view! {
         <{..}
             aria_describedby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
+                    if description_id.is_empty() {
+                        return None
+                    } else {
+                        return Some(description_id)
+                    }
                 }
+                if false { return Some("".to_string()) } else { return None }
             }
             aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
             aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             aria_labelledby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
-                } else {
-                    None
+                    return Some(field.label_id.get());
                 }
+                if has_children {
+                    return Some(label_id.to_string());
+                }
+                if false { return Some("".to_string()) } else { return None }
             }
             class=move || {
                 format!(
@@ -463,18 +472,23 @@ pub fn Input(
             prop:default=update_default
             disabled=move || disabled.get()
             prop:disabled=move || disabled.get()
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
+            id={move || {
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        return Some(id);
+                    }
                     field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
+                    return Some(input_id.to_string());
                 }
-            } else if let Some(id) = id.get_untracked() {
-                Some(id)
-            } else {
-                if has_children { Some(input_id.to_string()) } else { None }
+                if let Some(id) = id.get_untracked() {
+                    return Some(id);
+                }
+                if has_children {
+                    return Some(input_id.to_string());
+                }
+                return None;
             }}
             node_ref=input_ref
             on:input=on_input
@@ -494,8 +508,9 @@ pub fn Input(
     };
 
     if let Some(children) = children {
+        #[cfg(feature = "field")]
         if in_field {
-            view! {
+            return view! {
                 <LabelPrimitive
                     primitive_type=LabelPrimitiveType::FieldLabel
 
@@ -515,32 +530,21 @@ pub fn Input(
                     {..custom_attrs}
                 />
             }
-            .into_any()
-        } else {
-            view! {
-                <LabelPrimitive
-                    primitive_type=LabelPrimitiveType::InputLabel
-
-                    class
-                    disabled
-                    id=label_id.to_string()
-                    invalid
-                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                >
-                    {children()}
-                </LabelPrimitive>
-                <input
-                    {..global_attrs_1}
-                    {..global_attrs_2}
-                    {..input_attrs_1}
-                    {..input_attrs_2}
-                    {..custom_attrs}
-                />
-            }
-            .into_any()
+            .into_any();
         }
-    } else {
-        view! {
+        #[cfg(feature = "label")]
+        return view! {
+            <LabelPrimitive
+                primitive_type=LabelPrimitiveType::InputLabel
+
+                class
+                disabled
+                id=label_id.to_string()
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                {children()}
+            </LabelPrimitive>
             <input
                 {..global_attrs_1}
                 {..global_attrs_2}
@@ -549,6 +553,16 @@ pub fn Input(
                 {..custom_attrs}
             />
         }
-        .into_any()
+        .into_any();
     }
+    return view! {
+        <input
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..input_attrs_1}
+            {..input_attrs_2}
+            {..custom_attrs}
+        />
+    }
+    .into_any();
 }

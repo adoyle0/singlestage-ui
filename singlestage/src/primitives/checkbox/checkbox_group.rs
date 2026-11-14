@@ -11,8 +11,10 @@ pub(crate) struct CheckboxGroupContext {
 
 #[derive(Clone, Copy)]
 pub enum CheckboxGroupPrimitiveType {
-    Field,
     Normal,
+    #[cfg(feature = "field")]
+    Field,
+    #[cfg(feature = "popover")]
     Menu,
 }
 
@@ -209,8 +211,10 @@ pub fn CheckboxGroupPrimitive(
                 format!(
                     "{}{}",
                     match primitive_type {
-                        CheckboxGroupPrimitiveType::Field => "singlestage-field-group ",
                         CheckboxGroupPrimitiveType::Normal => "singlestage-checkbox-group ",
+                        #[cfg(feature = "field")]
+                        CheckboxGroupPrimitiveType::Field => "singlestage-field-group ",
+                        #[cfg(feature = "popover")]
                         CheckboxGroupPrimitiveType::Menu => "",
                     },
                     class.get().unwrap_or_default(),

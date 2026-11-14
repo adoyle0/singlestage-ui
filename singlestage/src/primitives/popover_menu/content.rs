@@ -1,5 +1,7 @@
-use super::{MenuSubContext, PopoverMenuContext};
+#[cfg(feature = "context_menu")]
 use crate::ContextMenuContext;
+
+use super::{MenuSubContext, PopoverMenuContext};
 use leptos::prelude::*;
 
 pub enum MenuContentPrimitiveType {
@@ -173,7 +175,12 @@ pub fn MenuContentPrimitive(
             translate=move || translate.get()
         />
     };
-    let is_context_menu = use_context::<ContextMenuContext>().is_some();
+
+    #[cfg(feature = "context_menu")]
+    let is_context_menu: bool = use_context::<ContextMenuContext>().is_some();
+    #[cfg(not(feature = "context_menu"))]
+    let is_context_menu: bool = false;
+
     let is_sub = StoredValue::new(match primitive_type {
         MenuContentPrimitiveType::Main => false,
         MenuContentPrimitiveType::Sub => true,
@@ -229,6 +236,7 @@ pub fn MenuContentPrimitive(
             }
             node_ref=menu_ref
             on:contextmenu=move |ev| {
+                #[cfg(feature = "context_menu")]
                 if use_context::<ContextMenuContext>().is_some() {
                     ev.prevent_default();
                 }
@@ -238,20 +246,20 @@ pub fn MenuContentPrimitive(
             }
             role="menu"
             style=move || {
+                #[cfg(feature = "context_menu")]
                 if let Some(context_menu) = use_context::<ContextMenuContext>()
                     && !is_sub.get_value()
                 {
-                    Some(
+                    return Some(
                         format!(
                             "left: {}px; top: {}px; {}",
                             context_menu.x.get(),
                             context_menu.y.get(),
                             style.get().unwrap_or_default(),
                         ),
-                    )
-                } else {
-                    style.get()
+                    );
                 }
+                return style.get();
             }
             style:position-anchor=move || {
                 if is_sub.get_value() {

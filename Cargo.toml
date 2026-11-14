@@ -1,18 +1,18 @@
 [workspace]
-resolver = "2"
 members = ["docs", "docs_macro", "singlestage", "singlestage_macro"]
+resolver = "2"
 
 [workspace.package]
 version = "0.5.0"
 authors = ["Adam Doyle <adam@doordesk.net>"]
-edition = "2024"
-rust-version = "1.88"
 description = "A UI component library for Leptos based on Basecoat UI and shadcn/ui"
 homepage = "https://singlestage.doordesk.net"
-repository = "https://github.com/adoyle0/singlestage-ui"
-license = "MIT"
 keywords = ["leptos", "ui", "components", "basecoat", "shadcn"]
 categories = ["web-programming", "gui", "wasm"]
+license = "MIT"
+repository = "https://github.com/adoyle0/singlestage-ui"
+edition = "2024"
+rust-version = "1.88"
 
 [workspace.dependencies]
 axum = "0.8"
@@ -40,8 +40,8 @@ wasm-bindgen = "0.2"
 web-sys = "0.3"
 
 [profile.wasm-release]
-inherits = "release"
-opt-level = 'z'
+opt-level = "z"
 lto = true
 codegen-units = 1
 panic = "abort"
+inherits = "release"

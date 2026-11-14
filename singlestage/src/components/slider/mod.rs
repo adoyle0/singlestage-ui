@@ -1,4 +1,10 @@
-use crate::{FieldContext, Label, Reactive};
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[cfg(feature = "label")]
+use crate::Label;
+
+use crate::Reactive;
 use leptos::prelude::*;
 
 // TODO: figure this out
@@ -311,36 +317,43 @@ pub fn Slider(
     let custom_attrs = view! {
         <{..}
             aria_describedby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
+                    if !description_id.is_empty() { return Some(description_id) }
                 }
+                if false {return Some("".to_string())} else {return None}
             }
             aria_disabled=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() && field.disabled.get() {
-                    Some("true".to_string())
-                } else if disabled.get() {
-                    Some("true".to_string())
+                    return Some("true".to_string())
+                }
+                if disabled.get() {
+                    return Some("true".to_string())
                 } else {
-                    None
+                    return None
                 }
             }
             aria_invalid=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() && field.invalid.get() {
-                    Some("true".to_string())
-                } else {
-                    None
+                    return Some("true".to_string())
+                }
+               if false {return Some("".to_string())}
+                else {
+                    return None
                 }
             }
             aria_labelledby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
+                    return Some(field.label_id.get())
+                }
+                if has_children {
+                    return Some(label_id.to_string())
                 } else {
-                    None
+                    return None
                 }
             }
             autocomplete=move || autocomplete.get()
@@ -352,19 +365,24 @@ pub fn Slider(
                 class.get().unwrap_or_default())
             disabled=disabled.get_untracked()
             form=move || form.get()
-            id={if let Some(field) = use_context::<FieldContext>() {
+            id={ move || {
+
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() {
                 if let Some(id) = id.get_untracked() {
                     field.input_id.set(id.clone());
-                    Some(id)
+                    return Some(id);
                 } else {
                     field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
+                    return Some(input_id.to_string());
                 }
-            } else if let Some(id) = id.get_untracked() {
-                Some(id)
-            } else {
-                if has_children { Some(input_id.to_string()) } else { None }
-            }}
+            }
+                if let Some(id) = id.get_untracked() {
+                return Some(id)
+            }
+                if has_children { return Some(input_id.to_string()) } else { return None }
+            }
+                }
             list=move || list.get()
             name=move || name.get()
             max=move || max.get()
@@ -380,7 +398,8 @@ pub fn Slider(
     };
 
     if let Some(children) = children {
-        view! {
+        #[cfg(feature = "label")]
+        return view! {
             <Label
                 class
                 disabled
@@ -396,16 +415,15 @@ pub fn Slider(
                 {..custom_attrs}
             />
         }
-        .into_any()
-    } else {
-        view! {
-            <input
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..custom_attrs}
-            />
-        }
-        .into_any()
+        .into_any();
     }
+    return view! {
+        <input
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..custom_attrs}
+        />
+    }
+    .into_any();
 }

@@ -1,11 +1,19 @@
+#[cfg(feature = "checkbox")]
+use crate::Checkbox;
+
+#[cfg(feature = "radio")]
+use crate::Radio;
+
 use super::{MenuSubContext, PopoverMenuContext};
-use crate::{Button, Checkbox, Radio, Reactive};
+use crate::{Button, Reactive};
 use leptos::{context::Provider, prelude::*};
 
 #[derive(Clone, Copy)]
 pub enum MenuItemPrimitiveType {
     Item,
+    #[cfg(feature = "checkbox")]
     Checkbox,
+    #[cfg(feature = "radio")]
     Radio,
     SubTrigger,
 }
@@ -214,7 +222,20 @@ pub fn MenuItemPrimitive(
             }
             on:click=move |_| {
                 match primitive_type {
-                    MenuItemPrimitiveType::Checkbox | MenuItemPrimitiveType::Radio => {
+                    #[cfg(feature = "checkbox")]
+                    MenuItemPrimitiveType::Checkbox => {
+                        if dismiss.get() {
+                            if let Some(menu) = use_context::<PopoverMenuContext>()
+                                && !menu.modal.get()
+                            {
+                                menu.open.set(false);
+                            } else if let Some(menu) = use_context::<PopoverMenuContext>() {
+                                menu.open.set(false);
+                            }
+                        }
+                    }
+                    #[cfg(feature = "radio")]
+                    MenuItemPrimitiveType::Radio => {
                         if dismiss.get() {
                             if let Some(menu) = use_context::<PopoverMenuContext>()
                                 && !menu.modal.get()
@@ -263,43 +284,6 @@ pub fn MenuItemPrimitive(
                     }
                         .into_any()
                 }
-                MenuItemPrimitiveType::Checkbox | MenuItemPrimitiveType::Radio => {
-                    view! {
-                        <label aria_disabled=move || {
-                            if disabled.get() { Some("true") } else { None }
-                        }>
-                            {children()}
-                            {match primitive_type {
-                                MenuItemPrimitiveType::Checkbox => {
-                                    view! {
-                                        <Checkbox
-                                            class="singlestage-dropdown-menu-checkbox-item"
-                                            checked
-                                            disabled
-                                            id
-                                            value
-                                        />
-                                    }
-                                        .into_any()
-                                }
-                                MenuItemPrimitiveType::Radio => {
-                                    view! {
-                                        <Radio
-                                            class="singlestage-dropdown-menu-radio-item"
-                                            checked
-                                            disabled
-                                            id
-                                            value
-                                        />
-                                    }
-                                        .into_any()
-                                }
-                                _ => ().into_any(),
-                            }}
-                        </label>
-                    }
-                        .into_any()
-                }
                 MenuItemPrimitiveType::SubTrigger => {
                     let sub = expect_context::<MenuSubContext>();
 
@@ -336,6 +320,58 @@ pub fn MenuItemPrimitive(
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </button>
+                    }
+                        .into_any()
+                }
+                #[cfg(feature = "checkbox")]
+                MenuItemPrimitiveType::Checkbox => {
+                    view! {
+                        <label aria_disabled=move || {
+                            if disabled.get() { Some("true") } else { None }
+                        }>
+                            {children()}
+                            {match primitive_type {
+                                MenuItemPrimitiveType::Checkbox => {
+                                    view! {
+                                        <Checkbox
+                                            class="singlestage-dropdown-menu-checkbox-item"
+                                            checked
+                                            disabled
+                                            id
+                                            value
+                                        />
+                                    }
+                                        .into_any()
+                                }
+                                _ => ().into_any(),
+                            }}
+                        </label>
+                    }
+                        .into_any()
+                }
+                #[cfg(feature = "radio")]
+                MenuItemPrimitiveType::Radio => {
+                    view! {
+                        <label aria_disabled=move || {
+                            if disabled.get() { Some("true") } else { None }
+                        }>
+                            {children()}
+                            {match primitive_type {
+                                MenuItemPrimitiveType::Radio => {
+                                    view! {
+                                        <Radio
+                                            class="singlestage-dropdown-menu-radio-item"
+                                            checked
+                                            disabled
+                                            id
+                                            value
+                                        />
+                                    }
+                                        .into_any()
+                                }
+                                _ => ().into_any(),
+                            }}
+                        </label>
                     }
                         .into_any()
                 }

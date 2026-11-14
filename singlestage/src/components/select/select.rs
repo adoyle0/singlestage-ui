@@ -1,5 +1,8 @@
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
 use super::SelectContext;
-use crate::{FieldContext, Reactive};
+use crate::Reactive;
 use leptos::{context::Provider, prelude::*};
 
 /// Displays a list of options for the user to pick from—triggered by a button.
@@ -11,8 +14,9 @@ pub fn Select(
     #[prop(optional, into)]
     default: MaybeProp<String>,
     /// Toggle invalid appearance and behavior.
+    #[allow(unused)]
     #[prop(optional, into)]
-    invalid: Reactive<bool>,
+    mut invalid: Reactive<bool>,
     /// Set the size to render the element.
     #[prop(optional, into)]
     todo_name_me_size: MaybeProp<String>,
@@ -34,8 +38,9 @@ pub fn Select(
     #[prop(optional, into)]
     autocomplete: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
+    #[allow(unused)]
     #[prop(optional, into)]
-    disabled: Reactive<bool>,
+    mut disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -46,8 +51,9 @@ pub fn Select(
     #[prop(optional, into)]
     name: MaybeProp<String>,
     /// Toggle whether or not this element requires a value for form submission.
+    #[allow(unused)]
     #[prop(optional, into)]
-    required: Reactive<bool>,
+    mut required: Reactive<bool>,
     /// Set how many characters wide the field should be. Defaults to `20`.
     #[prop(optional, into)]
     size: MaybeProp<usize>,
@@ -173,29 +179,17 @@ pub fn Select(
         Reactive::from("singlestage-select-value-not-set".to_string())
     });
 
-    let disabled: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.disabled
-        } else {
-            disabled
-        }
-    };
+    #[cfg(feature = "field")]
+    if let Some(field) = use_context::<FieldContext>() {
+        disabled = field.disabled;
+        invalid = field.invalid;
+        required = field.required;
+    }
 
-    let invalid: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.invalid
-        } else {
-            invalid
-        }
-    };
-
-    let required: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.required
-        } else {
-            required
-        }
-    };
+    #[cfg(feature = "field")]
+    let in_field: bool = use_context::<FieldContext>().is_some();
+    #[cfg(not(feature = "field"))]
+    let in_field: bool = false;
 
     let context = SelectContext { value };
 
@@ -263,12 +257,14 @@ pub fn Select(
             <Provider value=context>
                 <select
                     aria_describedby=move || {
+                        #[cfg(feature = "field")]
                         if let Some(field) = use_context::<FieldContext>() {
                             let description_id = field.description_id.get();
-                            if description_id.is_empty() { None } else { Some(description_id) }
-                        } else {
-                            None
+                            if !description_id.is_empty() {
+                                return Some(description_id);
+                            }
                         }
+                        if false { return Some("".to_string()) } else { return None }
                     }
                     aria_invalid=move || {
                         match invalid.get() {
@@ -277,7 +273,11 @@ pub fn Select(
                         }
                     }
                     aria_labelledby=move || {
-                        use_context::<FieldContext>().map(|field| field.label_id.get())
+                        #[cfg(feature = "field")]
+                        if let Some(field) = use_context::<FieldContext>() {
+                            return Some(field.label_id.get());
+                        }
+                        if false { return Some("".to_string()) } else { return None }
                     }
                     class=move || {
                         format!(
@@ -299,17 +299,16 @@ pub fn Select(
                     node_ref=select_ref
                     on:change=on_change
                     id=move || {
+                        #[cfg(feature = "field")]
                         if let Some(field) = use_context::<FieldContext>() {
                             if let Some(id) = id.get_untracked() {
                                 field.input_id.set(id.clone());
-                                Some(id)
-                            } else {
+                                return Some(id);
                                 field.input_id.set(input_id.to_string());
-                                Some(input_id.to_string())
+                                return Some(input_id.to_string());
                             }
-                        } else {
-                            id.get_untracked()
                         }
+                        return id.get_untracked();
                     }
                     prop:value=move || {
                         if value.get().as_str() == "singlestage-select-value-not-set" {

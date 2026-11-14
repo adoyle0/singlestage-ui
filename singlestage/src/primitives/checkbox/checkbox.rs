@@ -1,13 +1,21 @@
+#[cfg(feature = "field")]
 use crate::{
-    FieldContext, Reactive,
-    primitives::{CheckboxGroupContext, LabelPrimitive, LabelPrimitiveType, RadioGroupContext},
+    FieldContext,
+    primitives::{LabelPrimitive, LabelPrimitiveType},
 };
+
+#[cfg(feature = "radio")]
+use crate::primitives::RadioGroupContext;
+
+use crate::{Reactive, primitives::CheckboxGroupContext};
 use leptos::prelude::*;
 
 #[derive(Clone, Copy)]
 pub enum CheckboxPrimitiveType {
     Checkbox,
+    #[cfg(feature = "switch")]
     Switch,
+    #[cfg(feature = "radio")]
     Radio,
 }
 
@@ -19,8 +27,9 @@ pub fn CheckboxPrimitive(
 
     /// Whether the input is invalid
     #[prop(into)]
-    invalid: Reactive<bool>,
+    mut invalid: Reactive<bool>,
     /// Set the size to render the Switch
+    #[allow(unused)]
     #[prop(optional, into)]
     size: MaybeProp<String>,
 
@@ -39,11 +48,12 @@ pub fn CheckboxPrimitive(
     #[prop(into)]
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
+    #[allow(unused)]
     #[prop(into)]
-    required: Reactive<bool>,
+    mut required: Reactive<bool>,
     /// Whether the form control is disabled
     #[prop(into)]
-    disabled: Reactive<bool>,
+    mut disabled: Reactive<bool>,
     /// The value of the control. When specified in the HTML, corresponds to the initial value
     #[prop(into)]
     value: MaybeProp<String>,
@@ -169,7 +179,7 @@ pub fn CheckboxPrimitive(
     let update_checked = move || {
         if let Some(value) = value.get() {
             match primitive_type {
-                CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
+                CheckboxPrimitiveType::Checkbox => {
                     if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
                         let is_checked = checkbox_group.value.get().contains(&value);
                         checked.set(is_checked);
@@ -178,6 +188,17 @@ pub fn CheckboxPrimitive(
                         checked.get()
                     }
                 }
+                #[cfg(feature = "switch")]
+                CheckboxPrimitiveType::Switch => {
+                    if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                        let is_checked = checkbox_group.value.get().contains(&value);
+                        checked.set(is_checked);
+                        is_checked
+                    } else {
+                        checked.get()
+                    }
+                }
+                #[cfg(feature = "radio")]
                 CheckboxPrimitiveType::Radio => {
                     if let Some(radio_group) = use_context::<RadioGroupContext>() {
                         let is_checked = radio_group.value.get() == value;
@@ -193,37 +214,23 @@ pub fn CheckboxPrimitive(
         }
     };
 
-    let disabled: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.disabled
-        } else if let Some(radio_group) = use_context::<RadioGroupContext>() {
-            radio_group.disabled
-        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            checkbox_group.disabled
-        } else {
-            disabled
-        }
-    };
-
-    let invalid: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.invalid
-        } else if let Some(radio_group) = use_context::<RadioGroupContext>() {
-            radio_group.invalid
-        } else if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
-            checkbox_group.invalid
-        } else {
-            invalid
-        }
-    };
-
-    let required: Reactive<bool> = {
-        if let Some(field) = use_context::<FieldContext>() {
-            field.required
-        } else {
-            required
-        }
-    };
+    // Inherit state from parent context
+    #[cfg(feature = "checkbox")]
+    if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+        disabled = checkbox_group.disabled;
+        invalid = checkbox_group.invalid;
+    }
+    #[cfg(feature = "radio")]
+    if let Some(radio_group) = use_context::<RadioGroupContext>() {
+        disabled = radio_group.disabled;
+        invalid = radio_group.invalid;
+    }
+    #[cfg(feature = "field")]
+    if let Some(field) = use_context::<FieldContext>() {
+        disabled = field.disabled;
+        invalid = field.invalid;
+        required = field.required;
+    }
 
     let on_change = move |ev| {
         let input_checked = event_target_checked(&ev);
@@ -231,7 +238,7 @@ pub fn CheckboxPrimitive(
         checked.set(input_checked);
 
         match primitive_type {
-            CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
+            CheckboxPrimitiveType::Checkbox => {
                 if let Some(input_value) = value.get_untracked()
                     && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
                 {
@@ -249,6 +256,26 @@ pub fn CheckboxPrimitive(
                     }
                 }
             }
+            #[cfg(feature = "switch")]
+            CheckboxPrimitiveType::Switch => {
+                if let Some(input_value) = value.get_untracked()
+                    && let Some(checkbox_group) = use_context::<CheckboxGroupContext>()
+                {
+                    match input_checked {
+                        true => checkbox_group.value.update(|group_value| {
+                            group_value.push(input_value);
+                        }),
+                        false => checkbox_group.value.update(|group_value| {
+                            if let Some(index) =
+                                group_value.iter().position(|el| *el == input_value)
+                            {
+                                group_value.swap_remove(index);
+                            }
+                        }),
+                    }
+                }
+            }
+            #[cfg(feature = "radio")]
             CheckboxPrimitiveType::Radio => {
                 if let Some(radio_group) = use_context::<RadioGroupContext>() {
                     radio_group.value.set(event_target_value(&ev));
@@ -301,23 +328,23 @@ pub fn CheckboxPrimitive(
         <{..}
             aria_checked=move || { if update_checked() { Some("true") } else { None } }
             aria_describedby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
+                    if !description_id.is_empty() {
+                        return Some(description_id);
+                    }
                 }
+                if false { return Some("".to_string()) } else { return None }
             }
             aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
             aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_labelledby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
-                } else {
-                    None
+                    return Some(field.label_id.get());
                 }
+                if has_children { return Some(label_id.to_string()) } else { return None }
             }
             checked=update_checked
             prop:checked=update_checked
@@ -336,6 +363,7 @@ pub fn CheckboxPrimitive(
                                 "singlestage-checkbox".to_owned()
                             }
                         }
+                        #[cfg(feature = "switch")]
                         CheckboxPrimitiveType::Switch => {
                             format!(
                                 "singlestage-switch {}",
@@ -345,6 +373,7 @@ pub fn CheckboxPrimitive(
                                 },
                             )
                         }
+                        #[cfg(feature = "radio")]
                         CheckboxPrimitiveType::Radio => {
                             if class
                                 .get()
@@ -363,31 +392,46 @@ pub fn CheckboxPrimitive(
             disabled=move || disabled.get()
             prop:disabled=move || disabled.get()
             form=move || form.get()
-            id={if let Some(field) = use_context::<FieldContext>() {
-                if let Some(id) = id.get_untracked() {
-                    field.input_id.set(id.clone());
-                    Some(id)
-                } else {
-                    field.input_id.set(input_id.to_string());
-                    Some(input_id.to_string())
+            id={move || {
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        return Some(id);
+                    } else {
+                        field.input_id.set(input_id.to_string());
+                        return Some(input_id.to_string());
+                    }
                 }
-            } else if let Some(id) = id.get_untracked() {
-                Some(id)
-            } else {
-                if has_children { Some(input_id.to_string()) } else { None }
+                if let Some(id) = id.get_untracked() {
+                    return Some(id)
+                } else if has_children {
+                    return Some(input_id.to_string())
+                } else {
+                    return None
+                }
             }}
             name=move || {
                 if let Some(name) = name.get() {
                     Some(name)
                 } else {
                     match primitive_type {
-                        CheckboxPrimitiveType::Checkbox | CheckboxPrimitiveType::Switch => {
+                        CheckboxPrimitiveType::Checkbox => {
                             if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
                                 Some(format!("{}[]", checkbox_group.name.clone()))
                             } else {
                                 None
                             }
                         }
+                        #[cfg(feature = "switch")]
+                        CheckboxPrimitiveType::Switch => {
+                            if let Some(checkbox_group) = use_context::<CheckboxGroupContext>() {
+                                Some(format!("{}[]", checkbox_group.name.clone()))
+                            } else {
+                                None
+                            }
+                        }
+                        #[cfg(feature = "radio")]
                         CheckboxPrimitiveType::Radio => {
                             if let Some(radio_group) = use_context::<RadioGroupContext>() {
                                 Some(radio_group.name.clone())
@@ -404,10 +448,12 @@ pub fn CheckboxPrimitive(
             required=move || required.get()
             prop:required=move || required.get()
             role=match primitive_type {
+                #[cfg(feature = "switch")]
                 CheckboxPrimitiveType::Switch => Some("switch"),
-                _ => None,
+                _ => if false { Some("") } else { None }
             }
             type=match primitive_type {
+                #[cfg(feature = "radio")]
                 CheckboxPrimitiveType::Radio => "radio",
                 _ => "checkbox",
             }
@@ -416,10 +462,14 @@ pub fn CheckboxPrimitive(
         />
     };
 
-    let in_field = use_context::<FieldContext>().is_some();
+    #[cfg(feature = "field")]
+    let in_field: bool = use_context::<FieldContext>().is_some();
+
+    #[allow(unused)]
     if let Some(children) = children {
+        #[cfg(feature = "field")]
         if in_field {
-            view! {
+            return view! {
                 <input
 
                     {..global_attrs_1}
@@ -438,9 +488,9 @@ pub fn CheckboxPrimitive(
                     {children()}
                 </LabelPrimitive>
             }
-            .into_any()
+            .into_any();
         } else {
-            view! {
+            return view! {
                 <LabelPrimitive
                     primitive_type=LabelPrimitiveType::Label
 
@@ -459,17 +509,16 @@ pub fn CheckboxPrimitive(
                     {children()}
                 </LabelPrimitive>
             }
-            .into_any()
+            .into_any();
         }
-    } else {
-        view! {
-            <input
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..input_attrs}
-            />
-        }
-        .into_any()
     }
+    return view! {
+        <input
+
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..input_attrs}
+        />
+    }
+    .into_any();
 }

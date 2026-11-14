@@ -1,7 +1,9 @@
 mod content;
-mod trigger;
-
 pub use content::*;
+
+#[cfg(feature = "button")]
+mod trigger;
+#[cfg(feature = "button")]
 pub use trigger::*;
 
 use crate::Reactive;
