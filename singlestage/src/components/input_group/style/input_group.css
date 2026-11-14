@@ -1,0 +1,66 @@
+@layer components1 {
+  .singlestage-input-group-addon {
+    @apply cursor-text
+    flex
+    items-center
+    justify-center
+    select-none;
+  }
+
+  .singlestage-input-group-addon-align-inline-start {
+    @apply order-first;
+  }
+
+  .singlestage-input-group-addon-align-inline-end {
+    @apply order-last;
+  }
+
+  .singlestage-input-group-addon-align-block-start {
+    @apply justify-start
+    order-first
+    w-full;
+  }
+
+  .singlestage-input-group-addon-align-block-end {
+    @apply justify-start
+    order-last
+    w-full;
+  }
+
+  .singlestage-input-group-button {
+    @apply flex
+    items-center
+    shadow-none;
+  }
+
+  .singlestage-input-group-text {
+    @apply flex
+    items-center;
+
+    svg {
+      @apply pointer-events-none;
+    }
+  }
+
+  .singlestage-input-group-input {
+    @apply flex-1;
+  }
+
+  .singlestage-input-group-textarea {
+    @apply flex-1
+    resize-none;
+  }
+
+  .singlestage-input-group {
+    @apply flex
+    items-center
+    min-w-0
+    outline-none
+    relative
+    w-full;
+
+    &:has(> .singlestage-textarea) {
+      @apply h-auto;
+    }
+  }
+}

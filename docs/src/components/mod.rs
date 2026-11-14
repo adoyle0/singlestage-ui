@@ -6,3 +6,4 @@ mod theme_switcher;
 pub use code_block::*;
 pub use component_template::*;
 pub use sidebar::*;
+pub use theme_switcher::*;

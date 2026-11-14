@@ -4,8 +4,13 @@ use singlestage::*;
 #[component]
 pub fn TooltipExample() -> impl IntoView {
     view! {
-        <Tooltip value="Add to library">
-            <Button variant="outline">"Hover"</Button>
+        <Tooltip>
+            <TooltipTrigger>
+                <Button variant="outline">"Hover"</Button>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p>"Add to library"</p>
+            </TooltipContent>
         </Tooltip>
     }
 }

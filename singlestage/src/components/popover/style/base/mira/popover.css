@@ -1,0 +1,31 @@
+@layer components1 {
+  .singlestage-popover-content {
+    @apply bg-popover
+    flex
+    flex-col
+    gap-4
+    p-2.5
+    ring-1
+    ring-foreground/10
+    rounded-lg
+    shadow-md
+    text-popover-foreground
+    text-xs;
+  }
+
+  .singlestage-popover-header {
+    @apply flex
+    flex-col
+    gap-1
+    text-xs;
+  }
+
+  .singlestage-popover-title {
+    @apply font-medium
+    text-sm;
+  }
+
+  .singlestage-popover-description {
+    @apply text-muted-foreground;
+  }
+}

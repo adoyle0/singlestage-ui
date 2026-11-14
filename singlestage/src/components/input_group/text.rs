@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+/// A styled wrapper for displaying text and icons in an InputGroup.
 #[component]
 pub fn InputGroupText(
     children: Children,

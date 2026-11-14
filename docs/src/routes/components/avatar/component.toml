@@ -5,16 +5,60 @@ description = "An image element with a fallback for representing the user."
 name = "Avatar"
 
 [[examples]]
-name = "Avatar Fallback"
-title = "Fallback"
+name = "avatar basic"
+title = "Basic"
+description = "A basic avatar component with an image and a fallback."
 
 [[examples]]
-name = "Avatar group"
+name = "avatar badge"
+title = "Badge"
+description = """Use the AvatarBadge component to add a badge to the avatar. The badge is \
+positioned at the bottom right of the avatar."""
+
+[[examples]]
+name = "avatar badge with icon"
+title = "Badge with Icon"
+description = "You can also use an icon inside a badge."
+
+[[examples]]
+name = "avatar group"
 title = "Avatar Group"
+description = "Use AvatarGroup to group avatars."
+
+[[examples]]
+name = "avatar group count"
+title = "Avatar Group Count"
+description = "Use AvatarGroupCount to add a count to the group."
+
+[[examples]]
+name = "avatar group with icon"
+title = "Avatar Group with Icon"
+description = "You can also use an icon inside <AvatarGroupCount>."
+
+[[examples]]
+name = "avatar sizes"
+title = "Sizes"
+description = "Use the size prop to change the size of the avatar."
+
+[[examples]]
+name = "avatar dropdown"
+title = "Dropdown"
+description = "You can use an Avatar component as a trigger for a dropdown menu."
 
 [[references]]
 name = "Avatar"
 description = "Contains the contents of an avatar."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = [
+  { attr = "size", attr_type = "String", default = """"default"""", description = """Set which \
+    size avatar to display. Accepted values: \"sm\" | \"default\" | \"lg\".""" },
+]
+
+[[references]]
+name = "AvatarBadge"
+description = "Displays a badge overlay at the bottom right of an avatar."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
@@ -36,6 +80,13 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attribu
 attributes."""
 attrs = []
 
+[[references]]
+name = "AvatarGroupCount"
+description = "Displays a count representing additional hidden avatars."
+extra = """Implements <a class="singlestage-link" \
+href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
+attributes."""
+attrs = []
 
 [[references]]
 name = "AvatarImage"

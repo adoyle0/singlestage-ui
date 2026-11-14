@@ -1,6 +1,8 @@
+// TODO: Merge with Separator primitive
+
 use leptos::prelude::*;
 
-/// Visually eparates sidebar content.
+/// Visually separates sidebar content.
 #[component]
 pub fn SidebarSeparator(
     // GLOBAL ATTRIBUTES
@@ -113,7 +115,7 @@ pub fn SidebarSeparator(
             accesskey=move || accesskey.get()
             autocapitalize=move || autocapitalize.get()
             autofocus=move || autofocus.get()
-            class=move || class.get()
+            // class=move || class.get()
             contenteditable=move || contenteditable.get()
             dir=move || dir.get()
             draggable=move || draggable.get()
@@ -150,6 +152,9 @@ pub fn SidebarSeparator(
 
     view! {
         <hr
+            class=move || {
+                format!("singlestage-sidebar-separator {}", class.get().unwrap_or_default())
+            }
             role="separator"
 
             {..global_attrs_1}

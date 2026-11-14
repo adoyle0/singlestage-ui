@@ -8,6 +8,11 @@ pub mod alert;
 #[cfg(feature = "alert")]
 pub use alert::*;
 
+#[cfg(feature = "alert_dialog")]
+pub mod alert_dialog;
+#[cfg(feature = "alert_dialog")]
+pub use alert_dialog::*;
+
 #[cfg(feature = "aspect_ratio")]
 pub mod aspect_ratio;
 #[cfg(feature = "aspect_ratio")]
@@ -52,6 +57,11 @@ pub use carousel::*;
 pub mod checkbox;
 #[cfg(feature = "checkbox")]
 pub use checkbox::*;
+
+#[cfg(feature = "collapsible")]
+pub mod collapsible;
+#[cfg(feature = "collapsible")]
+pub use collapsible::*;
 
 #[cfg(feature = "context_menu")]
 pub mod context_menu;
@@ -142,6 +152,11 @@ pub use select::*;
 pub mod separator;
 #[cfg(feature = "separator")]
 pub use separator::*;
+
+#[cfg(feature = "sheet")]
+pub mod sheet;
+#[cfg(feature = "sheet")]
+pub use sheet::*;
 
 #[cfg(feature = "sidebar")]
 pub mod sidebar;

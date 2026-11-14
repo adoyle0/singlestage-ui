@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Empty::*;
+use singlestage::*;
 
 #[component]
 pub fn EmptyAnatomy() -> impl IntoView {

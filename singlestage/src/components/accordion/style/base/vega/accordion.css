@@ -1,0 +1,46 @@
+@layer components1 {
+  .singlestage-accordion-item:not(&:last-child) {
+    @apply border-b;
+  }
+
+  .singlestage-accordion-trigger {
+    @apply font-medium
+    py-4
+    rounded-md
+    text-left
+    text-sm;
+
+    &:focus-visible {
+      @apply border-ring
+      ring-3
+      ring-ring/50;
+
+      &::after {
+        @appy border-ring;
+      }
+    }
+
+    &:hover {
+      @apply underline;
+    }
+
+    > h3 {
+      > svg {
+        @apply ml-auto
+        size-4
+        text-muted-foreground;
+      }
+    }
+  }
+
+  .singlestage-accordion-content-inner {
+    @apply pb-4
+    pt-0;
+  }
+
+  .singlestage-accordion-content {
+    @apply duration-150
+    text-sm
+    transition-all;
+  }
+}

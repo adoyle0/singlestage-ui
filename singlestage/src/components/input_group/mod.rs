@@ -7,4 +7,4 @@ pub use group::*;
 pub use text::*;
 
 #[derive(Clone)]
-pub struct InputGroupContext {}
+pub(crate) struct InputGroupContext {}

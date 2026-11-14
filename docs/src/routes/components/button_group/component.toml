@@ -22,15 +22,13 @@ description = "Nest <ButtonGroup> components to create button groups with spacin
 [[examples]]
 name = "button group separator"
 title = "Separator"
-description = """The ButtonGroupSeparator component visually divides buttons within a group. \
-\
-Buttons with variant outline do not need a separator since they have a border. For other variants, \
-a separator is recommended to improve the visual hierarchy."""
+description = """Some buttons don't need a separator since they have a border. For other variants \
+use a Separator to improve the visual hierarchy."""
 
 [[examples]]
 name = "button group split"
 title = "Split"
-description = "Create a split button group by adding two buttons separated by a ButtonGroupSeparator."
+description = "Create a split button group using a Separator."
 
 [[examples]]
 name = "button group input"
@@ -64,17 +62,20 @@ extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
 attrs = [
-  { attr = "vertical", attr_type = "bool", default = "false", description = """Sets the display \
-    direction of the ButtonGroup.""" },
+  { attr = "orientation", attr_type = "String", default = """""""", description = """Sets the \
+    display direction of the ButtonGroup.""" },
 ]
 
 [[references]]
 name = "ButtonGroupSeparator"
-description = "Visually separates elements in the ButtonGroup."
+description = "Visually separates button group buttons."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""
-attrs = []
+attrs = [
+  { attr = "orientation", attr_type = "String", default = """""""", description = """Sets the \
+    display direction of the separator.""" },
+]
 
 [[references]]
 name = "ButtonGroupText"

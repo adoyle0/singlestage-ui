@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Separator;
+use singlestage::*;
 
 #[component]
 pub fn SeparatorAnatomy() -> impl IntoView {

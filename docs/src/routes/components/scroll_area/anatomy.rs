@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::scroll_area::*;
+use singlestage::*;
 
 #[component]
 pub fn ScrollAreaAnatomy() -> impl IntoView {

@@ -24,15 +24,22 @@ mod icon;
 /// # Examples
 ///
 /// ```rust
-/// use singlestage::icon;
+/// use leptos::prelude::*;
+/// use singlestage::*;
 ///
-///<Label>
-///  {icon!(icondata::FiCreditCard)} "Card"
-/// </Label>
+///#[component]
+///fn UsesIcon() -> impl IntoView {
 ///
-///<Label>
-///  {icon!(icondata::FiCreditCard, width=100, class="mr-3")} "Card"
-/// </Label>
+///   view!{
+///       <Label>
+///          {icon!(icondata::FiCreditCard)} "Card"
+///       </Label>
+///
+///       <Label>
+///          {icon!(icondata::FiCreditCard, width=100, class="mr-3")} "Card"
+///       </Label>
+///   }
+///}
 /// ```
 #[proc_macro]
 pub fn icon(input: TokenStream) -> TokenStream {

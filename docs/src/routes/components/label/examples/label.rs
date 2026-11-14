@@ -1,21 +1,12 @@
 use leptos::prelude::*;
-use singlestage::{Checkbox, Input, Label};
+use singlestage::*;
 
 #[component]
 pub fn LabelExample() -> impl IntoView {
     view! {
-        <div class="space-y-4">
-            <div class="grid gap-2">
-                <Label label_for="email">"Email"</Label>
-                <Input id="email" input_type="email" />
-            </div>
-
-            <Label class="grid gap-2">"Password" <Input input_type="password" /></Label>
-
-            <Label>
-                <Checkbox />
-                "Accept terms and conditions"
-            </Label>
+        <div class="flex gap-2">
+            <Checkbox id="terms" />
+            <Label label_for="terms">"Accept terms and conditions"</Label>
         </div>
     }
 }

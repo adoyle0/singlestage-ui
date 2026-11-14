@@ -1,0 +1,7 @@
+@layer components1 {
+  .singlestage-textarea {
+    &[aria-invalid="true"] {
+      @apply border-b-destructive/50;
+    }
+  }
+}

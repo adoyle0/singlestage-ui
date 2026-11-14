@@ -6,6 +6,7 @@ mod item_header;
 mod item_icon;
 mod item_image;
 mod item_link;
+mod item_size;
 mod item_variants;
 
 pub use item::*;
@@ -16,4 +17,5 @@ pub use item_header::*;
 pub use item_icon::*;
 pub use item_image::*;
 pub use item_link::*;
+pub use item_size::*;
 pub use item_variants::*;

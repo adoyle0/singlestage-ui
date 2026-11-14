@@ -1,7 +1,25 @@
-use crate::{
-    DropdownMenuContext, DropdownTriggerContext, InputGroupContext, PopoverContext,
-    PopoverTriggerContext,
-};
+#[cfg(feature = "breadcrumb")]
+use crate::BreadcrumbLinkContext;
+
+#[cfg(feature = "collapsible")]
+use crate::CollapsibleContext;
+
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+#[cfg(feature = "popover")]
+use crate::PopoverContext;
+
+#[cfg(feature = "sheet")]
+use crate::{SheetCloseContext, SheetContext};
+
+#[cfg(feature = "sidebar")]
+use crate::{SidebarContext, SidebarMenuButtonContext};
+
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
 /// Creates a button.
@@ -9,16 +27,24 @@ use leptos::prelude::*;
 pub fn Button(
     children: Children,
 
-    /// The type of the button. Defaults to `submit`:
-    /// Button types: submit | button | reset
+    /// This component will render without styling
+    #[prop(optional, into)]
+    as_child: MaybeProp<bool>,
+    /// Renamed `button` `type` attribute to avoid name collisions
     #[prop(optional, into)]
     button_type: MaybeProp<String>,
+    /// Toggle whether clicking this button dismisses its parent popover
+    #[prop(optional, into, default = Reactive::from(true))]
+    dismiss: Reactive<bool>,
+    /// Whether the input is invalid
+    #[prop(optional, into)]
+    invalid: Reactive<bool>,
     /// The size of the button. Leave this empty for the default size.
     /// Sizes: small | large | icon | sm-icon | lg-icon
     #[prop(optional, into)]
     size: MaybeProp<String>,
     /// The display variant of the button. Defaults to `primary`
-    /// Variants: primary | secondary | outline | ghost | link | destructive
+    /// Variants: "primary" | "secondary" | "outline" | "ghost" | "link" | "destructive"
     #[prop(optional, into)]
     variant: MaybeProp<String>,
 
@@ -35,7 +61,7 @@ pub fn Button(
     commandfor: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -82,6 +108,7 @@ pub fn Button(
 
     // ARIA ATTRIBUTES
     //
+    #[prop(optional, into)] aria_current: MaybeProp<String>,
     /// Provide a custom accessible name for this element.
     #[prop(optional, into)]
     aria_label: MaybeProp<String>,
@@ -191,41 +218,24 @@ pub fn Button(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let global_attrs_1 = view! {
-        <{..}
-            accesskey=move || accesskey.get()
-            autocapitalize=move || autocapitalize.get()
-            autofocus=move || autofocus.get()
-            contenteditable=move || contenteditable.get()
-            dir=move || dir.get()
-            draggable=move || draggable.get()
-            enterkeyhint=move || enterkeyhint.get()
-            exportparts=move || exportparts.get()
-            hidden=move || hidden.get()
-            inert=move || inert.get()
-            inputmode=move || inputmode.get()
-            is=move || is.get()
-            itemid=move || itemid.get()
-        />
+    let update_disabled = move || {
+        #[cfg(feature = "field")]
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_disabled = field.disabled.get();
+            disabled.set(is_disabled);
+            return is_disabled;
+        }
+        return disabled.get();
     };
-    let global_attrs_2 = view! {
-        <{..}
-            itemprop=move || itemprop.get()
-            itemref=move || itemref.get()
-            itemscope=move || itemscope.get()
-            itemtype=move || itemtype.get()
-            lang=move || lang.get()
-            nonce=move || nonce.get()
-            part=move || part.get()
-            popover=move || popover.get()
-            role=move || role.get()
-            slot=move || slot.get()
-            spellcheck=move || spellcheck.get()
-            style=move || style.get()
-            tabindex=move || tabindex.get()
-            title=move || title.get()
-            translate=move || translate.get()
-        />
+
+    let update_invalid = move || {
+        #[cfg(feature = "field")]
+        if let Some(field) = use_context::<FieldContext>() {
+            let is_invalid = field.invalid.get();
+            invalid.set(is_invalid);
+            return is_invalid;
+        }
+        return invalid.get();
     };
 
     let button_attrs = view! {
@@ -243,112 +253,373 @@ pub fn Button(
         />
     };
 
-    let button_is_trigger: bool = use_context::<DropdownTriggerContext>().is_some()
-        || use_context::<PopoverTriggerContext>().is_some();
+    let global_attrs_1 = view! {
+        <{..}
+            accesskey=move || accesskey.get()
+            autocapitalize=move || autocapitalize.get()
+            autofocus=move || autofocus.get()
+            contenteditable=move || contenteditable.get()
+            dir=move || dir.get()
+            draggable=move || draggable.get()
+            enterkeyhint=move || enterkeyhint.get()
+            exportparts=move || exportparts.get()
+            hidden=move || hidden.get()
+            inert=move || inert.get()
+            inputmode=move || inputmode.get()
+            is=move || is.get()
+            itemid=move || itemid.get()
+            itemprop=move || itemprop.get()
+        />
+    };
+    let global_attrs_2 = view! {
+        <{..}
+            itemref=move || itemref.get()
+            itemscope=move || itemscope.get()
+            itemtype=move || itemtype.get()
+            lang=move || lang.get()
+            nonce=move || nonce.get()
+            part=move || part.get()
+            popover=move || popover.get()
+            role=move || role.get()
+            slot=move || slot.get()
+            spellcheck=move || spellcheck.get()
+            style=move || style.get()
+            tabindex=move || tabindex.get()
+            title=move || title.get()
+            translate=move || translate.get()
+        />
+    };
+
+    #[cfg(feature = "breadcrumb")]
+    let in_breadcrumb_link: bool = use_context::<BreadcrumbLinkContext>().is_some();
+    #[cfg(not(feature = "breadcrumb"))]
+    let in_breadcrumb_link: bool = false;
+
+    #[cfg(feature = "input_group")]
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
+
+    #[cfg(feature = "popover")]
+    let in_popover_menu_item: bool = use_context::<MenuItemContext>().is_some();
+    #[cfg(not(feature = "popover"))]
+    let in_popover_menu_item: bool = false;
+
+    #[cfg(feature = "sidebar")]
+    let in_sidebar_menu_button: bool = use_context::<SidebarMenuButtonContext>().is_some();
+    #[cfg(not(feature = "sidebar"))]
+    let in_sidebar_menu_button: bool = false;
+
+    #[cfg(feature = "dialog")]
+    let is_dialog_action: bool = use_context::<DialogActionContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_action: bool = false;
+
+    #[cfg(feature = "dialog")]
+    let is_dialog_cancel: bool = use_context::<DialogCancelContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_cancel: bool = false;
+
+    #[cfg(feature = "dialog")]
+    let is_dialog_close: bool = use_context::<DialogCloseContext>().is_some();
+    #[cfg(not(feature = "dialog"))]
+    let is_dialog_close: bool = false;
+
+    #[cfg(feature = "sheet")]
+    let is_sheet_close: bool = use_context::<SheetCloseContext>().is_some();
+    #[cfg(not(feature = "sheet"))]
+    let is_sheet_close: bool = false;
+
+    let is_trigger: bool = use_context::<TriggerContext>().is_some();
 
     view! {
         <button
             aria_controls=move || {
-                if button_is_trigger {
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
-                        Some(dropdown.menu_id.get())
-                    } else { use_context::<PopoverContext>().map(|popover| popover.menu_id.get()) }
+                if is_trigger {
+                    #[cfg(feature = "dropdown")]
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>()
+                        && !in_popover_menu_item
+                    {
+                        return Some(dropdown.menu_id.get());
+                    }
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
+                        return Some(popover.menu_id.get());
+                    }
+                    #[cfg(feature = "sheet")]
+                    if cfg!(feature = "sheet") && let Some(sheet) = use_context::<SheetContext>() {
+                        return Some(sheet.content_id.get());
+                    }
+                    if false { return Some("".to_string()) } else { return None }
                 } else {
-                    None
+                    #[cfg(feature = "popover")]
+                    if let Some(menu_item) = use_context::<MenuItemContext>()
+                        && menu_item.dismiss.get()
+                        && let Some(menu) = use_context::<PopoverMenuContext>()
+                    {
+                        return Some(menu.menu_id.get());
+                    }
+                    return None;
                 }
             }
-            aria_haspopup=move || { if button_is_trigger { Some("menu") } else { None } }
+            aria_current=move || aria_current.get()
+            aria_disabled=move || { if update_disabled() { Some("true") } else { None } }
+            aria_expanded=move || {
+                if is_trigger {
+                    #[cfg(feature = "popover")]
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>()
+                        && dropdown.open.get()
+                    {
+                        return Some("true".to_owned());
+                    }
+                    #[cfg(feature = "collapsible")]
+                    if let Some(collapsible) = use_context::<CollapsibleContext>()
+                        && collapsible.open.get()
+                    {
+                        return Some("true".to_owned());
+                    }
+                    if false { return Some("".to_string()) } else { return None }
+                } else {
+                    return None
+                }
+            }
+            aria_haspopup=move || {
+                if is_trigger || in_popover_menu_item { Some("menu") } else { None }
+            }
+            aria_invalid=move || { if update_invalid() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             class=move || {
-                format!(
-                    "{}{} {} {} {}",
-                    if button_is_trigger { "singlestage-trigger " } else { "" },
-                    match variant.get().unwrap_or_default().as_str() {
-                        "primary" => "singlestage-btn-primary",
-                        "secondary" => "singlestage-btn-secondary",
-                        "outline" => "singlestage-btn-outline",
-                        "ghost" => "singlestage-btn-ghost",
-                        "link" => "singlestage-btn-link",
-                        "destructive" => "singlestage-btn-destructive",
-                        _ => {
-                            if use_context::<InputGroupContext>().is_some()
-                                && variant.get().is_none()
-                            {
-                                "singlestage-btn-ghost"
-                            } else {
-                                "singlestage-btn-primary"
-                            }
-                        }
-                    },
-                    match size.get().unwrap_or_default().as_str() {
-                        "sm" => "singlestage-btn-sm",
-                        "small" => "singlestage-btn-sm",
-                        "lg" => "singlestage-btn-lg",
-                        "large" => "singlestage-btn-lg",
-                        "icon" => "singlestage-btn-icon",
-                        "sm-icon" => "singlestage-btn-sm-icon",
-                        "icon-sm" => "singlestage-btn-sm-icon",
-                        "lg-icon" => "singlestage-btn-lg-icon",
-                        "icon-lg" => "singlestage-btn-lg-icon",
-                        _ => "",
-                    },
-                    if use_context::<InputGroupContext>().is_some() {
-                        format!(
-                            "singlestage-input-group-button {}",
-                            match size.get().unwrap_or_default().as_str() {
-                                "sm" => "singlestage-input-group-button-sm",
-                                "icon-xs" => "singlestage-input-group-button-icon-xs",
-                                "icon-sm" => "singlestage-input-group-button-icon-sm",
-                                _ => "singlestage-input-group-button-xs",
-                            },
-                        )
+                if as_child.get().unwrap_or_default() {
+                    if in_breadcrumb_link {
+                        format!("singlestage-breadcrumb-link {}", class.get().unwrap_or_default())
                     } else {
-                        "".to_string()
-                    },
-                    class.get().unwrap_or_default(),
-                )
+                        class.get().unwrap_or_default()
+                    }
+                } else if in_popover_menu_item {
+                    class.get().unwrap_or_default()
+                } else if in_sidebar_menu_button {
+                    format!(
+                        "singlestage-sidebar-menu-button {} {} {}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "sm" | "small" => "singlestage-sidebar-menu-button-size-sm",
+                            "lg" | "large" => "singlestage-sidebar-menu-button-size-lg",
+                            _ => "singlestage-sidebar-menu-button-size-default",
+                        },
+                        match variant.get().unwrap_or_default().as_str() {
+                            "outline" => "singlestage-sidebar-menu-button-variant-outline",
+                            _ => "singlestage-sidebar-menu-button-variant-default",
+                        },
+                        class.get().unwrap_or_default(),
+                    )
+                } else {
+                    let size = format!(
+                        "{}{}",
+                        match size.get().unwrap_or_default().as_str() {
+                            "xs" | "extra small" => "singlestage-button-size-xs",
+                            "sm" | "small" => "singlestage-button-size-sm",
+                            "lg" | "large" => "singlestage-button-size-lg",
+                            "icon" => "singlestage-button-size-icon",
+                            "xs-icon" | "icon-xs" | "icon extra small" | "extra small icon" => {
+                                "singlestage-button-size-icon-xs"
+                            }
+                            "sm-icon" | "icon-sm" | "icon small" | "small icon" => {
+                                "singlestage-button-size-icon-sm"
+                            }
+                            "lg-icon" | "icon-lg" | "icon large" | "large icon" => {
+                                "singlestage-button-size-icon-lg"
+                            }
+                            _ => "singlestage-button-size-default",
+                        },
+                        if in_input_group {
+                            match size.get().unwrap_or_default().as_str() {
+                                "sm" | "small" => " singlestage-input-group-button-sm",
+                                "icon-xs" | "xs-icon" => " singlestage-input-group-button-icon-xs",
+                                "icon-sm" | "sm-icon" => " singlestage-input-group-button-icon-sm",
+                                _ => " singlestage-input-group-button-xs",
+                            }
+                        } else {
+                            ""
+                        },
+                    );
+                    format!(
+                        "singlestage-button{}{}{} {} {} {}",
+                        if in_input_group { " singlestage-input-group-button" } else { "" },
+                        if is_trigger { " singlestage-trigger" } else { "" },
+                        if is_dialog_action {
+                            " singlestage-alert-dialog-action"
+                        } else if is_dialog_cancel {
+                            " singlestage-alert-dialog-cancel"
+                        } else {
+                            ""
+                        },
+                        match variant.get().unwrap_or_default().as_str() {
+                            "secondary" => "singlestage-button-variant-secondary",
+                            "outline" => "singlestage-button-variant-outline",
+                            "ghost" => "singlestage-button-variant-ghost",
+                            "link" => "singlestage-button-variant-link",
+                            "destructive" => "singlestage-button-variant-destructive",
+                            _ => {
+                                if is_dialog_cancel {
+                                    "singlestage-button-variant-outline"
+                                } else if in_input_group && variant.get().is_none() {
+                                    "singlestage-button-variant-ghost"
+                                } else {
+                                    "singlestage-button-variant-default"
+                                }
+                            }
+                        },
+                        size,
+                        class.get().unwrap_or_default(),
+                    )
+                }
             }
-            disabled=disabled.get_untracked()
+            disabled=update_disabled
+            prop:disabled=update_disabled
             id=move || {
-                if button_is_trigger {
+                if is_trigger {
                     let trigger_id = id.get().unwrap_or(uuid::Uuid::new_v4().to_string());
-                    if let Some(dropdown) = use_context::<DropdownMenuContext>() {
+                    #[cfg(feature = "dropdown")]
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>() {
                         dropdown.trigger_id.set(trigger_id.clone());
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
+                        return None;
+                    }
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
                         popover.trigger_id.set(trigger_id.clone());
+                        return None;
+                    }
+                    #[cfg(feature = "sheet")]
+                    if let Some(sheet) = use_context::<SheetContext>() {
+                        sheet.trigger_id.set(trigger_id.clone());
+                        return None;
                     }
                     Some(trigger_id)
                 } else {
                     id.get()
                 }
             }
+            on:click=move |ev| {
+                #[cfg(feature = "dialog")]
+                if let Some(dialog) = use_context::<DialogContext>() {
+                    if is_trigger {
+                        dialog.open.set(true);
+                    } else if (is_dialog_action || is_dialog_cancel || is_dialog_close)
+                        && dismiss.get()
+                    {
+                        dialog.open.set(false);
+                    }
+                    return;
+                }
+                #[cfg(feature = "popover")]
+                if let Some(popover) = use_context::<PopoverContext>() && is_trigger {
+                    if let Some(menu_item) = use_context::<MenuItemContext>()
+                        && let Some(menu) = use_context::<PopoverMenuContext>() && !menu.modal.get()
+                        && menu_item.dismiss.get() && dismiss.get()
+                    {
+                        ev.prevent_default();
+                        menu.open.set(false);
+                        return;
+                    }
+                    if popover.modal.get_untracked() {
+                        ev.prevent_default();
+                        popover.open.set(!popover.open.get_untracked());
+                        return;
+                    }
+                    return;
+                }
+                #[cfg(feature = "dropdown")]
+                if let Some(dropdown) = use_context::<PopoverMenuContext>() {
+                    if let Some(menu_item) = use_context::<MenuItemContext>() {
+                        if !menu_item.dismiss.get_untracked() {
+                            ev.prevent_default();
+                        }
+                        return;
+                    } else {
+                        if dropdown.modal.get_untracked() {
+                            ev.prevent_default();
+                            dropdown.open.set(!dropdown.open.get_untracked());
+                        }
+                        return;
+                    }
+                }
+                #[cfg(feature = "collapsible")]
+                if let Some(collapsible) = use_context::<CollapsibleContext>() {
+                    collapsible.open.set(!collapsible.open.get_untracked());
+                    return;
+                }
+                #[cfg(feature = "sheet")]
+                if let Some(sheet) = use_context::<SheetContext>() {
+                    if is_trigger && !in_sidebar_menu_button {
+                        sheet.open.set(true);
+                    } else if (is_sheet_close || in_sidebar_menu_button) && dismiss.get() {
+                        sheet.open.set(false);
+                    }
+                    return;
+                }
+                return;
+            }
             popovertarget=move || {
-                if button_is_trigger {
-                    let mut target_id = None;
+                #[cfg(feature = "popover")]
+                if is_trigger {
+                    let mut target_id: Option<String> = None;
                     if let Some(popovertarget) = popovertarget.get() {
                         target_id = Some(popovertarget);
-                    } else if let Some(dropdown) = use_context::<DropdownMenuContext>() {
-                        target_id = Some(dropdown.menu_id.get())
-                    } else if let Some(popover) = use_context::<PopoverContext>() {
-                        target_id = Some(popover.menu_id.get())
                     }
-                    target_id
-                } else {
-                    popovertarget.get()
+                    #[cfg(feature = "dropdown")]
+                    if let Some(dropdown) = use_context::<PopoverMenuContext>()
+                        && !in_popover_menu_item
+                    {
+                        target_id = Some(dropdown.menu_id.get());
+                    }
+                    #[cfg(feature = "popover")]
+                    if let Some(popover) = use_context::<PopoverContext>() {
+                        target_id = Some(popover.menu_id.get());
+                    }
+                    #[cfg(feature = "sheet")]
+                    if let Some(sheet) = use_context::<SheetContext>() {
+                        target_id = Some(sheet.content_id.get());
+                    }
+                    return target_id;
+                } else if let Some(menu_item) = use_context::<MenuItemContext>() {
+                    if let Some(menu) = use_context::<PopoverMenuContext>()
+                        && menu_item.dismiss.get()
+                    {
+                        return Some(menu.menu_id.get());
+                    } else {
+                        return None;
+                    }
                 }
+                popovertarget.get()
             }
             popovertargetaction=move || {
-                if button_is_trigger {
+                #[cfg(feature = "popover")]
+                if is_trigger {
+                    Some("toggle".to_string())
+                } else if let Some(menu_item) = use_context::<MenuItemContext>()
+                    && menu_item.dismiss.get()
+                {
                     Some("toggle".to_string())
                 } else {
                     popovertargetaction.get()
                 }
+                #[cfg(not(feature = "popover"))]
+                if is_trigger { Some("toggle".to_string()) } else { popovertargetaction.get() }
             }
-            prop:disabled=move || disabled.get()
+            style:anchor-name=move || {
+                #[cfg(feature = "dropdown")]
+                if is_trigger && let Some(dropdown) = use_context::<PopoverMenuContext>() {
+                    return Some(format!("--{}", dropdown.trigger_id.get()));
+                }
+                #[cfg(feature = "popover")]
+                if let Some(popover) = use_context::<PopoverContext>() {
+                    return Some(format!("--{}", popover.trigger_id.get()));
+                }
+                if false { Some("".to_string()) } else { None }
+            }
             type=move || {
                 if let Some(button_type) = button_type.get() {
                     Some(button_type)
-                } else if use_context::<InputGroupContext>().is_some() {
+                } else if is_trigger || in_popover_menu_item || is_dialog_close || is_sheet_close {
                     Some("button".to_string())
                 } else {
                     None

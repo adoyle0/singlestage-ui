@@ -10,12 +10,13 @@ pub fn ButtonGroupInputGroupExample() -> impl IntoView {
 
     Effect::new(move || {
         class.set(format!(
-            "rounded-full{}",
+            "rounded-full {}",
             if voice_enabled.get() {
+                // TODO: make a reactive signal for the current preferred mode
                 match theme.mode.get() {
-                    Mode::Dark => " bg-orange-800 text-orange-100",
-                    Mode::Light => " bg-orange-100 text-orange-700",
-                    _ => " bg-orange-100 text-orange-700 dark:bg-orange-800 dark:text-orange-100",
+                    Mode::Dark => "bg-orange-800 text-orange-100",
+                    Mode::Light => "bg-orange-100 text-orange-700",
+                    _ => "bg-orange-100 text-orange-700 dark:bg-orange-800 dark:text-orange-100",
                 }
             } else {
                 ""
@@ -45,14 +46,19 @@ pub fn ButtonGroupInputGroupExample() -> impl IntoView {
                 <InputGroup class="rounded-full">
                     <Input placeholder disabled=voice_enabled />
                     <InputGroupAddon align="inline-end">
-                        <Tooltip value="Voice Mode">
-                            <Button
-                                on:click=move |_| voice_enabled.set(!voice_enabled.get())
-                                size="icon-xs"
-                                class
-                            >
-                                {icon!(icondata::LuAudioLines)}
-                            </Button>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button
+                                    on:click=move |_| voice_enabled.set(!voice_enabled.get_untracked())
+                                    size="icon-xs"
+                                    class
+                                >
+                                    {icon!(icondata::LuAudioLines)}
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>"Voice Mode"</p>
+                            </TooltipContent>
                         </Tooltip>
                     </InputGroupAddon>
                 </InputGroup>

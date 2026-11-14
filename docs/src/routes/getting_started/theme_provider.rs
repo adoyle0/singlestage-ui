@@ -10,8 +10,8 @@ pub fn ThemeProviderRoute() -> impl IntoView {
         <p class="my-4">"Wrap your app, probably at the router, with ThemeProvider:"</p>
         <CodeBlock code=r#"<pre>
 <span>...</span>
-<span><</span><span>Stylesheet id="leptos" href="/pkg/my_app.css" </span><span>/></span>
 <span><</span>ThemeProvider</span><span>></span>
+<span>    <</span><span>Stylesheet id="leptos" href="/pkg/my_app.css" </span><span>/></span>
 <span>    <</span><span>Router</span><span>></span>
 <span>        ...</span>
 <span>    <</span><span>/Router</span><span>></span>
@@ -20,13 +20,13 @@ pub fn ThemeProviderRoute() -> impl IntoView {
 </pre>"#
             .to_string() />
 
-        <p class="my-4">"Load your own stylesheets before ThemeProvider to avoid conflicts."</p>
+        <p class="my-4">"Load your own stylesheets after ThemeProvider to avoid conflicts."</p>
 
         <h2 class="mt-6 text-2xl font-semibold">"Setting the Default Theme and Mode"</h2>
         <p class="my-4">"By default, the theme provider expands to look like this:"</p>
 
         <CodeBlock code=r#"<pre>
-<span><</span><span>ThemeProvider mode="auto" theme=Theme::Default></span>
+<span><</span><span>ThemeProvider mode="auto" theme=Theme::Neutral></span>
 </pre>"#
             .to_string() />
 
@@ -38,7 +38,7 @@ pub fn ThemeProviderRoute() -> impl IntoView {
         </ul>
 
         <p class="my-4">
-            "These modes correspond to parts of the theme, in this case Theme::Default.
+            "These modes correspond to parts of the theme, in this case Theme::Neutral.
             Each theme has three parts which are just a collection of CSS variables that override
             the main template:"
         </p>

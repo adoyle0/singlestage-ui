@@ -1,45 +1,38 @@
 use leptos::prelude::*;
-use singlestage::{button::*, dialog::*, input::*, label::*};
+use singlestage::*;
 
 #[component]
 pub fn DialogExample() -> impl IntoView {
     view! {
-        <Dialog>
-            <DialogTrigger slot>
-                <Button variant="outline">"Edit Profile"</Button>
+        <Dialog class="sm:max-w-sm">
+            <DialogTrigger>
+                <Button variant="outline">"Open Dialog"</Button>
             </DialogTrigger>
-
-            <DialogClose />
-
-            <DialogHeader>
-                <DialogTitle>"Edit profile"</DialogTitle>
-                <DialogDescription>
-                    "Make changes to your profile here. Click save when you're done."
-                </DialogDescription>
-            </DialogHeader>
-
             <DialogContent>
-                <form class="grid gap-4">
-                    <div class="grid gap-3">
-                        <Label label_for="demo-dialog-edit-profile-name">"Name"</Label>
-                        <Input
-                            value="Pedro Duarte"
-                            id="demo-dialog-edit-profile-name"
-                            autofocus=true
-                        />
-                    </div>
-                    <div class="grid gap-3">
-                        <Label label_for="demo-dialog-edit-profile-username">"Username"</Label>
-                        <Input value="@peduarte" id="demo-dialog-edit-profile-username" />
-                    </div>
+                <form>
+                    <DialogHeader>
+                        <DialogTitle>"Edit profile"</DialogTitle>
+                        <DialogDescription>
+                            "Make changes to your profile here. Click save when you're
+                            done."
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
+                        <Field>
+                            <Input value="Pedro Duarte">"Name"</Input>
+                        </Field>
+                        <Field>
+                            <Input value="@peduarte">"Username"</Input>
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            <Button>"Cancel"</Button>
+                        </DialogClose>
+                        <Button>"Save changes"</Button>
+                    </DialogFooter>
                 </form>
             </DialogContent>
-
-            <DialogFooter>
-                <Button variant="outline">"Cancel"</Button>
-                <Button>"Save changes"</Button>
-            </DialogFooter>
-
         </Dialog>
     }
 }

@@ -1,4 +1,4 @@
-use crate::ContextMenuContext;
+use crate::{ContextMenuContext, primitives::*};
 use leptos::prelude::*;
 
 /// Defines the area where the context menu can be triggered.
@@ -105,8 +105,6 @@ pub fn ContextMenuTrigger(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let menu = expect_context::<ContextMenuContext>();
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -145,30 +143,50 @@ pub fn ContextMenuTrigger(
         />
     };
 
+    let context_menu = expect_context::<ContextMenuContext>();
+    let menu = expect_context::<PopoverMenuContext>();
+
+    // Keep track of when the user triggers the menu
+    // So it doesn't flicker when tapping on the trigger area
+    // If the menu wasn't opened previously
+    let triggered = RwSignal::new(false);
+
     view! {
         <div
             on:contextmenu=move |ev| {
                 ev.prevent_default();
-                menu.x.set(ev.x());
-                menu.y.set(ev.y());
-                if let Some(menu) = menu.menu_ref.get_untracked()
-                    && let Some(menu) = menu.get_untracked() {
-                        let _ = menu.show_popover();
-                    }
+                context_menu.x.set(ev.x());
+                context_menu.y.set(ev.y());
+                menu.open.set(true);
+                triggered.set(true);
             }
-            on:mousedown=move |_ev| {
-                if let Some(menu) = menu.menu_ref.get_untracked()
-                    && let Some(menu) = menu.get_untracked() {
-                        let _ = menu.hide_popover();
-                    }
-            }
+
+            // Prevent the menu getting immediately soft dismissed after opening
             on:mouseup=move |ev| {
-                if ev.button() == 2
-                    && let Some(menu) = menu.menu_ref.get_untracked()
-                        && let Some(menu) = menu.get_untracked() {
-                            let _ = menu.show_popover();
-                        }
+                if ev.button() == 2 {
+                    menu.open.set(true);
+                }
             }
+            on:touchend=move |_ev| {
+                if triggered.get() {
+                    menu.open.set(true);
+                }
+            }
+
+            // Allow closing the menu if the trigger area is touched/clicked again
+            on:mousedown=move |_ev| {
+                if menu.open.get_untracked() && !menu.modal.get_untracked() {
+                    menu.open.set(false);
+                    triggered.set(false);
+                }
+            }
+            on:touchstart=move |_ev| {
+                if menu.open.get_untracked() && !menu.modal.get_untracked() {
+                    menu.open.set(false);
+                    triggered.set(false);
+                }
+            }
+
             {..global_attrs_1}
             {..global_attrs_2}
         >

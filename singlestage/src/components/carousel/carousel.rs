@@ -135,11 +135,13 @@ pub fn Carousel(
             }
         }
 
-        if let Some(ul_ref) = ul_ref.get_untracked() {
+        if let Some(ul_ref) = ul_ref.get() {
             let width = ul_ref.scroll_width();
             let scroll_step = width / num_items;
 
-            ul_ref.set_scroll_left(scroll_step * (cur - 1));
+            // web-sys sometimes uses i32 and other times uses i64
+            #[allow(clippy::useless_conversion)]
+            ul_ref.set_scroll_left((scroll_step * (cur - 1)).into());
         }
     });
 

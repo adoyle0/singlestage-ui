@@ -1,0 +1,50 @@
+@layer components1 {
+  .singlestage-tabs {
+    @apply gap-2;
+  }
+
+  .singlestage-tabs-list {
+    @apply p-1;
+  }
+
+  .singlestage-tabs-trigger {
+    @apply border
+    border-transparent
+    font-semibold
+    gap-2
+    px-4
+    py-1.5
+    text-xs
+    tracking-wider
+    uppercase;
+
+    &:has(svg:last-child:not(svg:first-child)) {
+      @apply pr-2.5;
+    }
+
+    &:has(svg:first-child:not(svg:last-child)) {
+      @apply pl-2.5;
+    }
+
+    svg:not([class*="size-"]) {
+      @apply size-3.5;
+    }
+  }
+
+  .singlestage-tabs-orientation-horizontal {
+    .singlestage-tabs-list {
+      @apply h-10;
+    }
+  }
+
+  .singlestage-tabs-orientation-vertical {
+    .singlestage-tabs-trigger {
+      @apply px-4
+      py-2;
+    }
+  }
+
+  .singlestage-tabs-content {
+    @apply text-sm;
+  }
+}

@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Textarea;
+use singlestage::*;
 
 #[component]
 pub fn TextareaAnatomy() -> impl IntoView {

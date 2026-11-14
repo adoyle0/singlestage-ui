@@ -46,34 +46,34 @@ pub fn PaymentMethod() -> impl IntoView {
                         <div class="grid flex-1 gap-2">
                             <Label label_for="payment-method-expiration-month">"Expires"</Label>
                             <Select id="payment-method-expiration-month" class="w-full">
-                                <SelectItem value="01">"January"</SelectItem>
-                                <SelectItem value="02">"February"</SelectItem>
-                                <SelectItem value="03">"March"</SelectItem>
-                                <SelectItem value="04">"April"</SelectItem>
-                                <SelectItem value="05">"May"</SelectItem>
-                                <SelectItem value="06">"June"</SelectItem>
-                                <SelectItem value="07">"July"</SelectItem>
-                                <SelectItem value="08">"August"</SelectItem>
-                                <SelectItem value="09">"September"</SelectItem>
-                                <SelectItem value="10">"October"</SelectItem>
-                                <SelectItem value="11">"November"</SelectItem>
-                                <SelectItem value="12">"December"</SelectItem>
+                                <SelectOption value="01">"January"</SelectOption>
+                                <SelectOption value="02">"February"</SelectOption>
+                                <SelectOption value="03">"March"</SelectOption>
+                                <SelectOption value="04">"April"</SelectOption>
+                                <SelectOption value="05">"May"</SelectOption>
+                                <SelectOption value="06">"June"</SelectOption>
+                                <SelectOption value="07">"July"</SelectOption>
+                                <SelectOption value="08">"August"</SelectOption>
+                                <SelectOption value="09">"September"</SelectOption>
+                                <SelectOption value="10">"October"</SelectOption>
+                                <SelectOption value="11">"November"</SelectOption>
+                                <SelectOption value="12">"December"</SelectOption>
                             </Select>
                         </div>
                         <div class="grid flex-1 gap-2">
                             <Label label_for="payment-method-expiration-year">"Year"</Label>
                             <Select id="payment-method-expiration-year" class="w-full">
-                                <SelectItem value="2024">"2024"</SelectItem>
-                                <SelectItem value="2025">"2025"</SelectItem>
-                                <SelectItem value="2026">"2026"</SelectItem>
-                                <SelectItem value="2027">"2027"</SelectItem>
-                                <SelectItem value="2028">"2028"</SelectItem>
-                                <SelectItem value="2029">"2029"</SelectItem>
-                                <SelectItem value="2030">"2030"</SelectItem>
-                                <SelectItem value="2031">"2031"</SelectItem>
-                                <SelectItem value="2032">"2032"</SelectItem>
-                                <SelectItem value="2033">"2033"</SelectItem>
-                                <SelectItem value="2034">"2034"</SelectItem>
+                                <SelectOption value="2024">"2024"</SelectOption>
+                                <SelectOption value="2025">"2025"</SelectOption>
+                                <SelectOption value="2026">"2026"</SelectOption>
+                                <SelectOption value="2027">"2027"</SelectOption>
+                                <SelectOption value="2028">"2028"</SelectOption>
+                                <SelectOption value="2029">"2029"</SelectOption>
+                                <SelectOption value="2030">"2030"</SelectOption>
+                                <SelectOption value="2031">"2031"</SelectOption>
+                                <SelectOption value="2032">"2032"</SelectOption>
+                                <SelectOption value="2033">"2033"</SelectOption>
+                                <SelectOption value="2034">"2034"</SelectOption>
                             </Select>
                         </div>
                         <div class="grid flex-1 gap-2">

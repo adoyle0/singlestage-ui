@@ -1,7 +1,16 @@
-use crate::{FieldContext, FieldLabel, Reactive};
+#[cfg(feature = "field")]
+use crate::FieldContext;
+
+#[cfg(feature = "input_group")]
+use crate::InputGroupContext;
+
+#[cfg(feature = "sidebar")]
+use crate::SidebarGroupContext;
+
+use crate::{Reactive, primitives::*};
 use leptos::prelude::*;
 
-/// A form input field.
+/// A text input component for forms and user data entry with built-in styling and accessibility features.
 #[component]
 pub fn Input(
     #[prop(optional)] children: Option<Children>,
@@ -17,7 +26,7 @@ pub fn Input(
     input_type: MaybeProp<String>,
     /// Toggle invalid appearance.
     #[prop(optional, into)]
-    invalid: MaybeProp<bool>,
+    mut invalid: Reactive<bool>,
     /// The reactive value signal of this input. Also sets initial `default` value, but doesn't
     /// update it.
     #[prop(optional, into)]
@@ -58,7 +67,7 @@ pub fn Input(
     dirname: MaybeProp<String>,
     /// Toggle whether or not the input is disabled.
     #[prop(optional, into)]
-    disabled: MaybeProp<bool>,
+    mut disabled: Reactive<bool>,
     /// Associate this element with a form element that may not be its parent by its `id`.
     #[prop(optional, into)]
     form: MaybeProp<String>,
@@ -123,7 +132,7 @@ pub fn Input(
     readonly: MaybeProp<bool>,
     /// Toggle whether or not this element requires a value for form submission.
     #[prop(optional, into)]
-    required: MaybeProp<bool>,
+    mut required: Reactive<bool>,
     /// Set how many characters wide the field should be. Defaults to `20`.
     #[prop(optional, into)]
     size: MaybeProp<usize>,
@@ -269,41 +278,53 @@ pub fn Input(
         }
     };
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(default) = default.get()
-        {
-            input.set_default_value(&default);
-        }
-    });
+    let update_default = move || {
+        if let Some(val) = default.get() {
+            if let Some(input) = input_ref.get() {
+                input.set_default_value(&val);
+            }
 
-    Effect::new(move || {
-        if let Some(input) = input_ref.get_untracked()
-            && let Some(disabled) = disabled.get()
-        {
-            input.set_disabled(disabled);
+            value.set(val);
         }
-    });
 
-    Effect::new(
-        move || match input_type.get_untracked().unwrap_or_default().as_str() {
-            "file" => {
-                if value.get().is_empty()
-                    && let Some(input) = input_ref.get_untracked()
+        default.get()
+    };
+
+    let on_input = move |ev: web_sys::Event| {
+        let input_value = event_target_value(&ev);
+
+        let val = match input_type.get_untracked().unwrap_or_default().as_str() {
+            "number" => {
+                let decimal = '.';
+
+                if step.get_untracked().unwrap_or_default().contains(decimal)
+                    && let Some(input_precision) = input_value.split(decimal).next_back()
+                    && let Some(step_precision) = step
+                        .get_untracked()
+                        .unwrap_or_default()
+                        .split(decimal)
+                        .next_back()
                 {
-                    input.set_value("");
-                }
-            }
-            _ => {
-                if let Some(input) = input_ref.get_untracked() {
-                    input.set_value(&value.get());
-                }
-            }
-        },
-    );
+                    if input_precision.len() < step_precision.len()
+                        || !input_value.contains(decimal)
+                    {
+                        // User is not done typing
+                        return;
+                    }
 
-    let on_input = move |ev| {
-        value.set(event_target_value(&ev));
+                    format!(
+                        "{:.*}",
+                        step_precision.len(),
+                        input_value.parse::<f64>().unwrap()
+                    )
+                } else {
+                    input_value
+                }
+            }
+            _ => input_value,
+        };
+
+        value.set(val);
     };
 
     let global_attrs_1 = view! {
@@ -383,38 +404,96 @@ pub fn Input(
 
     let input_id = uuid::Uuid::new_v4();
     let label_id = uuid::Uuid::new_v4();
-    let has_children = children.is_some();
+
+    let has_children: bool = children.is_some();
+
+    #[cfg(feature = "field")]
+    if let Some(field) = use_context::<FieldContext>() {
+        disabled = field.disabled;
+        invalid = field.invalid;
+        required = field.required;
+    }
+
+    #[cfg(feature = "field")]
+    let in_field: bool = use_context::<FieldContext>().is_some();
+    #[cfg(not(feature = "field"))]
+    let in_field: bool = false;
+
+    #[cfg(feature = "input_group")]
+    let in_input_group: bool = use_context::<InputGroupContext>().is_some();
+    #[cfg(not(feature = "input_group"))]
+    let in_input_group: bool = false;
+
+    #[cfg(feature = "sidebar")]
+    let in_sidebar_group: bool = use_context::<SidebarGroupContext>().is_some();
+    #[cfg(not(feature = "sidebar"))]
+    let in_sidebar_group: bool = false;
 
     let custom_attrs = view! {
         <{..}
             aria_describedby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
                     let description_id = field.description_id.get();
-                    if description_id.is_empty() { None } else { Some(description_id) }
-                } else {
-                    None
+                    if description_id.is_empty() {
+                        return None
+                    } else {
+                        return Some(description_id)
+                    }
                 }
+                if false { return Some("".to_string()) } else { return None }
             }
-            aria_invalid=move || {
-                match invalid.get() {
-                    Some(true) => Some("true"),
-                    _ => None,
-                }
-            }
+            aria_disabled=move || { if disabled.get() { Some("true") } else { None } }
+            aria_invalid=move || { if invalid.get() { Some("true") } else { None } }
             aria_label=move || aria_label.get()
             aria_labelledby=move || {
+                #[cfg(feature = "field")]
                 if let Some(field) = use_context::<FieldContext>() {
-                    Some(field.label_id.get())
-                } else if has_children {
-                    Some(label_id.to_string())
-                } else {
-                    None
+                    return Some(field.label_id.get());
                 }
+                if has_children {
+                    return Some(label_id.to_string());
+                }
+                if false { return Some("".to_string()) } else { return None }
             }
-            class=move || { format!("singlestage-input {}", class.get().unwrap_or_default()) }
+            class=move || {
+                format!(
+                    "singlestage-input{}{} {}",
+                    if in_input_group {
+                        " singlestage-input-group-input singlestage-input-group-control"
+                    } else {
+                        ""
+                    },
+                    if in_sidebar_group { " singlestage-sidebar-input" } else { "" },
+                    class.get().unwrap_or_default(),
+                )
+            }
+            default=update_default
+            prop:default=update_default
             disabled=move || disabled.get()
+            prop:disabled=move || disabled.get()
+            id={move || {
+                #[cfg(feature = "field")]
+                if let Some(field) = use_context::<FieldContext>() {
+                    if let Some(id) = id.get_untracked() {
+                        field.input_id.set(id.clone());
+                        return Some(id);
+                    }
+                    field.input_id.set(input_id.to_string());
+                    return Some(input_id.to_string());
+                }
+                if let Some(id) = id.get_untracked() {
+                    return Some(id);
+                }
+                if has_children {
+                    return Some(input_id.to_string());
+                }
+                return None;
+            }}
             node_ref=input_ref
             on:input=on_input
+            required=move || required.get()
+            prop:required=move || required.get()
             type=move || {
                 let input_type = input_type.get().unwrap_or_default();
                 if supported_types.contains(&input_type.as_str()) {
@@ -423,45 +502,50 @@ pub fn Input(
                     "text".to_string()
                 }
             }
-            value={
-                let value = value.get_untracked();
-                if value.is_empty() { None } else { Some(value) }
-            }
+            value=default.get_untracked().unwrap_or(value.get_untracked())
+            prop:value=move || value.get()
         />
     };
 
     if let Some(children) = children {
-        view! {
-            {if use_context::<FieldContext>().is_some() {
-                view! {
-                    <FieldLabel
-                        class=class.get_untracked()
-                        label_for=id.get_untracked().unwrap_or(input_id.to_string())
-                    >
-                        {children()}
-                    </FieldLabel>
-                }
-                    .into_any()
-            } else {
-                view! {
-                    <label
-                        class=move || {
-                            format!(
-                                "singlestage-label singlestage-input-label {}",
-                                class.get().unwrap_or_default(),
-                            )
-                        }
-                        for=move || id.get().unwrap_or(input_id.to_string())
-                        id=label_id.to_string()
-                    >
-                        {children()}
-                    </label>
-                }
-                    .into_any()
-            }}
-            <input
-                id=move || id.get().unwrap_or(input_id.to_string())
+        #[cfg(feature = "field")]
+        if in_field {
+            return view! {
+                <LabelPrimitive
+                    primitive_type=LabelPrimitiveType::FieldLabel
 
+                    class
+                    disabled
+                    id=label_id.to_string()
+                    invalid
+                    label_for=id.get_untracked().unwrap_or(input_id.to_string())
+                >
+                    {children()}
+                </LabelPrimitive>
+                <input
+                    {..global_attrs_1}
+                    {..global_attrs_2}
+                    {..input_attrs_1}
+                    {..input_attrs_2}
+                    {..custom_attrs}
+                />
+            }
+            .into_any();
+        }
+        #[cfg(feature = "label")]
+        return view! {
+            <LabelPrimitive
+                primitive_type=LabelPrimitiveType::InputLabel
+
+                class
+                disabled
+                id=label_id.to_string()
+                invalid
+                label_for=id.get_untracked().unwrap_or(input_id.to_string())
+            >
+                {children()}
+            </LabelPrimitive>
+            <input
                 {..global_attrs_1}
                 {..global_attrs_2}
                 {..input_attrs_1}
@@ -469,29 +553,16 @@ pub fn Input(
                 {..custom_attrs}
             />
         }
-        .into_any()
-    } else {
-        view! {
-            <input
-                id={if let Some(field) = use_context::<FieldContext>() {
-                    if let Some(id) = id.get_untracked() {
-                        field.input_id.set(id.clone());
-                        Some(id)
-                    } else {
-                        field.input_id.set(input_id.to_string());
-                        Some(input_id.to_string())
-                    }
-                } else {
-                    id.get_untracked()
-                }}
-
-                {..global_attrs_1}
-                {..global_attrs_2}
-                {..input_attrs_1}
-                {..input_attrs_2}
-                {..custom_attrs}
-            />
-        }
-        .into_any()
+        .into_any();
     }
+    return view! {
+        <input
+            {..global_attrs_1}
+            {..global_attrs_2}
+            {..input_attrs_1}
+            {..input_attrs_2}
+            {..custom_attrs}
+        />
+    }
+    .into_any();
 }

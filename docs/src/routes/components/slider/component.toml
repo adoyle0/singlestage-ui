@@ -4,6 +4,20 @@ description = "An input where the user selects a value from within a given range
 [[examples]]
 name = "slider"
 
+[[examples]]
+name = "slider vertical"
+title = "Vertical"
+description = "Use the orientation prop to change between horizontal and vertical orientations."
+
+[[examples]]
+name = "slider controlled"
+title = "Controlled"
+
+[[examples]]
+name = "slider disabled"
+title = "Disabled"
+description = "Use the disabled prop to disable the slider."
+
 [[references]]
 name = "Slider"
 description = "An input where the user selects a value from within a given range."
@@ -20,8 +34,10 @@ attrs = [
     range of permitted values.""" },
   { attr = "min", attr_type = "f64", default = "0.0", description = """The lowest value in the \
     range of permitted values.""" },
+  { attr = "orientation", attr_type = "String", default = """"horizontal"""", description = """Set \
+    the orientation to render the slider. Accepted values: \"vertical\", \"horizontal\".""" },
   { attr = "step", attr_type = "f64", default = "1.0", description = """Define the granularity of \
     the expected input value.""" },
-  { attr = "value", attr_type = "Reactive<f64>", default = "0.0", description = """A \
-    reactive signal coupled to the input's value.""" },
+  { attr = "value", attr_type = "f64", default = "0.0", description = """A reactive signal coupled \
+    to the input's value.""" },
 ]

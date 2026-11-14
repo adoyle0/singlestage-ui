@@ -9,6 +9,6 @@ pub use label::*;
 use leptos::prelude::*;
 
 #[derive(Clone)]
-pub struct SidebarGroupContext {
+pub(crate) struct SidebarGroupContext {
     pub label_id: RwSignal<String>,
 }

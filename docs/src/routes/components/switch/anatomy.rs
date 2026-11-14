@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Switch;
+use singlestage::*;
 
 #[component]
 pub fn SwitchAnatomy() -> impl IntoView {

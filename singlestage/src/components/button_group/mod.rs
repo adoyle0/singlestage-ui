@@ -1,7 +1,10 @@
 mod group;
-mod separator;
 mod text;
 
 pub use group::*;
-pub use separator::*;
 pub use text::*;
+
+#[cfg(feature = "separator")]
+mod separator;
+#[cfg(feature = "separator")]
+pub use separator::*;

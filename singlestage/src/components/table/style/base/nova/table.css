@@ -1,0 +1,75 @@
+@layer components1 {
+  .singlestage-table-container {
+    @apply overflow-x-auto
+    relative
+    w-full;
+  }
+
+  .singlestage-table {
+    @apply caption-bottom
+    text-sm
+    w-full;
+
+    thead {
+      tr {
+        @apply border-b;
+      }
+    }
+
+    tbody {
+      tr:last-child {
+        @apply border-0;
+      }
+    }
+
+    tfoot {
+      @apply bg-muted/50
+      border-t
+      font-medium;
+
+      > tr:last-child {
+        @apply border-b-0;
+      }
+    }
+
+    tr {
+      @apply border-b
+      data-[state=selected]:bg-muted
+      transition-colors;
+
+      &:hover {
+        @apply bg-muted/50;
+      }
+    }
+
+    th {
+      @apply align-middle
+      font-medium
+      h-10
+      px-2
+      text-foreground
+      text-left
+      whitespace-nowrap;
+
+      &:has(.singlestage-checkbox) {
+        @apply pr-0;
+      }
+    }
+
+    td {
+      @apply align-middle
+      p-2
+      whitespace-nowrap;
+
+      &:has(.singlestage-checkbox) {
+        @apply pr-0;
+      }
+    }
+
+    caption {
+      @apply mt-4
+      text-muted-foreground
+      text-sm;
+    }
+  }
+}

@@ -5,12 +5,28 @@ description = "Use to show a placeholder while content is loading."
 name = "skeleton"
 
 [[examples]]
+name = "skeleton avatar"
+title = "Avatar"
+
+[[examples]]
 name = "skeleton card"
 title = "Card"
 
+[[examples]]
+name = "skeleton text"
+title = "Text"
+
+[[examples]]
+name = "skeleton form"
+title = "Form"
+
+[[examples]]
+name = "skeleton table"
+title = "Table"
+
 [[references]]
 name = "Skeleton"
-description = "Creates a skeleton used to show a placeholder while content is loading."
+description = "Use to show a placeholder while content is loading."
 extra = """Implements <a class="singlestage-link" \
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">global</a> \
 attributes."""

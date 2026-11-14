@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::kbd::*;
+use singlestage::*;
 
 #[component]
 pub fn KbdGroupExample() -> impl IntoView {

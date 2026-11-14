@@ -1,27 +1,15 @@
-use crate::{DialogContext, DialogTrigger};
-use leptos::{context::Provider, html, prelude::*};
+use crate::{Reactive, primitives::*};
+use leptos::prelude::*;
 
-/// Contains all the parts of an alert dialog.
+/// Contains all the parts of a Dialog component.
 #[component]
 pub fn Dialog(
     children: Children,
-    /// A button that opens the dialog.
-    dialog_trigger: DialogTrigger,
 
-    // DIALOG ATTRIBUTES
-    //
-    /// Specify whether or not this dialog contains an alert
+    /// Reactive signal that can remotely control the open state of the popover **but is not
+    /// coupled to the actual open state of the popover**
     #[prop(optional, into)]
-    alert: MaybeProp<bool>,
-    // TODO:Check for safari support
-    // /// Specify what actions will close the dialog.
-    // ///
-    // /// Accepted values: "any" | "closerequest" | "none"
-    // #[prop(optional, into)]
-    // closedby: MaybeProp<String>,
-    /// Toggle whether or not the dialog is open.
-    #[prop(optional, into)]
-    open: MaybeProp<bool>,
+    open: Reactive<bool>,
 
     // GLOBAL ATTRIBUTES
     //
@@ -128,42 +116,6 @@ pub fn Dialog(
     #[prop(optional, into)]
     translate: MaybeProp<String>,
 ) -> impl IntoView {
-    let dialog_ref = NodeRef::<html::Dialog>::new();
-    let labeled_by = RwSignal::new(String::new());
-    let described_by = RwSignal::new(String::new());
-
-    let context = DialogContext {
-        labeled_by,
-        described_by,
-    };
-
-    let open_dialog = move || {
-        if let Some(dialog) = dialog_ref.write().as_ref()
-            && dialog.show_modal().is_err()
-        {}
-    };
-
-    let close_dialog = move || {
-        if let Some(alert) = alert.get_untracked()
-            && alert
-        {
-            return;
-        }
-
-        if let Some(dialog) = dialog_ref.write().as_ref() {
-            dialog.close();
-        }
-    };
-
-    Effect::new(move || {
-        if let Some(open) = open.get() {
-            match open {
-                true => open_dialog(),
-                false => close_dialog(),
-            }
-        }
-    });
-
     let global_attrs_1 = view! {
         <{..}
             accesskey=move || accesskey.get()
@@ -205,20 +157,14 @@ pub fn Dialog(
     };
 
     view! {
-        <div on:click=move |_| open_dialog()>{(dialog_trigger.children)().into_any()}</div>
-        <dialog
-            aria-describedby=move || described_by.get()
-            aria-labelledby=move || labeled_by.get()
-            class="singlestage-dialog"
-            // TODO:Check for safari support
-            // closedby=closedby.get()
-            node_ref=dialog_ref
-            on:click=move |_| close_dialog()
-            open=move || open.get_untracked()
+        <DialogPrimitive
+            alert=false
+            open
+
+            {..global_attrs_1}
+            {..global_attrs_2}
         >
-            <article {..global_attrs_1} {..global_attrs_2} on:click=move |ev| ev.stop_propagation()>
-                <Provider value=context>{children()}</Provider>
-            </article>
-        </dialog>
+            {children()}
+        </DialogPrimitive>
     }
 }

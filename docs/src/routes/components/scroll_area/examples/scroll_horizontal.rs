@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::scroll_area::*;
+use singlestage::*;
 
 #[derive(Clone)]
 struct Artwork {

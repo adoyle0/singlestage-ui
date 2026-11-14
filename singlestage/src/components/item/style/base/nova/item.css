@@ -1,0 +1,152 @@
+@layer components1 {
+  .singlestage-item-variant-default {
+    @apply border-transparent;
+  }
+
+  .singlestage-item-variant-outline {
+    @apply border-border;
+  }
+
+  .singlestage-item-variant-muted {
+    @apply bg-muted/50
+    border-transparent;
+  }
+
+  .singlestage-item-size-default {
+    @apply gap-2.5
+    px-3
+    py-2.5;
+  }
+
+  .singlestage-item-size-sm {
+    @apply gap-2.5
+    px-3
+    py-2.5;
+  }
+
+  .singlestage-item-size-xs {
+    @apply gap-2
+    px-2.5
+    py-2;
+  }
+
+  .singlestage-dropdown-menu-content {
+    .singlestage-item-size-xs {
+      @apply p-0;
+    }
+  }
+
+  .singlestage-item-media {
+    @apply gap-2;
+  }
+
+  .singlestage-item-media-variant-default {
+    @apply bg-transparent;
+  }
+
+  .singlestage-item-media-variant-icon {
+    svg:not([class*="size-"]) {
+      @apply size-4;
+    }
+  }
+
+  .singlestage-item-media-variant-image {
+    @apply overflow-hidden
+    rounded-sm
+    size-10;
+
+    img {
+      @apply object-cover
+      size-full;
+    }
+  }
+
+  .singlestage-item-content {
+    @apply gap-1;
+  }
+
+  .singlestage-item-title {
+    @apply font-medium
+    gap-2
+    leading-snug
+    text-sm
+    underline-offset-4;
+  }
+
+  .singlestage-item-description {
+    @apply leading-normal
+    text-left
+    text-muted-foreground
+    text-sm;
+  }
+
+  .singlestage-item-actions {
+    @apply gap-2;
+  }
+
+  .singlestage-item-header {
+    @apply gap-2;
+  }
+
+  .singlestage-item-footer {
+    @apply gap-2;
+  }
+
+  .singlestage-item-group {
+    @apply gap-4;
+
+    &:has(.singlestage-item-size-xs) {
+      @apply gap-2;
+    }
+
+    &:has(.singlestage-item-size-sm) {
+      @apply gap-2.5;
+    }
+  }
+
+  .singlestage-item-separator {
+    @apply my-2;
+  }
+
+  .singlestage-item {
+    @apply border
+    rounded-lg
+    text-sm;
+
+    &:has(.singlestage-item-description) {
+      .singlestage-item-media {
+        @apply self-start
+        translate-y-0.5;
+      }
+    }
+
+    &.singlestage-item-size-sm {
+      .singlestage-item-media-variant-image {
+        @apply size-8;
+      }
+    }
+
+    &.singlestage-item-size-xs {
+      .singlestage-item-media-variant-image {
+        @apply size-6;
+      }
+
+      .singlestage-item-content {
+        @apply gap-0;
+      }
+
+      .singlestage-item-description {
+        @apply text-xs;
+      }
+    }
+  }
+
+  a:has(> .singlestage-item) {
+    @apply rounded-lg;
+
+    &:hover {
+      @apply bg-muted
+      rounded-lg;
+    }
+  }
+}

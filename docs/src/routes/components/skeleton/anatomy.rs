@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use singlestage::Skeleton;
+use singlestage::*;
 
 #[component]
 pub fn SkeletonAnatomy() -> impl IntoView {
